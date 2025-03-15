@@ -1,12 +1,12 @@
 package com.fractal.domain.dictionary;
 
-import com.fractal.domain.abstraction.AbstractDictionary;
+import com.fractal.domain.abstraction.Dictionary;
 import com.fractal.domain.location.Country;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "currency", schema = "dictionary_schema", catalog = "fractal")
-public class Currency extends AbstractDictionary {
+public class Currency extends Dictionary {
 
     @Column(name ="short_name",length = 5)
     private String shortName;

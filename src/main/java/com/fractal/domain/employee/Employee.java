@@ -1,6 +1,6 @@
 package com.fractal.domain.employee;
 
-import com.fractal.domain.abstraction.AbstractPerson;
+import com.fractal.domain.abstraction.Person;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Employee extends AbstractPerson {
+public class Employee extends Person {
 
 
 }

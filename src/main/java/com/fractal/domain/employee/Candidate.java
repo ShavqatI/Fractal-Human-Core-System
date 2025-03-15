@@ -1,7 +1,7 @@
 package com.fractal.domain.employee;
 
 
-import com.fractal.domain.abstraction.AbstractPerson;
+import com.fractal.domain.abstraction.Person;
 import com.fractal.domain.organization.Vacancy;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Candidate extends AbstractPerson {
+public class Candidate extends Person {
 
     @ManyToOne
     @JoinColumn(name = "vacancy_id", referencedColumnName = "id")

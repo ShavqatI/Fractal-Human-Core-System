@@ -1,7 +1,7 @@
 package com.fractal.domain.employee;
 
 
-import com.fractal.domain.abstraction.AbstractPerson;
+import com.fractal.domain.abstraction.Person;
 import com.fractal.domain.dictionary.RelationType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Relative extends AbstractPerson {
+public class Relative extends Person {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
