@@ -6,12 +6,20 @@ import com.fractal.domain.dictionary.EducationDocumentType;
 import com.fractal.domain.dictionary.EducationType;
 import com.fractal.domain.dictionary.Status;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
 
 @Entity
 @Table(name = "education", schema = "employee_schema", catalog = "fractal")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Education extends AbstractEntity {
 
     @ManyToOne
@@ -52,91 +60,4 @@ public class Education extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
-    }
-
-    public EducationType getEducationType() {
-        return educationType;
-    }
-
-    public void setEducationType(EducationType educationType) {
-        this.educationType = educationType;
-    }
-
-    public EducationDocumentType getEducationDocumentType() {
-        return educationDocumentType;
-    }
-
-    public void setEducationDocumentType(EducationDocumentType educationDocumentType) {
-        this.educationDocumentType = educationDocumentType;
-    }
-
-    public Date getBeginDate() {
-        return beginDate;
-    }
-
-    public void setBeginDate(Date beginDate) {
-        this.beginDate = beginDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getUniversity() {
-        return university;
-    }
-
-    public void setUniversity(String university) {
-        this.university = university;
-    }
-
-    public String getUniversityAddress() {
-        return universityAddress;
-    }
-
-    public void setUniversityAddress(String universityAddress) {
-        this.universityAddress = universityAddress;
-    }
-
-    public String getSeries() {
-        return series;
-    }
-
-    public void setSeries(String series) {
-        this.series = series;
-    }
-
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 }
