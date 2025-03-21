@@ -1,0 +1,63 @@
+package com.fractal.domain.employee_management.performance;
+
+import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.dictionary.Status;
+import com.fractal.domain.employee_management.performance.goal.Goal;
+import com.fractal.domain.employee_management.performance.improvement.Improvement;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import com.fractal.domain.employee_management.employee.Employee;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Table(name = "performance", schema = "employee_schema", catalog = "fractal")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Performance extends AbstractEntity {
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    private Employee employee;
+
+    @Column(name = "evaluation_date", nullable = false)
+    private LocalDate evaluationDate;
+
+    @Column(name = "rating", nullable = false)
+    private Integer rating;
+
+    @Column(name = "review_period_start", nullable = false)
+    private LocalDate reviewPeriodStart;
+
+    @Column(name = "review_period_end", nullable = false)
+    private LocalDate reviewPeriodEnd;
+
+    @ManyToOne
+    @JoinColumn(name = "reviewer_employee_id", referencedColumnName = "id")
+    private Employee reviewerEmployee;
+
+    @Column(name = "comments", length = 2000)
+    private String comments;
+
+    @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Goal> goals;
+
+    @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Improvement> improvements;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    private Status status;
+
+
+
+}
