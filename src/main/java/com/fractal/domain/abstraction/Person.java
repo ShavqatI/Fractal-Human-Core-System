@@ -42,4 +42,5 @@ public abstract class Person extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "nationality_id", referencedColumnName = "id")
     private Nationality nationality;
+
 }
