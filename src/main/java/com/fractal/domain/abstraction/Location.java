@@ -7,8 +7,8 @@ import jakarta.persistence.MappedSuperclass;
 public abstract class Location extends AbstractEntity {
 
     @Column(name = "name")
-    private String name;
+    protected String name;
 
     @Column(name = "code", unique = true, length = 5)
-    private String code;
+    protected String code;
 }

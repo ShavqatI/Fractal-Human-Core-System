@@ -1,6 +1,5 @@
 package com.fractal.domain.location;
 
-
 import com.fractal.domain.abstraction.Location;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -13,14 +12,14 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "city", schema = "location_schema", catalog = "fractal")
+@Table(name = "district", schema = "location_schema", catalog = "fractal")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class City extends Location {
+public class District extends Location {
 
     @ManyToOne
-    @JoinColumn(name ="region_id", referencedColumnName = "id")
-    private Region region;
+    @JoinColumn(name ="city_id", referencedColumnName = "id")
+    private City city;
 }

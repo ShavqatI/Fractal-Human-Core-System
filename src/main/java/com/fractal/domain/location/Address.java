@@ -4,9 +4,19 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.EntityType;
 import com.fractal.domain.dictionary.AddressType;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "address", schema = "location_schema", catalog = "fractal")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Address extends AbstractEntity {
 
     @ManyToOne
@@ -21,10 +31,6 @@ public class Address extends AbstractEntity {
     private AddressType addressType;
 
     @ManyToOne
-    @JoinColumn(name ="location_unit_id", referencedColumnName = "id")
-    private LocationUnit locationUnit;
-
-    @ManyToOne
     @JoinColumn(name ="country_id", referencedColumnName = "id")
     private Country country;
 
@@ -32,84 +38,42 @@ public class Address extends AbstractEntity {
     @JoinColumn(name ="region_id", referencedColumnName = "id")
     private Region region;
 
+    @ManyToOne
+    @JoinColumn(name ="city_id", referencedColumnName = "id")
+    private City city;
+
+    @ManyToOne
+    @JoinColumn(name ="district_id", referencedColumnName = "id")
+    private District district;
+
+    @Column(name = "street")
+    private String street;
+
     @Column(name = "house")
     private String house;
 
     @Column(name = "apartment")
     private String apartment;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "postal_code")
+    private String postalCode;
 
-    public EntityType getEntityType() {
-        return entityType;
-    }
+    @Column(name = "building_number")
+    private String buildingNumber;
 
-    public void setEntityType(EntityType entityType) {
-        this.entityType = entityType;
-    }
+    @Column(name = "floor_number")
+    private String floorNumber;
 
-    public Integer getEntity() {
-        return entity;
-    }
+    @Column(name = "latitude")
+    private Double latitude;
 
-    public void setEntity(Integer entity) {
-        this.entity = entity;
-    }
+    @Column(name = "longitude")
+    private Double longitude;
 
-    public AddressType getAddressType() {
-        return addressType;
-    }
+    @Column(name = "start_date")
+    private LocalDate startDate;
 
-    public void setAddressType(AddressType addressType) {
-        this.addressType = addressType;
-    }
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
-    public LocationUnit getLocationUnit() {
-        return locationUnit;
-    }
-
-    public void setLocationUnit(LocationUnit locationUnit) {
-        this.locationUnit = locationUnit;
-    }
-
-    public Country getCountry() {
-        return country;
-    }
-
-    public void setCountry(Country country) {
-        this.country = country;
-    }
-
-    public Region getRegion() {
-        return region;
-    }
-
-    public void setRegion(Region region) {
-        this.region = region;
-    }
-
-    public String getHouse() {
-        return house;
-    }
-
-    public void setHouse(String house) {
-        this.house = house;
-    }
-
-    public String getApartment() {
-        return apartment;
-    }
-
-    public void setApartment(String apartment) {
-        this.apartment = apartment;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
