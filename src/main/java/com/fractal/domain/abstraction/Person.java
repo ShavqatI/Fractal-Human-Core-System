@@ -3,7 +3,6 @@ package com.fractal.domain.abstraction;
 import com.fractal.domain.dictionary.Gender;
 import com.fractal.domain.dictionary.MaritalStatus;
 import com.fractal.domain.dictionary.Nationality;
-import com.fractal.domain.dictionary.Status;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -42,5 +41,6 @@ public abstract class Person extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "nationality_id", referencedColumnName = "id")
     private Nationality nationality;
+
 
 }

@@ -1,9 +1,10 @@
-package com.fractal.domain.employee;
+package com.fractal.domain.employee_management.identification;
 
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.IdentificationType;
 import com.fractal.domain.dictionary.Status;
+import com.fractal.domain.employee_management.employee.Employee;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

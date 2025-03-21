@@ -1,10 +1,12 @@
-package com.fractal.domain.employee;
+package com.fractal.domain.employee_management.employment_history;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.Status;
-import com.fractal.domain.organization.Department;
-import com.fractal.domain.organization.Organization;
-import com.fractal.domain.organization.Position;
+import com.fractal.domain.employee_management.category.Category;
+import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.organization_management.Department;
+import com.fractal.domain.organization_management.Organization;
+import com.fractal.domain.organization_management.Position;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

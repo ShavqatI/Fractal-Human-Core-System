@@ -1,9 +1,10 @@
-package com.fractal.domain.employee;
+package com.fractal.domain.employee_management.business_trip;
 
-import com.fractal.domain.dictionary.Status;
-import com.fractal.domain.dictionary.VacationCategory;
+
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.dictionary.VacationType;
+import com.fractal.domain.dictionary.Status;
+import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.organization_management.Organization;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,28 +13,22 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
+
 @Entity
-@Table(name = "vacation", schema = "employee_schema", catalog = "fractal")
+@Table(name = "business_trip", schema = "employee_schema", catalog = "fractal")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Vacation extends AbstractEntity {
+public class BusinessTrip extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
-    @ManyToOne
-    @JoinColumn(name = "successor_employee_id", referencedColumnName = "id")
-    private Employee successorEmployee;
 
     @ManyToOne
-    @JoinColumn(name = "vacation_category_id", referencedColumnName = "id")
-    private VacationCategory vacationCategory;
-
-    @ManyToOne
-    @JoinColumn(name = "vacation_type_id", referencedColumnName = "id")
-    private VacationType vacationType;
+    @JoinColumn(name = "organization_id", referencedColumnName = "id")
+    private Organization organization;
 
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")

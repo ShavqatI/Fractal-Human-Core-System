@@ -1,4 +1,4 @@
-package com.fractal.domain.organization;
+package com.fractal.domain.organization_management;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.Status;

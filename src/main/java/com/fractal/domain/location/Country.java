@@ -1,14 +1,21 @@
 package com.fractal.domain.location;
 
-import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.abstraction.Location;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "country", schema = "location_schema", catalog = "fractal")
-public class Country extends AbstractEntity {
-    @Column(name = "name")
-    private String name;
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Country extends Location {
 
     @Column(name ="code",unique = true,length = 5)
     private String code;
@@ -16,27 +23,4 @@ public class Country extends AbstractEntity {
     @Column(name ="iso_code",unique = true)
     private String isoCode;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getIsoCode() {
-        return isoCode;
-    }
-
-    public void setIsoCode(String isoCode) {
-        this.isoCode = isoCode;
-    }
 }

@@ -1,7 +1,8 @@
-package com.fractal.domain.employee;
+package com.fractal.domain.employee_management.military_service;
 
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.employee_management.employee.Employee;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
