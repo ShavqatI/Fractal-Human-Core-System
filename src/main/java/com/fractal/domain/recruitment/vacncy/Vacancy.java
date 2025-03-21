@@ -1,7 +1,9 @@
-package com.fractal.domain.organization_management;
+package com.fractal.domain.recruitment.vacncy;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.Status;
+import com.fractal.domain.organization_management.Organization;
+import com.fractal.domain.organization_management.Position;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

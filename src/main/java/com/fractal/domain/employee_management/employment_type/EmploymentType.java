@@ -1,4 +1,4 @@
-package com.fractal.domain.employee_management.category;
+package com.fractal.domain.employee_management.employment_type;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import jakarta.persistence.Column;
@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category extends AbstractEntity {
+public class EmploymentType extends AbstractEntity {
 
     @Column(name = "code")
     private String code;

@@ -1,8 +1,8 @@
-package com.fractal.domain.employee_management.candidate;
+package com.fractal.domain.recruitment.candidate;
 
 
 import com.fractal.domain.abstraction.Person;
-import com.fractal.domain.organization_management.Vacancy;
+import com.fractal.domain.recruitment.vacncy.Vacancy;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

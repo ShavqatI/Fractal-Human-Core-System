@@ -2,7 +2,7 @@ package com.fractal.domain.employee_management.employment_history;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.Status;
-import com.fractal.domain.employee_management.category.Category;
+import com.fractal.domain.employee_management.employment_type.EmploymentType;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.organization_management.Department;
 import com.fractal.domain.organization_management.Organization;
@@ -12,8 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "labor_activity", schema = "employee_schema", catalog = "fractal")
@@ -23,26 +22,29 @@ import java.sql.Date;
 @NoArgsConstructor
 public class EmploymentHistory extends AbstractEntity {
 
-    @Column(name = "accept_date")
-    private Date acceptDate;
-
     @Column(name = "agreement_number")
     private String agreementNumber;
 
-    @Column(name = "agreement_date")
-    private Date agreementDate;
+    @Column(name = "agreement_start_date")
+    private LocalDate agreementStartDate;
 
-    @Column(name = "agreement_term")
-    private Date agreementTerm;
+    @Column(name = "agreement_end_date")
+    private LocalDate agreementEndDate;
 
     @Column(name = "order_number")
     private String orderNumber;
 
     @Column(name = "order_date")
-    private Date orderDate;
+    private LocalDate orderDate;
 
     @Column(name = "serial")
     private Integer serial;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
@@ -65,7 +67,7 @@ public class EmploymentHistory extends AbstractEntity {
     private Status status;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
-    private Category category;
+    @JoinColumn(name = "employment_type_id", referencedColumnName = "id")
+    private EmploymentType employmentType;
 
 }
