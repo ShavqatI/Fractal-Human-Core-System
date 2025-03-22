@@ -4,7 +4,7 @@ import com.fractal.domain.abstraction.Person;
 import com.fractal.domain.dictionary.Status;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.education.Education;
-import com.fractal.domain.employee_management.employment_history.EmploymentHistory;
+import com.fractal.domain.employee_management.employment.EmploymentHistory;
 import com.fractal.domain.employee_management.identification.Identification;
 import com.fractal.domain.employee_management.military_service.MilitaryService;
 import com.fractal.domain.employee_management.performance.Performance;

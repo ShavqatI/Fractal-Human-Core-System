@@ -1,8 +1,8 @@
-package com.fractal.domain.employee_management.employment_history;
+package com.fractal.domain.employee_management.employment;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.Status;
-import com.fractal.domain.employee_management.employment_type.EmploymentType;
+import com.fractal.domain.employee_management.employment.type.EmploymentType;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.organization_management.Department;
 import com.fractal.domain.organization_management.Organization;

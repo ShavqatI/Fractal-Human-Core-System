@@ -1,4 +1,4 @@
-package com.fractal.domain.employee_management.employment_type;
+package com.fractal.domain.employee_management.employment.type;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import jakarta.persistence.Column;
