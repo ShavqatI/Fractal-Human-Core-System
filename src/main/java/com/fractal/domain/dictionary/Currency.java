@@ -1,7 +1,7 @@
 package com.fractal.domain.dictionary;
 
 import com.fractal.domain.abstraction.Dictionary;
-import com.fractal.domain.location.Country;
+import com.fractal.domain.location.country.Country;
 import jakarta.persistence.*;
 
 @Entity

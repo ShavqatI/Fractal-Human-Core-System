@@ -1,6 +1,6 @@
 package com.fractal.domain.system;
 
-import com.fractal.domain.localization.Language;
+import com.fractal.domain.localization.language.Language;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.MessageType;
 import jakarta.persistence.*;

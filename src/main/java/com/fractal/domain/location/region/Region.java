@@ -1,7 +1,8 @@
-package com.fractal.domain.location;
+package com.fractal.domain.location.region;
 
 
-import com.fractal.domain.abstraction.Location;
+import com.fractal.domain.location.Location;
+import com.fractal.domain.location.country.Country;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

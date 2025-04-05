@@ -1,6 +1,7 @@
-package com.fractal.domain.location;
+package com.fractal.domain.location.district;
 
-import com.fractal.domain.abstraction.Location;
+import com.fractal.domain.location.Location;
+import com.fractal.domain.location.city.City;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

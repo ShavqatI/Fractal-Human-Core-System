@@ -1,5 +1,6 @@
-package com.fractal.domain.abstraction;
+package com.fractal.domain.location;
 
+import com.fractal.domain.abstraction.AbstractEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 

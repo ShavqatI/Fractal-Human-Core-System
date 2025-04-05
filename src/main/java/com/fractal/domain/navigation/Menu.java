@@ -1,6 +1,6 @@
 package com.fractal.domain.navigation;
 
-import com.fractal.domain.localization.LayoutLabel;
+import com.fractal.domain.localization.layout_label.LayoutLabel;
 import com.fractal.domain.abstraction.AbstractEntity;
 import jakarta.persistence.*;
 

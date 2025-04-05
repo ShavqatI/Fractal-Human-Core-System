@@ -1,6 +1,8 @@
-package com.fractal.domain.localization;
+package com.fractal.domain.localization.layout_label_detail;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.localization.language.Language;
+import com.fractal.domain.localization.layout_label.LayoutLabel;
 import jakarta.persistence.*;
 
 @Entity

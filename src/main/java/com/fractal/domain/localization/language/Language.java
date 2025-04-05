@@ -1,4 +1,4 @@
-package com.fractal.domain.localization;
+package com.fractal.domain.localization.language;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import jakarta.persistence.Column;

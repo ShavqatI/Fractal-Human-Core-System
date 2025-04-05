@@ -1,6 +1,6 @@
-package com.fractal.domain.location;
+package com.fractal.domain.location.country;
 
-import com.fractal.domain.abstraction.Location;
+import com.fractal.domain.location.Location;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

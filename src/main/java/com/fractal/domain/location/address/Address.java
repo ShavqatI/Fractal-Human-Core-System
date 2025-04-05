@@ -1,8 +1,12 @@
-package com.fractal.domain.location;
+package com.fractal.domain.location.address;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.EntityType;
-import com.fractal.domain.dictionary.AddressType;
+import com.fractal.domain.location.address.address_type.AddressType;
+import com.fractal.domain.location.city.City;
+import com.fractal.domain.location.country.Country;
+import com.fractal.domain.location.district.District;
+import com.fractal.domain.location.region.Region;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
