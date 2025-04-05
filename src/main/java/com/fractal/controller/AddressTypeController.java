@@ -1,6 +1,5 @@
 package com.fractal.controller;
 
-import com.fractal.domain.abstraction.Dictionary;
 import com.fractal.domain.location.address.type.AddressType;
 import com.fractal.domain.location.address.type.AddressTypeService;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +16,7 @@ public class AddressTypeController {
     private final AddressTypeService addressTypeService;
     @GetMapping
     public ResponseEntity<String> test() {
-        AddressType addressType = AddressType.builder().code("hello").name("blllla").build();
+        AddressType addressType = AddressType.builder().code("2323").name("blllla").build();
         addressTypeService.update(1L,addressType);
         return ResponseEntity.ok("Hello");
     }

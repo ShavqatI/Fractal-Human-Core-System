@@ -9,6 +9,4 @@ public interface AddressTypeService {
    AddressType findById(Long id);
    AddressType create(AddressType addressType);
    AddressType update(Long id,AddressType newAddressType);
-
-
 }

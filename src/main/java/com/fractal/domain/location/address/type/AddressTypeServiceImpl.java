@@ -1,6 +1,7 @@
 package com.fractal.domain.location.address.type;
 
 
+import com.fractal.exception.AddressTypeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -8,7 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class AddressTypeServiceImpl implements AddressTypeService {
+class AddressTypeServiceImpl implements AddressTypeService {
 
     private final AddressTypeRepository addressTypeRepository;
 
@@ -17,7 +18,7 @@ public class AddressTypeServiceImpl implements AddressTypeService {
         addressTypeRepository.save(addressType);
         return addressType;
     }
-
+   @Override
     public AddressType update(Long id,AddressType newAddressType) {
         AddressType addressType = findById(id);
         addressType.setName(newAddressType.getName());
@@ -34,11 +35,11 @@ public class AddressTypeServiceImpl implements AddressTypeService {
 
     @Override
     public AddressType findByCode(String code) {
-        return addressTypeRepository.findByCode(code).orElseThrow(()-> new RuntimeException("Address Type with code: " + code + " not found"));
+        return addressTypeRepository.findByCode(code).orElseThrow(()-> new AddressTypeException("Address Type with code: " + code + " not found"));
     }
 
     @Override
     public AddressType findById(Long id) {
-        return addressTypeRepository.findById(id).orElseThrow(()-> new RuntimeException("Address Type with id: " + id + " not found"));
+        return addressTypeRepository.findById(id).orElseThrow(()-> new AddressTypeException("Address Type with id: " + id + " not found"));
     }
 }
