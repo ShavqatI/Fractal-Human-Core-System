@@ -1,6 +1,7 @@
 package com.fractal.domain.location.address.type;
 
 
+import com.fractal.domain.location.address.type.dto.AddressTypeDTO;
 import com.fractal.exception.AddressTypeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,18 +14,27 @@ class AddressTypeServiceImpl implements AddressTypeService {
 
     private final AddressTypeRepository addressTypeRepository;
 
-    @Override
-    public AddressType create(AddressType addressType) {
+
+    private AddressType save(AddressType addressType) {
         addressTypeRepository.save(addressType);
         return addressType;
     }
-   @Override
+
+    @Override
+    public AddressType create(AddressTypeDTO dto) {
+        AddressType addressType = AddressType.builder()
+                .code(dto.code())
+                .name(dto.name())
+                .build();
+        return save(addressType);
+    }
+
+    @Override
     public AddressType update(Long id,AddressType newAddressType) {
         AddressType addressType = findById(id);
         addressType.setName(newAddressType.getName());
         addressType.setCode(newAddressType.getCode());
-        addressTypeRepository.save(addressType);
-        return addressType;
+        return save(addressType);
     }
 
 

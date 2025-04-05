@@ -1,5 +1,7 @@
 package com.fractal.domain.location.address.type;
 
+import com.fractal.domain.location.address.type.dto.AddressTypeDTO;
+
 import java.util.List;
 
 public interface AddressTypeService {
@@ -7,6 +9,7 @@ public interface AddressTypeService {
    AddressType findByCode(String code);
 
    AddressType findById(Long id);
-   AddressType create(AddressType addressType);
+   AddressType create(AddressTypeDTO dto);
    AddressType update(Long id,AddressType newAddressType);
+
 }

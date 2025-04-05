@@ -2,6 +2,7 @@ package com.fractal.controller;
 
 import com.fractal.domain.location.address.type.AddressType;
 import com.fractal.domain.location.address.type.AddressTypeService;
+import com.fractal.domain.location.address.type.dto.AddressTypeDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +17,8 @@ public class AddressTypeController {
     private final AddressTypeService addressTypeService;
     @GetMapping
     public ResponseEntity<String> test() {
-        AddressType addressType = AddressType.builder().code("2323").name("blllla").build();
-        addressTypeService.update(1L,addressType);
+        AddressTypeDTO addressTypeDTO = new AddressTypeDTO("myCode","myName");
+        addressTypeService.create(addressTypeDTO);
         return ResponseEntity.ok("Hello");
     }
 }
