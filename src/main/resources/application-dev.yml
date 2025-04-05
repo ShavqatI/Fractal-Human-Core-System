@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: 'jdbc:postgresql://localhost:5435/fractal'
+    username: fractal
+    password: Fractal@2025
+    driver-class-name: org.postgresql.Driver

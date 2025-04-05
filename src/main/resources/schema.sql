@@ -1,0 +1,10 @@
+CREATE SCHEMA IF NOT EXISTS employee_schema;
+CREATE SCHEMA IF NOT EXISTS dictionary_schema;
+CREATE SCHEMA IF NOT EXISTS localization_schema;
+CREATE SCHEMA IF NOT EXISTS location_schema;
+CREATE SCHEMA IF NOT EXISTS navigation_schema;
+CREATE SCHEMA IF NOT EXISTS organization_schema;
+CREATE SCHEMA IF NOT EXISTS recruitment_schema;
+CREATE SCHEMA IF NOT EXISTS system_schema;
+CREATE SCHEMA IF NOT EXISTS ui_schema;
+CREATE SCHEMA IF NOT EXISTS user_schema;

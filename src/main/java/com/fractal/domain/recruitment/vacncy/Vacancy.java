@@ -2,17 +2,20 @@ package com.fractal.domain.recruitment.vacncy;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.Status;
-import com.fractal.domain.organization_management.Organization;
-import com.fractal.domain.organization_management.Position;
+import com.fractal.domain.organization_management.organization.Organization;
+import com.fractal.domain.organization_management.position.Position;
+import com.fractal.domain.recruitment.candidate.Candidate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table(name = "vacancy", schema = "organization_schema", catalog = "fractal")
+@Table(name = "vacancy", schema = "recruitment_schema", catalog = "fractal")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,6 +28,9 @@ public class Vacancy extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position position;
+
+    @OneToMany(mappedBy = "vacancy",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<Candidate> candidates = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")

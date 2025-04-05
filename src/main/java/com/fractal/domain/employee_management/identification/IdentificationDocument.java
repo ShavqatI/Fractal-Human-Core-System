@@ -2,7 +2,7 @@ package com.fractal.domain.employee_management.identification;
 
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.dictionary.IdentificationType;
+import com.fractal.domain.employee_management.identification.identification_document_type.IdentificationDocumentType;
 import com.fractal.domain.dictionary.Status;
 import com.fractal.domain.employee_management.employee.Employee;
 import jakarta.persistence.*;
@@ -28,7 +28,7 @@ public class IdentificationDocument extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "identification_type_id", referencedColumnName = "id")
-    private IdentificationType identificationType;
+    private IdentificationDocumentType identificationDocumentType;
 
 
     @Column(name = "series")

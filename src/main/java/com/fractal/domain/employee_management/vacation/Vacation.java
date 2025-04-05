@@ -40,8 +40,8 @@ public class Vacation extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @Column(name = "begin_date")
-    private Date beginDate;
+    @Column(name = "start_date")
+    private Date startDate;
 
     @Column(name = "end_date")
     private Date endDate;

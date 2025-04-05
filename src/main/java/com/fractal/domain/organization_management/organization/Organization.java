@@ -1,12 +1,15 @@
-package com.fractal.domain.organization_management;
+package com.fractal.domain.organization_management.organization;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.organization_management.organization_unit.OrganizationUnit;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "organization", schema = "organization_schema", catalog = "fractal")
@@ -42,6 +45,9 @@ public class Organization extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Organization parent;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    private List<Organization> children = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "organization_unit_id", referencedColumnName = "id")

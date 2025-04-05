@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "candidate", schema = "employee_schema", catalog = "fractal")
+@Table(name = "candidate", schema = "recruitment_schema", catalog = "fractal")
 @Data
 @Builder
 @AllArgsConstructor

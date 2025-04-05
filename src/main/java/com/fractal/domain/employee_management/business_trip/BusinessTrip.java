@@ -4,7 +4,7 @@ package com.fractal.domain.employee_management.business_trip;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.Status;
 import com.fractal.domain.employee_management.employee.Employee;
-import com.fractal.domain.organization_management.Organization;
+import com.fractal.domain.organization_management.organization.Organization;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,8 +34,8 @@ public class BusinessTrip extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @Column(name = "begin_date")
-    private Date beginDate;
+    @Column(name = "start_date")
+    private Date startDate;
 
     @Column(name = "end_date")
     private Date endDate;
