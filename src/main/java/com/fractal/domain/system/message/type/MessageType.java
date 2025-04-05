@@ -1,25 +1,25 @@
-package com.fractal.domain.dictionary;
+package com.fractal.domain.system.message.type;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 
 @Entity
 @Table(name = "message_type", schema = "dictionary_schema", catalog = "fractal")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class MessageType extends Dictionary {
 
-    @Basic
     @Column(name = "description")
     private String description;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
