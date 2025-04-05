@@ -6,7 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "vacation_category", schema = "dictionary_schema", catalog = "fractal")
+@Table(name = "vacation_category", schema = "employee_schema", catalog = "fractal")
 public class VacationCategory extends Dictionary {
     private String description;
 

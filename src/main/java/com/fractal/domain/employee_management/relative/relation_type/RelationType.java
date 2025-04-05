@@ -5,6 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "relation_type", schema = "dictionary_schema", catalog = "fractal")
+@Table(name = "relation_type", schema = "employee_schema", catalog = "fractal")
 public class RelationType extends Dictionary {
 }

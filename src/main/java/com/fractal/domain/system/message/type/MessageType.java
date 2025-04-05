@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "message_type", schema = "dictionary_schema", catalog = "fractal")
+@Table(name = "message_type", schema = "system_schema", catalog = "fractal")
 @Data
 @Builder
 @AllArgsConstructor

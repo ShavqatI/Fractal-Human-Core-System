@@ -5,32 +5,23 @@ import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "notification_template", schema = "dictionary_schema", catalog = "fractal")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class NotificationTemplate extends Dictionary {
 
-    @Basic
     @Column(name = "description")
     private String description;
 
-    @Basic
     @Column(name = "key_words")
     private String keyWords;
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getKeyWords() {
-        return keyWords;
-    }
-
-    public void setKeyWords(String keyWords) {
-        this.keyWords = keyWords;
-    }
 }

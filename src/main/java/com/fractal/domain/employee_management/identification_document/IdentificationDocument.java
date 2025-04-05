@@ -15,7 +15,7 @@ import java.sql.Date;
 
 
 @Entity
-@Table(name = "identification", schema = "employee_schema", catalog = "fractal")
+@Table(name = "identification_document",schema = "employee_schema", catalog = "fractal")
 @Data
 @Builder
 @AllArgsConstructor
