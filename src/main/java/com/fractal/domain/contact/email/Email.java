@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Email extends Contact {
+
     @Column(name = "address")
     private String address;
 

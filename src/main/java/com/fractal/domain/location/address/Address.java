@@ -2,7 +2,7 @@ package com.fractal.domain.location.address;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.EntityType;
-import com.fractal.domain.location.address.address_type.AddressType;
+import com.fractal.domain.location.address.type.AddressType;
 import com.fractal.domain.location.city.City;
 import com.fractal.domain.location.country.Country;
 import com.fractal.domain.location.district.District;

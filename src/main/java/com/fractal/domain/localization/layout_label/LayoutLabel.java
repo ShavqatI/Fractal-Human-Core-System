@@ -1,23 +1,28 @@
 package com.fractal.domain.localization.layout_label;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fractal.domain.localization.layout_label.detail.LayoutLabelDetail;
+import com.fractal.domain.recruitment.candidate.Candidate;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "layout_label", schema = "localization_schema", catalog = "fractal")
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class LayoutLabel extends AbstractEntity {
 
     @Column(name = "name")
     private String name;
 
-
-     public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-   }
+    @OneToMany(mappedBy = "layoutLabel",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<LayoutLabelDetail> layoutLabelDetails = new ArrayList<>();
+}

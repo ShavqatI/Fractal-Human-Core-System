@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Contact extends AbstractEntity {
+public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;

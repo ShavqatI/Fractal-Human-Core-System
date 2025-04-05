@@ -23,4 +23,7 @@ public class Country extends Location {
     @Column(name ="iso_code",unique = true)
     private String isoCode;
 
+    @Column(name = "phone_prefix")
+    private String phonePrefix;
+
 }

@@ -1,4 +1,4 @@
-package com.fractal.domain.location.address.address_type;
+package com.fractal.domain.location.address.type;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;

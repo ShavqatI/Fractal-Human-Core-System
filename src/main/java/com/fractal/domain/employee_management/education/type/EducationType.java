@@ -1,4 +1,4 @@
-package com.fractal.domain.employee_management.education.education_type;
+package com.fractal.domain.employee_management.education.type;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;

@@ -1,4 +1,4 @@
-package com.fractal.domain.employee_management.identification_document.identification_document_type;
+package com.fractal.domain.employee_management.identification_document.type;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;
