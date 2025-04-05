@@ -3,16 +3,21 @@ package com.fractal.domain.abstraction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
 @Data
+@SuperBuilder
+@NoArgsConstructor
 public abstract class Dictionary extends AbstractEntity {
 
     @Column(name = "code",unique = true)
-    private String code;
+    protected String code;
 
     @Column(name = "name")
-    private String name;
-
+    protected String name;
 }

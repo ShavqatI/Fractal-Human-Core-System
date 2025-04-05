@@ -35,34 +35,34 @@ public class Employee extends Person {
     private Status status;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EmploymentHistory> employmentHistories  = new ArrayList<>();
+    private final List<EmploymentHistory> employmentHistories  = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Performance> performances  = new ArrayList<>();
+    private final List<Performance> performances  = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<BusinessTrip> businessTrips  = new ArrayList<>();
+    private final List<BusinessTrip> businessTrips  = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Vacation> vacations  = new ArrayList<>();
+    private final List<Vacation> vacations  = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MilitaryService> militaryServices  = new ArrayList<>();
+    private final List<MilitaryService> militaryServices  = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Relative> relatives  = new ArrayList<>();
+    private final List<Relative> relatives  = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Education> educations   = new ArrayList<>();
+    private final List<Education> educations   = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<IdentificationDocument> identificationDocuments = new ArrayList<>();
+    private final List<IdentificationDocument> identificationDocuments = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Citizenship> citizenships   = new ArrayList<>();
+    private final List<Citizenship> citizenships   = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Subordinate> subordinates   = new ArrayList<>();
+    private final List<Subordinate> subordinates   = new ArrayList<>();
 
    /* @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contact> contacts   = new ArrayList<>();*/

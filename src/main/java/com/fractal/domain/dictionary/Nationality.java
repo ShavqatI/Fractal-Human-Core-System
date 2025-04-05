@@ -3,16 +3,14 @@ package com.fractal.domain.dictionary;
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "category", schema = "employee_schema", catalog = "fractal")
 @Data
-@Builder
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Nationality extends Dictionary {
 }

@@ -5,11 +5,15 @@ import com.fractal.domain.dictionary.MaritalStatus;
 import com.fractal.domain.dictionary.Nationality;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.sql.Date;
 
 @MappedSuperclass
 @Data
+@SuperBuilder
+@NoArgsConstructor
 public abstract class Person extends AbstractEntity {
 
     @Column(name = "last_name")
