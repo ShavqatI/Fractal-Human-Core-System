@@ -20,7 +20,7 @@ import java.sql.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Identification extends AbstractEntity {
+public class IdentificationDocument extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")

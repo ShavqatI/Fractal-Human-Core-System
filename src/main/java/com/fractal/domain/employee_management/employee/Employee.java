@@ -6,7 +6,7 @@ import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.education.Education;
 import com.fractal.domain.employee_management.employment.EmploymentHistory;
 import com.fractal.domain.employee_management.subordinate.Subordinate;
-import com.fractal.domain.employee_management.identification.Identification;
+import com.fractal.domain.employee_management.identification.IdentificationDocument;
 import com.fractal.domain.employee_management.military_service.MilitaryService;
 import com.fractal.domain.employee_management.performance.Performance;
 import com.fractal.domain.employee_management.relative.Relative;
@@ -55,13 +55,13 @@ public class Employee extends Person {
     private List<Education> educations   = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Identification> identifications   = new ArrayList<>();
+    private List<IdentificationDocument> identificationDocuments = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Country> citizenships   = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Subordinate> hierarchies   = new ArrayList<>();
+    private List<Subordinate> subordinates   = new ArrayList<>();
 
 
 }
