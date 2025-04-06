@@ -9,6 +9,7 @@ import java.util.Optional;
 @Repository
 interface AddressTypeRepository extends JpaRepository<AddressType,Long> {
 
+
     List<AddressType> findAll();
     Optional<AddressType> findByCode(String code);
     Optional<AddressType> findById(Long id);

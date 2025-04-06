@@ -1,6 +1,6 @@
 package com.fractal.exception;
 
-public class AddressTypeException extends RuntimeException {
+public class AddressTypeException extends ResourceNotFoundException {
     public AddressTypeException() {
     }
 

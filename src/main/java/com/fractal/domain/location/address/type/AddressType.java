@@ -1,6 +1,5 @@
 package com.fractal.domain.location.address.type;
 
-import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
