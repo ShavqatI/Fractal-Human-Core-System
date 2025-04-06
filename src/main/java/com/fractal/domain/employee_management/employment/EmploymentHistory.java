@@ -2,8 +2,10 @@ package com.fractal.domain.employee_management.employment;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.Status;
+import com.fractal.domain.employee_management.employment.agreement.Agreement;
 import com.fractal.domain.employee_management.employment.type.EmploymentType;
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.employee_management.subordinate.Subordinate;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.position.Position;
@@ -13,6 +15,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "employment_history", schema = "employee_schema", catalog = "fractal")
@@ -21,15 +25,6 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class EmploymentHistory extends AbstractEntity {
-
-    @Column(name = "agreement_number")
-    private String agreementNumber;
-
-    @Column(name = "agreement_start_date")
-    private LocalDate agreementStartDate;
-
-    @Column(name = "agreement_end_date")
-    private LocalDate agreementEndDate;
 
     @Column(name = "order_number")
     private String orderNumber;
@@ -69,5 +64,8 @@ public class EmploymentHistory extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "employment_type_id", referencedColumnName = "id")
     private EmploymentType employmentType;
+
+    @OneToMany(mappedBy = "employmentHistory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<Agreement> agreements   = new ArrayList<>();
 
 }
