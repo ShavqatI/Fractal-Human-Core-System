@@ -1,6 +1,6 @@
 package com.fractal.domain.location.address.type;
 
-import com.fractal.exception.AddressTypeException;
+import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
 
     @Override
     public AddressTypeDTO getByCode(String code) {
-        return toDTO(addressTypeRepository.findByCode(code).orElseThrow(()-> new AddressTypeException("Address Type with code: " + code + " not found")));
+        return toDTO(addressTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found")));
     }
 
     @Override
@@ -84,7 +84,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
     }
 
     private AddressType findById(Long id) {
-        return addressTypeRepository.findById(id).orElseThrow(()-> new AddressTypeException("Address Type with id: " + id + " not found"));
+        return addressTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
     }
 
 }
