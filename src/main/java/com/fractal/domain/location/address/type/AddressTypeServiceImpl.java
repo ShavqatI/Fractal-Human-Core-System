@@ -3,6 +3,7 @@ package com.fractal.domain.location.address.type;
 
 import com.fractal.domain.location.address.type.dto.AddressTypeDTO;
 import com.fractal.exception.AddressTypeException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
