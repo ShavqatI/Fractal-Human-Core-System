@@ -1,7 +1,7 @@
 package com.fractal.controller.location;
 
 import com.fractal.domain.location.address.type.AddressTypeService;
-import com.fractal.domain.location.address.type.dto.AddressTypeDTO;
+import com.fractal.domain.location.address.type.AddressTypeDTO;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,7 +1,5 @@
 package com.fractal.domain.location.address.type;
 
-import com.fractal.domain.location.address.type.dto.AddressTypeDTO;
-
 import java.util.List;
 
 public interface AddressTypeService {

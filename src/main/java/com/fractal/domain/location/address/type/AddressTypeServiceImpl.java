@@ -1,6 +1,5 @@
 package com.fractal.domain.location.address.type;
 
-import com.fractal.domain.location.address.type.dto.AddressTypeDTO;
 import com.fractal.exception.AddressTypeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -54,7 +53,12 @@ class AddressTypeServiceImpl implements AddressTypeService {
     }
 
     private AddressTypeDTO toDTO(AddressType addressType) {
-        return new AddressTypeDTO(addressType.getId(),addressType.getCode(),addressType.getName());
+        return new AddressTypeDTO(
+                addressType.getId(),
+                addressType.getCode(),
+                addressType.getName(),
+                addressType.getCreatedDate()
+        );
     }
     private AddressType toEntity(AddressTypeDTO dto) {
         return AddressType.builder()
