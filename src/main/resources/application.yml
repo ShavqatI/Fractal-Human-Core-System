@@ -31,5 +31,8 @@ spring:
         format_sql: 'true'
         #hbm2ddl:
          # import_files: schema.sql
+        transaction:
+          jta:
+            platform: org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform
 server:
   port: 8585

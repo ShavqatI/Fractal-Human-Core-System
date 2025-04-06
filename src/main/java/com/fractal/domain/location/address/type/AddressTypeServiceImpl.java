@@ -2,6 +2,7 @@ package com.fractal.domain.location.address.type;
 
 import com.fractal.exception.AddressTypeException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,17 +14,27 @@ class AddressTypeServiceImpl implements AddressTypeService {
     private final AddressTypeRepository addressTypeRepository;
     @Override
     public AddressTypeDTO create(AddressTypeDTO dto) {
-        AddressType addressType = toEntity(dto);
-        return toDTO(save(addressType));
+        try {
+            AddressType addressType = toEntity(dto);
+            return toDTO(save(addressType));
+        }
+        catch (DataAccessException e) {
+           throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
     @Override
     public AddressTypeDTO update(Long id,AddressTypeDTO dto) {
-        AddressType newAddressType = toEntity(dto);
-        AddressType addressType = findById(id);
-        addressType.setName(newAddressType.getName());
-        addressType.setCode(newAddressType.getCode());
-        return toDTO(save(addressType));
+        try {
+            AddressType newAddressType = toEntity(dto);
+            AddressType addressType = findById(id);
+            addressType.setName(newAddressType.getName());
+            addressType.setCode(newAddressType.getCode());
+            return toDTO(save(addressType));
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
 
