@@ -1,6 +1,5 @@
 package com.fractal.domain.organization_management.organization_unit;
 
-import com.fractal.domain.location.address.type.AddressType;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
