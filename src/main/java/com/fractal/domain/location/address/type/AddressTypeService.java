@@ -9,8 +9,4 @@ public interface AddressTypeService {
    AddressTypeDTO getById(Long id);
    AddressTypeDTO update(Long id,AddressTypeDTO addressTypeDTO);
    void deleteById(Long id);
-
-
-
-
 }

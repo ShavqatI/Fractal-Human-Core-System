@@ -16,8 +16,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
     @Override
     public AddressTypeDTO create(AddressTypeDTO dto) {
         try {
-            AddressType addressType = toEntity(dto);
-            return toDTO(save(addressType));
+            return toDTO(save(toEntity(dto)));
         }
         catch (DataAccessException e) {
            throw new RuntimeException(e.getMostSpecificCause().getMessage());
@@ -63,6 +62,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
        addressTypeRepository.delete(addressType);
 
     }
+
 
     private AddressTypeDTO toDTO(AddressType addressType) {
         return new AddressTypeDTO(
