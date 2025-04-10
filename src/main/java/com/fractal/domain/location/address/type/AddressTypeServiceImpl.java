@@ -58,9 +58,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
 
     @Override
     public void deleteById(Long id) {
-       AddressType addressType = findById(id);
-       addressTypeRepository.delete(addressType);
-
+       addressTypeRepository.delete(findById(id));
     }
 
 

@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.organization_unit;
 
+import com.fractal.domain.location.address.type.AddressType;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -40,17 +41,24 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
     }
 
     @Override
-    public OrganizationUnitDTO update(Long id, OrganizationUnitDTO addressTypeDTO) {
-        return null;
+    public OrganizationUnitDTO update(Long id, OrganizationUnitDTO dto) {
+        try {
+            OrganizationUnit newOrganizationUnit = toEntity(dto);
+            OrganizationUnit organizationUnit = findById(id);
+            organizationUnit.setCode(newOrganizationUnit.getCode());
+            organizationUnit.setName(newOrganizationUnit.getName());
+            organizationUnit.setDescription(newOrganizationUnit.getDescription());
+            return toDTO(save(organizationUnit));
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
     @Override
     public void deleteById(Long id) {
-
+        organizationUnitRepository.delete(findById(id));
     }
-
-
-
     private OrganizationUnitDTO toDTO(OrganizationUnit organizationUnit) {
         return new OrganizationUnitDTO(
                 organizationUnit.getId(),
@@ -60,8 +68,6 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
                 organizationUnit.getCreatedDate()
         );
     }
-
-
     private OrganizationUnit toEntity(OrganizationUnitDTO dto) {
         return OrganizationUnit.builder()
                 .code(dto.code())
