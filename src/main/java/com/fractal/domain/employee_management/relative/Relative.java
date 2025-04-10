@@ -2,8 +2,8 @@ package com.fractal.domain.employee_management.relative;
 
 
 import com.fractal.domain.abstraction.Person;
-import com.fractal.domain.employee_management.relative.relation_type.RelationType;
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.employee_management.relative.relation_type.RelationType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

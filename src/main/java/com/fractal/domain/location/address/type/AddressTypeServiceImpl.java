@@ -4,6 +4,7 @@ import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,8 +80,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
     }
 
     private AddressType save(AddressType addressType) {
-        addressTypeRepository.save(addressType);
-        return addressType;
+        return addressTypeRepository.save(addressType);
     }
 
     private AddressType findById(Long id) {

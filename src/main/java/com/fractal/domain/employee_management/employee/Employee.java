@@ -1,17 +1,16 @@
 package com.fractal.domain.employee_management.employee;
 
 import com.fractal.domain.abstraction.Person;
-import com.fractal.domain.contact.Contact;
 import com.fractal.domain.dictionary.Status;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.citizenship.Citizenship;
 import com.fractal.domain.employee_management.education.Education;
 import com.fractal.domain.employee_management.employment.EmploymentHistory;
-import com.fractal.domain.employee_management.subordinate.Subordinate;
 import com.fractal.domain.employee_management.identification_document.IdentificationDocument;
 import com.fractal.domain.employee_management.military_service.MilitaryService;
 import com.fractal.domain.employee_management.performance.Performance;
 import com.fractal.domain.employee_management.relative.Relative;
+import com.fractal.domain.employee_management.subordinate.Subordinate;
 import com.fractal.domain.employee_management.vacation.Vacation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

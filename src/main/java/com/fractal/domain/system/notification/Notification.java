@@ -1,8 +1,8 @@
 package com.fractal.domain.system.notification;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.system.notification.type.NotificationType;
 import com.fractal.domain.dictionary.Status;
+import com.fractal.domain.system.notification.type.NotificationType;
 import com.fractal.domain.system.service_provider.ServiceProvider;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

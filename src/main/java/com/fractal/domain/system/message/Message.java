@@ -1,7 +1,7 @@
 package com.fractal.domain.system.message;
 
-import com.fractal.domain.localization.language.Language;
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.localization.language.Language;
 import com.fractal.domain.system.message.type.MessageType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,10 +1,10 @@
 package com.fractal.domain.employee_management.vacation;
 
-import com.fractal.domain.dictionary.Status;
-import com.fractal.domain.employee_management.vacation.category.VacationCategory;
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.employee_management.vacation.type.VacationType;
+import com.fractal.domain.dictionary.Status;
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.employee_management.vacation.category.VacationCategory;
+import com.fractal.domain.employee_management.vacation.type.VacationType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

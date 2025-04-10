@@ -1,7 +1,7 @@
 package com.fractal.domain.navigation;
 
-import com.fractal.domain.localization.layout_label.LayoutLabel;
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.localization.layout_label.LayoutLabel;
 import jakarta.persistence.*;
 
 @Entity

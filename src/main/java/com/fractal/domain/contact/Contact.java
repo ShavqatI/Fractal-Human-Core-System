@@ -1,11 +1,7 @@
 package com.fractal.domain.contact;
 
-import com.fractal.domain.abstraction.AbstractEntity;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)

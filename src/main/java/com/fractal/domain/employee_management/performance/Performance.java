@@ -2,21 +2,18 @@ package com.fractal.domain.employee_management.performance;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.Status;
+import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.performance.goal.Goal;
 import com.fractal.domain.employee_management.performance.improvement.Improvement;
 import com.fractal.domain.employee_management.performance.type.PerformanceType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.*;
-
-import java.time.LocalDate;
-import java.util.List;
-
-import com.fractal.domain.employee_management.employee.Employee;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "performance", schema = "employee_schema", catalog = "fractal")

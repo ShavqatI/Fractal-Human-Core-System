@@ -2,10 +2,9 @@ package com.fractal.domain.employee_management.employment;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.Status;
+import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employment.agreement.Agreement;
 import com.fractal.domain.employee_management.employment.type.EmploymentType;
-import com.fractal.domain.employee_management.employee.Employee;
-import com.fractal.domain.employee_management.subordinate.Subordinate;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.position.Position;
@@ -14,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

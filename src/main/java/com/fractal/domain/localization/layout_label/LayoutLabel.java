@@ -2,7 +2,6 @@ package com.fractal.domain.localization.layout_label;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.localization.layout_label.detail.LayoutLabelDetail;
-import com.fractal.domain.recruitment.candidate.Candidate;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

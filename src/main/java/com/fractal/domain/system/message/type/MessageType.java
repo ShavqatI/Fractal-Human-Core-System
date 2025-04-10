@@ -1,7 +1,6 @@
 package com.fractal.domain.system.message.type;
 
 import com.fractal.domain.abstraction.Dictionary;
-import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;

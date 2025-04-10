@@ -1,8 +1,8 @@
 package com.fractal.domain.user;
 
+import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.ProfileAttribute;
 import com.fractal.domain.dictionary.Status;
-import com.fractal.domain.abstraction.AbstractEntity;
 import jakarta.persistence.*;
 
 @Entity

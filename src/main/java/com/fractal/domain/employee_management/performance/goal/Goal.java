@@ -1,7 +1,6 @@
 package com.fractal.domain.employee_management.performance.goal;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-
 import com.fractal.domain.employee_management.performance.Performance;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

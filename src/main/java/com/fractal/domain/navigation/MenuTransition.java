@@ -1,8 +1,8 @@
 package com.fractal.domain.navigation;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.dictionary.Status;
 import com.fractal.domain.dictionary.EntityType;
+import com.fractal.domain.dictionary.Status;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
