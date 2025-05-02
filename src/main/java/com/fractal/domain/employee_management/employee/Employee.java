@@ -12,6 +12,7 @@ import com.fractal.domain.employee_management.performance.Performance;
 import com.fractal.domain.employee_management.relative.Relative;
 import com.fractal.domain.employee_management.subordinate.Subordinate;
 import com.fractal.domain.employee_management.vacation.Vacation;
+import com.fractal.domain.location.address.EmployeeAddress;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -62,6 +63,9 @@ public class Employee extends Person {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<Subordinate> subordinates   = new ArrayList<>();
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<EmployeeAddress> addresses   = new ArrayList<>();
 
    /* @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Contact> contacts   = new ArrayList<>();*/

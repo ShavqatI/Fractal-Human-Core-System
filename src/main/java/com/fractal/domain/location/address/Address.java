@@ -1,12 +1,11 @@
 package com.fractal.domain.location.address;
 
-import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.dictionary.EntityType;
 import com.fractal.domain.location.address.type.AddressType;
 import com.fractal.domain.location.city.City;
 import com.fractal.domain.location.country.Country;
 import com.fractal.domain.location.district.District;
 import com.fractal.domain.location.region.Region;
+import com.fractal.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,21 +13,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "address", schema = "location_schema", catalog = "fractal")
-@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address extends AbstractEntity {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class Address {
 
-    @ManyToOne
-    @JoinColumn(name ="entity_type_id", referencedColumnName = "id")
-    private EntityType entityType;
-
-    @Column(name = "entity_id")
-    private Integer entity;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name ="address_type_id", referencedColumnName = "id")
@@ -79,5 +76,42 @@ public class Address extends AbstractEntity {
 
     @Column(name = "end_date")
     private LocalDate endDate;
+
+    @Column(name = "created_date",updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    protected LocalDateTime createdDate;
+
+    @Column(name = "updated_date")
+    protected LocalDateTime updatedDate;
+
+    @ManyToOne
+    @JoinColumn(name = "created_user_id")
+    protected User createdUser;
+
+    @ManyToOne
+    @JoinColumn(name = "updated_user_id")
+    protected User updatedUser;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdDate = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedDate = LocalDateTime.now();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public LocalDateTime getUpdatedDate() {
+        return updatedDate;
+    }
+
 
 }
