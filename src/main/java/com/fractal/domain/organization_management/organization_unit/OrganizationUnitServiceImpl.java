@@ -42,11 +42,10 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
     @Override
     public OrganizationUnitDTO update(Long id, OrganizationUnitDTO dto) {
         try {
-            OrganizationUnit newOrganizationUnit = toEntity(dto);
             OrganizationUnit organizationUnit = findById(id);
-            organizationUnit.setCode(newOrganizationUnit.getCode());
-            organizationUnit.setName(newOrganizationUnit.getName());
-            organizationUnit.setDescription(newOrganizationUnit.getDescription());
+            organizationUnit.setCode(dto.code());
+            organizationUnit.setName(dto.name());
+            organizationUnit.setDescription(dto.description());
             return toDTO(save(organizationUnit));
         }
         catch (DataAccessException e) {

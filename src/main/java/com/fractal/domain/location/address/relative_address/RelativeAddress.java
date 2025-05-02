@@ -1,7 +1,8 @@
-package com.fractal.domain.location.address.employee_address;
+package com.fractal.domain.location.address.relative_address;
 
 
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.employee_management.relative.Relative;
 import com.fractal.domain.location.address.Address;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -18,9 +19,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeAddress extends Address {
+public class RelativeAddress extends Address {
 
     @ManyToOne
-    @JoinColumn(name ="employee_id", referencedColumnName = "id")
-    private Employee employee;
+    @JoinColumn(name ="relative_id", referencedColumnName = "id")
+    private Relative relative;
 }

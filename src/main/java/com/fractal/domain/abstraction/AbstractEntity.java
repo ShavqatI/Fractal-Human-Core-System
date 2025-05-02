@@ -3,7 +3,6 @@ package com.fractal.domain.abstraction;
 import com.fractal.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -12,7 +11,6 @@ import java.time.LocalDateTime;
 
 
 @MappedSuperclass
-@Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor

@@ -7,20 +7,16 @@ import com.fractal.domain.location.district.District;
 import com.fractal.domain.location.region.Region;
 import com.fractal.domain.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "address", schema = "location_schema", catalog = "fractal")
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+
 public class Address {
 
     @Id
@@ -100,18 +96,5 @@ public class Address {
     protected void onUpdate() {
         this.updatedDate = LocalDateTime.now();
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public LocalDateTime getUpdatedDate() {
-        return updatedDate;
-    }
-
 
 }
