@@ -4,7 +4,6 @@ package com.fractal.domain.employee_management.relative;
 import com.fractal.domain.abstraction.Person;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.relative.relation_type.RelationType;
-import com.fractal.domain.location.address.employee_address.EmployeeAddress;
 import com.fractal.domain.location.address.relative_address.RelativeAddress;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,6 @@
 package com.fractal.domain.location.address.relative_address;
 
 
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.relative.Relative;
 import com.fractal.domain.location.address.Address;
 import jakarta.persistence.Entity;
