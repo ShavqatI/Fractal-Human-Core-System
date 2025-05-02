@@ -14,46 +14,11 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class AbstractEntity {
+public abstract class AbstractEntity extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    @Column(name = "created_date",updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    protected LocalDateTime createdDate;
-
-    @Column(name = "updated_date")
-    protected LocalDateTime updatedDate;
-
-    @ManyToOne
-    @JoinColumn(name = "created_user_id")
-    protected User createdUser;
-
-    @ManyToOne
-    @JoinColumn(name = "updated_user_id")
-    protected User updatedUser;
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdDate = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedDate = LocalDateTime.now();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public LocalDateTime getCreatedDate() {
-        return createdDate;
-    }
-
-    public LocalDateTime getUpdatedDate() {
-        return updatedDate;
-    }
 
 }

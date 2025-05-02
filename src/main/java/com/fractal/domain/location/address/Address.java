@@ -1,23 +1,22 @@
 package com.fractal.domain.location.address;
 
+import com.fractal.domain.abstraction.Auditable;
 import com.fractal.domain.location.address.type.AddressType;
 import com.fractal.domain.location.city.City;
 import com.fractal.domain.location.country.Country;
 import com.fractal.domain.location.district.District;
 import com.fractal.domain.location.region.Region;
-import com.fractal.domain.user.User;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "address", schema = "location_schema", catalog = "fractal")
 @Data
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 
-public class Address {
+public class Address extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -72,29 +71,5 @@ public class Address {
 
     @Column(name = "end_date")
     private LocalDate endDate;
-
-    @Column(name = "created_date",updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    protected LocalDateTime createdDate;
-
-    @Column(name = "updated_date")
-    protected LocalDateTime updatedDate;
-
-    @ManyToOne
-    @JoinColumn(name = "created_user_id")
-    protected User createdUser;
-
-    @ManyToOne
-    @JoinColumn(name = "updated_user_id")
-    protected User updatedUser;
-
-    @PrePersist
-    protected void onCreate() {
-        this.createdDate = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        this.updatedDate = LocalDateTime.now();
-    }
 
 }
