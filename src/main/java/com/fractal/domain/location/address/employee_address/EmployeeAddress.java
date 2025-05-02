@@ -1,7 +1,8 @@
-package com.fractal.domain.location.address;
+package com.fractal.domain.location.address.employee_address;
 
 
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.location.address.Address;
 import com.fractal.domain.location.address.type.AddressType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

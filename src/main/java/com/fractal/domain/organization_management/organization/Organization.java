@@ -1,6 +1,7 @@
 package com.fractal.domain.organization_management.organization;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.location.address.organization_address.OrganizationAddress;
 import com.fractal.domain.organization_management.organization_unit.OrganizationUnit;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -48,6 +49,9 @@ public class Organization extends AbstractEntity {
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
     private List<Organization> children = new ArrayList<>();
+
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private List<OrganizationAddress> addresses = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "organization_unit_id", referencedColumnName = "id")
