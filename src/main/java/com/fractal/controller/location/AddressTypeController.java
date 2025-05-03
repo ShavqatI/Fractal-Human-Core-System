@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/location/address_type")
+@RequestMapping("/api/v1/location/address-type")
 @RequiredArgsConstructor
 public class AddressTypeController {
 

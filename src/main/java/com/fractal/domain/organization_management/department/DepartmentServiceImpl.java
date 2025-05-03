@@ -28,7 +28,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department getByCode(String code) {
-        return departmentRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Department with code: " + code + " not found"));
+        return findByCode(code);
     }
 
     @Override
