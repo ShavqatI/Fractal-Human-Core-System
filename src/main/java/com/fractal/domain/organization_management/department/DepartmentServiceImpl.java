@@ -1,6 +1,7 @@
 package com.fractal.domain.organization_management.department;
 
-import com.fractal.domain.organization_management.organization_unit.OrganizationUnit;
+import com.fractal.domain.organization_management.department.dto.DepartmentCreateDto;
+import com.fractal.domain.organization_management.department.dto.DepartmentResponseDto;
 import com.fractal.domain.organization_management.organization_unit.OrganizationUnitService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     private final DepartmentRepository departmentRepository;
     private final OrganizationUnitService organizationUnitService;
     @Override
-    public Department create(DepartmentDto dto) {
+    public Department create(DepartmentCreateDto dto) {
         return save(toEntity(dto));
     }
 
@@ -36,13 +37,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department update(Long id, DepartmentDto dto) {
+    public Department update(Long id, DepartmentCreateDto dto) {
         Department department = findById(id);
         department.setCode(dto.code());
         department.setName(dto.name());
         department.setLevel(dto.level());
         department.setLevelMap(dto.levelMap());
-        department.setOrganizationUnit(organizationUnitService.findByCode(dto.organizationUnit().code()));
+        department.setOrganizationUnit(organizationUnitService.findByCode(dto.organizationUnit()));
         return null;
     }
 
@@ -51,8 +52,8 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentRepository.delete(findById(id));
     }
 
-    private DepartmentDto toDTO(Department department) {
-        return new DepartmentDto(
+    public DepartmentResponseDto toDTO(Department department) {
+        return new DepartmentResponseDto(
                 department.getId(),
                 department.getCode(),
                 department.getName(),
@@ -64,15 +65,14 @@ public class DepartmentServiceImpl implements DepartmentService {
                 department.getCreatedDate()
         );
     }
-    private Department toEntity(DepartmentDto dto) {
+    private Department toEntity(DepartmentCreateDto dto) {
         return Department.builder()
                 .code(dto.code())
                 .name(dto.name())
                 .level(dto.level())
                 .levelMap(dto.levelMap())
-                .parent(toEntity(dto.parent()))
-                .children(dto.children().stream().map(this::toEntity).collect(Collectors.toList()))
-                .organizationUnit(organizationUnitService.findByCode(dto.organizationUnit().code()))
+                .parent(findByCode(dto.parent()))
+                .organizationUnit(organizationUnitService.findByCode(dto.organizationUnit()))
                 .build();
     }
 
@@ -82,5 +82,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     private Department findById(Long id) {
         return departmentRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Department with id: " + id + " not found"));
+    }
+    private Department findByCode(String code) {
+        return departmentRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Department with code : " + code + " not found"));
     }
 }

@@ -1,4 +1,4 @@
-package com.fractal.domain.organization_management.department;
+package com.fractal.domain.organization_management.department.dto;
 
 import com.fractal.domain.organization_management.organization_unit.OrganizationUnitDto;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record DepartmentDto(
+public record DepartmentResponseDto(
         Long id,
         @NotBlank
         @Pattern(regexp = "^[A-Z]{3,20}$", message = "Code must be in Latin uppercase letters")
@@ -21,8 +21,8 @@ public record DepartmentDto(
         int level,
         @NotBlank
         String levelMap,
-        DepartmentDto parent,
-        List<DepartmentDto> children,
+        DepartmentResponseDto parent,
+        List<DepartmentResponseDto> children,
         OrganizationUnitDto organizationUnit,
         LocalDateTime createdDate
 ) {}
