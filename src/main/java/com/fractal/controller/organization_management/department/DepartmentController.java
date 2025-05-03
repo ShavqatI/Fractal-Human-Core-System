@@ -38,13 +38,10 @@ public class DepartmentController {
     @PutMapping("/{id}")
     public ResponseEntity<DepartmentResponseDto> update(@PathVariable Long id, @RequestBody @Valid DepartmentCreateDto dto) {
         return  ResponseEntity.ok(departmentService.toDTO(departmentService.update(id,dto)));
-
-
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         departmentService.deleteById(id);
         return ResponseEntity.noContent().build();
-
     }
 }
