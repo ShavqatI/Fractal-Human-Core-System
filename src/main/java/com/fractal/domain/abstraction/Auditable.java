@@ -45,5 +45,13 @@ public abstract class Auditable {
     public LocalDateTime getUpdatedDate() {
         return updatedDate;
     }
+
+    public User getCreatedUser() {
+        return createdUser;
+    }
+
+    public User getUpdatedUser() {
+        return updatedUser;
+    }
 }
 

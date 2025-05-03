@@ -14,7 +14,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
 
     private final OrganizationUnitRepository organizationUnitRepository;
     @Override
-    public OrganizationUnitDTO create(OrganizationUnitDTO dto) {
+    public OrganizationUnitDto create(OrganizationUnitDto dto) {
         try {
             return toDTO(save(toEntity(dto)));
         }
@@ -25,22 +25,27 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
     }
 
     @Override
-    public List<OrganizationUnitDTO> getAll() {
+    public List<OrganizationUnitDto> getAll() {
         return organizationUnitRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
     }
 
     @Override
-    public OrganizationUnitDTO getByCode(String code) {
+    public OrganizationUnitDto getByCode(String code) {
         return toDTO(organizationUnitRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Organization Unit with code: " + code + " not found")));
     }
 
     @Override
-    public OrganizationUnitDTO getById(Long id) {
+    public OrganizationUnit findByCode(String code) {
+        return organizationUnitRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Organization Unit with code: " + code + " not found"));
+    }
+
+    @Override
+    public OrganizationUnitDto getById(Long id) {
         return toDTO(findById(id));
     }
 
     @Override
-    public OrganizationUnitDTO update(Long id, OrganizationUnitDTO dto) {
+    public OrganizationUnitDto update(Long id, OrganizationUnitDto dto) {
         try {
             OrganizationUnit organizationUnit = findById(id);
             organizationUnit.setCode(dto.code());
@@ -57,8 +62,8 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
     public void deleteById(Long id) {
         organizationUnitRepository.delete(findById(id));
     }
-    private OrganizationUnitDTO toDTO(OrganizationUnit organizationUnit) {
-        return new OrganizationUnitDTO(
+    public OrganizationUnitDto toDTO(OrganizationUnit organizationUnit) {
+        return new OrganizationUnitDto(
                 organizationUnit.getId(),
                 organizationUnit.getCode(),
                 organizationUnit.getName(),
@@ -66,7 +71,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
                 organizationUnit.getCreatedDate()
         );
     }
-    private OrganizationUnit toEntity(OrganizationUnitDTO dto) {
+    private OrganizationUnit toEntity(OrganizationUnitDto dto) {
         return OrganizationUnit.builder()
                 .code(dto.code())
                 .name(dto.name())
@@ -81,4 +86,5 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
     private OrganizationUnit findById(Long id) {
         return organizationUnitRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Organization Unit with id: " + id + " not found"));
     }
+
 }

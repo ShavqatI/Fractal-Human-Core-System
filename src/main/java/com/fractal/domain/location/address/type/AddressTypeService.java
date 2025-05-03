@@ -3,10 +3,10 @@ package com.fractal.domain.location.address.type;
 import java.util.List;
 
 public interface AddressTypeService {
-   AddressTypeDTO create(AddressTypeDTO dto);
-   List<AddressTypeDTO> getAll();
-   AddressTypeDTO getByCode(String code);
-   AddressTypeDTO getById(Long id);
-   AddressTypeDTO update(Long id,AddressTypeDTO addressTypeDTO);
+   AddressTypeDto create(AddressTypeDto dto);
+   List<AddressTypeDto> getAll();
+   AddressTypeDto getByCode(String code);
+   AddressTypeDto getById(Long id);
+   AddressTypeDto update(Long id, AddressTypeDto addressTypeDTO);
    void deleteById(Long id);
 }

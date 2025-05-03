@@ -14,7 +14,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
 
     private final AddressTypeRepository addressTypeRepository;
     @Override
-    public AddressTypeDTO create(AddressTypeDTO dto) {
+    public AddressTypeDto create(AddressTypeDto dto) {
         try {
             return toDTO(save(toEntity(dto)));
         }
@@ -24,7 +24,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
     }
 
     @Override
-    public AddressTypeDTO update(Long id,AddressTypeDTO dto) {
+    public AddressTypeDto update(Long id, AddressTypeDto dto) {
         try {
             AddressType newAddressType = toEntity(dto);
             AddressType addressType = findById(id);
@@ -39,7 +39,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
 
 
     @Override
-    public List<AddressTypeDTO> getAll() {
+    public List<AddressTypeDto> getAll() {
         return addressTypeRepository.findAll()
                 .stream()
                  .map(this::toDTO)
@@ -47,12 +47,12 @@ class AddressTypeServiceImpl implements AddressTypeService {
     }
 
     @Override
-    public AddressTypeDTO getByCode(String code) {
+    public AddressTypeDto getByCode(String code) {
         return toDTO(addressTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found")));
     }
 
     @Override
-    public AddressTypeDTO getById(Long id) {
+    public AddressTypeDto getById(Long id) {
         return toDTO(findById(id));
     }
 
@@ -62,15 +62,15 @@ class AddressTypeServiceImpl implements AddressTypeService {
     }
 
 
-    private AddressTypeDTO toDTO(AddressType addressType) {
-        return new AddressTypeDTO(
+    private AddressTypeDto toDTO(AddressType addressType) {
+        return new AddressTypeDto(
                 addressType.getId(),
                 addressType.getCode(),
                 addressType.getName(),
                 addressType.getCreatedDate()
         );
     }
-    private AddressType toEntity(AddressTypeDTO dto) {
+    private AddressType toEntity(AddressTypeDto dto) {
         return AddressType.builder()
                 .code(dto.code())
                 .name(dto.name())

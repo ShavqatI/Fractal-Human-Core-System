@@ -1,6 +1,7 @@
 package com.fractal.controller.location;
 
-import com.fractal.domain.location.address.type.AddressTypeDTO;
+
+import com.fractal.domain.location.address.type.AddressTypeDto;
 import com.fractal.domain.location.address.type.AddressTypeService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,23 +18,23 @@ public class AddressTypeController {
 
     private final AddressTypeService addressTypeService;
     @PostMapping
-    public ResponseEntity<AddressTypeDTO> create(@RequestBody @Valid AddressTypeDTO addressTypeDTO) {
+    public ResponseEntity<AddressTypeDto> create(@RequestBody @Valid AddressTypeDto addressTypeDTO) {
         return new ResponseEntity<>(addressTypeService.create(addressTypeDTO), HttpStatus.CREATED);
     }
     @GetMapping
-    public ResponseEntity<List<AddressTypeDTO>> getAll() {
+    public ResponseEntity<List<AddressTypeDto>> getAll() {
         return ResponseEntity.ok(addressTypeService.getAll());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<AddressTypeDTO> getById(@PathVariable Long id) {
+    public ResponseEntity<AddressTypeDto> getById(@PathVariable Long id) {
         return ResponseEntity.ok(addressTypeService.getById(id));
     }
     @GetMapping("/code/{code}")
-    public ResponseEntity<AddressTypeDTO> getByCode(@PathVariable String code) {
+    public ResponseEntity<AddressTypeDto> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(addressTypeService.getByCode(code));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<AddressTypeDTO> update(@PathVariable Long id,@RequestBody @Valid AddressTypeDTO addressTypeDTO) {
+    public ResponseEntity<AddressTypeDto> update(@PathVariable Long id, @RequestBody @Valid AddressTypeDto addressTypeDTO) {
       return  ResponseEntity.ok(addressTypeService.update(id,addressTypeDTO));
 
 

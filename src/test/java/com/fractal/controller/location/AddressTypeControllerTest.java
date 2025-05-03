@@ -1,6 +1,6 @@
 package com.fractal.controller.location;
 
-import com.fractal.domain.location.address.type.AddressTypeDTO;
+import com.fractal.domain.location.address.type.AddressTypeDto;
 import com.fractal.domain.location.address.type.AddressTypeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,10 +38,10 @@ class AddressTypeControllerTest {
     @Test
     void createTest() throws Exception {
         // Arrange
-        AddressTypeDTO addressTypeDTO = new AddressTypeDTO(null, "TESTCODE", "Test Name",null);
-        AddressTypeDTO createdAddressTypeDTO = new AddressTypeDTO(14L, "TESTCODE", "Test Name", LocalDateTime.now());
+        AddressTypeDto addressTypeDTO = new AddressTypeDto(null, "TESTCODE", "Test Name",null);
+        AddressTypeDto createdAddressTypeDto = new AddressTypeDto(14L, "TESTCODE", "Test Name", LocalDateTime.now());
 
-        given(addressTypeService.create(addressTypeDTO)).willReturn(createdAddressTypeDTO);
+        given(addressTypeService.create(addressTypeDTO)).willReturn(createdAddressTypeDto);
 
         // Act & Assert
         mockMvc.perform(post("/api/v1/location/address_type")
@@ -55,11 +55,11 @@ class AddressTypeControllerTest {
 
     @Test
     void getAllTest() throws Exception  {
-        List<AddressTypeDTO> addressTypeDTOList = Arrays.asList(
-                new AddressTypeDTO(1L, "Code1", "Name1",LocalDateTime.now()),
-                new AddressTypeDTO(2L, "Code2", "Name2",LocalDateTime.now())
+        List<AddressTypeDto> addressTypeDtoList = Arrays.asList(
+                new AddressTypeDto(1L, "Code1", "Name1",LocalDateTime.now()),
+                new AddressTypeDto(2L, "Code2", "Name2",LocalDateTime.now())
         );
-        given(addressTypeService.getAll()).willReturn(addressTypeDTOList);
+        given(addressTypeService.getAll()).willReturn(addressTypeDtoList);
 
         mockMvc.perform(get("/api/v1/location/address_type"))
                 .andExpect(status().isOk())
@@ -70,7 +70,7 @@ class AddressTypeControllerTest {
     @Test
     void getByIdTest() throws Exception {
         Long id = 1L;
-        AddressTypeDTO addressTypeDTO = new AddressTypeDTO(id, "Code1", "Name1",LocalDateTime.now());
+        AddressTypeDto addressTypeDTO = new AddressTypeDto(id, "Code1", "Name1",LocalDateTime.now());
         given(addressTypeService.getById(id)).willReturn(addressTypeDTO);
 
         mockMvc.perform(get("/api/v1/location/address_type/{id}", id))
@@ -83,7 +83,7 @@ class AddressTypeControllerTest {
     @Test
     void getByCodeTest() throws Exception {
         String code = "SOLID";
-        AddressTypeDTO addressTypeDTO = new AddressTypeDTO(1L, code, "Name1",LocalDateTime.now());
+        AddressTypeDto addressTypeDTO = new AddressTypeDto(1L, code, "Name1",LocalDateTime.now());
         given(addressTypeService.getByCode(code)).willReturn(addressTypeDTO);
 
         mockMvc.perform(get("/api/v1/location/address_type/code/{code}", code))
@@ -96,10 +96,10 @@ class AddressTypeControllerTest {
     @Test
     void updateTest() throws Exception {
         Long id = 1L;
-        AddressTypeDTO addressTypeDTO = new AddressTypeDTO(null, "UPDCODE", "Updated Name",null);
-        AddressTypeDTO updatedAddressTypeDTO = new AddressTypeDTO(id, "UPDCODE", "Updated Name",LocalDateTime.now());
+        AddressTypeDto addressTypeDTO = new AddressTypeDto(null, "UPDCODE", "Updated Name",null);
+        AddressTypeDto updatedAddressTypeDto = new AddressTypeDto(id, "UPDCODE", "Updated Name",LocalDateTime.now());
 
-        given(addressTypeService.update(id, addressTypeDTO)).willReturn(updatedAddressTypeDTO);
+        given(addressTypeService.update(id, addressTypeDTO)).willReturn(updatedAddressTypeDto);
 
         mockMvc.perform(put("/api/v1/location/address_type/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)

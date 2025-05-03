@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 
-public record OrganizationUnitDTO(
+public record OrganizationUnitDto(
     Long id,
     @NotBlank
     @Pattern(regexp = "^[A-Z]{3,20}$", message = "Code must be in Latin uppercase letters")
