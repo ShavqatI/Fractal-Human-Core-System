@@ -4,6 +4,7 @@ package com.fractal.domain.location.region;
 import com.fractal.domain.abstraction.Location;
 import com.fractal.domain.location.city.City;
 import com.fractal.domain.location.country.Country;
+import com.fractal.domain.location.district.District;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,5 +28,8 @@ public class Region extends Location {
 
     @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
     private List<City> cities = new ArrayList<>();
+
+    @OneToMany(mappedBy = "region", cascade = CascadeType.ALL)
+    private List<District> districts = new ArrayList<>();
 
 }

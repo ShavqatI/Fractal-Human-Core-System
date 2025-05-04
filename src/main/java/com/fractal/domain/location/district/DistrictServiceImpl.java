@@ -1,0 +1,104 @@
+package com.fractal.domain.location.district;
+
+import com.fractal.domain.location.city.CityService;
+import com.fractal.domain.location.district.dto.DistrictRequest;
+import com.fractal.domain.location.district.dto.DistrictResponse;
+import com.fractal.domain.location.region.RegionService;
+import com.fractal.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+class DistrictServiceImpl implements DistrictService {
+    private final DistrictRepository districtRepository;
+    private final RegionService regionService;
+    private final CityService cityService;
+
+    @Override
+    public District create(DistrictRequest dto) {
+        return save(toEntity(dto));
+    }
+
+    @Override
+    public List<District> getAll() {
+        return districtRepository.findAll();
+    }
+
+    @Override
+    public List<District> getByRegionId(Long regionId) {
+        return districtRepository.findByRegion(regionService.getById(regionId));
+    }
+
+    @Override
+    public List<District> getByCityId(Long cityId) {
+        return districtRepository.findByCity(cityService.getById(cityId));
+    }
+
+    @Override
+    public District getByCode(String code) {
+        return districtRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("District with code: " + code + " not found"));
+    }
+
+    @Override
+    public District getById(Long id) {
+        return findById(id);
+    }
+
+    @Override
+    public District update(Long id, DistrictRequest dto) {
+        try {
+            District district = findById(id);
+            district.setCode(dto.code());
+            district.setName(dto.name());
+            district.setCity(cityService.getById(dto.cityId()));
+            district.setRegion(regionService.getById(dto.regionId()));
+            return save(district);
+        }
+        catch (DataAccessException e){
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
+    }
+
+    @Override
+    public void deleteById(Long id) {
+      districtRepository.delete(findById(id));
+    }
+
+    @Override
+    public DistrictResponse toDTO(District district) {
+        return new DistrictResponse(
+                district.getId(),
+                district.getCode(),
+                district.getName(),
+                district.getCity().getName(),
+                district.getRegion().getName(),
+                district.getCreatedDate()
+        );
+    }
+
+    private District toEntity(DistrictRequest dto) {
+        return District.builder()
+                .code(dto.code())
+                .name(dto.name())
+                .city(cityService.getById(dto.cityId()))
+                .region(regionService.getById(dto.regionId()))
+                .build();
+    }
+
+    private District save(District district) {
+        try {
+            return districtRepository.save(district);
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
+    }
+
+    private District findById(Long id) {
+        return districtRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("District with id: " + id + " not found"));
+    }
+}

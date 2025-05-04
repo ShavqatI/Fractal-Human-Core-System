@@ -2,9 +2,6 @@ package com.fractal.domain.location.city;
 
 import com.fractal.domain.location.city.dto.CityRequest;
 import com.fractal.domain.location.city.dto.CityResponse;
-import com.fractal.domain.location.region.Region;
-import com.fractal.domain.location.region.dto.RegionRequest;
-import com.fractal.domain.location.region.dto.RegionResponse;
 
 import java.util.List;
 
