@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "address", schema = "location_schema", catalog = "fractal")
 @Data
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Address extends Auditable {
 
     @Id
@@ -42,7 +42,7 @@ public class Address extends Auditable {
     protected District district;
 
     @Column(name = "street")
-    private String street;
+    protected String street;
 
     @Column(name = "house")
     protected String house;
