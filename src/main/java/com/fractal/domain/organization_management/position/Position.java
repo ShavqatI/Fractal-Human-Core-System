@@ -2,11 +2,12 @@ package com.fractal.domain.organization_management.position;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.organization_management.department.Department;
+import com.fractal.domain.organization_management.job_description.JobDescription;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "position", schema = "organization_schema", catalog = "fractal")
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@EqualsAndHashCode(callSuper = true)
 public class Position extends AbstractEntity {
 
     @Column(name = "code",unique = true)
@@ -28,5 +30,8 @@ public class Position extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
+
+    @OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
+    private List<JobDescription> jobDescriptions = new ArrayList<>();
 
 }
