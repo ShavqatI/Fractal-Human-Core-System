@@ -4,6 +4,7 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.organization_management.department.Department;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,13 +13,14 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class Position extends AbstractEntity {
+
+    @Column(name = "code",unique = true)
+    private String code;
 
     @Column(name = "name")
     private String name;
-
-    @Column(name = "code")
-    private String code;
 
     @Column(name = "description")
     private String description;

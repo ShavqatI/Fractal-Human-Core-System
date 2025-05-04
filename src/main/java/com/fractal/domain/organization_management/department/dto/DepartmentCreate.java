@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record DepartmentCreateDto (
+public record DepartmentCreate(
     @NotBlank
     @Pattern(regexp = "^[A-Z]{2,20}$", message = "Code must be in Latin uppercase letters")
     String code,

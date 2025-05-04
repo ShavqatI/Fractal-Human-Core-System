@@ -1,0 +1,52 @@
+package com.fractal.controller.organization_management;
+
+import com.fractal.domain.organization_management.position.PositionService;
+import com.fractal.domain.organization_management.position.dto.PositionCreate;
+import com.fractal.domain.organization_management.position.dto.PositionResponse;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@RestController
+@RequestMapping("/api/v1/organization-management/position")
+@RequiredArgsConstructor
+public class PositionController {
+
+    private final PositionService positionService;
+
+    @PostMapping
+    public ResponseEntity<PositionResponse> create(@RequestBody @Valid PositionCreate dto) {
+        return new ResponseEntity<>(positionService.toDTO(positionService.create(dto)), HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<PositionResponse>> getAll() {
+        return ResponseEntity.ok(positionService.getAll().stream().map(department -> positionService.toDTO(department)).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PositionResponse> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(positionService.toDTO(positionService.getById(id)));
+    }
+
+    @GetMapping("/code/{code}")
+    public ResponseEntity<PositionResponse> getByCode(@PathVariable String code) {
+        return ResponseEntity.ok(positionService.toDTO(positionService.getByCode(code)));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PositionResponse> update(@PathVariable Long id, @RequestBody @Valid PositionCreate dto) {
+        return ResponseEntity.ok(positionService.toDTO(positionService.update(id, dto)));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        positionService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+}

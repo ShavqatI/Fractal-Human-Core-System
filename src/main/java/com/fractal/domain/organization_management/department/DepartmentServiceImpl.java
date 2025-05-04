@@ -1,10 +1,11 @@
 package com.fractal.domain.organization_management.department;
 
-import com.fractal.domain.organization_management.department.dto.DepartmentCreateDto;
-import com.fractal.domain.organization_management.department.dto.DepartmentResponseDto;
+import com.fractal.domain.organization_management.department.dto.DepartmentCreate;
+import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
 import com.fractal.domain.organization_management.organization_unit.OrganizationUnitService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,12 +17,12 @@ import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
-public class DepartmentServiceImpl implements DepartmentService {
+class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository departmentRepository;
     private final OrganizationUnitService organizationUnitService;
     @Override
-    public Department create(DepartmentCreateDto dto) {
+    public Department create(DepartmentCreate dto) {
         return save(toEntity(dto));
     }
 
@@ -44,15 +45,20 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department update(Long id, DepartmentCreateDto dto) {
-        Department department = findById(id);
-        department.setCode(dto.code());
-        department.setName(dto.name());
-        department.setLevel(dto.level());
-        department.setLevelMap(dto.levelMap());
-        department.setParent(getParentByCode(dto.parent()));
-        department.setOrganizationUnit(organizationUnitService.findByCode(dto.organizationUnit()));
-        return save(department);
+    public Department update(Long id, DepartmentCreate dto) {
+        try {
+         Department department = findById(id);
+         department.setCode(dto.code());
+         department.setName(dto.name());
+         department.setLevel(dto.level());
+         department.setLevelMap(dto.levelMap());
+         department.setParent(getParentByCode(dto.parent()));
+         department.setOrganizationUnit(organizationUnitService.getByCode(dto.organizationUnit()));
+         return save(department);
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
     @Override
@@ -60,8 +66,8 @@ public class DepartmentServiceImpl implements DepartmentService {
         departmentRepository.delete(findById(id));
     }
 
-    public DepartmentResponseDto toDTO(Department department) {
-        return new DepartmentResponseDto(
+    public DepartmentResponse toDTO(Department department) {
+        return new DepartmentResponse(
                 department.getId(),
                 department.getCode(),
                 department.getName(),
@@ -79,19 +85,24 @@ public class DepartmentServiceImpl implements DepartmentService {
                 department.getCreatedDate()
         );
     }
-    private Department toEntity(DepartmentCreateDto dto) {
+    private Department toEntity(DepartmentCreate dto) {
         return Department.builder()
                 .code(dto.code())
                 .name(dto.name())
                 .level(dto.level())
                 .levelMap(dto.levelMap())
                 .parent(getParentByCode(dto.parent()))
-                .organizationUnit(organizationUnitService.findByCode(dto.organizationUnit()))
+                .organizationUnit(organizationUnitService.getByCode(dto.organizationUnit()))
                 .build();
     }
 
     private Department save(Department department) {
-        return departmentRepository.save(department);
+        try {
+            return departmentRepository.save(department);
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
     private Department findById(Long id) {

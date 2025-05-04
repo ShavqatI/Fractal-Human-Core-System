@@ -1,16 +1,16 @@
 package com.fractal.domain.organization_management.department;
 
-import com.fractal.domain.organization_management.department.dto.DepartmentCreateDto;
-import com.fractal.domain.organization_management.department.dto.DepartmentResponseDto;
+import com.fractal.domain.organization_management.department.dto.DepartmentCreate;
+import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
 
 import java.util.List;
 
 public interface DepartmentService {
-    Department create(DepartmentCreateDto dto);
+    Department create(DepartmentCreate dto);
     List<Department> getAll();
     Department getByCode(String code);
     Department getById(Long id);
-    Department update(Long id, DepartmentCreateDto dto);
+    Department update(Long id, DepartmentCreate dto);
     void deleteById(Long id);
-    DepartmentResponseDto toDTO(Department department);
+    DepartmentResponse toDTO(Department department);
 }

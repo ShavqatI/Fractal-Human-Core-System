@@ -1,8 +1,8 @@
-package com.fractal.controller.organization_management.department;
+package com.fractal.controller.organization_management;
 
 import com.fractal.domain.organization_management.department.DepartmentService;
-import com.fractal.domain.organization_management.department.dto.DepartmentCreateDto;
-import com.fractal.domain.organization_management.department.dto.DepartmentResponseDto;
+import com.fractal.domain.organization_management.department.dto.DepartmentCreate;
+import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,27 +20,27 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @PostMapping
-    public ResponseEntity<DepartmentResponseDto> create(@RequestBody @Valid DepartmentCreateDto dto) {
+    public ResponseEntity<DepartmentResponse> create(@RequestBody @Valid DepartmentCreate dto) {
         return new ResponseEntity<>(departmentService.toDTO(departmentService.create(dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<DepartmentResponseDto>> getAll() {
+    public ResponseEntity<List<DepartmentResponse>> getAll() {
         return ResponseEntity.ok(departmentService.getAll().stream().map(department -> departmentService.toDTO(department)).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DepartmentResponseDto> getById(@PathVariable Long id) {
+    public ResponseEntity<DepartmentResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(departmentService.toDTO(departmentService.getById(id)));
     }
 
     @GetMapping("/code/{code}")
-    public ResponseEntity<DepartmentResponseDto> getByCode(@PathVariable String code) {
+    public ResponseEntity<DepartmentResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(departmentService.toDTO(departmentService.getByCode(code)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DepartmentResponseDto> update(@PathVariable Long id, @RequestBody @Valid DepartmentCreateDto dto) {
+    public ResponseEntity<DepartmentResponse> update(@PathVariable Long id, @RequestBody @Valid DepartmentCreate dto) {
         return ResponseEntity.ok(departmentService.toDTO(departmentService.update(id, dto)));
     }
 

@@ -1,12 +1,13 @@
 package com.fractal.domain.organization_management.organization_unit;
 
+import com.fractal.domain.organization_management.organization_unit.dto.OrganizationUnitCreate;
+import com.fractal.domain.organization_management.organization_unit.dto.OrganizationUnitResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -14,44 +15,37 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
 
     private final OrganizationUnitRepository organizationUnitRepository;
     @Override
-    public OrganizationUnitDto create(OrganizationUnitDto dto) {
-        try {
-            return toDTO(save(toEntity(dto)));
-        }
-        catch (DataAccessException e) {
-            throw new RuntimeException(e.getMostSpecificCause().getMessage());
-        }
-
+    public OrganizationUnit create(OrganizationUnitCreate dto) {
+        return save(toEntity(dto));
     }
 
     @Override
-    public List<OrganizationUnitDto> getAll() {
-        return organizationUnitRepository.findAll().stream().map(this::toDTO).collect(Collectors.toList());
+    public List<OrganizationUnit> getAll() {
+        return organizationUnitRepository.findAll();
     }
 
     @Override
-    public OrganizationUnitDto getByCode(String code) {
-        return toDTO(organizationUnitRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Organization Unit with code: " + code + " not found")));
+    public OrganizationUnit getByCode(String code) {
+        return findByCode(code);
     }
 
-    @Override
-    public OrganizationUnit findByCode(String code) {
+    private OrganizationUnit findByCode(String code) {
         return organizationUnitRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Organization Unit with code: " + code + " not found"));
     }
 
     @Override
-    public OrganizationUnitDto getById(Long id) {
-        return toDTO(findById(id));
+    public OrganizationUnit getById(Long id) {
+        return findById(id);
     }
 
     @Override
-    public OrganizationUnitDto update(Long id, OrganizationUnitDto dto) {
+    public OrganizationUnit update(Long id, OrganizationUnitCreate dto) {
         try {
             OrganizationUnit organizationUnit = findById(id);
             organizationUnit.setCode(dto.code());
             organizationUnit.setName(dto.name());
             organizationUnit.setDescription(dto.description());
-            return toDTO(save(organizationUnit));
+            return save(organizationUnit);
         }
         catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
@@ -62,8 +56,8 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
     public void deleteById(Long id) {
         organizationUnitRepository.delete(findById(id));
     }
-    public OrganizationUnitDto toDTO(OrganizationUnit organizationUnit) {
-        return new OrganizationUnitDto(
+    public OrganizationUnitResponse toDTO(OrganizationUnit organizationUnit) {
+        return new OrganizationUnitResponse(
                 organizationUnit.getId(),
                 organizationUnit.getCode(),
                 organizationUnit.getName(),
@@ -71,7 +65,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
                 organizationUnit.getCreatedDate()
         );
     }
-    private OrganizationUnit toEntity(OrganizationUnitDto dto) {
+    private OrganizationUnit toEntity(OrganizationUnitCreate dto) {
         return OrganizationUnit.builder()
                 .code(dto.code())
                 .name(dto.name())
@@ -80,7 +74,13 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
     }
 
     private OrganizationUnit save(OrganizationUnit organizationUnit) {
-        return organizationUnitRepository.save(organizationUnit);
+        try {
+            return organizationUnitRepository.save(organizationUnit);
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
+
     }
 
     private OrganizationUnit findById(Long id) {

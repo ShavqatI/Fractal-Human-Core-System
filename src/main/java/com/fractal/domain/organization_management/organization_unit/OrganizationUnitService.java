@@ -1,14 +1,16 @@
 package com.fractal.domain.organization_management.organization_unit;
 
+import com.fractal.domain.organization_management.organization_unit.dto.OrganizationUnitCreate;
+import com.fractal.domain.organization_management.organization_unit.dto.OrganizationUnitResponse;
+
 import java.util.List;
 
 public interface OrganizationUnitService {
-    OrganizationUnitDto create(OrganizationUnitDto dto);
-    List<OrganizationUnitDto> getAll();
-    OrganizationUnitDto getByCode(String code);
-    OrganizationUnit findByCode(String code);
-    OrganizationUnitDto getById(Long id);
-    OrganizationUnitDto update(Long id, OrganizationUnitDto addressTypeDTO);
+    OrganizationUnit create(OrganizationUnitCreate dto);
+    List<OrganizationUnit> getAll();
+    OrganizationUnit getByCode(String code);
+    OrganizationUnit getById(Long id);
+    OrganizationUnit update(Long id, OrganizationUnitCreate addressTypeDTO);
     void deleteById(Long id);
-    OrganizationUnitDto toDTO(OrganizationUnit organizationUnit);
+    OrganizationUnitResponse toDTO(OrganizationUnit organizationUnit);
 }
