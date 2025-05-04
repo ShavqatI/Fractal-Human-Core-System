@@ -26,7 +26,7 @@ public class PositionController {
 
     @GetMapping
     public ResponseEntity<List<PositionResponse>> getAll() {
-        return ResponseEntity.ok(positionService.getAll().stream().map(department -> positionService.toDTO(department)).collect(Collectors.toList()));
+        return ResponseEntity.ok(positionService.getAll().stream().map(positionService::toDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")

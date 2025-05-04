@@ -26,7 +26,7 @@ public class DepartmentController {
 
     @GetMapping
     public ResponseEntity<List<DepartmentResponse>> getAll() {
-        return ResponseEntity.ok(departmentService.getAll().stream().map(department -> departmentService.toDTO(department)).collect(Collectors.toList()));
+        return ResponseEntity.ok(departmentService.getAll().stream().map(departmentService::toDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
