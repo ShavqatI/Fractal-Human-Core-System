@@ -2,7 +2,7 @@ package com.fractal.controller.location;
 
 
 import com.fractal.domain.location.address.type.AddressTypeService;
-import com.fractal.domain.location.address.type.dto.AddressTypeCreate;
+import com.fractal.domain.location.address.type.dto.AddressTypeRequest;
 import com.fractal.domain.location.address.type.dto.AddressTypeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class AddressTypeController {
 
     private final AddressTypeService addressTypeService;
     @PostMapping
-    public ResponseEntity<AddressTypeResponse> create(@RequestBody @Valid AddressTypeCreate dto) {
+    public ResponseEntity<AddressTypeResponse> create(@RequestBody @Valid AddressTypeRequest dto) {
         return new ResponseEntity<>(addressTypeService.toDTO(addressTypeService.create(dto)), HttpStatus.CREATED);
     }
     @GetMapping
@@ -36,7 +36,7 @@ public class AddressTypeController {
         return ResponseEntity.ok(addressTypeService.toDTO(addressTypeService.getByCode(code)));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<AddressTypeResponse> update(@PathVariable Long id, @RequestBody @Valid AddressTypeCreate dto) {
+    public ResponseEntity<AddressTypeResponse> update(@PathVariable Long id, @RequestBody @Valid AddressTypeRequest dto) {
       return  ResponseEntity.ok(addressTypeService.toDTO(addressTypeService.update(id, dto)));
 
 

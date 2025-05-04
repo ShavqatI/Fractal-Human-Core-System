@@ -1,6 +1,6 @@
 package com.fractal.domain.organization_management.unit;
 
-import com.fractal.domain.organization_management.unit.dto.OrganizationUnitCreate;
+import com.fractal.domain.organization_management.unit.dto.OrganizationUnitRequest;
 import com.fractal.domain.organization_management.unit.dto.OrganizationUnitResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
 
     private final OrganizationUnitRepository organizationUnitRepository;
     @Override
-    public OrganizationUnit create(OrganizationUnitCreate dto) {
+    public OrganizationUnit create(OrganizationUnitRequest dto) {
         return save(toEntity(dto));
     }
 
@@ -39,7 +39,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
     }
 
     @Override
-    public OrganizationUnit update(Long id, OrganizationUnitCreate dto) {
+    public OrganizationUnit update(Long id, OrganizationUnitRequest dto) {
         try {
             OrganizationUnit organizationUnit = findById(id);
             organizationUnit.setCode(dto.code());
@@ -65,7 +65,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
                 organizationUnit.getCreatedDate()
         );
     }
-    private OrganizationUnit toEntity(OrganizationUnitCreate dto) {
+    private OrganizationUnit toEntity(OrganizationUnitRequest dto) {
         return OrganizationUnit.builder()
                 .code(dto.code())
                 .name(dto.name())

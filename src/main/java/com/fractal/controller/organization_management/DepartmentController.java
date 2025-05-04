@@ -1,7 +1,7 @@
 package com.fractal.controller.organization_management;
 
 import com.fractal.domain.organization_management.department.DepartmentService;
-import com.fractal.domain.organization_management.department.dto.DepartmentCreate;
+import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class DepartmentController {
     private final DepartmentService departmentService;
 
     @PostMapping
-    public ResponseEntity<DepartmentResponse> create(@RequestBody @Valid DepartmentCreate dto) {
+    public ResponseEntity<DepartmentResponse> create(@RequestBody @Valid DepartmentRequest dto) {
         return new ResponseEntity<>(departmentService.toDTO(departmentService.create(dto)), HttpStatus.CREATED);
     }
 
@@ -40,7 +40,7 @@ public class DepartmentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<DepartmentResponse> update(@PathVariable Long id, @RequestBody @Valid DepartmentCreate dto) {
+    public ResponseEntity<DepartmentResponse> update(@PathVariable Long id, @RequestBody @Valid DepartmentRequest dto) {
         return ResponseEntity.ok(departmentService.toDTO(departmentService.update(id, dto)));
     }
 

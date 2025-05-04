@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record AddressTypeCreate(
+public record AddressTypeRequest(
         @NotBlank
         @Pattern(regexp = "^[A-Z]{3,20}$", message = "Code must be in Latin uppercase letters")
         String code,

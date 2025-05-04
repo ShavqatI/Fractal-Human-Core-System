@@ -1,6 +1,6 @@
 package com.fractal.domain.organization_management.department;
 
-import com.fractal.domain.organization_management.department.dto.DepartmentCreate;
+import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
 import com.fractal.domain.organization_management.unit.OrganizationUnitService;
 import com.fractal.exception.ResourceNotFoundException;
@@ -22,7 +22,7 @@ class DepartmentServiceImpl implements DepartmentService {
     private final DepartmentRepository departmentRepository;
     private final OrganizationUnitService organizationUnitService;
     @Override
-    public Department create(DepartmentCreate dto) {
+    public Department create(DepartmentRequest dto) {
         return save(toEntity(dto));
     }
 
@@ -45,7 +45,7 @@ class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department update(Long id, DepartmentCreate dto) {
+    public Department update(Long id, DepartmentRequest dto) {
         try {
          Department department = findById(id);
          department.setCode(dto.code());
@@ -85,7 +85,7 @@ class DepartmentServiceImpl implements DepartmentService {
                 department.getCreatedDate()
         );
     }
-    private Department toEntity(DepartmentCreate dto) {
+    private Department toEntity(DepartmentRequest dto) {
         return Department.builder()
                 .code(dto.code())
                 .name(dto.name())

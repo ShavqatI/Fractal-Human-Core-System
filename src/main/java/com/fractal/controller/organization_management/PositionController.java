@@ -1,7 +1,7 @@
 package com.fractal.controller.organization_management;
 
 import com.fractal.domain.organization_management.position.PositionService;
-import com.fractal.domain.organization_management.position.dto.PositionCreate;
+import com.fractal.domain.organization_management.position.dto.PositionRequest;
 import com.fractal.domain.organization_management.position.dto.PositionResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ public class PositionController {
     private final PositionService positionService;
 
     @PostMapping
-    public ResponseEntity<PositionResponse> create(@RequestBody @Valid PositionCreate dto) {
+    public ResponseEntity<PositionResponse> create(@RequestBody @Valid PositionRequest dto) {
         return new ResponseEntity<>(positionService.toDTO(positionService.create(dto)), HttpStatus.CREATED);
     }
 
@@ -40,7 +40,7 @@ public class PositionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PositionResponse> update(@PathVariable Long id, @RequestBody @Valid PositionCreate dto) {
+    public ResponseEntity<PositionResponse> update(@PathVariable Long id, @RequestBody @Valid PositionRequest dto) {
         return ResponseEntity.ok(positionService.toDTO(positionService.update(id, dto)));
     }
 

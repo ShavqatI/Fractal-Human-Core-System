@@ -1,7 +1,7 @@
 package com.fractal.domain.organization_management.position;
 
 import com.fractal.domain.organization_management.department.DepartmentService;
-import com.fractal.domain.organization_management.position.dto.PositionCreate;
+import com.fractal.domain.organization_management.position.dto.PositionRequest;
 import com.fractal.domain.organization_management.position.dto.PositionResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ class PositionServiceImpl implements PositionService {
     private final DepartmentService departmentService;
 
     @Override
-    public Position create(PositionCreate dto) {
+    public Position create(PositionRequest dto) {
         return save(toEntity(dto));
     }
 
@@ -38,7 +38,7 @@ class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public Position update(Long id, PositionCreate dto) {
+    public Position update(Long id, PositionRequest dto) {
         try {
             Position position = findById(id);
             position.setCode(dto.code());
@@ -68,7 +68,7 @@ class PositionServiceImpl implements PositionService {
                 position.getCreatedDate()
         );
     }
-    private Position toEntity(PositionCreate dto) {
+    private Position toEntity(PositionRequest dto) {
         return Position.builder()
                 .code(dto.code())
                 .name(dto.name())

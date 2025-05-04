@@ -1,6 +1,6 @@
 package com.fractal.domain.location.address.type;
 
-import com.fractal.domain.location.address.type.dto.AddressTypeCreate;
+import com.fractal.domain.location.address.type.dto.AddressTypeRequest;
 import com.fractal.domain.location.address.type.dto.AddressTypeResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -15,12 +15,12 @@ class AddressTypeServiceImpl implements AddressTypeService {
 
     private final AddressTypeRepository addressTypeRepository;
     @Override
-    public AddressType create(AddressTypeCreate dto) {
+    public AddressType create(AddressTypeRequest dto) {
        return save(toEntity(dto));
     }
 
     @Override
-    public AddressType update(Long id, AddressTypeCreate dto) {
+    public AddressType update(Long id, AddressTypeRequest dto) {
         try {
             AddressType addressType = findById(id);
             addressType.setCode(dto.code());
@@ -62,7 +62,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
                 addressType.getCreatedDate()
         );
     }
-    private AddressType toEntity(AddressTypeCreate dto) {
+    private AddressType toEntity(AddressTypeRequest dto) {
         return AddressType.builder()
                 .code(dto.code())
                 .name(dto.name())

@@ -2,7 +2,7 @@ package com.fractal.controller.organization_management;
 
 
 import com.fractal.domain.organization_management.unit.OrganizationUnitService;
-import com.fractal.domain.organization_management.unit.dto.OrganizationUnitCreate;
+import com.fractal.domain.organization_management.unit.dto.OrganizationUnitRequest;
 import com.fractal.domain.organization_management.unit.dto.OrganizationUnitResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ public class OrganizationUnitController {
     private final OrganizationUnitService organizationUnitService;
 
     @PostMapping
-    public ResponseEntity<OrganizationUnitResponse> create(@RequestBody @Valid OrganizationUnitCreate dto) {
+    public ResponseEntity<OrganizationUnitResponse> create(@RequestBody @Valid OrganizationUnitRequest dto) {
         return new ResponseEntity<>(organizationUnitService.toDTO(organizationUnitService.create(dto)), HttpStatus.CREATED);
     }
 
@@ -41,7 +41,7 @@ public class OrganizationUnitController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<OrganizationUnitResponse> update(@PathVariable Long id, @RequestBody @Valid OrganizationUnitCreate dto) {
+    public ResponseEntity<OrganizationUnitResponse> update(@PathVariable Long id, @RequestBody @Valid OrganizationUnitRequest dto) {
         return ResponseEntity.ok(organizationUnitService.toDTO(organizationUnitService.update(id,dto)));
     }
 
