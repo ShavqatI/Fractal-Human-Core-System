@@ -38,7 +38,7 @@ public class CityController {
     public ResponseEntity<CityResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(cityService.toDTO(cityService.getByCode(code)));
     }
-    @GetMapping("/county/{id}")
+    @GetMapping("/region/{id}")
     public ResponseEntity<List<CityResponse>>  getByRegion(@PathVariable Long id) {
         return ResponseEntity.ok(cityService.getByRegionId(id).stream().map(cityService::toDTO).collect(Collectors.toList()));
     }

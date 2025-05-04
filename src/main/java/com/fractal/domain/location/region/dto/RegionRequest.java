@@ -14,5 +14,5 @@ public record RegionRequest(
         @Pattern(regexp = "^\\p{L}[\\p{L}\\p{M}\\p{S}\\p{P}\\p{N}\\s]*$",message = "Only Unicode letters, symbols, punctuation, numbers and spaces are allowed")
         String name,
         @NotNull
-        long country
+        long countryId
 ) { }

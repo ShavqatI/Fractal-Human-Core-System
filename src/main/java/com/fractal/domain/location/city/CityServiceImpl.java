@@ -48,7 +48,7 @@ class CityServiceImpl implements CityService {
             City city = findById(id);
             city.setCode(dto.code());
             city.setName(dto.name());
-            city.setRegion(regionService.getById(dto.region()));
+            city.setRegion(regionService.getById(dto.regionId()));
             return save(city);
         }
         catch (DataAccessException e){
@@ -76,7 +76,7 @@ class CityServiceImpl implements CityService {
         return City.builder()
                 .code(dto.code())
                 .name(dto.name())
-                .region(regionService.getById(dto.region()))
+                .region(regionService.getById(dto.regionId()))
                 .build();
     }
 

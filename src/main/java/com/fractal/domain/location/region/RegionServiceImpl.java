@@ -50,7 +50,7 @@ class RegionServiceImpl implements RegionService {
             Region region = findById(id);
             region.setCode(dto.code());
             region.setName(dto.name());
-            region.setCountry(countryService.getById(dto.country()));
+            region.setCountry(countryService.getById(dto.countryId()));
             return save(region);
         }
         catch (DataAccessException e){
@@ -78,7 +78,7 @@ class RegionServiceImpl implements RegionService {
         return Region.builder()
                 .code(dto.code())
                 .name(dto.name())
-                .country(countryService.getById(dto.country()))
+                .country(countryService.getById(dto.countryId()))
                 .build();
     }
 
