@@ -44,7 +44,7 @@ public class DistrictController {
     }
     @GetMapping("/city/{id}")
     public ResponseEntity<List<DistrictResponse>>  getByCity(@PathVariable Long id) {
-        return ResponseEntity.ok(districtService.getByRegionId(id).stream().map(districtService::toDTO).collect(Collectors.toList()));
+        return ResponseEntity.ok(districtService.getByCityId(id).stream().map(districtService::toDTO).collect(Collectors.toList()));
     }
 
     @PutMapping("/{id}")
