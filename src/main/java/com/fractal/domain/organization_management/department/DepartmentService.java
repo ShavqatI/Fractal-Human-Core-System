@@ -12,6 +12,5 @@ public interface DepartmentService {
     Department getById(Long id);
     Department update(Long id, DepartmentCreateDto dto);
     void deleteById(Long id);
-
     DepartmentResponseDto toDTO(Department department);
 }

@@ -11,8 +11,8 @@ public record DepartmentResponseDto(
         String name,
         int level,
         String levelMap,
-        DepartmentResponseDto parent,
+        String parent,
         List<DepartmentResponseDto> children,
-        OrganizationUnitDto organizationUnit,
+        String organizationUnit,
         LocalDateTime createdDate
 ) {}

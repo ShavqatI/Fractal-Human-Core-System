@@ -19,11 +19,11 @@ import java.util.List;
 @NoArgsConstructor
 public class Department extends AbstractEntity {
 
+    @Column(name = "code",unique = true)
+    private String code;
+
     @Column(name = "name")
     private String name;
-
-    @Column(name = "code")
-    private String code;
 
     @Column(name = "level")
     private Integer level;

@@ -7,8 +7,12 @@ import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
@@ -23,12 +27,15 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public List<Department> getAll() {
-        return departmentRepository.findAll();
+        return departmentRepository.findAll()
+                .stream()
+                .peek(department -> department.setChildren(new ArrayList<>()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Department getByCode(String code) {
-        return findByCode(code);
+        return departmentRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Department with code : " + code + " not found"));
     }
 
     @Override
@@ -43,8 +50,9 @@ public class DepartmentServiceImpl implements DepartmentService {
         department.setName(dto.name());
         department.setLevel(dto.level());
         department.setLevelMap(dto.levelMap());
+        department.setParent(getParentByCode(dto.parent()));
         department.setOrganizationUnit(organizationUnitService.findByCode(dto.organizationUnit()));
-        return null;
+        return save(department);
     }
 
     @Override
@@ -59,9 +67,15 @@ public class DepartmentServiceImpl implements DepartmentService {
                 department.getName(),
                 department.getLevel(),
                 department.getLevelMap(),
-                toDTO(department.getParent()),
-                department.getChildren().stream().map(this::toDTO).collect(Collectors.toList()),
-                organizationUnitService.toDTO(department.getOrganizationUnit()),
+                Optional.ofNullable(department.getParent())
+                        .map(Department::getName)
+                        .orElse(null),
+                Optional.ofNullable(department.getChildren())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(this::toDTO)
+                        .collect(Collectors.toList()),
+                department.getOrganizationUnit().getName(),
                 department.getCreatedDate()
         );
     }
@@ -71,7 +85,7 @@ public class DepartmentServiceImpl implements DepartmentService {
                 .name(dto.name())
                 .level(dto.level())
                 .levelMap(dto.levelMap())
-                .parent(findByCode(dto.parent()))
+                .parent(getParentByCode(dto.parent()))
                 .organizationUnit(organizationUnitService.findByCode(dto.organizationUnit()))
                 .build();
     }
@@ -85,5 +99,15 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
     private Department findByCode(String code) {
         return departmentRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Department with code : " + code + " not found"));
+    }
+
+    private Department getParentByCode(String code) {
+        try {
+            return findByCode(code);
+        }
+        catch (Exception e){
+
+        }
+        return null;
     }
 }
