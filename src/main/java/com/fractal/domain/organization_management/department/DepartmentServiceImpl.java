@@ -52,7 +52,7 @@ class DepartmentServiceImpl implements DepartmentService {
          department.setName(dto.name());
          department.setLevel(dto.level());
          department.setLevelMap(dto.levelMap());
-         department.setParent(getParentByCode(dto.parent()));
+         department.setParent(departmentRepository.findByCode(dto.parent()).orElse(null));
          department.setOrganizationUnit(organizationUnitService.getByCode(dto.organizationUnit()));
          return save(department);
         }
@@ -91,7 +91,7 @@ class DepartmentServiceImpl implements DepartmentService {
                 .name(dto.name())
                 .level(dto.level())
                 .levelMap(dto.levelMap())
-                .parent(getParentByCode(dto.parent()))
+                .parent(departmentRepository.findByCode(dto.parent()).orElse(null))
                 .organizationUnit(organizationUnitService.getByCode(dto.organizationUnit()))
                 .build();
     }
@@ -108,17 +108,5 @@ class DepartmentServiceImpl implements DepartmentService {
     private Department findById(Long id) {
         return departmentRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Department with id: " + id + " not found"));
     }
-    private Department findByCode(String code) {
-        return departmentRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Department with code : " + code + " not found"));
-    }
 
-    private Department getParentByCode(String code) {
-        try {
-            return findByCode(code);
-        }
-        catch (Exception e){
-
-        }
-        return null;
-    }
 }
