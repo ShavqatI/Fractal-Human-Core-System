@@ -1,9 +1,9 @@
 package com.fractal.controller.organization_management;
 
 
-import com.fractal.domain.organization_management.organization_unit.OrganizationUnitService;
-import com.fractal.domain.organization_management.organization_unit.dto.OrganizationUnitCreate;
-import com.fractal.domain.organization_management.organization_unit.dto.OrganizationUnitResponse;
+import com.fractal.domain.organization_management.unit.OrganizationUnitService;
+import com.fractal.domain.organization_management.unit.dto.OrganizationUnitCreate;
+import com.fractal.domain.organization_management.unit.dto.OrganizationUnitResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

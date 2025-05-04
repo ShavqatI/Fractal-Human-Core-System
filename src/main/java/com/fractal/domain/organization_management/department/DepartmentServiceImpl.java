@@ -2,7 +2,7 @@ package com.fractal.domain.organization_management.department;
 
 import com.fractal.domain.organization_management.department.dto.DepartmentCreate;
 import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
-import com.fractal.domain.organization_management.organization_unit.OrganizationUnitService;
+import com.fractal.domain.organization_management.unit.OrganizationUnitService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;

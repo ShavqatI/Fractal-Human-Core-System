@@ -1,7 +1,7 @@
-package com.fractal.domain.organization_management.organization_unit;
+package com.fractal.domain.organization_management.unit;
 
-import com.fractal.domain.organization_management.organization_unit.dto.OrganizationUnitCreate;
-import com.fractal.domain.organization_management.organization_unit.dto.OrganizationUnitResponse;
+import com.fractal.domain.organization_management.unit.dto.OrganizationUnitCreate;
+import com.fractal.domain.organization_management.unit.dto.OrganizationUnitResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;

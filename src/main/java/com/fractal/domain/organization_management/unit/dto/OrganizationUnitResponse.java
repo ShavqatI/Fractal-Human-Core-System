@@ -1,4 +1,4 @@
-package com.fractal.domain.organization_management.organization_unit.dto;
+package com.fractal.domain.organization_management.unit.dto;
 
 import java.time.LocalDateTime;
 

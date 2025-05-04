@@ -1,6 +1,6 @@
 package com.fractal.controller.location;
 
-import com.fractal.domain.location.address.type.AddressTypeDto;
+import com.fractal.domain.location.address.type.dto.AddressTypeResponse;
 import com.fractal.domain.location.address.type.AddressTypeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -38,10 +38,10 @@ class AddressTypeControllerTest {
     @Test
     void createTest() throws Exception {
         // Arrange
-        AddressTypeDto addressTypeDTO = new AddressTypeDto(null, "TESTCODE", "Test Name",null);
-        AddressTypeDto createdAddressTypeDto = new AddressTypeDto(14L, "TESTCODE", "Test Name", LocalDateTime.now());
+        AddressTypeResponse addressTypeResponse = new AddressTypeResponse(null, "TESTCODE", "Test Name",null);
+        AddressTypeResponse createdAddressTypeResponse = new AddressTypeResponse(14L, "TESTCODE", "Test Name", LocalDateTime.now());
 
-        given(addressTypeService.create(addressTypeDTO)).willReturn(createdAddressTypeDto);
+        given(addressTypeService.create(addressTypeResponse)).willReturn(createdAddressTypeResponse);
 
         // Act & Assert
         mockMvc.perform(post("/api/v1/location/address_type")
@@ -55,11 +55,11 @@ class AddressTypeControllerTest {
 
     @Test
     void getAllTest() throws Exception  {
-        List<AddressTypeDto> addressTypeDtoList = Arrays.asList(
-                new AddressTypeDto(1L, "Code1", "Name1",LocalDateTime.now()),
-                new AddressTypeDto(2L, "Code2", "Name2",LocalDateTime.now())
+        List<AddressTypeResponse> addressTypeResponseList = Arrays.asList(
+                new AddressTypeResponse(1L, "Code1", "Name1",LocalDateTime.now()),
+                new AddressTypeResponse(2L, "Code2", "Name2",LocalDateTime.now())
         );
-        given(addressTypeService.getAll()).willReturn(addressTypeDtoList);
+        given(addressTypeService.getAll()).willReturn(addressTypeResponseList);
 
         mockMvc.perform(get("/api/v1/location/address_type"))
                 .andExpect(status().isOk())
@@ -70,8 +70,8 @@ class AddressTypeControllerTest {
     @Test
     void getByIdTest() throws Exception {
         Long id = 1L;
-        AddressTypeDto addressTypeDTO = new AddressTypeDto(id, "Code1", "Name1",LocalDateTime.now());
-        given(addressTypeService.getById(id)).willReturn(addressTypeDTO);
+        AddressTypeResponse addressTypeResponse = new AddressTypeResponse(id, "Code1", "Name1",LocalDateTime.now());
+        given(addressTypeService.getById(id)).willReturn(addressTypeResponse);
 
         mockMvc.perform(get("/api/v1/location/address_type/{id}", id))
                 .andExpect(status().isOk())
@@ -83,8 +83,8 @@ class AddressTypeControllerTest {
     @Test
     void getByCodeTest() throws Exception {
         String code = "SOLID";
-        AddressTypeDto addressTypeDTO = new AddressTypeDto(1L, code, "Name1",LocalDateTime.now());
-        given(addressTypeService.getByCode(code)).willReturn(addressTypeDTO);
+        AddressTypeResponse addressTypeResponse = new AddressTypeResponse(1L, code, "Name1",LocalDateTime.now());
+        given(addressTypeService.getByCode(code)).willReturn(addressTypeResponse);
 
         mockMvc.perform(get("/api/v1/location/address_type/code/{code}", code))
                 .andExpect(status().isOk())
@@ -96,10 +96,10 @@ class AddressTypeControllerTest {
     @Test
     void updateTest() throws Exception {
         Long id = 1L;
-        AddressTypeDto addressTypeDTO = new AddressTypeDto(null, "UPDCODE", "Updated Name",null);
-        AddressTypeDto updatedAddressTypeDto = new AddressTypeDto(id, "UPDCODE", "Updated Name",LocalDateTime.now());
+        AddressTypeResponse addressTypeResponse = new AddressTypeResponse(null, "UPDCODE", "Updated Name",null);
+        AddressTypeResponse updatedAddressTypeResponse = new AddressTypeResponse(id, "UPDCODE", "Updated Name",LocalDateTime.now());
 
-        given(addressTypeService.update(id, addressTypeDTO)).willReturn(updatedAddressTypeDto);
+        given(addressTypeService.update(id, addressTypeResponse)).willReturn(updatedAddressTypeResponse);
 
         mockMvc.perform(put("/api/v1/location/address_type/{id}", id)
                         .contentType(MediaType.APPLICATION_JSON)

@@ -1,4 +1,4 @@
-package com.fractal.domain.location.address.type;
+package com.fractal.domain.location.address.type.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDateTime;
 
-public record AddressTypeDto(
+public record AddressTypeCreate(
         Long id,
         @NotBlank
         @Pattern(regexp = "^[A-Z]{3,20}$", message = "Code must be in Latin uppercase letters")

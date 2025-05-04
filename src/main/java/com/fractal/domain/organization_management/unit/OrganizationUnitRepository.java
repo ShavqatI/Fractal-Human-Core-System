@@ -1,4 +1,4 @@
-package com.fractal.domain.organization_management.organization_unit;
+package com.fractal.domain.organization_management.unit;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

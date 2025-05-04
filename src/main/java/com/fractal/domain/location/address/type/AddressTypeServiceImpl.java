@@ -1,5 +1,7 @@
 package com.fractal.domain.location.address.type;
 
+import com.fractal.domain.location.address.type.dto.AddressTypeCreate;
+import com.fractal.domain.location.address.type.dto.AddressTypeResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -14,23 +16,17 @@ class AddressTypeServiceImpl implements AddressTypeService {
 
     private final AddressTypeRepository addressTypeRepository;
     @Override
-    public AddressTypeDto create(AddressTypeDto dto) {
-        try {
-            return toDTO(save(toEntity(dto)));
-        }
-        catch (DataAccessException e) {
-           throw new RuntimeException(e.getMostSpecificCause().getMessage());
-        }
+    public AddressType create(AddressTypeCreate dto) {
+       return save(toEntity(dto));
     }
 
     @Override
-    public AddressTypeDto update(Long id, AddressTypeDto dto) {
+    public AddressType update(Long id, AddressTypeCreate dto) {
         try {
-            AddressType newAddressType = toEntity(dto);
             AddressType addressType = findById(id);
-            addressType.setName(newAddressType.getName());
-            addressType.setCode(newAddressType.getCode());
-            return toDTO(save(addressType));
+            addressType.setCode(dto.code());
+            addressType.setName(dto.name());
+            return save(addressType);
         }
         catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
@@ -39,21 +35,18 @@ class AddressTypeServiceImpl implements AddressTypeService {
 
 
     @Override
-    public List<AddressTypeDto> getAll() {
-        return addressTypeRepository.findAll()
-                .stream()
-                 .map(this::toDTO)
-                 .collect(Collectors.toList());
+    public List<AddressType> getAll() {
+        return addressTypeRepository.findAll();
     }
 
     @Override
-    public AddressTypeDto getByCode(String code) {
-        return toDTO(addressTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found")));
+    public AddressType getByCode(String code) {
+        return addressTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
     }
 
     @Override
-    public AddressTypeDto getById(Long id) {
-        return toDTO(findById(id));
+    public AddressType getById(Long id) {
+        return findById(id);
     }
 
     @Override
@@ -61,16 +54,16 @@ class AddressTypeServiceImpl implements AddressTypeService {
        addressTypeRepository.delete(findById(id));
     }
 
-
-    private AddressTypeDto toDTO(AddressType addressType) {
-        return new AddressTypeDto(
+    @Override
+    public AddressTypeResponse toDTO(AddressType addressType) {
+        return new AddressTypeResponse(
                 addressType.getId(),
                 addressType.getCode(),
                 addressType.getName(),
                 addressType.getCreatedDate()
         );
     }
-    private AddressType toEntity(AddressTypeDto dto) {
+    private AddressType toEntity(AddressTypeCreate dto) {
         return AddressType.builder()
                 .code(dto.code())
                 .name(dto.name())
@@ -78,7 +71,12 @@ class AddressTypeServiceImpl implements AddressTypeService {
     }
 
     private AddressType save(AddressType addressType) {
-        return addressTypeRepository.save(addressType);
+        try {
+            return addressTypeRepository.save(addressType);
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
     private AddressType findById(Long id) {

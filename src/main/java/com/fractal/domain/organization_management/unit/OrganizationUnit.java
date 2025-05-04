@@ -1,4 +1,4 @@
-package com.fractal.domain.organization_management.organization_unit;
+package com.fractal.domain.organization_management.unit;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Column;

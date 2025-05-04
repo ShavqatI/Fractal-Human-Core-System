@@ -1,7 +1,7 @@
 package com.fractal.domain.organization_management.department;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.organization_management.organization_unit.OrganizationUnit;
+import com.fractal.domain.organization_management.unit.OrganizationUnit;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +26,7 @@ public class Department extends AbstractEntity {
     private String name;
 
     @Column(name = "level")
-    private Integer level;
+    private int level;
 
     @Column(name = "level_map")
     private String levelMap;
