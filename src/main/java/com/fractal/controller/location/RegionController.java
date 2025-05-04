@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/location/country")
+@RequestMapping("/api/v1/location/region")
 @RequiredArgsConstructor
 public class RegionController {
 
@@ -37,6 +37,10 @@ public class RegionController {
     @GetMapping("/code/{code}")
     public ResponseEntity<RegionResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(regionService.toDTO(regionService.getByCode(code)));
+    }
+    @GetMapping("/county/{id}")
+    public ResponseEntity<List<RegionResponse>>  getByCountry(@PathVariable Long id) {
+        return ResponseEntity.ok(regionService.getByCountryId(id).stream().map(regionService::toDTO).collect(Collectors.toList()));
     }
 
     @PutMapping("/{id}")

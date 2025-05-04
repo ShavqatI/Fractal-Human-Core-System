@@ -1,7 +1,7 @@
 package com.fractal.domain.location.city;
 
 
-import com.fractal.domain.location.Location;
+import com.fractal.domain.abstraction.Location;
 import com.fractal.domain.location.region.Region;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -11,12 +11,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 
 @Entity
 @Table(name = "city", schema = "location_schema", catalog = "fractal")
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class City extends Location {

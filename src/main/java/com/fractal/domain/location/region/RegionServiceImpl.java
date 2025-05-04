@@ -1,6 +1,7 @@
 package com.fractal.domain.location.region;
 
 
+import com.fractal.domain.location.country.Country;
 import com.fractal.domain.location.country.CountryService;
 import com.fractal.domain.location.region.dto.RegionRequest;
 import com.fractal.domain.location.region.dto.RegionResponse;
@@ -29,6 +30,11 @@ class RegionServiceImpl implements RegionService {
     }
 
     @Override
+    public List<Region> getByCountryId(Long countryId) {
+        return regionRepository.findByCountry(countryService.getById(countryId));
+    }
+
+    @Override
     public Region getByCode(String code) {
         return regionRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Region with code: " + code + " not found"));
     }
@@ -40,7 +46,16 @@ class RegionServiceImpl implements RegionService {
 
     @Override
     public Region update(Long id, RegionRequest dto) {
-        return null;
+        try {
+            Region region = findById(id);
+            region.setCode(dto.code());
+            region.setName(dto.name());
+            region.setCountry(countryService.getById(dto.country()));
+            return save(region);
+        }
+        catch (DataAccessException e){
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
     @Override
