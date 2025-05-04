@@ -19,7 +19,6 @@ public record CountryRequest(
         @NotBlank
         @NotNull
         String phonePrefix,
-        @NotBlank
         @NotNull
         int numericCode
 ) { }
