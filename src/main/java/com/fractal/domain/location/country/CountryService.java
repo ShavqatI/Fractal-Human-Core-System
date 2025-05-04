@@ -1,8 +1,5 @@
 package com.fractal.domain.location.country;
 
-import com.fractal.domain.location.address.type.AddressType;
-import com.fractal.domain.location.address.type.dto.AddressTypeCreate;
-import com.fractal.domain.location.address.type.dto.AddressTypeResponse;
 import com.fractal.domain.location.country.dto.CountryRequest;
 import com.fractal.domain.location.country.dto.CountryResponse;
 

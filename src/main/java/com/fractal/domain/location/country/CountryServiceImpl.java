@@ -27,7 +27,7 @@ class CountryServiceImpl implements CountryService {
 
     @Override
     public Country getByCode(String code) {
-        return countryRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Country Type with id: " + code + " not found"));
+        return countryRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Country  with code: " + code + " not found"));
 
     }
 
@@ -90,6 +90,6 @@ class CountryServiceImpl implements CountryService {
     }
 
     private Country findById(Long id) {
-        return countryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Country Type with id: " + id + " not found"));
+        return countryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Country  with id: " + id + " not found"));
     }
 }
