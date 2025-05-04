@@ -10,16 +10,16 @@ public record AddressCreate(
         String addressType,
         @NotBlank
         @NotBlank
-        String country,
+        Long country,
         @NotBlank
         @NotBlank
-        String region,
+        Long region,
         @NotBlank
         @NotBlank
-        String city,
+        Long city,
         @NotBlank
         @NotBlank
-        String district,
+        long district,
         @NotBlank
         @NotBlank
         String street,

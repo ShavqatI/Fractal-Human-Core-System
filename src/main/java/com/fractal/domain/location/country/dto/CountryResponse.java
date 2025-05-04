@@ -7,8 +7,8 @@ public record CountryResponse(
         String code,
         String name,
         String iso3Code,
-        String phonePrefix,
         int numericCode,
+        String phonePrefix,
         LocalDateTime createdDate
 
 ) { }
