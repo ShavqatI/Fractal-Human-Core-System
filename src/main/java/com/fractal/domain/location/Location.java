@@ -10,6 +10,6 @@ public abstract class Location extends AbstractEntity {
     @Column(name = "name")
     protected String name;
 
-    @Column(name = "code", unique = true, length = 5)
+    @Column(name = "code", unique = true)
     protected String code;
 }

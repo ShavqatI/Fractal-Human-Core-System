@@ -1,13 +1,16 @@
 package com.fractal.domain.location.country;
 
 import com.fractal.domain.location.Location;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fractal.domain.location.address.organization_address.OrganizationAddress;
+import com.fractal.domain.location.region.Region;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "country", schema = "location_schema", catalog = "fractal")
@@ -17,13 +20,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Country extends Location {
 
-    @Column(name ="code",unique = true,length = 5)
-    private String code;
+    @Column(name = "iso3_code", unique = true, length = 3)
+    private String iso3Code;
 
-    @Column(name ="iso_code",unique = true)
-    private String isoCode;
-
-    @Column(name = "phone_prefix")
+    @Column(name = "phone_prefix", nullable = false)
     private String phonePrefix;
+
+    @Column(name = "numeric_code", unique = true)
+    private Integer numericCode;
+
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    private List<Region> regions = new ArrayList<>();
 
 }
