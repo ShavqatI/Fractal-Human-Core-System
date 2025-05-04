@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -54,7 +55,7 @@ class DistrictServiceImpl implements DistrictService {
             District district = findById(id);
             district.setCode(dto.code());
             district.setName(dto.name());
-            district.setCity(cityService.getById(dto.cityId()));
+            district.setCity(Optional.of(cityService.getById(dto.cityId())).orElse(null));
             district.setRegion(regionService.getById(dto.regionId()));
             return save(district);
         }

@@ -26,7 +26,7 @@ public class Department extends AbstractEntity {
     private String name;
 
     @Column(name = "level")
-    private int level;
+    private Integer level;
 
     @Column(name = "level_map")
     private String levelMap;

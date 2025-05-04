@@ -40,7 +40,7 @@ public class Organization extends AbstractEntity {
     private LocalDate closeDate;
 
     @Column(name = "level")
-    private int level;
+    private Integer level;
 
     @Column(name = "level_map")
     private String levelMap;

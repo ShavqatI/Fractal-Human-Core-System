@@ -1,7 +1,6 @@
 package com.fractal.domain.location.region;
 
 
-import com.fractal.domain.location.country.Country;
 import com.fractal.domain.location.country.CountryService;
 import com.fractal.domain.location.region.dto.RegionRequest;
 import com.fractal.domain.location.region.dto.RegionResponse;
