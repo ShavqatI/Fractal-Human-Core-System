@@ -19,8 +19,8 @@ public class RequiredExperience extends AbstractEntity {
     @Column(name = "description", columnDefinition = "TEXT", nullable = false)
     private String description;
 
-    @Column(name = "years_required")
-    private Integer yearsRequired;
+    @Column(name = "required_years")
+    private Integer requiredYears;
 
     @Column(name = "domain")
     private String domain;
