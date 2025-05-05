@@ -105,7 +105,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
                 .build();
         dto.responsibilities().forEach(description -> jobDescription.addResponsibility(Responsibility.builder().description(description).build()));
         dto.qualifications().forEach(description-> jobDescription.addQualification(Qualification.builder().description(description).build()));
-        dto.requiredExperiences().forEach(requiredExperienceRequest -> jobDescription.addRequiredExperience(requiredExperienceService.toEntity(requiredExperienceRequest)));
+        dto.requiredExperiences().forEach(requiredExperienceRequest ->jobDescription.addRequiredExperience(requiredExperienceService.toEntity(requiredExperienceRequest)));
        return jobDescription;
     }
 
