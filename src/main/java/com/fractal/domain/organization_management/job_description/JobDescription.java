@@ -48,5 +48,24 @@ public class JobDescription extends AbstractEntity {
 
     @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RequiredExperience> requiredExperiences = new ArrayList<>();
+
+
+    public void addResponsibility(Responsibility responsibility) {
+        if (responsibilities == null) responsibilities = new ArrayList<>();
+        responsibility.setJobDescription(this);
+        responsibilities.add(responsibility);
+    }
+
+    public void addQualification(Qualification qualification) {
+        if (qualifications == null) qualifications = new ArrayList<>();
+        qualification.setJobDescription(this);
+        qualifications.add(qualification);
+    }
+    public void addRequiredExperience(RequiredExperience requiredExperience) {
+        if (requiredExperiences == null) requiredExperiences = new ArrayList<>();
+        requiredExperience.setJobDescription(this);
+        requiredExperiences.add(requiredExperience);
+    }
+
 }
 
