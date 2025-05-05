@@ -1,6 +1,8 @@
 package com.fractal.domain.organization_management.job_description.dto;
 
+import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationRequest;
 import com.fractal.domain.organization_management.job_description.required_experience.dto.RequiredExperienceRequest;
+import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityRequest;
 import com.fractal.domain.organization_management.position.Position;
 
 import java.time.LocalDate;
@@ -12,7 +14,7 @@ public record JobDescriptionRequest(
         LocalDate effectiveDate,
         String status,
         Long positionId,
-        List<String> responsibilities,
-        List<String> qualifications,
+        List<ResponsibilityRequest> responsibilities,
+        List<QualificationRequest> qualifications,
         List<RequiredExperienceRequest> requiredExperiences
 ) {}
