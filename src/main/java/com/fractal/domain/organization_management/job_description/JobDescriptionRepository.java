@@ -12,7 +12,6 @@ interface JobDescriptionRepository extends JpaRepository<JobDescription,Long> {
 
     JobDescription save(JobDescription jobDescription);
     List<JobDescription> findAll();
-    Optional<JobDescription> findByCode(String code);
     Optional<JobDescription> findById(Long id);
 
 }

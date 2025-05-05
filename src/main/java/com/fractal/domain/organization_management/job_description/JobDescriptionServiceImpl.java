@@ -4,8 +4,7 @@ import com.fractal.domain.organization_management.job_description.dto.JobDescrip
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionResponse;
 import com.fractal.domain.organization_management.job_description.qualification.Qualification;
 import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationResponse;
-import com.fractal.domain.organization_management.job_description.required_experience.RequiredExperience;
-import com.fractal.domain.organization_management.job_description.required_experience.dto.RequiredExperienceResponse;
+import com.fractal.domain.organization_management.job_description.required_experience.RequiredExperienceService;
 import com.fractal.domain.organization_management.job_description.responsibility.Responsibility;
 import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityResponse;
 import com.fractal.domain.organization_management.position.PositionService;
@@ -23,6 +22,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
 
     private final JobDescriptionRepository jobDescriptionRepository;
     private final PositionService positionService;
+    private final RequiredExperienceService requiredExperienceService;
 
 
     @Override
@@ -49,11 +49,10 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
             jobDescription.setEffectiveDate(dto.effectiveDate());
             //jobDescription.setStatus();
             jobDescription.setPosition(positionService.getById(dto.positionId()));
-            List<Responsibility> responsibilities = dto.responsibilities().stream()
-                    .map(description-> Responsibility.builder().description(description).build())
-                    .collect(Collectors.toList());
-            jobDescription.setResponsibilities(responsibilities);
-           return save(jobDescription);
+            dto.responsibilities().forEach(description -> jobDescription.addResponsibility(Responsibility.builder().description(description).build()));
+            dto.qualifications().forEach(description-> jobDescription.addQualification(Qualification.builder().description(description).build()));
+            dto.requiredExperiences().forEach(requiredExperienceRequest -> jobDescription.addRequiredExperience(requiredExperienceService.toEntity(requiredExperienceRequest)));
+          return save(jobDescription);
         }
         catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
@@ -72,11 +71,11 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
                 jobDescription.getTitle(),
                 jobDescription.getSummary(),
                 jobDescription.getEffectiveDate(),
-                jobDescription.getStatus().getName(),
+                null,//jobDescription.getStatus().getName(),
                 jobDescription.getPosition().getName(),
-                jobDescription.getResponsibilities().stream().map(this::toResponsibilityResponse).collect(Collectors.toList()),
-                jobDescription.getQualifications().stream().map(this::toQualificationResponse).collect(Collectors.toList()),
-                jobDescription.getRequiredExperiences().stream().map(this::toRequiredExperienceResponse).collect(Collectors.toList()),
+                jobDescription.getResponsibilities() != null ? jobDescription.getResponsibilities().stream().map(this::toResponsibilityResponse).collect(Collectors.toList()) : null,
+                jobDescription.getQualifications() != null ? jobDescription.getQualifications().stream().map(this::toQualificationResponse).collect(Collectors.toList()) : null,
+                jobDescription.getRequiredExperiences() != null ? jobDescription.getRequiredExperiences().stream().map(requiredExperienceService::toDTO).collect(Collectors.toList()) : null,
                 jobDescription.getCreatedDate()
         );
     }
@@ -95,22 +94,8 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
                 qualification.getCreatedDate()
         );
     }
-    private RequiredExperienceResponse toRequiredExperienceResponse(RequiredExperience requiredExperience) {
-        return new RequiredExperienceResponse(
-                requiredExperience.getId(),
-                requiredExperience.getDescription(),
-                requiredExperience.getRequiredYears(),
-                requiredExperience.getDomain(),
-                requiredExperience.getLevel(),
-                requiredExperience.getStartDate(),
-                requiredExperience.getEndDate(),
-                requiredExperience.getMandatory(),
-                requiredExperience.getNotes(),
-                requiredExperience.getCreatedDate()
-        );
-    }
 
-    private JobDescription toEntity(JobDescriptionRequest dto) {
+   private JobDescription toEntity(JobDescriptionRequest dto) {
         JobDescription jobDescription = JobDescription.builder()
                 .title(dto.title())
                 .summary(dto.summary())
@@ -118,19 +103,10 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
                 // add status later
                 .position(positionService.getById(dto.positionId()))
                 .build();
-
-        List<Responsibility> responsibilities = dto.responsibilities().stream()
-                                                                      .map(description-> Responsibility.builder().description(description).build())
-                                                                      .collect(Collectors.toList());
-
-        /*dto.responsibilities().forEach(
-                description -> jobDescription.addResponsibility(Responsibility.builder().description(description).build())
-        );*/
-
-        jobDescription.setResponsibilities(responsibilities);
-
-        return jobDescription;
-
+        dto.responsibilities().forEach(description -> jobDescription.addResponsibility(Responsibility.builder().description(description).build()));
+        dto.qualifications().forEach(description-> jobDescription.addQualification(Qualification.builder().description(description).build()));
+        dto.requiredExperiences().forEach(requiredExperienceRequest -> jobDescription.addRequiredExperience(requiredExperienceService.toEntity(requiredExperienceRequest)));
+       return jobDescription;
     }
 
     private JobDescription save(JobDescription jobDescription) {
