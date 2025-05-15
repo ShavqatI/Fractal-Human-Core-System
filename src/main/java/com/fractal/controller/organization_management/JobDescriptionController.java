@@ -46,25 +46,19 @@ public class JobDescriptionController {
     }
 
     @DeleteMapping("/{jobDescriptionId}/responsibility/{responsibilityId}")
-    public ResponseEntity<Void> removeResponsibility(
-            @PathVariable Long jobDescriptionId,
-            @PathVariable Long responsibilityId) {
+    public ResponseEntity<Void> removeResponsibility(@PathVariable Long jobDescriptionId,@PathVariable Long responsibilityId) {
         jobDescriptionService.removeResponsibility(jobDescriptionId, responsibilityId);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{jobDescriptionId}/qualification/{qualificationId}")
-    public ResponseEntity<Void> removeQualification(
-            @PathVariable Long jobDescriptionId,
-            @PathVariable Long qualificationId) {
+    public ResponseEntity<Void> removeQualification(@PathVariable Long jobDescriptionId,@PathVariable Long qualificationId) {
         jobDescriptionService.removeQualification(jobDescriptionId, qualificationId);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{jobDescriptionId}/required-experience/{experienceId}")
-    public ResponseEntity<Void> removeRequiredExperience(
-            @PathVariable Long jobDescriptionId,
-            @PathVariable Long experienceId) {
+    public ResponseEntity<Void> removeRequiredExperience(@PathVariable Long jobDescriptionId,@PathVariable Long experienceId) {
         jobDescriptionService.removeRequiredExperience(jobDescriptionId, experienceId);
         return ResponseEntity.noContent().build();
     }
