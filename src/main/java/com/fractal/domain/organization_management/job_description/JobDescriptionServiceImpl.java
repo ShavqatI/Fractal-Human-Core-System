@@ -2,8 +2,11 @@ package com.fractal.domain.organization_management.job_description;
 
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionRequest;
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionResponse;
+import com.fractal.domain.organization_management.job_description.qualification.Qualification;
 import com.fractal.domain.organization_management.job_description.qualification.QualificationService;
+import com.fractal.domain.organization_management.job_description.required_experience.RequiredExperience;
 import com.fractal.domain.organization_management.job_description.required_experience.RequiredExperienceService;
+import com.fractal.domain.organization_management.job_description.responsibility.Responsibility;
 import com.fractal.domain.organization_management.job_description.responsibility.ResponsibilityService;
 import com.fractal.domain.organization_management.position.PositionService;
 import com.fractal.exception.ResourceNotFoundException;
@@ -78,6 +81,33 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
                 jobDescription.getRequiredExperiences() != null ? jobDescription.getRequiredExperiences().stream().map(requiredExperienceService::toDTO).collect(Collectors.toList()) : null,
                 jobDescription.getCreatedDate()
         );
+    }
+
+    @Override
+    public void removeResponsibility(Long jobDescriptionId, Long responsibilityId) {
+        JobDescription jobDescription = findById(jobDescriptionId);
+        Responsibility responsibility = responsibilityService.findById(responsibilityId);
+        jobDescription.removeResponsibility(responsibility);
+        responsibilityService.delete(responsibility);
+        save(jobDescription);
+    }
+
+    @Override
+    public void removeQualification(Long jobDescriptionId, Long qualificationId) {
+        JobDescription jobDescription = findById(jobDescriptionId);
+        Qualification qualification = qualificationService.findById(qualificationId);
+        jobDescription.removeQualification(qualification);
+        qualificationService.delete(qualification);
+        save(jobDescription);
+    }
+
+    @Override
+    public void removeRequiredExperience(Long jobDescriptionId, Long experienceId) {
+        JobDescription jobDescription = findById(jobDescriptionId);
+        RequiredExperience experience = requiredExperienceService.findById(experienceId);
+        jobDescription.removeRequiredExperience(experience);
+        requiredExperienceService.delete(experience);
+        save(jobDescription);
     }
 
    private JobDescription toEntity(JobDescriptionRequest dto) {

@@ -55,16 +55,30 @@ public class JobDescription extends AbstractEntity {
         responsibility.setJobDescription(this);
         responsibilities.add(responsibility);
     }
+    public void removeResponsibility(Responsibility responsibility) {
+        if (responsibilities != null && !responsibilities.isEmpty())
+            responsibilities.remove(responsibility);
+    }
 
     public void addQualification(Qualification qualification) {
         if (qualifications == null) qualifications = new ArrayList<>();
         qualification.setJobDescription(this);
         qualifications.add(qualification);
     }
+    public void removeQualification(Qualification qualification) {
+        if (qualifications != null && !qualifications.isEmpty())
+        qualifications.remove(qualification);
+    }
+
+
     public void addRequiredExperience(RequiredExperience requiredExperience) {
         if (requiredExperiences == null) requiredExperiences = new ArrayList<>();
         requiredExperience.setJobDescription(this);
         requiredExperiences.add(requiredExperience);
+    }
+    public void removeRequiredExperience(RequiredExperience requiredExperience) {
+        if (requiredExperiences != null && !requiredExperiences.isEmpty())
+        requiredExperiences.remove(requiredExperience);
     }
 
 }

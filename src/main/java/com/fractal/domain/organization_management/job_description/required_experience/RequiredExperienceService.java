@@ -6,4 +6,7 @@ import com.fractal.domain.organization_management.job_description.required_exper
 public interface RequiredExperienceService {
     RequiredExperienceResponse toDTO(RequiredExperience requiredExperience);
     RequiredExperience toEntity(RequiredExperienceRequest dto);
+
+    RequiredExperience findById(Long id);
+     void delete(RequiredExperience requiredExperience);
 }

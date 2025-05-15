@@ -7,4 +7,7 @@ public interface ResponsibilityService {
 
     ResponsibilityResponse toDTO(Responsibility responsibility);
     Responsibility toEntity(ResponsibilityRequest dto);
+
+    Responsibility findById(Long id);
+    void delete(Responsibility responsibility);
 }
