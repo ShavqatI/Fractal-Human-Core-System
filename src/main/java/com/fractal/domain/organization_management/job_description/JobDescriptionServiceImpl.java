@@ -4,15 +4,19 @@ import com.fractal.domain.organization_management.job_description.dto.JobDescrip
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionResponse;
 import com.fractal.domain.organization_management.job_description.qualification.Qualification;
 import com.fractal.domain.organization_management.job_description.qualification.QualificationService;
+import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationRequest;
 import com.fractal.domain.organization_management.job_description.required_experience.RequiredExperience;
 import com.fractal.domain.organization_management.job_description.required_experience.RequiredExperienceService;
+import com.fractal.domain.organization_management.job_description.required_experience.dto.RequiredExperienceRequest;
 import com.fractal.domain.organization_management.job_description.responsibility.Responsibility;
 import com.fractal.domain.organization_management.job_description.responsibility.ResponsibilityService;
+import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityRequest;
 import com.fractal.domain.organization_management.position.PositionService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,6 +33,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
 
 
     @Override
+    @Transactional
     public JobDescription create(JobDescriptionRequest dto) {
         return save(toEntity(dto));
     }
@@ -44,6 +49,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
     }
 
     @Override
+    @Transactional
     public JobDescription update(Long id, JobDescriptionRequest dto) {
         try {
             JobDescription jobDescription = findById(id);
@@ -63,6 +69,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
         jobDescriptionRepository.delete(findById(id));
     }
@@ -81,6 +88,36 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
                 jobDescription.getRequiredExperiences() != null ? jobDescription.getRequiredExperiences().stream().map(requiredExperienceService::toDTO).collect(Collectors.toList()) : null,
                 jobDescription.getCreatedDate()
         );
+    }
+
+    @Override
+    public JobDescription updateResponsibility(Long jobDescriptionId, Long responsibilityId, ResponsibilityRequest dto) {
+        JobDescription jobDescription = findById(jobDescriptionId);
+        Responsibility responsibility = jobDescription.getResponsibilities().stream()
+                .filter(r -> r.getId().equals(responsibilityId))
+                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Responsibility with id: " + responsibilityId + " not found"));
+        responsibilityService.update(responsibility.getId(),dto);
+        return save(jobDescription);
+    }
+
+    @Override
+    public JobDescription updateQualification(Long jobDescriptionId, Long qualificationId, QualificationRequest dto) {
+        JobDescription jobDescription = findById(jobDescriptionId);
+        Qualification qualification = jobDescription.getQualifications().stream()
+                .filter(q -> q.getId().equals(qualificationId))
+                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Qualification with id: " + qualificationId + " not found"));
+        qualificationService.update(qualification.getId(),dto);
+        return save(jobDescription);
+    }
+
+    @Override
+    public JobDescription updateRequiredExperience(Long jobDescriptionId, Long requiredExperienceId, RequiredExperienceRequest dto) {
+        JobDescription jobDescription = findById(jobDescriptionId);
+        RequiredExperience requiredExperience = jobDescription.getRequiredExperiences().stream()
+                .filter(r -> r.getId().equals(requiredExperienceId))
+                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Required Experience with id: " + requiredExperienceId + " not found"));
+        requiredExperienceService.update(requiredExperience.getId(),dto);
+        return save(jobDescription);
     }
 
     @Override

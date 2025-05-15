@@ -3,6 +3,9 @@ package com.fractal.controller.organization_management;
 import com.fractal.domain.organization_management.job_description.JobDescriptionService;
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionRequest;
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionResponse;
+import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationRequest;
+import com.fractal.domain.organization_management.job_description.required_experience.dto.RequiredExperienceRequest;
+import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -38,6 +41,24 @@ public class JobDescriptionController {
     public ResponseEntity<JobDescriptionResponse> update(@PathVariable Long id, @RequestBody @Valid JobDescriptionRequest dto) {
         return ResponseEntity.ok(jobDescriptionService.toDTO(jobDescriptionService.update(id, dto)));
     }
+
+    @PutMapping("/{jobDescriptionId}/responsibility/{responsibilityId}")
+    public ResponseEntity<Void> updateResponsibility(@PathVariable Long jobDescriptionId,@PathVariable Long responsibilityId, @RequestBody ResponsibilityRequest dto) {
+        jobDescriptionService.updateResponsibility(jobDescriptionId, responsibilityId, dto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{jobDescriptionId}/qualification/{qualificationId}")
+    public ResponseEntity<Void> updateQualification(@PathVariable Long jobDescriptionId,@PathVariable Long qualificationId, @RequestBody QualificationRequest dto) {
+        jobDescriptionService.updateQualification(jobDescriptionId, qualificationId, dto);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/{jobDescriptionId}/responsibility/{responsibilityId}")
+    public ResponseEntity<Void> updateQualification(@PathVariable Long jobDescriptionId,@PathVariable Long responsibilityId, @RequestBody RequiredExperienceRequest dto) {
+        jobDescriptionService.updateRequiredExperience(jobDescriptionId, responsibilityId, dto);
+        return ResponseEntity.noContent().build();
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

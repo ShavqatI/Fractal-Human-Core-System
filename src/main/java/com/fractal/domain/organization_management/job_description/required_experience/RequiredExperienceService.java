@@ -8,5 +8,7 @@ public interface RequiredExperienceService {
     RequiredExperience toEntity(RequiredExperienceRequest dto);
 
     RequiredExperience findById(Long id);
+    RequiredExperience update(Long id,RequiredExperienceRequest dto);
+
      void delete(RequiredExperience requiredExperience);
 }

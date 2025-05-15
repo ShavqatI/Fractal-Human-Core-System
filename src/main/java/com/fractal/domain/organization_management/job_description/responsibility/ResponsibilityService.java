@@ -9,5 +9,6 @@ public interface ResponsibilityService {
     Responsibility toEntity(ResponsibilityRequest dto);
 
     Responsibility findById(Long id);
+    Responsibility update(Long id,ResponsibilityRequest dto);
     void delete(Responsibility responsibility);
 }

@@ -32,6 +32,13 @@ class QualificationServiceImpl implements QualificationService {
     }
 
     @Override
+    public Qualification update(Long id, QualificationRequest dto) {
+        Qualification qualification = findById(id);
+        qualification.setDescription(dto.description());
+        return qualificationRepository.save(qualification);
+    }
+
+    @Override
     public void delete(Qualification qualification) {
         qualificationRepository.delete(qualification);
     }

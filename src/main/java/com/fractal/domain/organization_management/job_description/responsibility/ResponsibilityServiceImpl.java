@@ -31,6 +31,13 @@ class ResponsibilityServiceImpl implements ResponsibilityService  {
     }
 
     @Override
+    public Responsibility update(Long id, ResponsibilityRequest dto) {
+        Responsibility responsibility = findById(id);
+        responsibility.setDescription(dto.description());
+       return responsibilityRepository.save(responsibility);
+    }
+
+    @Override
     public void delete(Responsibility responsibility) {
         responsibilityRepository.delete(responsibility);
     }

@@ -8,5 +8,6 @@ public interface QualificationService {
     Qualification toEntity(QualificationRequest dto);
 
     Qualification findById(Long id);
+    Qualification update(Long id, QualificationRequest dto);
     void delete(Qualification qualification);
 }

@@ -46,6 +46,20 @@ class RequiredExperienceServiceImpl implements RequiredExperienceService {
     }
 
     @Override
+    public RequiredExperience update(Long id, RequiredExperienceRequest dto) {
+        RequiredExperience requiredExperience = findById(id);
+        requiredExperience.setDescription(dto.description());
+        requiredExperience.setRequiredYears(dto.requiredYears());
+        requiredExperience.setDomain(dto.domain());
+        requiredExperience.setLevel(dto.level());
+        requiredExperience.setStartDate(dto.startDate());
+        requiredExperience.setEndDate(dto.endDate());
+        requiredExperience.setMandatory(dto.mandatory());
+        requiredExperience.setNotes(dto.notes());
+       return requiredExperienceRepository.save(requiredExperience);
+    }
+
+    @Override
     public void delete(RequiredExperience requiredExperience) {
         requiredExperienceRepository.delete(requiredExperience);
     }
