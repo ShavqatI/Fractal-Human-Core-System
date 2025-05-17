@@ -1,4 +1,4 @@
-package com.fractal.domain.location.address.relative_address;
+package com.fractal.domain.employee_management.relative.address;
 
 
 import com.fractal.domain.employee_management.relative.Relative;
@@ -13,7 +13,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "relative_address", schema = "location_schema", catalog = "fractal")
+@Table(name = "relative_address", schema = "employee_schema", catalog = "fractal")
 @Data
 @Builder
 @AllArgsConstructor

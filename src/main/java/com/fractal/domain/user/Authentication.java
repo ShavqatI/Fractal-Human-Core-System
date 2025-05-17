@@ -1,6 +1,6 @@
 package com.fractal.domain.user;
 
-import com.fractal.domain.dictionary.Status;
+import com.fractal.domain.dictionary.status.Status;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;

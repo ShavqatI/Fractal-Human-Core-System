@@ -1,4 +1,4 @@
-package com.fractal.domain.location.address.organization_address;
+package com.fractal.domain.organization_management.organization.address;
 
 
 import com.fractal.domain.location.address.Address;
@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 
 
 @Entity
-@Table(name = "organization_address", schema = "location_schema", catalog = "fractal")
+@Table(name = "organization_address", schema = "organization_schema", catalog = "fractal")
 @Data
 @Builder
 @AllArgsConstructor

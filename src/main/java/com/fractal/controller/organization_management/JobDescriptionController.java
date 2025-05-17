@@ -53,9 +53,9 @@ public class JobDescriptionController {
         jobDescriptionService.updateQualification(jobDescriptionId, qualificationId, dto);
         return ResponseEntity.noContent().build();
     }
-    @PutMapping("/{jobDescriptionId}/responsibility/{responsibilityId}")
-    public ResponseEntity<Void> updateQualification(@PathVariable Long jobDescriptionId,@PathVariable Long responsibilityId, @RequestBody RequiredExperienceRequest dto) {
-        jobDescriptionService.updateRequiredExperience(jobDescriptionId, responsibilityId, dto);
+    @PutMapping("/{jobDescriptionId}/responsibility/{requiredExperienceId}")
+    public ResponseEntity<Void> updateRequiredExperience(@PathVariable Long jobDescriptionId,@PathVariable Long requiredExperienceId, @RequestBody RequiredExperienceRequest dto) {
+        jobDescriptionService.updateRequiredExperience(jobDescriptionId, requiredExperienceId, dto);
         return ResponseEntity.noContent().build();
     }
 
@@ -78,7 +78,7 @@ public class JobDescriptionController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{jobDescriptionId}/required-experience/{experienceId}")
+    @DeleteMapping("/{jobDescriptionId}/required-experience/{requiredExperienceId}")
     public ResponseEntity<Void> removeRequiredExperience(@PathVariable Long jobDescriptionId,@PathVariable Long experienceId) {
         jobDescriptionService.removeRequiredExperience(jobDescriptionId, experienceId);
         return ResponseEntity.noContent().build();

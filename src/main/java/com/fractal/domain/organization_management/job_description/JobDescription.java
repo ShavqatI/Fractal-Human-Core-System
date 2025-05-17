@@ -1,7 +1,7 @@
 package com.fractal.domain.organization_management.job_description;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.dictionary.Status;
+import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.job_description.qualification.Qualification;
 import com.fractal.domain.organization_management.job_description.required_experience.RequiredExperience;
 import com.fractal.domain.organization_management.job_description.responsibility.Responsibility;
