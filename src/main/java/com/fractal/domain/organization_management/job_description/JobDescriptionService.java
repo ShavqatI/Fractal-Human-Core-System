@@ -5,7 +5,6 @@ import com.fractal.domain.organization_management.job_description.dto.JobDescrip
 import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationRequest;
 import com.fractal.domain.organization_management.job_description.required_experience.dto.RequiredExperienceRequest;
 import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityRequest;
-import com.fractal.domain.organization_management.position.dto.PositionResponse;
 
 import java.util.List;
 

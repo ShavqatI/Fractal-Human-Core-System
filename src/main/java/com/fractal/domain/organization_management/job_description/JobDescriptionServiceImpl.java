@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.job_description;
 
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionRequest;
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionResponse;
 import com.fractal.domain.organization_management.job_description.qualification.Qualification;
@@ -30,6 +31,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
     private final RequiredExperienceService requiredExperienceService;
     private final ResponsibilityService responsibilityService;
     private final QualificationService qualificationService;
+    private final StatusService statusService;
 
 
     @Override
@@ -56,7 +58,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
             jobDescription.setTitle(dto.title());
             jobDescription.setSummary(dto.summary());
             jobDescription.setEffectiveDate(dto.effectiveDate());
-            //jobDescription.setStatus();
+            jobDescription.setStatus(statusService.getByCode(dto.status()));
             jobDescription.setPosition(positionService.getById(dto.positionId()));
             dto.responsibilities().forEach(responsibilityRequest -> jobDescription.addResponsibility(responsibilityService.toEntity(responsibilityRequest)));
             dto.qualifications().forEach(qualificationRequest-> jobDescription.addQualification(qualificationService.toEntity(qualificationRequest)));
@@ -81,7 +83,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
                 jobDescription.getTitle(),
                 jobDescription.getSummary(),
                 jobDescription.getEffectiveDate(),
-                null,//jobDescription.getStatus().getName(),
+                jobDescription.getStatus().getName(),
                 jobDescription.getPosition().getName(),
                 jobDescription.getResponsibilities() != null ? jobDescription.getResponsibilities().stream().map(responsibilityService::toDTO).collect(Collectors.toList()) : null,
                 jobDescription.getQualifications() != null ? jobDescription.getQualifications().stream().map(qualificationService::toDTO).collect(Collectors.toList()) : null,
@@ -152,7 +154,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
                 .title(dto.title())
                 .summary(dto.summary())
                 .effectiveDate(dto.effectiveDate())
-                // add status later
+                .status(statusService.getByCode(dto.status()))
                 .position(positionService.getById(dto.positionId()))
                 .build();
         dto.responsibilities().forEach(responsibilityRequest -> jobDescription.addResponsibility(responsibilityService.toEntity(responsibilityRequest)));

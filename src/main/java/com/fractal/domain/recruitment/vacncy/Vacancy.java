@@ -1,7 +1,7 @@
 package com.fractal.domain.recruitment.vacncy;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.dictionary.Status;
+import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.position.Position;
 import com.fractal.domain.recruitment.candidate.Candidate;

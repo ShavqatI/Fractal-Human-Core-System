@@ -1,7 +1,7 @@
 package com.fractal.domain.system.service_provider;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.dictionary.Status;
+import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.system.service_provider.type.ServiceProviderType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
