@@ -23,8 +23,7 @@ public record PositionRequest(
         String description,
 
         @NotNull
-        @NotBlank
-        String department
+        Long department
 ) {
 
 }

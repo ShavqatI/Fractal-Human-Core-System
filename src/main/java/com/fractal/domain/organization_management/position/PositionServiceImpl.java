@@ -44,7 +44,7 @@ class PositionServiceImpl implements PositionService {
             position.setCode(dto.code());
             position.setName(dto.name());
             position.setDescription(dto.description());
-            position.setDepartment(departmentService.getByCode(dto.department()));
+            position.setDepartment(departmentService.getById(dto.department()));
             return save(position);
         }
         catch (DataAccessException e) {
@@ -73,7 +73,7 @@ class PositionServiceImpl implements PositionService {
                 .code(dto.code())
                 .name(dto.name())
                 .description(dto.description())
-                .department(departmentService.getByCode(dto.department()))
+                .department(departmentService.getById(dto.department()))
                 .build();
     }
 
