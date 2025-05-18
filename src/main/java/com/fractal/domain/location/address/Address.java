@@ -8,12 +8,16 @@ import com.fractal.domain.location.district.District;
 import com.fractal.domain.location.region.Region;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "address", schema = "location_schema", catalog = "fractal")
 @Data
+@SuperBuilder
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Address extends Auditable {
 

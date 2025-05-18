@@ -1,6 +1,8 @@
 package com.fractal.domain.organization_management.organization;
 
-import com.fractal.domain.organization_management.organization.dto.OrganizationCreate;
+import com.fractal.domain.organization_management.organization.address.OrganizationAddressService;
+import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
+import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 import com.fractal.domain.organization_management.unit.OrganizationUnitService;
 import com.fractal.exception.ResourceNotFoundException;
@@ -20,8 +22,10 @@ class OrganizationServiceImpl implements OrganizationService {
 
     private final OrganizationRepository organizationRepository;
     private final OrganizationUnitService organizationUnitService;
+    private final OrganizationAddressService organizationAddressService;
+
     @Override
-    public Organization create(OrganizationCreate dto) {
+    public Organization create(OrganizationRequest dto) {
         return save(toEntity(dto));
     }
 
@@ -42,7 +46,7 @@ class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public Organization update(Long id, OrganizationCreate dto) {
+    public Organization update(Long id, OrganizationRequest dto) {
         try {
             Organization organization = findById(id);
             organization.setCode(dto.code());
@@ -56,6 +60,7 @@ class OrganizationServiceImpl implements OrganizationService {
             organization.setLevelMap(dto.levelMap());
             organization.setParent(organizationRepository.findByCode(dto.parent()).orElse(null));
             organization.setOrganizationUnit(organizationUnitService.getByCode(dto.organizationUnit()));
+            dto.addresses().forEach(organizationAddressRequest -> organization.addAddress(organizationAddressService.toEntity(organizationAddressRequest)));
            return save(organization);
         }
         catch (DataAccessException e) {
@@ -90,13 +95,37 @@ class OrganizationServiceImpl implements OrganizationService {
                         .stream()
                         .map(this::toDTO)
                         .collect(Collectors.toList()),
-                null,
+                Optional.ofNullable(organization.getAddresses())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(organizationAddressService::toDTO)
+                        .collect(Collectors.toList()),
                 organization.getCreatedDate()
         );
     }
 
-    private Organization toEntity(OrganizationCreate dto) {
-        return Organization.builder()
+    @Override
+    public Organization updateAddress(Long id, Long addressId, OrganizationAddressRequest dto) {
+        Organization organization = findById(id);
+        var address = organization.getAddresses()
+                .stream()
+                .filter(a-> a.getId().equals(addressId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization address with id: " + addressId + " not found"));
+        organizationAddressService.update(address,dto);
+        return save(organization);
+    }
+
+    @Override
+    public Organization deleteAddress(Long id, Long addressId) {
+        Organization organization = findById(id);
+        var address = organization.getAddresses()
+                .stream()
+                .filter(a-> a.getId().equals(addressId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization address with id: " + addressId + " not found"));
+        organizationAddressService.delete(address);
+      return save(organization);
+    }
+
+    private Organization toEntity(OrganizationRequest dto) {
+        Organization organization = Organization.builder()
                 .code(dto.code())
                 .fullName(dto.fullName())
                 .name(dto.name())
@@ -108,6 +137,8 @@ class OrganizationServiceImpl implements OrganizationService {
                 .parent(organizationRepository.findByCode(dto.parent()).orElse(null))
                 .organizationUnit(organizationUnitService.getByCode(dto.organizationUnit()))
                 .build();
+        dto.addresses().forEach(organizationAddress-> organization.addAddress(organizationAddressService.toEntity(organizationAddress)));
+       return organization;
     }
 
     private Organization save(Organization organization) {

@@ -1,7 +1,8 @@
 package com.fractal.controller.organization_management;
 
 import com.fractal.domain.organization_management.organization.OrganizationService;
-import com.fractal.domain.organization_management.organization.dto.OrganizationCreate;
+import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
+import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class OrganizationController {
     private final OrganizationService organizationService;
 
     @PostMapping
-    public ResponseEntity<OrganizationResponse> create(@RequestBody @Valid OrganizationCreate dto) {
+    public ResponseEntity<OrganizationResponse> create(@RequestBody @Valid OrganizationRequest dto) {
         return new ResponseEntity<>(organizationService.toDTO(organizationService.create(dto)), HttpStatus.CREATED);
     }
 
@@ -40,13 +41,22 @@ public class OrganizationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<OrganizationResponse> update(@PathVariable Long id, @RequestBody @Valid OrganizationCreate dto) {
+    public ResponseEntity<OrganizationResponse> update(@PathVariable Long id, @RequestBody @Valid OrganizationRequest dto) {
         return ResponseEntity.ok(organizationService.toDTO(organizationService.update(id, dto)));
+    }
+    @PutMapping("/{id}/address/{addressId}")
+    public ResponseEntity<OrganizationResponse> updateAddress(@PathVariable Long id, @PathVariable Long addressId, @RequestBody @Valid OrganizationAddressRequest dto) {
+        return ResponseEntity.ok(organizationService.toDTO(organizationService.updateAddress(id,addressId, dto)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         organizationService.deleteById(id);
+        return ResponseEntity.noContent().build();
+    }
+    @DeleteMapping("/{id}/address/{addressId}")
+    public ResponseEntity<Void> deleteAddress(@PathVariable Long id, @PathVariable Long addressId) {
+        organizationService.deleteAddress(id,addressId);
         return ResponseEntity.noContent().build();
     }
 }

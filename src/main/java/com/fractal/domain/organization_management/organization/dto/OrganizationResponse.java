@@ -1,5 +1,7 @@
 package com.fractal.domain.organization_management.organization.dto;
 
+import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressResponse;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;

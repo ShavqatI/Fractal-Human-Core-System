@@ -1,27 +1,28 @@
-package com.fractal.domain.location.address.dto;
+package com.fractal.domain.organization_management.organization.address.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record AddressCreate(
+public record OrganizationAddressRequest(
         @NotBlank
-        @NotBlank
+        @NotNull
         String addressType,
         @NotBlank
-        @NotBlank
+        @NotNull
         Long country,
         @NotBlank
-        @NotBlank
+        @NotNull
         Long region,
         @NotBlank
-        @NotBlank
+        @NotNull
         Long city,
         @NotBlank
+        @NotNull
+        Long district,
         @NotBlank
-        long district,
-        @NotBlank
-        @NotBlank
+        @NotNull
         String street,
         String house,
         String apartment,

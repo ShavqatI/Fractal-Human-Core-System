@@ -58,8 +58,6 @@ public class JobDescriptionController {
         jobDescriptionService.updateRequiredExperience(jobDescriptionId, requiredExperienceId, dto);
         return ResponseEntity.noContent().build();
     }
-
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         jobDescriptionService.deleteById(id);

@@ -1,15 +1,12 @@
 package com.fractal.domain.organization_management.organization.dto;
 
-import com.fractal.domain.location.address.dto.AddressCreate;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
-public record OrganizationCreate (
+public record OrganizationRequest(
         @NotBlank
         @NotNull
         @Pattern(regexp = "^[A-Z]{2,20}$", message = "Code must be in Latin uppercase letters")
@@ -39,6 +36,7 @@ public record OrganizationCreate (
         @NotNull
         @NotBlank
         String organizationUnit,
-        List<AddressCreate> addresses
+        @NotEmpty
+        List<OrganizationAddressRequest> addresses
 ) {
 }
