@@ -2,7 +2,7 @@ package com.fractal.domain.abstraction;
 
 import com.fractal.domain.dictionary.gender.Gender;
 import com.fractal.domain.dictionary.marital_status.MaritalStatus;
-import com.fractal.domain.dictionary.Nationality;
+import com.fractal.domain.dictionary.nationality.Nationality;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

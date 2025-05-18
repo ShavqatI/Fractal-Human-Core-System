@@ -2,6 +2,7 @@ package com.fractal.domain.dictionary.gender;
 
 import com.fractal.domain.dictionary.gender.dto.GenderRequest;
 import com.fractal.domain.dictionary.gender.dto.GenderResponse;
+import com.fractal.domain.dictionary.nationality.dto.NationalityResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -56,7 +57,12 @@ class GenderServiceImpl implements GenderService {
 
     @Override
     public GenderResponse toDTO(Gender gender) {
-        return null;
+        return new GenderResponse(
+                gender.getId(),
+                gender.getCode(),
+                gender.getName(),
+                gender.getCreatedDate()
+        );
     }
 
     private Gender toEntity(GenderRequest dto) {

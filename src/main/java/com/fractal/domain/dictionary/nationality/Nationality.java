@@ -1,4 +1,4 @@
-package com.fractal.domain.dictionary;
+package com.fractal.domain.dictionary.nationality;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;
@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
 @Entity
 @Table(name = "category", schema = "employee_schema", catalog = "fractal")
 @Data

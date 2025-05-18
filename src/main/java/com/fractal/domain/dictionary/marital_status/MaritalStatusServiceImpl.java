@@ -56,7 +56,12 @@ class MaritalStatusServiceImpl implements MaritalStatusService {
 
     @Override
     public MaritalStatusResponse toDTO(MaritalStatus maritalStatus) {
-        return null;
+        return new MaritalStatusResponse(
+                maritalStatus.getId(),
+                maritalStatus.getCode(),
+                maritalStatus.getName(),
+                maritalStatus.getCreatedDate()
+        );
     }
 
     private MaritalStatus toEntity(MaritalStatusRequest dto) {
