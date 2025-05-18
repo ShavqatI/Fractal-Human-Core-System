@@ -32,11 +32,12 @@ public record OrganizationRequest(
         @NotBlank
         @NotNull
         String levelMap,
-        String parent,
         @NotNull
         @NotBlank
         String organizationUnit,
         @NotEmpty
-        List<OrganizationAddressRequest> addresses
+        List<OrganizationAddressRequest> addresses,
+        List<OrganizationRequest> children
+
 ) {
 }

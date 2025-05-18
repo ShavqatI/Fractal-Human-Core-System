@@ -58,9 +58,9 @@ class OrganizationServiceImpl implements OrganizationService {
             organization.setLevel(dto.level());
             organization.setLevelMap(dto.levelMap());
             organization.setLevelMap(dto.levelMap());
-            organization.setParent(organizationRepository.findByCode(dto.parent()).orElse(null));
             organization.setOrganizationUnit(organizationUnitService.getByCode(dto.organizationUnit()));
             dto.addresses().forEach(organizationAddressRequest -> organization.addAddress(organizationAddressService.toEntity(organizationAddressRequest)));
+            dto.children().forEach(child->organization.addChild(toEntity(child)));
            return save(organization);
         }
         catch (DataAccessException e) {
@@ -131,6 +131,33 @@ class OrganizationServiceImpl implements OrganizationService {
       return save(organization);
     }
 
+    @Override
+    public Organization addChild(Long id, OrganizationRequest dto) {
+        Organization organization = findById(id);
+        Organization child = toEntity(dto);
+        if (organization.getOrganizationUnit().equals(child.getOrganizationUnit())) {
+            throw new RuntimeException("Child can not have same organization unit as parent ");
+        }
+        organization.addChild(child);
+        return save(organization);
+    }
+
+    @Override
+    public Organization updateChild(Long id, Long childId, OrganizationRequest dto) {
+        Organization organization = findById(id);
+        var child = organization.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        update(child.getId(),dto);
+        return save(organization);
+    }
+
+    @Override
+    public Organization deleteChild(Long id, Long childId) {
+        Organization organization = findById(id);
+        var child = organization.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        organization.removeChild(child);
+       return save(organization);
+    }
+
     private Organization toEntity(OrganizationRequest dto) {
         Organization organization = Organization.builder()
                 .code(dto.code())
@@ -141,10 +168,10 @@ class OrganizationServiceImpl implements OrganizationService {
                 .closeDate(dto.closeDate())
                 .level(dto.level())
                 .levelMap(dto.levelMap())
-                .parent(organizationRepository.findByCode(dto.parent()).orElse(null))
                 .organizationUnit(organizationUnitService.getByCode(dto.organizationUnit()))
                 .build();
         dto.addresses().forEach(organizationAddress-> organization.addAddress(organizationAddressService.toEntity(organizationAddress)));
+        dto.children().forEach(child->organization.addChild(toEntity(child)));
        return organization;
     }
 

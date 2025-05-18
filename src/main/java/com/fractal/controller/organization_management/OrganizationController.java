@@ -54,7 +54,7 @@ public class OrganizationController {
 
     @PutMapping("/{id}/address")
     public ResponseEntity<OrganizationResponse> addAddress(@PathVariable Long id, @RequestBody @Valid OrganizationAddressRequest dto) {
-        return ResponseEntity.ok(organizationService.toDTO(organizationService.addAddress(id,dto)));
+        return new ResponseEntity<>(organizationService.toDTO(organizationService.addAddress(id,dto)), HttpStatus.CREATED);
     }
     @PutMapping("/{id}/address/{addressId}")
     public ResponseEntity<OrganizationResponse> updateAddress(@PathVariable Long id, @PathVariable Long addressId, @RequestBody @Valid OrganizationAddressRequest dto) {
@@ -64,6 +64,21 @@ public class OrganizationController {
     @DeleteMapping("/{id}/address/{addressId}")
     public ResponseEntity<Void> deleteAddress(@PathVariable Long id, @PathVariable Long addressId) {
         organizationService.deleteAddress(id,addressId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}/child")
+    public ResponseEntity<OrganizationResponse> addAddress(@PathVariable Long id, @RequestBody @Valid OrganizationRequest dto) {
+        return new ResponseEntity<>(organizationService.toDTO(organizationService.addChild(id,dto)), HttpStatus.CREATED);
+    }
+    @PutMapping("/{id}/child/{childId}")
+    public ResponseEntity<OrganizationResponse> addAddress(@PathVariable Long id, @PathVariable Long childId, @RequestBody @Valid OrganizationRequest dto) {
+        return ResponseEntity.ok(organizationService.toDTO(organizationService.updateChild(id,childId, dto)));
+    }
+
+    @DeleteMapping("/{id}/child/{childId}")
+    public ResponseEntity<Void> deleteChild(@PathVariable Long id, @PathVariable Long childId) {
+        organizationService.deleteChild(id,childId);
         return ResponseEntity.noContent().build();
     }
 }
