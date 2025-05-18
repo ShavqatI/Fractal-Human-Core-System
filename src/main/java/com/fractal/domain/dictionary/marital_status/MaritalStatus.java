@@ -1,4 +1,4 @@
-package com.fractal.domain.dictionary;
+package com.fractal.domain.dictionary.marital_status;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;
@@ -15,7 +15,5 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class MaritalStatus extends Dictionary {
-
-
 
 }
