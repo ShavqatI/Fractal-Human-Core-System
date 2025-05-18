@@ -3,8 +3,6 @@ package com.fractal.controller.organization_management;
 import com.fractal.domain.organization_management.department.DepartmentService;
 import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
-import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
-import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -52,7 +50,7 @@ public class DepartmentController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}/child")
+    @PostMapping("/{id}/child")
     public ResponseEntity<DepartmentResponse> addChild(@PathVariable Long id, @RequestBody @Valid DepartmentRequest dto) {
         return new ResponseEntity<>(departmentService.toDTO(departmentService.addChild(id,dto)), HttpStatus.CREATED);
     }

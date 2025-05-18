@@ -1,7 +1,6 @@
 package com.fractal.domain.organization_management.department;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.unit.OrganizationUnit;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

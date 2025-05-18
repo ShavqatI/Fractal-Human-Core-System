@@ -93,32 +93,19 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
     }
 
     @Override
+    public JobDescription addResponsibility(Long jobDescriptionId, ResponsibilityRequest dto) {
+        JobDescription jobDescription = findById(jobDescriptionId);
+        jobDescription.addResponsibility(responsibilityService.toEntity(dto));
+        return save(jobDescription);
+    }
+
+    @Override
     public JobDescription updateResponsibility(Long jobDescriptionId, Long responsibilityId, ResponsibilityRequest dto) {
         JobDescription jobDescription = findById(jobDescriptionId);
         Responsibility responsibility = jobDescription.getResponsibilities().stream()
                 .filter(r -> r.getId().equals(responsibilityId))
                 .findFirst().orElseThrow(()-> new ResourceNotFoundException("Responsibility with id: " + responsibilityId + " not found"));
         responsibilityService.update(responsibility.getId(),dto);
-        return save(jobDescription);
-    }
-
-    @Override
-    public JobDescription updateQualification(Long jobDescriptionId, Long qualificationId, QualificationRequest dto) {
-        JobDescription jobDescription = findById(jobDescriptionId);
-        Qualification qualification = jobDescription.getQualifications().stream()
-                .filter(q -> q.getId().equals(qualificationId))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Qualification with id: " + qualificationId + " not found"));
-        qualificationService.update(qualification.getId(),dto);
-        return save(jobDescription);
-    }
-
-    @Override
-    public JobDescription updateRequiredExperience(Long jobDescriptionId, Long requiredExperienceId, RequiredExperienceRequest dto) {
-        JobDescription jobDescription = findById(jobDescriptionId);
-        RequiredExperience requiredExperience = jobDescription.getRequiredExperiences().stream()
-                .filter(r -> r.getId().equals(requiredExperienceId))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Required Experience with id: " + requiredExperienceId + " not found"));
-        requiredExperienceService.update(requiredExperience.getId(),dto);
         return save(jobDescription);
     }
 
@@ -132,12 +119,45 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
     }
 
     @Override
+    public JobDescription addQualification(Long jobDescriptionId, QualificationRequest dto) {
+        JobDescription jobDescription = findById(jobDescriptionId);
+        jobDescription.addQualification(qualificationService.toEntity(dto));
+        return save(jobDescription);
+    }
+
+    @Override
+    public JobDescription updateQualification(Long jobDescriptionId, Long qualificationId, QualificationRequest dto) {
+        JobDescription jobDescription = findById(jobDescriptionId);
+        Qualification qualification = jobDescription.getQualifications().stream()
+                .filter(q -> q.getId().equals(qualificationId))
+                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Qualification with id: " + qualificationId + " not found"));
+        qualificationService.update(qualification.getId(),dto);
+        return save(jobDescription);
+    }
+    @Override
     public void removeQualification(Long jobDescriptionId, Long qualificationId) {
         JobDescription jobDescription = findById(jobDescriptionId);
         Qualification qualification = qualificationService.findById(qualificationId);
         jobDescription.removeQualification(qualification);
         qualificationService.delete(qualification);
         save(jobDescription);
+    }
+
+    @Override
+    public JobDescription addRequiredExperience(Long jobDescriptionId, RequiredExperienceRequest dto) {
+        JobDescription jobDescription = findById(jobDescriptionId);
+        jobDescription.addRequiredExperience(requiredExperienceService.toEntity(dto));
+        return save(jobDescription);
+    }
+
+    @Override
+    public JobDescription updateRequiredExperience(Long jobDescriptionId, Long requiredExperienceId, RequiredExperienceRequest dto) {
+        JobDescription jobDescription = findById(jobDescriptionId);
+        RequiredExperience requiredExperience = jobDescription.getRequiredExperiences().stream()
+                .filter(r -> r.getId().equals(requiredExperienceId))
+                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Required Experience with id: " + requiredExperienceId + " not found"));
+        requiredExperienceService.update(requiredExperience.getId(),dto);
+        return save(jobDescription);
     }
 
     @Override

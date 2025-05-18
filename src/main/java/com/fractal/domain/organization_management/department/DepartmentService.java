@@ -2,8 +2,6 @@ package com.fractal.domain.organization_management.department;
 
 import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
-import com.fractal.domain.organization_management.organization.Organization;
-import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 
 import java.util.List;
 

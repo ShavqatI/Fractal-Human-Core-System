@@ -16,11 +16,13 @@ public interface JobDescriptionService {
     void deleteById(Long id);
     JobDescriptionResponse toDTO(JobDescription jobDescription);
 
+    JobDescription addResponsibility(Long jobDescriptionId, ResponsibilityRequest dto);
     JobDescription updateResponsibility(Long jobDescriptionId, Long responsibilityId, ResponsibilityRequest dto);
-    JobDescription updateQualification(Long jobDescriptionId, Long qualificationId, QualificationRequest dto);
-    JobDescription updateRequiredExperience(Long jobDescriptionId, Long requiredExperienceId, RequiredExperienceRequest dto);
-
     void removeResponsibility(Long jobDescriptionId, Long responsibilityId);
+    JobDescription addQualification(Long jobDescriptionId, QualificationRequest dto);
+    JobDescription updateQualification(Long jobDescriptionId, Long qualificationId, QualificationRequest dto);
     void removeQualification(Long jobDescriptionId, Long qualificationId);
+    JobDescription updateRequiredExperience(Long jobDescriptionId, Long requiredExperienceId, RequiredExperienceRequest dto);
+    JobDescription addRequiredExperience(Long jobDescriptionId, RequiredExperienceRequest dto);
     void removeRequiredExperience(Long jobDescriptionId, Long experienceId);
 }
