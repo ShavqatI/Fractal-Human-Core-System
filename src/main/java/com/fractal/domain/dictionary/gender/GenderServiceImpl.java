@@ -2,7 +2,6 @@ package com.fractal.domain.dictionary.gender;
 
 import com.fractal.domain.dictionary.gender.dto.GenderRequest;
 import com.fractal.domain.dictionary.gender.dto.GenderResponse;
-import com.fractal.domain.dictionary.nationality.dto.NationalityResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
