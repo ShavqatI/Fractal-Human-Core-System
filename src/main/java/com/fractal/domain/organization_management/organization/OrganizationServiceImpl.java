@@ -105,6 +105,13 @@ class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    public Organization addAddress(Long id, OrganizationAddressRequest dto) {
+        Organization organization = findById(id);
+        organization.addAddress(organizationAddressService.toEntity(dto));
+        return save(organization);
+    }
+
+    @Override
     public Organization updateAddress(Long id, Long addressId, OrganizationAddressRequest dto) {
         Organization organization = findById(id);
         var address = organization.getAddresses()

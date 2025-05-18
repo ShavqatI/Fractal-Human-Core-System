@@ -9,16 +9,12 @@ public record OrganizationAddressRequest(
         @NotBlank
         @NotNull
         String addressType,
-        @NotBlank
         @NotNull
         Long country,
-        @NotBlank
         @NotNull
         Long region,
-        @NotBlank
         @NotNull
         Long city,
-        @NotBlank
         @NotNull
         Long district,
         @NotBlank

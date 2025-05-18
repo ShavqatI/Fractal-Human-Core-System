@@ -15,6 +15,7 @@ public interface OrganizationService {
     void deleteById(Long id);
     OrganizationResponse toDTO(Organization organization);
 
+    Organization addAddress(Long id,OrganizationAddressRequest dto);
     Organization updateAddress(Long id,Long addressId, OrganizationAddressRequest dto);
     Organization deleteAddress(Long id,Long addressId);
 }

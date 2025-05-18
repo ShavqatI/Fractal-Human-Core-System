@@ -44,16 +44,23 @@ public class OrganizationController {
     public ResponseEntity<OrganizationResponse> update(@PathVariable Long id, @RequestBody @Valid OrganizationRequest dto) {
         return ResponseEntity.ok(organizationService.toDTO(organizationService.update(id, dto)));
     }
-    @PutMapping("/{id}/address/{addressId}")
-    public ResponseEntity<OrganizationResponse> updateAddress(@PathVariable Long id, @PathVariable Long addressId, @RequestBody @Valid OrganizationAddressRequest dto) {
-        return ResponseEntity.ok(organizationService.toDTO(organizationService.updateAddress(id,addressId, dto)));
-    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         organizationService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{id}/address")
+    public ResponseEntity<OrganizationResponse> addAddress(@PathVariable Long id, @RequestBody @Valid OrganizationAddressRequest dto) {
+        return ResponseEntity.ok(organizationService.toDTO(organizationService.addAddress(id,dto)));
+    }
+    @PutMapping("/{id}/address/{addressId}")
+    public ResponseEntity<OrganizationResponse> updateAddress(@PathVariable Long id, @PathVariable Long addressId, @RequestBody @Valid OrganizationAddressRequest dto) {
+        return ResponseEntity.ok(organizationService.toDTO(organizationService.updateAddress(id,addressId, dto)));
+    }
+
     @DeleteMapping("/{id}/address/{addressId}")
     public ResponseEntity<Void> deleteAddress(@PathVariable Long id, @PathVariable Long addressId) {
         organizationService.deleteAddress(id,addressId);
