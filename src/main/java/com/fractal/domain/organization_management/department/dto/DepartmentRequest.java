@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import java.util.List;
+
 public record DepartmentRequest(
     @NotBlank
     @NotNull
@@ -23,7 +25,9 @@ public record DepartmentRequest(
     String parent,
     @NotNull
     @NotBlank
-    String organizationUnit
+    String organizationUnit,
+
+    List<DepartmentRequest> children
     )
 
 {}

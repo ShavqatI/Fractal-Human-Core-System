@@ -68,11 +68,11 @@ public class OrganizationController {
     }
 
     @PutMapping("/{id}/child")
-    public ResponseEntity<OrganizationResponse> addAddress(@PathVariable Long id, @RequestBody @Valid OrganizationRequest dto) {
+    public ResponseEntity<OrganizationResponse> addChild(@PathVariable Long id, @RequestBody @Valid OrganizationRequest dto) {
         return new ResponseEntity<>(organizationService.toDTO(organizationService.addChild(id,dto)), HttpStatus.CREATED);
     }
     @PutMapping("/{id}/child/{childId}")
-    public ResponseEntity<OrganizationResponse> addAddress(@PathVariable Long id, @PathVariable Long childId, @RequestBody @Valid OrganizationRequest dto) {
+    public ResponseEntity<OrganizationResponse> updateChild(@PathVariable Long id, @PathVariable Long childId, @RequestBody @Valid OrganizationRequest dto) {
         return ResponseEntity.ok(organizationService.toDTO(organizationService.updateChild(id,childId, dto)));
     }
 

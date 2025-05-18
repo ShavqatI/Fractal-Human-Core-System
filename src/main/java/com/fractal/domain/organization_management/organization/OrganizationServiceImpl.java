@@ -106,14 +106,14 @@ class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public Organization addAddress(Long id, OrganizationAddressRequest dto) {
-        Organization organization = findById(id);
+        var organization = findById(id);
         organization.addAddress(organizationAddressService.toEntity(dto));
         return save(organization);
     }
 
     @Override
     public Organization updateAddress(Long id, Long addressId, OrganizationAddressRequest dto) {
-        Organization organization = findById(id);
+        var organization = findById(id);
         var address = organization.getAddresses()
                 .stream()
                 .filter(a-> a.getId().equals(addressId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization address with id: " + addressId + " not found"));
@@ -123,18 +123,19 @@ class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public Organization deleteAddress(Long id, Long addressId) {
-        Organization organization = findById(id);
+        var organization = findById(id);
         var address = organization.getAddresses()
                 .stream()
                 .filter(a-> a.getId().equals(addressId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization address with id: " + addressId + " not found"));
+        organization.removeAddress(address);
         organizationAddressService.delete(address);
       return save(organization);
     }
 
     @Override
     public Organization addChild(Long id, OrganizationRequest dto) {
-        Organization organization = findById(id);
-        Organization child = toEntity(dto);
+        var organization = findById(id);
+        var child = toEntity(dto);
         if (organization.getOrganizationUnit().equals(child.getOrganizationUnit())) {
             throw new RuntimeException("Child can not have same organization unit as parent ");
         }
@@ -144,7 +145,7 @@ class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public Organization updateChild(Long id, Long childId, OrganizationRequest dto) {
-        Organization organization = findById(id);
+        var organization = findById(id);
         var child = organization.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
         update(child.getId(),dto);
         return save(organization);
@@ -152,14 +153,15 @@ class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public Organization deleteChild(Long id, Long childId) {
-        Organization organization = findById(id);
+        var organization = findById(id);
         var child = organization.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
         organization.removeChild(child);
+        deleteById(child.getId());
        return save(organization);
     }
 
     private Organization toEntity(OrganizationRequest dto) {
-        Organization organization = Organization.builder()
+        var organization = Organization.builder()
                 .code(dto.code())
                 .fullName(dto.fullName())
                 .name(dto.name())

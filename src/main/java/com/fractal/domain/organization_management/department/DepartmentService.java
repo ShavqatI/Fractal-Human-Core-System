@@ -2,6 +2,8 @@ package com.fractal.domain.organization_management.department;
 
 import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
+import com.fractal.domain.organization_management.organization.Organization;
+import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 
 import java.util.List;
 
@@ -13,4 +15,9 @@ public interface DepartmentService {
     Department update(Long id, DepartmentRequest dto);
     void deleteById(Long id);
     DepartmentResponse toDTO(Department department);
+
+    Department addChild(Long id, DepartmentRequest dto);
+    Department updateChild(Long id,Long childId,DepartmentRequest dto);
+
+    Department deleteChild(Long id,Long childId);
 }

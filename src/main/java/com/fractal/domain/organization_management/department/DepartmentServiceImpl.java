@@ -2,6 +2,7 @@ package com.fractal.domain.organization_management.department;
 
 import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
+import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.unit.OrganizationUnitService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -85,6 +86,35 @@ class DepartmentServiceImpl implements DepartmentService {
                 department.getCreatedDate()
         );
     }
+
+    @Override
+    public Department addChild(Long id, DepartmentRequest dto) {
+        var department = findById(id);
+        var child = toEntity(dto);
+        if (department.getOrganizationUnit().equals(child.getOrganizationUnit())) {
+            throw new RuntimeException("Child can not have same organization unit as parent ");
+        }
+        department.addChild(child);
+        return save(department);
+    }
+
+    @Override
+    public Department updateChild(Long id, Long childId, DepartmentRequest dto) {
+        var department = findById(id);
+        var child = department.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        update(child.getId(),dto);
+        return save(department);
+    }
+
+    @Override
+    public Department deleteChild(Long id, Long childId) {
+        var department = findById(id);
+        var child = department.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        department.removeChild(child);
+        deleteById(child.getId());
+        return save(department);
+    }
+
     private Department toEntity(DepartmentRequest dto) {
         return Department.builder()
                 .code(dto.code())

@@ -1,6 +1,7 @@
 package com.fractal.domain.organization_management.department;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.unit.OrganizationUnit;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -41,4 +42,14 @@ public class Department extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "organization_unit_id", referencedColumnName = "id")
     private OrganizationUnit organizationUnit;
+
+    public void addChild(Department department) {
+        if (children == null) children = new ArrayList<>();
+        department.setParent(this);
+        children.add(department);
+    }
+    public void removeChild(Department department) {
+        if (children != null && !children.isEmpty())
+            children.remove(department);
+    }
 }
