@@ -38,8 +38,6 @@ public class IdentificationDocumentTypeController {
     @PutMapping("/{id}")
     public ResponseEntity<IdentificationDocumentTypeResponse> update(@PathVariable Long id, @RequestBody @Valid IdentificationDocumentTypeRequest dto) {
       return  ResponseEntity.ok(identificationDocumentTypeService.toDTO(identificationDocumentTypeService.update(id, dto)));
-
-
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

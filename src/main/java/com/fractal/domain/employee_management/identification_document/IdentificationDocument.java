@@ -4,7 +4,9 @@ package com.fractal.domain.employee_management.identification_document;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.employee_management.identification_document.type.IdentificationDocumentType;
+import com.fractal.domain.organization_management.department.Department;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,8 +14,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
-
-
+import java.util.ArrayList;
+import java.util.List;
 @Entity
 @Table(name = "identification_document",schema = "employee_schema", catalog = "fractal")
 @Data
@@ -21,7 +23,6 @@ import java.sql.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IdentificationDocument extends AbstractEntity {
-
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
@@ -29,7 +30,6 @@ public class IdentificationDocument extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "identification_type_id", referencedColumnName = "id")
     private IdentificationDocumentType identificationDocumentType;
-
 
     @Column(name = "series")
     private String series;
@@ -40,11 +40,11 @@ public class IdentificationDocument extends AbstractEntity {
     @Column(name = "issue_date")
     private Date issueDate;
 
-    @Column(name = "valid_date")
-    private Date validDate;
+    @Column(name = "expiry_date")
+    private Date expiryDate ;
 
-    @Column(name = "term")
-    private Integer term;
+    @Column(name = "term_in_years")
+    private Integer termInYears;
 
     @Column(name = "issue_organization")
     private String issueOrganization;
@@ -52,11 +52,21 @@ public class IdentificationDocument extends AbstractEntity {
     @Column(name = "issue_organization_address")
     private String issueOrganizationAddress;
 
-    @Column(name = "image")
-    private String image;
-
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
+
+    @OneToMany(mappedBy = "identificationDocument",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<IdentificationDocumentResource> resources;
+
+    public void addResource(IdentificationDocumentResource resource) {
+        if (resources == null) resources = new ArrayList<>();
+        resource.setIdentificationDocument(this);
+        resources.add(resource);
+    }
+    public void removeChild(IdentificationDocumentResource resource) {
+        if (resources != null && !resources.isEmpty())
+            resources.remove(resource);
+    }
 
 }

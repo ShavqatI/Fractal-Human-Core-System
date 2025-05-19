@@ -1,9 +1,7 @@
 package com.fractal.domain.employee_management.employee;
 
-
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
-import com.fractal.domain.employee_management.identification_document.type.IdentificationDocumentTypeService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -16,7 +14,6 @@ import java.util.List;
 class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
-    private final IdentificationDocumentTypeService identificationDocumentTypeService;
 
     @Override
     public Employee create(EmployeeRequest dto) {

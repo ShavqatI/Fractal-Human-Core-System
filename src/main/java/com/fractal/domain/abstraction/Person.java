@@ -32,7 +32,7 @@ public abstract class Person extends AbstractEntity {
     private Date birthDate;
 
     @Column(name = "tin")
-    private Long tin;
+    private String tin;
 
     @Column(name = "ssn")
     private String ssn;
