@@ -1,4 +1,4 @@
-package com.fractal.controller.dictionary.status;
+package com.fractal.controller.dictionary;
 
 
 import com.fractal.domain.dictionary.status.StatusService;

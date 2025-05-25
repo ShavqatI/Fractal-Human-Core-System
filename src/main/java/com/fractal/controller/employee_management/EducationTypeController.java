@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/dictionary/education-type")
+@RequestMapping("/api/v1/employee-management/education-type")
 @RequiredArgsConstructor
 public class EducationTypeController {
 

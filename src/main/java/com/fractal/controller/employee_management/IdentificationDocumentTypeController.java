@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/dictionary/identification-document-type")
+@RequestMapping("/api/v1/employee-management/identification-document-type")
 @RequiredArgsConstructor
 public class IdentificationDocumentTypeController {
 

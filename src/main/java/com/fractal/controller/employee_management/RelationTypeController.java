@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/dictionary/relation-type")
+@RequestMapping("/api/v1/employee-management/relation-type")
 @RequiredArgsConstructor
 public class RelationTypeController {
 
