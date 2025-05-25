@@ -8,6 +8,7 @@ import com.fractal.domain.location.region.RegionService;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -67,23 +68,28 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
 
     @Override
     public OrganizationAddress update(OrganizationAddress address, OrganizationAddressRequest dto) {
-        address.setAddressType(addressTypeService.getByCode(dto.addressType()));
-        address.setCountry(countryService.getById(dto.country()));
-        address.setRegion(regionService.getById(dto.region()));
-        address.setCity(cityService.getById(dto.city()));
-        address.setDistrict(districtService.getById(dto.district()));
-        address.setStreet(dto.street());
-        address.setHouse(dto.house());
-        address.setApartment(dto.apartment());
-        address.setPostalCode(dto.postalCode());
-        address.setBuildingNumber(dto.buildingNumber());
-        address.setFloorNumber(dto.floorNumber());
-        address.setLatitude(dto.latitude());
-        address.setLongitude(dto.longitude());
-        address.setStartDate(dto.startDate());
-        address.setEndDate(dto.endDate());
-      organizationAddressRepository.save(address);
-      return address;
+        try {
+            address.setAddressType(addressTypeService.getByCode(dto.addressType()));
+            address.setCountry(countryService.getById(dto.country()));
+            address.setRegion(regionService.getById(dto.region()));
+            address.setCity(cityService.getById(dto.city()));
+            address.setDistrict(districtService.getById(dto.district()));
+            address.setStreet(dto.street());
+            address.setHouse(dto.house());
+            address.setApartment(dto.apartment());
+            address.setPostalCode(dto.postalCode());
+            address.setBuildingNumber(dto.buildingNumber());
+            address.setFloorNumber(dto.floorNumber());
+            address.setLatitude(dto.latitude());
+            address.setLongitude(dto.longitude());
+            address.setStartDate(dto.startDate());
+            address.setEndDate(dto.endDate());
+            organizationAddressRepository.save(address);
+            return address;
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
     @Override

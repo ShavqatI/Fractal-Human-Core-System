@@ -14,6 +14,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
@@ -35,13 +36,13 @@ public class IdentificationDocument extends AbstractEntity {
     private String series;
 
     @Column(name = "number")
-    private String number;
+    private Integer number;
 
     @Column(name = "issue_date")
-    private Date issueDate;
+    private LocalDate issueDate;
 
     @Column(name = "expiry_date")
-    private Date expiryDate ;
+    private LocalDate expiryDate ;
 
     @Column(name = "term_in_years")
     private Integer termInYears;
@@ -64,7 +65,7 @@ public class IdentificationDocument extends AbstractEntity {
         resource.setIdentificationDocument(this);
         resources.add(resource);
     }
-    public void removeChild(IdentificationDocumentResource resource) {
+    public void removeResource(IdentificationDocumentResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);
     }

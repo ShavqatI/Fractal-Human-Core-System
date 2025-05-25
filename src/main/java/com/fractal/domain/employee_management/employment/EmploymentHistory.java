@@ -9,10 +9,8 @@ import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.position.Position;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -21,9 +19,9 @@ import java.util.List;
 @Entity
 @Table(name = "employment_history", schema = "employee_schema", catalog = "fractal")
 @Data
-@Builder
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class EmploymentHistory extends AbstractEntity {
 
     @Column(name = "order_number")
