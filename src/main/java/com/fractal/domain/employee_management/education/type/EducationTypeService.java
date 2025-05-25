@@ -2,8 +2,6 @@ package com.fractal.domain.employee_management.education.type;
 
 import com.fractal.domain.employee_management.education.type.dto.EducationTypeRequest;
 import com.fractal.domain.employee_management.education.type.dto.EducationTypeResponse;
-import com.fractal.domain.employee_management.employment.type.dto.EmploymentTypeRequest;
-import com.fractal.domain.employee_management.employment.type.dto.EmploymentTypeResponse;
 
 import java.util.List;
 

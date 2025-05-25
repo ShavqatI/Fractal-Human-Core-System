@@ -6,14 +6,12 @@ import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.employee_management.identification_document.type.IdentificationDocumentType;
-import com.fractal.domain.organization_management.department.Department;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;

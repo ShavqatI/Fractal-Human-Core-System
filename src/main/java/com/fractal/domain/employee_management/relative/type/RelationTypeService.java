@@ -1,8 +1,5 @@
 package com.fractal.domain.employee_management.relative.type;
 
-import com.fractal.domain.employee_management.employment.type.EmploymentType;
-import com.fractal.domain.employee_management.employment.type.dto.EmploymentTypeRequest;
-import com.fractal.domain.employee_management.employment.type.dto.EmploymentTypeResponse;
 import com.fractal.domain.employee_management.relative.type.dto.RelationTypeRequest;
 import com.fractal.domain.employee_management.relative.type.dto.RelationTypeResponse;
 

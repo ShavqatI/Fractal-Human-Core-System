@@ -1,8 +1,8 @@
 package com.fractal.domain.employee_management.employee;
 
-import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
+
 import java.util.List;
 
 public interface EmployeeService {

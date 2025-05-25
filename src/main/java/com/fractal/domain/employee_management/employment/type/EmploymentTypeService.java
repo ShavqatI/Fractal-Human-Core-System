@@ -2,9 +2,6 @@ package com.fractal.domain.employee_management.employment.type;
 
 import com.fractal.domain.employee_management.employment.type.dto.EmploymentTypeRequest;
 import com.fractal.domain.employee_management.employment.type.dto.EmploymentTypeResponse;
-import com.fractal.domain.employee_management.identification_document.type.IdentificationDocumentType;
-import com.fractal.domain.employee_management.identification_document.type.dto.IdentificationDocumentTypeRequest;
-import com.fractal.domain.employee_management.identification_document.type.dto.IdentificationDocumentTypeResponse;
 
 import java.util.List;
 

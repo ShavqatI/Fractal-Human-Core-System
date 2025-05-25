@@ -2,11 +2,6 @@ package com.fractal.domain.employee_management.identification_document;
 
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentResponse;
-import com.fractal.domain.organization_management.organization.Organization;
-import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
-import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
-import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
-import com.fractal.domain.resource.dto.ResourceRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

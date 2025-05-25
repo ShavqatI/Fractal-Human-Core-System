@@ -9,7 +9,9 @@ import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.position.Position;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;

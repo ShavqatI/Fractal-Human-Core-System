@@ -7,8 +7,6 @@ import com.fractal.domain.employee_management.education.document_type.EducationD
 import com.fractal.domain.employee_management.education.type.EducationType;
 import com.fractal.domain.employee_management.employee.Employee;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

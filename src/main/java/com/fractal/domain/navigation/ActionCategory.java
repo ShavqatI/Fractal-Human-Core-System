@@ -1,9 +1,6 @@
 package com.fractal.domain.navigation;
 
-import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.abstraction.Dictionary;
-import jakarta.persistence.Basic;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
