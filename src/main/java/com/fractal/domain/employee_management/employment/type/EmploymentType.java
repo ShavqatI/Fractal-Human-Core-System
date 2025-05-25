@@ -1,6 +1,7 @@
 package com.fractal.domain.employee_management.employment.type;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -13,11 +14,6 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class EmploymentType extends AbstractEntity {
+public class EmploymentType extends Dictionary {
 
-    @Column(name = "code")
-    private String code;
-
-    @Column(name = "name")
-    private String name;
 }
