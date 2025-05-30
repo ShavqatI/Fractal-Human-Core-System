@@ -66,6 +66,16 @@ public class EmploymentHistory extends AbstractEntity {
     private EmploymentType employmentType;
 
     @OneToMany(mappedBy = "employmentHistory", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<Agreement> agreements   = new ArrayList<>();
+    private  List<Agreement> agreements   = new ArrayList<>();
+
+    public void addAgreement(Agreement agreement) {
+        if (agreements == null) agreements = new ArrayList<>();
+        agreement.setEmploymentHistory(this);
+        agreements.add(agreement);
+    }
+    public void removeChild(Agreement agreement) {
+        if (agreements != null && !agreements.isEmpty())
+            agreements.remove(agreement);
+    }
 
 }

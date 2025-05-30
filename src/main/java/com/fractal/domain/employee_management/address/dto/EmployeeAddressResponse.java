@@ -20,5 +20,7 @@ public record EmployeeAddressResponse(
         Double longitude,
         LocalDate startDate,
         LocalDate endDate,
-        LocalDateTime createdDate
+        LocalDateTime createdDate,
+        LocalDateTime updatedDate
+
 ) { }

@@ -7,9 +7,6 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-
-
 @MappedSuperclass
 @SuperBuilder
 @NoArgsConstructor

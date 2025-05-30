@@ -4,3 +4,21 @@ spring:
     username: fractal
     password: Fractal@2025
     driver-class-name: org.postgresql.Driver
+logging:
+  level:
+    org:
+      springframework:
+        security:
+          oauth2:
+            nodeValue: DEBUG
+            server:
+              authorization:
+                nodeValue: DEBUG
+                token: TRACE
+          nodeValue: DEBUG
+        web:
+          server: DEBUG
+          nodeValue: DEBUG
+          servlet: DEBUG
+      beans:
+        factory: DEBUG

@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 public class CurrencyController {
 
     private final CurrencyService currencyService;
+
+
     @PostMapping
     public ResponseEntity<CurrencyResponse> create(@RequestBody @Valid CurrencyRequest dto) {
         return new ResponseEntity<>(currencyService.toDTO(currencyService.create(dto)), HttpStatus.CREATED);

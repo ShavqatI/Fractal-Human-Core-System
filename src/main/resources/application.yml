@@ -1,31 +1,12 @@
-logging:
-  level:
-    org:
-      springframework:
-        security:
-          oauth2:
-            nodeValue: DEBUG
-            server:
-              authorization:
-                nodeValue: DEBUG
-                token: TRACE
-          nodeValue: DEBUG
-        web:
-          server: DEBUG
-          nodeValue: DEBUG
-          servlet: DEBUG
-      beans:
-        factory: DEBUG
 spring:
   application:
     name: Fractal-Human-Core-System
   profiles:
-    active: dev
+    active: gcp
   jpa:
     hibernate:
       ddl-auto: update
-    #show-sql: 'true'
-    database-platform: "org.hibernate.dialect.PostgreSQLDialect"
+    show-sql: 'true'
     properties:
       hibernate:
         format_sql: 'true'

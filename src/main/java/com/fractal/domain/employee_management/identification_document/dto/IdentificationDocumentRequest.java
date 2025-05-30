@@ -13,7 +13,6 @@ public record IdentificationDocumentRequest(
         LocalDate expiryDate,
         String issueOrganization,
         String issueOrganizationAddress,
-
         List<MultipartFile> files,
         Long statusId
 ) {
