@@ -56,7 +56,7 @@ public class IdentificationDocument extends AbstractEntity {
     private Status status;
 
     @OneToMany(mappedBy = "identificationDocument",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<IdentificationDocumentResource> resources;
+    private List<IdentificationDocumentResource> resources = new ArrayList<>();
 
     public void addResource(IdentificationDocumentResource resource) {
         if (resources == null) resources = new ArrayList<>();

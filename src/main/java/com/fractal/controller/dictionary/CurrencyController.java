@@ -1,6 +1,5 @@
 package com.fractal.controller.dictionary;
 
-
 import com.fractal.domain.dictionary.currency.CurrencyService;
 import com.fractal.domain.dictionary.currency.dto.CurrencyRequest;
 import com.fractal.domain.dictionary.currency.dto.CurrencyResponse;

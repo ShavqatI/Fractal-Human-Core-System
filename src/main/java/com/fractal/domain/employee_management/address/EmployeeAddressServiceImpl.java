@@ -40,7 +40,8 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
                 address.getLongitude(),
                 address.getStartDate(),
                 address.getEndDate(),
-                address.getCreatedDate()
+                address.getCreatedDate(),
+                address.getUpdatedDate()
         );
     }
 
