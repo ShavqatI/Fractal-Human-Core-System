@@ -73,7 +73,7 @@ public class EmploymentHistory extends AbstractEntity {
         agreement.setEmploymentHistory(this);
         agreements.add(agreement);
     }
-    public void removeChild(Agreement agreement) {
+    public void removeAgreement(Agreement agreement) {
         if (agreements != null && !agreements.isEmpty())
             agreements.remove(agreement);
     }

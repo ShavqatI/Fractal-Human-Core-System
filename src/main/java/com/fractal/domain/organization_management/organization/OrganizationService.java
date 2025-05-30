@@ -20,7 +20,6 @@ public interface OrganizationService {
     Organization deleteAddress(Long id,Long addressId);
     Organization addChild(Long id,OrganizationRequest dto);
     Organization updateChild(Long id,Long childId,OrganizationRequest dto);
-
     Organization deleteChild(Long id,Long childId);
 
 }

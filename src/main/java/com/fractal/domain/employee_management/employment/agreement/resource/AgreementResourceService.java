@@ -12,4 +12,5 @@ public interface AgreementResourceService {
     AgreementResource update(AgreementResource resource, ResourceRequest dto);
     ResourceRequest fileToRequest(MultipartFile file,String url);
     void delete(AgreementResource resource);
+    AgreementResource findById(Long id);
 }

@@ -110,7 +110,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
     }
 
     @Override
-    public void removeResponsibility(Long jobDescriptionId, Long responsibilityId) {
+    public void deleteResponsibility(Long jobDescriptionId, Long responsibilityId) {
         JobDescription jobDescription = findById(jobDescriptionId);
         Responsibility responsibility = responsibilityService.findById(responsibilityId);
         jobDescription.removeResponsibility(responsibility);
@@ -135,7 +135,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
         return save(jobDescription);
     }
     @Override
-    public void removeQualification(Long jobDescriptionId, Long qualificationId) {
+    public void deleteQualification(Long jobDescriptionId, Long qualificationId) {
         JobDescription jobDescription = findById(jobDescriptionId);
         Qualification qualification = qualificationService.findById(qualificationId);
         jobDescription.removeQualification(qualification);
@@ -161,7 +161,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
     }
 
     @Override
-    public void removeRequiredExperience(Long jobDescriptionId, Long experienceId) {
+    public void deleteRequiredExperience(Long jobDescriptionId, Long experienceId) {
         JobDescription jobDescription = findById(jobDescriptionId);
         RequiredExperience experience = requiredExperienceService.findById(experienceId);
         jobDescription.removeRequiredExperience(experience);

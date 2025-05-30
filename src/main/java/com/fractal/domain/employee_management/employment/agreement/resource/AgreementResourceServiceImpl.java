@@ -3,6 +3,7 @@ package com.fractal.domain.employee_management.employment.agreement.resource;
 import com.fractal.domain.resource.ResourceService;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;
+import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 @RequiredArgsConstructor
 public class AgreementResourceServiceImpl implements AgreementResourceService {
+
     private final AgreementResourceRepository resourceRepository;
     private final ResourceService resourceService;
     @Override
@@ -40,8 +42,6 @@ public class AgreementResourceServiceImpl implements AgreementResourceService {
         catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
-
-
     }
 
     @Override
@@ -52,5 +52,10 @@ public class AgreementResourceServiceImpl implements AgreementResourceService {
     @Override
     public void delete(AgreementResource resource) {
         resourceRepository.delete(resource);
+    }
+
+    @Override
+    public AgreementResource findById(Long id) {
+        return resourceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Agreement Resource with id: " + id + " not found"));
     }
 }
