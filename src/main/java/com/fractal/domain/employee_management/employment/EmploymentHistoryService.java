@@ -5,7 +5,7 @@ import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRe
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryResponse;
 
 public interface EmploymentHistoryService {
-
+    EmploymentHistory create(EmploymentHistoryRequest dto);
     EmploymentHistoryResponse toDTO(EmploymentHistory employmentHistory);
     EmploymentHistory toEntity(EmploymentHistoryRequest dto);
     EmploymentHistory update(Long id,EmploymentHistoryRequest dto);

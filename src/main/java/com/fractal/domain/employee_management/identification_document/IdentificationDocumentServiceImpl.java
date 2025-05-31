@@ -72,6 +72,11 @@ public class IdentificationDocumentServiceImpl implements IdentificationDocument
     }
 
     @Override
+    public void delete(IdentificationDocument identificationDocument) {
+        identificationDocumentRepository.delete(identificationDocument);
+    }
+
+    @Override
     public IdentificationDocumentResponse toDTO(IdentificationDocument identificationDocument) {
         return new IdentificationDocumentResponse(
                identificationDocument.getId(),
@@ -120,7 +125,8 @@ public class IdentificationDocumentServiceImpl implements IdentificationDocument
       return save(identificationDocument);
     }
 
-    private IdentificationDocument toEntity(IdentificationDocumentRequest dto) {
+    @Override
+    public IdentificationDocument toEntity(IdentificationDocumentRequest dto) {
         var identificationDocument  = IdentificationDocument.builder()
                 .identificationDocumentType(identificationDocumentTypeService.getById(dto.identificationTypeId()))
                 .series(dto.series())

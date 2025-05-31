@@ -32,6 +32,11 @@ class EmploymentHistoryServiceImpl implements EmploymentHistoryService {
     private final StatusService statusService;
 
     @Override
+    public EmploymentHistory create(EmploymentHistoryRequest dto) {
+        return save(toEntity(dto));
+    }
+
+    @Override
     public EmploymentHistoryResponse toDTO(EmploymentHistory employmentHistory) {
         return new EmploymentHistoryResponse(
                 employmentHistory.getId(),

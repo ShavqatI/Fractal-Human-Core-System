@@ -12,7 +12,9 @@ public interface IdentificationDocumentService {
     IdentificationDocument getById(Long id);
     IdentificationDocument update(Long id, IdentificationDocumentRequest dto);
     void deleteById(Long id);
+    void delete(IdentificationDocument identificationDocument);
     IdentificationDocumentResponse toDTO(IdentificationDocument identificationDocument);
+    IdentificationDocument toEntity(IdentificationDocumentRequest dto);
 
     IdentificationDocument addResource(Long id, MultipartFile file);
     IdentificationDocument updateResource(Long id,Long resourceId, MultipartFile file);

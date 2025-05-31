@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @MappedSuperclass
 @Data
@@ -29,7 +30,7 @@ public abstract class Person extends AbstractEntity {
     private String patronymicName;
 
     @Column(name = "birth_date")
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "tin")
     private String tin;
