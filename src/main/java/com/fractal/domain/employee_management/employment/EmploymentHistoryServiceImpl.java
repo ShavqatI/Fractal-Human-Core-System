@@ -1,7 +1,6 @@
 package com.fractal.domain.employee_management.employment;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.employment.agreement.Agreement;
 import com.fractal.domain.employee_management.employment.agreement.AgreementService;
 import com.fractal.domain.employee_management.employment.agreement.dto.AgreementRequest;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
@@ -72,6 +71,34 @@ class EmploymentHistoryServiceImpl implements EmploymentHistoryService {
                 .build();
         dto.agreements().forEach(agreementRequest -> employmentHistory.addAgreement(agreementService.toEntity(agreementRequest)));
         return employmentHistory;
+    }
+
+    @Override
+    public EmploymentHistory update(Long id, EmploymentHistoryRequest dto) {
+        try {
+           var employmentHistory = findById(id);
+            employmentHistory.setOrderNumber(dto.orderNumber());
+            employmentHistory.setOrderDate(dto.orderDate());
+            employmentHistory.setSerial(null);
+            employmentHistory.setStartDate(dto.startDate());
+            employmentHistory.setEndDate(dto.endDate());
+            employmentHistory.setOrganization(organizationService.getById(dto.organizationId()));
+            employmentHistory.setDepartment(departmentService.getById(dto.departmentId()));
+            employmentHistory.setPosition(positionService.getById(dto.positionId()));
+            employmentHistory.setEmploymentType(employmentTypeService.getById(dto.employmentTypeId()));
+            employmentHistory.setStatus(statusService.getById(dto.statusId()));
+            dto.agreements().forEach(agreementRequest -> employmentHistory.addAgreement(agreementService.toEntity(agreementRequest)));
+           return save(employmentHistory);
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
+
+    }
+
+    @Override
+    public void delete(EmploymentHistory employmentHistory) {
+        employmentHistoryRepository.delete(employmentHistory);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.employment.dto;
 
-import com.fractal.domain.employee_management.employment.agreement.dto.AgreementRequest;
 import com.fractal.domain.employee_management.employment.agreement.dto.AgreementResponse;
 
 import java.time.LocalDate;

@@ -4,7 +4,6 @@ package com.fractal.domain.employee_management.attendance.absence.type;
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

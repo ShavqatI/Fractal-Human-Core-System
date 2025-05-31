@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.vacation.category;
 
-import com.fractal.domain.employee_management.vacation.type.VacationType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

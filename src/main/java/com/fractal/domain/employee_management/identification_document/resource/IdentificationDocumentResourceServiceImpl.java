@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.identification_document.resource;
 
-import com.fractal.domain.employee_management.employment.agreement.resource.AgreementResourceService;
 import com.fractal.domain.resource.ResourceService;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;

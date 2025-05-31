@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.vacation.type;
 
-import com.fractal.domain.dictionary.status.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

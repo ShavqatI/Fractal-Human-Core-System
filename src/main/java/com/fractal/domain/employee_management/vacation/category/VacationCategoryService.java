@@ -2,9 +2,6 @@ package com.fractal.domain.employee_management.vacation.category;
 
 import com.fractal.domain.employee_management.vacation.category.dto.VacationCategoryRequest;
 import com.fractal.domain.employee_management.vacation.category.dto.VacationCategoryResponse;
-import com.fractal.domain.employee_management.vacation.type.VacationType;
-import com.fractal.domain.employee_management.vacation.type.dto.VacationTypeRequest;
-import com.fractal.domain.employee_management.vacation.type.dto.VacationTypeResponse;
 
 import java.util.List;
 

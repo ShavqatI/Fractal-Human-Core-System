@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.attendance.absence.type;
 
-import com.fractal.domain.employee_management.education.type.EducationType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -3,8 +3,6 @@ package com.fractal.domain.organization_management.department;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.organization_management.unit.OrganizationUnit;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

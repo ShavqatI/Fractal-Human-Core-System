@@ -2,7 +2,6 @@ package com.fractal.domain.employee_management.employment.agreement.resource;
 
 
 import com.fractal.domain.employee_management.employment.agreement.Agreement;
-import com.fractal.domain.employee_management.identification_document.IdentificationDocument;
 import com.fractal.domain.resource.Resource;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

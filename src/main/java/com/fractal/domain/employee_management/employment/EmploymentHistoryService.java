@@ -8,6 +8,8 @@ public interface EmploymentHistoryService {
 
     EmploymentHistoryResponse toDTO(EmploymentHistory employmentHistory);
     EmploymentHistory toEntity(EmploymentHistoryRequest dto);
+    EmploymentHistory update(Long id,EmploymentHistoryRequest dto);
+    void delete(EmploymentHistory employmentHistory);
     EmploymentHistory addAgreement(Long id, AgreementRequest agreementRequest);
     EmploymentHistory updateAgreement(Long id, Long agreementId, AgreementRequest agreementRequest);
     EmploymentHistory deleteAgreement(Long id, Long agreementId);

@@ -1,7 +1,6 @@
 package com.fractal.domain.employee_management.vacation.category;
 
 import com.fractal.domain.abstraction.Dictionary;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;

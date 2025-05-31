@@ -3,7 +3,6 @@ package com.fractal.domain.dictionary.currency;
 import com.fractal.domain.abstraction.Dictionary;
 import com.fractal.domain.location.country.Country;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

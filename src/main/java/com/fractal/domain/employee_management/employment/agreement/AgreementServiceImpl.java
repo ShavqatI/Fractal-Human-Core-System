@@ -4,7 +4,6 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employment.agreement.dto.AgreementRequest;
 import com.fractal.domain.employee_management.employment.agreement.dto.AgreementResponse;
 import com.fractal.domain.employee_management.employment.agreement.resource.AgreementResourceService;
-import com.fractal.domain.organization_management.job_description.JobDescription;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -62,12 +61,12 @@ class AgreementServiceImpl implements AgreementService {
              agreement.setStartDate(dto.startDate());
              agreement.setEndDate(dto.endDate());
              agreement.setStatus(statusService.getById(dto.statusId()));
-            dto.files().forEach(file-> agreement.addResource(resourceService.toEntity(file,null)));
+             dto.files().forEach(file-> agreement.addResource(resourceService.toEntity(file,null)));
+           return save(agreement);
         }
         catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
-        return null;
     }
 
     @Override

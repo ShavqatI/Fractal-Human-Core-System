@@ -1,6 +1,5 @@
 package com.fractal.domain.resource;
 
-import com.fractal.domain.employee_management.employment.agreement.resource.AgreementResource;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import org.springframework.web.multipart.MultipartFile;
