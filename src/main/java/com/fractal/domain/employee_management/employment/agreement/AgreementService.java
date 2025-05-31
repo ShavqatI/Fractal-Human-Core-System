@@ -8,6 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 public interface AgreementService {
     AgreementResponse toDTO(Agreement agreement);
     Agreement toEntity(AgreementRequest dto);
+    Agreement update(Long id,AgreementRequest dto);
+    void delete(Agreement agreement);
     Agreement addResource(Long id,MultipartFile file, String url);
     Agreement deleteResource(Long id, Long resourceId);
+
 }

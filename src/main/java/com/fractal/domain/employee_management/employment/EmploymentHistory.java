@@ -58,12 +58,12 @@ public class EmploymentHistory extends AbstractEntity {
     private Position position;
 
     @ManyToOne
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
-    private Status status;
-
-    @ManyToOne
     @JoinColumn(name = "employment_type_id", referencedColumnName = "id")
     private EmploymentType employmentType;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    private Status status;
 
     @OneToMany(mappedBy = "employmentHistory", cascade = CascadeType.ALL, orphanRemoval = true)
     private  List<Agreement> agreements   = new ArrayList<>();
