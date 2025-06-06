@@ -1,0 +1,14 @@
+package com.fractal.domain.employee_management.education.grade_point_average;
+
+import com.fractal.domain.employee_management.education.degree_type.DegreeType;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+interface GradePointAverageRepository extends JpaRepository<GradePointAverage,Long> {
+    Optional<GradePointAverage> findById(Long id);
+    List<GradePointAverage> findAll();
+}

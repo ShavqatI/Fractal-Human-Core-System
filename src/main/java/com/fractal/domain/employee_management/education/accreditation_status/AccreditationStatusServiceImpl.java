@@ -79,7 +79,7 @@ class AccreditationStatusServiceImpl implements AccreditationStatusService {
     }
 
     private AccreditationStatus findById(Long id) {
-        return accreditationStatusRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Degree Type with id: " + id + " not found"));
+        return accreditationStatusRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Accreditation Status with id: " + id + " not found"));
     }
 
 }

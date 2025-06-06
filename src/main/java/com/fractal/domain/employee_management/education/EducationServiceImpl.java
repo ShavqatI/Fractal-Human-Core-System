@@ -5,10 +5,10 @@ import com.fractal.domain.employee_management.education.accreditation_status.Acc
 import com.fractal.domain.employee_management.education.degree_type.DegreeTypeService;
 import com.fractal.domain.employee_management.education.document_type.EducationDocumentTypeService;
 import com.fractal.domain.employee_management.education.dto.EducationRequest;
+import com.fractal.domain.employee_management.education.grade_point_average.GradePointAverageService;
 import com.fractal.domain.employee_management.education.resource.EducationResourceService;
 import com.fractal.domain.employee_management.education.type.EducationTypeService;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryResponse;
-import com.fractal.domain.employee_management.identification_document.IdentificationDocument;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -23,6 +23,7 @@ class EducationServiceImpl implements EducationService {
     private final EducationTypeService educationTypeService;
     private final EducationDocumentTypeService educationDocumentTypeService;
     private final DegreeTypeService degreeTypeService;
+    private final GradePointAverageService gradePointAverageService;
     private final AccreditationStatusService accreditationStatusService;
     private final EducationResourceService resourceService;
 
@@ -49,7 +50,7 @@ class EducationServiceImpl implements EducationService {
                 .isForeignInstitution(dto.isForeignInstitution())
                 .specialization(dto.specialization())
                 .degreeType(degreeTypeService.getById(dto.degreeTypeId()))
-                //.gradePointAverage()
+                .gradePointAverage(gradePointAverageService.getById(dto.gradePointAverageId()))
                 .accreditationStatus(accreditationStatusService.getById(dto.accreditationStatusId()))
                 .documentVerified(dto.documentVerified())
                 .verificationNotes(dto.verificationNotes())

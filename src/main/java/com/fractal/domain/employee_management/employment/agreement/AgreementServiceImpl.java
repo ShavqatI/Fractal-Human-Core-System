@@ -1,7 +1,6 @@
 package com.fractal.domain.employee_management.employment.agreement;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.education.Education;
 import com.fractal.domain.employee_management.employment.agreement.dto.AgreementRequest;
 import com.fractal.domain.employee_management.employment.agreement.dto.AgreementResponse;
 import com.fractal.domain.employee_management.employment.agreement.resource.AgreementResourceService;
