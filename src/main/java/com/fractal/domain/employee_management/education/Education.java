@@ -3,7 +3,11 @@ package com.fractal.domain.employee_management.education;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.employee_management.education.accreditation_status.AccreditationStatus;
+import com.fractal.domain.employee_management.education.degree_type.DegreeType;
 import com.fractal.domain.employee_management.education.document_type.EducationDocumentType;
+import com.fractal.domain.employee_management.education.grade_point_average.GradePointAverage;
+import com.fractal.domain.employee_management.education.resource.EducationResource;
 import com.fractal.domain.employee_management.education.type.EducationType;
 import com.fractal.domain.employee_management.employee.Employee;
 import jakarta.persistence.*;
@@ -12,6 +16,9 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -34,29 +41,57 @@ public class Education extends AbstractEntity {
     private EducationDocumentType educationDocumentType;
 
 
-    @Column(name = "series")
-    private String series;
-
-    @Column(name = "number")
-    private String number;
-
     @Column(name = "begin_date")
-    private Date beginDate;
+    private LocalDate beginDate;
 
     @Column(name = "end_date")
-    private Date endDate;
+    private LocalDate endDate;
 
-    @Column(name = "university")
-    private String university;
+    @Column(name = "institution_name")
+    private String institutionName;
 
-    @Column(name = "university_address")
-    private String universityAddress;
+    @Column(name = "institution_address")
+    private String institutionAddress;
 
-    @Column(name = "image")
-    private String image;
+    @Column(name = "is_foreign_institution")
+    private Boolean isForeignInstitution;
+
+    @Column(name = "specialization")
+    private String specialization;
+
+    @ManyToOne
+    @JoinColumn(name = "degree_type_id", referencedColumnName = "id")
+    private DegreeType degreeType;
+
+    @ManyToOne
+    @JoinColumn(name = "grade_point_average_id", referencedColumnName = "id")
+    private GradePointAverage gradePointAverage;
+
+    @ManyToOne
+    @JoinColumn(name = "accreditation_status_id", referencedColumnName = "id")
+    private AccreditationStatus accreditationStatus;
+
+    @Column(name = "document_verified")
+    private Boolean documentVerified;
+
+    @Column(name = "verification_notes")
+    private String verificationNotes;
 
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
+
+    @OneToMany(mappedBy = "education",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<EducationResource> resources = new ArrayList<>();
+
+    public void addResource(EducationResource resource) {
+        if (resources == null) resources = new ArrayList<>();
+        resource.setEducation(this);
+        resources.add(resource);
+    }
+    public void removeResource(EducationResource resource) {
+        if (resources != null && !resources.isEmpty())
+            resources.remove(resource);
+    }
 
 }

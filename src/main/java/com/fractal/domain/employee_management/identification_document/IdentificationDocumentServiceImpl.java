@@ -121,6 +121,7 @@ public class IdentificationDocumentServiceImpl implements IdentificationDocument
         var resource = identificationDocument.getResources()
                 .stream()
                 .filter(r -> r.getId().equals(resourceId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification Document Resource  with id: " + resourceId + " not found"));
+        identificationDocument.removeResource(resource);
         resourceService.delete(resource);
       return save(identificationDocument);
     }

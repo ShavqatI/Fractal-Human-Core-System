@@ -1,6 +1,7 @@
 package com.fractal.domain.employee_management.employment.agreement;
 
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.education.Education;
 import com.fractal.domain.employee_management.employment.agreement.dto.AgreementRequest;
 import com.fractal.domain.employee_management.employment.agreement.dto.AgreementResponse;
 import com.fractal.domain.employee_management.employment.agreement.resource.AgreementResourceService;
@@ -8,6 +9,7 @@ import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
@@ -54,6 +56,7 @@ class AgreementServiceImpl implements AgreementService {
     }
 
     @Override
+    @Transactional
     public Agreement update(Long id, AgreementRequest dto) {
         try {
              Agreement agreement = findById(id);
@@ -70,6 +73,7 @@ class AgreementServiceImpl implements AgreementService {
     }
 
     @Override
+    @Transactional
     public void delete(Agreement agreement) {
          agreementRepository.delete(agreement);
     }
@@ -83,12 +87,24 @@ class AgreementServiceImpl implements AgreementService {
     }
 
     @Override
+    public Agreement updateResource(Long id, Long resourceId, MultipartFile file) {
+        var agreement = findById(id);
+        var resource = agreement.getResources()
+                .stream()
+                .filter(r -> r.getId().equals(resourceId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Agreement Resource  with id: " + resourceId + " not found"));
+        resourceService.update(resource,resourceService.fileToRequest(file,null));
+        return save(agreement);
+    }
+
+    @Override
     public Agreement deleteResource(Long id,Long resourceId) {
         var agreement = findById(id);
-        var resource = resourceService.findById(resourceId);
+        var resource = agreement.getResources()
+                .stream()
+                .filter(r -> r.getId().equals(resourceId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Agreement Resource  with id: " + resourceId + " not found"));
         agreement.removeResource(resource);
         resourceService.delete(resource);
-       return save(agreement);
+        return save(agreement);
     }
 
     private Agreement save(Agreement agreement) {

@@ -9,6 +9,4 @@ import java.util.Optional;
 @Repository
 interface IdentificationDocumentRepository extends JpaRepository<IdentificationDocument, Long> {
 
-    List<IdentificationDocument> findAll();
-    Optional<IdentificationDocument> findById(Long id);
 }

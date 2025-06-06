@@ -10,6 +10,7 @@ public interface AgreementService {
     Agreement update(Long id,AgreementRequest dto);
     void delete(Agreement agreement);
     Agreement addResource(Long id,MultipartFile file, String url);
+    Agreement updateResource(Long id, Long resourceId, MultipartFile file);
     Agreement deleteResource(Long id, Long resourceId);
 
 }

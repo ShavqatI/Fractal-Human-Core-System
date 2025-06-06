@@ -1,11 +1,20 @@
 package com.fractal.domain.employee_management.employee;
 
+import com.fractal.domain.dictionary.gender.GenderService;
+import com.fractal.domain.dictionary.marital_status.MaritalStatusService;
+import com.fractal.domain.dictionary.nationality.NationalityService;
+import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.address.EmployeeAddressService;
+import com.fractal.domain.employee_management.citizenship.CitizenshipService;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
+import com.fractal.domain.employee_management.employment.EmploymentHistoryService;
+import com.fractal.domain.employee_management.identification_document.IdentificationDocumentService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,7 +24,17 @@ class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
+    private final GenderService genderService;
+    private final MaritalStatusService maritalStatusService;
+    private final NationalityService nationalityService;
+    private final StatusService statusService;
+    private final IdentificationDocumentService identificationDocumentService;
+    private final CitizenshipService citizenshipService;
+    private final EmployeeAddressService addressService;
+    private final EmploymentHistoryService employmentHistoryService;
+
     @Override
+    @Transactional
     public Employee create(EmployeeRequest dto) {
         return save(toEntity(dto));
     }
@@ -36,11 +55,13 @@ class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Transactional
     public Employee update(Long id, EmployeeRequest dto) {
         return null;
     }
 
     @Override
+    @Transactional
     public void deleteById(Long id) {
       employeeRepository.delete(findById(id));
     }
@@ -51,7 +72,23 @@ class EmployeeServiceImpl implements EmployeeService {
     }
 
     private Employee toEntity(EmployeeRequest dto) {
-        return Employee.builder().build();
+        var employee = Employee.builder()
+                .lastName(dto.lastName())
+                .firstName(dto.firstName())
+                .patronymicName(dto.patronymicName())
+                .birthDate(dto.birthDate())
+                .tin(dto.tin())
+                .ssn(dto.ssn())
+                .gender(genderService.getById(dto.genderId()))
+                .maritalStatus(maritalStatusService.getById(dto.maritalStatusId()))
+                .nationality(nationalityService.getById(dto.nationalityId()))
+                .status(statusService.getById(dto.statusId()))
+                .build();
+        dto.identificationDocuments().forEach(identificationDocument->employee.addIdentificationDocument(identificationDocumentService.toEntity(identificationDocument)));
+        dto.citizenships().forEach(citizenship-> employee.addCitizenship(citizenshipService.toEntity(citizenship)));
+        dto.addresses().forEach(address->employee.addAddress(addressService.toEntity(address)));
+        dto.employmentHistories().forEach(employmentHistory->employee.addEmploymentHistory(employmentHistoryService.toEntity(employmentHistory)));
+        return employee;
     }
 
     private Employee save(Employee employee) {

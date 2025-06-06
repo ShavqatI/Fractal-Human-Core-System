@@ -13,6 +13,7 @@ import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -32,6 +33,7 @@ class EmploymentHistoryServiceImpl implements EmploymentHistoryService {
     private final StatusService statusService;
 
     @Override
+    @Transactional
     public EmploymentHistory create(EmploymentHistoryRequest dto) {
         return save(toEntity(dto));
     }
@@ -79,6 +81,7 @@ class EmploymentHistoryServiceImpl implements EmploymentHistoryService {
     }
 
     @Override
+    @Transactional
     public EmploymentHistory update(Long id, EmploymentHistoryRequest dto) {
         try {
            var employmentHistory = findById(id);
@@ -102,11 +105,13 @@ class EmploymentHistoryServiceImpl implements EmploymentHistoryService {
     }
 
     @Override
+    @Transactional
     public void delete(EmploymentHistory employmentHistory) {
         employmentHistoryRepository.delete(employmentHistory);
     }
 
     @Override
+    @Transactional
     public EmploymentHistory addAgreement(Long id, AgreementRequest agreementRequest) {
         var employmentHistory = findById(id);
         employmentHistory.addAgreement(agreementService.toEntity(agreementRequest));
@@ -114,6 +119,7 @@ class EmploymentHistoryServiceImpl implements EmploymentHistoryService {
     }
 
     @Override
+    @Transactional
     public EmploymentHistory updateAgreement(Long id, Long agreementId, AgreementRequest agreementRequest) {
         var employmentHistory = findById(id);
         var agreement = employmentHistory.getAgreements()
@@ -124,6 +130,7 @@ class EmploymentHistoryServiceImpl implements EmploymentHistoryService {
     }
 
     @Override
+    @Transactional
     public EmploymentHistory deleteAgreement(Long id, Long agreementId) {
         var employmentHistory = findById(id);
         var agreement = employmentHistory.getAgreements()
