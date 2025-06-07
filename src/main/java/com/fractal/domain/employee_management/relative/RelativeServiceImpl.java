@@ -3,17 +3,8 @@ package com.fractal.domain.employee_management.relative;
 import com.fractal.domain.dictionary.gender.GenderService;
 import com.fractal.domain.dictionary.marital_status.MaritalStatusService;
 import com.fractal.domain.dictionary.nationality.NationalityService;
-import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.education.Education;
-import com.fractal.domain.employee_management.education.accreditation_status.AccreditationStatusService;
-import com.fractal.domain.employee_management.education.degree_type.DegreeTypeService;
-import com.fractal.domain.employee_management.education.document_type.EducationDocumentTypeService;
-import com.fractal.domain.employee_management.education.dto.EducationRequest;
-import com.fractal.domain.employee_management.education.dto.EducationResponse;
-import com.fractal.domain.employee_management.education.grade_point_average.GradePointAverageService;
-import com.fractal.domain.employee_management.education.resource.EducationResourceService;
-import com.fractal.domain.employee_management.education.type.EducationTypeService;
 import com.fractal.domain.employee_management.relative.address.RelativeAddressService;
+import com.fractal.domain.employee_management.relative.address.dto.RelativeAddressRequest;
 import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
 import com.fractal.domain.employee_management.relative.dto.RelativeResponse;
 import com.fractal.domain.employee_management.relative.type.RelationTypeService;
@@ -21,7 +12,6 @@ import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -107,6 +97,33 @@ class RelativeServiceImpl implements RelativeService {
        relativeRepository.delete(relative);
     }
 
+    @Override
+    public Relative addAddress(Long id, RelativeAddressRequest dto) {
+        var relative = findById(id);
+        relative.addAddress(addressService.toEntity(dto));
+        return save(relative);
+    }
+
+    @Override
+    public Relative updateAddress(Long id, Long addressId, RelativeAddressRequest dto) {
+        var relative = findById(id);
+        var address = relative.getAddresses()
+                .stream()
+                .filter(a-> a.getId().equals(addressId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Relative address with id: " + addressId + " not found"));
+        addressService.update(address,dto);
+        return save(relative);
+    }
+
+    @Override
+    public Relative deleteAddress(Long id, Long addressId) {
+        var relative = findById(id);
+        var address = relative.getAddresses()
+                .stream()
+                .filter(a-> a.getId().equals(addressId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Relative address with id: " + addressId + " not found"));
+        relative.removeAddress(address);
+        addressService.delete(address);
+        return save(relative);
+    }
 
 
     private Relative save(Relative relative) {

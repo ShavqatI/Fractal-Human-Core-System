@@ -2,13 +2,10 @@ package com.fractal.domain.employee_management.relative;
 
 
 import com.fractal.domain.abstraction.Person;
-import com.fractal.domain.employee_management.address.EmployeeAddress;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.relative.address.RelativeAddress;
 import com.fractal.domain.employee_management.relative.type.RelationType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

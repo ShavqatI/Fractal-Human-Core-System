@@ -3,13 +3,16 @@ package com.fractal.domain.employee_management.military_service;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.employee_management.military_service.resource.MilitaryServiceResource;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -36,13 +39,23 @@ public class MilitaryService extends AbstractEntity {
     @Column(name = "address")
     private String address;
 
-    @Column(name = "image")
-    private String image;
-
     @Column(name = "begin_date")
-    private Date beginDate;
+    private LocalDate beginDate;
 
     @Column(name = "end_date")
-    private Date endDate;
+    private LocalDate endDate;
+
+    @OneToMany(mappedBy = "education",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<MilitaryServiceResource> resources = new ArrayList<>();
+
+    public void addResource(MilitaryServiceResource resource) {
+        if (resources == null) resources = new ArrayList<>();
+        resource.setMilitaryService(this);
+        resources.add(resource);
+    }
+    public void removeResource(MilitaryServiceResource resource) {
+        if (resources != null && !resources.isEmpty())
+            resources.remove(resource);
+    }
 
 }

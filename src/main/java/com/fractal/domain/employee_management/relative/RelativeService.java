@@ -1,11 +1,8 @@
 package com.fractal.domain.employee_management.relative;
 
-import com.fractal.domain.employee_management.education.Education;
-import com.fractal.domain.employee_management.education.dto.EducationRequest;
-import com.fractal.domain.employee_management.education.dto.EducationResponse;
+import com.fractal.domain.employee_management.relative.address.dto.RelativeAddressRequest;
 import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
 import com.fractal.domain.employee_management.relative.dto.RelativeResponse;
-import org.springframework.web.multipart.MultipartFile;
 
 
 public interface RelativeService {
@@ -14,5 +11,9 @@ public interface RelativeService {
     Relative toEntity(RelativeRequest dto);
     Relative update(Long id, RelativeRequest dto);
     void delete(Relative relative);
+
+    Relative addAddress(Long id, RelativeAddressRequest dto);
+    Relative updateAddress(Long id,Long addressId, RelativeAddressRequest dto);
+    Relative deleteAddress(Long id,Long addressId);
 
 }

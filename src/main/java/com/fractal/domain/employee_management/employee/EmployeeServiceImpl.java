@@ -11,6 +11,7 @@ import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employment.EmploymentHistoryService;
 import com.fractal.domain.employee_management.identification_document.IdentificationDocumentService;
+import com.fractal.domain.employee_management.military_service.MilitaryServiceService;
 import com.fractal.domain.employee_management.relative.RelativeService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,7 @@ class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeAddressService addressService;
     private final EducationService educationService;
     private final RelativeService relativeService;
+    private final MilitaryServiceService militaryServiceService;
     private final EmploymentHistoryService employmentHistoryService;
 
     @Override
@@ -93,6 +95,7 @@ class EmployeeServiceImpl implements EmployeeService {
         dto.addresses().forEach(address->employee.addAddress(addressService.toEntity(address)));
         dto.educations().forEach(education->employee.addEducation(educationService.toEntity(education)));
         dto.relatives().forEach(relative->employee.addRelative(relativeService.toEntity(relative)));
+        dto.militaryServices().forEach(militaryService->employee.addMilitaryService(militaryServiceService.toEntity(militaryService)));
         dto.employmentHistories().forEach(employmentHistory->employee.addEmploymentHistory(employmentHistoryService.toEntity(employmentHistory)));
         return employee;
     }

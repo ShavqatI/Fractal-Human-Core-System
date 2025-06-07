@@ -5,7 +5,7 @@ import com.fractal.domain.employee_management.citizenship.dto.CitizenshipRespons
 import com.fractal.domain.employee_management.education.dto.EducationResponse;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryResponse;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentResponse;
-import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
+import com.fractal.domain.employee_management.military_service.dto.MilitaryServiceResponse;
 import com.fractal.domain.employee_management.relative.dto.RelativeResponse;
 
 import java.time.LocalDate;
@@ -26,6 +26,7 @@ public record EmployeeResponse(
         List<EmployeeAddressResponse> addresses,
         List<EducationResponse> educations,
         List<RelativeResponse> relatives,
+        List<MilitaryServiceResponse> militaryServices,
         List<EmploymentHistoryResponse> employmentHistories,
         String status
 

@@ -5,7 +5,7 @@ import com.fractal.domain.employee_management.citizenship.dto.CitizenshipRequest
 import com.fractal.domain.employee_management.education.dto.EducationRequest;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
-import com.fractal.domain.employee_management.relative.Relative;
+import com.fractal.domain.employee_management.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
 
 import java.time.LocalDate;
@@ -26,6 +26,7 @@ public record EmployeeRequest(
         List<EmployeeAddressRequest> addresses,
         List<EducationRequest> educations,
         List<RelativeRequest> relatives,
+        List<MilitaryServiceRequest> militaryServices,
         List<EmploymentHistoryRequest> employmentHistories,
         Long statusId
 ){
