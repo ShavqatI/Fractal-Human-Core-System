@@ -6,6 +6,7 @@ import com.fractal.domain.employee_management.address.EmployeeAddress;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.citizenship.Citizenship;
 import com.fractal.domain.employee_management.education.Education;
+import com.fractal.domain.employee_management.employee.resource.EmployeeResource;
 import com.fractal.domain.employee_management.employment.EmploymentHistory;
 import com.fractal.domain.employee_management.identification_document.IdentificationDocument;
 import com.fractal.domain.employee_management.military_service.MilitaryService;
@@ -54,6 +55,9 @@ public class Employee extends Person {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private  List<EmploymentHistory> employmentHistories  = new ArrayList<>();
+
+    @OneToMany(mappedBy = "education",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<EmployeeResource> resources = new ArrayList<>();
 
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -134,6 +138,15 @@ public class Employee extends Person {
     public void removeEmploymentHistory(EmploymentHistory employmentHistory) {
         if (employmentHistories != null && !employmentHistories.isEmpty())
             employmentHistories.remove(employmentHistory);
+    }
+    public void addResource(EmployeeResource resource) {
+        if (resources == null) resources = new ArrayList<>();
+        resource.setEmployee(this);
+        resources.add(resource);
+    }
+    public void removeResource(EmployeeResource resource) {
+        if (resources != null && !resources.isEmpty())
+            resources.remove(resource);
     }
 
 

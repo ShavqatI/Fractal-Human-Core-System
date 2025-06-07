@@ -22,7 +22,7 @@ class OrganizationServiceImpl implements OrganizationService {
 
     private final OrganizationRepository organizationRepository;
     private final OrganizationUnitService organizationUnitService;
-    private final OrganizationAddressService organizationAddressService;
+    private final OrganizationAddressService addressService;
 
     @Override
     public Organization create(OrganizationRequest dto) {
@@ -59,7 +59,7 @@ class OrganizationServiceImpl implements OrganizationService {
             organization.setLevelMap(dto.levelMap());
             organization.setLevelMap(dto.levelMap());
             organization.setOrganizationUnit(organizationUnitService.getByCode(dto.organizationUnit()));
-            dto.addresses().forEach(organizationAddressRequest -> organization.addAddress(organizationAddressService.toEntity(organizationAddressRequest)));
+            dto.addresses().forEach(organizationAddressRequest -> organization.addAddress(addressService.toEntity(organizationAddressRequest)));
             dto.children().forEach(child->organization.addChild(toEntity(child)));
            return save(organization);
         }
@@ -98,7 +98,7 @@ class OrganizationServiceImpl implements OrganizationService {
                 Optional.ofNullable(organization.getAddresses())
                         .orElse(emptyList())
                         .stream()
-                        .map(organizationAddressService::toDTO)
+                        .map(addressService::toDTO)
                         .collect(Collectors.toList()),
                 organization.getCreatedDate()
         );
@@ -107,7 +107,7 @@ class OrganizationServiceImpl implements OrganizationService {
     @Override
     public Organization addAddress(Long id, OrganizationAddressRequest dto) {
         var organization = findById(id);
-        organization.addAddress(organizationAddressService.toEntity(dto));
+        organization.addAddress(addressService.toEntity(dto));
         return save(organization);
     }
 
@@ -117,7 +117,7 @@ class OrganizationServiceImpl implements OrganizationService {
         var address = organization.getAddresses()
                 .stream()
                 .filter(a-> a.getId().equals(addressId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization address with id: " + addressId + " not found"));
-        organizationAddressService.update(address,dto);
+        addressService.update(address,dto);
         return save(organization);
     }
 
@@ -128,7 +128,7 @@ class OrganizationServiceImpl implements OrganizationService {
                 .stream()
                 .filter(a-> a.getId().equals(addressId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization address with id: " + addressId + " not found"));
         organization.removeAddress(address);
-        organizationAddressService.delete(address);
+        addressService.delete(address);
       return save(organization);
     }
 
@@ -172,7 +172,7 @@ class OrganizationServiceImpl implements OrganizationService {
                 .levelMap(dto.levelMap())
                 .organizationUnit(organizationUnitService.getByCode(dto.organizationUnit()))
                 .build();
-        dto.addresses().forEach(organizationAddress-> organization.addAddress(organizationAddressService.toEntity(organizationAddress)));
+        dto.addresses().forEach(organizationAddress-> organization.addAddress(addressService.toEntity(organizationAddress)));
         dto.children().forEach(child->organization.addChild(toEntity(child)));
        return organization;
     }

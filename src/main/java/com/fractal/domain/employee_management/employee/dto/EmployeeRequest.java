@@ -7,6 +7,7 @@ import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRe
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.employee_management.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -28,6 +29,8 @@ public record EmployeeRequest(
         List<RelativeRequest> relatives,
         List<MilitaryServiceRequest> militaryServices,
         List<EmploymentHistoryRequest> employmentHistories,
+
+        List<MultipartFile> files,
         Long statusId
 ){
 

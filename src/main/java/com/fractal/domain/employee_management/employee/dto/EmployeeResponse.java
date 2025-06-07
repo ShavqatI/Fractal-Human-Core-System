@@ -7,11 +7,14 @@ import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRe
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentResponse;
 import com.fractal.domain.employee_management.military_service.dto.MilitaryServiceResponse;
 import com.fractal.domain.employee_management.relative.dto.RelativeResponse;
+import com.fractal.domain.resource.dto.ResourceResponse;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public record EmployeeResponse(
+        Long id,
         String lastName,
         String firstName,
         String patronymicName,
@@ -28,7 +31,9 @@ public record EmployeeResponse(
         List<RelativeResponse> relatives,
         List<MilitaryServiceResponse> militaryServices,
         List<EmploymentHistoryResponse> employmentHistories,
-        String status
+        List<ResourceResponse> resources,
+        String status,
+        LocalDateTime createdDate
 
 ){
 
