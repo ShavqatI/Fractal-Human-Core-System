@@ -22,11 +22,9 @@ public record DepartmentRequest(
     @NotNull
     @NotBlank
     String levelMap,
-    String parent,
     @NotNull
     @NotBlank
     String organizationUnit,
-
     List<DepartmentRequest> children
     )
 

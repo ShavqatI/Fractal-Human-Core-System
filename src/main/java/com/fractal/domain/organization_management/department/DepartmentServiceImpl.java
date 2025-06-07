@@ -52,8 +52,8 @@ class DepartmentServiceImpl implements DepartmentService {
          department.setName(dto.name());
          department.setLevel(dto.level());
          department.setLevelMap(dto.levelMap());
-         department.setParent(departmentRepository.findByCode(dto.parent()).orElse(null));
          department.setOrganizationUnit(organizationUnitService.getByCode(dto.organizationUnit()));
+         dto.children().forEach(child->department.addChild(toEntity(child)));
          return save(department);
         }
         catch (DataAccessException e) {
@@ -115,14 +115,15 @@ class DepartmentServiceImpl implements DepartmentService {
     }
 
     private Department toEntity(DepartmentRequest dto) {
-        return Department.builder()
+        var department = Department.builder()
                 .code(dto.code())
                 .name(dto.name())
                 .level(dto.level())
                 .levelMap(dto.levelMap())
-                .parent(departmentRepository.findByCode(dto.parent()).orElse(null))
                 .organizationUnit(organizationUnitService.getByCode(dto.organizationUnit()))
                 .build();
+        dto.children().forEach(child->department.addChild(toEntity(child)));
+       return department;
     }
 
     private Department save(Department department) {
