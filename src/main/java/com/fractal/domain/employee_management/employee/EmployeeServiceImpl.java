@@ -6,10 +6,12 @@ import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.address.EmployeeAddressService;
 import com.fractal.domain.employee_management.citizenship.CitizenshipService;
+import com.fractal.domain.employee_management.education.EducationService;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employment.EmploymentHistoryService;
 import com.fractal.domain.employee_management.identification_document.IdentificationDocumentService;
+import com.fractal.domain.employee_management.relative.RelativeService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -31,6 +33,8 @@ class EmployeeServiceImpl implements EmployeeService {
     private final IdentificationDocumentService identificationDocumentService;
     private final CitizenshipService citizenshipService;
     private final EmployeeAddressService addressService;
+    private final EducationService educationService;
+    private final RelativeService relativeService;
     private final EmploymentHistoryService employmentHistoryService;
 
     @Override
@@ -87,6 +91,8 @@ class EmployeeServiceImpl implements EmployeeService {
         dto.identificationDocuments().forEach(identificationDocument->employee.addIdentificationDocument(identificationDocumentService.toEntity(identificationDocument)));
         dto.citizenships().forEach(citizenship-> employee.addCitizenship(citizenshipService.toEntity(citizenship)));
         dto.addresses().forEach(address->employee.addAddress(addressService.toEntity(address)));
+        dto.educations().forEach(education->employee.addEducation(educationService.toEntity(education)));
+        dto.relatives().forEach(relative->employee.addRelative(relativeService.toEntity(relative)));
         dto.employmentHistories().forEach(employmentHistory->employee.addEmploymentHistory(employmentHistoryService.toEntity(employmentHistory)));
         return employee;
     }

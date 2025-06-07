@@ -95,7 +95,7 @@ public class Employee extends Person {
     }
     public void removeAddress(EmployeeAddress address) {
         if (addresses != null && !addresses.isEmpty())
-            citizenships.remove(address);
+            addresses.remove(address);
     }
 
     public void addEducation(Education education) {

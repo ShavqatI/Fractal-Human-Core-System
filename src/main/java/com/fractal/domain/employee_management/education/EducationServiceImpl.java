@@ -5,15 +5,20 @@ import com.fractal.domain.employee_management.education.accreditation_status.Acc
 import com.fractal.domain.employee_management.education.degree_type.DegreeTypeService;
 import com.fractal.domain.employee_management.education.document_type.EducationDocumentTypeService;
 import com.fractal.domain.employee_management.education.dto.EducationRequest;
+import com.fractal.domain.employee_management.education.dto.EducationResponse;
 import com.fractal.domain.employee_management.education.grade_point_average.GradePointAverageService;
 import com.fractal.domain.employee_management.education.resource.EducationResourceService;
 import com.fractal.domain.employee_management.education.type.EducationTypeService;
-import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
@@ -34,8 +39,30 @@ class EducationServiceImpl implements EducationService {
     }
 
     @Override
-    public EmploymentHistoryResponse toDTO(Education education) {
-        return null;
+    public EducationResponse toDTO(Education education) {
+        return new EducationResponse(
+                education.getId(),
+                education.getEducationType().getName(),
+                education.getEducationDocumentType().getName(),
+                education.getBeginDate(),
+                education.getEndDate(),
+                education.getInstitutionName(),
+                education.getInstitutionAddress(),
+                education.getIsForeignInstitution(),
+                education.getSpecialization(),
+                education.getDegreeType().getName(),
+                education.getGradePointAverage().getValue(),
+                education.getAccreditationStatus().getName(),
+                education.getDocumentVerified(),
+                education.getVerificationNotes(),
+                education.getStatus().getName(),
+                Optional.ofNullable(education.getResources())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(resourceService::toDTO)
+                        .collect(Collectors.toList()),
+                education.getCreatedDate()
+        );
     }
 
     @Override
@@ -62,7 +89,23 @@ class EducationServiceImpl implements EducationService {
 
     @Override
     public Education update(Long id, EducationRequest dto) {
-        return null;
+       var education = findById(id);
+        education.setEducationType(educationTypeService.getById(dto.educationTypeId()));
+        education.setEducationDocumentType(educationDocumentTypeService.getById(dto.educationDocumentTypeId()));
+        education.setBeginDate(dto.beginDate());
+        education.setEndDate(dto.endDate());
+        education.setInstitutionName(dto.institutionName());
+        education.setInstitutionAddress(dto.institutionAddress());
+        education.setIsForeignInstitution(dto.isForeignInstitution());
+        education.setSpecialization(dto.specialization());
+        education.setDegreeType(degreeTypeService.getById(dto.degreeTypeId()));
+        education.setGradePointAverage(gradePointAverageService.getById(dto.gradePointAverageId()));
+        education.setAccreditationStatus(accreditationStatusService.getById(dto.accreditationStatusId()));
+        education.setDocumentVerified(dto.documentVerified());
+        education.setVerificationNotes(dto.verificationNotes());
+        education.setStatus(statusService.getById(dto.statusId()));
+        dto.files().forEach(file-> education.addResource(resourceService.toEntity(file,null)));
+      return education;
     }
 
     @Override

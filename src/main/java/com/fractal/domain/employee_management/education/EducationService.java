@@ -1,13 +1,14 @@
 package com.fractal.domain.employee_management.education;
 
 import com.fractal.domain.employee_management.education.dto.EducationRequest;
+import com.fractal.domain.employee_management.education.dto.EducationResponse;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 
 public interface EducationService {
     Education create(EducationRequest dto);
-    EmploymentHistoryResponse toDTO(Education education);
+    EducationResponse toDTO(Education education);
     Education toEntity(EducationRequest dto);
     Education update(Long id,EducationRequest dto);
     void delete(Education education);

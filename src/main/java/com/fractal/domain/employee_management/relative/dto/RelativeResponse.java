@@ -1,17 +1,18 @@
-package com.fractal.domain.employee_management.employee.dto;
+package com.fractal.domain.employee_management.relative.dto;
 
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
 import com.fractal.domain.employee_management.citizenship.dto.CitizenshipResponse;
 import com.fractal.domain.employee_management.education.dto.EducationResponse;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryResponse;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentResponse;
-import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
-import com.fractal.domain.employee_management.relative.dto.RelativeResponse;
+import com.fractal.domain.employee_management.relative.address.dto.RelativeAddressResponse;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-public record EmployeeResponse(
+public record RelativeResponse(
+        Long id,
         String lastName,
         String firstName,
         String patronymicName,
@@ -21,14 +22,9 @@ public record EmployeeResponse(
         String gender,
         String maritalStatus,
         String nationality,
-        List<IdentificationDocumentResponse> identificationDocuments,
-        List<CitizenshipResponse> citizenships,
-        List<EmployeeAddressResponse> addresses,
-        List<EducationResponse> educations,
-        List<RelativeResponse> relatives,
-        List<EmploymentHistoryResponse> employmentHistories,
-        String status
-
+        String relationType,
+        List<RelativeAddressResponse> addresses,
+        LocalDateTime createdDate
 ){
 
 }

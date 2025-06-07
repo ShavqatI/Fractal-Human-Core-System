@@ -2,6 +2,7 @@ package com.fractal.domain.employee_management.relative;
 
 
 import com.fractal.domain.abstraction.Person;
+import com.fractal.domain.employee_management.address.EmployeeAddress;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.relative.address.RelativeAddress;
 import com.fractal.domain.employee_management.relative.type.RelationType;
@@ -10,16 +11,15 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
 @Table(name = "relative", schema = "employee_schema", catalog = "fractal")
 @Data
-@Builder
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
 public class Relative extends Person {
 
@@ -32,7 +32,17 @@ public class Relative extends Person {
     private RelationType relationType;
 
     @OneToMany(mappedBy = "relative", cascade = CascadeType.ALL, orphanRemoval = true)
-    private final List<RelativeAddress> addresses   = new ArrayList<>();
+    private List<RelativeAddress> addresses   = new ArrayList<>();
+
+    public void addAddress(RelativeAddress address) {
+        if (addresses == null) addresses = new ArrayList<>();
+        address.setRelative(this);
+        addresses.add(address);
+    }
+    public void removeAddress(RelativeAddress address) {
+        if (addresses != null && !addresses.isEmpty())
+            addresses.remove(address);
+    }
 
 
 }
