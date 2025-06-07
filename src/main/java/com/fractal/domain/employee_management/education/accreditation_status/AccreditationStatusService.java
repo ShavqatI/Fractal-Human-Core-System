@@ -1,7 +1,7 @@
 package com.fractal.domain.employee_management.education.accreditation_status;
 
 import com.fractal.domain.employee_management.education.accreditation_status.dto.AccreditationStatusRequest;
-import com.fractal.domain.employee_management.education.degree_type.dto.DegreeTypeResponse;
+import com.fractal.domain.employee_management.education.accreditation_status.dto.AccreditationStatusResponse;
 
 import java.util.List;
 
@@ -13,5 +13,5 @@ public interface AccreditationStatusService {
     AccreditationStatus getById(Long id);
     AccreditationStatus update(Long id, AccreditationStatusRequest dto);
     void deleteById(Long id);
-    DegreeTypeResponse toDTO(AccreditationStatus accreditationStatus);
+    AccreditationStatusResponse toDTO(AccreditationStatus accreditationStatus);
 }

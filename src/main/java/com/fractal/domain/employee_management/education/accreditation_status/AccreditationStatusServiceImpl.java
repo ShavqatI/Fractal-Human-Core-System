@@ -1,7 +1,7 @@
 package com.fractal.domain.employee_management.education.accreditation_status;
 
 import com.fractal.domain.employee_management.education.accreditation_status.dto.AccreditationStatusRequest;
-import com.fractal.domain.employee_management.education.degree_type.dto.DegreeTypeResponse;
+import com.fractal.domain.employee_management.education.accreditation_status.dto.AccreditationStatusResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -53,8 +53,8 @@ class AccreditationStatusServiceImpl implements AccreditationStatusService {
     }
 
     @Override
-    public DegreeTypeResponse toDTO(AccreditationStatus accreditationStatus) {
-        return new DegreeTypeResponse(
+    public AccreditationStatusResponse toDTO(AccreditationStatus accreditationStatus) {
+        return new AccreditationStatusResponse(
                 accreditationStatus.getId(),
                 accreditationStatus.getCode(),
                 accreditationStatus.getName(),

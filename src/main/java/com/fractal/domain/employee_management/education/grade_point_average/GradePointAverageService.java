@@ -1,8 +1,5 @@
 package com.fractal.domain.employee_management.education.grade_point_average;
 
-import com.fractal.domain.employee_management.education.degree_type.DegreeType;
-import com.fractal.domain.employee_management.education.degree_type.dto.DegreeTypeRequest;
-import com.fractal.domain.employee_management.education.degree_type.dto.DegreeTypeResponse;
 import com.fractal.domain.employee_management.education.grade_point_average.dto.GradePointAverageRequest;
 import com.fractal.domain.employee_management.education.grade_point_average.dto.GradePointAverageResponse;
 
