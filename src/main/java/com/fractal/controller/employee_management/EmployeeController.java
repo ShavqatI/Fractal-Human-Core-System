@@ -145,11 +145,11 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{id}/military-service")
+    @PostMapping("/{id}/employment-history")
     public ResponseEntity<EmployeeResponse> addEmploymentHistory(@PathVariable Long id, @RequestBody @Valid EmploymentHistoryRequest dto) {
         return new ResponseEntity<>(employeeService.toDTO(employeeService.addEmploymentHistory(id,dto)), HttpStatus.CREATED);
     }
-    @PutMapping("/{id}/employment-historyId/{employmentHistoryId}")
+    @PutMapping("/{id}/employment-history/{employmentHistoryId}")
     public ResponseEntity<EmployeeResponse> updateEmploymentHistory(@PathVariable Long id, @PathVariable Long employmentHistoryId, @RequestBody @Valid EmploymentHistoryRequest dto) {
         return ResponseEntity.ok(employeeService.toDTO(employeeService.updateEmploymentHistory(id,employmentHistoryId, dto)));
     }
