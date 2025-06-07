@@ -56,7 +56,7 @@ public class Employee extends Person {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private  List<EmploymentHistory> employmentHistories  = new ArrayList<>();
 
-    @OneToMany(mappedBy = "education",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<EmployeeResource> resources = new ArrayList<>();
 
 
