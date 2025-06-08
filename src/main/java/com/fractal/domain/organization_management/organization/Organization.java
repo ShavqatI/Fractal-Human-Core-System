@@ -1,7 +1,6 @@
 package com.fractal.domain.organization_management.organization;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.employee_management.relative.contact.RelativeContact;
 import com.fractal.domain.organization_management.organization.address.OrganizationAddress;
 import com.fractal.domain.organization_management.organization.contact.OrganizationContact;
 import com.fractal.domain.organization_management.unit.OrganizationUnit;

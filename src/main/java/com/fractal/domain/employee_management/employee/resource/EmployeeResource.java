@@ -1,7 +1,6 @@
 package com.fractal.domain.employee_management.employee.resource;
 
 
-import com.fractal.domain.employee_management.education.Education;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.resource.Resource;
 import jakarta.persistence.Entity;

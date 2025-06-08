@@ -2,7 +2,6 @@ package com.fractal.domain.organization_management.organization.contact;
 
 
 import com.fractal.domain.contact.Contact;
-import com.fractal.domain.employee_management.relative.Relative;
 import com.fractal.domain.organization_management.organization.Organization;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;

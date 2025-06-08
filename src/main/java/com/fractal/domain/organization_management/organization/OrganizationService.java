@@ -2,7 +2,6 @@ package com.fractal.domain.organization_management.organization;
 
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
-import com.fractal.domain.organization_management.organization.contact.OrganizationContact;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 

@@ -1,6 +1,5 @@
 package com.fractal.domain.organization_management.organization.dto;
 
-import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressResponse;
 

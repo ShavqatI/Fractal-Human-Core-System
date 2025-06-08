@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.relative.dto;
 
-import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.employee_management.relative.address.dto.RelativeAddressResponse;
 
