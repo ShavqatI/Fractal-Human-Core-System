@@ -1,23 +1,14 @@
-package com.fractal.controller.employee_management;
+package com.fractal.controller.employee_management.employee;
 
 
-import com.fractal.domain.contact.dto.ContactRequest;
-import com.fractal.domain.employee_management.address.dto.EmployeeAddressRequest;
-import com.fractal.domain.employee_management.citizenship.dto.CitizenshipRequest;
-import com.fractal.domain.employee_management.education.dto.EducationRequest;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
-import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
-import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
-import com.fractal.domain.employee_management.military_service.dto.MilitaryServiceRequest;
-import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,7 +46,7 @@ public class EmployeeController {
 
     }
 
-    @PostMapping("/{id}/identification-document")
+    /*@PostMapping("/{id}/identification-document")
     public ResponseEntity<EmployeeResponse> addIdentificationDocument(@PathVariable Long id, @RequestBody @Valid IdentificationDocumentRequest dto) {
         return new ResponseEntity<>(employeeService.toDTO(employeeService.addIdentificationDocument(id,dto)), HttpStatus.CREATED);
     }
@@ -97,6 +88,8 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
+
+
     @PostMapping("/{id}/contact")
     public ResponseEntity<EmployeeResponse> addContact(@PathVariable Long id, @RequestBody @Valid ContactRequest dto) {
         return new ResponseEntity<>(employeeService.toDTO(employeeService.addContact(id,dto)), HttpStatus.CREATED);
@@ -128,6 +121,8 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
+
+
     @PostMapping("/{id}/relative")
     public ResponseEntity<EmployeeResponse> addRelative(@PathVariable Long id, @RequestBody @Valid RelativeRequest dto) {
         return new ResponseEntity<>(employeeService.toDTO(employeeService.addRelative(id,dto)), HttpStatus.CREATED);
@@ -142,6 +137,8 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
+
+
     @PostMapping("/{id}/military-service")
     public ResponseEntity<EmployeeResponse> addMilitaryService(@PathVariable Long id, @RequestBody @Valid MilitaryServiceRequest dto) {
         return new ResponseEntity<>(employeeService.toDTO(employeeService.addMilitaryService(id,dto)), HttpStatus.CREATED);
@@ -155,6 +152,8 @@ public class EmployeeController {
         employeeService.deleteMilitaryService(id,militaryServiceId);
         return ResponseEntity.noContent().build();
     }
+
+
 
     @PostMapping("/{id}/employment-history")
     public ResponseEntity<EmployeeResponse> addEmploymentHistory(@PathVariable Long id, @RequestBody @Valid EmploymentHistoryRequest dto) {
@@ -184,5 +183,7 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
     }
 
+
+     */
 
 }

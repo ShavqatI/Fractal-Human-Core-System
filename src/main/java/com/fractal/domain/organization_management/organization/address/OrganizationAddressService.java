@@ -6,9 +6,6 @@ import com.fractal.domain.organization_management.organization.address.dto.Organ
 import java.util.List;
 
 public interface OrganizationAddressService {
-
-
-
     OrganizationAddressResponse toDTO(OrganizationAddress organizationAddress);
     OrganizationAddress toEntity(OrganizationAddressRequest dto);
     OrganizationAddress update(OrganizationAddress address,OrganizationAddressRequest dto);
