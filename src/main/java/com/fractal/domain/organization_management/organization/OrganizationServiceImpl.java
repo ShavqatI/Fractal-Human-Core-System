@@ -1,7 +1,9 @@
 package com.fractal.domain.organization_management.organization;
 
+import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.organization_management.organization.address.OrganizationAddressService;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
+import com.fractal.domain.organization_management.organization.contact.OrganizationContactService;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 import com.fractal.domain.organization_management.unit.OrganizationUnitService;
@@ -23,6 +25,7 @@ class OrganizationServiceImpl implements OrganizationService {
     private final OrganizationRepository organizationRepository;
     private final OrganizationUnitService organizationUnitService;
     private final OrganizationAddressService addressService;
+    private final OrganizationContactService contactService;
 
     @Override
     public Organization create(OrganizationRequest dto) {
@@ -59,7 +62,8 @@ class OrganizationServiceImpl implements OrganizationService {
             organization.setLevelMap(dto.levelMap());
             organization.setLevelMap(dto.levelMap());
             organization.setOrganizationUnit(organizationUnitService.getByCode(dto.organizationUnit()));
-            dto.addresses().forEach(organizationAddressRequest -> organization.addAddress(addressService.toEntity(organizationAddressRequest)));
+            dto.addresses().forEach(address -> organization.addAddress(addressService.toEntity(address)));
+            dto.contacts().forEach(contact -> organization.addContact(contactService.toEntity(contact)));
             dto.children().forEach(child->organization.addChild(toEntity(child)));
            return save(organization);
         }
@@ -90,15 +94,20 @@ class OrganizationServiceImpl implements OrganizationService {
                 Optional.ofNullable(organization.getParent())
                         .map(Organization::getName)
                         .orElse(null),
-                Optional.ofNullable(organization.getChildren())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(this::toDTO)
-                        .collect(Collectors.toList()),
                 Optional.ofNullable(organization.getAddresses())
                         .orElse(emptyList())
                         .stream()
                         .map(addressService::toDTO)
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(organization.getContacts())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(contactService::toDTO)
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(organization.getChildren())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(this::toDTO)
                         .collect(Collectors.toList()),
                 organization.getCreatedDate()
         );
@@ -130,6 +139,34 @@ class OrganizationServiceImpl implements OrganizationService {
         organization.removeAddress(address);
         addressService.delete(address);
       return save(organization);
+    }
+
+    @Override
+    public Organization addContact(Long id, ContactRequest dto) {
+        var organization = findById(id);
+        organization.addContact(contactService.toEntity(dto));
+        return save(organization);
+    }
+
+    @Override
+    public Organization updateContact(Long id, Long contactId, ContactRequest dto) {
+        var organization = findById(id);
+        var contact = organization.getContacts()
+                .stream()
+                .filter(c-> c.getId().equals(contactId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization contact with id: " + contactId + " not found"));
+        contactService.update(contact.getId(),dto);
+        return save(organization);
+    }
+
+    @Override
+    public Organization deleteContact(Long id, Long contactId) {
+        var organization = findById(id);
+        var contact = organization.getContacts()
+                .stream()
+                .filter(c-> c.getId().equals(contactId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization contact with id: " + contactId + " not found"));
+        organization.removeContact(contact);
+        contactService.delete(contact);
+        return save(organization);
     }
 
     @Override
@@ -173,6 +210,7 @@ class OrganizationServiceImpl implements OrganizationService {
                 .organizationUnit(organizationUnitService.getByCode(dto.organizationUnit()))
                 .build();
         dto.addresses().forEach(organizationAddress-> organization.addAddress(addressService.toEntity(organizationAddress)));
+        dto.contacts().forEach(contact -> organization.addContact(contactService.toEntity(contact)));
         dto.children().forEach(child->organization.addChild(toEntity(child)));
        return organization;
     }

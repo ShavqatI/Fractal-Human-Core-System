@@ -1,7 +1,9 @@
 package com.fractal.domain.organization_management.organization;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.employee_management.relative.contact.RelativeContact;
 import com.fractal.domain.organization_management.organization.address.OrganizationAddress;
+import com.fractal.domain.organization_management.organization.contact.OrganizationContact;
 import com.fractal.domain.organization_management.unit.OrganizationUnit;
 import jakarta.persistence.*;
 import lombok.*;
@@ -58,6 +60,9 @@ public class Organization extends AbstractEntity {
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
     private List<OrganizationAddress> addresses = new ArrayList<>();
 
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private List<OrganizationContact> contacts = new ArrayList<>();
+
     public void addAddress(OrganizationAddress address) {
         if (addresses == null) addresses = new ArrayList<>();
         address.setOrganization(this);
@@ -66,6 +71,16 @@ public class Organization extends AbstractEntity {
     public void removeAddress(OrganizationAddress address) {
         if (addresses != null && !addresses.isEmpty())
             addresses.remove(address);
+    }
+
+    public void addContact(OrganizationContact contact) {
+        if (contacts == null) contacts = new ArrayList<>();
+        contact.setOrganization(this);
+        contacts.add(contact);
+    }
+    public void removeContact(OrganizationContact contact) {
+        if (contacts != null && !contacts.isEmpty())
+            contacts.remove(contact);
     }
 
     public void addChild(Organization organization) {

@@ -1,6 +1,8 @@
 package com.fractal.domain.organization_management.organization;
 
+import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
+import com.fractal.domain.organization_management.organization.contact.OrganizationContact;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 
@@ -18,6 +20,11 @@ public interface OrganizationService {
     Organization addAddress(Long id,OrganizationAddressRequest dto);
     Organization updateAddress(Long id,Long addressId, OrganizationAddressRequest dto);
     Organization deleteAddress(Long id,Long addressId);
+    Organization addContact(Long id, ContactRequest dto);
+    Organization updateContact(Long id,Long contactId, ContactRequest dto);
+    Organization deleteContact(Long id,Long contactId);
+
+
     Organization addChild(Long id,OrganizationRequest dto);
     Organization updateChild(Long id,Long childId,OrganizationRequest dto);
     Organization deleteChild(Long id,Long childId);

@@ -1,5 +1,6 @@
 package com.fractal.controller.organization_management;
 
+import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.organization_management.organization.OrganizationService;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
@@ -64,6 +65,21 @@ public class OrganizationController {
     @DeleteMapping("/{id}/address/{addressId}")
     public ResponseEntity<Void> deleteAddress(@PathVariable Long id, @PathVariable Long addressId) {
         organizationService.deleteAddress(id,addressId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/{id}/contact")
+    public ResponseEntity<OrganizationResponse> addContact(@PathVariable Long id, @RequestBody @Valid ContactRequest dto) {
+        return new ResponseEntity<>(organizationService.toDTO(organizationService.addContact(id,dto)), HttpStatus.CREATED);
+    }
+    @PutMapping("/{id}/contact/{contactId}")
+    public ResponseEntity<OrganizationResponse> updateContact(@PathVariable Long id, @PathVariable Long contactId, @RequestBody @Valid ContactRequest dto) {
+        return ResponseEntity.ok(organizationService.toDTO(organizationService.updateContact(id,contactId, dto)));
+    }
+
+    @DeleteMapping("/{id}/contact/{contactId}")
+    public ResponseEntity<Void> deleteContact(@PathVariable Long id, @PathVariable Long contactId) {
+        organizationService.deleteContact(id,contactId);
         return ResponseEntity.noContent().build();
     }
 

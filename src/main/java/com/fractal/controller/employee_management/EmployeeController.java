@@ -1,6 +1,7 @@
 package com.fractal.controller.employee_management;
 
 
+import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressRequest;
 import com.fractal.domain.employee_management.citizenship.dto.CitizenshipRequest;
 import com.fractal.domain.employee_management.education.dto.EducationRequest;
@@ -10,16 +11,9 @@ import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.employee_management.military_service.dto.MilitaryServiceRequest;
-import com.fractal.domain.employee_management.relative.Relative;
 import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
-import com.fractal.domain.employee_management.vacation.type.VacationTypeService;
-import com.fractal.domain.employee_management.vacation.type.dto.VacationTypeRequest;
-import com.fractal.domain.employee_management.vacation.type.dto.VacationTypeResponse;
-import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
-import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.Realm;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -102,6 +96,23 @@ public class EmployeeController {
         employeeService.deleteAddress(id,addressId);
         return ResponseEntity.noContent().build();
     }
+
+    @PostMapping("/{id}/contact")
+    public ResponseEntity<EmployeeResponse> addContact(@PathVariable Long id, @RequestBody @Valid ContactRequest dto) {
+        return new ResponseEntity<>(employeeService.toDTO(employeeService.addContact(id,dto)), HttpStatus.CREATED);
+    }
+    @PutMapping("/{id}/contact/{contactId}")
+    public ResponseEntity<EmployeeResponse> updateContact(@PathVariable Long id, @PathVariable Long contactId, @RequestBody @Valid ContactRequest dto) {
+        return ResponseEntity.ok(employeeService.toDTO(employeeService.updateContact(id,contactId, dto)));
+    }
+    @DeleteMapping("/{id}/contact/{contactId}")
+    public ResponseEntity<Void> deleteContact(@PathVariable Long id, @PathVariable Long contactId) {
+        employeeService.deleteContact(id,contactId);
+        return ResponseEntity.noContent().build();
+    }
+
+
+
 
     @PostMapping("/{id}/education")
     public ResponseEntity<EmployeeResponse> addEducation(@PathVariable Long id, @RequestBody @Valid EducationRequest dto) {

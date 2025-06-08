@@ -1,5 +1,7 @@
 package com.fractal.domain.organization_management.organization.dto;
 
+import com.fractal.domain.contact.dto.ContactRequest;
+import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressResponse;
 
 import java.time.LocalDate;
@@ -18,8 +20,9 @@ public record OrganizationResponse (
         String levelMap,
         String organizationUnit,
         String parent,
-        List<OrganizationResponse> children,
         List<OrganizationAddressResponse> addresses,
+        List<ContactResponse> contacts,
+        List<OrganizationResponse> children,
         LocalDateTime createdDate
 )
 { }

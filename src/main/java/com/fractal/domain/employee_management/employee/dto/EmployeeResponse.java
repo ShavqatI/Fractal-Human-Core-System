@@ -1,5 +1,7 @@
 package com.fractal.domain.employee_management.employee.dto;
 
+import com.fractal.domain.contact.dto.ContactRequest;
+import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
 import com.fractal.domain.employee_management.citizenship.dto.CitizenshipResponse;
 import com.fractal.domain.employee_management.education.dto.EducationResponse;
@@ -27,6 +29,8 @@ public record EmployeeResponse(
         List<IdentificationDocumentResponse> identificationDocuments,
         List<CitizenshipResponse> citizenships,
         List<EmployeeAddressResponse> addresses,
+
+        List<ContactResponse> contacts,
         List<EducationResponse> educations,
         List<RelativeResponse> relatives,
         List<MilitaryServiceResponse> militaryServices,

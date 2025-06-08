@@ -5,6 +5,7 @@ import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.address.EmployeeAddress;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.citizenship.Citizenship;
+import com.fractal.domain.employee_management.contact.EmployeeContact;
 import com.fractal.domain.employee_management.education.Education;
 import com.fractal.domain.employee_management.employee.resource.EmployeeResource;
 import com.fractal.domain.employee_management.employment.EmploymentHistory;
@@ -43,6 +44,9 @@ public class Employee extends Person {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private  List<EmployeeAddress> addresses   = new ArrayList<>();
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private  List<EmployeeContact> contacts   = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private  List<Education> educations   = new ArrayList<>();
@@ -100,6 +104,15 @@ public class Employee extends Person {
     public void removeAddress(EmployeeAddress address) {
         if (addresses != null && !addresses.isEmpty())
             addresses.remove(address);
+    }
+    public void addContact(EmployeeContact contact) {
+        if (contacts == null) contacts = new ArrayList<>();
+        contact.setEmployee(this);
+        contacts.add(contact);
+    }
+    public void removeContact(EmployeeContact contact) {
+        if (contacts != null && !contacts.isEmpty())
+            contacts.remove(contact);
     }
 
     public void addEducation(Education education) {

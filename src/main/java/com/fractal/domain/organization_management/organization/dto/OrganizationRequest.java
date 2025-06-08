@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.organization.dto;
 
+import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
 import jakarta.validation.constraints.*;
 
@@ -37,6 +38,7 @@ public record OrganizationRequest(
         String organizationUnit,
         @NotEmpty
         List<OrganizationAddressRequest> addresses,
+        List<ContactRequest> contacts,
         List<OrganizationRequest> children
 
 ) {

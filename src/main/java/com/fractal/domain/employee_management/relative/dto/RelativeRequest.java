@@ -1,5 +1,6 @@
 package com.fractal.domain.employee_management.relative.dto;
 
+import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.employee_management.relative.address.dto.RelativeAddressRequest;
 
 import java.time.LocalDate;
@@ -16,7 +17,8 @@ public record RelativeRequest(
         Long maritalStatusId,
         Long nationalityId,
         Long relationTypeId,
-        List<RelativeAddressRequest> addresses
+        List<RelativeAddressRequest> addresses,
+        List<ContactRequest> contacts
 
 ){
 

@@ -1,10 +1,12 @@
 package com.fractal.domain.employee_management.relative;
 
+import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.dictionary.gender.GenderService;
 import com.fractal.domain.dictionary.marital_status.MaritalStatusService;
 import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.employee_management.relative.address.RelativeAddressService;
 import com.fractal.domain.employee_management.relative.address.dto.RelativeAddressRequest;
+import com.fractal.domain.employee_management.relative.contact.RelativeContactService;
 import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
 import com.fractal.domain.employee_management.relative.dto.RelativeResponse;
 import com.fractal.domain.employee_management.relative.type.RelationTypeService;
@@ -28,6 +30,7 @@ class RelativeServiceImpl implements RelativeService {
     private final MaritalStatusService maritalStatusService;
     private final NationalityService nationalityService;
     private final RelativeAddressService addressService;
+    private final RelativeContactService contactService;
 
     @Override
     public Relative create(RelativeRequest dto) {
@@ -53,6 +56,11 @@ class RelativeServiceImpl implements RelativeService {
                         .stream()
                         .map(addressService::toDTO)
                         .collect(Collectors.toList()),
+                Optional.ofNullable(relative.getContacts())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(contactService::toDTO)
+                        .collect(Collectors.toList()),
                 relative.getCreatedDate()
         );
     }
@@ -72,6 +80,7 @@ class RelativeServiceImpl implements RelativeService {
                         .relationType(relationTypeService.getById(dto.relationTypeId()))
                        .build();
         dto.addresses().forEach(address->relative.addAddress(addressService.toEntity(address)));
+        dto.contacts().forEach(contact->relative.addContact(contactService.toEntity(contact)));
         return relative;
     }
 
@@ -89,6 +98,7 @@ class RelativeServiceImpl implements RelativeService {
         relative.setNationality(nationalityService.getById(dto.nationalityId()));
         relative.setRelationType(relationTypeService.getById(dto.relationTypeId()));
         dto.addresses().forEach(address->relative.addAddress(addressService.toEntity(address)));
+        dto.contacts().forEach(contact->relative.addContact(contactService.toEntity(contact)));
        return relative;
     }
 
@@ -125,6 +135,33 @@ class RelativeServiceImpl implements RelativeService {
         return save(relative);
     }
 
+    @Override
+    public Relative addContact(Long id, ContactRequest dto) {
+        var relative = findById(id);
+        relative.addContact(contactService.toEntity(dto));
+        return save(relative);
+    }
+
+    @Override
+    public Relative updateContact(Long id, Long contactId, ContactRequest dto) {
+        var relative = findById(id);
+        var contact = relative.getContacts()
+                .stream()
+                .filter(c-> c.getId().equals(contactId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Relative contact with id: " + contactId + " not found"));
+        contactService.update(contact.getId(),dto);
+        return save(relative);
+    }
+
+    @Override
+    public Relative deleteContact(Long id, Long contactId) {
+        var relative = findById(id);
+        var contact = relative.getContacts()
+                .stream()
+                .filter(c-> c.getId().equals(contactId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Relative contact with id: " + contactId + " not found"));
+        relative.removeContact(contact);
+        contactService.delete(contact);
+        return save(relative);
+    }
 
     private Relative save(Relative relative) {
         try {
