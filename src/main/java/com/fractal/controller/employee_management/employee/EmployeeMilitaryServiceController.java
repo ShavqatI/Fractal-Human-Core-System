@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/employee/{employeeId}/education")
+@RequestMapping("/api/v1/employee-management/employee/{employeeId}/military-service")
 @RequiredArgsConstructor
 public class EmployeeMilitaryServiceController {
 
