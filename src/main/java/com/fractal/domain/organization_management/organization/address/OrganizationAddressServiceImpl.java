@@ -100,7 +100,7 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
     }
 
     @Override
-    public List<OrganizationAddress> getByOrganizationId(Long organizationId) {
+    public List<OrganizationAddress> getAllByOrganizationId(Long organizationId) {
         return organizationAddressRepository.findAllByOrganizationId(organizationId);
     }
 }

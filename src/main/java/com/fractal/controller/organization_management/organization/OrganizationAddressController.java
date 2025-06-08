@@ -33,7 +33,7 @@ public class OrganizationAddressController {
 
     @GetMapping
     public ResponseEntity<List<OrganizationAddressResponse>> getAll(@PathVariable Long organizationId) {
-        return ResponseEntity.ok(addressService.getByOrganizationId(organizationId).stream().map(addressService::toDTO).collect(Collectors.toList()));
+        return ResponseEntity.ok(addressService.getAllByOrganizationId(organizationId).stream().map(addressService::toDTO).collect(Collectors.toList()));
     }
 
     @DeleteMapping("{id}")
