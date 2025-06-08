@@ -1,4 +1,4 @@
-package com.fractal.controller.organization_management;
+package com.fractal.controller.organization_management.job_description;
 
 import com.fractal.domain.organization_management.job_description.JobDescriptionService;
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionRequest;
@@ -48,6 +48,7 @@ public class JobDescriptionController {
         return ResponseEntity.noContent().build();
     }
 
+    /*
     @PostMapping("/{id}/responsibility")
     public ResponseEntity<JobDescriptionResponse> addResponsibility(@PathVariable Long id,@RequestBody @Valid ResponsibilityRequest dto) {
         return new ResponseEntity<>(jobDescriptionService.toDTO(jobDescriptionService.addResponsibility(id,dto)), HttpStatus.CREATED);
@@ -65,6 +66,8 @@ public class JobDescriptionController {
         return ResponseEntity.noContent().build();
     }
 
+
+
     @PostMapping("/{id}/qualification")
     public ResponseEntity<JobDescriptionResponse> addQualification(@PathVariable Long id,@RequestBody @Valid QualificationRequest dto) {
         return new ResponseEntity<>(jobDescriptionService.toDTO(jobDescriptionService.addQualification(id,dto)), HttpStatus.CREATED);
@@ -81,6 +84,8 @@ public class JobDescriptionController {
         return ResponseEntity.noContent().build();
     }
 
+
+
     @PostMapping("/{id}/required-experience")
     public ResponseEntity<JobDescriptionResponse> addRequiredExperience(@PathVariable Long id,@RequestBody @Valid RequiredExperienceRequest dto) {
         return new ResponseEntity<>(jobDescriptionService.toDTO(jobDescriptionService.addRequiredExperience(id,dto)), HttpStatus.CREATED);
@@ -96,6 +101,8 @@ public class JobDescriptionController {
         jobDescriptionService.deleteRequiredExperience(id, experienceId);
         return ResponseEntity.noContent().build();
     }
+
+     */
 
 
 
