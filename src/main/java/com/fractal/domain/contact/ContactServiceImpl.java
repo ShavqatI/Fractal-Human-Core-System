@@ -3,13 +3,8 @@ package com.fractal.domain.contact;
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.contact.type.ContactTypeService;
-import com.fractal.domain.employee_management.employment.agreement.resource.AgreementResource;
-import com.fractal.domain.resource.Resource;
-import com.fractal.domain.resource.dto.ResourceRequest;
-import com.fractal.domain.resource.dto.ResourceResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor

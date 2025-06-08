@@ -1,4 +1,4 @@
-package com.fractal.controller.organization_management;
+package com.fractal.controller.organization_management.organization;
 
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.organization_management.organization.OrganizationService;

@@ -8,13 +8,13 @@ import java.time.LocalDate;
 public record OrganizationAddressRequest(
         @NotBlank
         @NotNull
-        String addressType,
+        Long addressTypeId,
         @NotNull
-        Long country,
+        Long countryId,
         @NotNull
-        Long region,
+        Long regionId,
         @NotNull
-        Long city,
+        Long cityId,
         @NotNull
         Long district,
         @NotBlank

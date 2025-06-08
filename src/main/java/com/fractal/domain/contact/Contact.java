@@ -3,8 +3,6 @@ package com.fractal.domain.contact;
 import com.fractal.domain.abstraction.Auditable;
 import com.fractal.domain.contact.type.ContactType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

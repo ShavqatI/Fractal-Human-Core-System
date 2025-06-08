@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class OrganizationAddressServiceImpl implements OrganizationAddressService {
@@ -48,10 +50,10 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
     @Override
     public OrganizationAddress toEntity(OrganizationAddressRequest dto) {
         return OrganizationAddress.builder()
-                .addressType(addressTypeService.getByCode(dto.addressType()))
-                .country(countryService.getById(dto.country()))
-                .region(regionService.getById(dto.region()))
-                .city(cityService.getById(dto.city()))
+                .addressType(addressTypeService.getById(dto.addressTypeId()))
+                .country(countryService.getById(dto.countryId()))
+                .region(regionService.getById(dto.regionId()))
+                .city(cityService.getById(dto.cityId()))
                 .district(districtService.getById(dto.district()))
                 .street(dto.street())
                 .house(dto.house())
@@ -69,10 +71,10 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
     @Override
     public OrganizationAddress update(OrganizationAddress address, OrganizationAddressRequest dto) {
         try {
-            address.setAddressType(addressTypeService.getByCode(dto.addressType()));
-            address.setCountry(countryService.getById(dto.country()));
-            address.setRegion(regionService.getById(dto.region()));
-            address.setCity(cityService.getById(dto.city()));
+            address.setAddressType(addressTypeService.getById(dto.addressTypeId()));
+            address.setCountry(countryService.getById(dto.countryId()));
+            address.setRegion(regionService.getById(dto.regionId()));
+            address.setCity(cityService.getById(dto.cityId()));
             address.setDistrict(districtService.getById(dto.district()));
             address.setStreet(dto.street());
             address.setHouse(dto.house());
@@ -95,5 +97,10 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
     @Override
     public void delete(OrganizationAddress address) {
         organizationAddressRepository.delete(address);
+    }
+
+    @Override
+    public List<OrganizationAddress> getByOrganizationId(Long organizationId) {
+        return organizationAddressRepository.findAllByOrganizationId(organizationId);
     }
 }
