@@ -53,7 +53,7 @@ public class OrganizationController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{id}/address")
+    /*@PostMapping("/{id}/address")
     public ResponseEntity<OrganizationResponse> addAddress(@PathVariable Long id, @RequestBody @Valid OrganizationAddressRequest dto) {
         return new ResponseEntity<>(organizationService.toDTO(organizationService.addAddress(id,dto)), HttpStatus.CREATED);
     }
@@ -81,7 +81,7 @@ public class OrganizationController {
     public ResponseEntity<Void> deleteContact(@PathVariable Long id, @PathVariable Long contactId) {
         organizationService.deleteContact(id,contactId);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 
     @PostMapping("/{id}/child")
     public ResponseEntity<OrganizationResponse> addChild(@PathVariable Long id, @RequestBody @Valid OrganizationRequest dto) {

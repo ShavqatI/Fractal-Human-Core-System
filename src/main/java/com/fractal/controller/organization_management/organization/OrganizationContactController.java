@@ -17,16 +17,16 @@ public class OrganizationContactController {
     private final OrganizationService organizationService;
 
     @PostMapping()
-    public ResponseEntity<OrganizationResponse> addContact(@PathVariable Long organizationId, @RequestBody @Valid ContactRequest dto) {
+    public ResponseEntity<OrganizationResponse> create(@PathVariable Long organizationId, @RequestBody @Valid ContactRequest dto) {
         return new ResponseEntity<>(organizationService.toDTO(organizationService.addContact(organizationId,dto)), HttpStatus.CREATED);
     }
     @PutMapping("/{contactId}")
-    public ResponseEntity<OrganizationResponse> updateContact(@PathVariable Long organizationId, @PathVariable Long contactId, @RequestBody @Valid ContactRequest dto) {
+    public ResponseEntity<OrganizationResponse> update(@PathVariable Long organizationId, @PathVariable Long contactId, @RequestBody @Valid ContactRequest dto) {
         return ResponseEntity.ok(organizationService.toDTO(organizationService.updateContact(organizationId,contactId, dto)));
     }
 
     @DeleteMapping("/{contactId}")
-    public ResponseEntity<Void> deleteContact(@PathVariable Long organizationId, @PathVariable Long contactId) {
+    public ResponseEntity<Void> delete(@PathVariable Long organizationId, @PathVariable Long contactId) {
         organizationService.deleteContact(organizationId,contactId);
         return ResponseEntity.noContent().build();
     }
