@@ -1,4 +1,4 @@
-package com.fractal.controller.organization_management;
+package com.fractal.controller.organization_management.department;
 
 import com.fractal.domain.organization_management.department.DepartmentService;
 import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
@@ -50,7 +50,7 @@ public class DepartmentController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{id}/child")
+    /*@PostMapping("/{id}/child")
     public ResponseEntity<DepartmentResponse> addChild(@PathVariable Long id, @RequestBody @Valid DepartmentRequest dto) {
         return new ResponseEntity<>(departmentService.toDTO(departmentService.addChild(id,dto)), HttpStatus.CREATED);
     }
@@ -63,5 +63,5 @@ public class DepartmentController {
     public ResponseEntity<Void> deleteChild(@PathVariable Long id, @PathVariable Long childId) {
         departmentService.deleteChild(id,childId);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 }
