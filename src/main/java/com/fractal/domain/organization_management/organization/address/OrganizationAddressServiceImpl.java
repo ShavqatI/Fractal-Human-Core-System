@@ -54,7 +54,7 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
                 .country(countryService.getById(dto.countryId()))
                 .region(regionService.getById(dto.regionId()))
                 .city(cityService.getById(dto.cityId()))
-                .district(districtService.getById(dto.district()))
+                .district(districtService.getById(dto.districtId()))
                 .street(dto.street())
                 .house(dto.house())
                 .apartment(dto.apartment())
@@ -75,7 +75,7 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
             address.setCountry(countryService.getById(dto.countryId()));
             address.setRegion(regionService.getById(dto.regionId()));
             address.setCity(cityService.getById(dto.cityId()));
-            address.setDistrict(districtService.getById(dto.district()));
+            address.setDistrict(districtService.getById(dto.districtId()));
             address.setStreet(dto.street());
             address.setHouse(dto.house());
             address.setApartment(dto.apartment());

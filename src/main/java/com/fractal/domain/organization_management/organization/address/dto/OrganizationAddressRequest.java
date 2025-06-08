@@ -16,7 +16,7 @@ public record OrganizationAddressRequest(
         @NotNull
         Long cityId,
         @NotNull
-        Long district,
+        Long districtId,
         @NotBlank
         @NotNull
         String street,
