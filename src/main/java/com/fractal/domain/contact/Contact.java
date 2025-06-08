@@ -13,8 +13,7 @@ import lombok.experimental.SuperBuilder;
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "contact", schema = "contact_schema", catalog = "fractal")
 @Data
-@Builder
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
 public class Contact extends Auditable {
     @Id
