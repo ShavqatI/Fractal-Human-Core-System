@@ -81,7 +81,7 @@ public class OrganizationController {
     public ResponseEntity<Void> deleteContact(@PathVariable Long id, @PathVariable Long contactId) {
         organizationService.deleteContact(id,contactId);
         return ResponseEntity.noContent().build();
-    }*/
+    }
 
     @PostMapping("/{id}/child")
     public ResponseEntity<OrganizationResponse> addChild(@PathVariable Long id, @RequestBody @Valid OrganizationRequest dto) {
@@ -97,4 +97,6 @@ public class OrganizationController {
         organizationService.deleteChild(id,childId);
         return ResponseEntity.noContent().build();
     }
+    */
+
 }
