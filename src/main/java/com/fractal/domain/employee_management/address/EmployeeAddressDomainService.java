@@ -3,10 +3,11 @@ package com.fractal.domain.employee_management.address;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressRequest;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
 
-public interface EmployeeAddressService {
-    EmployeeAddress addAddress(Long id, EmployeeAddressRequest dto);
-    EmployeeAddress updateAddress(Long id,Long addressId, EmployeeAddressRequest dto);
-    void deleteAddress(Long id, Long addressId);
+public interface EmployeeAddressDomainService {
     EmployeeAddressResponse toDTO(EmployeeAddress address);
-
+    EmployeeAddress toEntity(EmployeeAddressRequest dto);
+    EmployeeAddress update(EmployeeAddress address,EmployeeAddressRequest dto);
+    void delete(EmployeeAddress address);
 }
+
+

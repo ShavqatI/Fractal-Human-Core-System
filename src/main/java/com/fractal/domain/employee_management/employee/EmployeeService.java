@@ -22,6 +22,7 @@ public interface EmployeeService {
     Employee update(Long id, EmployeeRequest dto);
     void deleteById(Long id);
     EmployeeResponse toDTO(Employee employee);
+    //Employee save(Employee employee);
 
     Employee addIdentificationDocument(Long id, IdentificationDocumentRequest dto);
     Employee updateIdentificationDocument(Long id,Long identificationDocumentId, IdentificationDocumentRequest dto);
@@ -31,9 +32,11 @@ public interface EmployeeService {
     Employee updateCitizenship(Long id,Long citizenshipId, CitizenshipRequest dto);
     Employee deleteCitizenship(Long id,Long citizenshipId);
 
+    /*
     Employee addAddress(Long id, EmployeeAddressRequest dto);
     Employee updateAddress(Long id,Long addressId, EmployeeAddressRequest dto);
     Employee deleteAddress(Long id,Long addressId);
+    */
     Employee addContact(Long id, ContactRequest dto);
     Employee updateContact(Long id,Long contactId, ContactRequest dto);
     Employee deleteContact(Long id,Long contactId);
