@@ -22,7 +22,7 @@ class EmployeeAddressMapperServiceImpl implements EmployeeAddressMapperService {
     private final DistrictService districtService;
 
     @Override
-    public EmployeeAddressResponse toResponse(EmployeeAddress address) {
+    public EmployeeAddressResponse toDTO(EmployeeAddress address) {
         return new EmployeeAddressResponse(
                 address.getId(),
                 address.getAddressType().getName(),
