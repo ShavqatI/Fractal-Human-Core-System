@@ -5,7 +5,7 @@ import com.fractal.domain.employee_management.address.dto.EmployeeAddressRequest
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
 
 public interface EmployeeAddressMapperService {
-    EmployeeAddressResponse toDTO(EmployeeAddress address);
+    EmployeeAddressResponse toResponse(EmployeeAddress address);
     EmployeeAddress toEntity(EmployeeAddressRequest dto);
     EmployeeAddress toEntity(EmployeeAddress address, EmployeeAddressRequest dto);
 }

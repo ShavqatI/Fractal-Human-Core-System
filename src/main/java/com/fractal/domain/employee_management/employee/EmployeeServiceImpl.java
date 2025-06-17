@@ -134,7 +134,7 @@ class EmployeeServiceImpl implements EmployeeService {
                 Optional.ofNullable(employee.getAddresses())
                         .orElse(emptyList())
                         .stream()
-                        .map(addressMapperService::toDTO)
+                        .map(addressMapperService::toResponse)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(employee.getContacts())
                         .orElse(emptyList())

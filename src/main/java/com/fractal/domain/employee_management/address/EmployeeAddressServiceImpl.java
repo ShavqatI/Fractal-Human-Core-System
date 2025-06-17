@@ -66,8 +66,8 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
     }
 
     @Override
-    public EmployeeAddressResponse toDTO(EmployeeAddress address) {
-        return addressDomainService.toDTO(address);
+    public EmployeeAddressResponse toResponse(EmployeeAddress address) {
+        return addressDomainService.toResponse(address);
     }
 
 

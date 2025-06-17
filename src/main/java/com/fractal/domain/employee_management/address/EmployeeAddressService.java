@@ -11,6 +11,6 @@ public interface EmployeeAddressService {
     List<EmployeeAddress> getAllByEmployeeId(Long employeeId);
     EmployeeAddress update(Long employeeId,Long id, EmployeeAddressRequest dto);
     void delete(Long employeeId, Long id);
-    EmployeeAddressResponse toDTO(EmployeeAddress address);
+    EmployeeAddressResponse toResponse(EmployeeAddress address);
 
 }
