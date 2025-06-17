@@ -1,19 +1,11 @@
 package com.fractal.domain.employee_management.identification_document.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.address.EmployeeAddress;
-import com.fractal.domain.employee_management.address.dto.EmployeeAddressRequest;
-import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
 import com.fractal.domain.employee_management.identification_document.IdentificationDocument;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentResponse;
 import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResourceService;
 import com.fractal.domain.employee_management.identification_document.type.IdentificationDocumentTypeService;
-import com.fractal.domain.location.address.type.AddressTypeService;
-import com.fractal.domain.location.city.CityService;
-import com.fractal.domain.location.country.CountryService;
-import com.fractal.domain.location.district.DistrictService;
-import com.fractal.domain.location.region.RegionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

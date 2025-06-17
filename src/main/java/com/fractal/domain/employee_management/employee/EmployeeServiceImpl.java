@@ -17,7 +17,6 @@ import com.fractal.domain.employee_management.employee.resource.EmployeeResource
 import com.fractal.domain.employee_management.employment.EmploymentHistoryService;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
 import com.fractal.domain.employee_management.identification_document.IdentificationDocumentService;
-import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.employee_management.military_service.MilitaryServiceService;
 import com.fractal.domain.employee_management.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.employee_management.relative.RelativeService;

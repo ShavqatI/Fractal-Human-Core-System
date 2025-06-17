@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.identification_document;
 
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentResponse;
 import org.springframework.web.multipart.MultipartFile;
