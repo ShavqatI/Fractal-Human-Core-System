@@ -17,14 +17,14 @@ import java.util.List;
 public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 
     private final EmployeeService employeeService;
-    private final EmployeeAddressMapperService addressDomainService;
+    private final EmployeeAddressMapperService addressMapperService;
     private final EmployeeAddressRepository employeeAddressRepository;
 
     @Override
     @Transactional
     public EmployeeAddress create(Long employeeId, EmployeeAddressRequest dto) {
         var employee = employeeService.getById(employeeId);
-        EmployeeAddress address = addressDomainService.toEntity(dto);
+        EmployeeAddress address = addressMapperService.toEntity(dto);
         employee.addAddress(address);
         employeeService.save(employee);
         return address;
@@ -48,7 +48,7 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
         var address = employee.getAddresses()
                 .stream()
                 .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee address with id: " + id + " not found"));
-        address = addressDomainService.toEntity(address,dto);
+        address = addressMapperService.toEntity(address,dto);
         employeeAddressRepository.save(address);
         employeeService.save(employee);
         return address;
@@ -67,7 +67,7 @@ public class EmployeeAddressServiceImpl implements EmployeeAddressService {
 
     @Override
     public EmployeeAddressResponse toDTO(EmployeeAddress address) {
-        return addressDomainService.toDTO(address);
+        return addressMapperService.toDTO(address);
     }
 
 

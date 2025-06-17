@@ -199,37 +199,6 @@ class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     @Transactional
-    public Employee addIdentificationDocument(Long id, IdentificationDocumentRequest dto) {
-        var employee = findById(id);
-        employee.addIdentificationDocument(identificationDocumentService.toEntity(dto));
-        return save(employee);
-    }
-
-    @Override
-    @Transactional
-    public Employee updateIdentificationDocument(Long id, Long identificationDocumentId, IdentificationDocumentRequest dto) {
-        var employee = findById(id);
-        var identificationDocument = employee.getIdentificationDocuments()
-                .stream()
-                .filter(i-> i.getId().equals(identificationDocumentId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification document with id: " + identificationDocumentId + " not found"));
-        identificationDocumentService.update(identificationDocument.getId(),dto);
-        return save(employee);
-    }
-
-    @Override
-    @Transactional
-    public Employee deleteIdentificationDocument(Long id, Long identificationDocumentId) {
-        var employee = findById(id);
-        var identificationDocument = employee.getIdentificationDocuments()
-                .stream()
-                .filter(i -> i.getId().equals(identificationDocumentId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification document with id: " + identificationDocumentId + " not found"));
-        employee.removeIdentificationDocument(identificationDocument);
-        identificationDocumentService.delete(identificationDocument);
-        return save(employee);
-    }
-
-    @Override
-    @Transactional
     public Employee addCitizenship(Long id, CitizenshipRequest dto) {
         var employee = findById(id);
         employee.addCitizenship(citizenshipService.toEntity(dto));

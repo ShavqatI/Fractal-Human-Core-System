@@ -1,101 +1,91 @@
 package com.fractal.domain.employee_management.identification_document;
 
-import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentResponse;
+import com.fractal.domain.employee_management.identification_document.mapper.IdentificationDocumentMapperService;
 import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResourceService;
-import com.fractal.domain.employee_management.identification_document.type.IdentificationDocumentTypeService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
 public class IdentificationDocumentServiceImpl implements IdentificationDocumentService {
 
-    private final IdentificationDocumentRepository identificationDocumentRepository;
+    private final EmployeeService employeeService;
 
-    private final IdentificationDocumentTypeService identificationDocumentTypeService;
+    private final IdentificationDocumentRepository identificationDocumentRepository;
 
     private final IdentificationDocumentResourceService resourceService;
 
-    private final StatusService statusService;
+    private final IdentificationDocumentMapperService identificationDocumentMapperService;
+
 
     @Override
-    public IdentificationDocument create(IdentificationDocumentRequest dto) {
-        return save(toEntity(dto));
+    @Transactional
+    public IdentificationDocument create(Long employeeId, IdentificationDocumentRequest dto) {
+        var employee = employeeService.getById(employeeId);
+        var identificationDocument = identificationDocumentMapperService.toEntity(dto);
+        dto.files().forEach(file-> identificationDocument.addResource(resourceService.toEntity(file,null)));
+        employee.addIdentificationDocument(identificationDocument);
+        employeeService.save(employee);
+        return identificationDocument;
     }
 
     @Override
-    public List<IdentificationDocument> getAll() {
-        return identificationDocumentRepository.findAll();
+    @Transactional
+    public IdentificationDocument update(Long employeeId, Long id, IdentificationDocumentRequest dto) {
+        var employee = employeeService.getById(employeeId);
+        var identificationDocument = employee.getIdentificationDocuments()
+                .stream()
+                .filter(i-> i.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification document with id: " + id + " not found"));
+        var finalIdentificationDocument = identificationDocumentMapperService.toEntity(identificationDocument,dto);;
+        dto.files().forEach(file-> finalIdentificationDocument.addResource(resourceService.toEntity(file,null)));
+        employeeService.save(employee);
+        return finalIdentificationDocument;
     }
 
     @Override
-    public IdentificationDocument getById(Long id) {
-        return findById(id);
-    }
-
-    @Override
-    public IdentificationDocument update(Long id, IdentificationDocumentRequest dto) {
-        try {
-            var identificationDocument = findById(id);
-            identificationDocument.setIdentificationDocumentType(identificationDocumentTypeService.getById(dto.identificationTypeId()));
-            identificationDocument.setSeries(dto.series());
-            identificationDocument.setNumber(dto.number());
-            identificationDocument.setIssueDate(dto.issueDate());
-            identificationDocument.setExpiryDate(dto.expiryDate());
-            identificationDocument.setTermInYears((int) ChronoUnit.YEARS.between(dto.issueDate(), dto.expiryDate()));
-            identificationDocument.setIssueOrganization(dto.issueOrganization());
-            identificationDocument.setIssueOrganizationAddress(dto.issueOrganizationAddress());
-            identificationDocument.setStatus(statusService.getById(dto.statusId()));
-            dto.files().forEach(file-> identificationDocument.addResource(resourceService.toEntity(file,null)));
-           return identificationDocument;
-        }
-        catch (DataAccessException e) {
-            throw new RuntimeException(e.getMostSpecificCause().getMessage());
-        }
-    }
-
-    @Override
-    public void deleteById(Long id) {
-      identificationDocumentRepository.delete(findById(id));
-    }
-
-    @Override
-    public void delete(IdentificationDocument identificationDocument) {
+    @Transactional
+    public void delete(Long employeeId, Long id) {
+        var employee = employeeService.getById(employeeId);
+        var identificationDocument = employee.getIdentificationDocuments()
+                .stream()
+                .filter(i -> i.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification document with id: " + id + " not found"));
+        employee.removeIdentificationDocument(identificationDocument);
         identificationDocumentRepository.delete(identificationDocument);
+         employeeService.save(employee);
+    }
+    @Override
+    public List<IdentificationDocument> getAllByEmployeeId(Long employeeId) {
+        return identificationDocumentRepository.findAllByEmployeeId(employeeId);
     }
 
+    @Override
+    public IdentificationDocument getById(Long employeeId ,Long id) {
+        var employee = employeeService.getById(employeeId);
+        return employee.getIdentificationDocuments()
+                .stream()
+                .filter(i -> i.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification document with id: " + id + " not found"));
+
+    }
     @Override
     public IdentificationDocumentResponse toDTO(IdentificationDocument identificationDocument) {
-        return new IdentificationDocumentResponse(
-               identificationDocument.getId(),
-               identificationDocument.getIdentificationDocumentType().getName(),
-               identificationDocument.getSeries(),
-               identificationDocument.getNumber(),
-               identificationDocument.getIssueDate(),
-               identificationDocument.getExpiryDate(),
-               identificationDocument.getTermInYears(),
-               identificationDocument.getIssueOrganization(),
-               identificationDocument.getIssueOrganizationAddress(),
-               identificationDocument.getStatus().getName(),
-               Optional.ofNullable(identificationDocument.getResources())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(resourceService::toDTO)
-                        .collect(Collectors.toList()),
-               identificationDocument.getCreatedDate()
-        );
+        return identificationDocumentMapperService.toDTO(identificationDocument);
+    }
+
+    @Override
+    public IdentificationDocument toEntity(IdentificationDocumentRequest dto) {
+        var identificationDocument  = identificationDocumentMapperService.toEntity(new IdentificationDocument(), dto);
+        dto.files().forEach(file-> identificationDocument.addResource(resourceService.toEntity(file,null)));
+        return identificationDocument;
     }
 
     @Override
@@ -126,22 +116,7 @@ public class IdentificationDocumentServiceImpl implements IdentificationDocument
       return save(identificationDocument);
     }
 
-    @Override
-    public IdentificationDocument toEntity(IdentificationDocumentRequest dto) {
-        var identificationDocument  = IdentificationDocument.builder()
-                .identificationDocumentType(identificationDocumentTypeService.getById(dto.identificationTypeId()))
-                .series(dto.series())
-                .number(dto.number())
-                .issueDate(dto.issueDate())
-                .expiryDate(dto.expiryDate())
-                .termInYears((int) ChronoUnit.YEARS.between(dto.issueDate(), dto.expiryDate()))
-                .issueOrganization(dto.issueOrganization())
-                .issueOrganizationAddress(dto.issueOrganizationAddress())
-                .status(statusService.getById(dto.statusId()))
-                .build();
-        dto.files().forEach(file-> identificationDocument.addResource(resourceService.toEntity(file,null)));
-        return identificationDocument;
-    }
+
 
     private IdentificationDocument save(IdentificationDocument identificationDocument) {
         try {

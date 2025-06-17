@@ -24,10 +24,6 @@ public interface EmployeeService {
     EmployeeResponse toDTO(Employee employee);
     Employee save(Employee employee);
 
-    Employee addIdentificationDocument(Long id, IdentificationDocumentRequest dto);
-    Employee updateIdentificationDocument(Long id,Long identificationDocumentId, IdentificationDocumentRequest dto);
-    Employee deleteIdentificationDocument(Long id,Long identificationDocumentId);
-
     Employee addCitizenship(Long id, CitizenshipRequest dto);
     Employee updateCitizenship(Long id,Long citizenshipId, CitizenshipRequest dto);
     Employee deleteCitizenship(Long id,Long citizenshipId);
