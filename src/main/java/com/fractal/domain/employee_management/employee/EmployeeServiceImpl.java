@@ -5,11 +5,7 @@ import com.fractal.domain.dictionary.gender.GenderService;
 import com.fractal.domain.dictionary.marital_status.MaritalStatusService;
 import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.address.EmployeeAddress;
-import com.fractal.domain.employee_management.address.EmployeeAddressDomainService;
-import com.fractal.domain.employee_management.address.EmployeeAddressService;
-import com.fractal.domain.employee_management.address.dto.EmployeeAddressRequest;
-import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
+import com.fractal.domain.employee_management.address.mapper.EmployeeAddressMapperService;
 import com.fractal.domain.employee_management.citizenship.CitizenshipService;
 import com.fractal.domain.employee_management.citizenship.dto.CitizenshipRequest;
 import com.fractal.domain.employee_management.contact.EmployeeContactService;
@@ -41,7 +37,7 @@ import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
-class EmployeeServiceImpl implements EmployeeService, EmployeeAddressService {
+class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
 
@@ -51,7 +47,7 @@ class EmployeeServiceImpl implements EmployeeService, EmployeeAddressService {
     private final StatusService statusService;
     private final IdentificationDocumentService identificationDocumentService;
     private final CitizenshipService citizenshipService;
-    private final EmployeeAddressDomainService addressDomainService;
+    private final EmployeeAddressMapperService addressMapperService;
     private final EmployeeContactService contactService;
     private final EducationService educationService;
     private final RelativeService relativeService;
@@ -97,7 +93,7 @@ class EmployeeServiceImpl implements EmployeeService, EmployeeAddressService {
 
         dto.identificationDocuments().forEach(identificationDocument->employee.addIdentificationDocument(identificationDocumentService.toEntity(identificationDocument)));
         dto.citizenships().forEach(citizenship-> employee.addCitizenship(citizenshipService.toEntity(citizenship)));
-        dto.addresses().forEach(address->employee.addAddress(addressDomainService.toEntity(address)));
+        dto.addresses().forEach(address->employee.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact->employee.addContact(contactService.toEntity(contact)));
         dto.educations().forEach(education->employee.addEducation(educationService.toEntity(education)));
         dto.relatives().forEach(relative->employee.addRelative(relativeService.toEntity(relative)));
@@ -138,7 +134,7 @@ class EmployeeServiceImpl implements EmployeeService, EmployeeAddressService {
                 Optional.ofNullable(employee.getAddresses())
                         .orElse(emptyList())
                         .stream()
-                        .map(addressDomainService::toDTO)
+                        .map(addressMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(employee.getContacts())
                         .orElse(emptyList())
@@ -191,7 +187,7 @@ class EmployeeServiceImpl implements EmployeeService, EmployeeAddressService {
                 .build();
         dto.identificationDocuments().forEach(identificationDocument->employee.addIdentificationDocument(identificationDocumentService.toEntity(identificationDocument)));
         dto.citizenships().forEach(citizenship-> employee.addCitizenship(citizenshipService.toEntity(citizenship)));
-        dto.addresses().forEach(address->employee.addAddress(addressDomainService.toEntity(address)));
+        dto.addresses().forEach(address->employee.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact->employee.addContact(contactService.toEntity(contact)));
         dto.educations().forEach(education->employee.addEducation(educationService.toEntity(education)));
         dto.relatives().forEach(relative->employee.addRelative(relativeService.toEntity(relative)));
@@ -261,48 +257,6 @@ class EmployeeServiceImpl implements EmployeeService, EmployeeAddressService {
         employee.removeCitizenship(citizenship);
         citizenshipService.delete(citizenship);
         return save(employee);
-    }
-
-
-
-
-    @Override
-    @Transactional
-    public EmployeeAddress addAddress(Long id, EmployeeAddressRequest dto) {
-        var employee = findById(id);
-        EmployeeAddress address = addressDomainService.toEntity(dto);
-        employee.addAddress(address);
-        save(employee);
-        return address;
-    }
-
-
-    @Override
-    @Transactional
-    public EmployeeAddress updateAddress(Long id, Long addressId, EmployeeAddressRequest dto) {
-        var employee = findById(id);
-        var address = employee.getAddresses()
-                .stream()
-                .filter(a-> a.getId().equals(addressId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee address with id: " + addressId + " not found"));
-        address = addressDomainService.update(address,dto);
-        save(employee);
-        return address;
-    }
-
-    @Override
-    @Transactional
-    public void deleteAddress(Long id, Long addressId) {
-        var employee = findById(id);
-        var address = employee.getAddresses()
-                .stream()
-                .filter(a-> a.getId().equals(addressId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee address with id: " + addressId + " not found"));
-        employee.removeAddress(address);
-        addressDomainService.delete(address);
-    }
-
-    @Override
-    public EmployeeAddressResponse toDTO(EmployeeAddress address) {
-        return addressDomainService.toDTO(address);
     }
 
     @Override
@@ -489,13 +443,15 @@ class EmployeeServiceImpl implements EmployeeService, EmployeeAddressService {
         return save(employee);
     }
 
-    private Employee save(Employee employee) {
+    @Override
+    public Employee save(Employee employee) {
         try {
             return employeeRepository.save(employee);
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
+
 
     private Employee findById(Long id) {
         return employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee with id: " + id + " not found"));

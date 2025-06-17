@@ -3,10 +3,14 @@ package com.fractal.domain.employee_management.address;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressRequest;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
 
+import java.util.List;
+
 public interface EmployeeAddressService {
-    EmployeeAddress addAddress(Long id, EmployeeAddressRequest dto);
-    EmployeeAddress updateAddress(Long id,Long addressId, EmployeeAddressRequest dto);
-    void deleteAddress(Long id, Long addressId);
+    EmployeeAddress create(Long employeeId, EmployeeAddressRequest dto);
+    EmployeeAddress getById(Long employeeId,Long id);
+    List<EmployeeAddress> getAllByEmployeeId(Long employeeId);
+    EmployeeAddress update(Long employeeId,Long id, EmployeeAddressRequest dto);
+    void delete(Long employeeId, Long id);
     EmployeeAddressResponse toDTO(EmployeeAddress address);
 
 }

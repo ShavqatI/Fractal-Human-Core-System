@@ -1,5 +1,6 @@
-package com.fractal.domain.employee_management.address;
+package com.fractal.domain.employee_management.address.mapper;
 
+import com.fractal.domain.employee_management.address.EmployeeAddress;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressRequest;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
 import com.fractal.domain.location.address.type.AddressTypeService;
@@ -12,8 +13,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-class EmployeeAddressDomainServiceImpl implements EmployeeAddressDomainService {
-    private final EmployeeAddressRepository employeeAddressRepository;
+class EmployeeAddressMapperServiceImpl implements EmployeeAddressMapperService {
+
     private final AddressTypeService addressTypeService;
     private final CountryService countryService;
     private final RegionService regionService;
@@ -66,7 +67,7 @@ class EmployeeAddressDomainServiceImpl implements EmployeeAddressDomainService {
     }
 
     @Override
-    public EmployeeAddress update(EmployeeAddress address, EmployeeAddressRequest dto) {
+    public EmployeeAddress toEntity(EmployeeAddress address, EmployeeAddressRequest dto) {
         address.setAddressType(addressTypeService.getById(dto.addressTypeId()));
         address.setCountry(countryService.getById(dto.countryId()));
         address.setRegion(regionService.getById(dto.regionId()));
@@ -82,11 +83,7 @@ class EmployeeAddressDomainServiceImpl implements EmployeeAddressDomainService {
         address.setLongitude(dto.longitude());
         address.setStartDate(dto.startDate());
         address.setEndDate(dto.endDate());
-       return employeeAddressRepository.save(address);
+      return address;
     }
 
-    @Override
-    public void delete(EmployeeAddress address) {
-        employeeAddressRepository.delete(address);
-    }
 }
