@@ -28,7 +28,6 @@ public class EmployeeAddressController {
     public ResponseEntity<List<EmployeeAddressResponse>> getAll(@PathVariable Long employeeId) {
         return ResponseEntity.ok(addressService.getAllByEmployeeId(employeeId).stream().map(addressService::toDTO).collect(Collectors.toList()));
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeAddressResponse> getById(@PathVariable Long employeeId,@PathVariable Long id) {
         return ResponseEntity.ok(addressService.toDTO(addressService.getById(employeeId,id)));
