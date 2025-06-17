@@ -47,27 +47,15 @@ class EmployeeAddressMapperServiceImpl implements EmployeeAddressMapperService {
 
     @Override
     public EmployeeAddress toEntity(EmployeeAddressRequest dto) {
-        return EmployeeAddress.builder()
-                .addressType(addressTypeService.getById(dto.addressTypeId()))
-                .country(countryService.getById(dto.countryId()))
-                .region(regionService.getById(dto.regionId()))
-                .city(cityService.getById(dto.cityId()))
-                .district(districtService.getById(dto.districtId()))
-                .street(dto.street())
-                .house(dto.house())
-                .apartment(dto.apartment())
-                .postalCode(dto.postalCode())
-                .buildingNumber(dto.buildingNumber())
-                .floorNumber(dto.floorNumber())
-                .latitude(dto.latitude())
-                .longitude(dto.longitude())
-                .startDate(dto.startDate())
-                .endDate(dto.endDate())
-                .build();
+        return mapToEntity(new EmployeeAddress(),dto);
     }
 
     @Override
     public EmployeeAddress toEntity(EmployeeAddress address, EmployeeAddressRequest dto) {
+       return mapToEntity(address,dto);
+    }
+
+    private EmployeeAddress mapToEntity(EmployeeAddress address, EmployeeAddressRequest dto) {
         address.setAddressType(addressTypeService.getById(dto.addressTypeId()));
         address.setCountry(countryService.getById(dto.countryId()));
         address.setRegion(regionService.getById(dto.regionId()));
@@ -83,7 +71,7 @@ class EmployeeAddressMapperServiceImpl implements EmployeeAddressMapperService {
         address.setLongitude(dto.longitude());
         address.setStartDate(dto.startDate());
         address.setEndDate(dto.endDate());
-      return address;
+        return address;
     }
 
 }
