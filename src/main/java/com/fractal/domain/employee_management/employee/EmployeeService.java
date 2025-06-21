@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.employee;
 
-import com.fractal.domain.employee_management.education.dto.EducationRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
@@ -19,11 +18,6 @@ public interface EmployeeService {
     void deleteById(Long id);
     EmployeeResponse toDTO(Employee employee);
     Employee save(Employee employee);
-
-
-    Employee addEducation(Long id, EducationRequest dto);
-    Employee updateEducation(Long id,Long educationId, EducationRequest dto);
-    Employee deleteEducation(Long id,Long educationId);
 
     Employee addRelative(Long id, RelativeRequest dto);
     Employee updateRelative(Long id,Long relativeId, RelativeRequest dto);

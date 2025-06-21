@@ -57,10 +57,9 @@ public class IdentificationDocumentServiceImpl implements IdentificationDocument
         var identificationDocument = employee.getIdentificationDocuments()
                 .stream()
                 .filter(i-> i.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification document with id: " + id + " not found"));
-        var finalIdentificationDocument = identificationDocumentMapperService.toEntity(identificationDocument,dto);;
-        identificationDocumentRepository.save(finalIdentificationDocument);
+        identificationDocument = identificationDocumentRepository.save(identificationDocumentMapperService.toEntity(identificationDocument,dto));
         employeeService.save(employee);
-        return finalIdentificationDocument;
+        return identificationDocument;
     }
 
     @Override

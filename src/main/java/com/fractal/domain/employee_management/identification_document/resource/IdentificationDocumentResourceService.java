@@ -8,7 +8,6 @@ import java.util.List;
 public interface IdentificationDocumentResourceService {
 
     IdentificationDocumentResource create(Long identificationDocumentId, MultipartFile file);
-
     List<IdentificationDocumentResource> getAllByIdentificationDocumentId(Long identificationDocumentId);
     IdentificationDocumentResource getById(Long identificationDocumentId ,Long id);
     IdentificationDocumentResource update(Long identificationDocumentId,Long id, MultipartFile file);

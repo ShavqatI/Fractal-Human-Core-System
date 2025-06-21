@@ -47,8 +47,7 @@ class CitizenshipServiceImpl implements CitizenshipService {
         var citizenship = employee.getCitizenships()
                 .stream()
                 .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
-        citizenship = mapperService.toEntity(citizenship,dto);
-        citizenshipRepository.save(citizenship);
+        citizenship = citizenshipRepository.save(mapperService.toEntity(citizenship,dto));
         employeeService.save(employee);
        return citizenship;
     }
