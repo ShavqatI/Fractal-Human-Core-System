@@ -18,7 +18,6 @@ import java.util.List;
 class EducationServiceImpl implements EducationService {
 
     private final EducationRepository educationRepository;
-    private final EducationResourceService resourceService;
     private final EducationMapperService mapperService;
     private final EmployeeService employeeService;
 
