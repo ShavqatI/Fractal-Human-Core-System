@@ -16,7 +16,4 @@ public interface EducationService {
     void delete(Long employeeId, Long id);
     EducationResponse toDTO(Education education);
     Education save(Education education);
-    Education addResource(Long id, MultipartFile file, String url);
-    Education updateResource(Long id, Long resourceId, MultipartFile file);
-    Education deleteResource(Long id, Long resourceId);
 }
