@@ -13,30 +13,30 @@ import org.springframework.web.multipart.MultipartFile;
 @RequiredArgsConstructor
 class IdentificationDocumentResourceMapperServiceImpl implements IdentificationDocumentResourceMapperService {
 
-    private final ResourceMapperService mapperService;
+    private final ResourceMapperService resourceMapperService;
 
     @Override
     public ResourceResponse toDTO(Resource resource) {
-        return mapperService.toDTO(resource);
+        return resourceMapperService.toDTO(resource);
     }
 
     @Override
     public IdentificationDocumentResource toEntity(ResourceRequest dto) {
-        return (IdentificationDocumentResource) mapperService.toEntity(dto);
+        return (IdentificationDocumentResource) resourceMapperService.toEntity(dto);
     }
 
     @Override
     public IdentificationDocumentResource toEntity(MultipartFile file, String url) {
-        return (IdentificationDocumentResource) mapperService.toEntity(file,url);
+        return (IdentificationDocumentResource) resourceMapperService.toEntity(file,url);
     }
 
     @Override
     public IdentificationDocumentResource toEntity(Resource resource, ResourceRequest dto) {
-        return (IdentificationDocumentResource) mapperService.toEntity(resource,dto);
+        return (IdentificationDocumentResource) resourceMapperService.toEntity(resource,dto);
     }
 
     @Override
     public ResourceRequest fileToRequest(MultipartFile file, String url) {
-        return mapperService.fileToRequest(file,url);
+        return resourceMapperService.fileToRequest(file,url);
     }
 }

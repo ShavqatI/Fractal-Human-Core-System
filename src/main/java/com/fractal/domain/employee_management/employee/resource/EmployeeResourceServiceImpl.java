@@ -3,6 +3,7 @@ package com.fractal.domain.employee_management.employee.resource;
 import com.fractal.domain.resource.ResourceService;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;
+import com.fractal.domain.resource.mapper.ResourceMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -14,20 +15,20 @@ import org.springframework.web.multipart.MultipartFile;
 public class EmployeeResourceServiceImpl implements EmployeeResourceService {
 
     private final EmployeeResourceRepository resourceRepository;
-    private final ResourceService resourceService;
+    private final ResourceMapperService resourceMapperService;
     @Override
     public ResourceResponse toDTO(EmployeeResource resource) {
-        return resourceService.toDTO(resource);
+        return resourceMapperService.toDTO(resource);
     }
 
     @Override
     public EmployeeResource toEntity(ResourceRequest dto) {
-        return (EmployeeResource) resourceService.toEntity(dto);
+        return (EmployeeResource) resourceMapperService.toEntity(dto);
     }
 
     @Override
     public EmployeeResource toEntity(MultipartFile file, String url) {
-        return (EmployeeResource) resourceService.toEntity(file,url);
+        return (EmployeeResource) resourceMapperService.toEntity(file,url);
     }
 
     @Override
@@ -46,7 +47,7 @@ public class EmployeeResourceServiceImpl implements EmployeeResourceService {
 
     @Override
     public ResourceRequest fileToRequest(MultipartFile file, String url) {
-        return resourceService.fileToRequest(file,url);
+        return resourceMapperService.fileToRequest(file,url);
     }
 
     @Override
