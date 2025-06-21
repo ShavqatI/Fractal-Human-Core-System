@@ -2,7 +2,6 @@ package com.fractal.domain.employee_management.education;
 
 import com.fractal.domain.employee_management.education.dto.EducationRequest;
 import com.fractal.domain.employee_management.education.dto.EducationResponse;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

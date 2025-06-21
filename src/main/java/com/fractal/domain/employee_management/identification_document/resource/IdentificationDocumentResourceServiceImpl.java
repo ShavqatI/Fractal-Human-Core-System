@@ -1,8 +1,8 @@
 package com.fractal.domain.employee_management.identification_document.resource;
 
 import com.fractal.domain.employee_management.identification_document.IdentificationDocumentService;
+import com.fractal.domain.employee_management.identification_document.resource.mapper.IdentificationDocumentResourceMapperService;
 import com.fractal.domain.resource.dto.ResourceResponse;
-import com.fractal.domain.resource.mapper.ResourceMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.util.List;
 public class IdentificationDocumentResourceServiceImpl implements IdentificationDocumentResourceService {
 
     private final IdentificationDocumentResourceRepository resourceRepository;
-    private final ResourceMapperService resourceMapperService;
+    private final IdentificationDocumentResourceMapperService resourceMapperService;
     private final IdentificationDocumentService identificationDocumentService;
 
     @Override

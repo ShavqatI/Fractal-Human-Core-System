@@ -1,8 +1,8 @@
 package com.fractal.domain.employee_management.education.resource;
 
 import com.fractal.domain.employee_management.education.EducationService;
+import com.fractal.domain.employee_management.education.resource.mapper.EducationResourceMapperService;
 import com.fractal.domain.resource.dto.ResourceResponse;
-import com.fractal.domain.resource.mapper.ResourceMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,13 +15,13 @@ import java.util.List;
 public class EducationResourceServiceImpl implements EducationResourceService {
 
     private final EducationResourceRepository resourceRepository;
-    private final ResourceMapperService resourceMapperService;
+    private final EducationResourceMapperService resourceMapperService;
     private final EducationService educationService;
 
     @Override
     public EducationResource create(Long educationId, MultipartFile file) {
         var education = educationService.getById(educationId);
-        var resource = (EducationResource) resourceMapperService.toEntity(file,null);
+        var resource =  resourceMapperService.toEntity(file,null);
         education.addResource(resource);
         educationService.save(education);
         return resource;
@@ -43,7 +43,7 @@ public class EducationResourceServiceImpl implements EducationResourceService {
         var resource = education.getResources()
                 .stream()
                 .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
-        resource = (EducationResource) resourceMapperService.toEntity(resource,resourceMapperService.fileToRequest(file,null));
+        resource = resourceMapperService.toEntity(resource,resourceMapperService.fileToRequest(file,null));
         resourceRepository.save(resource);
         educationService.save(education);
         return resource;
