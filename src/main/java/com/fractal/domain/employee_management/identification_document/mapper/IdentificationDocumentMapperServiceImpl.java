@@ -4,8 +4,9 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.identification_document.IdentificationDocument;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentResponse;
-import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResourceService;
+import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.employee_management.identification_document.type.IdentificationDocumentTypeService;
+import com.fractal.domain.resource.mapper.ResourceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ import static java.util.Collections.emptyList;
 class IdentificationDocumentMapperServiceImpl implements IdentificationDocumentMapperService {
 
     private final IdentificationDocumentTypeService identificationDocumentTypeService;
-    private final IdentificationDocumentResourceService resourceService;
+    private final ResourceMapperService resourceMapperService;
     private final StatusService statusService;
 
     @Override
@@ -39,7 +40,7 @@ class IdentificationDocumentMapperServiceImpl implements IdentificationDocumentM
                 Optional.ofNullable(identificationDocument.getResources())
                         .orElse(emptyList())
                         .stream()
-                        .map(resourceService::toDTO)
+                        .map(resourceMapperService::toDTO)
                         .collect(Collectors.toList()),
                 identificationDocument.getCreatedDate()
         );
@@ -65,7 +66,7 @@ class IdentificationDocumentMapperServiceImpl implements IdentificationDocumentM
         identificationDocument.setIssueOrganization(dto.issueOrganization());
         identificationDocument.setIssueOrganizationAddress(dto.issueOrganizationAddress());
         identificationDocument.setStatus(statusService.getById(dto.statusId()));
-        //dto.files().forEach(file-> identificationDocument.addResource(resourceService.toEntity(file,null)));
+        dto.files().forEach(file-> identificationDocument.addResource((IdentificationDocumentResource) resourceMapperService.toEntity(file,null)));
         return identificationDocument;
     }
 

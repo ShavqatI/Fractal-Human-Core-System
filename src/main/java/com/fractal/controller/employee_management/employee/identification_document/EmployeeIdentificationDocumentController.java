@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management.employee;
+package com.fractal.controller.employee_management.employee.identification_document;
 
 
 import com.fractal.domain.employee_management.identification_document.IdentificationDocumentService;

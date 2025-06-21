@@ -13,9 +13,9 @@ public interface IdentificationDocumentService {
     void delete(Long employeeId,Long id);
     List<IdentificationDocument> getAllByEmployeeId(Long employeeId);
     IdentificationDocument getById(Long employeeId ,Long id);
+    IdentificationDocument getById(Long id);
+    IdentificationDocument save(IdentificationDocument identificationDocument);
     IdentificationDocumentResponse toDTO(IdentificationDocument identificationDocument);
-    IdentificationDocument toEntity(IdentificationDocumentRequest dto);
-    IdentificationDocument addResource(Long id, MultipartFile file);
-    IdentificationDocument updateResource(Long id,Long resourceId, MultipartFile file);
-    IdentificationDocument deleteResource(Long id,Long resourceId);
+    //IdentificationDocument toEntity(IdentificationDocumentRequest dto);
+
 }

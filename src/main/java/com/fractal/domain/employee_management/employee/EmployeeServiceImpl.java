@@ -17,6 +17,7 @@ import com.fractal.domain.employee_management.employee.resource.EmployeeResource
 import com.fractal.domain.employee_management.employment.EmploymentHistoryService;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
 import com.fractal.domain.employee_management.identification_document.IdentificationDocumentService;
+import com.fractal.domain.employee_management.identification_document.mapper.IdentificationDocumentMapperService;
 import com.fractal.domain.employee_management.military_service.MilitaryServiceService;
 import com.fractal.domain.employee_management.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.employee_management.relative.RelativeService;
@@ -44,7 +45,7 @@ class EmployeeServiceImpl implements EmployeeService {
     private final MaritalStatusService maritalStatusService;
     private final NationalityService nationalityService;
     private final StatusService statusService;
-    private final IdentificationDocumentService identificationDocumentService;
+    private final IdentificationDocumentMapperService identificationDocumentMapperService;
     private final CitizenshipService citizenshipService;
     private final EmployeeAddressMapperService addressMapperService;
     private final EmployeeContactService contactService;
@@ -90,7 +91,7 @@ class EmployeeServiceImpl implements EmployeeService {
         employee.setNationality(nationalityService.getById(dto.nationalityId()));
         employee.setStatus(statusService.getById(dto.statusId()));
 
-        dto.identificationDocuments().forEach(identificationDocument->employee.addIdentificationDocument(identificationDocumentService.toEntity(identificationDocument)));
+        dto.identificationDocuments().forEach(identificationDocument->employee.addIdentificationDocument(identificationDocumentMapperService.toEntity(identificationDocument)));
         dto.citizenships().forEach(citizenship-> employee.addCitizenship(citizenshipService.toEntity(citizenship)));
         dto.addresses().forEach(address->employee.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact->employee.addContact(contactService.toEntity(contact)));
@@ -123,7 +124,7 @@ class EmployeeServiceImpl implements EmployeeService {
                 Optional.ofNullable(employee.getIdentificationDocuments())
                         .orElse(emptyList())
                         .stream()
-                        .map(identificationDocumentService::toDTO)
+                        .map(identificationDocumentMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(employee.getCitizenships())
                         .orElse(emptyList())
@@ -184,7 +185,7 @@ class EmployeeServiceImpl implements EmployeeService {
                 .nationality(nationalityService.getById(dto.nationalityId()))
                 .status(statusService.getById(dto.statusId()))
                 .build();
-        dto.identificationDocuments().forEach(identificationDocument->employee.addIdentificationDocument(identificationDocumentService.toEntity(identificationDocument)));
+        dto.identificationDocuments().forEach(identificationDocument->employee.addIdentificationDocument(identificationDocumentMapperService.toEntity(identificationDocument)));
         dto.citizenships().forEach(citizenship-> employee.addCitizenship(citizenshipService.toEntity(citizenship)));
         dto.addresses().forEach(address->employee.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact->employee.addContact(contactService.toEntity(contact)));
