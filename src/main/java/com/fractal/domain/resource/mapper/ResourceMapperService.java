@@ -1,6 +1,5 @@
 package com.fractal.domain.resource.mapper;
 
-import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.resource.Resource;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;

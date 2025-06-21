@@ -4,13 +4,11 @@ import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentResponse;
 import com.fractal.domain.employee_management.identification_document.mapper.IdentificationDocumentMapperService;
-import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResourceService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,11 +17,7 @@ import java.util.List;
 public class IdentificationDocumentServiceImpl implements IdentificationDocumentService {
 
     private final EmployeeService employeeService;
-
     private final IdentificationDocumentRepository identificationDocumentRepository;
-
-    private final IdentificationDocumentResourceService resourceService;
-
     private final IdentificationDocumentMapperService identificationDocumentMapperService;
 
 
@@ -32,7 +26,6 @@ public class IdentificationDocumentServiceImpl implements IdentificationDocument
     public IdentificationDocument create(Long employeeId, IdentificationDocumentRequest dto) {
         var employee = employeeService.getById(employeeId);
         var identificationDocument = identificationDocumentMapperService.toEntity(dto);
-        //dto.files().forEach(file-> identificationDocument.addResource(resourceService.toEntity(file,null)));
         employee.addIdentificationDocument(identificationDocument);
         employeeService.save(employee);
         return identificationDocument;
@@ -54,7 +47,7 @@ public class IdentificationDocumentServiceImpl implements IdentificationDocument
 
     @Override
     public IdentificationDocument getById(Long id) {
-        return identificationDocumentRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Identification document with id: " + id + " not found"));
+        return findById(id);
     }
 
     @Override
@@ -65,7 +58,6 @@ public class IdentificationDocumentServiceImpl implements IdentificationDocument
                 .stream()
                 .filter(i-> i.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification document with id: " + id + " not found"));
         var finalIdentificationDocument = identificationDocumentMapperService.toEntity(identificationDocument,dto);;
-        //dto.files().forEach(file-> finalIdentificationDocument.addResource(resourceService.toEntity(file,null)));
         identificationDocumentRepository.save(finalIdentificationDocument);
         employeeService.save(employee);
         return finalIdentificationDocument;
@@ -87,7 +79,7 @@ public class IdentificationDocumentServiceImpl implements IdentificationDocument
     public IdentificationDocumentResponse toDTO(IdentificationDocument identificationDocument) {
         return identificationDocumentMapperService.toDTO(identificationDocument);
     }
-
+    @Override
     public IdentificationDocument save(IdentificationDocument identificationDocument) {
         try {
             return identificationDocumentRepository.save(identificationDocument);
