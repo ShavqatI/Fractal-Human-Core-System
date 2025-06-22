@@ -1,16 +1,17 @@
 package com.fractal.domain.employee_management.employee.resource;
 
-import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public interface EmployeeResourceService {
 
+    EmployeeResource create(Long employeeId, MultipartFile file);
+    List<EmployeeResource> getAllByEmployeeId(Long employeeId);
+    EmployeeResource getById(Long employeeId ,Long id);
+    EmployeeResource update(Long employeeId,Long id, MultipartFile file);
+    void delete(Long employeeId,Long id);
     ResourceResponse toDTO(EmployeeResource resource);
-    EmployeeResource toEntity(ResourceRequest dto);
-    EmployeeResource toEntity(MultipartFile file, String url);
-    EmployeeResource update(EmployeeResource resource, ResourceRequest dto);
-    ResourceRequest fileToRequest(MultipartFile file,String url);
-    void delete(EmployeeResource resource);
-    EmployeeResource findById(Long id);
+
 }

@@ -11,7 +11,7 @@ import com.fractal.domain.employee_management.education.mapper.EducationMapperSe
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
-import com.fractal.domain.employee_management.employee.resource.EmployeeResourceService;
+import com.fractal.domain.employee_management.employee.resource.mapper.EmployeeResourceMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmploymentHistoryMapperService;
 import com.fractal.domain.employee_management.identification_document.mapper.IdentificationDocumentMapperService;
 import com.fractal.domain.employee_management.military_service.mapper.MilitaryServiceMapperService;
@@ -40,7 +40,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
     private final RelativeMapperService relativeMapperService;
     private final MilitaryServiceMapperService militaryServiceMapperService;
     private final EmploymentHistoryMapperService employmentHistoryMapperService;
-    private final EmployeeResourceService resourceService;
+    private final EmployeeResourceMapperService employeeResourceMapperService;
 
     @Override
     public EmployeeResponse toDTO(Employee employee) {
@@ -98,7 +98,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                 Optional.ofNullable(employee.getResources())
                         .orElse(emptyList())
                         .stream()
-                        .map(resourceService::toDTO)
+                        .map(employeeResourceMapperService::toDTO)
                         .collect(Collectors.toList()),
                 employee.getStatus().getName(),
                 employee.getCreatedDate()

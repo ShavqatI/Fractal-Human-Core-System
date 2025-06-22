@@ -3,13 +3,11 @@ package com.fractal.domain.employee_management.employee;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employee.mapper.EmployeeMapperService;
-import com.fractal.domain.employee_management.employee.resource.EmployeeResourceService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,13 +16,12 @@ import java.util.List;
 class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
-    private final EmployeeResourceService resourceService;
     private final EmployeeMapperService employeeMapperService;
 
     @Override
     @Transactional
     public Employee create(EmployeeRequest dto) {
-        return save(toEntity(dto));
+        return save(employeeMapperService.toEntity(dto));
     }
 
     @Override
@@ -58,42 +55,6 @@ class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeResponse toDTO(Employee employee) {
        return employeeMapperService.toDTO(employee);
-    }
-
-    private Employee toEntity(EmployeeRequest dto) {
-        return employeeMapperService.toEntity(dto);
-    }
-
-    @Override
-    @Transactional
-    public Employee addResource(Long id, MultipartFile file, String url) {
-        var employee = findById(id);
-        var resource = resourceService.toEntity(file,url);
-        employee.addResource(resource);
-        return save(employee);
-    }
-
-    @Override
-    @Transactional
-    public Employee updateResource(Long id, Long resourceId, MultipartFile file) {
-        var employee = findById(id);
-        var resource = employee.getResources()
-                .stream()
-                .filter(r -> r.getId().equals(resourceId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee Resource  with id: " + resourceId + " not found"));
-        resourceService.update(resource,resourceService.fileToRequest(file,null));
-        return save(employee);
-    }
-
-    @Override
-    @Transactional
-    public Employee deleteResource(Long id, Long resourceId) {
-        var employee = findById(id);
-        var resource = employee.getResources()
-                .stream()
-                .filter(r -> r.getId().equals(resourceId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee Resource  with id: " + resourceId + " not found"));
-        employee.removeResource(resource);
-        resourceService.delete(resource);
-        return save(employee);
     }
 
     @Override
