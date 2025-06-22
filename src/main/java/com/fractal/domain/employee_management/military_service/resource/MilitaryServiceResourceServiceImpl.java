@@ -2,12 +2,9 @@ package com.fractal.domain.employee_management.military_service.resource;
 
 import com.fractal.domain.employee_management.military_service.MilitaryServiceService;
 import com.fractal.domain.employee_management.military_service.resource.mapper.MilitaryServiceResourceMapperService;
-import com.fractal.domain.resource.ResourceService;
-import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;

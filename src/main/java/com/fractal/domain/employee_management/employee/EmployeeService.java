@@ -2,8 +2,6 @@ package com.fractal.domain.employee_management.employee;
 
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
-import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
-import com.fractal.domain.employee_management.military_service.dto.MilitaryServiceRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -17,11 +15,6 @@ public interface EmployeeService {
     void deleteById(Long id);
     EmployeeResponse toDTO(Employee employee);
     Employee save(Employee employee);
-
-    Employee addEmploymentHistory(Long id, EmploymentHistoryRequest dto);
-    Employee updateEmploymentHistory(Long id,Long employmentHistoryId, EmploymentHistoryRequest dto);
-    Employee deleteEmploymentHistory(Long id,Long employmentHistoryId);
-
     Employee addResource(Long id, MultipartFile file, String url);
     Employee updateResource(Long id, Long resourceId, MultipartFile file);
     Employee deleteResource(Long id, Long resourceId);

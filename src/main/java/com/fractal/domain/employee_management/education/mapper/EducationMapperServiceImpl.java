@@ -9,8 +9,8 @@ import com.fractal.domain.employee_management.education.dto.EducationRequest;
 import com.fractal.domain.employee_management.education.dto.EducationResponse;
 import com.fractal.domain.employee_management.education.grade_point_average.GradePointAverageService;
 import com.fractal.domain.employee_management.education.resource.EducationResource;
+import com.fractal.domain.employee_management.education.resource.mapper.EducationResourceMapperService;
 import com.fractal.domain.employee_management.education.type.EducationTypeService;
-import com.fractal.domain.resource.mapper.ResourceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ class EducationMapperServiceImpl implements EducationMapperService {
     private final DegreeTypeService degreeTypeService;
     private final GradePointAverageService gradePointAverageService;
     private final AccreditationStatusService accreditationStatusService;
-    private final ResourceMapperService resourceMapperService;
+    private final EducationResourceMapperService resourceMapperService;
     private final StatusService statusService;
 
 

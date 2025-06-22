@@ -7,7 +7,6 @@ import com.fractal.domain.employee_management.identification_document.dto.Identi
 import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.employee_management.identification_document.resource.mapper.IdentificationDocumentResourceMapperService;
 import com.fractal.domain.employee_management.identification_document.type.IdentificationDocumentTypeService;
-import com.fractal.domain.resource.mapper.ResourceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

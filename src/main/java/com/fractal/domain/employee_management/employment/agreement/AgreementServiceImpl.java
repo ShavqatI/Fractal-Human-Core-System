@@ -1,118 +1,86 @@
 package com.fractal.domain.employee_management.employment.agreement;
 
-import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employment.EmploymentHistoryService;
 import com.fractal.domain.employee_management.employment.agreement.dto.AgreementRequest;
 import com.fractal.domain.employee_management.employment.agreement.dto.AgreementResponse;
-import com.fractal.domain.employee_management.employment.agreement.resource.AgreementResourceService;
+import com.fractal.domain.employee_management.employment.agreement.mapper.AgreementMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 class AgreementServiceImpl implements AgreementService {
 
-    private final StatusService statusService;
-    private final AgreementResourceService resourceService;
     private final AgreementRepository agreementRepository;
+    private final AgreementMapperService agreementMapperService;
+    private final EmploymentHistoryService employmentHistoryService;
+
+    @Override
+    @Transactional
+    public Agreement create(Long employmentHistoryId, AgreementRequest dto) {
+        var employmentHistory = employmentHistoryService.getById(employmentHistoryId);
+        var agreement = agreementMapperService.toEntity(dto);
+        employmentHistory.addAgreement(agreement);
+        employmentHistoryService.save(employmentHistory);
+        return agreement;
+    }
+
+    @Override
+    public List<Agreement> getAllByEmploymentHistoryId(Long employmentHistoryId) {
+        return agreementRepository.findAllByEmploymentHistoryId(employmentHistoryId);
+    }
+
+    @Override
+    public Agreement getById(Long employmentHistoryId, Long id) {
+        return agreementRepository.findByEmploymentHistoryIdAndId(employmentHistoryId,id).orElseThrow(()-> new ResourceNotFoundException("Agreement with id: " + id + " not found"));
+    }
+
+    @Override
+    @Transactional
+    public Agreement update(Long employmentHistoryId, Long id, AgreementRequest dto) {
+        var employmentHistory = employmentHistoryService.getById(employmentHistoryId);
+        var agreement = employmentHistory.getAgreements()
+                .stream()
+                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Agreement with id: " + id + " not found"));
+        agreement = agreementMapperService.toEntity(agreement,dto);
+        agreementRepository.save(agreement);
+        employmentHistoryService.save(employmentHistory);
+        return agreement;
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long employmentHistoryId, Long id) {
+        var employmentHistory = employmentHistoryService.getById(employmentHistoryId);
+        var agreement = employmentHistory.getAgreements()
+                .stream()
+                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Agreement with id: " + id + " not found"));
+        agreementRepository.delete(agreement);
+        employmentHistoryService.save(employmentHistory);
+    }
 
     @Override
     public AgreementResponse toDTO(Agreement agreement) {
-        return new AgreementResponse(
-                agreement.getId(),
-                agreement.getNumber(),
-                agreement.getStartDate(),
-                agreement.getEndDate(),
-                agreement.getStatus().getName(),
-                Optional.ofNullable(agreement.getResources())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(resourceService::toDTO)
-                        .collect(Collectors.toList()),
-                agreement.getCreatedDate(),
-                agreement.getUpdatedDate()
-        );
+        return agreementMapperService.toDTO(agreement);
     }
-
     @Override
-    public Agreement toEntity(AgreementRequest dto) {
-        var agreement = Agreement.builder()
-                .number(dto.number())
-                .startDate(dto.startDate())
-                .endDate(dto.endDate())
-                .status(statusService.getById(dto.statusId()))
-                .build();
-        dto.files().forEach(file-> agreement.addResource(resourceService.toEntity(file,null)));
-      return agreement;
-    }
-
-    @Override
-    @Transactional
-    public Agreement update(Long id, AgreementRequest dto) {
-        try {
-             Agreement agreement = findById(id);
-             agreement.setNumber(dto.number());
-             agreement.setStartDate(dto.startDate());
-             agreement.setEndDate(dto.endDate());
-             agreement.setStatus(statusService.getById(dto.statusId()));
-             dto.files().forEach(file-> agreement.addResource(resourceService.toEntity(file,null)));
-           return save(agreement);
-        }
-        catch (DataAccessException e) {
-            throw new RuntimeException(e.getMostSpecificCause().getMessage());
-        }
-    }
-
-    @Override
-    @Transactional
-    public void delete(Agreement agreement) {
-         agreementRepository.delete(agreement);
-    }
-
-    @Override
-    public Agreement addResource(Long id,MultipartFile file, String url) {
-        var agreement = findById(id);
-        var resource =resourceService.toEntity(file,url);
-        agreement.addResource(resource);
-       return save(agreement);
-    }
-
-    @Override
-    public Agreement updateResource(Long id, Long resourceId, MultipartFile file) {
-        var agreement = findById(id);
-        var resource = agreement.getResources()
-                .stream()
-                .filter(r -> r.getId().equals(resourceId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Agreement Resource  with id: " + resourceId + " not found"));
-        resourceService.update(resource,resourceService.fileToRequest(file,null));
-        return save(agreement);
-    }
-
-    @Override
-    public Agreement deleteResource(Long id,Long resourceId) {
-        var agreement = findById(id);
-        var resource = agreement.getResources()
-                .stream()
-                .filter(r -> r.getId().equals(resourceId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Agreement Resource  with id: " + resourceId + " not found"));
-        agreement.removeResource(resource);
-        resourceService.delete(resource);
-        return save(agreement);
-    }
-
-    private Agreement save(Agreement agreement) {
+    public Agreement save(Agreement agreement) {
         try {
             return agreementRepository.save(agreement);
         }
         catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
+    }
+
+    @Override
+    public Agreement getById(Long id) {
+        return findById(id);
     }
 
     private Agreement findById(Long id) {

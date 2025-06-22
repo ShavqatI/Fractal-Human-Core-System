@@ -1,7 +1,5 @@
 package com.fractal.domain.employee_management.military_service.resource;
 
-import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResource;
-import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import org.springframework.web.multipart.MultipartFile;
 

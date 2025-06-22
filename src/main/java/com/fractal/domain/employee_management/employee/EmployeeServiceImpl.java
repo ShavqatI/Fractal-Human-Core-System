@@ -4,8 +4,6 @@ import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employee.mapper.EmployeeMapperService;
 import com.fractal.domain.employee_management.employee.resource.EmployeeResourceService;
-import com.fractal.domain.employee_management.employment.EmploymentHistoryService;
-import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -20,7 +18,6 @@ import java.util.List;
 class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
-    private final EmploymentHistoryService employmentHistoryService;
     private final EmployeeResourceService resourceService;
     private final EmployeeMapperService employeeMapperService;
 
@@ -65,37 +62,6 @@ class EmployeeServiceImpl implements EmployeeService {
 
     private Employee toEntity(EmployeeRequest dto) {
         return employeeMapperService.toEntity(dto);
-    }
-
-    @Override
-    @Transactional
-    public Employee addEmploymentHistory(Long id, EmploymentHistoryRequest dto) {
-        var employee = findById(id);
-        employee.addEmploymentHistory(employmentHistoryService.toEntity(dto));
-        return save(employee);
-    }
-
-    @Override
-    @Transactional
-    public Employee updateEmploymentHistory(Long id, Long employmentHistoryId, EmploymentHistoryRequest dto) {
-        var employee = findById(id);
-        var employmentHistory = employee.getEmploymentHistories()
-                .stream()
-                .filter(eh-> eh.getId().equals(employmentHistoryId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employment History with id: " + employmentHistoryId + " not found"));
-        employmentHistoryService.update(employmentHistory.getId(),dto);
-        return save(employee);
-    }
-
-    @Override
-    @Transactional
-    public Employee deleteEmploymentHistory(Long id, Long employmentHistoryId) {
-        var employee = findById(id);
-        var employmentHistory = employee.getEmploymentHistories()
-                .stream()
-                .filter(eh-> eh.getId().equals(employmentHistoryId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employment History with id: " + employmentHistoryId + " not found"));
-        employee.removeEmploymentHistory(employmentHistory);
-        employmentHistoryService.delete(employmentHistory);
-        return save(employee);
     }
 
     @Override

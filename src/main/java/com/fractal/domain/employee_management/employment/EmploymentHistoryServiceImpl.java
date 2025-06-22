@@ -1,156 +1,88 @@
 package com.fractal.domain.employee_management.employment;
 
-import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.employment.agreement.AgreementService;
-import com.fractal.domain.employee_management.employment.agreement.dto.AgreementRequest;
+import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryResponse;
-import com.fractal.domain.employee_management.employment.type.EmploymentTypeService;
-import com.fractal.domain.organization_management.department.DepartmentService;
-import com.fractal.domain.organization_management.organization.OrganizationService;
-import com.fractal.domain.organization_management.position.PositionService;
+import com.fractal.domain.employee_management.employment.mapper.EmploymentHistoryMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 class EmploymentHistoryServiceImpl implements EmploymentHistoryService {
 
     private final EmploymentHistoryRepository employmentHistoryRepository;
-    private final AgreementService agreementService;
-    private final OrganizationService organizationService;
-    private final DepartmentService departmentService;
-    private final PositionService positionService;
-    private final EmploymentTypeService employmentTypeService;
-    private final StatusService statusService;
+    private final EmploymentHistoryMapperService employmentHistoryMapperService;
+    private final EmployeeService employeeService;
 
     @Override
     @Transactional
-    public EmploymentHistory create(EmploymentHistoryRequest dto) {
-        return save(toEntity(dto));
+    public EmploymentHistory create(Long employeeId, EmploymentHistoryRequest dto) {
+        var employee = employeeService.getById(employeeId);
+        var employmentHistory = employmentHistoryMapperService.toEntity(dto);
+        employee.addEmploymentHistory(employmentHistory);
+        employeeService.save(employee);
+        return employmentHistory;
     }
 
     @Override
-    public EmploymentHistoryResponse toDTO(EmploymentHistory employmentHistory) {
-        return new EmploymentHistoryResponse(
-                employmentHistory.getId(),
-                employmentHistory.getOrderNumber(),
-                employmentHistory.getOrderDate(),
-                employmentHistory.getSerial(),
-                employmentHistory.getStartDate(),
-                employmentHistory.getEndDate(),
-                employmentHistory.getOrganization().getName(),
-                employmentHistory.getDepartment().getName(),
-                employmentHistory.getPosition().getName(),
-                employmentHistory.getEmploymentType().getName(),
-                employmentHistory.getStatus().getName(),
-                Optional.ofNullable(employmentHistory.getAgreements())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(agreementService::toDTO)
-                        .collect(Collectors.toList()),
-                employmentHistory.getCreatedDate(),
-                employmentHistory.getUpdatedDate()
-        );
+    public List<EmploymentHistory> getAllByEmployeeId(Long employeeId) {
+        return employmentHistoryRepository.findAllByEmployeeId(employeeId);
     }
 
     @Override
-    public EmploymentHistory toEntity(EmploymentHistoryRequest dto) {
-        var employmentHistory = EmploymentHistory.builder()
-                .orderNumber(dto.orderNumber())
-                .orderDate(dto.orderDate())
-                .serial(null)
-                .startDate(dto.startDate())
-                .endDate(dto.endDate())
-                .organization(organizationService.getById(dto.organizationId()))
-                .department(departmentService.getById(dto.departmentId()))
-                .position(positionService.getById(dto.positionId()))
-                .employmentType(employmentTypeService.getById(dto.employmentTypeId()))
-                .status(statusService.getById(dto.statusId()))
-                .build();
-        dto.agreements().forEach(agreementRequest -> employmentHistory.addAgreement(agreementService.toEntity(agreementRequest)));
+    public EmploymentHistory getById(Long employeeId, Long id) {
+        return employmentHistoryRepository.findByEmployeeIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Employment History with id: " + id + " not found"));
+    }
+
+    @Override
+    public EmploymentHistory getById(Long id) {
+        return findById(id);
+    }
+
+    @Override
+    @Transactional
+    public EmploymentHistory update(Long employeeId, Long id, EmploymentHistoryRequest dto) {
+        var employee = employeeService.getById(employeeId);
+        var employmentHistory = employee.getEmploymentHistories()
+                .stream()
+                .filter(eh-> eh.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employment History with id: " + id + " not found"));
+        employmentHistory = employmentHistoryMapperService.toEntity(employmentHistory,dto);
+        employmentHistoryRepository.save(employmentHistory);
+        employeeService.save(employee);
         return employmentHistory;
     }
 
     @Override
     @Transactional
-    public EmploymentHistory update(Long id, EmploymentHistoryRequest dto) {
-        try {
-           var employmentHistory = findById(id);
-            employmentHistory.setOrderNumber(dto.orderNumber());
-            employmentHistory.setOrderDate(dto.orderDate());
-            employmentHistory.setSerial(null);
-            employmentHistory.setStartDate(dto.startDate());
-            employmentHistory.setEndDate(dto.endDate());
-            employmentHistory.setOrganization(organizationService.getById(dto.organizationId()));
-            employmentHistory.setDepartment(departmentService.getById(dto.departmentId()));
-            employmentHistory.setPosition(positionService.getById(dto.positionId()));
-            employmentHistory.setEmploymentType(employmentTypeService.getById(dto.employmentTypeId()));
-            employmentHistory.setStatus(statusService.getById(dto.statusId()));
-            dto.agreements().forEach(agreementRequest -> employmentHistory.addAgreement(agreementService.toEntity(agreementRequest)));
-           return save(employmentHistory);
-        }
-        catch (DataAccessException e) {
-            throw new RuntimeException(e.getMostSpecificCause().getMessage());
-        }
-
-    }
-
-    @Override
-    @Transactional
-    public void delete(EmploymentHistory employmentHistory) {
+    public void delete(Long employeeId, Long id) {
+        var employee = employeeService.getById(employeeId);
+        var employmentHistory = employee.getEmploymentHistories()
+                .stream()
+                .filter(eh-> eh.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employment History with id: " + id + " not found"));
         employmentHistoryRepository.delete(employmentHistory);
+        employeeService.save(employee);
     }
 
     @Override
-    @Transactional
-    public EmploymentHistory addAgreement(Long id, AgreementRequest agreementRequest) {
-        var employmentHistory = findById(id);
-        employmentHistory.addAgreement(agreementService.toEntity(agreementRequest));
-        return save(employmentHistory);
-    }
-
-    @Override
-    @Transactional
-    public EmploymentHistory updateAgreement(Long id, Long agreementId, AgreementRequest agreementRequest) {
-        var employmentHistory = findById(id);
-        var agreement = employmentHistory.getAgreements()
-                .stream()
-                .filter(a-> a.getId().equals(agreementId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Agreement with id: " + agreementId + " not found"));
-        agreementService.update(agreement.getId(),agreementRequest);
-        return save(employmentHistory);
-    }
-
-    @Override
-    @Transactional
-    public EmploymentHistory deleteAgreement(Long id, Long agreementId) {
-        var employmentHistory = findById(id);
-        var agreement = employmentHistory.getAgreements()
-                .stream()
-                .filter(a-> a.getId().equals(agreementId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Agreement with id: " + agreementId + " not found"));
-        employmentHistory.removeAgreement(agreement);
-        agreementService.delete(agreement);
-        return save(employmentHistory);
-    }
-
-    private EmploymentHistory save(EmploymentHistory employmentHistory) {
+    public EmploymentHistory save(EmploymentHistory employmentHistory) {
         try {
-            return employmentHistoryRepository.save(employmentHistory);
+           return employmentHistoryRepository.save(employmentHistory);
         }
-        catch (DataAccessException e) {
+        catch (DataAccessException e){
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
-
+    @Override
+    public EmploymentHistoryResponse toDTO(EmploymentHistory employmentHistory) {
+        return employmentHistoryMapperService.toDTO(employmentHistory);
+    }
     private EmploymentHistory findById(Long id) {
         return employmentHistoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Employment History with id: " + id + " not found"));
     }

@@ -12,21 +12,13 @@ import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employee.resource.EmployeeResourceService;
-import com.fractal.domain.employee_management.employment.EmploymentHistoryService;
-import com.fractal.domain.employee_management.identification_document.IdentificationDocument;
-import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
-import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentResponse;
+import com.fractal.domain.employee_management.employment.mapper.EmploymentHistoryMapperService;
 import com.fractal.domain.employee_management.identification_document.mapper.IdentificationDocumentMapperService;
-import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResource;
-import com.fractal.domain.employee_management.identification_document.type.IdentificationDocumentTypeService;
-import com.fractal.domain.employee_management.military_service.MilitaryServiceService;
 import com.fractal.domain.employee_management.military_service.mapper.MilitaryServiceMapperService;
 import com.fractal.domain.employee_management.relative.mapper.RelativeMapperService;
-import com.fractal.domain.resource.mapper.ResourceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -47,8 +39,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
     private final EducationMapperService educationMapperService;
     private final RelativeMapperService relativeMapperService;
     private final MilitaryServiceMapperService militaryServiceMapperService;
-
-    private final EmploymentHistoryService employmentHistoryService;
+    private final EmploymentHistoryMapperService employmentHistoryMapperService;
     private final EmployeeResourceService resourceService;
 
     @Override
@@ -102,7 +93,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                 Optional.ofNullable(employee.getEmploymentHistories())
                         .orElse(emptyList())
                         .stream()
-                        .map(employmentHistoryService::toDTO)
+                        .map(employmentHistoryMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(employee.getResources())
                         .orElse(emptyList())
@@ -144,7 +135,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
         dto.educations().forEach(education->employee.addEducation(educationMapperService.toEntity(education)));
         dto.relatives().forEach(relative->employee.addRelative(relativeMapperService.toEntity(relative)));
         dto.militaryServices().forEach(militaryService->employee.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
-        dto.employmentHistories().forEach(employmentHistory->employee.addEmploymentHistory(employmentHistoryService.toEntity(employmentHistory)));
+        dto.employmentHistories().forEach(employmentHistory->employee.addEmploymentHistory(employmentHistoryMapperService.toEntity(employmentHistory)));
         return employee;
     }
 
