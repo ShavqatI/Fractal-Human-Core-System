@@ -5,6 +5,7 @@ import com.fractal.domain.employee_management.identification_document.Identifica
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.employee_management.identification_document.dto.IdentificationDocumentResponse;
 import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResource;
+import com.fractal.domain.employee_management.identification_document.resource.mapper.IdentificationDocumentResourceMapperService;
 import com.fractal.domain.employee_management.identification_document.type.IdentificationDocumentTypeService;
 import com.fractal.domain.resource.mapper.ResourceMapperService;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,7 @@ import static java.util.Collections.emptyList;
 class IdentificationDocumentMapperServiceImpl implements IdentificationDocumentMapperService {
 
     private final IdentificationDocumentTypeService identificationDocumentTypeService;
-    private final ResourceMapperService resourceMapperService;
+    private final IdentificationDocumentResourceMapperService resourceMapperService;
     private final StatusService statusService;
 
     @Override

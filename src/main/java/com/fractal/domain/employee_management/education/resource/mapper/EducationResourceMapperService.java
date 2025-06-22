@@ -7,10 +7,10 @@ import com.fractal.domain.resource.dto.ResourceResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface EducationResourceMapperService {
-    ResourceResponse toDTO(Resource resource);
+    ResourceResponse toDTO(EducationResource resource);
     EducationResource toEntity(ResourceRequest dto);
     EducationResource toEntity(MultipartFile file, String url);
-    EducationResource toEntity(Resource resource, ResourceRequest dto);
+    EducationResource toEntity(EducationResource resource, ResourceRequest dto);
     ResourceRequest fileToRequest(MultipartFile file,String url);
 }
 

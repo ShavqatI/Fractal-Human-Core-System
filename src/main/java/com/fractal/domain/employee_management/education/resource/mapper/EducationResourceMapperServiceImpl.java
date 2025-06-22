@@ -16,7 +16,7 @@ class EducationResourceMapperServiceImpl implements EducationResourceMapperServi
     private final ResourceMapperService mapperService;
 
     @Override
-    public ResourceResponse toDTO(Resource resource) {
+    public ResourceResponse toDTO(EducationResource resource) {
         return mapperService.toDTO(resource);
     }
 
@@ -31,7 +31,7 @@ class EducationResourceMapperServiceImpl implements EducationResourceMapperServi
     }
 
     @Override
-    public EducationResource toEntity(Resource resource, ResourceRequest dto) {
+    public EducationResource toEntity(EducationResource resource, ResourceRequest dto) {
         return (EducationResource) mapperService.toEntity(resource,dto);
     }
 

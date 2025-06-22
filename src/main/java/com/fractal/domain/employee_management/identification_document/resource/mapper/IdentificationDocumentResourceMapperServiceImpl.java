@@ -16,7 +16,7 @@ class IdentificationDocumentResourceMapperServiceImpl implements IdentificationD
     private final ResourceMapperService resourceMapperService;
 
     @Override
-    public ResourceResponse toDTO(Resource resource) {
+    public ResourceResponse toDTO(IdentificationDocumentResource resource) {
         return resourceMapperService.toDTO(resource);
     }
 
@@ -31,7 +31,7 @@ class IdentificationDocumentResourceMapperServiceImpl implements IdentificationD
     }
 
     @Override
-    public IdentificationDocumentResource toEntity(Resource resource, ResourceRequest dto) {
+    public IdentificationDocumentResource toEntity(IdentificationDocumentResource resource, ResourceRequest dto) {
         return (IdentificationDocumentResource) resourceMapperService.toEntity(resource,dto);
     }
 

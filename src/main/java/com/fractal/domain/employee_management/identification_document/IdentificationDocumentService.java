@@ -15,6 +15,6 @@ public interface IdentificationDocumentService {
     IdentificationDocument getById(Long id);
     IdentificationDocument save(IdentificationDocument identificationDocument);
     IdentificationDocumentResponse toDTO(IdentificationDocument identificationDocument);
-    //IdentificationDocument toEntity(IdentificationDocumentRequest dto);
+
 
 }

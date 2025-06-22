@@ -18,10 +18,6 @@ public interface EmployeeService {
     EmployeeResponse toDTO(Employee employee);
     Employee save(Employee employee);
 
-    Employee addMilitaryService(Long id, MilitaryServiceRequest dto);
-    Employee updateMilitaryService(Long id,Long militaryServiceId, MilitaryServiceRequest dto);
-    Employee deleteMilitaryService(Long id,Long militaryServiceId);
-
     Employee addEmploymentHistory(Long id, EmploymentHistoryRequest dto);
     Employee updateEmploymentHistory(Long id,Long employmentHistoryId, EmploymentHistoryRequest dto);
     Employee deleteEmploymentHistory(Long id,Long employmentHistoryId);
