@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.employee.resource;
 
-import com.fractal.domain.resource.ResourceService;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import com.fractal.domain.resource.mapper.ResourceMapperService;

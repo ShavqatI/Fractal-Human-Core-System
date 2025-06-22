@@ -16,8 +16,7 @@ import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRe
 import com.fractal.domain.employee_management.identification_document.mapper.IdentificationDocumentMapperService;
 import com.fractal.domain.employee_management.military_service.MilitaryServiceService;
 import com.fractal.domain.employee_management.military_service.dto.MilitaryServiceRequest;
-import com.fractal.domain.employee_management.relative.RelativeService;
-import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
+import com.fractal.domain.employee_management.relative.mapper.RelativeMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -46,7 +45,7 @@ class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeAddressMapperService addressMapperService;
     private final EmployeeContactMapperService contactMapperService;
     private final EducationMapperService educationMapperService;
-    private final RelativeService relativeService;
+    private final RelativeMapperService relativeMapperService;
     private final MilitaryServiceService militaryServiceService;
     private final EmploymentHistoryService employmentHistoryService;
     private final EmployeeResourceService resourceService;
@@ -92,7 +91,7 @@ class EmployeeServiceImpl implements EmployeeService {
         dto.addresses().forEach(address->employee.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact->employee.addContact(contactMapperService.toEntity(contact)));
         dto.educations().forEach(education->employee.addEducation(educationMapperService.toEntity(education)));
-        dto.relatives().forEach(relative->employee.addRelative(relativeService.toEntity(relative)));
+        dto.relatives().forEach(relative->employee.addRelative(relativeMapperService.toEntity(relative)));
         dto.militaryServices().forEach(militaryService->employee.addMilitaryService(militaryServiceService.toEntity(militaryService)));
         dto.employmentHistories().forEach(employmentHistory->employee.addEmploymentHistory(employmentHistoryService.toEntity(employmentHistory)));
        return employee;
@@ -145,7 +144,7 @@ class EmployeeServiceImpl implements EmployeeService {
                 Optional.ofNullable(employee.getRelatives())
                         .orElse(emptyList())
                         .stream()
-                        .map(relativeService::toDTO)
+                        .map(relativeMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(employee.getMilitaryServices())
                         .orElse(emptyList())
@@ -186,42 +185,11 @@ class EmployeeServiceImpl implements EmployeeService {
         dto.addresses().forEach(address->employee.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact->employee.addContact(contactMapperService.toEntity(contact)));
         dto.educations().forEach(education->employee.addEducation(educationMapperService.toEntity(education)));
-        dto.relatives().forEach(relative->employee.addRelative(relativeService.toEntity(relative)));
+        dto.relatives().forEach(relative->employee.addRelative(relativeMapperService.toEntity(relative)));
         dto.militaryServices().forEach(militaryService->employee.addMilitaryService(militaryServiceService.toEntity(militaryService)));
         dto.employmentHistories().forEach(employmentHistory->employee.addEmploymentHistory(employmentHistoryService.toEntity(employmentHistory)));
         dto.files().forEach(file-> employee.addResource(resourceService.toEntity(file,null)));
         return employee;
-    }
-
-    @Override
-    @Transactional
-    public Employee addRelative(Long id, RelativeRequest dto) {
-        var employee = findById(id);
-        employee.addRelative(relativeService.toEntity(dto));
-        return save(employee);
-    }
-
-    @Override
-    @Transactional
-    public Employee updateRelative(Long id, Long relativeId, RelativeRequest dto) {
-        var employee = findById(id);
-        var relative = employee.getRelatives()
-                .stream()
-                .filter(r-> r.getId().equals(relativeId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Relative with id: " + relativeId + " not found"));
-        relativeService.update(relative.getId(),dto);
-        return save(employee);
-    }
-
-    @Override
-    @Transactional
-    public Employee deleteRelative(Long id, Long relativeId) {
-        var employee = findById(id);
-        var relative = employee.getRelatives()
-                .stream()
-                .filter(r-> r.getId().equals(relativeId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Relative with id: " + relativeId + " not found"));
-        employee.removeRelative(relative);
-        relativeService.delete(relative);
-        return save(employee);
     }
 
     @Override

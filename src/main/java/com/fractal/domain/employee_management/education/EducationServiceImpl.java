@@ -3,7 +3,6 @@ package com.fractal.domain.employee_management.education;
 import com.fractal.domain.employee_management.education.dto.EducationRequest;
 import com.fractal.domain.employee_management.education.dto.EducationResponse;
 import com.fractal.domain.employee_management.education.mapper.EducationMapperService;
-import com.fractal.domain.employee_management.education.resource.EducationResourceService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
