@@ -15,10 +15,6 @@ public interface JobDescriptionService {
     void deleteById(Long id);
     JobDescriptionResponse toDTO(JobDescription jobDescription);
     JobDescription save(JobDescription jobDescription);
-
-    JobDescription addQualification(Long jobDescriptionId, QualificationRequest dto);
-    JobDescription updateQualification(Long jobDescriptionId, Long qualificationId, QualificationRequest dto);
-    void deleteQualification(Long jobDescriptionId, Long qualificationId);
     JobDescription updateRequiredExperience(Long jobDescriptionId, Long requiredExperienceId, RequiredExperienceRequest dto);
     JobDescription addRequiredExperience(Long jobDescriptionId, RequiredExperienceRequest dto);
     void deleteRequiredExperience(Long jobDescriptionId, Long experienceId);

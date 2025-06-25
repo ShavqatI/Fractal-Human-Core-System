@@ -7,6 +7,7 @@ import com.fractal.domain.organization_management.organization.address.mapper.Or
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +21,7 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
 
 
     @Override
+    @Transactional
     public OrganizationAddress create(Long organizationId, OrganizationAddressRequest dto) {
         var organization = organizationService.getById(organizationId);
         var address = addressMapperService.toEntity(dto);
@@ -41,6 +43,7 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
     }
 
     @Override
+    @Transactional
     public OrganizationAddress update(Long organizationId, Long id, OrganizationAddressRequest dto) {
         var organization = organizationService.getById(organizationId);
         var address = organization.getAddresses()
@@ -52,6 +55,7 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
     }
 
     @Override
+    @Transactional
     public void delete(Long organizationId, Long id) {
         var organization = organizationService.getById(organizationId);
         var address = organization.getAddresses()

@@ -90,33 +90,6 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
         );
     }
 
-
-
-    @Override
-    public JobDescription addQualification(Long jobDescriptionId, QualificationRequest dto) {
-        JobDescription jobDescription = findById(jobDescriptionId);
-        jobDescription.addQualification(qualificationService.toEntity(dto));
-        return save(jobDescription);
-    }
-
-    @Override
-    public JobDescription updateQualification(Long jobDescriptionId, Long qualificationId, QualificationRequest dto) {
-        JobDescription jobDescription = findById(jobDescriptionId);
-        Qualification qualification = jobDescription.getQualifications().stream()
-                .filter(q -> q.getId().equals(qualificationId))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Qualification with id: " + qualificationId + " not found"));
-        qualificationService.update(qualification.getId(),dto);
-        return save(jobDescription);
-    }
-    @Override
-    public void deleteQualification(Long jobDescriptionId, Long qualificationId) {
-        JobDescription jobDescription = findById(jobDescriptionId);
-        Qualification qualification = qualificationService.findById(qualificationId);
-        jobDescription.removeQualification(qualification);
-        qualificationService.delete(qualification);
-        save(jobDescription);
-    }
-
     @Override
     public JobDescription addRequiredExperience(Long jobDescriptionId, RequiredExperienceRequest dto) {
         JobDescription jobDescription = findById(jobDescriptionId);

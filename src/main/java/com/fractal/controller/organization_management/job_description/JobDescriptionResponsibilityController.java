@@ -38,7 +38,6 @@ public class JobDescriptionResponsibilityController {
         return ResponseEntity.ok(responsibilityService.toDTO(responsibilityService.update(jobDescriptionId,id, dto)));
     }
 
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long jobDescriptionId,@PathVariable Long id) {
         responsibilityService.delete(jobDescriptionId, id);

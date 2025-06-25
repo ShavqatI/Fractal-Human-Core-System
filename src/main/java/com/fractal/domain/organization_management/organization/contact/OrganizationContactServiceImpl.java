@@ -9,6 +9,7 @@ import com.fractal.domain.organization_management.organization.contact.mapper.Or
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,11 +19,11 @@ public class OrganizationContactServiceImpl implements OrganizationContactServic
 
     private final OrganizationContactRepository contactRepository;
     private final ContactService contactService;
-    private final ContactTypeService contactTypeService;
     private final OrganizationContactMapperService contactMapperService;
     private final OrganizationService organizationService;
 
     @Override
+    @Transactional
     public OrganizationContact create(Long organizationId, ContactRequest dto) {
         var organization = organizationService.getById(organizationId);
         var contact = contactMapperService.toEntity(dto);
@@ -42,6 +43,7 @@ public class OrganizationContactServiceImpl implements OrganizationContactServic
     }
 
     @Override
+    @Transactional
     public OrganizationContact update(Long organizationId, Long id, ContactRequest dto) {
         var organization = organizationService.getById(organizationId);
         var contact = organization.getContacts()
@@ -53,6 +55,7 @@ public class OrganizationContactServiceImpl implements OrganizationContactServic
     }
 
     @Override
+    @Transactional
     public void delete(Long organizationId, Long id) {
         var organization = organizationService.getById(organizationId);
         var contact = organization.getContacts()

@@ -7,6 +7,7 @@ import com.fractal.domain.organization_management.job_description.responsibility
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,12 +18,9 @@ class ResponsibilityServiceImpl implements ResponsibilityService  {
     private final ResponsibilityRepository responsibilityRepository;
     private final ResponsibilityMapperService mapperService;
     private final JobDescriptionService jobDescriptionService;
-    @Override
-    public ResponsibilityResponse toDTO(Responsibility responsibility) {
-        return mapperService.toDTO(responsibility);
-    }
 
     @Override
+    @Transactional
     public Responsibility create(Long jobDescriptionId, ResponsibilityRequest dto) {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         var responsibility = mapperService.toEntity(dto);
@@ -41,9 +39,8 @@ class ResponsibilityServiceImpl implements ResponsibilityService  {
         return responsibilityRepository.findByJobDescriptionIdAndId(jobDescriptionId,id).orElseThrow(()-> new ResourceNotFoundException("Responsibility with id: " + id + " not found"));
     }
 
-
-
     @Override
+    @Transactional
     public Responsibility update(Long jobDescriptionId, Long id, ResponsibilityRequest dto) {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         Responsibility responsibility = jobDescription.getResponsibilities().stream()
@@ -55,6 +52,7 @@ class ResponsibilityServiceImpl implements ResponsibilityService  {
     }
 
     @Override
+    @Transactional
     public void delete(Long jobDescriptionId, Long id) {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         Responsibility responsibility = jobDescription.getResponsibilities().stream()
@@ -65,4 +63,10 @@ class ResponsibilityServiceImpl implements ResponsibilityService  {
         jobDescriptionService.save(jobDescription);
 
     }
+
+    @Override
+    public ResponsibilityResponse toDTO(Responsibility responsibility) {
+        return mapperService.toDTO(responsibility);
+    }
+
 }

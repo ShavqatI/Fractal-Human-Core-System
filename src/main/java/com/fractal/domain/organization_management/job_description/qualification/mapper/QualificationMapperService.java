@@ -1,19 +1,16 @@
-package com.fractal.domain.organization_management.job_description.qualification;
+package com.fractal.domain.organization_management.job_description.qualification.mapper;
 
+import com.fractal.domain.organization_management.job_description.qualification.Qualification;
 import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationRequest;
 import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationResponse;
 import com.fractal.domain.organization_management.job_description.responsibility.Responsibility;
 import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityRequest;
 import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityResponse;
 
-import java.util.List;
-
-public interface QualificationService {
-
-    Qualification create(Long jobDescriptionId, QualificationRequest dto);
-    List<Qualification> getAllByJobDescriptionId(Long jobDescriptionId);
-    Qualification getById(Long jobDescriptionId ,Long id);
-    Qualification update(Long jobDescriptionId,Long id, QualificationRequest dto);
-    void delete(Long jobDescriptionId, Long id);
+public interface QualificationMapperService {
     QualificationResponse toDTO(Qualification qualification);
+    Qualification toEntity(QualificationRequest dto);
+    Qualification toEntity(Qualification qualification, QualificationRequest dto);
 }
+
+

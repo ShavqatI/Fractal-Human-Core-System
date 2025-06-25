@@ -7,14 +7,7 @@ import java.util.List;
 
 public interface ResponsibilityService {
 
-
-   /* Responsibility toEntity(ResponsibilityRequest dto);
-
-    Responsibility findById(Long id);
-    Responsibility update(Long id,ResponsibilityRequest dto);
-    void delete(Responsibility responsibility);
-*/
-   Responsibility create(Long jobDescriptionId, ResponsibilityRequest dto);
+    Responsibility create(Long jobDescriptionId, ResponsibilityRequest dto);
     List<Responsibility> getAllByJobDescriptionId(Long jobDescriptionId);
     Responsibility getById(Long jobDescriptionId ,Long id);
     Responsibility update(Long jobDescriptionId,Long id, ResponsibilityRequest dto);
