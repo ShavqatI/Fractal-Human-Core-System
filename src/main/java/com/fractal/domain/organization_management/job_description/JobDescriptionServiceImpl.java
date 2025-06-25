@@ -9,9 +9,7 @@ import com.fractal.domain.organization_management.job_description.qualification.
 import com.fractal.domain.organization_management.job_description.required_experience.RequiredExperience;
 import com.fractal.domain.organization_management.job_description.required_experience.RequiredExperienceService;
 import com.fractal.domain.organization_management.job_description.required_experience.dto.RequiredExperienceRequest;
-import com.fractal.domain.organization_management.job_description.responsibility.Responsibility;
-import com.fractal.domain.organization_management.job_description.responsibility.ResponsibilityService;
-import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityRequest;
+import com.fractal.domain.organization_management.job_description.responsibility.mapper.ResponsibilityMapperService;
 import com.fractal.domain.organization_management.position.PositionService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +27,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
     private final JobDescriptionRepository jobDescriptionRepository;
     private final PositionService positionService;
     private final RequiredExperienceService requiredExperienceService;
-    private final ResponsibilityService responsibilityService;
+    private final ResponsibilityMapperService responsibilityMapperService;
     private final QualificationService qualificationService;
     private final StatusService statusService;
 
@@ -60,7 +58,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
             jobDescription.setEffectiveDate(dto.effectiveDate());
             jobDescription.setStatus(statusService.getByCode(dto.status()));
             jobDescription.setPosition(positionService.getById(dto.positionId()));
-            dto.responsibilities().forEach(responsibilityRequest -> jobDescription.addResponsibility(responsibilityService.toEntity(responsibilityRequest)));
+            dto.responsibilities().forEach(responsibilityRequest -> jobDescription.addResponsibility(responsibilityMapperService.toEntity(responsibilityRequest)));
             dto.qualifications().forEach(qualificationRequest-> jobDescription.addQualification(qualificationService.toEntity(qualificationRequest)));
             dto.requiredExperiences().forEach(requiredExperienceRequest -> jobDescription.addRequiredExperience(requiredExperienceService.toEntity(requiredExperienceRequest)));
           return save(jobDescription);
@@ -85,38 +83,14 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
                 jobDescription.getEffectiveDate(),
                 jobDescription.getStatus().getName(),
                 jobDescription.getPosition().getName(),
-                jobDescription.getResponsibilities() != null ? jobDescription.getResponsibilities().stream().map(responsibilityService::toDTO).collect(Collectors.toList()) : null,
+                jobDescription.getResponsibilities() != null ? jobDescription.getResponsibilities().stream().map(responsibilityMapperService::toDTO).collect(Collectors.toList()) : null,
                 jobDescription.getQualifications() != null ? jobDescription.getQualifications().stream().map(qualificationService::toDTO).collect(Collectors.toList()) : null,
                 jobDescription.getRequiredExperiences() != null ? jobDescription.getRequiredExperiences().stream().map(requiredExperienceService::toDTO).collect(Collectors.toList()) : null,
                 jobDescription.getCreatedDate()
         );
     }
 
-    @Override
-    public JobDescription addResponsibility(Long jobDescriptionId, ResponsibilityRequest dto) {
-        JobDescription jobDescription = findById(jobDescriptionId);
-        jobDescription.addResponsibility(responsibilityService.toEntity(dto));
-        return save(jobDescription);
-    }
 
-    @Override
-    public JobDescription updateResponsibility(Long jobDescriptionId, Long responsibilityId, ResponsibilityRequest dto) {
-        JobDescription jobDescription = findById(jobDescriptionId);
-        Responsibility responsibility = jobDescription.getResponsibilities().stream()
-                .filter(r -> r.getId().equals(responsibilityId))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Responsibility with id: " + responsibilityId + " not found"));
-        responsibilityService.update(responsibility.getId(),dto);
-        return save(jobDescription);
-    }
-
-    @Override
-    public void deleteResponsibility(Long jobDescriptionId, Long responsibilityId) {
-        JobDescription jobDescription = findById(jobDescriptionId);
-        Responsibility responsibility = responsibilityService.findById(responsibilityId);
-        jobDescription.removeResponsibility(responsibility);
-        responsibilityService.delete(responsibility);
-        save(jobDescription);
-    }
 
     @Override
     public JobDescription addQualification(Long jobDescriptionId, QualificationRequest dto) {
@@ -177,13 +151,14 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
                 .status(statusService.getByCode(dto.status()))
                 .position(positionService.getById(dto.positionId()))
                 .build();
-        dto.responsibilities().forEach(responsibilityRequest -> jobDescription.addResponsibility(responsibilityService.toEntity(responsibilityRequest)));
+        dto.responsibilities().forEach(responsibilityRequest -> jobDescription.addResponsibility(responsibilityMapperService.toEntity(responsibilityRequest)));
         dto.qualifications().forEach(qualificationRequest-> jobDescription.addQualification(qualificationService.toEntity(qualificationRequest)));
         dto.requiredExperiences().forEach(requiredExperienceRequest ->jobDescription.addRequiredExperience(requiredExperienceService.toEntity(requiredExperienceRequest)));
        return jobDescription;
     }
 
-    private JobDescription save(JobDescription jobDescription) {
+    @Override
+    public JobDescription save(JobDescription jobDescription) {
         try {
             return jobDescriptionRepository.save(jobDescription);
         }

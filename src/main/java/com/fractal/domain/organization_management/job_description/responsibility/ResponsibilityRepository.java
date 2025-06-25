@@ -3,6 +3,12 @@ package com.fractal.domain.organization_management.job_description.responsibilit
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+
 @Repository
 public interface ResponsibilityRepository extends JpaRepository<Responsibility,Long> {
+
+    List<Responsibility> findAllByJobDescriptionId(Long jobDescriptionId);
+    Optional<Responsibility> findByJobDescriptionIdAndId(Long jobDescriptionId, Long id);
 }
