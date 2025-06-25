@@ -4,49 +4,67 @@ import com.fractal.domain.contact.ContactService;
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.contact.type.ContactTypeService;
+import com.fractal.domain.organization_management.organization.OrganizationService;
+import com.fractal.domain.organization_management.organization.contact.mapper.OrganizationContactMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class OrganizationContactServiceImpl implements OrganizationContactService {
 
-    private final OrganizationContactRepository resourceRepository;
+    private final OrganizationContactRepository contactRepository;
     private final ContactService contactService;
     private final ContactTypeService contactTypeService;
+    private final OrganizationContactMapperService contactMapperService;
+    private final OrganizationService organizationService;
+
+    @Override
+    public OrganizationContact create(Long organizationId, ContactRequest dto) {
+        var organization = organizationService.getById(organizationId);
+        var contact = contactMapperService.toEntity(dto);
+        organization.addContact(contact);
+        organizationService.save(organization);
+        return contact;
+    }
+
+    @Override
+    public List<OrganizationContact> getAllByOrganizationId(Long organizationId) {
+        return contactRepository.findAllByOrganizationId(organizationId);
+    }
+
+    @Override
+    public OrganizationContact getById(Long organizationId, Long id) {
+        return contactRepository.findByOrganizationIdAndId(organizationId,id).orElseThrow(()-> new ResourceNotFoundException("Organization contact with id: " + id + " not found"));
+    }
+
+    @Override
+    public OrganizationContact update(Long organizationId, Long id, ContactRequest dto) {
+        var organization = organizationService.getById(organizationId);
+        var contact = organization.getContacts()
+                .stream()
+                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization contact with id: " + id + " not found"));
+        contact = contactRepository.save(contactMapperService.toEntity(contact,dto));
+        organizationService.save(organization);
+        return contact;
+    }
+
+    @Override
+    public void delete(Long organizationId, Long id) {
+        var organization = organizationService.getById(organizationId);
+        var contact = organization.getContacts()
+                .stream()
+                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization contact with id: " + id + " not found"));
+        organization.removeContact(contact);
+        contactRepository.delete(contact);
+        organizationService.save(organization);
+    }
 
     @Override
     public ContactResponse toDTO(OrganizationContact contact) {
         return contactService.toDTO(contact);
-    }
-
-    @Override
-    public OrganizationContact toEntity(ContactRequest dto) {
-        return (OrganizationContact) contactService.toEntity(dto);
-    }
-
-    @Override
-    public OrganizationContact update(Long id, ContactRequest dto) {
-        try {
-            OrganizationContact contact = findById(id);
-            contact.setContactType(contactTypeService.getById(dto.contactTypeId()));
-            contact.setValue(dto.value());
-            return resourceRepository.save(contact);
-        }
-        catch (DataAccessException e) {
-            throw new RuntimeException(e.getMostSpecificCause().getMessage());
-        }
-    }
-
-    @Override
-    public void delete(OrganizationContact contact) {
-        resourceRepository.delete(contact);
-    }
-
-    @Override
-    public OrganizationContact findById(Long id) {
-        return resourceRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
     }
 }

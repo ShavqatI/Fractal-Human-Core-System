@@ -7,6 +7,5 @@ import java.util.List;
 
 @Repository
 interface EmployeeAddressRepository extends JpaRepository<EmployeeAddress, Long> {
-
     List<EmployeeAddress> findAllByEmployeeId(Long employeeId);
 }

@@ -1,9 +1,9 @@
-package com.fractal.domain.organization_management.organization.address.dto;
+package com.fractal.domain.location.address.dto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public record OrganizationAddressResponse(
+public record AddressResponse(
         Long id,
         String addressType,
         String country,

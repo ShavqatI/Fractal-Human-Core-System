@@ -6,9 +6,11 @@ import com.fractal.domain.organization_management.organization.address.dto.Organ
 import java.util.List;
 
 public interface OrganizationAddressService {
-    OrganizationAddressResponse toDTO(OrganizationAddress organizationAddress);
-    OrganizationAddress toEntity(OrganizationAddressRequest dto);
-    OrganizationAddress update(OrganizationAddress address,OrganizationAddressRequest dto);
-    void delete(OrganizationAddress address);
+
+    OrganizationAddress create(Long organizationId, OrganizationAddressRequest dto);
+    OrganizationAddress getById(Long organizationId,Long id);
     List<OrganizationAddress> getAllByOrganizationId(Long organizationId);
+    OrganizationAddress update(Long organizationId,Long id, OrganizationAddressRequest dto);
+    void delete(Long organizationId, Long id);
+    OrganizationAddressResponse toDTO(OrganizationAddress address);
 }
