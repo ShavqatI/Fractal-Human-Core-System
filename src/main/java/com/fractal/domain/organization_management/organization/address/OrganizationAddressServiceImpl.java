@@ -37,7 +37,7 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
 
     @Override
     public OrganizationAddress getById(Long organizationId, Long id) {
-        return organizationAddressRepository.findByOrganizationIdAndId(organizationId,id).orElseThrow(()-> new ResourceNotFoundException("Organization address with id: " + id + " not found"));;
+        return organizationAddressRepository.findByOrganizationIdAndId(organizationId,id).orElseThrow(()-> new ResourceNotFoundException("Organization address with id: " + id + " not found"));
     }
 
     @Override
