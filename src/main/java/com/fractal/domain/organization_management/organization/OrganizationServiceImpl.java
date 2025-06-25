@@ -4,6 +4,7 @@ import com.fractal.domain.organization_management.organization.address.mapper.Or
 import com.fractal.domain.organization_management.organization.contact.mapper.OrganizationContactMapperService;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
+import com.fractal.domain.organization_management.organization.mapper.OrganizationMapperService;
 import com.fractal.domain.organization_management.unit.OrganizationUnitService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +22,11 @@ import static java.util.Collections.emptyList;
 class OrganizationServiceImpl implements OrganizationService {
 
     private final OrganizationRepository organizationRepository;
-    private final OrganizationUnitService organizationUnitService;
-    private final OrganizationAddressMapperService addressMapperService;
-    private final OrganizationContactMapperService contactMapperService;
+    private final OrganizationMapperService mapperService;
 
     @Override
     public Organization create(OrganizationRequest dto) {
-        return save(toEntity(dto));
+        return save(mapperService.toEntity(dto));
     }
 
     @Override
@@ -49,21 +48,8 @@ class OrganizationServiceImpl implements OrganizationService {
     @Override
     public Organization update(Long id, OrganizationRequest dto) {
         try {
-            Organization organization = findById(id);
-            organization.setCode(dto.code());
-            organization.setName(dto.name());
-            organization.setFullName(dto.fullName());
-            organization.setTinNumber(dto.tinNumber());
-            organization.setOpenDate(dto.openDate());
-            organization.setCloseDate(dto.closeDate());
-            organization.setLevel(dto.level());
-            organization.setLevelMap(dto.levelMap());
-            organization.setLevelMap(dto.levelMap());
-            organization.setOrganizationUnit(organizationUnitService.getByCode(dto.organizationUnit()));
-            dto.addresses().forEach(address -> organization.addAddress(addressMapperService.toEntity(address)));
-            dto.contacts().forEach(contact -> organization.addContact(contactMapperService.toEntity(contact)));
-            dto.children().forEach(child->organization.addChild(toEntity(child)));
-           return save(organization);
+            Organization organization = mapperService.toEntity(findById(id),dto);
+            return save(organization);
         }
         catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
@@ -78,42 +64,12 @@ class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public OrganizationResponse toDTO(Organization organization) {
-        return new OrganizationResponse(
-                organization.getId(),
-                organization.getCode(),
-                organization.getName(),
-                organization.getFullName(),
-                organization.getTinNumber(),
-                organization.getOpenDate(),
-                organization.getCloseDate(),
-                organization.getLevel(),
-                organization.getLevelMap(),
-                organization.getOrganizationUnit().getName(),
-                Optional.ofNullable(organization.getParent())
-                        .map(Organization::getName)
-                        .orElse(null),
-                Optional.ofNullable(organization.getAddresses())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(addressMapperService::toDTO)
-                        .collect(Collectors.toList()),
-                Optional.ofNullable(organization.getContacts())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(contactMapperService::toDTO)
-                        .collect(Collectors.toList()),
-                Optional.ofNullable(organization.getChildren())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(this::toDTO)
-                        .collect(Collectors.toList()),
-                organization.getCreatedDate()
-        );
+        return mapperService.toDTO(organization);
     }
     @Override
     public Organization addChild(Long id, OrganizationRequest dto) {
         var organization = findById(id);
-        var child = toEntity(dto);
+        var child = mapperService.toEntity(dto);
         if (organization.getOrganizationUnit().equals(child.getOrganizationUnit())) {
             throw new RuntimeException("Child can not have same organization unit as parent ");
         }
@@ -137,25 +93,6 @@ class OrganizationServiceImpl implements OrganizationService {
         deleteById(child.getId());
        return save(organization);
     }
-
-    private Organization toEntity(OrganizationRequest dto) {
-        var organization = Organization.builder()
-                .code(dto.code())
-                .fullName(dto.fullName())
-                .name(dto.name())
-                .tinNumber(dto.tinNumber())
-                .openDate(dto.openDate())
-                .closeDate(dto.closeDate())
-                .level(dto.level())
-                .levelMap(dto.levelMap())
-                .organizationUnit(organizationUnitService.getByCode(dto.organizationUnit()))
-                .build();
-        dto.addresses().forEach(organizationAddress-> organization.addAddress(addressMapperService.toEntity(organizationAddress)));
-        dto.contacts().forEach(contact -> organization.addContact(contactMapperService.toEntity(contact)));
-        dto.children().forEach(child->organization.addChild(toEntity(child)));
-       return organization;
-    }
-
     @Override
     public Organization save(Organization organization) {
         try {
