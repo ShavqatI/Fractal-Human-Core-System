@@ -2,9 +2,6 @@ package com.fractal.domain.organization_management.job_description.qualification
 
 import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationRequest;
 import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationResponse;
-import com.fractal.domain.organization_management.job_description.responsibility.Responsibility;
-import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityRequest;
-import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityResponse;
 
 import java.util.List;
 

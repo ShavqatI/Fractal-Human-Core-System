@@ -1,66 +1,69 @@
 package com.fractal.domain.organization_management.job_description.required_experience;
 
+import com.fractal.domain.organization_management.job_description.JobDescriptionService;
 import com.fractal.domain.organization_management.job_description.required_experience.dto.RequiredExperienceRequest;
 import com.fractal.domain.organization_management.job_description.required_experience.dto.RequiredExperienceResponse;
+import com.fractal.domain.organization_management.job_description.required_experience.mapper.RequiredExperienceMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 class RequiredExperienceServiceImpl implements RequiredExperienceService {
      private final RequiredExperienceRepository requiredExperienceRepository;
+     private final RequiredExperienceMapperService mapperService;
+     private final JobDescriptionService jobDescriptionService;
+
+    @Override
+    @Transactional
+    public RequiredExperience create(Long jobDescriptionId, RequiredExperienceRequest dto) {
+        var jobDescription = jobDescriptionService.getById(jobDescriptionId);
+        var requiredExperience = mapperService.toEntity(dto);
+        jobDescription.addRequiredExperience(requiredExperience);
+        jobDescriptionService.save(jobDescription);
+        return requiredExperience;
+    }
+
+    @Override
+    public List<RequiredExperience> getAllByJobDescriptionId(Long jobDescriptionId) {
+        return requiredExperienceRepository.findAllByJobDescriptionId(jobDescriptionId);
+    }
+
+    @Override
+    public RequiredExperience getById(Long jobDescriptionId, Long id) {
+        return requiredExperienceRepository.findByJobDescriptionIdAndId(jobDescriptionId,id).orElseThrow(()-> new ResourceNotFoundException("Required Experience with id: " + id + " not found"));
+    }
+
+    @Override
+    @Transactional
+    public RequiredExperience update(Long jobDescriptionId, Long id, RequiredExperienceRequest dto) {
+        var jobDescription = jobDescriptionService.getById(jobDescriptionId);
+        var requiredExperience = jobDescription.getRequiredExperiences().stream()
+                .filter(r -> r.getId().equals(id))
+                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Required Experience with id: " + id + " not found"));
+        requiredExperience = requiredExperienceRepository.save(mapperService.toEntity(requiredExperience,dto));
+        jobDescriptionService.save(jobDescription);
+        return requiredExperience;
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long jobDescriptionId, Long id) {
+        var jobDescription = jobDescriptionService.getById(jobDescriptionId);
+        var requiredExperience = jobDescription.getRequiredExperiences().stream()
+                .filter(r -> r.getId().equals(id))
+                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Required Experience with id: " + id + " not found"));
+        jobDescription.removeRequiredExperience(requiredExperience);
+        jobDescriptionService.save(jobDescription);
+        requiredExperienceRepository.delete(requiredExperience);
+    }
+
     @Override
     public RequiredExperienceResponse toDTO(RequiredExperience requiredExperience) {
-        return new RequiredExperienceResponse(
-                requiredExperience.getId(),
-                requiredExperience.getDescription(),
-                requiredExperience.getRequiredYears(),
-                requiredExperience.getDomain(),
-                requiredExperience.getLevel(),
-                requiredExperience.getStartDate(),
-                requiredExperience.getEndDate(),
-                requiredExperience.getMandatory(),
-                requiredExperience.getNotes(),
-                requiredExperience.getCreatedDate()
-        );
-    }
-
-    @Override
-    public RequiredExperience toEntity(RequiredExperienceRequest dto) {
-        return RequiredExperience.builder()
-                .description(dto.description())
-                .requiredYears(dto.requiredYears())
-                .domain(dto.domain())
-                .level(dto.level())
-                .startDate(dto.startDate())
-                .endDate(dto.endDate())
-                .mandatory(dto.mandatory())
-                .notes(dto.notes())
-                .build();
-    }
-
-    @Override
-    public RequiredExperience findById(Long id) {
-        return requiredExperienceRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("RequiredExperience with id: " + id + " not found"));
-    }
-
-    @Override
-    public RequiredExperience update(Long id, RequiredExperienceRequest dto) {
-        RequiredExperience requiredExperience = findById(id);
-        requiredExperience.setDescription(dto.description());
-        requiredExperience.setRequiredYears(dto.requiredYears());
-        requiredExperience.setDomain(dto.domain());
-        requiredExperience.setLevel(dto.level());
-        requiredExperience.setStartDate(dto.startDate());
-        requiredExperience.setEndDate(dto.endDate());
-        requiredExperience.setMandatory(dto.mandatory());
-        requiredExperience.setNotes(dto.notes());
-       return requiredExperienceRepository.save(requiredExperience);
-    }
-
-    @Override
-    public void delete(RequiredExperience requiredExperience) {
-        requiredExperienceRepository.delete(requiredExperience);
+        return mapperService.toDTO(requiredExperience);
     }
 }

@@ -2,8 +2,6 @@ package com.fractal.domain.organization_management.job_description;
 
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionRequest;
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionResponse;
-import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationRequest;
-import com.fractal.domain.organization_management.job_description.required_experience.dto.RequiredExperienceRequest;
 
 import java.util.List;
 
@@ -15,7 +13,4 @@ public interface JobDescriptionService {
     void deleteById(Long id);
     JobDescriptionResponse toDTO(JobDescription jobDescription);
     JobDescription save(JobDescription jobDescription);
-    JobDescription updateRequiredExperience(Long jobDescriptionId, Long requiredExperienceId, RequiredExperienceRequest dto);
-    JobDescription addRequiredExperience(Long jobDescriptionId, RequiredExperienceRequest dto);
-    void deleteRequiredExperience(Long jobDescriptionId, Long experienceId);
 }

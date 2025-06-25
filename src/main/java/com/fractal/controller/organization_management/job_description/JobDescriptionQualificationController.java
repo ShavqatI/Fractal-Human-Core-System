@@ -19,7 +19,7 @@ public class JobDescriptionQualificationController {
 
     private final QualificationService qualificationService;
 
-    @PostMapping("/{id}/qualification")
+    @PostMapping()
     public ResponseEntity<QualificationResponse> create(@PathVariable Long jobDescriptionId, @RequestBody @Valid QualificationRequest dto) {
         return new ResponseEntity<>(qualificationService.toDTO(qualificationService.create(jobDescriptionId,dto)), HttpStatus.CREATED);
     }

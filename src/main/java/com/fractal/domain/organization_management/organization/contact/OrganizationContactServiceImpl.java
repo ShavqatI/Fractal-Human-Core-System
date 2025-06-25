@@ -3,7 +3,6 @@ package com.fractal.domain.organization_management.organization.contact;
 import com.fractal.domain.contact.ContactService;
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.contact.dto.ContactResponse;
-import com.fractal.domain.contact.type.ContactTypeService;
 import com.fractal.domain.organization_management.organization.OrganizationService;
 import com.fractal.domain.organization_management.organization.contact.mapper.OrganizationContactMapperService;
 import com.fractal.exception.ResourceNotFoundException;
