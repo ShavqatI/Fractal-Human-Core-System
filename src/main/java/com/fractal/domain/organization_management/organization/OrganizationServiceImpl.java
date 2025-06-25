@@ -1,21 +1,14 @@
 package com.fractal.domain.organization_management.organization;
 
-import com.fractal.domain.organization_management.organization.address.mapper.OrganizationAddressMapperService;
-import com.fractal.domain.organization_management.organization.contact.mapper.OrganizationContactMapperService;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 import com.fractal.domain.organization_management.organization.mapper.OrganizationMapperService;
-import com.fractal.domain.organization_management.unit.OrganizationUnitService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
