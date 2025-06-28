@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management;
+package com.fractal.controller.employee_management.employee.relative;
 
 
 import com.fractal.domain.employee_management.relative.type.RelationTypeService;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/relation-type")
+@RequestMapping("/api/v1/employee-management/relative/relation-type")
 @RequiredArgsConstructor
 public class RelationTypeController {
 
