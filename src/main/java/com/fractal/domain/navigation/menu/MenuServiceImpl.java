@@ -93,6 +93,7 @@ class MenuServiceImpl implements MenuService {
         return save(menu);
     }
 
+    @Override
     public Menu save(Menu menu) {
         try {
             return menuRepository.save(menu);

@@ -8,6 +8,6 @@ import java.util.Optional;
 
 @Repository
 interface MenuActionRepository extends JpaRepository<MenuAction,Long> {
-    Optional<MenuAction> findByMenuIdAndId(String menuId,Long id);
-    List<MenuAction> findAllByMenuId(String menuId);
+    Optional<MenuAction> findByMenuIdAndId(Long menuId,Long id);
+    List<MenuAction> findAllByMenuId(Long menuId);
 }

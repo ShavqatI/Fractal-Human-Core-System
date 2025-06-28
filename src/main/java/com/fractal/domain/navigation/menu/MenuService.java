@@ -13,6 +13,7 @@ public interface MenuService {
     Menu update(Long id, MenuRequest dto);
     void deleteById(Long id);
     MenuResponse toDTO(Menu menu);
+    Menu save(Menu menu);
     Menu addChild(Long id, MenuRequest dto);
     Menu updateChild(Long id, Long childId, MenuRequest dto);
     Menu deleteChild(Long id, Long childId);
