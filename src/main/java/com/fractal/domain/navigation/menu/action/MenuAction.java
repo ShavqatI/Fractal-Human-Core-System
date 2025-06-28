@@ -1,7 +1,9 @@
-package com.fractal.domain.navigation;
+package com.fractal.domain.navigation.menu.action;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.navigation.action.Action;
+import com.fractal.domain.navigation.menu.Menu;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

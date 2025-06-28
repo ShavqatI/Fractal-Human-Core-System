@@ -1,7 +1,10 @@
-package com.fractal.domain.navigation;
+package com.fractal.domain.navigation.action;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.abstraction.Dictionary;
 import com.fractal.domain.localization.layout_label.LayoutLabel;
+import com.fractal.domain.navigation.action.category.ActionCategory;
+import com.fractal.domain.navigation.menu.action.MenuAction;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,4 +43,13 @@ public class Action extends AbstractEntity {
 
     @OneToMany(mappedBy = "action", cascade = CascadeType.ALL)
     private List<MenuAction> menuActions = new ArrayList<>();
+
+    @Entity
+    @Table(name = "action_type", schema = "navigation_schema", catalog = "fractal")
+    @Data
+    @SuperBuilder
+    @NoArgsConstructor
+    public static class ActionType extends Dictionary {
+
+    }
 }

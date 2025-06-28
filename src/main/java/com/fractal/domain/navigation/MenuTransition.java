@@ -3,6 +3,7 @@ package com.fractal.domain.navigation;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.EntityType;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.navigation.menu.Menu;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;

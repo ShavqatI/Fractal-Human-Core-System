@@ -1,4 +1,4 @@
-package com.fractal.domain.navigation;
+package com.fractal.domain.navigation.action.category;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;

@@ -3,7 +3,7 @@ package com.fractal.domain.user;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.navigation.MenuAction;
+import com.fractal.domain.navigation.menu.action.MenuAction;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;

@@ -2,6 +2,7 @@ package com.fractal.domain.navigation;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.navigation.menu.action.MenuAction;
 import jakarta.persistence.*;
 
 @Entity
