@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management;
+package com.fractal.controller.employee_management.employee.education;
 
 
 import com.fractal.domain.employee_management.education.document_type.EducationDocumentTypeService;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/education-document-type")
+@RequestMapping("/api/v1/employee-management/education/document-type")
 @RequiredArgsConstructor
 public class EducationDocumentTypeController {
 
