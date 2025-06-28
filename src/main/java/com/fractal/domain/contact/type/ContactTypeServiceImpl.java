@@ -26,7 +26,7 @@ class ContactTypeServiceImpl implements ContactTypeService {
 
     @Override
     public ContactType getByCode(String code) {
-        return contactTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
+        return contactTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Contact Type with code: " + code + " not found"));
     }
 
     @Override
@@ -79,7 +79,7 @@ class ContactTypeServiceImpl implements ContactTypeService {
     }
 
     private ContactType findById(Long id) {
-        return contactTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Education Type with id: " + id + " not found"));
+        return contactTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Contact Type with id: " + id + " not found"));
     }
 
 }

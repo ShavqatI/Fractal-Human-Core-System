@@ -1,4 +1,4 @@
-package com.fractal.domain.navigation.action.category;
+package com.fractal.domain.navigation.action.type;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;
@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "action_category", schema = "navigation_schema", catalog = "fractal")
+@Table(name = "action_type", schema = "navigation_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class ActionCategory extends Dictionary {
+public class ActionType extends Dictionary {
 
 }
