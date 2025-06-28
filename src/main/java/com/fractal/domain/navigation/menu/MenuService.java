@@ -2,9 +2,6 @@ package com.fractal.domain.navigation.menu;
 
 import com.fractal.domain.navigation.menu.dto.MenuRequest;
 import com.fractal.domain.navigation.menu.dto.MenuResponse;
-import com.fractal.domain.organization_management.organization.Organization;
-import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
-import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 
 import java.util.List;
 
@@ -16,4 +13,7 @@ public interface MenuService {
     Menu update(Long id, MenuRequest dto);
     void deleteById(Long id);
     MenuResponse toDTO(Menu menu);
+    Menu addChild(Long id, MenuRequest dto);
+    Menu updateChild(Long id, Long childId, MenuRequest dto);
+    Menu deleteChild(Long id, Long childId);
 }

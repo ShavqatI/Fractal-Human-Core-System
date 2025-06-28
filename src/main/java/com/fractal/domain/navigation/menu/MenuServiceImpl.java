@@ -14,6 +14,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 class MenuServiceImpl implements MenuService {
+
     private final MenuMapperService mapperService;
     private final MenuRepository menuRepository;
 
@@ -58,8 +59,40 @@ class MenuServiceImpl implements MenuService {
 
     @Override
     public MenuResponse toDTO(Menu menu) {
-        return null;
+        return mapperService.toDTO(menu);
     }
+
+    @Override
+    @Transactional
+    public Menu addChild(Long id, MenuRequest dto) {
+        var menu = findById(id);
+        var child = mapperService.toEntity(dto);
+        if (menu.getLevel().equals(child.getLevel())) {
+            throw new RuntimeException("Child can not have same level as parent ");
+        }
+        menu.addChild(child);
+        return save(menu);
+    }
+
+    @Override
+    @Transactional
+    public Menu updateChild(Long id, Long childId, MenuRequest dto) {
+        var menu = findById(id);
+        var child = menu.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        update(child.getId(),dto);
+        return save(menu);
+    }
+
+    @Override
+    @Transactional
+    public Menu deleteChild(Long id, Long childId) {
+        var menu = findById(id);
+        var child = menu.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        menu.removeChild(child);
+        deleteById(child.getId());
+        return save(menu);
+    }
+
     public Menu save(Menu menu) {
         try {
             return menuRepository.save(menu);
