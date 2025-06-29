@@ -17,3 +17,7 @@ spring:
             platform: org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform
 server:
   port: 8585
+
+jwt:
+  secret: fractalJwtSecretKey@2025strong&safe!
+  expiration: 36000000 # 10 hours
