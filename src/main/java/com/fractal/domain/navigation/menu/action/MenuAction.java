@@ -28,6 +28,4 @@ public class MenuAction extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @Column(name = "is_active")
-    private Boolean isActive;
 }
