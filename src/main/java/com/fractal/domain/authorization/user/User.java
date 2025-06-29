@@ -1,6 +1,8 @@
-package com.fractal.domain.authorization;
+package com.fractal.domain.authorization.user;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.authorization.role.Role;
+import com.fractal.domain.authorization.user.role.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,13 +19,19 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User extends AbstractEntity {
+
     @Column(name = "username", length = 50)
     private String username;
+
     @Column(name = "password")
     private String password;
+
     private boolean accountNonExpired;
+
     private boolean accountNonLocked;
+
     private boolean credentialsNonExpired;
+
     private boolean enabled;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)

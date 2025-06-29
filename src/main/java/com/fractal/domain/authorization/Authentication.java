@@ -1,5 +1,6 @@
 package com.fractal.domain.authorization;
 
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import jakarta.persistence.*;
 

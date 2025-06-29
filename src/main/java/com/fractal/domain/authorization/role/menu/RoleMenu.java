@@ -1,6 +1,8 @@
-package com.fractal.domain.authorization;
+package com.fractal.domain.authorization.role.menu;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.authorization.role.Role;
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.navigation.menu.Menu;
 import jakarta.persistence.*;
@@ -8,9 +10,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "role_menu", schema = "authorization_schema", catalog = "fractal")
@@ -37,7 +39,7 @@ public class RoleMenu extends AbstractEntity {
     private User confirmedUser;
 
     @Column(name = "confirmed_date")
-    private Timestamp confirmedDate;
+    private LocalDateTime confirmedDate;
 
 
 }

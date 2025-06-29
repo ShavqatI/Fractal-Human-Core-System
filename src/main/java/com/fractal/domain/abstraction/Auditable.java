@@ -1,6 +1,6 @@
 package com.fractal.domain.abstraction;
 
-import com.fractal.domain.authorization.User;
+import com.fractal.domain.authorization.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;

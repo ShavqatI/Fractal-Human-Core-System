@@ -1,6 +1,7 @@
 package com.fractal.domain.authorization;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.ProfileAttribute;
 import com.fractal.domain.dictionary.status.Status;
 import jakarta.persistence.*;

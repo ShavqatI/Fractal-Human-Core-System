@@ -1,7 +1,9 @@
 
-package com.fractal.domain.authorization;
+package com.fractal.domain.authorization.permission;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.authorization.role.Role;
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.navigation.menu.action.MenuAction;
 import jakarta.persistence.*;
@@ -10,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 
 @Entity
@@ -36,7 +39,7 @@ public class Permission extends AbstractEntity {
     private User confirmedUser;
 
     @Column(name = "confirmed_date")
-    private Timestamp confirmedDate;
+    private LocalDateTime confirmedDate;
 
   }
 

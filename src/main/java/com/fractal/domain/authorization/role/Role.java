@@ -1,5 +1,6 @@
-package com.fractal.domain.authorization;
+package com.fractal.domain.authorization.role;
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.authorization.user.role.UserRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
