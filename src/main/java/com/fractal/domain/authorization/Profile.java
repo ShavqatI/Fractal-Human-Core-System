@@ -1,4 +1,4 @@
-package com.fractal.domain.user;
+package com.fractal.domain.authorization;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.ProfileAttribute;
@@ -24,36 +24,4 @@ public class Profile extends AbstractEntity {
     @Basic
     @Column(name = "value")
     private String value;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public ProfileAttribute getProfileAttribute() {
-        return profileAttribute;
-    }
-
-    public void setProfileAttribute(ProfileAttribute profileAttribute) {
-        this.profileAttribute = profileAttribute;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
 }
