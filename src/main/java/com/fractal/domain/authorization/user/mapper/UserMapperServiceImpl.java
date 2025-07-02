@@ -45,7 +45,7 @@ class UserMapperServiceImpl implements UserMapperService {
 
     private User mapToEntity(User user, UserRequest dto) {
         user.setUsername(dto.username());
-        user.setUsername(passwordEncoder.encode(dto.password()));
+        user.setPassword(passwordEncoder.encode(dto.password()));
         user.setAccountNonExpired(true);
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);

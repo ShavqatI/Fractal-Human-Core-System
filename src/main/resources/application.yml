@@ -19,5 +19,5 @@ server:
   port: 8585
 
 jwt:
-  secret: fractalJwtSecretKey@2025strong&safe!
+  secret: "fractalJwtSecretKey@2025strong&safe!"
   expiration: 36000000 # 10 hours

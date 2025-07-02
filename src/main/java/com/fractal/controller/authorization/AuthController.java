@@ -18,8 +18,6 @@ public class AuthController {
     private final AuthenticationManager authManager;
     private final JwtService jwtService;
 
-
-
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody AuthRequest authRequest) {
         Authentication auth = authManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.username(), authRequest.password()));

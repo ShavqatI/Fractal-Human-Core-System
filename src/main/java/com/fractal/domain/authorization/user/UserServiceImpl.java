@@ -38,6 +38,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(()->new ResourceNotFoundException("User with username:" + username + " not found"));
+    }
+
+    @Override
     @Transactional
     public User update(Long id, UserRequest dto) {
         return mapperService.toEntity(findById(id),dto);
