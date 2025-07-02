@@ -1,7 +1,6 @@
 package com.fractal.domain.navigation.menu;
 
-import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.localization.layout_label.LayoutLabel;
+import com.fractal.domain.abstraction.Navigation;
 import com.fractal.domain.navigation.menu.action.MenuAction;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -16,22 +15,10 @@ import java.util.List;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class Menu extends AbstractEntity {
-    @Column(name = "name")
-    private String name;
-
-    @Column(name = "url")
-    private String url;
+public class Menu extends Navigation {
 
     @Column(name = "level")
     private Integer level;
-
-    @Column(name = "icon")
-    private String icon;
-
-    @ManyToOne
-    @JoinColumn(name = "layout_label_id", referencedColumnName = "id")
-    private LayoutLabel layoutLabel;
 
     @Column(name = "sequence")
     private Integer sequence;
