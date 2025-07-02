@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication(scanBasePackages = "com.fractal")
-public class FractalHumanCoreSystemApplication {
+public class Application  {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FractalHumanCoreSystemApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
