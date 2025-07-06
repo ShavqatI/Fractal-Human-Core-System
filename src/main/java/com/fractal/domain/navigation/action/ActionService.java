@@ -2,9 +2,6 @@ package com.fractal.domain.navigation.action;
 
 import com.fractal.domain.navigation.action.dto.ActionRequest;
 import com.fractal.domain.navigation.action.dto.ActionResponse;
-import com.fractal.domain.navigation.menu.Menu;
-import com.fractal.domain.navigation.menu.dto.MenuRequest;
-import com.fractal.domain.navigation.menu.dto.MenuResponse;
 
 import java.util.List;
 

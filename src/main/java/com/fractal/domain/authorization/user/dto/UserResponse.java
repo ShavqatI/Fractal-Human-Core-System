@@ -1,6 +1,5 @@
 package com.fractal.domain.authorization.user.dto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record UserResponse(

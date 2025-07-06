@@ -2,7 +2,6 @@ package com.fractal.domain.authorization.user;
 
 import com.fractal.domain.authorization.user.dto.UserRequest;
 import com.fractal.domain.authorization.user.dto.UserResponse;
-import com.fractal.domain.employee_management.address.EmployeeAddress;
 
 import java.util.List;
 
@@ -13,6 +12,7 @@ public interface UserService {
     List<User> getAll();
     User update(Long id, UserRequest dto);
     void delete(Long id);
+    User save(User user);
     UserResponse toDTO(User user);
 
 }

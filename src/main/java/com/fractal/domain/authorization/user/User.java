@@ -1,7 +1,6 @@
 package com.fractal.domain.authorization.user;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.authorization.role.Role;
 import com.fractal.domain.authorization.user.role.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -37,15 +36,13 @@ public class User extends AbstractEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UserRole> userRoles = new ArrayList<>();
 
-    public void addRole(Role role) {
+    public void addRole(UserRole userRole) {
         if (userRoles == null) userRoles = new ArrayList<>();
-        UserRole userRole = new UserRole(this, role);
+        userRole.setUser(this);
         userRoles.add(userRole);
     }
 
-
-    public void removeRole(Role role) {
-        UserRole userRole = new UserRole(this, role);
+    public void removeRole(UserRole userRole) {
         userRoles.remove(userRole);
     }
 

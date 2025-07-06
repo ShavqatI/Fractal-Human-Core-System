@@ -3,9 +3,6 @@ package com.fractal.domain.authorization.user;
 import com.fractal.domain.authorization.user.dto.UserRequest;
 import com.fractal.domain.authorization.user.dto.UserResponse;
 import com.fractal.domain.authorization.user.mapper.UserMapperService;
-import com.fractal.domain.employee_management.address.EmployeeAddress;
-import com.fractal.domain.employee_management.employee.Employee;
-import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -59,7 +56,8 @@ public class UserServiceImpl implements UserService {
         return mapperService.toDTO(user);
     }
 
-    private User save(User user) {
+    @Override
+    public User save(User user) {
         try {
             return userRepository.save(user);
         } catch (DataAccessException e) {

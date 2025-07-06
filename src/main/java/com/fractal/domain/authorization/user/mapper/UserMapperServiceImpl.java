@@ -3,12 +3,6 @@ package com.fractal.domain.authorization.user.mapper;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.authorization.user.dto.UserRequest;
 import com.fractal.domain.authorization.user.dto.UserResponse;
-import com.fractal.domain.employee_management.address.EmployeeAddress;
-import com.fractal.domain.location.address.type.AddressTypeService;
-import com.fractal.domain.location.city.CityService;
-import com.fractal.domain.location.country.CountryService;
-import com.fractal.domain.location.district.DistrictService;
-import com.fractal.domain.location.region.RegionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -50,7 +44,7 @@ class UserMapperServiceImpl implements UserMapperService {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
-        //dto.roles().forEach(role-> user.addRole());
+        //dto.roles().forEach(roleId-> user.addRole());
         return user;
     }
 

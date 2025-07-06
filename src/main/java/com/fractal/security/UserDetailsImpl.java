@@ -1,12 +1,14 @@
 package com.fractal.security;
 
 import com.fractal.domain.authorization.user.User;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+
 public class UserDetailsImpl implements UserDetails {
     private final User user;
 
@@ -16,7 +18,9 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        List<GrantedAuthority> authorities = new ArrayList<>();
+        user.getUserRoles().forEach(userRole -> authorities.add(new SimpleGrantedAuthority("ROLE_" + userRole.getRole().getCode())));
+        return authorities;
     }
 
     @Override

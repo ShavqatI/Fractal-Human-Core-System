@@ -1,7 +1,6 @@
  package com.fractal.domain.navigation.action.dto;
 
  import java.time.LocalDateTime;
- import java.util.List;
 
 public record ActionResponse(
         Long id,
