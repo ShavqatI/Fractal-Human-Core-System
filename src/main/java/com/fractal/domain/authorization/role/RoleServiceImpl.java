@@ -2,6 +2,7 @@ package com.fractal.domain.authorization.role;
 
 import com.fractal.domain.authorization.role.dto.RoleRequest;
 import com.fractal.domain.authorization.role.dto.RoleResponse;
+import com.fractal.domain.authorization.role.menu.mapper.RoleMenuMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -14,6 +15,7 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
+    private final RoleMenuMapperService roleMenuMapperService;
 
     @Override
     public Role create(RoleRequest dto) {
@@ -72,10 +74,12 @@ public class RoleServiceImpl implements RoleService {
     }
 
     private Role toEntity(RoleRequest dto) {
-       return Role.builder()
+       var role = Role.builder()
                 .code(dto.code())
                 .name(dto.name())
                 .build();
+       dto.menus().forEach(menu-> role.addMenu(roleMenuMapperService.toEntity(menu)));
+       return role;
     }
 }
 

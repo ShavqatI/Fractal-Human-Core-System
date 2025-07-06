@@ -3,6 +3,8 @@ package com.fractal.domain.authorization.user.mapper;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.authorization.user.dto.UserRequest;
 import com.fractal.domain.authorization.user.dto.UserResponse;
+import com.fractal.domain.authorization.user.role.UserRoleService;
+import com.fractal.domain.authorization.user.role.mapper.UserRoleMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 class UserMapperServiceImpl implements UserMapperService {
 
     private final PasswordEncoder passwordEncoder;
+    private final UserRoleMapperService userRoleMapperService;
 
     @Override
     public UserResponse toDTO(User user) {
@@ -44,7 +47,7 @@ class UserMapperServiceImpl implements UserMapperService {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
-        //dto.roles().forEach(roleId-> user.addRole());
+        dto.userRoles().forEach(userRole-> user.addRole(userRoleMapperService.toEntity(userRole)));
         return user;
     }
 

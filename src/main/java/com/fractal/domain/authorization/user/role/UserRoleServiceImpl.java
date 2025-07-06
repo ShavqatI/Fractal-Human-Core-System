@@ -1,28 +1,27 @@
 package com.fractal.domain.authorization.user.role;
 
-import com.fractal.domain.authorization.role.RoleService;
 import com.fractal.domain.authorization.user.UserService;
 import com.fractal.domain.authorization.user.role.dto.UserRoleRequest;
 import com.fractal.domain.authorization.user.role.dto.UserRoleResponse;
+import com.fractal.domain.authorization.user.role.mapper.UserRoleMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
-
 @Service
 @RequiredArgsConstructor
 public class UserRoleServiceImpl implements UserRoleService {
 
     private final UserRoleRepository userRoleRepository;
     private final UserService userService;
-    private final RoleService roleService;
+    private final UserRoleMapperService mapperService;
+
     @Override
     public UserRole create(Long userId,UserRoleRequest dto) {
         var user = userService.getById(userId);
-        var userRole = toEntity(dto);
+        var userRole = mapperService.toEntity(dto);
         user.addRole(userRole);
         return userRole;
     }
@@ -46,7 +45,7 @@ public class UserRoleServiceImpl implements UserRoleService {
         var userRole = user.getUserRoles()
                 .stream()
                 .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("User role with id: " + id + " not found"));
-        userRole = save(toEntity(userRole,dto));
+        userRole = save(mapperService.toEntity(userRole,dto));
         userService.save(user);
         return userRole;
     }
@@ -63,13 +62,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 
     @Override
     public UserRoleResponse toDTO(UserRole userRole) {
-        return new UserRoleResponse(
-                userRole.getId(),
-                userRole.getRole().getName(),
-                userRole.getStatus().getName(),
-                userRole.getCreatedDate(),
-                userRole.getUpdatedDate()
-        );
+       return mapperService.toDTO(userRole);
     }
 
     private UserRole save(UserRole userRole) {
@@ -78,14 +71,6 @@ public class UserRoleServiceImpl implements UserRoleService {
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
-    }
-
-    private UserRole toEntity(UserRoleRequest dto) {
-        return UserRole.builder().role(roleService.getById(dto.roleId())).build();
-    }
-    private UserRole toEntity(UserRole userRole,UserRoleRequest dto) {
-        userRole.setRole(roleService.getById(dto.roleId()));
-        return userRole;
     }
 }
 

@@ -3,6 +3,7 @@ package com.fractal.domain.authorization.role.menu;
 import com.fractal.domain.authorization.role.RoleService;
 import com.fractal.domain.authorization.role.menu.dto.RoleMenuRequest;
 import com.fractal.domain.authorization.role.menu.dto.RoleMenuResponse;
+import com.fractal.domain.authorization.role.menu.mapper.RoleMenuMapperService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.navigation.menu.MenuService;
 import com.fractal.exception.ResourceNotFoundException;
@@ -17,13 +18,12 @@ import java.util.List;
 public class RoleMenuServiceImpl implements RoleMenuService {
 
     private final RoleMenuRepository roleMenuRepository;
-    private final MenuService menuService;
-    private final StatusService statusService;
     private final RoleService roleService;
+    private final RoleMenuMapperService mapperService;
     @Override
     public RoleMenu create(Long roleId, RoleMenuRequest dto) {
         var role = roleService.getById(roleId);
-        var roleMenu = toEntity(dto);
+        var roleMenu = mapperService.toEntity(dto);
         role.addMenu(roleMenu);
         return roleMenu;
     }
@@ -47,7 +47,7 @@ public class RoleMenuServiceImpl implements RoleMenuService {
         var roleMenu = role.getRoleMenus()
                 .stream()
                 .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Role menu with id: " + id + " not found"));
-        roleMenu = save(toEntity(roleMenu,dto));
+        roleMenu = save(mapperService.toEntity(roleMenu,dto));
         roleService.save(role);
         return roleMenu;
     }
@@ -64,13 +64,7 @@ public class RoleMenuServiceImpl implements RoleMenuService {
 
     @Override
     public RoleMenuResponse toDTO(RoleMenu roleMenu) {
-        return new RoleMenuResponse(
-                roleMenu.getId(),
-                roleMenu.getMenu().getName(),
-                roleMenu.getStatus().getName(),
-                roleMenu.getCreatedDate(),
-                roleMenu.getUpdatedDate()
-        );
+        return mapperService.toDTO(roleMenu);
     }
 
     private RoleMenu save(RoleMenu roleMenu) {
@@ -79,18 +73,6 @@ public class RoleMenuServiceImpl implements RoleMenuService {
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
-    }
-
-    private RoleMenu toEntity(RoleMenuRequest dto) {
-        return RoleMenu.builder()
-                .menu(menuService.getById(dto.menuId()))
-                .status(statusService.getById(dto.statusId()))
-                .build();
-    }
-    private RoleMenu toEntity(RoleMenu roleMenu,RoleMenuRequest dto) {
-        roleMenu.setMenu(menuService.getById(dto.menuId()));
-        roleMenu.setStatus(statusService.getById(dto.statusId()));
-        return roleMenu;
     }
 }
 
