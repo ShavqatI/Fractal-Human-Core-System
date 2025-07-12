@@ -1,5 +1,7 @@
  package com.fractal.domain.navigation.action.dto;
 
+ import com.fractal.domain.localization.layout_label.dto.LayoutLabelResponse;
+
  import java.time.LocalDateTime;
 
 public record ActionResponse(
@@ -7,7 +9,7 @@ public record ActionResponse(
         String name,
         String url,
         String icon,
-        String layoutLabel,
+        LayoutLabelResponse layoutLabel,
         String actionType,
         String actionCategory,
         LocalDateTime createdDate

@@ -1,5 +1,6 @@
 package com.fractal.domain.navigation.action.mapper;
 
+import com.fractal.domain.localization.layout_label.LayoutLabelService;
 import com.fractal.domain.navigation.action.Action;
 import com.fractal.domain.navigation.action.category.ActionCategoryService;
 import com.fractal.domain.navigation.action.dto.ActionRequest;
@@ -14,6 +15,7 @@ class ActionMapperServiceImpl implements ActionMapperService {
 
     private final ActionCategoryService actionCategoryService;
     private final ActionTypeService actionTypeService;
+    private final LayoutLabelService layoutLabelService;
     @Override
     public ActionResponse toDTO(Action action) {
         return new ActionResponse(
@@ -21,7 +23,7 @@ class ActionMapperServiceImpl implements ActionMapperService {
                 action.getName(),
                 action.getUrl(),
                 action.getIcon(),
-                null,
+                layoutLabelService.toDTO(action.getLayoutLabel()),
                 action.getActionCategory().getName(),
                 action.getActionType().getName(),
                 action.getCreatedDate()
@@ -42,7 +44,7 @@ class ActionMapperServiceImpl implements ActionMapperService {
         action.setName(dto.name());
         action.setUrl(dto.url());
         action.setIcon(dto.icon());
-        //action.setLayoutLabel(dto.layoutLabelId());
+        action.setLayoutLabel(layoutLabelService.getById(dto.layoutLabelId()));
         action.setActionCategory(actionCategoryService.getById(dto.actionCategoryId()));
         action.setActionType(actionTypeService.getById(dto.actionTypeId()));
         return action;

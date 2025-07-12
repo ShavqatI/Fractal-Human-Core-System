@@ -1,5 +1,6 @@
 package com.fractal.domain.navigation.menu.mapper;
 
+import com.fractal.domain.localization.layout_label.LayoutLabelService;
 import com.fractal.domain.navigation.menu.Menu;
 import com.fractal.domain.navigation.menu.dto.MenuRequest;
 import com.fractal.domain.navigation.menu.dto.MenuResponse;
@@ -15,6 +16,8 @@ import static java.util.Collections.emptyList;
 @RequiredArgsConstructor
 class MenuMapperServiceImpl implements MenuMapperService {
 
+    private final LayoutLabelService layoutLabelService;
+
     @Override
     public MenuResponse toDTO(Menu menu) {
         return new MenuResponse(
@@ -23,7 +26,7 @@ class MenuMapperServiceImpl implements MenuMapperService {
                 menu.getUrl(),
                 menu.getLevel(),
                 menu.getIcon(),
-                null,
+                layoutLabelService.toDTO(menu.getLayoutLabel()),
                 menu.getSequence(),
                 Optional.ofNullable(menu.getChildren())
                         .orElse(emptyList())
@@ -50,7 +53,7 @@ class MenuMapperServiceImpl implements MenuMapperService {
         menu.setUrl(dto.url());
         menu.setLevel(dto.level());
         menu.setIcon(dto.icon());
-        //menu.setLayoutLabel();
+        menu.setLayoutLabel(layoutLabelService.getById(dto.layoutLabelId()));
         menu.setSequence(dto.sequence());
         dto.children().forEach(child->menu.addChild(toEntity(child)));
         return menu;
