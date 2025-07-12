@@ -24,4 +24,14 @@ public class LayoutLabel extends AbstractEntity {
 
     @OneToMany(mappedBy = "layoutLabel",cascade = CascadeType.ALL,orphanRemoval = true)
     private List<LayoutLabelDetail> layoutLabelDetails = new ArrayList<>();
+
+    public void addDetail(LayoutLabelDetail detail) {
+        if (layoutLabelDetails == null) layoutLabelDetails = new ArrayList<>();
+        detail.setLayoutLabel(this);
+        layoutLabelDetails.add(detail);
+    }
+    public void removeDetail(LayoutLabelDetail detail) {
+        if (layoutLabelDetails != null && !layoutLabelDetails.isEmpty())
+            layoutLabelDetails.remove(detail);
+    }
 }

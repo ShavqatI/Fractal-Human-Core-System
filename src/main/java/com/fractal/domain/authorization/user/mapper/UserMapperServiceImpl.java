@@ -3,7 +3,6 @@ package com.fractal.domain.authorization.user.mapper;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.authorization.user.dto.UserRequest;
 import com.fractal.domain.authorization.user.dto.UserResponse;
-import com.fractal.domain.authorization.user.role.UserRoleService;
 import com.fractal.domain.authorization.user.role.mapper.UserRoleMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

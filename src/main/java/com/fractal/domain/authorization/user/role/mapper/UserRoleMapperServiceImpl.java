@@ -1,14 +1,9 @@
 package com.fractal.domain.authorization.user.role.mapper;
 
 import com.fractal.domain.authorization.role.RoleService;
-import com.fractal.domain.authorization.role.menu.RoleMenu;
-import com.fractal.domain.authorization.role.menu.dto.RoleMenuRequest;
-import com.fractal.domain.authorization.role.menu.dto.RoleMenuResponse;
 import com.fractal.domain.authorization.user.role.UserRole;
 import com.fractal.domain.authorization.user.role.dto.UserRoleRequest;
 import com.fractal.domain.authorization.user.role.dto.UserRoleResponse;
-import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.navigation.menu.MenuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,5 +1,7 @@
  package com.fractal.domain.navigation.menu.dto;
 
+ import com.fractal.domain.localization.layout_label.dto.LayoutLabelResponse;
+
  import java.time.LocalDateTime;
  import java.util.List;
 
@@ -9,7 +11,7 @@ public record MenuResponse(
         String url,
         Integer level,
         String icon,
-        Long layoutLabelId,
+        LayoutLabelResponse layoutLabel,
         Integer sequence,
         List<MenuResponse> children,
         LocalDateTime createdDate
