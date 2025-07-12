@@ -13,11 +13,9 @@ import jakarta.persistence.Table;
 @Table(name = "menu_transition", schema = "navigation_schema", catalog = "fractal")
 public class MenuTransition extends AbstractEntity {
 
-
     @ManyToOne
     @JoinColumn(name = "entity_type_id", referencedColumnName = "id")
     private EntityType entityType;
-
 
     @ManyToOne
     @JoinColumn(name = "menu_id", referencedColumnName = "id")
@@ -26,29 +24,4 @@ public class MenuTransition extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
-
-
-    public EntityType getEntityType() {
-        return entityType;
-    }
-
-    public void setEntityType(EntityType entityType) {
-        this.entityType = entityType;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public Menu getMenu() {
-        return menu;
-    }
-
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
 }

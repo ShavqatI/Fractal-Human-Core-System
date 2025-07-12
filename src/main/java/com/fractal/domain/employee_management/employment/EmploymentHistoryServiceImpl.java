@@ -65,6 +65,7 @@ class EmploymentHistoryServiceImpl implements EmploymentHistoryService {
         var employmentHistory = employee.getEmploymentHistories()
                 .stream()
                 .filter(eh-> eh.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employment History with id: " + id + " not found"));
+        employee.removeEmploymentHistory(employmentHistory);
         employmentHistoryRepository.delete(employmentHistory);
         employeeService.save(employee);
     }

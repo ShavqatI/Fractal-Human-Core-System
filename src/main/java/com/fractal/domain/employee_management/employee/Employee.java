@@ -164,9 +164,4 @@ public class Employee extends Person {
 
 
 
-
-   /* @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Contact> contacts   = new ArrayList<>();*/
-
-
 }
