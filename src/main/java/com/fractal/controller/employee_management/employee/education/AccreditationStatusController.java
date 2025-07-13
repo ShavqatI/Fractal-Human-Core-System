@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management;
+package com.fractal.controller.employee_management.employee.education;
 
 
 import com.fractal.domain.employee_management.education.accreditation_status.AccreditationStatusService;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/accreditation-status")
+@RequestMapping("/api/v1/employee-management/education/accreditation-status")
 @RequiredArgsConstructor
 public class AccreditationStatusController {
 

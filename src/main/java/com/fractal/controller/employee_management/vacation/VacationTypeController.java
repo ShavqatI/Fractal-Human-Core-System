@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management;
+package com.fractal.controller.employee_management.vacation;
 
 
 import com.fractal.domain.employee_management.vacation.type.VacationTypeService;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/vacation-type")
+@RequestMapping("/api/v1/employee-management/vacation/type")
 @RequiredArgsConstructor
 public class VacationTypeController {
 

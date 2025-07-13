@@ -8,8 +8,6 @@ import java.util.Optional;
 
 @Repository
 interface VacationCategoryRepository extends JpaRepository<VacationCategory,Long> {
-
-    Optional<VacationCategory> findById(Long id);
     Optional<VacationCategory> findByCode(String code);
-    List<VacationCategory> findAll();
+
 }

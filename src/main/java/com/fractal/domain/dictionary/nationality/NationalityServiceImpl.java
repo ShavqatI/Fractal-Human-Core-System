@@ -1,5 +1,6 @@
 package com.fractal.domain.dictionary.nationality;
 
+import com.fractal.domain.dictionary.currency.Currency;
 import com.fractal.domain.dictionary.nationality.dto.NationalityRequest;
 import com.fractal.domain.dictionary.nationality.dto.NationalityResponse;
 import com.fractal.exception.ResourceNotFoundException;
@@ -38,7 +39,15 @@ class NationalityServiceImpl implements NationalityService {
 
     @Override
     public Nationality update(Long id, NationalityRequest dto) {
-        return null;
+        try {
+            Nationality nationality = findById(id);
+            nationality.setCode(dto.code());
+            nationality.setName(dto.name());
+            return save(nationality);
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
     @Override

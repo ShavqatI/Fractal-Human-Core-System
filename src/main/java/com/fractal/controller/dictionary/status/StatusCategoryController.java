@@ -1,4 +1,4 @@
-package com.fractal.controller.dictionary;
+package com.fractal.controller.dictionary.status;
 
 
 import com.fractal.domain.dictionary.status.category.StatusCategoryService;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/dictionary/status-category")
+@RequestMapping("/api/v1/dictionary/status/category")
 @RequiredArgsConstructor
 public class StatusCategoryController {
 

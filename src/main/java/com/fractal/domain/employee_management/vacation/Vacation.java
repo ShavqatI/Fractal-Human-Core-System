@@ -12,6 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "vacation", schema = "employee_schema", catalog = "fractal")
@@ -41,16 +42,19 @@ public class Vacation extends AbstractEntity {
     private Status status;
 
     @Column(name = "start_date")
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(name = "end_date")
-    private Date endDate;
+    private LocalDate endDate;
+
+    @Column(name = "days")
+    private Integer days;
 
     @Column(name = "order_number")
     private String orderNumber;
 
     @Column(name = "order_date")
-    private Date orderDate;
+    private LocalDate orderDate;
 
     @Column(name = "description")
     private String description;

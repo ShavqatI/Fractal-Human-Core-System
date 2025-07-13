@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management;
+package com.fractal.controller.employee_management.vacation;
 
 
 import com.fractal.domain.employee_management.vacation.category.VacationCategoryService;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 @RestController
-@RequestMapping("/api/v1/employee-management/vacation-category")
+@RequestMapping("/api/v1/employee-management/vacation/category")
 @RequiredArgsConstructor
 public class VacationCategoryController {
 
