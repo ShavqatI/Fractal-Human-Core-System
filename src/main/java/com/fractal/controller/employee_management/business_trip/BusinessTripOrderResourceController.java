@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/employee/business-trip/order/{orderId}/resource")
+@RequestMapping("/api/v1/employee-management/business-trip/order/{orderId}/resource")
 @RequiredArgsConstructor
 public class BusinessTripOrderResourceController {
 
