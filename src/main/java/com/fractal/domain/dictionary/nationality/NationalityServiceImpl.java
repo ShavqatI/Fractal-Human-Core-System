@@ -1,6 +1,5 @@
 package com.fractal.domain.dictionary.nationality;
 
-import com.fractal.domain.dictionary.currency.Currency;
 import com.fractal.domain.dictionary.nationality.dto.NationalityRequest;
 import com.fractal.domain.dictionary.nationality.dto.NationalityResponse;
 import com.fractal.exception.ResourceNotFoundException;

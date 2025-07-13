@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApprovalWorkflow extends Auditable {
+public abstract class ApprovalWorkflow extends Auditable {
 
     @Column(name = "reviewed_date")
     protected LocalDateTime reviewedDate;

@@ -2,7 +2,6 @@ package com.fractal.domain.employee_management.order;
 
 
 import com.fractal.domain.abstraction.ApprovalWorkflow;
-import com.fractal.domain.employee_management.education.resource.EducationResource;
 import com.fractal.domain.employee_management.order.resource.OrderResource;
 import com.fractal.domain.employee_management.order.type.OrderType;
 import jakarta.persistence.*;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "oder", schema = "employee_schema", catalog = "fractal")
+@Table(name = "order", schema = "employee_schema", catalog = "fractal")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @Builder

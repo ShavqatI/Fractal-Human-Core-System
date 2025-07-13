@@ -1,9 +1,5 @@
 package com.fractal.domain.employee_management.order;
 
-import com.fractal.domain.contact.Contact;
-import com.fractal.domain.contact.dto.ContactRequest;
-import com.fractal.domain.contact.dto.ContactResponse;
-import com.fractal.domain.contact.type.ContactTypeService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
