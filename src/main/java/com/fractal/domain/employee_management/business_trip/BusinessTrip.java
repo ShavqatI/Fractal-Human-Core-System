@@ -1,18 +1,18 @@
 package com.fractal.domain.employee_management.business_trip;
 
-
-import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.employee_management.business_trip.order.BusinessTripOrder;
+import com.fractal.domain.employee_management.business_trip.resource.BusinessTripResource;
+import com.fractal.domain.employee_management.business_trip.type.BusinessTripType;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.organization_management.organization.Organization;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import java.sql.Date;
-
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "business_trip", schema = "employee_schema", catalog = "fractal")
@@ -20,7 +20,13 @@ import java.sql.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class BusinessTrip extends AbstractEntity {
+@EqualsAndHashCode(callSuper = true)
+public class BusinessTrip extends ApprovalWorkflow {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
+    protected Long id;
 
     @ManyToOne
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
@@ -31,22 +37,54 @@ public class BusinessTrip extends AbstractEntity {
     private Organization organization;
 
     @ManyToOne
+    @JoinColumn(name = "business_tripType_id", referencedColumnName = "id")
+    private BusinessTripType businessTripType;
+
+    @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @Column(name = "start_date")
-    private Date startDate;
+    @Column(name = "purpose",length = 5000)
+    private String purpose;
 
-    @Column(name = "end_date")
-    private Date endDate;
-
-    @Column(name = "order_number")
-    private String orderNumber;
-
-    @Column(name = "order_date")
-    private Date orderDate;
-
-    @Column(name = "description")
+    @Column(name = "description",length = 1000)
     private String description;
 
+    @Column(name = "location",length = 1000)
+    private String location;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    private LocalDate endDate;
+
+    @Column(name = "days")
+    private Integer days;
+
+    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<BusinessTripOrder> orders = new ArrayList<>();
+
+    @OneToMany(mappedBy = "businessTrip",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<BusinessTripResource> resources = new ArrayList<>();
+
+    public void addOrder(BusinessTripOrder order) {
+        if (orders == null) orders = new ArrayList<>();
+        order.setBusinessTrip(this);
+        orders.add(order);
+    }
+    public void removeOrder(BusinessTripOrder order) {
+        if (orders != null && !orders.isEmpty())
+            orders.remove(order);
+    }
+
+    public void addResource(BusinessTripResource resource) {
+        if (resources == null) resources = new ArrayList<>();
+        resource.setBusinessTrip(this);
+        resources.add(resource);
+    }
+    public void removeResource(BusinessTripResource resource) {
+        if (resources != null && !resources.isEmpty())
+            resources.remove(resource);
+    }
 }

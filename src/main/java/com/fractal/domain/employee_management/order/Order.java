@@ -5,10 +5,9 @@ import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.employee_management.order.resource.OrderResource;
 import com.fractal.domain.employee_management.order.type.OrderType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -18,8 +17,7 @@ import java.util.List;
 @Table(name = "order", schema = "employee_schema", catalog = "fractal")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
-@Builder
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
 public class Order extends ApprovalWorkflow {
 
