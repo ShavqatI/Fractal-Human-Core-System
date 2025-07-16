@@ -1,11 +1,13 @@
 package com.fractal.domain.location.city.dto;
 
+import com.fractal.domain.location.region.dto.RegionResponse;
+
 import java.time.LocalDateTime;
 
 public record CityResponse(
         Long id,
         String code,
         String name,
-        String region,
+        RegionResponse region,
         LocalDateTime createdDate
 ) { }

@@ -37,7 +37,7 @@ public class BusinessTrip extends ApprovalWorkflow {
     private Organization organization;
 
     @ManyToOne
-    @JoinColumn(name = "business_tripType_id", referencedColumnName = "id")
+    @JoinColumn(name = "business_trip_type_id", referencedColumnName = "id")
     private BusinessTripType businessTripType;
 
     @ManyToOne

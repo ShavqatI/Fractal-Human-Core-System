@@ -67,7 +67,7 @@ class CityServiceImpl implements CityService {
                 city.getId(),
                 city.getCode(),
                 city.getName(),
-                city.getRegion().getName(),
+                regionService.toDTO(city.getRegion()),
                 city.getCreatedDate()
         );
     }

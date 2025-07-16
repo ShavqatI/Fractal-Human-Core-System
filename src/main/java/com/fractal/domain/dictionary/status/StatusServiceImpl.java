@@ -63,7 +63,7 @@ public class StatusServiceImpl implements StatusService {
                 status.getId(),
                 status.getCode(),
                 status.getName(),
-                status.getStatusCategory().getName(),
+                statusCategoryService.toDTO(status.getStatusCategory()),
                 status.getDescription(),
                 status.getCreatedDate()
         );

@@ -16,7 +16,7 @@ class LayoutLabelDetailMapperServiceImpl implements LayoutLabelDetailMapperServi
     public LayoutLabelDetailResponse toDTO(LayoutLabelDetail layoutLabelDetail) {
         return new LayoutLabelDetailResponse(
                 layoutLabelDetail.getId(),
-                layoutLabelDetail.getLanguage().getName(),
+                languageService.toDTO(layoutLabelDetail.getLanguage()),
                 layoutLabelDetail.getDescription(),
                 layoutLabelDetail.getCreatedDate()
 

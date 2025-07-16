@@ -68,7 +68,7 @@ class RegionServiceImpl implements RegionService {
                 region.getId(),
                 region.getCode(),
                 region.getName(),
-                region.getCountry().getName(),
+                countryService.toDTO(region.getCountry()),
                 region.getCreatedDate()
         );
     }
