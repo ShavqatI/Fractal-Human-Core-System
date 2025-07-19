@@ -2,6 +2,7 @@ package com.fractal.domain.authorization.role;
 
 import com.fractal.domain.authorization.role.dto.RoleRequest;
 import com.fractal.domain.authorization.role.dto.RoleResponse;
+import com.fractal.domain.authorization.role.menu.RoleMenu;
 import com.fractal.domain.authorization.role.menu.mapper.RoleMenuMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -66,6 +68,15 @@ public class RoleServiceImpl implements RoleService {
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
+    }
+
+    @Override
+    public List<RoleMenu> getActiveMenus(Long id) {
+        return findById(id).getRoleMenus()
+                .stream()
+                .filter(roleMenu -> roleMenu.getStatus().getCode().equals("ACTIVE"))
+                .collect(Collectors.toList());
+
     }
 
 

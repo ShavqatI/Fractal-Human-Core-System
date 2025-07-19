@@ -3,6 +3,7 @@ package com.fractal.domain.authorization.user;
 import com.fractal.domain.authorization.user.dto.UserRequest;
 import com.fractal.domain.authorization.user.dto.UserResponse;
 import com.fractal.domain.authorization.user.mapper.UserMapperService;
+import com.fractal.domain.authorization.user.role.UserRole;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -18,6 +20,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapperService mapperService;
     private final UserRepository userRepository;
+
 
     @Override
     @Transactional
@@ -63,6 +66,13 @@ public class UserServiceImpl implements UserService {
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
+    }
+
+    @Override
+    public List<UserRole> getActiveRoles(Long id) {
+        return findById(id).getUserRoles().stream()
+                .filter(userRole -> userRole.getStatus().getCode().equals("ACTIVE"))
+                .collect(Collectors.toList());
     }
 
 

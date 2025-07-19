@@ -33,13 +33,14 @@ public class User extends AbstractEntity {
 
     private boolean enabled;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<UserRole> userRoles = new ArrayList<>();
 
     public void addRole(UserRole userRole) {
         if (userRoles == null) userRoles = new ArrayList<>();
         userRole.setUser(this);
         userRoles.add(userRole);
+
     }
 
     public void removeRole(UserRole userRole) {

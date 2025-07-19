@@ -4,10 +4,14 @@ package com.fractal.controller.authorization.role;
 import com.fractal.domain.authorization.role.RoleService;
 import com.fractal.domain.authorization.role.dto.RoleRequest;
 import com.fractal.domain.authorization.role.dto.RoleResponse;
+import com.fractal.security.UserDetailsImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,6 +30,17 @@ public class RoleController {
     @GetMapping
     public ResponseEntity<List<RoleResponse>> getAll() {
         return ResponseEntity.ok(roleService.getAll().stream().map(roleService::toDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("/active-menu")
+    public ResponseEntity<List<RoleResponse>> getActiveMenus() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.getPrincipal() instanceof UserDetails){
+            var userDetails = (UserDetails) auth.getPrincipal();
+            System.out.println(userDetails.getUsername());
+
+        }
+        return null;
+
     }
     @GetMapping("/{id}")
     public ResponseEntity<RoleResponse> getById(@PathVariable Long id) {

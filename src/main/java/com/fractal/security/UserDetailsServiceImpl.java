@@ -1,7 +1,7 @@
 package com.fractal.security;
 
-import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.authorization.user.UserService;
+import com.fractal.domain.authorization.user.role.UserRoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,11 +13,10 @@ import org.springframework.stereotype.Service;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserService userService;
+    private final UserRoleService roleService;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetails userDetails;
-        User user = userService.findByUsername(username);
-        userDetails = new UserDetailsImpl(user);
+        UserDetailsImpl userDetails = new UserDetailsImpl(userService.findByUsername(username),roleService);
         return userDetails;
     }
 }
