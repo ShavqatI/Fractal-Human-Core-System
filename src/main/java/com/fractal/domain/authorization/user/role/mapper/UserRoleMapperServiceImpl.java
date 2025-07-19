@@ -4,6 +4,7 @@ import com.fractal.domain.authorization.role.RoleService;
 import com.fractal.domain.authorization.user.role.UserRole;
 import com.fractal.domain.authorization.user.role.dto.UserRoleRequest;
 import com.fractal.domain.authorization.user.role.dto.UserRoleResponse;
+import com.fractal.domain.dictionary.status.StatusService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 class UserRoleMapperServiceImpl implements UserRoleMapperService {
 
     private final RoleService roleService;
+    private final StatusService statusService;
     @Override
     public UserRoleResponse toDTO(UserRole userRole) {
         return new UserRoleResponse(
@@ -37,6 +39,7 @@ class UserRoleMapperServiceImpl implements UserRoleMapperService {
 
     private UserRole mapToEntity(UserRole userRole, UserRoleRequest dto) {
         userRole.setRole(roleService.getById(dto.roleId()));
+        userRole.setStatus(statusService.getById(dto.statusId()));
         return userRole;
     }
 }

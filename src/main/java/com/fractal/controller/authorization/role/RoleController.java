@@ -4,6 +4,7 @@ package com.fractal.controller.authorization.role;
 import com.fractal.domain.authorization.role.RoleService;
 import com.fractal.domain.authorization.role.dto.RoleRequest;
 import com.fractal.domain.authorization.role.dto.RoleResponse;
+import com.fractal.domain.authorization.user.UserService;
 import com.fractal.security.UserDetailsImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 public class RoleController {
 
     private final RoleService roleService;
+    private final UserService userService;
     @PostMapping
     public ResponseEntity<RoleResponse> create(@RequestBody @Valid RoleRequest dto) {
         return new ResponseEntity<>(roleService.toDTO(roleService.create(dto)), HttpStatus.CREATED);
@@ -36,7 +38,14 @@ public class RoleController {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth.getPrincipal() instanceof UserDetails){
             var userDetails = (UserDetails) auth.getPrincipal();
-            System.out.println(userDetails.getUsername());
+            //var user = userService.findByUsername(userDetails.getUsername());
+            //System.out.println(user.getUsername());
+
+            /*userService.getActiveRoles(userService.findByUsername(userDetails.getUsername()).getId())
+                    .forEach(userRole -> {
+                        System.out.println(userRole.getRole().getCode());
+                    });
+            ;*/
 
         }
         return null;
