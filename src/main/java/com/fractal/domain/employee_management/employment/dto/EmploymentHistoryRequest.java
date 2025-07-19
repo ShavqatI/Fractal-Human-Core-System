@@ -1,13 +1,12 @@
 package com.fractal.domain.employee_management.employment.dto;
 
 import com.fractal.domain.employee_management.employment.agreement.dto.AgreementRequest;
+import com.fractal.domain.employee_management.employment.order.dto.EmploymentHistoryOrderRequest;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public record EmploymentHistoryRequest(
-        String orderNumber,
-        LocalDate orderDate,
         Integer serial,
         LocalDate startDate,
         LocalDate endDate,
@@ -16,6 +15,7 @@ public record EmploymentHistoryRequest(
         Long positionId,
         Long statusId,
         Long employmentTypeId,
-        List<AgreementRequest> agreements
+        List<AgreementRequest> agreements,
+        List<EmploymentHistoryOrderRequest> orders
 ) {
 }

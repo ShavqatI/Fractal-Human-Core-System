@@ -43,7 +43,7 @@ public class StatusServiceImpl implements StatusService {
             Status status = findById(id);
             status.setCode(dto.code());
             status.setName(dto.name());
-            status.setStatusCategory(statusCategoryService.getByCode(dto.statusCategory()));
+            status.setStatusCategory(statusCategoryService.getById(dto.statusCategoryId()));
             status.setDescription(dto.description());
             return save(status);
         }
@@ -73,7 +73,7 @@ public class StatusServiceImpl implements StatusService {
         return Status.builder()
                 .code(dto.code())
                 .name(dto.name())
-                .statusCategory(statusCategoryService.getByCode(dto.statusCategory()))
+                .statusCategory(statusCategoryService.getById(dto.statusCategoryId()))
                 .description(dto.description())
                 .build();
     }

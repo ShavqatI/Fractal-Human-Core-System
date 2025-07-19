@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/v1/employee-management/employee/{employeeId}/employment-history")
 @RequiredArgsConstructor
-public class EmployeeEmploymentHistoryController {
+public class EmploymentHistoryController {
 
     private final EmploymentHistoryService employmentHistoryService;
 

@@ -5,6 +5,7 @@ import com.fractal.domain.employee_management.employment.EmploymentHistory;
 import com.fractal.domain.employee_management.employment.agreement.mapper.AgreementMapperService;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryResponse;
+import com.fractal.domain.employee_management.employment.order.mapper.EmploymentHistoryOrderMapperService;
 import com.fractal.domain.employee_management.employment.type.EmploymentTypeService;
 import com.fractal.domain.organization_management.department.DepartmentService;
 import com.fractal.domain.organization_management.organization.OrganizationService;
@@ -27,13 +28,12 @@ class EmploymentHistoryMapperServiceImpl implements EmploymentHistoryMapperServi
     private final PositionService positionService;
     private final EmploymentTypeService employmentTypeService;
     private final StatusService statusService;
+    private final EmploymentHistoryOrderMapperService orderMapperService;
 
     @Override
     public EmploymentHistoryResponse toDTO(EmploymentHistory employmentHistory) {
         return new EmploymentHistoryResponse(
                 employmentHistory.getId(),
-                employmentHistory.getOrderNumber(),
-                employmentHistory.getOrderDate(),
                 employmentHistory.getSerial(),
                 employmentHistory.getStartDate(),
                 employmentHistory.getEndDate(),
@@ -46,6 +46,11 @@ class EmploymentHistoryMapperServiceImpl implements EmploymentHistoryMapperServi
                         .orElse(emptyList())
                         .stream()
                         .map(agreementMapperService::toDTO)
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(employmentHistory.getOrders())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(orderMapperService::toDTO)
                         .collect(Collectors.toList()),
                 employmentHistory.getCreatedDate(),
                 employmentHistory.getUpdatedDate()
@@ -63,8 +68,6 @@ class EmploymentHistoryMapperServiceImpl implements EmploymentHistoryMapperServi
     }
 
     private EmploymentHistory mapToEntity(EmploymentHistory employmentHistory, EmploymentHistoryRequest dto) {
-        employmentHistory.setOrderNumber(dto.orderNumber());
-        employmentHistory.setOrderDate(dto.orderDate());
         employmentHistory.setSerial(null);
         employmentHistory.setStartDate(dto.startDate());
         employmentHistory.setEndDate(dto.endDate());
@@ -74,6 +77,7 @@ class EmploymentHistoryMapperServiceImpl implements EmploymentHistoryMapperServi
         employmentHistory.setEmploymentType(employmentTypeService.getById(dto.employmentTypeId()));
         employmentHistory.setStatus(statusService.getById(dto.statusId()));
         dto.agreements().forEach(agreementRequest -> employmentHistory.addAgreement(agreementMapperService.toEntity(agreementRequest)));
+        dto.orders().forEach(orderRequest -> employmentHistory.addOrder(orderMapperService.toEntity(orderRequest)));
         return employmentHistory;
     }
 

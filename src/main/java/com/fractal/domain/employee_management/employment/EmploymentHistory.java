@@ -2,8 +2,11 @@ package com.fractal.domain.employee_management.employment;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.employee_management.business_trip.order.BusinessTripOrder;
+import com.fractal.domain.employee_management.business_trip.resource.BusinessTripResource;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employment.agreement.Agreement;
+import com.fractal.domain.employee_management.employment.order.EmploymentHistoryOrder;
 import com.fractal.domain.employee_management.employment.type.EmploymentType;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.organization.Organization;
@@ -25,12 +28,6 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class EmploymentHistory extends AbstractEntity {
-
-    @Column(name = "order_number")
-    private String orderNumber;
-
-    @Column(name = "order_date")
-    private LocalDate orderDate;
 
     @Column(name = "serial")
     private Integer serial;
@@ -68,6 +65,10 @@ public class EmploymentHistory extends AbstractEntity {
     @OneToMany(mappedBy = "employmentHistory", cascade = CascadeType.ALL, orphanRemoval = true)
     private  List<Agreement> agreements   = new ArrayList<>();
 
+    @OneToMany(mappedBy = "employmentHistory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<EmploymentHistoryOrder> orders = new ArrayList<>();
+
+
     public void addAgreement(Agreement agreement) {
         if (agreements == null) agreements = new ArrayList<>();
         agreement.setEmploymentHistory(this);
@@ -76,6 +77,16 @@ public class EmploymentHistory extends AbstractEntity {
     public void removeAgreement(Agreement agreement) {
         if (agreements != null && !agreements.isEmpty())
             agreements.remove(agreement);
+    }
+
+    public void addOrder(EmploymentHistoryOrder order) {
+        if (orders == null) orders = new ArrayList<>();
+        order.setEmploymentHistory(this);
+        orders.add(order);
+    }
+    public void removeOrder(EmploymentHistoryOrder order) {
+        if (orders != null && !orders.isEmpty())
+            orders.remove(order);
     }
 
 }
