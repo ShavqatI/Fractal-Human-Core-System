@@ -44,6 +44,11 @@ class MenuActionServiceImpl implements MenuActionService {
     }
 
     @Override
+    public MenuAction getById(Long id) {
+        return menuActionRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Menu action with id: " + id + " not found"));
+    }
+
+    @Override
     @Transactional
     public MenuAction update(Long menuId,Long id, MenuActionRequest dto) {
         var menu = menuService.getById(menuId);

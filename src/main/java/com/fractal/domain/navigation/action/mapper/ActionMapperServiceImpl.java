@@ -24,8 +24,8 @@ class ActionMapperServiceImpl implements ActionMapperService {
                 action.getUrl(),
                 action.getIcon(),
                 layoutLabelService.toDTO(action.getLayoutLabel()),
-                action.getActionCategory().getName(),
-                action.getActionType().getName(),
+                actionTypeService.toDTO(action.getActionType()),
+                actionCategoryService.toDTO(action.getActionCategory()),
                 action.getCreatedDate()
         );
     }

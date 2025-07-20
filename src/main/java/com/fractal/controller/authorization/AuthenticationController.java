@@ -2,10 +2,14 @@ package com.fractal.controller.authorization;
 
 import com.fractal.controller.authorization.dto.AuthRequest;
 import com.fractal.controller.authorization.dto.AuthResponse;
+import com.fractal.domain.authorization.permission.Permission;
+import com.fractal.domain.authorization.permission.PermissionService;
 import com.fractal.domain.authorization.role.RoleService;
 import com.fractal.domain.authorization.role.dto.RoleResponse;
 import com.fractal.domain.authorization.role.menu.RoleMenu;
 import com.fractal.domain.authorization.user.UserService;
+import com.fractal.domain.navigation.action.ActionService;
+import com.fractal.domain.navigation.action.dto.ActionResponse;
 import com.fractal.domain.navigation.menu.MenuService;
 import com.fractal.domain.navigation.menu.dto.MenuResponse;
 import com.fractal.security.JwtService;
@@ -32,6 +36,8 @@ public class AuthenticationController {
     private final UserService userService;
     private final RoleService roleService;
     private final MenuService menuService;
+    private final ActionService actionService;
+    private final PermissionService permissionService;
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody AuthRequest authRequest) {
@@ -51,6 +57,22 @@ public class AuthenticationController {
             roles.forEach(userRole -> roleMenus.add(roleService.getActiveMenus(userRole.getRole().getId())));
             return ResponseEntity.ok(roleMenus.stream()
                     .flatMap(List::stream).map(roleMenu -> menuService.toDTO(roleMenu.getMenu()))
+                    .collect(Collectors.toList()));
+
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+    @GetMapping("/navigation/{menuId}/action")
+    public ResponseEntity<List<ActionResponse>> getNavigationActions(@PathVariable Long menuId) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth.getPrincipal() instanceof UserDetails) {
+            var userDetails = (UserDetails) auth.getPrincipal();
+            var user = userService.findByUsername(userDetails.getUsername());
+            var roles = userService.getActiveRoles(user.getId());
+            List<List<Permission>> permissions = new ArrayList<>();
+            roles.forEach(userRole -> permissions.add(permissionService.getAllByRoleIdMenuId(userRole.getRole().getId(),menuId)));
+            return ResponseEntity.ok(permissions.stream()
+                    .flatMap(List::stream).map(permission -> actionService.toDTO(permission.getMenuAction().getAction()))
                     .collect(Collectors.toList()));
 
         }

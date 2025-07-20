@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 public class Permission extends AbstractEntity {
 
     @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
+    @JoinColumn(name = "role_id",referencedColumnName = "id")
     private Role role;
 
     @ManyToOne
