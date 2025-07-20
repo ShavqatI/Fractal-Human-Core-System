@@ -19,15 +19,15 @@ import lombok.NoArgsConstructor;
 @Table(name = "user_role",schema = "authorization_schema",catalog = "fractal")
 public class UserRole extends AbstractEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;
 

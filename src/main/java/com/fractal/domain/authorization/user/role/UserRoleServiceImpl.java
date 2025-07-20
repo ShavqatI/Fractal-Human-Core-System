@@ -8,6 +8,7 @@ import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +38,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<UserRole> getAllByUserId(Long userId) {
         return userRoleRepository.findAllByUserId(userId);
     }

@@ -69,6 +69,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<UserRole> getActiveRoles(Long id) {
         return findById(id).getUserRoles().stream()
                 .filter(userRole -> userRole.getStatus().getCode().equals("ACTIVE"))

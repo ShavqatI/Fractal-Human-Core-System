@@ -8,6 +8,7 @@ import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,10 +20,12 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     private final RoleService roleService;
     private final RoleMenuMapperService mapperService;
     @Override
+    @Transactional
     public RoleMenu create(Long roleId, RoleMenuRequest dto) {
         var role = roleService.getById(roleId);
         var roleMenu = mapperService.toEntity(dto);
         role.addMenu(roleMenu);
+        roleService.save(role);
         return roleMenu;
     }
 

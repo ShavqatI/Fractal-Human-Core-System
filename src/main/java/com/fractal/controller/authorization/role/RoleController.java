@@ -33,24 +33,6 @@ public class RoleController {
     public ResponseEntity<List<RoleResponse>> getAll() {
         return ResponseEntity.ok(roleService.getAll().stream().map(roleService::toDTO).collect(Collectors.toList()));
     }
-    @GetMapping("/active-menu")
-    public ResponseEntity<List<RoleResponse>> getActiveMenus() {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if(auth.getPrincipal() instanceof UserDetails){
-            var userDetails = (UserDetails) auth.getPrincipal();
-            //var user = userService.findByUsername(userDetails.getUsername());
-            //System.out.println(user.getUsername());
-
-            /*userService.getActiveRoles(userService.findByUsername(userDetails.getUsername()).getId())
-                    .forEach(userRole -> {
-                        System.out.println(userRole.getRole().getCode());
-                    });
-            ;*/
-
-        }
-        return null;
-
-    }
     @GetMapping("/{id}")
     public ResponseEntity<RoleResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(roleService.toDTO(roleService.getById(id)));
