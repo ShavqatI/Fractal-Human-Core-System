@@ -2,6 +2,7 @@ package com.fractal.domain.organization_management.position;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.organization_management.department.Department;
+import com.fractal.domain.organization_management.grade.Grade;
 import com.fractal.domain.organization_management.job_description.JobDescription;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,6 +31,10 @@ public class Position extends AbstractEntity {
     @ManyToOne
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
+
+    @ManyToOne
+    @JoinColumn(name = "grade_id", referencedColumnName = "id")
+    private Grade grade;
 
     @OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
     private List<JobDescription> jobDescriptions = new ArrayList<>();

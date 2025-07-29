@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "address_type", schema = "location_schema", catalog = "fractal")
+@Table(name = "question_type", schema = "testing_schema", catalog = "fractal")
 @EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder

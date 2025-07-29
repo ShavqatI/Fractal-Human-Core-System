@@ -2,6 +2,7 @@ package com.fractal.domain.navigation.menu.mapper;
 
 import com.fractal.domain.localization.layout_label.LayoutLabelService;
 import com.fractal.domain.navigation.menu.Menu;
+import com.fractal.domain.navigation.menu.action.mapper.MenuActionMapperService;
 import com.fractal.domain.navigation.menu.dto.MenuRequest;
 import com.fractal.domain.navigation.menu.dto.MenuResponse;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,8 @@ import static java.util.Collections.emptyList;
 class MenuMapperServiceImpl implements MenuMapperService {
 
     private final LayoutLabelService layoutLabelService;
+    private final MenuActionMapperService menuActionMapperService;
+
 
     @Override
     public MenuResponse toDTO(Menu menu) {
@@ -32,6 +35,11 @@ class MenuMapperServiceImpl implements MenuMapperService {
                         .orElse(emptyList())
                         .stream()
                         .map(this::toDTO)
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(menu.getMenuActions())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(menuActionMapperService::toDTO)
                         .collect(Collectors.toList()),
                 menu.getCreatedDate()
 
@@ -56,6 +64,7 @@ class MenuMapperServiceImpl implements MenuMapperService {
         menu.setLayoutLabel(layoutLabelService.getById(dto.layoutLabelId()));
         menu.setSequence(dto.sequence());
         dto.children().forEach(child->menu.addChild(toEntity(child)));
+        dto.actions().forEach(action->menu.addAction(menuActionMapperService.toEntity(action)));
         return menu;
     }
 }

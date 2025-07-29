@@ -1,9 +1,9 @@
 package com.fractal.domain.navigation.menu.action;
 
-import com.fractal.domain.navigation.action.ActionService;
 import com.fractal.domain.navigation.menu.MenuService;
 import com.fractal.domain.navigation.menu.action.dto.MenuActionRequest;
 import com.fractal.domain.navigation.menu.action.dto.MenuActionResponse;
+import com.fractal.domain.navigation.menu.action.mapper.MenuActionMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,20 +17,16 @@ class MenuActionServiceImpl implements MenuActionService {
 
     private final MenuActionRepository menuActionRepository;
     private final MenuService menuService;
-    private final ActionService actionService;
+    private final MenuActionMapperService mapperService;
 
     @Override
     @Transactional
     public MenuAction create(Long menuId,MenuActionRequest dto) {
         var menu = menuService.getById(menuId);
-        var menuAction = toEntity(dto);
+        var menuAction = mapperService.toEntity(dto);
         menu.addAction(menuAction);
         menuService.save(menu);
         return menuAction;
-    }
-
-    private MenuAction toEntity(MenuActionRequest dto) {
-        return MenuAction.builder().action(actionService.getById(dto.actionId())).build();
     }
 
     @Override
@@ -40,12 +36,12 @@ class MenuActionServiceImpl implements MenuActionService {
 
     @Override
     public MenuAction getById(Long menuId,Long id) {
-        return menuActionRepository.findByMenuIdAndId(menuId,id).orElseThrow(()->new ResourceNotFoundException("Menu action with id: " + id + " not found"));
+        return menuActionRepository.findByMenuIdAndId(menuId,id).orElseThrow(()->new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
     }
 
     @Override
     public MenuAction getById(Long id) {
-        return menuActionRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Menu action with id: " + id + " not found"));
+        return menuActionRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
     }
 
     @Override
@@ -54,31 +50,25 @@ class MenuActionServiceImpl implements MenuActionService {
         var menu = menuService.getById(menuId);
         var menuAction = menu.getMenuActions().stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Menu action with id: " + id + " not found"));
-        menuAction.setAction(actionService.getById(dto.actionId()));
-        menuAction = menuActionRepository.save(menuAction);
+                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
+        menuAction = menuActionRepository.save(mapperService.toEntity(menuAction,dto));
         menuService.save(menu);
         return menuAction;
     }
 
     @Override
-    @Transactional
     public void delete(Long menuId, Long id) {
         var menu = menuService.getById(menuId);
         var menuAction = menu.getMenuActions().stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Menu action with id: " + id + " not found"));
+                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
         menu.removeAction(menuAction);
-        menuActionRepository.delete(menuAction);
+        //menuActionRepository.delete(menuAction);
         menuService.save(menu);
     }
 
     @Override
     public MenuActionResponse toDTO(MenuAction menuAction) {
-        return new MenuActionResponse(
-                menuAction.getId(),
-                menuAction.getAction().getName(),
-                menuAction.getCreatedDate()
-        );
+        return mapperService.toDTO(menuAction);
     }
 }

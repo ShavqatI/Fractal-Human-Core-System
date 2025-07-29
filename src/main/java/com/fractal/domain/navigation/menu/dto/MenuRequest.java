@@ -1,5 +1,7 @@
 package com.fractal.domain.navigation.menu.dto;
 
+import com.fractal.domain.navigation.menu.action.dto.MenuActionRequest;
+
 import java.util.List;
 
 public record MenuRequest(
@@ -9,5 +11,6 @@ public record MenuRequest(
         String icon,
         Long layoutLabelId,
         Integer sequence,
-        List<MenuRequest> children
+        List<MenuRequest> children,
+        List<MenuActionRequest> actions
 ) {}

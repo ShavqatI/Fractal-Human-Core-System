@@ -3,6 +3,7 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.authorization.role.menu.RoleMenu;
 import com.fractal.domain.authorization.user.role.UserRole;
 import jakarta.persistence.*;
+import jakarta.transaction.Transactional;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,12 +37,14 @@ public class Role extends AbstractEntity {
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<RoleMenu> roleMenus = new ArrayList<>();
 
+    @Transactional
     public void addMenu(RoleMenu roleMenu) {
         if (roleMenus == null) roleMenus = new ArrayList<>();
         roleMenu.setRole(this);
         roleMenus.add(roleMenu);
     }
 
+    @Transactional
     public void removeMenu(RoleMenu roleMenu) {
         roleMenus.remove(roleMenu);
     }

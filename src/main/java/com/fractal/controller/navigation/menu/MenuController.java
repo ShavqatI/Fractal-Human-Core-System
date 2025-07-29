@@ -33,7 +33,7 @@ public class MenuController {
     public ResponseEntity<MenuResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(menuService.toDTO(menuService.getById(id)));
     }
-    @GetMapping("/url{url}")
+    @GetMapping("/url/{url}")
     public ResponseEntity<MenuResponse> getById(@PathVariable String url) {
         return ResponseEntity.ok(menuService.toDTO(menuService.getByUrl(url)));
     }

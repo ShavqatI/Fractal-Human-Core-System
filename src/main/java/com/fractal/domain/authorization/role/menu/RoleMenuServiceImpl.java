@@ -20,7 +20,6 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     private final RoleService roleService;
     private final RoleMenuMapperService mapperService;
     @Override
-    @Transactional
     public RoleMenu create(Long roleId, RoleMenuRequest dto) {
         var role = roleService.getById(roleId);
         var roleMenu = mapperService.toEntity(dto);
@@ -59,7 +58,7 @@ public class RoleMenuServiceImpl implements RoleMenuService {
         var roleMenu = role.getRoleMenus()
                 .stream()
                 .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Role menu with id: " + id + " not found"));
-        roleMenuRepository.delete(roleMenu);
+        role.removeMenu(roleMenu);
         roleService.save(role);
     }
 

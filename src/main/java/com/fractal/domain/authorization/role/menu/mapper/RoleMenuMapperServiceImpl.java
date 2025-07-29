@@ -19,8 +19,8 @@ class RoleMenuMapperServiceImpl implements RoleMenuMapperService {
     public RoleMenuResponse toDTO(RoleMenu roleMenu) {
         return new RoleMenuResponse(
                 roleMenu.getId(),
-                roleMenu.getMenu().getName(),
-                roleMenu.getStatus().getName(),
+                menuService.toDTO(roleMenu.getMenu()),
+                statusService.toDTO(roleMenu.getStatus()),
                 roleMenu.getCreatedDate(),
                 roleMenu.getUpdatedDate()
         );

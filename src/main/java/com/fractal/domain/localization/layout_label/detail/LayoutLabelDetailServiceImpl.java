@@ -22,7 +22,6 @@ class LayoutLabelDetailServiceImpl implements LayoutLabelDetailService {
 
 
     @Override
-    @Transactional
     public LayoutLabelDetail create(Long menuId, LayoutLabelDetailRequest dto) {
         var layoutLabel = layoutLabelService.getById(menuId);
         var detail = mapperService.toEntity(dto);
@@ -53,13 +52,12 @@ class LayoutLabelDetailServiceImpl implements LayoutLabelDetailService {
     }
 
     @Override
-    @Transactional
     public void delete(Long layoutLabelId, Long id) {
         var layoutLabel = layoutLabelService.getById(layoutLabelId);
         var detail = layoutLabel.getLayoutLabelDetails().stream()
                 .filter(r -> r.getId().equals(id))
                 .findFirst().orElseThrow(()-> new ResourceNotFoundException("Layout Label Detail with id: " + id + " not found"));
-        layoutLabelDetailRepository.delete(detail);
+        layoutLabel.removeDetail(detail);
         layoutLabelService.save(layoutLabel);
     }
 

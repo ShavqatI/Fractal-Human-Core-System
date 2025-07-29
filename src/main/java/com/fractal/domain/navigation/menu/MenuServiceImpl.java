@@ -84,12 +84,10 @@ class MenuServiceImpl implements MenuService {
     }
 
     @Override
-    @Transactional
     public Menu deleteChild(Long id, Long childId) {
         var menu = findById(id);
         var child = menu.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
         menu.removeChild(child);
-        deleteById(child.getId());
         return save(menu);
     }
 

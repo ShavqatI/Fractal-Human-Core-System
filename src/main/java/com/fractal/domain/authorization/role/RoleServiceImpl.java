@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
@@ -58,6 +61,11 @@ public class RoleServiceImpl implements RoleService {
               role.getId(),
               role.getCode(),
               role.getName(),
+                Optional.ofNullable(role.getRoleMenus())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(roleMenuMapperService::toDTO)
+                        .collect(Collectors.toList()),
               role.getCreatedDate(),
               role.getUpdatedDate()
         );
