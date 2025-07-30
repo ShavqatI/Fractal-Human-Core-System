@@ -3,8 +3,6 @@ package com.fractal.controller.organization_management;
 import com.fractal.domain.organization_management.grade.GradeService;
 import com.fractal.domain.organization_management.grade.dto.GradeRequest;
 import com.fractal.domain.organization_management.grade.dto.GradeResponse;
-import com.fractal.domain.organization_management.position.dto.PositionRequest;
-import com.fractal.domain.organization_management.position.dto.PositionResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

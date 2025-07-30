@@ -2,6 +2,8 @@ package com.fractal.controller.authorization.user;
 
 
 import com.fractal.domain.authorization.user.UserService;
+import com.fractal.domain.authorization.user.dto.ChangePasswordRequest;
+import com.fractal.domain.authorization.user.dto.ResetPasswordRequest;
 import com.fractal.domain.authorization.user.dto.UserRequest;
 import com.fractal.domain.authorization.user.dto.UserResponse;
 import jakarta.validation.Valid;
@@ -34,6 +36,16 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<UserResponse> update(@PathVariable Long id, @RequestBody @Valid UserRequest dto) {
       return  ResponseEntity.ok(userService.toDTO(userService.update(id, dto)));
+    }
+    @PutMapping("reset-password/{id}")
+    public ResponseEntity<Void> resetPassword(@PathVariable Long id, @RequestBody @Valid ResetPasswordRequest dto) {
+        userService.resetPassword(id, dto);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("change-password/{id}")
+    public ResponseEntity<Void> changePassword(@PathVariable Long id, @RequestBody @Valid ChangePasswordRequest dto) {
+        userService.changePassword(id, dto);
+        return ResponseEntity.noContent().build();
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

@@ -8,6 +8,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
+
 @Service
 @RequiredArgsConstructor
 class UserMapperServiceImpl implements UserMapperService {
@@ -24,6 +29,11 @@ class UserMapperServiceImpl implements UserMapperService {
                 user.isAccountNonLocked(),
                 user.isCredentialsNonExpired(),
                 user.isEnabled(),
+                Optional.ofNullable(user.getUserRoles())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(userRoleMapperService::toDTO)
+                        .collect(Collectors.toList()),
                 user.getCreatedDate(),
                 user.getUpdatedDate()
         );
@@ -49,5 +59,6 @@ class UserMapperServiceImpl implements UserMapperService {
         dto.userRoles().forEach(userRole-> user.addRole(userRoleMapperService.toEntity(userRole)));
         return user;
     }
+
 
 }

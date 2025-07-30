@@ -1,6 +1,5 @@
 package com.fractal.domain.authorization.permission.dto;
 
-import com.fractal.domain.authorization.role.Role;
 import com.fractal.domain.authorization.role.dto.RoleResponse;
 import com.fractal.domain.dictionary.status.dto.StatusResponse;
 import com.fractal.domain.navigation.menu.action.dto.MenuActionResponse;

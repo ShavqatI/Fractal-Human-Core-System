@@ -1,7 +1,6 @@
  package com.fractal.domain.navigation.action.dto;
 
  import com.fractal.domain.localization.layout_label.dto.LayoutLabelResponse;
- import com.fractal.domain.navigation.action.category.ActionCategory;
  import com.fractal.domain.navigation.action.category.dto.ActionCategoryResponse;
  import com.fractal.domain.navigation.action.type.dto.ActionTypeResponse;
 

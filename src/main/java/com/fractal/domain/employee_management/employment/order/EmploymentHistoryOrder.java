@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.employment.order;
 
-import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.employment.EmploymentHistory;
 import com.fractal.domain.employee_management.order.Order;
 import jakarta.persistence.*;

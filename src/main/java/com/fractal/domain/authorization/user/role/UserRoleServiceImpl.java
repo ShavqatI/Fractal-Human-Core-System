@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +25,7 @@ public class UserRoleServiceImpl implements UserRoleService {
         var user = userService.getById(userId);
         var userRole = mapperService.toEntity(dto);
         user.addRole(userRole);
+        userService.save(user);
         return userRole;
     }
 
@@ -61,7 +61,7 @@ public class UserRoleServiceImpl implements UserRoleService {
                 .stream()
                 .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("User role with id: " + id + " not found"));
         user.removeRole(userRole);
-        userRoleRepository.delete(userRole);
+        userService.save(user);
     }
 
     @Override

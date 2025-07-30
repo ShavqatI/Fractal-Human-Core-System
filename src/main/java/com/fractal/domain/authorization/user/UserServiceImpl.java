@@ -1,5 +1,7 @@
 package com.fractal.domain.authorization.user;
 
+import com.fractal.domain.authorization.user.dto.ChangePasswordRequest;
+import com.fractal.domain.authorization.user.dto.ResetPasswordRequest;
 import com.fractal.domain.authorization.user.dto.UserRequest;
 import com.fractal.domain.authorization.user.dto.UserResponse;
 import com.fractal.domain.authorization.user.mapper.UserMapperService;
@@ -7,6 +9,7 @@ import com.fractal.domain.authorization.user.role.UserRole;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapperService mapperService;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
 
     @Override
@@ -46,6 +50,33 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public User update(Long id, UserRequest dto) {
         return mapperService.toEntity(findById(id),dto);
+    }
+
+    @Override
+    public void resetPassword(Long id, ResetPasswordRequest dto) {
+        try {
+            var user = findById(id);
+            user.setPassword(passwordEncoder.encode(dto.password()));
+            save(user);
+        }
+        catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void changePassword(Long id, ChangePasswordRequest dto) {
+        try {
+            var user = findById(id);
+            if(user.getPassword().equals(passwordEncoder.encode(dto.oldPassword()))){
+                user.setPassword(passwordEncoder.encode(dto.newPassword()));
+                save(user);
+            }
+            else throw new RuntimeException("Old password is wrong!");
+        }
+        catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
     }
 
     @Override

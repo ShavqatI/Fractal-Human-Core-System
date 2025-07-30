@@ -4,13 +4,10 @@ import com.fractal.domain.organization_management.department.dto.DepartmentCompa
 
 import java.time.LocalDateTime;
 
-public record PositionResponse(
+public record PositionCompactResponse(
         Long id,
         String code,
-        String name,
-        String description,
-        DepartmentCompactResponse department,
-        LocalDateTime createdDate
+        String name
 ) {
 
 }

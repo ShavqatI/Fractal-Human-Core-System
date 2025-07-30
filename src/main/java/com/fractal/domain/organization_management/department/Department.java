@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +41,14 @@ public class Department extends AbstractEntity {
     @JoinColumn(name = "organization_unit_id", referencedColumnName = "id")
     private OrganizationUnit organizationUnit;
 
+    @Transactional
     public void addChild(Department department) {
         if (children == null) children = new ArrayList<>();
         department.setParent(this);
         children.add(department);
     }
+
+    @Transactional
     public void removeChild(Department department) {
         if (children != null && !children.isEmpty())
             children.remove(department);

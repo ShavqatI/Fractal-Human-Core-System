@@ -54,14 +54,12 @@ public class OrganizationContactServiceImpl implements OrganizationContactServic
     }
 
     @Override
-    @Transactional
     public void delete(Long organizationId, Long id) {
         var organization = organizationService.getById(organizationId);
         var contact = organization.getContacts()
                 .stream()
                 .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization contact with id: " + id + " not found"));
         organization.removeContact(contact);
-        contactRepository.delete(contact);
         organizationService.save(organization);
     }
 

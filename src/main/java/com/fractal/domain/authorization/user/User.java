@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +37,7 @@ public class User extends AbstractEntity {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<UserRole> userRoles = new ArrayList<>();
 
+    @Transactional
     public void addRole(UserRole userRole) {
         if (userRoles == null) userRoles = new ArrayList<>();
         userRole.setUser(this);
@@ -43,6 +45,7 @@ public class User extends AbstractEntity {
 
     }
 
+    @Transactional
     public void removeRole(UserRole userRole) {
         userRoles.remove(userRole);
     }

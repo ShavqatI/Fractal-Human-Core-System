@@ -55,14 +55,12 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
     }
 
     @Override
-    @Transactional
     public void delete(Long organizationId, Long id) {
         var organization = organizationService.getById(organizationId);
         var address = organization.getAddresses()
                 .stream()
                 .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization address with id: " + id + " not found"));
         organization.removeAddress(address);
-        organizationAddressRepository.delete(address);
         organizationService.save(organization);
     }
 

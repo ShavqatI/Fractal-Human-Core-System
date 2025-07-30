@@ -20,6 +20,7 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
+
         roleService.getAllByUserId(user.getId()).stream()
         .filter(userRole -> userRole.getStatus().getCode().equals("ACTIVE"))
          .forEach(userRole -> authorities.add(new SimpleGrantedAuthority("ROLE_" + userRole.getRole().getCode())));

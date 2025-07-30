@@ -5,7 +5,6 @@ import com.fractal.controller.authorization.dto.AuthResponse;
 import com.fractal.domain.authorization.permission.Permission;
 import com.fractal.domain.authorization.permission.PermissionService;
 import com.fractal.domain.authorization.role.RoleService;
-import com.fractal.domain.authorization.role.dto.RoleResponse;
 import com.fractal.domain.authorization.role.menu.RoleMenu;
 import com.fractal.domain.authorization.user.UserService;
 import com.fractal.domain.navigation.action.ActionService;

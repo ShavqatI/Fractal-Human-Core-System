@@ -1,6 +1,7 @@
 package com.fractal.domain.organization_management.position;
 
 import com.fractal.domain.organization_management.department.DepartmentService;
+import com.fractal.domain.organization_management.position.dto.PositionCompactResponse;
 import com.fractal.domain.organization_management.position.dto.PositionRequest;
 import com.fractal.domain.organization_management.position.dto.PositionResponse;
 import com.fractal.exception.ResourceNotFoundException;
@@ -64,10 +65,20 @@ class PositionServiceImpl implements PositionService {
                 position.getCode(),
                 position.getName(),
                 position.getDescription(),
-                position.getDepartment().getName(),
+                departmentService.toCompactDTO(position.getDepartment()),
                 position.getCreatedDate()
         );
     }
+
+    @Override
+    public PositionCompactResponse toCompactDTO(Position position) {
+        return new PositionCompactResponse(
+                position.getId(),
+                position.getCode(),
+                position.getName()
+        );
+    }
+
     private Position toEntity(PositionRequest dto) {
         return Position.builder()
                 .code(dto.code())

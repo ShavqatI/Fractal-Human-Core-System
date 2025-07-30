@@ -2,19 +2,11 @@ package com.fractal.domain.organization_management.grade.mapper;
 
 import com.fractal.domain.dictionary.currency.CurrencyService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.employment.EmploymentHistory;
-import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
-import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryResponse;
 import com.fractal.domain.organization_management.grade.Grade;
 import com.fractal.domain.organization_management.grade.dto.GradeRequest;
 import com.fractal.domain.organization_management.grade.dto.GradeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor

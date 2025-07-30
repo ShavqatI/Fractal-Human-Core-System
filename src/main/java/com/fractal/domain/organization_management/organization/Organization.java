@@ -6,6 +6,7 @@ import com.fractal.domain.organization_management.organization.contact.Organizat
 import com.fractal.domain.organization_management.unit.OrganizationUnit;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -62,31 +63,35 @@ public class Organization extends AbstractEntity {
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
     private List<OrganizationContact> contacts = new ArrayList<>();
 
+    @Transactional
     public void addAddress(OrganizationAddress address) {
         if (addresses == null) addresses = new ArrayList<>();
         address.setOrganization(this);
         addresses.add(address);
     }
+    @Transactional
     public void removeAddress(OrganizationAddress address) {
         if (addresses != null && !addresses.isEmpty())
             addresses.remove(address);
     }
-
+    @Transactional
     public void addContact(OrganizationContact contact) {
         if (contacts == null) contacts = new ArrayList<>();
         contact.setOrganization(this);
         contacts.add(contact);
     }
+    @Transactional
     public void removeContact(OrganizationContact contact) {
         if (contacts != null && !contacts.isEmpty())
             contacts.remove(contact);
     }
-
+    @Transactional
     public void addChild(Organization organization) {
         if (children == null) children = new ArrayList<>();
         organization.setParent(this);
         children.add(organization);
     }
+    @Transactional
     public void removeChild(Organization organization) {
         if (children != null && !children.isEmpty())
             children.remove(organization);

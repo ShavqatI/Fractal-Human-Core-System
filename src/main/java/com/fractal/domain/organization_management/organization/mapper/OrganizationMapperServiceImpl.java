@@ -3,6 +3,7 @@ package com.fractal.domain.organization_management.organization.mapper;
 import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.organization.address.mapper.OrganizationAddressMapperService;
 import com.fractal.domain.organization_management.organization.contact.mapper.OrganizationContactMapperService;
+import com.fractal.domain.organization_management.organization.dto.OrganizationCompactResponse;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 import com.fractal.domain.organization_management.unit.OrganizationUnitService;
@@ -53,6 +54,15 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
                         .map(this::toDTO)
                         .collect(Collectors.toList()),
                 organization.getCreatedDate()
+        );
+    }
+
+    @Override
+    public OrganizationCompactResponse toCompactDTO(Organization organization) {
+        return new OrganizationCompactResponse(
+                organization.getId(),
+                organization.getCode(),
+                organization.getName()
         );
     }
 

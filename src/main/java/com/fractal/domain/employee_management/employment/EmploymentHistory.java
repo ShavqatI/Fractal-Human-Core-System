@@ -2,8 +2,6 @@ package com.fractal.domain.employee_management.employment;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.employee_management.business_trip.order.BusinessTripOrder;
-import com.fractal.domain.employee_management.business_trip.resource.BusinessTripResource;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employment.agreement.Agreement;
 import com.fractal.domain.employee_management.employment.order.EmploymentHistoryOrder;

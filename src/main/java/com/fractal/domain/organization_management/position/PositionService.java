@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.position;
 
+import com.fractal.domain.organization_management.position.dto.PositionCompactResponse;
 import com.fractal.domain.organization_management.position.dto.PositionRequest;
 import com.fractal.domain.organization_management.position.dto.PositionResponse;
 
@@ -13,4 +14,5 @@ public interface PositionService {
     Position update(Long id, PositionRequest dto);
     void deleteById(Long id);
     PositionResponse toDTO(Position position);
+    PositionCompactResponse toCompactDTO(Position position);
 }

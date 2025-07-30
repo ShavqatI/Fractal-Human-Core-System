@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.organization;
 
+import com.fractal.domain.organization_management.organization.dto.OrganizationCompactResponse;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 import com.fractal.domain.organization_management.organization.mapper.OrganizationMapperService;
@@ -63,6 +64,12 @@ class OrganizationServiceImpl implements OrganizationService {
     public OrganizationResponse toDTO(Organization organization) {
         return mapperService.toDTO(organization);
     }
+
+    @Override
+    public OrganizationCompactResponse toCompactDTO(Organization organization) {
+        return mapperService.toCompactDTO(organization);
+    }
+
     @Override
     @Transactional
     public Organization addChild(Long id, OrganizationRequest dto) {
@@ -85,12 +92,10 @@ class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    @Transactional
     public Organization deleteChild(Long id, Long childId) {
         var organization = findById(id);
         var child = organization.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
         organization.removeChild(child);
-        deleteById(child.getId());
        return save(organization);
     }
     @Override

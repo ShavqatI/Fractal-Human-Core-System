@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.employment.dto;
 
-import com.fractal.domain.employee_management.business_trip.order.dto.BusinessTripOrderResponse;
 import com.fractal.domain.employee_management.employment.agreement.dto.AgreementResponse;
 import com.fractal.domain.employee_management.employment.order.dto.EmploymentHistoryOrderResponse;
 

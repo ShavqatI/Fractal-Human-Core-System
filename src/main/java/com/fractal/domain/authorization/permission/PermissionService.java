@@ -2,9 +2,6 @@ package com.fractal.domain.authorization.permission;
 
 import com.fractal.domain.authorization.permission.dto.PermissionRequest;
 import com.fractal.domain.authorization.permission.dto.PermissionResponse;
-import com.fractal.domain.authorization.role.menu.RoleMenu;
-import com.fractal.domain.authorization.role.menu.dto.RoleMenuRequest;
-import com.fractal.domain.authorization.role.menu.dto.RoleMenuResponse;
 
 import java.util.List;
 
