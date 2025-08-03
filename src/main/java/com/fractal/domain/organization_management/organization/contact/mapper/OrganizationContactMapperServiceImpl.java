@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.organization.contact.mapper;
 
+import com.fractal.domain.contact.Contact;
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.contact.mapper.ContactMapperService;
@@ -18,11 +19,17 @@ class OrganizationContactMapperServiceImpl implements OrganizationContactMapperS
 
     @Override
     public OrganizationContact toEntity(ContactRequest dto) {
-        return (OrganizationContact) mapperService.toEntity(dto);
+        return mapToEntity(new OrganizationContact(),mapperService.toEntity(dto));
     }
 
     @Override
     public OrganizationContact toEntity(OrganizationContact contact, ContactRequest dto) {
-        return (OrganizationContact) mapperService.toEntity(contact,dto);
+        return mapToEntity(contact,mapperService.toEntity(contact,dto));
+    }
+
+    private OrganizationContact mapToEntity(OrganizationContact organizationContact, Contact contact) {
+         organizationContact.setContactType(contact.getContactType());
+         organizationContact.setValue(contact.getValue());
+         return organizationContact;
     }
 }

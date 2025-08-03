@@ -17,7 +17,7 @@ class ContactMapperServiceImpl implements ContactMapperService {
     public ContactResponse toDTO(Contact contact) {
         return new ContactResponse(
                 contact.getId(),
-                contact.getContactType().getName(),
+                contactTypeService.toDTO(contact.getContactType()),
                 contact.getValue(),
                 contact.getCreatedDate()
         );
