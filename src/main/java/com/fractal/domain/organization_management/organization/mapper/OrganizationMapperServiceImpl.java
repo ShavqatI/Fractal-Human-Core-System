@@ -34,7 +34,7 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
                 organization.getCloseDate(),
                 organization.getLevel(),
                 organization.getLevelMap(),
-                organization.getOrganizationUnit().getName(),
+                organizationUnitService.toDTO(organization.getOrganizationUnit()),
                 Optional.ofNullable(organization.getParent())
                         .map(Organization::getName)
                         .orElse(null),

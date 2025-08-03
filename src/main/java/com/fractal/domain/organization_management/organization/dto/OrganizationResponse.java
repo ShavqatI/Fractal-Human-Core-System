@@ -2,6 +2,7 @@ package com.fractal.domain.organization_management.organization.dto;
 
 import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressResponse;
+import com.fractal.domain.organization_management.unit.dto.OrganizationUnitResponse;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,7 +18,7 @@ public record OrganizationResponse (
         LocalDate closeDate,
         Integer level,
         String levelMap,
-        String organizationUnit,
+        OrganizationUnitResponse organizationUnit,
         String parent,
         List<OrganizationAddressResponse> addresses,
         List<ContactResponse> contacts,

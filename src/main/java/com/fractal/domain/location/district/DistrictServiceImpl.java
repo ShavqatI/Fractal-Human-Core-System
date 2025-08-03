@@ -1,6 +1,7 @@
 package com.fractal.domain.location.district;
 
 import com.fractal.domain.location.city.CityService;
+import com.fractal.domain.location.district.dto.DistrictCompactResponse;
 import com.fractal.domain.location.district.dto.DistrictRequest;
 import com.fractal.domain.location.district.dto.DistrictResponse;
 import com.fractal.domain.location.region.RegionService;
@@ -80,6 +81,15 @@ class DistrictServiceImpl implements DistrictService {
                         .orElse(null),
                 regionService.toDTO(district.getRegion()),
                 district.getCreatedDate()
+        );
+    }
+
+    @Override
+    public DistrictCompactResponse toCompactDTO(District district) {
+        return new DistrictCompactResponse(
+                district.getId(),
+                district.getCode(),
+                district.getName()
         );
     }
 

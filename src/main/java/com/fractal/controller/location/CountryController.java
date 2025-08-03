@@ -1,6 +1,7 @@
 package com.fractal.controller.location;
 
 import com.fractal.domain.location.country.CountryService;
+import com.fractal.domain.location.country.dto.CountryCompactResponse;
 import com.fractal.domain.location.country.dto.CountryRequest;
 import com.fractal.domain.location.country.dto.CountryResponse;
 import jakarta.validation.Valid;
@@ -32,6 +33,14 @@ public class CountryController {
     @GetMapping("/{id}")
     public ResponseEntity<CountryResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(countryService.toDTO(countryService.getById(id)));
+    }
+    @GetMapping("/compact")
+    public ResponseEntity<List<CountryCompactResponse>> getAllCompact() {
+        return ResponseEntity.ok(countryService.getAll().stream().map(countryService::toCompactDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("compact/{id}")
+    public ResponseEntity<CountryCompactResponse> getByIdCompact(@PathVariable Long id) {
+        return ResponseEntity.ok(countryService.toCompactDTO(countryService.getById(id)));
     }
 
     @GetMapping("/code/{code}")

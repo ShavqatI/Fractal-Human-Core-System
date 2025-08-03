@@ -1,5 +1,6 @@
 package com.fractal.domain.location.city;
 
+import com.fractal.domain.location.city.dto.CityCompactResponse;
 import com.fractal.domain.location.city.dto.CityRequest;
 import com.fractal.domain.location.city.dto.CityResponse;
 import com.fractal.domain.location.region.RegionService;
@@ -69,6 +70,15 @@ class CityServiceImpl implements CityService {
                 city.getName(),
                 regionService.toDTO(city.getRegion()),
                 city.getCreatedDate()
+        );
+    }
+
+    @Override
+    public CityCompactResponse toCompactDTO(City city) {
+        return new CityCompactResponse(
+                city.getId(),
+                city.getCode(),
+                city.getName()
         );
     }
 

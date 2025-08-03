@@ -1,5 +1,6 @@
 package com.fractal.domain.location.district;
 
+import com.fractal.domain.location.district.dto.DistrictCompactResponse;
 import com.fractal.domain.location.district.dto.DistrictRequest;
 import com.fractal.domain.location.district.dto.DistrictResponse;
 
@@ -15,4 +16,5 @@ public interface DistrictService {
    District update(Long id, DistrictRequest dto);
    void deleteById(Long id);
    DistrictResponse toDTO(District district);
+   DistrictCompactResponse toCompactDTO(District district);
 }

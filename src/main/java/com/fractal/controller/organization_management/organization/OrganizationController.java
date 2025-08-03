@@ -1,6 +1,7 @@
 package com.fractal.controller.organization_management.organization;
 
 import com.fractal.domain.organization_management.organization.OrganizationService;
+import com.fractal.domain.organization_management.organization.dto.OrganizationCompactResponse;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 import jakarta.validation.Valid;
@@ -28,11 +29,19 @@ public class OrganizationController {
     public ResponseEntity<List<OrganizationResponse>> getAll() {
         return ResponseEntity.ok(organizationService.getAll().stream().map(organizationService::toDTO).collect(Collectors.toList()));
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<OrganizationResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(organizationService.toDTO(organizationService.getById(id)));
     }
+    @GetMapping("/compact")
+    public ResponseEntity<List<OrganizationCompactResponse>> getAllCompact() {
+        return ResponseEntity.ok(organizationService.getAll().stream().map(organizationService::toCompactDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("/compact/{id}")
+    public ResponseEntity<List<OrganizationCompactResponse>> getByIdCompact(@PathVariable Long id) {
+        return ResponseEntity.ok(organizationService.getAll().stream().map(organizationService::toCompactDTO).collect(Collectors.toList()));
+    }
+
 
     @GetMapping("/code/{code}")
     public ResponseEntity<OrganizationResponse> getByCode(@PathVariable String code) {

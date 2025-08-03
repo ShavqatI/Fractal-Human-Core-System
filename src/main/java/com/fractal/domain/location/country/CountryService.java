@@ -1,5 +1,6 @@
 package com.fractal.domain.location.country;
 
+import com.fractal.domain.location.country.dto.CountryCompactResponse;
 import com.fractal.domain.location.country.dto.CountryRequest;
 import com.fractal.domain.location.country.dto.CountryResponse;
 
@@ -13,4 +14,5 @@ public interface CountryService {
    Country update(Long id, CountryRequest dto);
    void deleteById(Long id);
    CountryResponse toDTO(Country country);
+   CountryCompactResponse toCompactDTO(Country country);
 }

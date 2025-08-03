@@ -1,5 +1,6 @@
 package com.fractal.domain.location.region;
 
+import com.fractal.domain.location.region.dto.RegionCompactResponse;
 import com.fractal.domain.location.region.dto.RegionRequest;
 import com.fractal.domain.location.region.dto.RegionResponse;
 
@@ -14,4 +15,5 @@ public interface RegionService {
    Region update(Long id, RegionRequest dto);
    void deleteById(Long id);
    RegionResponse toDTO(Region region);
+   RegionCompactResponse toCompactDTO(Region region);
 }

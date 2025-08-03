@@ -68,11 +68,11 @@ public class UserServiceImpl implements UserService {
     public void changePassword(Long id, ChangePasswordRequest dto) {
         try {
             var user = findById(id);
-            if(user.getPassword().equals(passwordEncoder.encode(dto.oldPassword()))){
+            if(passwordEncoder.matches(dto.oldPassword(),user.getPassword())){
                 user.setPassword(passwordEncoder.encode(dto.newPassword()));
                 save(user);
             }
-            else throw new RuntimeException("Old password is wrong!");
+            else throw new RuntimeException("Old password is wrong!" + dto.oldPassword());
         }
         catch (Exception e){
             throw new RuntimeException(e.getMessage());

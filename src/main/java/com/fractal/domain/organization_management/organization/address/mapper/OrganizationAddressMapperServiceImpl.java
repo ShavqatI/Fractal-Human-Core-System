@@ -26,11 +26,11 @@ class OrganizationAddressMapperServiceImpl implements OrganizationAddressMapperS
     public OrganizationAddressResponse toDTO(OrganizationAddress address) {
         return new OrganizationAddressResponse(
                 address.getId(),
-                address.getAddressType().getName(),
-                address.getCountry().getName(),
-                address.getRegion().getName(),
-                address.getCity().getName(),
-                address.getDistrict().getName(),
+                addressTypeService.toDTO(address.getAddressType()),
+                countryService.toCompactDTO(address.getCountry()),
+                regionService.toCompactDTO(address.getRegion()),
+                cityService.toCompactDTO(address.getCity()),
+                districtService.toCompactDTO(address.getDistrict()),
                 address.getStreet(),
                 address.getHouse(),
                 address.getApartment(),

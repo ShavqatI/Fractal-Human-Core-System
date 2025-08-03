@@ -63,7 +63,6 @@ class MenuActionServiceImpl implements MenuActionService {
                 .filter(r -> r.getId().equals(id))
                 .findFirst().orElseThrow(()-> new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
         menu.removeAction(menuAction);
-        //menuActionRepository.delete(menuAction);
         menuService.save(menu);
     }
 

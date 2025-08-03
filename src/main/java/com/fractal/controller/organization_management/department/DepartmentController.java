@@ -1,6 +1,7 @@
 package com.fractal.controller.organization_management.department;
 
 import com.fractal.domain.organization_management.department.DepartmentService;
+import com.fractal.domain.organization_management.department.dto.DepartmentCompactResponse;
 import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
 import jakarta.validation.Valid;
@@ -33,6 +34,15 @@ public class DepartmentController {
     public ResponseEntity<DepartmentResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(departmentService.toDTO(departmentService.getById(id)));
     }
+    @GetMapping("/compact")
+    public ResponseEntity<List<DepartmentCompactResponse>> getAllCompact() {
+        return ResponseEntity.ok(departmentService.getAll().stream().map(departmentService::toCompactDTO).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/compact/{id}")
+    public ResponseEntity<DepartmentResponse> getByIdCompact(@PathVariable Long id) {
+        return ResponseEntity.ok(departmentService.toDTO(departmentService.getById(id)));
+    }
 
     @GetMapping("/code/{code}")
     public ResponseEntity<DepartmentResponse> getByCode(@PathVariable String code) {
@@ -50,18 +60,4 @@ public class DepartmentController {
         return ResponseEntity.noContent().build();
     }
 
-    /*@PostMapping("/{id}/child")
-    public ResponseEntity<DepartmentResponse> addChild(@PathVariable Long id, @RequestBody @Valid DepartmentRequest dto) {
-        return new ResponseEntity<>(departmentService.toDTO(departmentService.addChild(id,dto)), HttpStatus.CREATED);
-    }
-    @PutMapping("/{id}/child/{childId}")
-    public ResponseEntity<DepartmentResponse> updateChild(@PathVariable Long id, @PathVariable Long childId, @RequestBody @Valid DepartmentRequest dto) {
-        return ResponseEntity.ok(departmentService.toDTO(departmentService.updateChild(id,childId, dto)));
-    }
-
-    @DeleteMapping("/{id}/child/{childId}")
-    public ResponseEntity<Void> deleteChild(@PathVariable Long id, @PathVariable Long childId) {
-        departmentService.deleteChild(id,childId);
-        return ResponseEntity.noContent().build();
-    }*/
 }

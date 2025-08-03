@@ -1,5 +1,6 @@
 package com.fractal.domain.location.country;
 
+import com.fractal.domain.location.country.dto.CountryCompactResponse;
 import com.fractal.domain.location.country.dto.CountryRequest;
 import com.fractal.domain.location.country.dto.CountryResponse;
 import com.fractal.exception.ResourceNotFoundException;
@@ -67,6 +68,15 @@ class CountryServiceImpl implements CountryService {
                 country.getNumericCode(),
                 country.getPhonePrefix(),
                 country.getCreatedDate()
+        );
+    }
+
+    @Override
+    public CountryCompactResponse toCompactDTO(Country country) {
+        return new CountryCompactResponse(
+                country.getId(),
+                country.getCode(),
+                country.getName()
         );
     }
 

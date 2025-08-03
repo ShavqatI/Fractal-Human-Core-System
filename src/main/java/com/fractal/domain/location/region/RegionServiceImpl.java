@@ -2,6 +2,7 @@ package com.fractal.domain.location.region;
 
 
 import com.fractal.domain.location.country.CountryService;
+import com.fractal.domain.location.region.dto.RegionCompactResponse;
 import com.fractal.domain.location.region.dto.RegionRequest;
 import com.fractal.domain.location.region.dto.RegionResponse;
 import com.fractal.exception.ResourceNotFoundException;
@@ -70,6 +71,15 @@ class RegionServiceImpl implements RegionService {
                 region.getName(),
                 countryService.toDTO(region.getCountry()),
                 region.getCreatedDate()
+        );
+    }
+
+    @Override
+    public RegionCompactResponse toCompactDTO(Region region) {
+        return new RegionCompactResponse(
+                region.getId(),
+                region.getCode(),
+                region.getName()
         );
     }
 

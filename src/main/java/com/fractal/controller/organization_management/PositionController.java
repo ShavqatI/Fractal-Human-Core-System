@@ -1,6 +1,7 @@
 package com.fractal.controller.organization_management;
 
 import com.fractal.domain.organization_management.position.PositionService;
+import com.fractal.domain.organization_management.position.dto.PositionCompactResponse;
 import com.fractal.domain.organization_management.position.dto.PositionRequest;
 import com.fractal.domain.organization_management.position.dto.PositionResponse;
 import jakarta.validation.Valid;
@@ -32,6 +33,16 @@ public class PositionController {
     @GetMapping("/{id}")
     public ResponseEntity<PositionResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(positionService.toDTO(positionService.getById(id)));
+    }
+
+    @GetMapping("/compact")
+    public ResponseEntity<List<PositionCompactResponse>> getAllCompact() {
+        return ResponseEntity.ok(positionService.getAll().stream().map(positionService::toCompactDTO).collect(Collectors.toList()));
+    }
+
+    @GetMapping("/compact/{id}")
+    public ResponseEntity<PositionCompactResponse> getByIdCompact(@PathVariable Long id) {
+        return ResponseEntity.ok(positionService.toCompactDTO(positionService.getById(id)));
     }
 
     @GetMapping("/code/{code}")

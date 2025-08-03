@@ -36,7 +36,6 @@ public record OrganizationRequest(
         @NotNull
         @NotBlank
         String organizationUnit,
-        @NotEmpty
         List<OrganizationAddressRequest> addresses,
         List<ContactRequest> contacts,
         List<OrganizationRequest> children
