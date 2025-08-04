@@ -23,8 +23,8 @@ public record DepartmentRequest(
     @NotBlank
     String levelMap,
     @NotNull
-    @NotBlank
-    String organizationUnit,
+    Long organizationUnitId,
+    Long statusId,
     List<DepartmentRequest> children
     )
 

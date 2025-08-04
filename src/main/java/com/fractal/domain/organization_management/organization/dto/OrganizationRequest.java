@@ -34,8 +34,7 @@ public record OrganizationRequest(
         @NotNull
         String levelMap,
         @NotNull
-        @NotBlank
-        String organizationUnit,
+        Long organizationUnitId,
         List<OrganizationAddressRequest> addresses,
         List<ContactRequest> contacts,
         List<OrganizationRequest> children

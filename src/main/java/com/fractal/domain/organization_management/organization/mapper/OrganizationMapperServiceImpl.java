@@ -86,7 +86,7 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
         organization.setLevel(dto.level());
         organization.setLevelMap(dto.levelMap());
         organization.setLevelMap(dto.levelMap());
-        organization.setOrganizationUnit(organizationUnitService.getByCode(dto.organizationUnit()));
+        organization.setOrganizationUnit(organizationUnitService.getById(dto.organizationUnitId()));
         dto.addresses().forEach(address -> organization.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact -> organization.addContact(contactMapperService.toEntity(contact)));
         dto.children().forEach(child->organization.addChild(toEntity(child)));

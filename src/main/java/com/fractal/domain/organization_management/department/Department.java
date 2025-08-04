@@ -1,6 +1,7 @@
 package com.fractal.domain.organization_management.department;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.unit.OrganizationUnit;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -34,12 +35,16 @@ public class Department extends AbstractEntity {
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Department parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Department> children = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "organization_unit_id", referencedColumnName = "id")
     private OrganizationUnit organizationUnit;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id",referencedColumnName = "id")
+    private Status status;
 
     @Transactional
     public void addChild(Department department) {

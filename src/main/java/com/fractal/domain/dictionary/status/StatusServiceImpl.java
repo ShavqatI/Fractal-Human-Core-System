@@ -1,6 +1,7 @@
 package com.fractal.domain.dictionary.status;
 
 import com.fractal.domain.dictionary.status.category.StatusCategoryService;
+import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.dictionary.status.dto.StatusRequest;
 import com.fractal.domain.dictionary.status.dto.StatusResponse;
 import com.fractal.exception.ResourceNotFoundException;
@@ -67,6 +68,15 @@ public class StatusServiceImpl implements StatusService {
                 status.getDescription(),
                 status.getCreatedDate()
         );
+    }
+
+    @Override
+    public StatusCompactResponse toCompactDTO(Status status) {
+         return new StatusCompactResponse(
+                status.getId(),
+                status.getCode(),
+                status.getName()
+         );
     }
 
     private Status toEntity(StatusRequest dto) {

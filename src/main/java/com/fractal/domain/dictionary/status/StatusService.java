@@ -1,5 +1,6 @@
 package com.fractal.domain.dictionary.status;
 
+import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.dictionary.status.dto.StatusRequest;
 import com.fractal.domain.dictionary.status.dto.StatusResponse;
 
@@ -14,4 +15,5 @@ public interface StatusService {
     Status update(Long id, StatusRequest dto);
     void deleteById(Long id);
     StatusResponse toDTO(Status status);
+    StatusCompactResponse toCompactDTO(Status status);
 }

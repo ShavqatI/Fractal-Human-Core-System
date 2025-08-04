@@ -26,10 +26,7 @@ class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public List<Department> getAll() {
-        return departmentRepository.findAll()
-                .stream()
-                .peek(department -> department.setChildren(new ArrayList<>()))
-                .collect(Collectors.toList());
+        return departmentRepository.findAll();
     }
 
     @Override

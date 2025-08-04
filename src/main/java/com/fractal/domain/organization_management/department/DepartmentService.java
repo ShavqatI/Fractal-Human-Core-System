@@ -15,9 +15,7 @@ public interface DepartmentService {
     void deleteById(Long id);
     DepartmentResponse toDTO(Department department);
     DepartmentCompactResponse toCompactDTO(Department department);
-
     Department addChild(Long id, DepartmentRequest dto);
     Department updateChild(Long id,Long childId,DepartmentRequest dto);
-
     Department deleteChild(Long id,Long childId);
 }

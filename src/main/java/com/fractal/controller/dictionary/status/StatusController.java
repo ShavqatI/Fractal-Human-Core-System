@@ -2,6 +2,7 @@ package com.fractal.controller.dictionary.status;
 
 
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.dictionary.status.dto.StatusRequest;
 import com.fractal.domain.dictionary.status.dto.StatusResponse;
 import jakarta.validation.Valid;
@@ -26,6 +27,10 @@ public class StatusController {
     @GetMapping
     public ResponseEntity<List<StatusResponse>> getAll() {
         return ResponseEntity.ok(statusService.getAll().stream().map(statusService::toDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("/compact")
+    public ResponseEntity<List<StatusCompactResponse>> getAllCompact() {
+        return ResponseEntity.ok(statusService.getAll().stream().map(statusService::toCompactDTO).collect(Collectors.toList()));
     }
     @GetMapping("/{id}")
     public ResponseEntity<StatusResponse> getById(@PathVariable Long id) {

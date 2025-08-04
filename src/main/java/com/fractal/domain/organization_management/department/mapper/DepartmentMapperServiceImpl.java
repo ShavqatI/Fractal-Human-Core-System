@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.department.mapper;
 
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.department.dto.DepartmentCompactResponse;
 import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
@@ -18,6 +19,7 @@ import static java.util.Collections.emptyList;
 class DepartmentMapperServiceImpl implements DepartmentMapperService {
 
     private final OrganizationUnitService organizationUnitService;
+    private final StatusService statusService;
 
     @Override
     public DepartmentResponse toDTO(Department department) {
@@ -35,7 +37,8 @@ class DepartmentMapperServiceImpl implements DepartmentMapperService {
                         .stream()
                         .map(this::toDTO)
                         .collect(Collectors.toList()),
-                department.getOrganizationUnit().getName(),
+                organizationUnitService.toDTO(department.getOrganizationUnit()),
+                statusService.toCompactDTO(department.getStatus()),
                 department.getCreatedDate()
         );
     }
@@ -63,7 +66,8 @@ class DepartmentMapperServiceImpl implements DepartmentMapperService {
         department.setName(dto.name());
         department.setLevel(dto.level());
         department.setLevelMap(dto.levelMap());
-        department.setOrganizationUnit(organizationUnitService.getByCode(dto.organizationUnit()));
+        department.setOrganizationUnit(organizationUnitService.getById(dto.organizationUnitId()));
+        department.setStatus(statusService.getById(dto.statusId()));
         dto.children().forEach(child->department.addChild(toEntity(child)));
         return department;
 
