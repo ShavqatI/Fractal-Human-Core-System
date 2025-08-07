@@ -1,5 +1,6 @@
  package com.fractal.domain.organization_management.job_description.dto;
 
+ import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
  import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationResponse;
  import com.fractal.domain.organization_management.job_description.required_experience.dto.RequiredExperienceResponse;
  import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityResponse;
@@ -14,7 +15,7 @@ public record JobDescriptionResponse(
         String title,
         String summary,
         LocalDate effectiveDate,
-        String status,
+        StatusCompactResponse status,
         PositionCompactResponse position,
         List<ResponsibilityResponse> responsibilities,
         List<QualificationResponse> qualifications,

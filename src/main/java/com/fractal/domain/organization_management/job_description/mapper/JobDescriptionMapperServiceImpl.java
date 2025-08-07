@@ -32,7 +32,7 @@ class JobDescriptionMapperServiceImpl implements JobDescriptionMapperService {
                 jobDescription.getTitle(),
                 jobDescription.getSummary(),
                 jobDescription.getEffectiveDate(),
-                jobDescription.getStatus().getName(),
+                statusService.toCompactDTO(jobDescription.getStatus()),
                 positionService.toCompactDTO(jobDescription.getPosition()),
                 Optional.ofNullable(jobDescription.getResponsibilities())
                         .orElse(emptyList())

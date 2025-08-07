@@ -1,6 +1,7 @@
 package com.fractal.controller.navigation.action;
 
 import com.fractal.domain.navigation.action.ActionService;
+import com.fractal.domain.navigation.action.dto.ActionCompactResponse;
 import com.fractal.domain.navigation.action.dto.ActionRequest;
 import com.fractal.domain.navigation.action.dto.ActionResponse;
 import jakarta.validation.Valid;
@@ -27,6 +28,10 @@ public class ActionController {
     @GetMapping
     public ResponseEntity<List<ActionResponse>> getAll() {
         return ResponseEntity.ok(actionService.getAll().stream().map(actionService::toDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("/compact")
+    public ResponseEntity<List<ActionCompactResponse>> getAllCompact() {
+        return ResponseEntity.ok(actionService.getAll().stream().map(actionService::toCompactDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")

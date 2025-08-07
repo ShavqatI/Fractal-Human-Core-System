@@ -1,5 +1,8 @@
 package com.fractal.domain.dictionary.currency.dto;
 
+import com.fractal.domain.location.country.Country;
+import com.fractal.domain.location.country.dto.CountryResponse;
+
 import java.time.LocalDateTime;
 
 public record CurrencyResponse(
@@ -7,7 +10,7 @@ public record CurrencyResponse(
         String code,
         Integer numericCode,
         String name,
-        String country,
+        CountryResponse country,
         LocalDateTime createdDate
 
 ) {

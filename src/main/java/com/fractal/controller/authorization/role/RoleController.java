@@ -2,6 +2,7 @@ package com.fractal.controller.authorization.role;
 
 
 import com.fractal.domain.authorization.role.RoleService;
+import com.fractal.domain.authorization.role.dto.RoleCompactResponse;
 import com.fractal.domain.authorization.role.dto.RoleRequest;
 import com.fractal.domain.authorization.role.dto.RoleResponse;
 import com.fractal.domain.authorization.user.UserService;
@@ -20,7 +21,6 @@ import java.util.stream.Collectors;
 public class RoleController {
 
     private final RoleService roleService;
-    private final UserService userService;
     @PostMapping
     public ResponseEntity<RoleResponse> create(@RequestBody @Valid RoleRequest dto) {
         return new ResponseEntity<>(roleService.toDTO(roleService.create(dto)), HttpStatus.CREATED);
@@ -32,6 +32,11 @@ public class RoleController {
     @GetMapping("/{id}")
     public ResponseEntity<RoleResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(roleService.toDTO(roleService.getById(id)));
+    }
+
+    @GetMapping("/compact")
+    public ResponseEntity<List<RoleCompactResponse>> getAllCompact() {
+        return ResponseEntity.ok(roleService.getAll().stream().map(roleService::toCompactDTO).collect(Collectors.toList()));
     }
     @PutMapping("/{id}")
     public ResponseEntity<RoleResponse> update(@PathVariable Long id, @RequestBody @Valid RoleRequest dto) {

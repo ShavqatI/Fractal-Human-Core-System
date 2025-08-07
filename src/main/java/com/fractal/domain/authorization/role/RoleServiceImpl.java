@@ -1,5 +1,6 @@
 package com.fractal.domain.authorization.role;
 
+import com.fractal.domain.authorization.role.dto.RoleCompactResponse;
 import com.fractal.domain.authorization.role.dto.RoleRequest;
 import com.fractal.domain.authorization.role.dto.RoleResponse;
 import com.fractal.domain.authorization.role.menu.RoleMenu;
@@ -70,6 +71,16 @@ public class RoleServiceImpl implements RoleService {
               role.getUpdatedDate()
         );
     }
+
+    @Override
+    public RoleCompactResponse toCompactDTO(Role role) {
+        return new RoleCompactResponse(
+                role.getId(),
+                role.getCode(),
+                role.getName()
+        );
+    }
+
     @Override
     public Role save(Role role) {
         try {

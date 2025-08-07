@@ -14,11 +14,10 @@ public record CurrencyRequest(
         @Pattern(regexp = "^\\p{L}[\\p{L}\\p{M}\\p{S}\\p{P}\\p{N}\\s]*$",message = "Only Unicode letters, symbols, punctuation, numbers and spaces are allowed")
         String name,
 
-        @Pattern(regexp = "^\\d{3}$", message = "Must be exactly 3 digits")
         @NotNull
         Integer numericCode,
         @NotNull
-        Long country
+        Long countryId
 ) {
 
 

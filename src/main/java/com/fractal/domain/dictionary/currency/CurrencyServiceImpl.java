@@ -1,5 +1,6 @@
 package com.fractal.domain.dictionary.currency;
 
+import com.fractal.domain.dictionary.currency.dto.CurrencyCompactResponse;
 import com.fractal.domain.dictionary.currency.dto.CurrencyRequest;
 import com.fractal.domain.dictionary.currency.dto.CurrencyResponse;
 import com.fractal.domain.location.country.CountryService;
@@ -46,7 +47,7 @@ class CurrencyServiceImpl implements CurrencyService {
             currency.setCode(dto.code());
             currency.setName(dto.name());
             currency.setNumericCode(dto.numericCode());
-            currency.setCountry(countryService.getById(dto.country()));
+            currency.setCountry(countryService.getById(dto.countryId()));
             return save(currency);
         }
         catch (DataAccessException e) {
@@ -66,8 +67,18 @@ class CurrencyServiceImpl implements CurrencyService {
                 currency.getCode(),
                 currency.getNumericCode(),
                 currency.getName(),
-                currency.getCountry().getName(),
+                countryService.toDTO(currency.getCountry()),
                 currency.getCreatedDate()
+        );
+    }
+
+    @Override
+    public CurrencyCompactResponse toCompactDTO(Currency currency) {
+        return new CurrencyCompactResponse(
+                currency.getId(),
+                currency.getCode(),
+                currency.getNumericCode(),
+                currency.getName()
         );
     }
 
@@ -76,7 +87,7 @@ class CurrencyServiceImpl implements CurrencyService {
                 .code(dto.code())
                 .name(dto.name())
                 .numericCode(dto.numericCode())
-                .country(countryService.getById(dto.country()))
+                .country(countryService.getById(dto.countryId()))
                 .build();
     }
 

@@ -1,5 +1,6 @@
 package com.fractal.domain.navigation.action;
 
+import com.fractal.domain.navigation.action.dto.ActionCompactResponse;
 import com.fractal.domain.navigation.action.dto.ActionRequest;
 import com.fractal.domain.navigation.action.dto.ActionResponse;
 
@@ -13,4 +14,5 @@ public interface ActionService {
     Action update(Long id, ActionRequest dto);
     void deleteById(Long id);
     ActionResponse toDTO(Action action);
+    ActionCompactResponse toCompactDTO(Action action);
 }

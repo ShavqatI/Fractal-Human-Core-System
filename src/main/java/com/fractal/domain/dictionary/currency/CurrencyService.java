@@ -1,5 +1,6 @@
 package com.fractal.domain.dictionary.currency;
 
+import com.fractal.domain.dictionary.currency.dto.CurrencyCompactResponse;
 import com.fractal.domain.dictionary.currency.dto.CurrencyRequest;
 import com.fractal.domain.dictionary.currency.dto.CurrencyResponse;
 
@@ -14,4 +15,5 @@ public interface CurrencyService {
     Currency update(Long id, CurrencyRequest dto);
     void deleteById(Long id);
     CurrencyResponse toDTO(Currency currency);
+    CurrencyCompactResponse toCompactDTO(Currency currency);
 }

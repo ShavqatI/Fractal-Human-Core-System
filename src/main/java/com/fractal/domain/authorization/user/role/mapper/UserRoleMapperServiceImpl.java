@@ -18,8 +18,8 @@ class UserRoleMapperServiceImpl implements UserRoleMapperService {
     public UserRoleResponse toDTO(UserRole userRole) {
         return new UserRoleResponse(
                 userRole.getId(),
-                userRole.getRole().getName(),
-                userRole.getStatus().getName(),
+                roleService.toCompactDTO(userRole.getRole()),
+                statusService.toCompactDTO(userRole.getStatus()),
                 userRole.getCreatedDate(),
                 userRole.getUpdatedDate()
         );

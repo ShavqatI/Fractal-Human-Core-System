@@ -1,5 +1,6 @@
 package com.fractal.domain.navigation.menu;
 
+import com.fractal.domain.navigation.menu.dto.MenuCompactResponse;
 import com.fractal.domain.navigation.menu.dto.MenuRequest;
 import com.fractal.domain.navigation.menu.dto.MenuResponse;
 import com.fractal.domain.navigation.menu.mapper.MenuMapperService;
@@ -60,6 +61,11 @@ class MenuServiceImpl implements MenuService {
     @Override
     public MenuResponse toDTO(Menu menu) {
         return mapperService.toDTO(menu);
+    }
+
+    @Override
+    public MenuCompactResponse toCompactDTO(Menu menu) {
+        return mapperService.toCompactDTO(menu);
     }
 
     @Override

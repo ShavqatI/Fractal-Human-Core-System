@@ -1,5 +1,6 @@
 package com.fractal.domain.navigation.action;
 
+import com.fractal.domain.navigation.action.dto.ActionCompactResponse;
 import com.fractal.domain.navigation.action.dto.ActionRequest;
 import com.fractal.domain.navigation.action.dto.ActionResponse;
 import com.fractal.domain.navigation.action.mapper.ActionMapperService;
@@ -60,6 +61,11 @@ class ActionServiceImpl implements ActionService {
     @Override
     public ActionResponse toDTO(Action action) {
         return mapperService.toDTO(action);
+    }
+
+    @Override
+    public ActionCompactResponse toCompactDTO(Action action) {
+        return mapperService.toCompactDTO(action);
     }
 
     public Action save(Action action) {

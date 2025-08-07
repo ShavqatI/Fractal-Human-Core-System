@@ -1,6 +1,7 @@
 package com.fractal.controller.dictionary;
 
 import com.fractal.domain.dictionary.currency.CurrencyService;
+import com.fractal.domain.dictionary.currency.dto.CurrencyCompactResponse;
 import com.fractal.domain.dictionary.currency.dto.CurrencyRequest;
 import com.fractal.domain.dictionary.currency.dto.CurrencyResponse;
 import jakarta.validation.Valid;
@@ -35,6 +36,11 @@ public class CurrencyController {
     @GetMapping("/code/{code}")
     public ResponseEntity<CurrencyResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(currencyService.toDTO(currencyService.getByCode(code)));
+    }
+
+    @GetMapping("/compact")
+    public ResponseEntity<List<CurrencyCompactResponse>> getAllCompact() {
+        return ResponseEntity.ok(currencyService.getAll().stream().map(currencyService::toCompactDTO).collect(Collectors.toList()));
     }
     @PutMapping("/{id}")
     public ResponseEntity<CurrencyResponse> update(@PathVariable Long id, @RequestBody @Valid CurrencyRequest dto) {

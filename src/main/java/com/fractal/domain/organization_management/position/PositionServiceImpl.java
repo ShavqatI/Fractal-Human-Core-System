@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.position;
 
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.organization_management.department.DepartmentService;
 import com.fractal.domain.organization_management.position.dto.PositionCompactResponse;
 import com.fractal.domain.organization_management.position.dto.PositionRequest;
@@ -17,6 +18,7 @@ class PositionServiceImpl implements PositionService {
 
     private final PositionRepository positionRepository;
     private final DepartmentService departmentService;
+    private final StatusService statusService;
 
     @Override
     public Position create(PositionRequest dto) {
@@ -46,6 +48,7 @@ class PositionServiceImpl implements PositionService {
             position.setName(dto.name());
             position.setDescription(dto.description());
             position.setDepartment(departmentService.getById(dto.departmentId()));
+            position.setStatus(statusService.getById(dto.statusId()));
             return save(position);
         }
         catch (DataAccessException e) {
@@ -66,6 +69,7 @@ class PositionServiceImpl implements PositionService {
                 position.getName(),
                 position.getDescription(),
                 departmentService.toCompactDTO(position.getDepartment()),
+                statusService.toCompactDTO(position.getStatus()),
                 position.getCreatedDate()
         );
     }
@@ -85,6 +89,7 @@ class PositionServiceImpl implements PositionService {
                 .name(dto.name())
                 .description(dto.description())
                 .department(departmentService.getById(dto.departmentId()))
+                .status(statusService.getById(dto.statusId()))
                 .build();
     }
 

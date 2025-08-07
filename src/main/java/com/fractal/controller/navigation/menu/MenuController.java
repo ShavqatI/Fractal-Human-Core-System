@@ -1,6 +1,7 @@
 package com.fractal.controller.navigation.menu;
 
 import com.fractal.domain.navigation.menu.MenuService;
+import com.fractal.domain.navigation.menu.dto.MenuCompactResponse;
 import com.fractal.domain.navigation.menu.dto.MenuRequest;
 import com.fractal.domain.navigation.menu.dto.MenuResponse;
 import jakarta.validation.Valid;
@@ -28,6 +29,12 @@ public class MenuController {
     public ResponseEntity<List<MenuResponse>> getAll() {
         return ResponseEntity.ok(menuService.getAll().stream().map(menuService::toDTO).collect(Collectors.toList()));
     }
+    @GetMapping("/compact")
+    public ResponseEntity<List<MenuCompactResponse>> getAllCompact() {
+        return ResponseEntity.ok(menuService.getAll().stream().map(menuService::toCompactDTO).collect(Collectors.toList()));
+    }
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity<MenuResponse> getById(@PathVariable Long id) {

@@ -3,6 +3,7 @@ package com.fractal.domain.navigation.action.mapper;
 import com.fractal.domain.localization.layout_label.LayoutLabelService;
 import com.fractal.domain.navigation.action.Action;
 import com.fractal.domain.navigation.action.category.ActionCategoryService;
+import com.fractal.domain.navigation.action.dto.ActionCompactResponse;
 import com.fractal.domain.navigation.action.dto.ActionRequest;
 import com.fractal.domain.navigation.action.dto.ActionResponse;
 import com.fractal.domain.navigation.action.type.ActionTypeService;
@@ -27,6 +28,15 @@ class ActionMapperServiceImpl implements ActionMapperService {
                 actionTypeService.toDTO(action.getActionType()),
                 actionCategoryService.toDTO(action.getActionCategory()),
                 action.getCreatedDate()
+        );
+    }
+
+    @Override
+    public ActionCompactResponse toCompactDTO(Action action) {
+        return new ActionCompactResponse(
+                action.getId(),
+                action.getName(),
+                action.getUrl()
         );
     }
 

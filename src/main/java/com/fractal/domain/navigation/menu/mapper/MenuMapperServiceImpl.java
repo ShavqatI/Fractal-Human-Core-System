@@ -3,6 +3,7 @@ package com.fractal.domain.navigation.menu.mapper;
 import com.fractal.domain.localization.layout_label.LayoutLabelService;
 import com.fractal.domain.navigation.menu.Menu;
 import com.fractal.domain.navigation.menu.action.mapper.MenuActionMapperService;
+import com.fractal.domain.navigation.menu.dto.MenuCompactResponse;
 import com.fractal.domain.navigation.menu.dto.MenuRequest;
 import com.fractal.domain.navigation.menu.dto.MenuResponse;
 import lombok.RequiredArgsConstructor;
@@ -44,6 +45,15 @@ class MenuMapperServiceImpl implements MenuMapperService {
                 menu.getCreatedDate()
 
         );
+    }
+
+    @Override
+    public MenuCompactResponse toCompactDTO(Menu menu) {
+         return new MenuCompactResponse(
+                menu.getId(),
+                menu.getName(),
+                menu.getUrl()
+         );
     }
 
     @Override

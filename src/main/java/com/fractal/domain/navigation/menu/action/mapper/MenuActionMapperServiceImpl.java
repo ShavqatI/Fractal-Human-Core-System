@@ -15,13 +15,14 @@ class MenuActionMapperServiceImpl implements MenuActionMapperService {
     private final ActionService actionService;
     private final StatusService statusService;
 
+
     @Override
     public MenuActionResponse toDTO(MenuAction menuAction) {
         return new MenuActionResponse(
                 menuAction.getId(),
                 new MenuActionResponse.Menu(menuAction.getMenu().getId(),menuAction.getMenu().getName()),
-                actionService.toDTO(menuAction.getAction()),
-                statusService.toDTO(menuAction.getStatus()),
+                actionService.toCompactDTO(menuAction.getAction()),
+                statusService.toCompactDTO(menuAction.getStatus()),
                 menuAction.getCreatedDate()
 
         );

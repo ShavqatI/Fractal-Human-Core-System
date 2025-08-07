@@ -1,6 +1,8 @@
 package com.fractal.domain.organization_management.grade.dto;
 
+import com.fractal.domain.dictionary.currency.dto.CurrencyCompactResponse;
 import com.fractal.domain.dictionary.currency.dto.CurrencyResponse;
+import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.dictionary.status.dto.StatusResponse;
 
 import java.math.BigDecimal;
@@ -11,12 +13,12 @@ public record GradeResponse(
         Long id,
         String code,
         String name,
-        CurrencyResponse currency,
+        CurrencyCompactResponse currency,
         BigDecimal minSalary,
         BigDecimal  maxSalary,
         LocalDate startDate,
         LocalDate endDate,
-        StatusResponse statusId,
+        StatusCompactResponse status,
         String notes,
         LocalDateTime createdDate,
         LocalDateTime updatedDate
