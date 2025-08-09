@@ -20,7 +20,7 @@ public class Responsibility extends AbstractEntity {
     @Column(name = "description", columnDefinition = "TEXT", nullable = false)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_description_id",referencedColumnName = "id")
     private JobDescription jobDescription;
 }

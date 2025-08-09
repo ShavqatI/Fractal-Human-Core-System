@@ -20,7 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 public class City extends Location {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="region_id", referencedColumnName = "id")
     private Region region;
 

@@ -21,11 +21,11 @@ import java.util.List;
 @NoArgsConstructor
 public class Relative extends Person {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "relation_type_id", referencedColumnName = "id")
     private RelationType relationType;
 

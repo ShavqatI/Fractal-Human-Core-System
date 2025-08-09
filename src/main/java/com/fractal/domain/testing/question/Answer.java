@@ -19,7 +19,7 @@ public class Answer extends AbstractEntity {
     @Column(nullable = false)
     private String text;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id", referencedColumnName = "id")
     private Question question;
 

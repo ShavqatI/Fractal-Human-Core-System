@@ -19,14 +19,15 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Attendance extends AbstractEntity {
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
     @Column(name = "date")
     private LocalDate date;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 

@@ -3,15 +3,16 @@ package com.fractal.domain.abstraction;
 import com.fractal.domain.authorization.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@SuperBuilder
 public abstract class Auditable {
 
     @Column(name = "created_date", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -20,11 +21,11 @@ public abstract class Auditable {
     @Column(name = "updated_date")
     protected LocalDateTime updatedDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_user_id")
     protected User createdUser;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "updated_user_id")
     protected User updatedUser;
 

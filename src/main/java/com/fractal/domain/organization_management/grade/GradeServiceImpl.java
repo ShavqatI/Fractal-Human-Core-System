@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.grade;
 
+import com.fractal.domain.organization_management.grade.dto.GradeCompactResponse;
 import com.fractal.domain.organization_management.grade.dto.GradeRequest;
 import com.fractal.domain.organization_management.grade.dto.GradeResponse;
 import com.fractal.domain.organization_management.grade.mapper.GradeMapperService;
@@ -55,6 +56,11 @@ class GradeServiceImpl implements GradeService {
     @Override
     public GradeResponse toDTO(Grade grade) {
         return mapperService.toDTO(grade);
+    }
+
+    @Override
+    public GradeCompactResponse toCompactDTO(Grade grade) {
+        return mapperService.toCompactDTO(grade);
     }
 
     private Grade save(Grade grade) {

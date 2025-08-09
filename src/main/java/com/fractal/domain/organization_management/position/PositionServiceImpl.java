@@ -2,10 +2,12 @@ package com.fractal.domain.organization_management.position;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.organization_management.department.DepartmentService;
+import com.fractal.domain.organization_management.grade.GradeService;
 import com.fractal.domain.organization_management.position.dto.PositionCompactResponse;
 import com.fractal.domain.organization_management.position.dto.PositionRequest;
 import com.fractal.domain.organization_management.position.dto.PositionResponse;
 import com.fractal.exception.ResourceNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,7 @@ class PositionServiceImpl implements PositionService {
     private final PositionRepository positionRepository;
     private final DepartmentService departmentService;
     private final StatusService statusService;
+    private final GradeService gradeService;
 
     @Override
     public Position create(PositionRequest dto) {
@@ -69,6 +72,7 @@ class PositionServiceImpl implements PositionService {
                 position.getName(),
                 position.getDescription(),
                 departmentService.toCompactDTO(position.getDepartment()),
+                gradeService.toCompactDTO(position.getGrade()),
                 statusService.toCompactDTO(position.getStatus()),
                 position.getCreatedDate()
         );
@@ -90,6 +94,7 @@ class PositionServiceImpl implements PositionService {
                 .description(dto.description())
                 .department(departmentService.getById(dto.departmentId()))
                 .status(statusService.getById(dto.statusId()))
+                .grade(gradeService.getById(dto.gradeId()))
                 .build();
     }
 
@@ -101,6 +106,7 @@ class PositionServiceImpl implements PositionService {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
+
 
     private Position findById(Long id) {
         return positionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Position with id: " + id + " not found"));

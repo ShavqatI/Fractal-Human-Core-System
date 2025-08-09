@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 public class Agreement extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employment_history_id",referencedColumnName = "id")
     private EmploymentHistory employmentHistory;
 
@@ -35,7 +35,7 @@ public class Agreement extends AbstractEntity {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 

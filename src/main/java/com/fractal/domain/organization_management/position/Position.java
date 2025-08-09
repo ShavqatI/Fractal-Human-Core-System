@@ -7,6 +7,7 @@ import com.fractal.domain.organization_management.grade.Grade;
 import com.fractal.domain.organization_management.job_description.JobDescription;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-@EqualsAndHashCode(callSuper = true)
+@SuperBuilder
 public class Position extends AbstractEntity {
 
     @Column(name = "code",unique = true)
@@ -29,15 +29,15 @@ public class Position extends AbstractEntity {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "grade_id", referencedColumnName = "id")
     private Grade grade;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id",referencedColumnName = "id")
     private Status status;
 

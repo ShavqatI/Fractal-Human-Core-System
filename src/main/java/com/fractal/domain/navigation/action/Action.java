@@ -3,10 +3,7 @@ package com.fractal.domain.navigation.action;
 import com.fractal.domain.abstraction.Navigation;
 import com.fractal.domain.navigation.action.category.ActionCategory;
 import com.fractal.domain.navigation.action.type.ActionType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,11 +17,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Action extends Navigation {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "action_category_id", referencedColumnName = "id")
     private ActionCategory actionCategory;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "action_type_id", referencedColumnName = "id")
     private ActionType actionType;
 }

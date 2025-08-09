@@ -17,7 +17,7 @@ public class Currency extends Dictionary {
     @Column(name ="numeric_code",length = 5)
     private Integer numericCode;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     private Country country;
 }

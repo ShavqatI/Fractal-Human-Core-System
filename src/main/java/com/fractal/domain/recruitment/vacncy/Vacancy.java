@@ -26,11 +26,11 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class Vacancy extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id", referencedColumnName = "id")
     private Organization organization;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position position;
 
@@ -46,7 +46,7 @@ public class Vacancy extends AbstractEntity {
     @Column(name = "salary")
     private Double salary;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 

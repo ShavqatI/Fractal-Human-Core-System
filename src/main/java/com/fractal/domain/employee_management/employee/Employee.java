@@ -32,7 +32,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class Employee extends Person {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 

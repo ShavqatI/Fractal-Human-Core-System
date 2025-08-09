@@ -3,10 +3,16 @@ package com.fractal.domain.organization_management.grade.mapper;
 import com.fractal.domain.dictionary.currency.CurrencyService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.organization_management.grade.Grade;
+import com.fractal.domain.organization_management.grade.dto.GradeCompactResponse;
 import com.fractal.domain.organization_management.grade.dto.GradeRequest;
 import com.fractal.domain.organization_management.grade.dto.GradeResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
@@ -29,8 +35,22 @@ class GradeMapperServiceImpl implements GradeMapperService {
                 grade.getEndDate(),
                 statusService.toCompactDTO(grade.getStatus()),
                 grade.getNotes(),
+                Optional.ofNullable(grade.getChildren())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(this::toDTO)
+                        .collect(Collectors.toList()),
                 grade.getCreatedDate(),
                 grade.getUpdatedDate()
+        );
+    }
+
+    @Override
+    public GradeCompactResponse toCompactDTO(Grade grade) {
+        return new GradeCompactResponse(
+                grade.getId(),
+                grade.getCode(),
+                grade.getName()
         );
     }
 
@@ -54,6 +74,7 @@ class GradeMapperServiceImpl implements GradeMapperService {
         grade.setEndDate(dto.endDate());
         grade.setStatus(statusService.getById(dto.statusId()));
         grade.setNotes(dto.notes());
+        dto.children().forEach(child->grade.addChild(toEntity(child)));
         return grade;
     }
 

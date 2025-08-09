@@ -28,7 +28,7 @@ public class Order extends ApprovalWorkflow {
     @Column(name = "date")
     private Date date;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_type_id")
     protected OrderType orderType;
 

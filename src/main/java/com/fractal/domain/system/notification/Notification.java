@@ -18,11 +18,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Notification extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "notification_type_id", referencedColumnName = "id")
     private NotificationType notificationType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_provider_id", referencedColumnName = "id")
     private ServiceProvider serviceProvider;
 
@@ -35,7 +35,7 @@ public class Notification extends AbstractEntity {
     @Column(name = "receiver")
     private String receiver;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 

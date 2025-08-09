@@ -21,19 +21,19 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Permission extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "role_id",referencedColumnName = "id")
     private Role role;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "menu_action_id", referencedColumnName = "id")
     private MenuAction menuAction;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "confirmed_user_id", referencedColumnName = "id")
     private User confirmedUser;
 

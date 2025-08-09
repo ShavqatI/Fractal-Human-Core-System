@@ -19,7 +19,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Improvement extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "performance_id")
     private Performance performance;
 
@@ -35,7 +35,7 @@ public class Improvement extends AbstractEntity {
     @Column(name = "target_date")
     private LocalDate targetDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 }

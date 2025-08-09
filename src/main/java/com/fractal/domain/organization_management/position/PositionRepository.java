@@ -9,9 +9,7 @@ import java.util.Optional;
 @Repository
 interface PositionRepository extends JpaRepository<Position,Long> {
 
-    Position save(Position position);
-    List<Position> findAll();
     Optional<Position> findByCode(String code);
-    Optional<Position> findById(Long id);
+
 
 }

@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.grade;
 
+import com.fractal.domain.organization_management.grade.dto.GradeCompactResponse;
 import com.fractal.domain.organization_management.grade.dto.GradeRequest;
 import com.fractal.domain.organization_management.grade.dto.GradeResponse;
 
@@ -13,6 +14,7 @@ public interface GradeService {
     Grade update(Long id, GradeRequest dto);
     void deleteById(Long id);
     GradeResponse toDTO(Grade grade);
+    GradeCompactResponse toCompactDTO(Grade grade);
 
 
 }

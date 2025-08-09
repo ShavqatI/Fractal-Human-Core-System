@@ -31,7 +31,7 @@ public class Test extends ApprovalWorkflow {
 
     private Integer durationMinutes;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 

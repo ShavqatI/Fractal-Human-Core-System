@@ -25,7 +25,7 @@ public class EmploymentHistoryOrder extends Order {
     @Setter(AccessLevel.NONE)
     private Long number;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employment_history_id", referencedColumnName = "id")
     private EmploymentHistory employmentHistory;
 

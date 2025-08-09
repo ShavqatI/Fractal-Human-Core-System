@@ -23,11 +23,11 @@ import java.util.List;
 @NoArgsConstructor
 public class Performance extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "performance_type_id", referencedColumnName = "id")
     private PerformanceType performanceType;
 
@@ -43,7 +43,7 @@ public class Performance extends AbstractEntity {
     @Column(name = "review_period_end", nullable = false)
     private LocalDate reviewPeriodEnd;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reviewer_employee_id", referencedColumnName = "id")
     private Employee reviewerEmployee;
 
@@ -56,7 +56,7 @@ public class Performance extends AbstractEntity {
     @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Improvement> improvements;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 

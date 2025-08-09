@@ -40,7 +40,7 @@ public class RequiredExperience extends AbstractEntity {
     @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "job_description_id",referencedColumnName = "id")
     private JobDescription jobDescription;
 }

@@ -22,11 +22,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IdentificationDocument extends AbstractEntity {
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "identification_type_id", referencedColumnName = "id")
     private IdentificationDocumentType identificationDocumentType;
 
@@ -51,7 +51,7 @@ public class IdentificationDocument extends AbstractEntity {
     @Column(name = "issue_organization_address")
     private String issueOrganizationAddress;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 

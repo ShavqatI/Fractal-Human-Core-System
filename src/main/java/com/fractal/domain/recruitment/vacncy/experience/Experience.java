@@ -32,7 +32,7 @@ public class Experience extends AbstractEntity {
     @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vacancy_id",referencedColumnName = "id")
     private Vacancy vacancy;
 }

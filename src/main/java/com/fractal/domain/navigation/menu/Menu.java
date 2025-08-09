@@ -27,7 +27,7 @@ public class Menu extends Navigation {
     @Column(name = "class_name")
     private String className;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Menu parent;
 

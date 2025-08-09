@@ -2,6 +2,7 @@ package com.fractal.domain.organization_management.grade.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 public record GradeRequest(
         String code,
@@ -12,6 +13,7 @@ public record GradeRequest(
         LocalDate startDate,
         LocalDate endDate,
         Long statusId,
-        String notes
+        String notes,
+        List<GradeRequest> children
 ) {
 }

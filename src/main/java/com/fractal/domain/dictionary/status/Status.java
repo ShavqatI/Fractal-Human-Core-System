@@ -2,10 +2,7 @@ package com.fractal.domain.dictionary.status;
 
 import com.fractal.domain.abstraction.Dictionary;
 import com.fractal.domain.dictionary.status.category.StatusCategory;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,7 +19,7 @@ public class Status extends Dictionary {
 
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_category_id", referencedColumnName = "id")
     private StatusCategory statusCategory;
 }

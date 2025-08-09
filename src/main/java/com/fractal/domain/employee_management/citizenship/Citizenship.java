@@ -3,10 +3,7 @@ package com.fractal.domain.employee_management.citizenship;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.location.country.Country;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -18,11 +15,11 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 public class Citizenship extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;
 

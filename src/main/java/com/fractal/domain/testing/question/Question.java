@@ -25,7 +25,7 @@ public class Question extends AbstractEntity {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String text;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_type_id", referencedColumnName = "id")
     private QuestionType questionType;
 
@@ -35,11 +35,11 @@ public class Question extends AbstractEntity {
     @Column(name = "max_selectable_options")
     private Integer maxSelectableOptions;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "test_id", referencedColumnName = "id")
     private Test test;
 }

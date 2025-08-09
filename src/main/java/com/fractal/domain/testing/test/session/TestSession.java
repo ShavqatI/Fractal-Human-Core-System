@@ -38,7 +38,7 @@ public class TestSession extends ApprovalWorkflow {
 
     private Double score;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 }

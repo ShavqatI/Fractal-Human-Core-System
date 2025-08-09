@@ -26,6 +26,9 @@ public record PositionRequest(
         Long departmentId,
 
         @NotNull
+        Long gradeId,
+
+        @NotNull
         Long statusId
 ) {
 

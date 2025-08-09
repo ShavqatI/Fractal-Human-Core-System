@@ -8,6 +8,7 @@ import com.fractal.domain.dictionary.status.dto.StatusResponse;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public record GradeResponse(
         Long id,
@@ -20,6 +21,7 @@ public record GradeResponse(
         LocalDate endDate,
         StatusCompactResponse status,
         String notes,
+        List<GradeResponse> children,
         LocalDateTime createdDate,
         LocalDateTime updatedDate
 ) {

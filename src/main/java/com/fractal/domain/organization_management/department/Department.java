@@ -31,18 +31,18 @@ public class Department extends AbstractEntity {
     @Column(name = "level_map")
     private String levelMap;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Department parent;
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<Department> children = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_unit_id", referencedColumnName = "id")
     private OrganizationUnit organizationUnit;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id",referencedColumnName = "id")
     private Status status;
 

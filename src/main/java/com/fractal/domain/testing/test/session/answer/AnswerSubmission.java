@@ -32,7 +32,7 @@ public class AnswerSubmission extends ApprovalWorkflow {
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 

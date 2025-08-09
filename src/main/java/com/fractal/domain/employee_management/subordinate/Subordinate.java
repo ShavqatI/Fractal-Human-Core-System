@@ -21,19 +21,19 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Subordinate extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subordinate_employee_id", referencedColumnName = "id")
     private Employee subordinateEmployee;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subordinate_type_id", referencedColumnName = "id")
     private SubordinateType subordinateType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 

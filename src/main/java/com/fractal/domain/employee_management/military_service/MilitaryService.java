@@ -23,7 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 public class MilitaryService extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 

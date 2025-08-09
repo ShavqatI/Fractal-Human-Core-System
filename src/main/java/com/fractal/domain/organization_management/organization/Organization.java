@@ -45,11 +45,11 @@ public class Organization extends AbstractEntity {
     @Column(name = "level_map")
     private String levelMap;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_unit_id", referencedColumnName = "id")
     private OrganizationUnit organizationUnit;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Organization parent;
 

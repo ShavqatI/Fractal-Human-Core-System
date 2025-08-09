@@ -17,7 +17,7 @@ public class Skill extends AbstractEntity {
     @Column(name = "description", columnDefinition = "TEXT", nullable = false)
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vacancy_id",referencedColumnName = "id")
     private Vacancy vacancy;
 }

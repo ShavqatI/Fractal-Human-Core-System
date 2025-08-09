@@ -32,11 +32,11 @@ public class JobDescription extends AbstractEntity {
     @Column(name = "effective_date")
     private LocalDate effectiveDate;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id",referencedColumnName = "id")
     private Status status;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id",referencedColumnName = "id")
     private Position position;
 

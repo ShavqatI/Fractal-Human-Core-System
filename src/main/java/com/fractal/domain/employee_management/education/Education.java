@@ -27,15 +27,15 @@ import java.util.List;
 @NoArgsConstructor
 public class Education extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "education_type_id", referencedColumnName = "id")
     private EducationType educationType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "education_document_type_id", referencedColumnName = "id")
     private EducationDocumentType educationDocumentType;
 
@@ -58,15 +58,15 @@ public class Education extends AbstractEntity {
     @Column(name = "specialization")
     private String specialization;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "degree_type_id", referencedColumnName = "id")
     private DegreeType degreeType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "grade_point_average_id", referencedColumnName = "id")
     private GradePointAverage gradePointAverage;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accreditation_status_id", referencedColumnName = "id")
     private AccreditationStatus accreditationStatus;
 
@@ -76,7 +76,7 @@ public class Education extends AbstractEntity {
     @Column(name = "verification_notes")
     private String verificationNotes;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
