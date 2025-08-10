@@ -2,6 +2,9 @@ package com.fractal.domain.organization_management.job_description;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.organization_management.job_description.accountability.Accountability;
+import com.fractal.domain.organization_management.job_description.authority.Authority;
+import com.fractal.domain.organization_management.job_description.kpi.KeyPerformanceIndicator;
 import com.fractal.domain.organization_management.job_description.qualification.Qualification;
 import com.fractal.domain.organization_management.job_description.required_experience.RequiredExperience;
 import com.fractal.domain.organization_management.job_description.responsibility.Responsibility;
@@ -40,15 +43,23 @@ public class JobDescription extends AbstractEntity {
     @JoinColumn(name = "position_id",referencedColumnName = "id")
     private Position position;
 
-    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Responsibility> responsibilities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Qualification> qualifications = new ArrayList<>();
 
-    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<RequiredExperience> requiredExperiences = new ArrayList<>();
 
+    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<KeyPerformanceIndicator> keyPerformanceIndicators = new ArrayList<>();
+
+    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<Authority> authorities = new ArrayList<>();
+
+    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<Accountability> accountabilities = new ArrayList<>();
 
     public void addResponsibility(Responsibility responsibility) {
         if (responsibilities == null) responsibilities = new ArrayList<>();
@@ -70,7 +81,6 @@ public class JobDescription extends AbstractEntity {
         qualifications.remove(qualification);
     }
 
-
     public void addRequiredExperience(RequiredExperience requiredExperience) {
         if (requiredExperiences == null) requiredExperiences = new ArrayList<>();
         requiredExperience.setJobDescription(this);
@@ -78,8 +88,40 @@ public class JobDescription extends AbstractEntity {
     }
     public void removeRequiredExperience(RequiredExperience requiredExperience) {
         if (requiredExperiences != null && !requiredExperiences.isEmpty())
-        requiredExperiences.remove(requiredExperience);
+            requiredExperiences.remove(requiredExperience);
     }
+
+    public void addKeyPerformanceIndicator(KeyPerformanceIndicator keyPerformanceIndicator) {
+        if (keyPerformanceIndicators == null) keyPerformanceIndicators = new ArrayList<>();
+        keyPerformanceIndicator.setJobDescription(this);
+        keyPerformanceIndicators.add(keyPerformanceIndicator);
+    }
+    public void removeKeyPerformanceIndicator(KeyPerformanceIndicator keyPerformanceIndicator) {
+        if (keyPerformanceIndicators != null && !keyPerformanceIndicators.isEmpty())
+            keyPerformanceIndicators.remove(keyPerformanceIndicator);
+    }
+
+    public void addAuthority(Authority authority) {
+        if (authorities == null) authorities = new ArrayList<>();
+        authority.setJobDescription(this);
+        authorities.add(authority);
+    }
+    public void removeAuthority(Authority authority) {
+        if (accountabilities != null && !accountabilities.isEmpty())
+            accountabilities.remove(authority);
+    }
+
+    public void addAccountability(Accountability accountability) {
+        if (accountabilities == null) accountabilities = new ArrayList<>();
+        accountability.setJobDescription(this);
+        accountabilities.add(accountability);
+    }
+    public void removeAccountability(Accountability accountability) {
+        if (accountabilities != null && !accountabilities.isEmpty())
+            accountabilities.remove(accountability);
+    }
+
+
 
 }
 
