@@ -5,7 +5,6 @@ import com.fractal.domain.authorization.role.RoleService;
 import com.fractal.domain.authorization.role.dto.RoleCompactResponse;
 import com.fractal.domain.authorization.role.dto.RoleRequest;
 import com.fractal.domain.authorization.role.dto.RoleResponse;
-import com.fractal.domain.authorization.user.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

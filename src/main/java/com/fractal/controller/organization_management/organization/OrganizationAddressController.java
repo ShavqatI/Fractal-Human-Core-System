@@ -3,7 +3,6 @@ package com.fractal.controller.organization_management.organization;
 import com.fractal.domain.organization_management.organization.address.OrganizationAddressService;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressResponse;
-import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

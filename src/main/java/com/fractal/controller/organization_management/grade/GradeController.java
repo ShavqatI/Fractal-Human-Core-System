@@ -1,4 +1,4 @@
-package com.fractal.controller.organization_management;
+package com.fractal.controller.organization_management.grade;
 
 import com.fractal.domain.organization_management.grade.GradeService;
 import com.fractal.domain.organization_management.grade.dto.GradeRequest;

@@ -4,13 +4,11 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.grade.Grade;
-import com.fractal.domain.organization_management.job_description.JobDescription;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "position", schema = "organization_schema", catalog = "fractal")

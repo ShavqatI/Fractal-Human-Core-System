@@ -13,8 +13,13 @@ public interface GradeService {
     Grade getById(Long id);
     Grade update(Long id, GradeRequest dto);
     void deleteById(Long id);
+    Grade save(Grade grade);
     GradeResponse toDTO(Grade grade);
     GradeCompactResponse toCompactDTO(Grade grade);
+
+    Grade addChild(Long id, GradeRequest dto);
+    Grade updateChild(Long id,Long childId,GradeRequest dto);
+    Grade deleteChild(Long id,Long childId);
 
 
 }

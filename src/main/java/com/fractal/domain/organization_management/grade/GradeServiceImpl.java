@@ -8,6 +8,7 @@ import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -63,7 +64,36 @@ class GradeServiceImpl implements GradeService {
         return mapperService.toCompactDTO(grade);
     }
 
-    private Grade save(Grade grade) {
+
+    @Override
+    @Transactional
+    public Grade addChild(Long id, GradeRequest dto) {
+        var grade = findById(id);
+        var child = mapperService.toEntity(dto);
+        grade.addChild(child);
+        return save(grade);
+    }
+
+    @Override
+    @Transactional
+    public Grade updateChild(Long id, Long childId, GradeRequest dto) {
+        var grade = findById(id);
+        var child = grade.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        update(child.getId(),dto);
+        return save(grade);
+    }
+
+    @Override
+    @Transactional
+    public Grade deleteChild(Long id, Long childId) {
+        var grade = findById(id);
+        var child = grade.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        grade.removeChild(child);
+        return save(grade);
+    }
+
+    @Override
+    public Grade save(Grade grade) {
         try {
             return gradeRepository.save(grade);
         }

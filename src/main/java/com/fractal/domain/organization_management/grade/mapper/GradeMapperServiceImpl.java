@@ -6,6 +6,8 @@ import com.fractal.domain.organization_management.grade.Grade;
 import com.fractal.domain.organization_management.grade.dto.GradeCompactResponse;
 import com.fractal.domain.organization_management.grade.dto.GradeRequest;
 import com.fractal.domain.organization_management.grade.dto.GradeResponse;
+import com.fractal.domain.organization_management.grade.level.GradeLevelService;
+import com.fractal.domain.organization_management.grade.step.mapper.GradeStepMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,9 @@ import static java.util.Collections.emptyList;
 class GradeMapperServiceImpl implements GradeMapperService {
 
     private final CurrencyService currencyService;
+    private final GradeLevelService levelService;
     private final StatusService statusService;
+    private final GradeStepMapperService stepMapperService;
 
 
     @Override
@@ -29,12 +33,18 @@ class GradeMapperServiceImpl implements GradeMapperService {
                 grade.getCode(),
                 grade.getName(),
                 currencyService.toCompactDTO(grade.getCurrency()),
+                levelService.toDTO(grade.getLevel()),
                 grade.getMinSalary(),
                 grade.getMaxSalary(),
                 grade.getStartDate(),
                 grade.getEndDate(),
                 statusService.toCompactDTO(grade.getStatus()),
                 grade.getNotes(),
+                Optional.ofNullable(grade.getSteps())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(stepMapperService::toDTO)
+                        .collect(Collectors.toList()),
                 Optional.ofNullable(grade.getChildren())
                         .orElse(emptyList())
                         .stream()
@@ -68,12 +78,14 @@ class GradeMapperServiceImpl implements GradeMapperService {
         grade.setCode(dto.code());
         grade.setName(dto.name());
         grade.setCurrency(currencyService.getById(dto.currencyId()));
+        grade.setLevel(levelService.getById(dto.currencyId()));
         grade.setMinSalary(dto.minSalary());
         grade.setMaxSalary(dto.maxSalary());
         grade.setStartDate(dto.startDate());
         grade.setEndDate(dto.endDate());
         grade.setStatus(statusService.getById(dto.statusId()));
         grade.setNotes(dto.notes());
+        dto.steps().forEach(step-> grade.addStep(stepMapperService.toEntity(step)));
         dto.children().forEach(child->grade.addChild(toEntity(child)));
         return grade;
     }

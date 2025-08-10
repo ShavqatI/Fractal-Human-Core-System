@@ -2,7 +2,10 @@ package com.fractal.domain.organization_management.organization.dto;
 
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 import java.util.List;

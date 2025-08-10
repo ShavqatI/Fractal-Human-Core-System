@@ -3,6 +3,7 @@ package com.fractal.domain.organization_management.grade;
 import com.fractal.domain.abstraction.Dictionary;
 import com.fractal.domain.dictionary.currency.Currency;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.organization_management.grade.level.GradeLevel;
 import com.fractal.domain.organization_management.grade.step.GradeStep;
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,6 +27,10 @@ public class Grade extends Dictionary {
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
     private Currency currency;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "grade_level_id", referencedColumnName = "id")
+    private GradeLevel level;
+
     @Column(name = "min_salary")
     private BigDecimal minSalary;
 
@@ -45,17 +50,15 @@ public class Grade extends Dictionary {
     @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Grade parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Grade> children = new ArrayList<>();
 
-    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<GradeStep> steps = new ArrayList<>();
-
     @Transactional
     public void addChild(Grade grade) {
         if (children == null) children = new ArrayList<>();
@@ -77,7 +80,7 @@ public class Grade extends Dictionary {
     }
 
     @Transactional
-    public void removeChild(GradeStep step) {
+    public void removeStep(GradeStep step) {
         if (steps != null && !steps.isEmpty())
             steps.remove(step);
     }

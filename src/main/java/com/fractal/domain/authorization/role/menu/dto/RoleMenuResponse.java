@@ -2,7 +2,6 @@ package com.fractal.domain.authorization.role.menu.dto;
 
 import com.fractal.domain.dictionary.status.dto.StatusResponse;
 import com.fractal.domain.navigation.menu.dto.MenuCompactResponse;
-import com.fractal.domain.navigation.menu.dto.MenuResponse;
 
 import java.time.LocalDateTime;
 

@@ -1,10 +1,5 @@
 package com.fractal.domain.authorization.role.dto;
 
-import com.fractal.domain.authorization.role.menu.dto.RoleMenuResponse;
-
-import java.time.LocalDateTime;
-import java.util.List;
-
 public record RoleCompactResponse(
         Long id,
         String code,
