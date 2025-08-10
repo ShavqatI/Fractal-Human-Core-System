@@ -1,4 +1,4 @@
-package com.fractal.domain.employee_management.citizenship;
+package com.fractal.domain.citizenship;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,5 +11,5 @@ interface CitizenshipRepository extends JpaRepository<Citizenship,Long> {
 
 
     List<Citizenship> findAllByEmployeeId(Long employeeId);
-    Optional<Citizenship> findByEmployeeIdAndId(Long employeeId,Long id);
+    Optional<Citizenship> findByEmployeeIdAndId(Long employeeId, Long id);
 }

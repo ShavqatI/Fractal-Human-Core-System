@@ -5,7 +5,7 @@ import com.fractal.domain.dictionary.marital_status.MaritalStatusService;
 import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.address.mapper.EmployeeAddressMapperService;
-import com.fractal.domain.employee_management.citizenship.mapper.CitizenshipMapperService;
+import com.fractal.domain.employee_management.citizenship.mapper.EmployeeCitizenshipMapperService;
 import com.fractal.domain.employee_management.contact.mapper.EmployeeContactMapperService;
 import com.fractal.domain.employee_management.education.mapper.EducationMapperService;
 import com.fractal.domain.employee_management.employee.Employee;
@@ -33,7 +33,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
     private final NationalityService nationalityService;
     private final StatusService statusService;
     private final IdentificationDocumentMapperService identificationDocumentMapperService;
-    private final CitizenshipMapperService citizenshipMapperService;
+    private final EmployeeCitizenshipMapperService employeeCitizenshipMapperService;
     private final EmployeeAddressMapperService addressMapperService;
     private final EmployeeContactMapperService contactMapperService;
     private final EducationMapperService educationMapperService;
@@ -60,10 +60,10 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                         .stream()
                         .map(identificationDocumentMapperService::toDTO)
                         .collect(Collectors.toList()),
-                Optional.ofNullable(employee.getCitizenships())
+                Optional.ofNullable(employee.getEmployeeCitizenships())
                         .orElse(emptyList())
                         .stream()
-                        .map(citizenshipMapperService::toDTO)
+                        .map(employeeCitizenshipMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(employee.getAddresses())
                         .orElse(emptyList())
@@ -129,7 +129,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
         employee.setStatus(statusService.getById(dto.statusId()));
 
         dto.identificationDocuments().forEach(identificationDocument->employee.addIdentificationDocument(identificationDocumentMapperService.toEntity(identificationDocument)));
-        dto.citizenships().forEach(citizenship-> employee.addCitizenship(citizenshipMapperService.toEntity(citizenship)));
+        dto.citizenships().forEach(citizenship-> employee.addCitizenship(employeeCitizenshipMapperService.toEntity(citizenship)));
         dto.addresses().forEach(address->employee.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact->employee.addContact(contactMapperService.toEntity(contact)));
         dto.educations().forEach(education->employee.addEducation(educationMapperService.toEntity(education)));

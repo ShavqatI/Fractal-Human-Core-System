@@ -1,8 +1,8 @@
 package com.fractal.domain.employee_management.citizenship;
 
-import com.fractal.domain.employee_management.citizenship.dto.CitizenshipRequest;
-import com.fractal.domain.employee_management.citizenship.dto.CitizenshipResponse;
-import com.fractal.domain.employee_management.citizenship.mapper.CitizenshipMapperService;
+import com.fractal.domain.employee_management.citizenship.dto.EmployeeCitizenshipRequest;
+import com.fractal.domain.employee_management.citizenship.dto.EmployeeCitizenshipResponse;
+import com.fractal.domain.employee_management.citizenship.mapper.EmployeeCitizenshipMapperService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -13,16 +13,16 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-class CitizenshipServiceImpl implements CitizenshipService {
+class EmployeeCitizenshipServiceImpl implements EmployeeCitizenshipService {
 
-    private final CitizenshipRepository citizenshipRepository;
+    private final EmployeeCitizenshipRepository employeeCitizenshipRepository;
     private final EmployeeService employeeService;
-    private final CitizenshipMapperService mapperService;
+    private final EmployeeCitizenshipMapperService mapperService;
 
 
     @Override
     @Transactional
-    public Citizenship create(Long employeeId, CitizenshipRequest dto) {
+    public EmployeeCitizenship create(Long employeeId, EmployeeCitizenshipRequest dto) {
         var employee = employeeService.getById(employeeId);
         var citizenship = mapperService.toEntity(dto);
         employee.addCitizenship(citizenship);
@@ -31,23 +31,23 @@ class CitizenshipServiceImpl implements CitizenshipService {
     }
 
     @Override
-    public List<Citizenship> getAllByEmployeeId(Long employeeId) {
-        return citizenshipRepository.findAllByEmployeeId(employeeId);
+    public List<EmployeeCitizenship> getAllByEmployeeId(Long employeeId) {
+        return employeeCitizenshipRepository.findAllByEmployeeId(employeeId);
     }
 
     @Override
-    public Citizenship getById(Long employeeId, Long id) {
-        return citizenshipRepository.findByEmployeeIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
+    public EmployeeCitizenship getById(Long employeeId, Long id) {
+        return employeeCitizenshipRepository.findByEmployeeIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
     }
 
     @Override
     @Transactional
-    public Citizenship update(Long employeeId, Long id, CitizenshipRequest dto) {
+    public EmployeeCitizenship update(Long employeeId, Long id, EmployeeCitizenshipRequest dto) {
         var employee = employeeService.getById(employeeId);
-        var citizenship = employee.getCitizenships()
+        var citizenship = employee.getEmployeeCitizenships()
                 .stream()
                 .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
-        citizenship = citizenshipRepository.save(mapperService.toEntity(citizenship,dto));
+        citizenship = employeeCitizenshipRepository.save(mapperService.toEntity(citizenship,dto));
         employeeService.save(employee);
        return citizenship;
     }
@@ -56,17 +56,17 @@ class CitizenshipServiceImpl implements CitizenshipService {
     @Transactional
     public void delete(Long employeeId, Long id) {
         var employee = employeeService.getById(employeeId);
-        var citizenship = employee.getCitizenships()
+        var citizenship = employee.getEmployeeCitizenships()
                 .stream()
                 .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
         employee.removeCitizenship(citizenship);
-        citizenshipRepository.delete(citizenship);
+        employeeCitizenshipRepository.delete(citizenship);
         employeeService.save(employee);
     }
 
     @Override
-    public CitizenshipResponse toDTO(Citizenship citizenship) {
-        return mapperService.toDTO(citizenship);
+    public EmployeeCitizenshipResponse toDTO(EmployeeCitizenship employeeCitizenship) {
+        return mapperService.toDTO(employeeCitizenship);
     }
 
 }

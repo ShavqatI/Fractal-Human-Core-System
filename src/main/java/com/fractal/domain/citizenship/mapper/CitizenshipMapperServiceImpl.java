@@ -1,8 +1,8 @@
-package com.fractal.domain.employee_management.citizenship.mapper;
+package com.fractal.domain.citizenship.mapper;
 
-import com.fractal.domain.employee_management.citizenship.Citizenship;
-import com.fractal.domain.employee_management.citizenship.dto.CitizenshipRequest;
-import com.fractal.domain.employee_management.citizenship.dto.CitizenshipResponse;
+import com.fractal.domain.citizenship.Citizenship;
+import com.fractal.domain.citizenship.dto.CitizenshipRequest;
+import com.fractal.domain.citizenship.dto.CitizenshipResponse;
 import com.fractal.domain.location.country.CountryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

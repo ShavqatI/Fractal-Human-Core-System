@@ -4,7 +4,7 @@ import com.fractal.domain.abstraction.Person;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.address.EmployeeAddress;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
-import com.fractal.domain.employee_management.citizenship.Citizenship;
+import com.fractal.domain.employee_management.citizenship.EmployeeCitizenship;
 import com.fractal.domain.employee_management.contact.EmployeeContact;
 import com.fractal.domain.employee_management.education.Education;
 import com.fractal.domain.employee_management.employee.resource.EmployeeResource;
@@ -40,7 +40,7 @@ public class Employee extends Person {
     private  List<IdentificationDocument> identificationDocuments = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private  List<Citizenship> citizenships   = new ArrayList<>();
+    private  List<EmployeeCitizenship> employeeCitizenships = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private  List<EmployeeAddress> addresses   = new ArrayList<>();
@@ -86,14 +86,14 @@ public class Employee extends Person {
         if (identificationDocuments != null && !identificationDocuments.isEmpty())
             identificationDocuments.remove(identificationDocument);
     }
-    public void addCitizenship(Citizenship citizenship) {
-        if (citizenships == null) citizenships = new ArrayList<>();
-        citizenship.setEmployee(this);
-        citizenships.add(citizenship);
+    public void addCitizenship(EmployeeCitizenship employeeCitizenship) {
+        if (employeeCitizenships == null) employeeCitizenships = new ArrayList<>();
+        employeeCitizenship.setEmployee(this);
+        employeeCitizenships.add(employeeCitizenship);
     }
-    public void removeCitizenship(Citizenship citizenship) {
-        if (citizenships != null && !citizenships.isEmpty())
-            citizenships.remove(citizenship);
+    public void removeCitizenship(EmployeeCitizenship employeeCitizenship) {
+        if (employeeCitizenships != null && !employeeCitizenships.isEmpty())
+            employeeCitizenships.remove(employeeCitizenship);
     }
 
     public void addAddress(EmployeeAddress address) {

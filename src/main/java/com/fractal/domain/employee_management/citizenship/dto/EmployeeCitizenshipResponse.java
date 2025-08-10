@@ -1,6 +1,6 @@
 package com.fractal.domain.employee_management.citizenship.dto;
 
-public record CitizenshipRequest(
-        Long countryId
+public record EmployeeCitizenshipResponse(
+        String country
 ) {
 }
