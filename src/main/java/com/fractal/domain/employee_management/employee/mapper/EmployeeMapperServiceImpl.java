@@ -60,7 +60,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                         .stream()
                         .map(identificationDocumentMapperService::toDTO)
                         .collect(Collectors.toList()),
-                Optional.ofNullable(employee.getEmployeeCitizenships())
+                Optional.ofNullable(employee.getCitizenships())
                         .orElse(emptyList())
                         .stream()
                         .map(employeeCitizenshipMapperService::toDTO)

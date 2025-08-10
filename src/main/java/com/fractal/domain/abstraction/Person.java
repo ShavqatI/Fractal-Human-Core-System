@@ -49,5 +49,4 @@ public abstract class Person extends AbstractEntity {
     @JoinColumn(name = "nationality_id", referencedColumnName = "id")
     private Nationality nationality;
 
-
 }

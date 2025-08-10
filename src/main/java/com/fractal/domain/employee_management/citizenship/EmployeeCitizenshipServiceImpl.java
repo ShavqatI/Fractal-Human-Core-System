@@ -44,7 +44,7 @@ class EmployeeCitizenshipServiceImpl implements EmployeeCitizenshipService {
     @Transactional
     public EmployeeCitizenship update(Long employeeId, Long id, EmployeeCitizenshipRequest dto) {
         var employee = employeeService.getById(employeeId);
-        var citizenship = employee.getEmployeeCitizenships()
+        var citizenship = employee.getCitizenships()
                 .stream()
                 .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
         citizenship = employeeCitizenshipRepository.save(mapperService.toEntity(citizenship,dto));
@@ -56,7 +56,7 @@ class EmployeeCitizenshipServiceImpl implements EmployeeCitizenshipService {
     @Transactional
     public void delete(Long employeeId, Long id) {
         var employee = employeeService.getById(employeeId);
-        var citizenship = employee.getEmployeeCitizenships()
+        var citizenship = employee.getCitizenships()
                 .stream()
                 .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
         employee.removeCitizenship(citizenship);

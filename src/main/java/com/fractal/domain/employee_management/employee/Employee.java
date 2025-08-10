@@ -40,7 +40,7 @@ public class Employee extends Person {
     private  List<IdentificationDocument> identificationDocuments = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private  List<EmployeeCitizenship> employeeCitizenships = new ArrayList<>();
+    private  List<EmployeeCitizenship> citizenships = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private  List<EmployeeAddress> addresses   = new ArrayList<>();
@@ -87,13 +87,13 @@ public class Employee extends Person {
             identificationDocuments.remove(identificationDocument);
     }
     public void addCitizenship(EmployeeCitizenship employeeCitizenship) {
-        if (employeeCitizenships == null) employeeCitizenships = new ArrayList<>();
+        if (citizenships == null) citizenships = new ArrayList<>();
         employeeCitizenship.setEmployee(this);
-        employeeCitizenships.add(employeeCitizenship);
+        citizenships.add(employeeCitizenship);
     }
     public void removeCitizenship(EmployeeCitizenship employeeCitizenship) {
-        if (employeeCitizenships != null && !employeeCitizenships.isEmpty())
-            employeeCitizenships.remove(employeeCitizenship);
+        if (citizenships != null && !citizenships.isEmpty())
+            citizenships.remove(employeeCitizenship);
     }
 
     public void addAddress(EmployeeAddress address) {
