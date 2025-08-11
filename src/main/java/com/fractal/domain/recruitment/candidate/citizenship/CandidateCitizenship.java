@@ -5,12 +5,12 @@ import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.recruitment.candidate.Candidate;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "employee_citizenship", schema = "employee_schema", catalog = "fractal")
+@Table(name = "candidate_citizenship", schema = "employee_schema", catalog = "fractal")
 @Data
-@Builder
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Inheritance()

@@ -59,7 +59,6 @@ class ResponsibilityServiceImpl implements ResponsibilityService  {
                 .filter(r -> r.getId().equals(id))
                 .findFirst().orElseThrow(()-> new ResourceNotFoundException("Responsibility with id: " + id + " not found"));
         jobDescription.removeResponsibility(responsibility);
-        responsibilityRepository.delete(responsibility);
         jobDescriptionService.save(jobDescription);
 
     }

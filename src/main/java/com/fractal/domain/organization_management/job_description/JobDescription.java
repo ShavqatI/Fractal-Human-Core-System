@@ -6,6 +6,7 @@ import com.fractal.domain.organization_management.job_description.accountability
 import com.fractal.domain.organization_management.job_description.authority.Authority;
 import com.fractal.domain.organization_management.job_description.kpi.KeyPerformanceIndicator;
 import com.fractal.domain.organization_management.job_description.qualification.Qualification;
+import com.fractal.domain.organization_management.job_description.reporting_line.ReportingLine;
 import com.fractal.domain.organization_management.job_description.required_experience.RequiredExperience;
 import com.fractal.domain.organization_management.job_description.responsibility.Responsibility;
 import com.fractal.domain.organization_management.position.Position;
@@ -43,6 +44,11 @@ public class JobDescription extends AbstractEntity {
     @JoinColumn(name = "position_id",referencedColumnName = "id")
     private Position position;
 
+
+
+    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<ReportingLine> reportingLines = new ArrayList<>();
+
     @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Responsibility> responsibilities = new ArrayList<>();
 
@@ -60,6 +66,17 @@ public class JobDescription extends AbstractEntity {
 
     @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Accountability> accountabilities = new ArrayList<>();
+
+    public void addReportingLine(ReportingLine reportingLine) {
+        if (reportingLines == null) reportingLines = new ArrayList<>();
+        reportingLine.setJobDescription(this);
+        reportingLines.add(reportingLine);
+    }
+    public void removeReportingLine(ReportingLine reportingLine) {
+        if (reportingLines != null && !reportingLines.isEmpty())
+            reportingLines.remove(reportingLine);
+    }
+
 
     public void addResponsibility(Responsibility responsibility) {
         if (responsibilities == null) responsibilities = new ArrayList<>();

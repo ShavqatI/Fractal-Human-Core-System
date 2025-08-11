@@ -59,7 +59,6 @@ class QualificationServiceImpl implements QualificationService {
                 .filter(q -> q.getId().equals(id))
                 .findFirst().orElseThrow(()-> new ResourceNotFoundException("Qualification with id: " + id + " not found"));
         jobDescription.removeQualification(qualification);
-        qualificationRepository.delete(qualification);
         jobDescriptionService.save(jobDescription);
     }
 

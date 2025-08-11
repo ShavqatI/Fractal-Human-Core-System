@@ -56,7 +56,6 @@ class AccountabilityServiceImpl implements AccountabilityService {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         var accountability = findById(jobDescription,id);
         jobDescription.removeAccountability(accountability);
-        accountabilityRepository.delete(accountability);
         jobDescriptionService.save(jobDescription);
     }
 

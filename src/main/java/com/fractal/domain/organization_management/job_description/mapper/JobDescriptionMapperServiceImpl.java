@@ -67,7 +67,7 @@ class JobDescriptionMapperServiceImpl implements JobDescriptionMapperService {
         jobDescription.setTitle(dto.title());
         jobDescription.setSummary(dto.summary());
         jobDescription.setEffectiveDate(dto.effectiveDate());
-        jobDescription.setStatus(statusService.getByCode(dto.status()));
+        jobDescription.setStatus(statusService.getById(dto.statusId()));
         jobDescription.setPosition(positionService.getById(dto.positionId()));
         dto.responsibilities().forEach(responsibilityRequest -> jobDescription.addResponsibility(responsibilityMapperService.toEntity(responsibilityRequest)));
         dto.qualifications().forEach(qualificationRequest-> jobDescription.addQualification(qualificationMapperService.toEntity(qualificationRequest)));

@@ -59,7 +59,6 @@ class AuthorityServiceImpl implements AuthorityService {
                 .filter(q -> q.getId().equals(id))
                 .findFirst().orElseThrow(()-> new ResourceNotFoundException("Authority with id: " + id + " not found"));
         jobDescription.removeAuthority(authority);
-        authorityRepository.delete(authority);
         jobDescriptionService.save(jobDescription);
     }
 

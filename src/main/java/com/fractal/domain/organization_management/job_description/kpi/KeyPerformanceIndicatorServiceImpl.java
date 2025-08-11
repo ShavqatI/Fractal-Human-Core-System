@@ -59,7 +59,6 @@ class KeyPerformanceIndicatorServiceImpl implements KeyPerformanceIndicatorServi
                 .filter(q -> q.getId().equals(id))
                 .findFirst().orElseThrow(()-> new ResourceNotFoundException("Key Performance Indicator with id: " + id + " not found"));
         jobDescription.removeKeyPerformanceIndicator(keyPerformanceIndicator);
-        keyPerformanceIndicatorRepository.delete(keyPerformanceIndicator);
         jobDescriptionService.save(jobDescription);
     }
 

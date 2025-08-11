@@ -10,6 +10,5 @@ import java.util.Optional;
 interface CitizenshipRepository extends JpaRepository<Citizenship,Long> {
 
 
-    List<Citizenship> findAllByEmployeeId(Long employeeId);
-    Optional<Citizenship> findByEmployeeIdAndId(Long employeeId, Long id);
+
 }

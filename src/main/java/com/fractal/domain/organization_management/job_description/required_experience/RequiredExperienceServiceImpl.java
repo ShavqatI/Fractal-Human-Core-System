@@ -59,7 +59,6 @@ class RequiredExperienceServiceImpl implements RequiredExperienceService {
                 .findFirst().orElseThrow(()-> new ResourceNotFoundException("Required Experience with id: " + id + " not found"));
         jobDescription.removeRequiredExperience(requiredExperience);
         jobDescriptionService.save(jobDescription);
-        requiredExperienceRepository.delete(requiredExperience);
     }
 
     @Override
