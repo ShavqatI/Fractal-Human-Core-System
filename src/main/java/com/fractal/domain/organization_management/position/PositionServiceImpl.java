@@ -51,6 +51,7 @@ class PositionServiceImpl implements PositionService {
             position.setDescription(dto.description());
             position.setDepartment(departmentService.getById(dto.departmentId()));
             position.setStatus(statusService.getById(dto.statusId()));
+            position.setGrade(gradeService.getById(dto.gradeId()));
             return save(position);
         }
         catch (DataAccessException e) {

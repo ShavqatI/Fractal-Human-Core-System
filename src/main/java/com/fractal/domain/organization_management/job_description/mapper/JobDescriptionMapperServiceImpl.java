@@ -2,9 +2,15 @@ package com.fractal.domain.organization_management.job_description.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.organization_management.job_description.JobDescription;
+import com.fractal.domain.organization_management.job_description.accountability.mapper.AccountabilityMapperService;
+import com.fractal.domain.organization_management.job_description.authority.mapper.AuthorityMapperService;
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionRequest;
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionResponse;
+import com.fractal.domain.organization_management.job_description.kpi.KeyPerformanceIndicatorService;
+import com.fractal.domain.organization_management.job_description.kpi.mapper.KeyPerformanceIndicatorMapperService;
 import com.fractal.domain.organization_management.job_description.qualification.mapper.QualificationMapperService;
+import com.fractal.domain.organization_management.job_description.reporting_line.ReportingLine;
+import com.fractal.domain.organization_management.job_description.reporting_line.mapper.ReportingLineMapperService;
 import com.fractal.domain.organization_management.job_description.required_experience.mapper.RequiredExperienceMapperService;
 import com.fractal.domain.organization_management.job_description.responsibility.mapper.ResponsibilityMapperService;
 import com.fractal.domain.organization_management.position.PositionService;
@@ -20,9 +26,13 @@ import static java.util.Collections.emptyList;
 @RequiredArgsConstructor
 class JobDescriptionMapperServiceImpl implements JobDescriptionMapperService {
 
+    private final ReportingLineMapperService reportingLineMapperService;
     private final ResponsibilityMapperService responsibilityMapperService;
     private final QualificationMapperService qualificationMapperService;
     private final RequiredExperienceMapperService requiredExperienceMapperService;
+    private final KeyPerformanceIndicatorMapperService keyPerformanceIndicatorMapperService;
+    private final AuthorityMapperService authorityMapperService;
+    private final AccountabilityMapperService accountabilityMapperService;
     private final PositionService positionService;
     private final StatusService statusService;
     @Override
@@ -34,6 +44,11 @@ class JobDescriptionMapperServiceImpl implements JobDescriptionMapperService {
                 jobDescription.getEffectiveDate(),
                 statusService.toCompactDTO(jobDescription.getStatus()),
                 positionService.toCompactDTO(jobDescription.getPosition()),
+                Optional.ofNullable(jobDescription.getReportingLines())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(reportingLineMapperService::toDTO)
+                        .collect(Collectors.toList()),
                 Optional.ofNullable(jobDescription.getResponsibilities())
                         .orElse(emptyList())
                         .stream()
@@ -48,6 +63,21 @@ class JobDescriptionMapperServiceImpl implements JobDescriptionMapperService {
                         .orElse(emptyList())
                         .stream()
                         .map(requiredExperienceMapperService::toDTO)
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(jobDescription.getKeyPerformanceIndicators())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(keyPerformanceIndicatorMapperService::toDTO)
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(jobDescription.getAuthorities())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(authorityMapperService::toDTO)
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(jobDescription.getAccountabilities())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(accountabilityMapperService::toDTO)
                         .collect(Collectors.toList()),
                 jobDescription.getCreatedDate()
         );
@@ -69,9 +99,15 @@ class JobDescriptionMapperServiceImpl implements JobDescriptionMapperService {
         jobDescription.setEffectiveDate(dto.effectiveDate());
         jobDescription.setStatus(statusService.getById(dto.statusId()));
         jobDescription.setPosition(positionService.getById(dto.positionId()));
+        dto.reportingLines().forEach(reportingLine -> jobDescription.addReportingLine(reportingLineMapperService.toEntity(reportingLine)));
         dto.responsibilities().forEach(responsibilityRequest -> jobDescription.addResponsibility(responsibilityMapperService.toEntity(responsibilityRequest)));
         dto.qualifications().forEach(qualificationRequest-> jobDescription.addQualification(qualificationMapperService.toEntity(qualificationRequest)));
         dto.requiredExperiences().forEach(requiredExperienceRequest -> jobDescription.addRequiredExperience(requiredExperienceMapperService.toEntity(requiredExperienceRequest)));
+        dto.keyPerformanceIndicators().forEach(keyPerformanceIndicator -> jobDescription.addKeyPerformanceIndicator(keyPerformanceIndicatorMapperService.toEntity(keyPerformanceIndicator)));
+        dto.keyPerformanceIndicators().forEach(keyPerformanceIndicator -> jobDescription.addKeyPerformanceIndicator(keyPerformanceIndicatorMapperService.toEntity(keyPerformanceIndicator)));
+        dto.authorities().forEach(authority -> jobDescription.addAuthority(authorityMapperService.toEntity(authority)));
+        dto.accountabilities().forEach(accountability -> jobDescription.addAccountability(accountabilityMapperService.toEntity(accountability)));
+
         return jobDescription;
     }
 }
