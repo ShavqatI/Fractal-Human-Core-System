@@ -1,6 +1,7 @@
 package com.fractal.controller.organization_management.grade;
 
 import com.fractal.domain.organization_management.grade.GradeService;
+import com.fractal.domain.organization_management.grade.dto.GradeCompactResponse;
 import com.fractal.domain.organization_management.grade.dto.GradeRequest;
 import com.fractal.domain.organization_management.grade.dto.GradeResponse;
 import jakarta.validation.Valid;
@@ -27,6 +28,10 @@ public class GradeController {
     @GetMapping
     public ResponseEntity<List<GradeResponse>> getAll() {
         return ResponseEntity.ok(gradeService.getAll().stream().map(gradeService::toDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("/compact")
+    public ResponseEntity<List<GradeCompactResponse>> getAllCompact() {
+        return ResponseEntity.ok(gradeService.getAll().stream().map(gradeService::toCompactDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")

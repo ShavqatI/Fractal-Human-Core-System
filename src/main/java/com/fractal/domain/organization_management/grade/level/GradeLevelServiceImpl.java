@@ -81,6 +81,6 @@ class GradeLevelServiceImpl implements GradeLevelService {
     }
 
     private GradeLevel findById(Long id) {
-        return gradeLevelRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Gender with id: " + id + " not found"));
+        return gradeLevelRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Grade Level with id: " + id + " not found"));
     }
 }

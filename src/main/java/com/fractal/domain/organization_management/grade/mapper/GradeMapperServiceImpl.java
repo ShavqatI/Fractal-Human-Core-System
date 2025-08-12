@@ -78,7 +78,7 @@ class GradeMapperServiceImpl implements GradeMapperService {
         grade.setCode(dto.code());
         grade.setName(dto.name());
         grade.setCurrency(currencyService.getById(dto.currencyId()));
-        grade.setLevel(levelService.getById(dto.currencyId()));
+        grade.setLevel(levelService.getById(dto.levelId()));
         grade.setMinSalary(dto.minSalary());
         grade.setMaxSalary(dto.maxSalary());
         grade.setStartDate(dto.startDate());

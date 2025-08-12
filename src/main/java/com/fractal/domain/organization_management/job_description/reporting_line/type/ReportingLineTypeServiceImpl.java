@@ -26,7 +26,7 @@ class ReportingLineTypeServiceImpl implements ReportingLineTypeService {
 
     @Override
     public ReportingLineType getByCode(String code) {
-        return reportingLineTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Absence Type with code: " + code + " not found"));
+        return reportingLineTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Reporting Line Type with code: " + code + " not found"));
     }
 
     @Override
@@ -79,7 +79,7 @@ class ReportingLineTypeServiceImpl implements ReportingLineTypeService {
     }
 
     private ReportingLineType findById(Long id) {
-        return reportingLineTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Absence Type with id: " + id + " not found"));
+        return reportingLineTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Reporting Line Type with id: " + id + " not found"));
     }
 
 }
