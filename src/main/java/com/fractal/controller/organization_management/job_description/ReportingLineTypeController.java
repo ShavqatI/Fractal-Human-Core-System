@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/organization-management/reporting-line-type")
+@RequestMapping("/api/v1/organization-management/job-description/reporting-line-type")
 @RequiredArgsConstructor
 public class ReportingLineTypeController {
 
