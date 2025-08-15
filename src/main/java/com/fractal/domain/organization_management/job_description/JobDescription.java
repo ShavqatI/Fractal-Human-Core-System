@@ -124,8 +124,8 @@ public class JobDescription extends AbstractEntity {
         authorities.add(authority);
     }
     public void removeAuthority(Authority authority) {
-        if (accountabilities != null && !accountabilities.isEmpty())
-            accountabilities.remove(authority);
+        if (authorities != null && !authorities.isEmpty())
+            authorities.remove(authority);
     }
 
     public void addAccountability(Accountability accountability) {

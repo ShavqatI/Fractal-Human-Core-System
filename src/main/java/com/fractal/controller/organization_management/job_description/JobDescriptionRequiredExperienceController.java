@@ -19,7 +19,7 @@ public class JobDescriptionRequiredExperienceController {
 
     private final RequiredExperienceService requiredExperienceService;
 
-    @PostMapping("/{id}/required-experience")
+    @PostMapping
     public ResponseEntity<RequiredExperienceResponse> create(@PathVariable Long jobDescriptionId, @RequestBody @Valid RequiredExperienceRequest dto) {
         return new ResponseEntity<>(requiredExperienceService.toDTO(requiredExperienceService.create(jobDescriptionId,dto)), HttpStatus.CREATED);
     }

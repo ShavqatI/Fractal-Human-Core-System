@@ -40,7 +40,7 @@ class GradeStepMapperServiceImpl implements GradeStepMapperService {
     private GradeStep mapToEntity(GradeStep step, GradeStepRequest dto) {
         step.setStatus(statusService.getById(dto.statusId()));
         step.setMinSalary(dto.minSalary());
-        step.setMaxSalary(step.getMaxSalary());
+        step.setMaxSalary(dto.maxSalary());
         return step;
     }
 
