@@ -1,9 +1,10 @@
 package com.fractal.controller.employee_management.employee.employment;
 
 
-import com.fractal.domain.employee_management.employment.type.EmploymentTypeService;
-import com.fractal.domain.employee_management.employment.type.dto.EmploymentTypeRequest;
-import com.fractal.domain.employee_management.employment.type.dto.EmploymentTypeResponse;
+
+import com.fractal.domain.employment.type.EmploymentTypeService;
+import com.fractal.domain.employment.type.dto.EmploymentTypeRequest;
+import com.fractal.domain.employment.type.dto.EmploymentTypeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/employment/type")
+@RequestMapping("/api/v1/employment/type")
 @RequiredArgsConstructor
 public class EmploymentTypeController {
 

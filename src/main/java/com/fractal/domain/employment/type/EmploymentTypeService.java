@@ -1,7 +1,8 @@
-package com.fractal.domain.employee_management.employment.type;
+package com.fractal.domain.employment.type;
 
-import com.fractal.domain.employee_management.employment.type.dto.EmploymentTypeRequest;
-import com.fractal.domain.employee_management.employment.type.dto.EmploymentTypeResponse;
+import com.fractal.domain.employment.type.dto.EmploymentTypeCompactResponse;
+import com.fractal.domain.employment.type.dto.EmploymentTypeRequest;
+import com.fractal.domain.employment.type.dto.EmploymentTypeResponse;
 
 import java.util.List;
 
@@ -14,4 +15,5 @@ public interface EmploymentTypeService {
     EmploymentType update(Long id, EmploymentTypeRequest dto);
     void deleteById(Long id);
     EmploymentTypeResponse toDTO(EmploymentType employmentType);
+    EmploymentTypeCompactResponse toCompactDTO(EmploymentType employmentType);
 }

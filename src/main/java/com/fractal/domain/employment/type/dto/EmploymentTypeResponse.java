@@ -1,4 +1,4 @@
-package com.fractal.domain.employee_management.employment.type.dto;
+package com.fractal.domain.employment.type.dto;
 
 import java.time.LocalDateTime;
 

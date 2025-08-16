@@ -42,8 +42,8 @@ public class CandidateEducationServiceImpl implements CandidateEducationService 
 
     @Override
     @Transactional
-    public CandidateEducation update(Long organizationId, Long id, EducationRequest dto) {
-        var candidate = candidateService.getById(organizationId);
+    public CandidateEducation update(Long candidateId, Long id, EducationRequest dto) {
+        var candidate = candidateService.getById(candidateId);
         var education = candidate.getEducations()
                 .stream()
                 .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate education with id: " + id + " not found"));

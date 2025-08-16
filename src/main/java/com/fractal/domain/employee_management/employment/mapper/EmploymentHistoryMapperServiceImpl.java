@@ -6,7 +6,7 @@ import com.fractal.domain.employee_management.employment.agreement.mapper.Agreem
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryResponse;
 import com.fractal.domain.employee_management.employment.order.mapper.EmploymentHistoryOrderMapperService;
-import com.fractal.domain.employee_management.employment.type.EmploymentTypeService;
+import com.fractal.domain.employment.type.EmploymentTypeService;
 import com.fractal.domain.organization_management.department.DepartmentService;
 import com.fractal.domain.organization_management.organization.OrganizationService;
 import com.fractal.domain.organization_management.position.PositionService;

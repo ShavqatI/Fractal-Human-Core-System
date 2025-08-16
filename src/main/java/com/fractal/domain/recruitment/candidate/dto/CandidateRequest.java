@@ -5,6 +5,7 @@ import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.education.dto.EducationRequest;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryRequest;
 import com.fractal.domain.employee_management.military_service.dto.MilitaryServiceRequest;
+import com.fractal.domain.employment.work_experience.dto.WorkExperienceRequest;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.recruitment.candidate.address.dto.CandidateAddressRequest;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,8 +28,8 @@ public record CandidateRequest(
         List<CandidateAddressRequest> addresses,
         List<ContactRequest> contacts,
         List<EducationRequest> educations,
-        List<MilitaryServiceRequest> militaryServices,
-        List<EmploymentHistoryRequest> employmentHistories,
+        List<WorkExperienceRequest> workExperiences,
+        ///List<MilitaryServiceRequest> militaryServices,
         List<MultipartFile> files
 
 ) {

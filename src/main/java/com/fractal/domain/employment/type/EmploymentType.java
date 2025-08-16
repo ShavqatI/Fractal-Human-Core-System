@@ -1,4 +1,4 @@
-package com.fractal.domain.employee_management.employment.type;
+package com.fractal.domain.employment.type;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "category", schema = "employee_schema", catalog = "fractal")
+@Table(name = "employment_type", schema = "employment_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @NoArgsConstructor

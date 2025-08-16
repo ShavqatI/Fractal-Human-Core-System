@@ -1,7 +1,8 @@
-package com.fractal.domain.employee_management.employment.type;
+package com.fractal.domain.employment.type;
 
-import com.fractal.domain.employee_management.employment.type.dto.EmploymentTypeRequest;
-import com.fractal.domain.employee_management.employment.type.dto.EmploymentTypeResponse;
+import com.fractal.domain.employment.type.dto.EmploymentTypeCompactResponse;
+import com.fractal.domain.employment.type.dto.EmploymentTypeRequest;
+import com.fractal.domain.employment.type.dto.EmploymentTypeResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -59,6 +60,15 @@ class EmploymentTypeServiceImpl implements EmploymentTypeService {
                 employmentType.getCode(),
                 employmentType.getName(),
                 employmentType.getCreatedDate()
+        );
+    }
+
+    @Override
+    public EmploymentTypeCompactResponse toCompactDTO(EmploymentType employmentType) {
+        return new EmploymentTypeCompactResponse(
+                employmentType.getId(),
+                employmentType.getCode(),
+                employmentType.getName()
         );
     }
 

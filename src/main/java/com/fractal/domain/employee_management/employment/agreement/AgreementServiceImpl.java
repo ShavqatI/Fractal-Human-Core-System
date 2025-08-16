@@ -60,7 +60,7 @@ class AgreementServiceImpl implements AgreementService {
         var agreement = employmentHistory.getAgreements()
                 .stream()
                 .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Agreement with id: " + id + " not found"));
-        agreementRepository.delete(agreement);
+        employmentHistory.removeAgreement(agreement);
         employmentHistoryService.save(employmentHistory);
     }
 

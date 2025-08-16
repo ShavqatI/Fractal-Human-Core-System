@@ -9,7 +9,7 @@ public interface CandidateEducationService {
 
     CandidateEducation create(Long candidateId, EducationRequest dto);
     CandidateEducation getById(Long candidateId, Long id);
-    List<CandidateEducation> getAllByCandidateId(Long organizationId);
+    List<CandidateEducation> getAllByCandidateId(Long candidateId);
     CandidateEducation update(Long candidateId, Long id, EducationRequest dto);
     void delete(Long candidateId, Long id);
     EducationResponse toDTO(CandidateEducation address);
