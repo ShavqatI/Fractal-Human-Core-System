@@ -3,8 +3,6 @@ package com.fractal.domain.recruitment.candidate.address.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.time.LocalDate;
-
 public record CandidateAddressRequest(
 
         @NotNull

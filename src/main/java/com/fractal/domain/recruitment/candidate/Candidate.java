@@ -3,12 +3,6 @@ package com.fractal.domain.recruitment.candidate;
 
 import com.fractal.domain.abstraction.Person;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.employee_management.citizenship.EmployeeCitizenship;
-import com.fractal.domain.employee_management.contact.EmployeeContact;
-import com.fractal.domain.employee_management.education.EmployeeEducation;
-import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
-import com.fractal.domain.organization_management.organization.address.OrganizationAddress;
-import com.fractal.domain.organization_management.organization.contact.OrganizationContact;
 import com.fractal.domain.recruitment.candidate.address.CandidateAddress;
 import com.fractal.domain.recruitment.candidate.citizenship.CandidateCitizenship;
 import com.fractal.domain.recruitment.candidate.contact.CandidateContact;

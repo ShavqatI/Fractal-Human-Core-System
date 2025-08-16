@@ -9,7 +9,6 @@ import com.fractal.domain.education.document_type.EducationDocumentType;
 import com.fractal.domain.education.grade_point_average.GradePointAverage;
 import com.fractal.domain.education.resource.EducationResource;
 import com.fractal.domain.education.type.EducationType;
-import com.fractal.domain.employee_management.employee.Employee;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

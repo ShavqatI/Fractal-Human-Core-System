@@ -4,10 +4,6 @@ import com.fractal.domain.organization_management.job_description.JobDescription
 import com.fractal.domain.organization_management.job_description.reporting_line.dto.ReportingLineRequest;
 import com.fractal.domain.organization_management.job_description.reporting_line.dto.ReportingLineResponse;
 import com.fractal.domain.organization_management.job_description.reporting_line.mapper.ReportingLineMapperService;
-import com.fractal.domain.organization_management.job_description.responsibility.Responsibility;
-import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityRequest;
-import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityResponse;
-import com.fractal.domain.organization_management.job_description.responsibility.mapper.ResponsibilityMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -6,10 +6,8 @@ import com.fractal.domain.organization_management.job_description.accountability
 import com.fractal.domain.organization_management.job_description.authority.mapper.AuthorityMapperService;
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionRequest;
 import com.fractal.domain.organization_management.job_description.dto.JobDescriptionResponse;
-import com.fractal.domain.organization_management.job_description.kpi.KeyPerformanceIndicatorService;
 import com.fractal.domain.organization_management.job_description.kpi.mapper.KeyPerformanceIndicatorMapperService;
 import com.fractal.domain.organization_management.job_description.qualification.mapper.QualificationMapperService;
-import com.fractal.domain.organization_management.job_description.reporting_line.ReportingLine;
 import com.fractal.domain.organization_management.job_description.reporting_line.mapper.ReportingLineMapperService;
 import com.fractal.domain.organization_management.job_description.required_experience.mapper.RequiredExperienceMapperService;
 import com.fractal.domain.organization_management.job_description.responsibility.mapper.ResponsibilityMapperService;

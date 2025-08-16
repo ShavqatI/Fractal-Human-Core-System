@@ -3,8 +3,6 @@ package com.fractal.controller.organization_management.job_description;
 import com.fractal.domain.organization_management.job_description.accountability.AccountabilityService;
 import com.fractal.domain.organization_management.job_description.accountability.dto.AccountabilityRequest;
 import com.fractal.domain.organization_management.job_description.accountability.dto.AccountabilityResponse;
-import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationRequest;
-import com.fractal.domain.organization_management.job_description.qualification.dto.QualificationResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

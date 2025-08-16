@@ -1,8 +1,6 @@
 package com.fractal.controller.recruitment.candidate;
 
 
-import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
-import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.recruitment.candidate.CandidateService;
 import com.fractal.domain.recruitment.candidate.dto.CandidateCompactResponse;
 import com.fractal.domain.recruitment.candidate.dto.CandidateRequest;

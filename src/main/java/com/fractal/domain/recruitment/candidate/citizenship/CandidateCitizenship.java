@@ -1,10 +1,11 @@
 package com.fractal.domain.recruitment.candidate.citizenship;
 
 import com.fractal.domain.citizenship.Citizenship;
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.recruitment.candidate.Candidate;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity

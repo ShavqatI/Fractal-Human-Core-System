@@ -3,11 +3,13 @@ package com.fractal.domain.identification_document;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.identification_document.type.IdentificationDocumentType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;

@@ -2,7 +2,6 @@ package com.fractal.domain.recruitment.candidate.education;
 
 
 import com.fractal.domain.education.Education;
-import com.fractal.domain.location.address.Address;
 import com.fractal.domain.recruitment.candidate.Candidate;
 import jakarta.persistence.*;
 import lombok.Data;

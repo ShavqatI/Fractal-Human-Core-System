@@ -2,9 +2,6 @@ package com.fractal.domain.organization_management.job_description.reporting_lin
 
 import com.fractal.domain.organization_management.job_description.reporting_line.dto.ReportingLineRequest;
 import com.fractal.domain.organization_management.job_description.reporting_line.dto.ReportingLineResponse;
-import com.fractal.domain.organization_management.job_description.responsibility.Responsibility;
-import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityRequest;
-import com.fractal.domain.organization_management.job_description.responsibility.dto.ResponsibilityResponse;
 
 import java.util.List;
 

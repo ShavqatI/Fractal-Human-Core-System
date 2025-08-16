@@ -6,7 +6,6 @@ import com.fractal.domain.location.country.dto.CountryCompactResponse;
 import com.fractal.domain.location.district.dto.DistrictCompactResponse;
 import com.fractal.domain.location.region.dto.RegionCompactResponse;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record CandidateAddressResponse(

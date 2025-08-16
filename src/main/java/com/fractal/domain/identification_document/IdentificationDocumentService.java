@@ -1,9 +1,6 @@
 package com.fractal.domain.identification_document;
 
-import com.fractal.domain.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
-
-import java.util.List;
 
 public interface IdentificationDocumentService {
 

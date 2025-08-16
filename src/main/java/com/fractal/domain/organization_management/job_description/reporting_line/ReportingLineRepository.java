@@ -1,6 +1,5 @@
 package com.fractal.domain.organization_management.job_description.reporting_line;
 
-import com.fractal.domain.organization_management.job_description.responsibility.Responsibility;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

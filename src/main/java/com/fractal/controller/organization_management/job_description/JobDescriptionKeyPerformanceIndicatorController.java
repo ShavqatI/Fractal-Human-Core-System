@@ -1,7 +1,5 @@
 package com.fractal.controller.organization_management.job_description;
 
-import com.fractal.domain.organization_management.job_description.accountability.dto.AccountabilityRequest;
-import com.fractal.domain.organization_management.job_description.accountability.dto.AccountabilityResponse;
 import com.fractal.domain.organization_management.job_description.kpi.KeyPerformanceIndicatorService;
 import com.fractal.domain.organization_management.job_description.kpi.dto.KeyPerformanceIndicatorRequest;
 import com.fractal.domain.organization_management.job_description.kpi.dto.KeyPerformanceIndicatorResponse;

@@ -1,9 +1,6 @@
 package com.fractal.domain.education;
 
-import com.fractal.domain.education.dto.EducationRequest;
 import com.fractal.domain.education.dto.EducationResponse;
-
-import java.util.List;
 
 
 public interface EducationService {

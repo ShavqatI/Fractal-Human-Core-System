@@ -4,7 +4,6 @@ import com.fractal.domain.dictionary.gender.GenderService;
 import com.fractal.domain.dictionary.marital_status.MaritalStatusService;
 import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.employee.resource.mapper.EmployeeResourceMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmploymentHistoryMapperService;
 import com.fractal.domain.employee_management.military_service.mapper.MilitaryServiceMapperService;
 import com.fractal.domain.recruitment.candidate.Candidate;

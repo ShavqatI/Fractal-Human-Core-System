@@ -2,6 +2,7 @@ package com.fractal.domain.recruitment.candidate.education;
 
 import com.fractal.domain.education.dto.EducationRequest;
 import com.fractal.domain.education.dto.EducationResponse;
+
 import java.util.List;
 
 public interface CandidateEducationService {

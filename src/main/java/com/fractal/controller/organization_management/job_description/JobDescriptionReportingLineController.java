@@ -1,7 +1,5 @@
 package com.fractal.controller.organization_management.job_description;
 
-import com.fractal.domain.organization_management.job_description.authority.dto.AuthorityRequest;
-import com.fractal.domain.organization_management.job_description.authority.dto.AuthorityResponse;
 import com.fractal.domain.organization_management.job_description.reporting_line.ReportingLineService;
 import com.fractal.domain.organization_management.job_description.reporting_line.dto.ReportingLineRequest;
 import com.fractal.domain.organization_management.job_description.reporting_line.dto.ReportingLineResponse;

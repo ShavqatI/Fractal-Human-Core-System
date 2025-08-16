@@ -3,7 +3,6 @@ package com.fractal.controller.recruitment.candidate;
 
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.contact.dto.ContactResponse;
-import com.fractal.domain.employee_management.contact.EmployeeContactService;
 import com.fractal.domain.recruitment.candidate.contact.CandidateContactService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
