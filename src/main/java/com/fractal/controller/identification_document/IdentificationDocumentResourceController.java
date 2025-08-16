@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management.employee.identification_document;
+package com.fractal.controller.identification_document;
 
 
 import com.fractal.domain.identification_document.resource.IdentificationDocumentResourceService;
@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/employee/identification-document/{identificationDocumentId}/resource")
+@RequestMapping("/api/v1/identification-document/{identificationDocumentId}/resource")
 @RequiredArgsConstructor
-public class EmployeeIdentificationDocumentResourceController {
+public class IdentificationDocumentResourceController {
 
     private final IdentificationDocumentResourceService resourceService;
 

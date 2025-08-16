@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management.employee.identification_document;
+package com.fractal.controller.identification_document;
 
 
 import com.fractal.domain.identification_document.type.IdentificationDocumentTypeService;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/identification-document/type")
+@RequestMapping("/api/v1/identification-document/type")
 @RequiredArgsConstructor
 public class IdentificationDocumentTypeController {
 

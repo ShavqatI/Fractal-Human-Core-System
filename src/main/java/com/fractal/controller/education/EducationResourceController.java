@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management.employee.education;
+package com.fractal.controller.education;
 
 
 import com.fractal.domain.education.resource.EducationResourceService;
@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/employee/education/{educationId}/resource")
+@RequestMapping("/api/v1/education/{educationId}/resource")
 @RequiredArgsConstructor
-public class EmployeeEducationResourceController {
+public class EducationResourceController {
 
     private final EducationResourceService resourceService;
 
