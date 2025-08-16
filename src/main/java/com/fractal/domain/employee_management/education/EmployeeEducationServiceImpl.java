@@ -1,12 +1,11 @@
 package com.fractal.domain.employee_management.education;
 
-import com.fractal.domain.employee_management.education.dto.EducationRequest;
-import com.fractal.domain.employee_management.education.dto.EducationResponse;
+import com.fractal.domain.education.dto.EducationRequest;
+import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.employee_management.education.mapper.EmployeeEducationMapperService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -72,17 +71,6 @@ class EmployeeEducationServiceImpl implements EmployeeEducationService {
     public EducationResponse toDTO(EmployeeEducation employeeEducation) {
         return mapperService.toDTO(employeeEducation);
     }
-
-    @Override
-    public EmployeeEducation save(EmployeeEducation employeeEducation) {
-        try {
-            return employeeEducationRepository.save(employeeEducation);
-        }
-        catch (DataAccessException e) {
-            throw new RuntimeException(e.getMostSpecificCause().getMessage());
-        }
-    }
-
 
     private EmployeeEducation findById(Long id) {
         return employeeEducationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Education History with id: " + id + " not found"));

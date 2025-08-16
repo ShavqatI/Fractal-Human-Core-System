@@ -11,7 +11,7 @@ import lombok.experimental.SuperBuilder;
 
 
 @Entity
-@Table(name = "candidate_address", schema = "recruitment_schema", catalog = "fractal")
+@Table(name = "candidate_education", schema = "recruitment_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @NoArgsConstructor

@@ -1,9 +1,9 @@
 package com.fractal.domain.recruitment.candidate.citizenship.mapper;
 
-import com.fractal.domain.location.country.CountryService;
+import com.fractal.domain.citizenship.dto.CitizenshipRequest;
+import com.fractal.domain.citizenship.dto.CitizenshipResponse;
+import com.fractal.domain.citizenship.mapper.CitizenshipMapperService;
 import com.fractal.domain.recruitment.candidate.citizenship.CandidateCitizenship;
-import com.fractal.domain.recruitment.candidate.citizenship.dto.CandidateCitizenshipRequest;
-import com.fractal.domain.recruitment.candidate.citizenship.dto.CandidateCitizenshipResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,25 +11,20 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class CandidateCitizenshipMapperServiceImpl implements CandidateCitizenshipMapperService {
 
-    private final CountryService countryService;
-
+    private final CitizenshipMapperService citizenshipMapperService;
     @Override
-    public CandidateCitizenshipResponse toDTO(CandidateCitizenship candidateCitizenship) {
-        return new CandidateCitizenshipResponse(candidateCitizenship.getCountry().getName());
-    }
-
-    @Override
-    public CandidateCitizenship toEntity(CandidateCitizenshipRequest dto) {
-        return mapToEntity(new CandidateCitizenship(),dto);
+    public CitizenshipResponse toDTO(CandidateCitizenship citizenship) {
+        return citizenshipMapperService.toDTO(citizenship);
     }
 
     @Override
-    public CandidateCitizenship toEntity(CandidateCitizenship candidateCitizenship, CandidateCitizenshipRequest dto) {
-        return mapToEntity(candidateCitizenship,dto);
+    public CandidateCitizenship toEntity(CitizenshipRequest dto) {
+        return (CandidateCitizenship) citizenshipMapperService.toEntity(dto);
     }
 
-    private CandidateCitizenship mapToEntity(CandidateCitizenship candidateCitizenship, CandidateCitizenshipRequest dto) {
-        candidateCitizenship.setCountry(countryService.getById(dto.countryId()));
-        return candidateCitizenship;
+    @Override
+    public CandidateCitizenship toEntity(CandidateCitizenship citizenship, CitizenshipRequest dto) {
+        return (CandidateCitizenship) citizenshipMapperService.toEntity(citizenship,dto);
     }
+
 }

@@ -1,13 +1,13 @@
 package com.fractal.domain.recruitment.candidate.citizenship.mapper;
 
+import com.fractal.domain.citizenship.dto.CitizenshipRequest;
+import com.fractal.domain.citizenship.dto.CitizenshipResponse;
 import com.fractal.domain.recruitment.candidate.citizenship.CandidateCitizenship;
-import com.fractal.domain.recruitment.candidate.citizenship.dto.CandidateCitizenshipRequest;
-import com.fractal.domain.recruitment.candidate.citizenship.dto.CandidateCitizenshipResponse;
 
 public interface CandidateCitizenshipMapperService {
-    CandidateCitizenshipResponse toDTO(CandidateCitizenship candidateCitizenship);
-    CandidateCitizenship toEntity(CandidateCitizenshipRequest dto);
-    CandidateCitizenship toEntity(CandidateCitizenship candidateCitizenship, CandidateCitizenshipRequest dto);
+    CitizenshipResponse toDTO(CandidateCitizenship citizenship);
+    CandidateCitizenship toEntity(CitizenshipRequest dto);
+    CandidateCitizenship toEntity(CandidateCitizenship citizenship, CitizenshipRequest dto);
 }
 
 

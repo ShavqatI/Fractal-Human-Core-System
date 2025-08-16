@@ -1,7 +1,7 @@
 package com.fractal.controller.employee_management.employee.identification_document;
 
 
-import com.fractal.domain.employee_management.identification_document.resource.IdentificationDocumentResourceService;
+import com.fractal.domain.identification_document.resource.IdentificationDocumentResourceService;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

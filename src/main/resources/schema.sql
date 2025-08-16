@@ -13,4 +13,6 @@ CREATE SCHEMA IF NOT EXISTS resource_schema;
 CREATE SCHEMA IF NOT EXISTS authorization_schema;
 CREATE SCHEMA IF NOT EXISTS testing_schema;
 CREATE SCHEMA IF NOT EXISTS education_schema;
+CREATE SCHEMA IF NOT EXISTS identification_schema;
+CREATE SCHEMA IF NOT EXISTS citizenship_schema;
 

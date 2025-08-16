@@ -1,9 +1,9 @@
 package com.fractal.controller.employee_management.employee.identification_document;
 
 
-import com.fractal.domain.employee_management.identification_document.type.IdentificationDocumentTypeService;
-import com.fractal.domain.employee_management.identification_document.type.dto.IdentificationDocumentTypeRequest;
-import com.fractal.domain.employee_management.identification_document.type.dto.IdentificationDocumentTypeResponse;
+import com.fractal.domain.identification_document.type.IdentificationDocumentTypeService;
+import com.fractal.domain.identification_document.type.dto.IdentificationDocumentTypeRequest;
+import com.fractal.domain.identification_document.type.dto.IdentificationDocumentTypeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

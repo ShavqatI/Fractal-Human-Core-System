@@ -8,12 +8,11 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "candidate_citizenship", schema = "employee_schema", catalog = "fractal")
+@Table(name = "candidate_citizenship", schema = "recruitment_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Inheritance()
 public class CandidateCitizenship extends Citizenship {
 
     @ManyToOne(fetch = FetchType.LAZY)

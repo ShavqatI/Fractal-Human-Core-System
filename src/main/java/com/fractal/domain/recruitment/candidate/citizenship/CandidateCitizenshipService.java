@@ -1,17 +1,17 @@
 package com.fractal.domain.recruitment.candidate.citizenship;
 
-import com.fractal.domain.recruitment.candidate.citizenship.dto.CandidateCitizenshipRequest;
-import com.fractal.domain.recruitment.candidate.citizenship.dto.CandidateCitizenshipResponse;
+import com.fractal.domain.citizenship.dto.CitizenshipRequest;
+import com.fractal.domain.citizenship.dto.CitizenshipResponse;
 
 import java.util.List;
 
 public interface CandidateCitizenshipService {
 
-    CandidateCitizenship create(Long candidateId, CandidateCitizenshipRequest dto);
+    CandidateCitizenship create(Long candidateId, CitizenshipRequest dto);
     List<CandidateCitizenship> getAllByCandidateId(Long candidateId);
     CandidateCitizenship getById(Long candidateId , Long id);
-    CandidateCitizenship update(Long candidateId, Long id, CandidateCitizenshipRequest dto);
+    CandidateCitizenship update(Long candidateId, Long id, CitizenshipRequest dto);
     void delete(Long candidateId,Long id);
-    CandidateCitizenshipResponse toDTO(CandidateCitizenship candidateCitizenship);
+    CitizenshipResponse toDTO(CandidateCitizenship candidateCitizenship);
 
 }

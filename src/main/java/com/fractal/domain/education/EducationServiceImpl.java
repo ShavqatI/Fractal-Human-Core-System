@@ -1,16 +1,11 @@
 package com.fractal.domain.education;
 
-import com.fractal.domain.education.dto.EducationRequest;
 import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.education.mapper.EducationMapperService;
-import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +13,7 @@ class EducationServiceImpl implements EducationService {
 
     private final EducationRepository educationRepository;
     private final EducationMapperService mapperService;
-    private final EmployeeService employeeService;
+
 /*
     @Override
     @Transactional

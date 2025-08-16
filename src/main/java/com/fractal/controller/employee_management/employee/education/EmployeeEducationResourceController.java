@@ -1,7 +1,7 @@
 package com.fractal.controller.employee_management.employee.education;
 
 
-import com.fractal.domain.employee_management.education.resource.EducationResourceService;
+import com.fractal.domain.education.resource.EducationResourceService;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

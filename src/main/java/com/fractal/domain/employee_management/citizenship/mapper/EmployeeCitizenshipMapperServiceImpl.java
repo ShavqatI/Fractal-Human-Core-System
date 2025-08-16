@@ -1,9 +1,9 @@
 package com.fractal.domain.employee_management.citizenship.mapper;
 
+import com.fractal.domain.citizenship.dto.CitizenshipRequest;
+import com.fractal.domain.citizenship.dto.CitizenshipResponse;
+import com.fractal.domain.citizenship.mapper.CitizenshipMapperService;
 import com.fractal.domain.employee_management.citizenship.EmployeeCitizenship;
-import com.fractal.domain.employee_management.citizenship.dto.EmployeeCitizenshipRequest;
-import com.fractal.domain.employee_management.citizenship.dto.EmployeeCitizenshipResponse;
-import com.fractal.domain.location.country.CountryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,25 +11,20 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class EmployeeCitizenshipMapperServiceImpl implements EmployeeCitizenshipMapperService {
 
-    private final CountryService countryService;
 
+    private final CitizenshipMapperService citizenshipMapperService;
     @Override
-    public EmployeeCitizenshipResponse toDTO(EmployeeCitizenship employeeCitizenship) {
-        return new EmployeeCitizenshipResponse(employeeCitizenship.getCountry().getName());
+    public CitizenshipResponse toDTO(EmployeeCitizenship citizenship) {
+        return citizenshipMapperService.toDTO(citizenship);
     }
 
     @Override
-    public EmployeeCitizenship toEntity(EmployeeCitizenshipRequest dto) {
-        return mapToEntity(new EmployeeCitizenship(),dto);
+    public EmployeeCitizenship toEntity(CitizenshipRequest dto) {
+        return (EmployeeCitizenship) citizenshipMapperService.toEntity(dto);
     }
 
     @Override
-    public EmployeeCitizenship toEntity(EmployeeCitizenship employeeCitizenship, EmployeeCitizenshipRequest dto) {
-        return mapToEntity(employeeCitizenship,dto);
-    }
-
-    private EmployeeCitizenship mapToEntity(EmployeeCitizenship employeeCitizenship, EmployeeCitizenshipRequest dto) {
-        employeeCitizenship.setCountry(countryService.getById(dto.countryId()));
-        return employeeCitizenship;
+    public EmployeeCitizenship toEntity(EmployeeCitizenship citizenship, CitizenshipRequest dto) {
+        return (EmployeeCitizenship) citizenshipMapperService.toEntity(citizenship,dto);
     }
 }

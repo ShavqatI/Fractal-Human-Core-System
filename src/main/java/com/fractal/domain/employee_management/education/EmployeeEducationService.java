@@ -1,7 +1,7 @@
 package com.fractal.domain.employee_management.education;
 
-import com.fractal.domain.employee_management.education.dto.EducationRequest;
-import com.fractal.domain.employee_management.education.dto.EducationResponse;
+import com.fractal.domain.education.dto.EducationRequest;
+import com.fractal.domain.education.dto.EducationResponse;
 
 import java.util.List;
 
@@ -14,5 +14,4 @@ public interface EmployeeEducationService {
     EmployeeEducation update(Long id, Long educationId, EducationRequest dto);
     void delete(Long employeeId, Long id);
     EducationResponse toDTO(EmployeeEducation employeeEducation);
-    EmployeeEducation save(EmployeeEducation employeeEducation);
 }

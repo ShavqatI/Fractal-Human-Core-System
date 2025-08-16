@@ -1,9 +1,9 @@
 package com.fractal.controller.employee_management.employee.education;
 
 
+import com.fractal.domain.education.dto.EducationRequest;
+import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.employee_management.education.EmployeeEducationService;
-import com.fractal.domain.employee_management.education.dto.EducationRequest;
-import com.fractal.domain.employee_management.education.dto.EducationResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

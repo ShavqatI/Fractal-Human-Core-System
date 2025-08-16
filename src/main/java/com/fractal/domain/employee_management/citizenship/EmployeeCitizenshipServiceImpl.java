@@ -1,7 +1,8 @@
 package com.fractal.domain.employee_management.citizenship;
 
-import com.fractal.domain.employee_management.citizenship.dto.EmployeeCitizenshipRequest;
-import com.fractal.domain.employee_management.citizenship.dto.EmployeeCitizenshipResponse;
+
+import com.fractal.domain.citizenship.dto.CitizenshipRequest;
+import com.fractal.domain.citizenship.dto.CitizenshipResponse;
 import com.fractal.domain.employee_management.citizenship.mapper.EmployeeCitizenshipMapperService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.exception.ResourceNotFoundException;
@@ -22,7 +23,7 @@ class EmployeeCitizenshipServiceImpl implements EmployeeCitizenshipService {
 
     @Override
     @Transactional
-    public EmployeeCitizenship create(Long employeeId, EmployeeCitizenshipRequest dto) {
+    public EmployeeCitizenship create(Long employeeId, CitizenshipRequest dto) {
         var employee = employeeService.getById(employeeId);
         var citizenship = mapperService.toEntity(dto);
         employee.addCitizenship(citizenship);
@@ -42,7 +43,7 @@ class EmployeeCitizenshipServiceImpl implements EmployeeCitizenshipService {
 
     @Override
     @Transactional
-    public EmployeeCitizenship update(Long employeeId, Long id, EmployeeCitizenshipRequest dto) {
+    public EmployeeCitizenship update(Long employeeId, Long id, CitizenshipRequest dto) {
         var employee = employeeService.getById(employeeId);
         var citizenship = employee.getCitizenships()
                 .stream()
@@ -64,7 +65,7 @@ class EmployeeCitizenshipServiceImpl implements EmployeeCitizenshipService {
     }
 
     @Override
-    public EmployeeCitizenshipResponse toDTO(EmployeeCitizenship employeeCitizenship) {
+    public CitizenshipResponse toDTO(EmployeeCitizenship employeeCitizenship) {
         return mapperService.toDTO(employeeCitizenship);
     }
 

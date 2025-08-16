@@ -6,9 +6,7 @@ import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.resource.mapper.EmployeeResourceMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmploymentHistoryMapperService;
-import com.fractal.domain.employee_management.identification_document.mapper.IdentificationDocumentMapperService;
 import com.fractal.domain.employee_management.military_service.mapper.MilitaryServiceMapperService;
-import com.fractal.domain.employee_management.relative.mapper.RelativeMapperService;
 import com.fractal.domain.recruitment.candidate.Candidate;
 import com.fractal.domain.recruitment.candidate.address.mapper.CandidateAddressMapperService;
 import com.fractal.domain.recruitment.candidate.citizenship.mapper.CandidateCitizenshipMapperService;
@@ -17,6 +15,7 @@ import com.fractal.domain.recruitment.candidate.dto.CandidateCompactResponse;
 import com.fractal.domain.recruitment.candidate.dto.CandidateRequest;
 import com.fractal.domain.recruitment.candidate.dto.CandidateResponse;
 import com.fractal.domain.recruitment.candidate.education.mapper.CandidateEducationMapperService;
+import com.fractal.domain.recruitment.candidate.identification_document.mapper.CandidateIdentificationDocumentMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,14 +32,14 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     private final MaritalStatusService maritalStatusService;
     private final NationalityService nationalityService;
     private final StatusService statusService;
-    private final IdentificationDocumentMapperService identificationDocumentMapperService;
+    private final CandidateIdentificationDocumentMapperService identificationDocumentMapperService;
     private final CandidateCitizenshipMapperService citizenshipMapperService;
     private final CandidateAddressMapperService addressMapperService;
     private final CandidateContactMapperService contactMapperService;
     private final CandidateEducationMapperService educationMapperService;
     private final MilitaryServiceMapperService militaryServiceMapperService;
     private final EmploymentHistoryMapperService employmentHistoryMapperService;
-    private final EmployeeResourceMapperService employeeResourceMapperService;
+
     @Override
     public CandidateResponse toDTO(Candidate candidate) {
         return new CandidateResponse(
@@ -54,11 +53,11 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
                 candidate.getGender().getName(),
                 candidate.getMaritalStatus().getName(),
                 candidate.getNationality().getName(),
-                /*Optional.ofNullable(candidate.getIdentificationDocuments())
+                Optional.ofNullable(candidate.getIdentificationDocuments())
                         .orElse(emptyList())
                         .stream()
                         .map(identificationDocumentMapperService::toDTO)
-                        .collect(Collectors.toList()),*/
+                        .collect(Collectors.toList()),
                 Optional.ofNullable(candidate.getCitizenships())
                         .orElse(emptyList())
                         .stream()
@@ -137,7 +136,7 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
         candidate.setMaritalStatus(maritalStatusService.getById(dto.maritalStatusId()));
         candidate.setNationality(nationalityService.getById(dto.nationalityId()));
 
-        //dto.identificationDocuments().forEach(identificationDocument->employee.addIdentificationDocument(identificationDocumentMapperService.toEntity(identificationDocument)));
+        dto.identificationDocuments().forEach(identificationDocument->candidate.addIdentificationDocument(identificationDocumentMapperService.toEntity(identificationDocument)));
         dto.citizenships().forEach(citizenship-> candidate.addCitizenship(citizenshipMapperService.toEntity(citizenship)));
         dto.addresses().forEach(address->candidate.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact->candidate.addContact(contactMapperService.toEntity(contact)));

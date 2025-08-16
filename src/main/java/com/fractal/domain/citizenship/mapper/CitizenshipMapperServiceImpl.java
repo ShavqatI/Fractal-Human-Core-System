@@ -14,7 +14,11 @@ class CitizenshipMapperServiceImpl implements CitizenshipMapperService {
 
     @Override
     public CitizenshipResponse toDTO(Citizenship citizenship) {
-        return new CitizenshipResponse(citizenship.getCountry().getName());
+        return new CitizenshipResponse(
+                citizenship.getId(),
+                countryService.toCompactDTO(citizenship.getCountry()),
+                citizenship.getCreatedDate()
+        );
     }
 
     @Override

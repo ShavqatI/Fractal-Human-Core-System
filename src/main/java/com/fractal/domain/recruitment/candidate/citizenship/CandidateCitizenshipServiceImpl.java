@@ -1,8 +1,8 @@
 package com.fractal.domain.recruitment.candidate.citizenship;
 
+import com.fractal.domain.citizenship.dto.CitizenshipRequest;
+import com.fractal.domain.citizenship.dto.CitizenshipResponse;
 import com.fractal.domain.recruitment.candidate.CandidateService;
-import com.fractal.domain.recruitment.candidate.citizenship.dto.CandidateCitizenshipRequest;
-import com.fractal.domain.recruitment.candidate.citizenship.dto.CandidateCitizenshipResponse;
 import com.fractal.domain.recruitment.candidate.citizenship.mapper.CandidateCitizenshipMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ class CandidateCitizenshipServiceImpl implements CandidateCitizenshipService {
 
     @Override
     @Transactional
-    public CandidateCitizenship create(Long candidateId, CandidateCitizenshipRequest dto) {
+    public CandidateCitizenship create(Long candidateId, CitizenshipRequest dto) {
         var candidate = candidateService.getById(candidateId);
         var citizenship = mapperService.toEntity(dto);
         candidate.addCitizenship(citizenship);
@@ -43,7 +43,7 @@ class CandidateCitizenshipServiceImpl implements CandidateCitizenshipService {
 
     @Override
     @Transactional
-    public CandidateCitizenship update(Long candidateId, Long id, CandidateCitizenshipRequest dto) {
+    public CandidateCitizenship update(Long candidateId, Long id, CitizenshipRequest dto) {
         var candidate = candidateService.getById(candidateId);
         var citizenship = candidate.getCitizenships()
                 .stream()
@@ -65,7 +65,7 @@ class CandidateCitizenshipServiceImpl implements CandidateCitizenshipService {
     }
 
     @Override
-    public CandidateCitizenshipResponse toDTO(CandidateCitizenship citizenship) {
+    public CitizenshipResponse toDTO(CandidateCitizenship citizenship) {
         return mapperService.toDTO(citizenship);
     }
 }

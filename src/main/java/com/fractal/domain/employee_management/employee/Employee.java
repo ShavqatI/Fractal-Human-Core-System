@@ -9,7 +9,7 @@ import com.fractal.domain.employee_management.contact.EmployeeContact;
 import com.fractal.domain.employee_management.education.EmployeeEducation;
 import com.fractal.domain.employee_management.employee.resource.EmployeeResource;
 import com.fractal.domain.employee_management.employment.EmploymentHistory;
-import com.fractal.domain.employee_management.identification_document.IdentificationDocument;
+import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
 import com.fractal.domain.employee_management.military_service.MilitaryService;
 import com.fractal.domain.employee_management.performance.Performance;
 import com.fractal.domain.employee_management.relative.Relative;
@@ -38,7 +38,7 @@ public class Employee extends Person {
     private Status status;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private  List<IdentificationDocument> identificationDocuments = new ArrayList<>();
+    private  List<EmployeeIdentificationDocument> identificationDocuments = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmployeeCitizenship> citizenships = new ArrayList<>();
@@ -79,13 +79,13 @@ public class Employee extends Person {
 
 
     @Transactional
-    public void addIdentificationDocument(IdentificationDocument identificationDocument) {
+    public void addIdentificationDocument(EmployeeIdentificationDocument identificationDocument) {
         if (identificationDocuments == null) identificationDocuments = new ArrayList<>();
         identificationDocument.setEmployee(this);
         identificationDocuments.add(identificationDocument);
     }
     @Transactional
-    public void removeIdentificationDocument(IdentificationDocument identificationDocument) {
+    public void removeIdentificationDocument(EmployeeIdentificationDocument identificationDocument) {
         if (identificationDocuments != null && !identificationDocuments.isEmpty())
             identificationDocuments.remove(identificationDocument);
     }
