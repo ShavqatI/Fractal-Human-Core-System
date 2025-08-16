@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface CandidateCitizenshipService {
 
-    CandidateCitizenship create(Long employeeId, CandidateCitizenshipRequest dto);
-    List<CandidateCitizenship> getAllByEmployeeId(Long employeeId);
-    CandidateCitizenship getById(Long employeeId , Long id);
-    CandidateCitizenship update(Long employeeId, Long id, CandidateCitizenshipRequest dto);
-    void delete(Long employeeId,Long id);
+    CandidateCitizenship create(Long candidateId, CandidateCitizenshipRequest dto);
+    List<CandidateCitizenship> getAllByCandidateId(Long candidateId);
+    CandidateCitizenship getById(Long candidateId , Long id);
+    CandidateCitizenship update(Long candidateId, Long id, CandidateCitizenshipRequest dto);
+    void delete(Long candidateId,Long id);
     CandidateCitizenshipResponse toDTO(CandidateCitizenship candidateCitizenship);
 
 }

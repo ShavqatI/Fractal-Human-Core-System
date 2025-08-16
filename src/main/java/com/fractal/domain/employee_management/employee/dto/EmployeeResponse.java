@@ -28,7 +28,6 @@ public record EmployeeResponse(
         List<IdentificationDocumentResponse> identificationDocuments,
         List<EmployeeCitizenshipResponse> citizenships,
         List<EmployeeAddressResponse> addresses,
-
         List<ContactResponse> contacts,
         List<EducationResponse> educations,
         List<RelativeResponse> relatives,

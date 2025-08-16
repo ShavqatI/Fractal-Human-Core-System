@@ -61,7 +61,6 @@ public class EmployeeContactServiceImpl implements EmployeeContactService {
                 .stream()
                 .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
         employee.removeContact(contact);
-        contactRepository.delete(contact);
         employeeService.save(employee);
     }
 

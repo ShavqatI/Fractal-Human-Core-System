@@ -54,13 +54,13 @@ public class Organization extends AbstractEntity {
     private Organization parent;
 
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Organization> children = new ArrayList<>();
 
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OrganizationAddress> addresses = new ArrayList<>();
 
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<OrganizationContact> contacts = new ArrayList<>();
 
     @Transactional

@@ -7,7 +7,7 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.address.mapper.EmployeeAddressMapperService;
 import com.fractal.domain.employee_management.citizenship.mapper.EmployeeCitizenshipMapperService;
 import com.fractal.domain.employee_management.contact.mapper.EmployeeContactMapperService;
-import com.fractal.domain.employee_management.education.mapper.EducationMapperService;
+import com.fractal.domain.employee_management.education.mapper.EmployeeEducationMapperService;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
@@ -36,7 +36,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
     private final EmployeeCitizenshipMapperService employeeCitizenshipMapperService;
     private final EmployeeAddressMapperService addressMapperService;
     private final EmployeeContactMapperService contactMapperService;
-    private final EducationMapperService educationMapperService;
+    private final EmployeeEducationMapperService employeeEducationMapperService;
     private final RelativeMapperService relativeMapperService;
     private final MilitaryServiceMapperService militaryServiceMapperService;
     private final EmploymentHistoryMapperService employmentHistoryMapperService;
@@ -78,7 +78,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                 Optional.ofNullable(employee.getEducations())
                         .orElse(emptyList())
                         .stream()
-                        .map(educationMapperService::toDTO)
+                        .map(employeeEducationMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(employee.getRelatives())
                         .orElse(emptyList())
@@ -132,7 +132,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
         dto.citizenships().forEach(citizenship-> employee.addCitizenship(employeeCitizenshipMapperService.toEntity(citizenship)));
         dto.addresses().forEach(address->employee.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact->employee.addContact(contactMapperService.toEntity(contact)));
-        dto.educations().forEach(education->employee.addEducation(educationMapperService.toEntity(education)));
+        dto.educations().forEach(education->employee.addEducation(employeeEducationMapperService.toEntity(education)));
         dto.relatives().forEach(relative->employee.addRelative(relativeMapperService.toEntity(relative)));
         dto.militaryServices().forEach(militaryService->employee.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
         dto.employmentHistories().forEach(employmentHistory->employee.addEmploymentHistory(employmentHistoryMapperService.toEntity(employmentHistory)));

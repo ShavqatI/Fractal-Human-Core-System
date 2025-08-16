@@ -6,7 +6,7 @@ import com.fractal.domain.employee_management.address.EmployeeAddress;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.citizenship.EmployeeCitizenship;
 import com.fractal.domain.employee_management.contact.EmployeeContact;
-import com.fractal.domain.employee_management.education.Education;
+import com.fractal.domain.employee_management.education.EmployeeEducation;
 import com.fractal.domain.employee_management.employee.resource.EmployeeResource;
 import com.fractal.domain.employee_management.employment.EmploymentHistory;
 import com.fractal.domain.employee_management.identification_document.IdentificationDocument;
@@ -20,6 +20,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,127 +37,145 @@ public class Employee extends Person {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<IdentificationDocument> identificationDocuments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmployeeCitizenship> citizenships = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmployeeAddress> addresses   = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmployeeContact> contacts   = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
-    private  List<Education> educations   = new ArrayList<>();
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private  List<EmployeeEducation> educations = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<Relative> relatives  = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<MilitaryService> militaryServices  = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmploymentHistory> employmentHistories  = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
     private List<EmployeeResource> resources = new ArrayList<>();
 
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<Performance> performances  = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<BusinessTrip> businessTrips  = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<Vacation> vacations  = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<Subordinate> subordinates   = new ArrayList<>();
 
 
+    @Transactional
     public void addIdentificationDocument(IdentificationDocument identificationDocument) {
         if (identificationDocuments == null) identificationDocuments = new ArrayList<>();
         identificationDocument.setEmployee(this);
         identificationDocuments.add(identificationDocument);
     }
+    @Transactional
     public void removeIdentificationDocument(IdentificationDocument identificationDocument) {
         if (identificationDocuments != null && !identificationDocuments.isEmpty())
             identificationDocuments.remove(identificationDocument);
     }
+    @Transactional
     public void addCitizenship(EmployeeCitizenship employeeCitizenship) {
         if (citizenships == null) citizenships = new ArrayList<>();
         employeeCitizenship.setEmployee(this);
         citizenships.add(employeeCitizenship);
     }
+    @Transactional
     public void removeCitizenship(EmployeeCitizenship employeeCitizenship) {
         if (citizenships != null && !citizenships.isEmpty())
             citizenships.remove(employeeCitizenship);
     }
-
+    @Transactional
     public void addAddress(EmployeeAddress address) {
         if (addresses == null) addresses = new ArrayList<>();
         address.setEmployee(this);
         addresses.add(address);
     }
+    @Transactional
     public void removeAddress(EmployeeAddress address) {
         if (addresses != null && !addresses.isEmpty())
             addresses.remove(address);
     }
+    @Transactional
     public void addContact(EmployeeContact contact) {
         if (contacts == null) contacts = new ArrayList<>();
         contact.setEmployee(this);
         contacts.add(contact);
     }
+    @Transactional
     public void removeContact(EmployeeContact contact) {
         if (contacts != null && !contacts.isEmpty())
             contacts.remove(contact);
     }
-
-    public void addEducation(Education education) {
+    @Transactional
+    public void addEducation(EmployeeEducation education) {
         if (educations == null) educations = new ArrayList<>();
         education.setEmployee(this);
         educations.add(education);
     }
-    public void removeEducation(Education education) {
+    @Transactional
+    public void removeEducation(EmployeeEducation education) {
         if (educations != null && !educations.isEmpty())
             educations.remove(education);
     }
 
+    @Transactional
     public void addRelative(Relative relative) {
         if (relatives == null) relatives = new ArrayList<>();
         relative.setEmployee(this);
         relatives.add(relative);
     }
+
+    @Transactional
     public void removeRelative(Relative relative) {
         if (relatives != null && !relatives.isEmpty())
             relatives.remove(relative);
     }
+
+    @Transactional
     public void addMilitaryService(MilitaryService militaryService) {
         if (militaryServices == null) militaryServices = new ArrayList<>();
         militaryService.setEmployee(this);
         militaryServices.add(militaryService);
     }
+    @Transactional
     public void removeMilitaryService(MilitaryService militaryService) {
         if (militaryServices != null && !militaryServices.isEmpty())
             militaryServices.remove(militaryService);
     }
+    @Transactional
     public void addEmploymentHistory(EmploymentHistory employmentHistory) {
         if (employmentHistories == null) employmentHistories = new ArrayList<>();
         employmentHistory.setEmployee(this);
         employmentHistories.add(employmentHistory);
     }
+    @Transactional
     public void removeEmploymentHistory(EmploymentHistory employmentHistory) {
         if (employmentHistories != null && !employmentHistories.isEmpty())
             employmentHistories.remove(employmentHistory);
     }
+    @Transactional
     public void addResource(EmployeeResource resource) {
         if (resources == null) resources = new ArrayList<>();
         resource.setEmployee(this);
         resources.add(resource);
     }
+    @Transactional
     public void removeResource(EmployeeResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);

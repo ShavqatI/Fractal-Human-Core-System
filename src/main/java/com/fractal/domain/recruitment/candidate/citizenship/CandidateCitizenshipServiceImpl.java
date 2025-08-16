@@ -1,6 +1,6 @@
 package com.fractal.domain.recruitment.candidate.citizenship;
 
-import com.fractal.domain.employee_management.employee.EmployeeService;
+import com.fractal.domain.recruitment.candidate.CandidateService;
 import com.fractal.domain.recruitment.candidate.citizenship.dto.CandidateCitizenshipRequest;
 import com.fractal.domain.recruitment.candidate.citizenship.dto.CandidateCitizenshipResponse;
 import com.fractal.domain.recruitment.candidate.citizenship.mapper.CandidateCitizenshipMapperService;
@@ -16,33 +16,56 @@ import java.util.List;
 class CandidateCitizenshipServiceImpl implements CandidateCitizenshipService {
 
 
+    private final CandidateCitizenshipRepository citizenshipRepository;
+    private final CandidateService candidateService;
+    private final CandidateCitizenshipMapperService mapperService;
+
+
     @Override
-    public CandidateCitizenship create(Long employeeId, CandidateCitizenshipRequest dto) {
-        return null;
+    @Transactional
+    public CandidateCitizenship create(Long candidateId, CandidateCitizenshipRequest dto) {
+        var candidate = candidateService.getById(candidateId);
+        var citizenship = mapperService.toEntity(dto);
+        candidate.addCitizenship(citizenship);
+        candidateService.save(candidate);
+        return citizenship;
     }
 
     @Override
-    public List<CandidateCitizenship> getAllByEmployeeId(Long employeeId) {
-        return null;
+    public List<CandidateCitizenship> getAllByCandidateId(Long candidateId) {
+        return citizenshipRepository.findAllByCandidateId(candidateId);
     }
 
     @Override
     public CandidateCitizenship getById(Long employeeId, Long id) {
-        return null;
+        return citizenshipRepository.findByCandidateIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
     }
 
     @Override
-    public CandidateCitizenship update(Long employeeId, Long id, CandidateCitizenshipRequest dto) {
-        return null;
+    @Transactional
+    public CandidateCitizenship update(Long candidateId, Long id, CandidateCitizenshipRequest dto) {
+        var candidate = candidateService.getById(candidateId);
+        var citizenship = candidate.getCitizenships()
+                .stream()
+                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
+        citizenship = citizenshipRepository.save(mapperService.toEntity(citizenship,dto));
+        candidateService.save(candidate);
+        return citizenship;
     }
 
     @Override
-    public void delete(Long employeeId, Long id) {
-
+    @Transactional
+    public void delete(Long candidateId, Long id) {
+        var candidate = candidateService.getById(candidateId);
+        var citizenship = candidate.getCitizenships()
+                .stream()
+                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
+        candidate.removeCitizenship(citizenship);
+        candidateService.save(candidate);
     }
 
     @Override
-    public CandidateCitizenshipResponse toDTO(CandidateCitizenship candidateCitizenship) {
-        return null;
+    public CandidateCitizenshipResponse toDTO(CandidateCitizenship citizenship) {
+        return mapperService.toDTO(citizenship);
     }
 }

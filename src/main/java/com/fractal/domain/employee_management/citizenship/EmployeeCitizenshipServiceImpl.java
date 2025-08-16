@@ -60,7 +60,6 @@ class EmployeeCitizenshipServiceImpl implements EmployeeCitizenshipService {
                 .stream()
                 .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
         employee.removeCitizenship(citizenship);
-        employeeCitizenshipRepository.delete(citizenship);
         employeeService.save(employee);
     }
 
