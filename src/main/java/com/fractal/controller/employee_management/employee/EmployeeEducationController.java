@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management.employee.education;
+package com.fractal.controller.employee_management.employee;
 
 
 import com.fractal.domain.education.dto.EducationRequest;

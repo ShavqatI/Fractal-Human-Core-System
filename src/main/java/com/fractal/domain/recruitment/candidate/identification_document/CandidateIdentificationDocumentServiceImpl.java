@@ -31,7 +31,7 @@ public class CandidateIdentificationDocumentServiceImpl implements CandidateIden
     }
 
     @Override
-    public List<CandidateIdentificationDocument> getAllByEmployeeId(Long employeeId) {
+    public List<CandidateIdentificationDocument> getAllByCandidateId(Long employeeId) {
         return candidateIdentificationDocumentRepository.findAllByCandidateId(employeeId);
     }
 
