@@ -1,10 +1,9 @@
 package com.fractal.controller.employee_management.employee.employment;
 
 
-import com.fractal.domain.employee_management.employment.work_experience.EmployeeWorkExperienceService;
+import com.fractal.domain.employee_management.work_experience.EmployeeWorkExperienceService;
 import com.fractal.domain.employment.work_experience.dto.WorkExperienceRequest;
 import com.fractal.domain.employment.work_experience.dto.WorkExperienceResponse;
-import com.fractal.domain.recruitment.candidate.work_experience.CandidateWorkExperienceService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
