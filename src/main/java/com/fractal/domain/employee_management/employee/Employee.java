@@ -15,6 +15,7 @@ import com.fractal.domain.employee_management.performance.Performance;
 import com.fractal.domain.employee_management.relative.Relative;
 import com.fractal.domain.employee_management.subordinate.Subordinate;
 import com.fractal.domain.employee_management.vacation.Vacation;
+import com.fractal.domain.employee_management.work_experience.EmployeeWorkExperience;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -76,6 +77,9 @@ public class Employee extends Person {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<Subordinate> subordinates   = new ArrayList<>();
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private  List<EmployeeWorkExperience> workExperiences = new ArrayList<>();
 
 
     @Transactional
@@ -168,6 +172,18 @@ public class Employee extends Person {
     public void removeEmploymentHistory(EmploymentHistory employmentHistory) {
         if (employmentHistories != null && !employmentHistories.isEmpty())
             employmentHistories.remove(employmentHistory);
+    }
+
+    @Transactional
+    public void addWorkExperience(EmployeeWorkExperience workExperience) {
+        if (workExperiences == null) workExperiences = new ArrayList<>();
+        workExperience.setEmployee(this);
+        workExperiences.add(workExperience);
+    }
+    @Transactional
+    public void removeWorkExperience(EmployeeWorkExperience workExperience) {
+        if (workExperiences != null && !workExperiences.isEmpty())
+            workExperiences.remove(workExperience);
     }
     @Transactional
     public void addResource(EmployeeResource resource) {
