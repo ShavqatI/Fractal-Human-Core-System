@@ -3,6 +3,7 @@ package com.fractal.domain.organization_management.organization;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.organization_management.organization.address.OrganizationAddress;
 import com.fractal.domain.organization_management.organization.contact.OrganizationContact;
+import com.fractal.domain.organization_management.organization.work_schedule.OrganizationWorkSchedule;
 import com.fractal.domain.organization_management.unit.OrganizationUnit;
 import jakarta.persistence.*;
 import lombok.*;
@@ -63,6 +64,9 @@ public class Organization extends AbstractEntity {
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<OrganizationContact> contacts = new ArrayList<>();
 
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<OrganizationWorkSchedule> workSchedules = new ArrayList<>();
+
     @Transactional
     public void addAddress(OrganizationAddress address) {
         if (addresses == null) addresses = new ArrayList<>();
@@ -97,6 +101,17 @@ public class Organization extends AbstractEntity {
     public void removeChild(Organization organization) {
         if (children != null && !children.isEmpty())
             children.remove(organization);
+    }
+    @Transactional
+    public void addWorkSchedule(OrganizationWorkSchedule workSchedule) {
+        if (workSchedules == null) workSchedules = new ArrayList<>();
+        workSchedule.setOrganization(this);
+        workSchedules.add(workSchedule);
+    }
+    @Transactional
+    public void removeWorkSchedule(OrganizationWorkSchedule workSchedule) {
+        if (workSchedules != null && !workSchedules.isEmpty())
+            workSchedules.remove(workSchedule);
     }
 
 }

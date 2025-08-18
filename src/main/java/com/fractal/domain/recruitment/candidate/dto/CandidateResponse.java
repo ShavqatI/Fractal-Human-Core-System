@@ -4,7 +4,6 @@ import com.fractal.domain.citizenship.dto.CitizenshipResponse;
 import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.education.dto.EducationResponse;
-import com.fractal.domain.employment.work_experience.WorkExperience;
 import com.fractal.domain.employment.work_experience.dto.WorkExperienceResponse;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
 import com.fractal.domain.recruitment.candidate.address.dto.CandidateAddressResponse;

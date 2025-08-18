@@ -5181,7 +5181,7 @@ COPY localization_schema.layout_label (id, created_date, updated_date, name, cre
 23	2025-07-27 13:45:05.203625	\N	action_type	\N	\N
 24	2025-07-27 14:08:48.550731	\N	role_menu	\N	\N
 25	2025-07-27 14:09:15.191485	\N	menu_action	\N	\N
-26	2025-07-28 12:05:01.312414	\N	nationality	\N	\N
+26	2025-07-28 12:05:01.312414	\N	weekDay	\N	\N
 27	2025-07-28 12:18:54.431101	\N	status_category	\N	\N
 28	2025-07-28 13:46:30.603149	\N	location	\N	\N
 29	2025-07-28 13:50:33.441043	\N	address_type	\N	\N
@@ -5491,7 +5491,7 @@ COPY navigation_schema.menu (id, created_date, updated_date, class_name, icon, l
 4	2025-07-24 12:53:31.800519	2025-07-28 11:25:19.472725	\N	SIGN_IN	1	Authorization	2	authorization	\N	\N	15	\N
 6	2025-07-24 12:53:31.818747	2025-07-28 11:25:45.00487	\N	USER_STAR	2	Role	1	role	\N	\N	14	4
 7	2025-07-24 12:56:04.770544	2025-07-28 11:28:02.928663	\N	COMPASS	1	Navigation	3	navigation	\N	\N	10	\N
-33	2025-07-28 12:07:18.003651	\N	\N	FLAG	2	Nationality	3	nationality	\N	\N	26	1
+33	2025-07-28 12:07:18.003651	\N	\N	FLAG	2	Nationality	3	weekDay	\N	\N	26	1
 34	2025-07-28 12:21:30.649273	\N	\N	TAGS	2	Status Category	4	status-category	\N	\N	27	1
 47	2025-08-01 10:41:34.943319	\N	\N		2	Job Description	6	job-description	\N	\N	40	42
 48	2025-08-03 16:59:45.021762	\N	\N	CONTACT	2	Contact Type	6	contact-type	\N	\N	43	1

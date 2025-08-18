@@ -1,10 +1,10 @@
 package com.fractal.domain.employment.work_experience.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employment.type.EmploymentTypeService;
 import com.fractal.domain.employment.work_experience.WorkExperience;
 import com.fractal.domain.employment.work_experience.dto.WorkExperienceRequest;
 import com.fractal.domain.employment.work_experience.dto.WorkExperienceResponse;
-import com.fractal.domain.employment.type.EmploymentTypeService;
 import com.fractal.domain.location.country.CountryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

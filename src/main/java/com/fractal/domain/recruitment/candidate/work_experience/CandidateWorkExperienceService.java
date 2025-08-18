@@ -1,7 +1,5 @@
 package com.fractal.domain.recruitment.candidate.work_experience;
 
-import com.fractal.domain.education.dto.EducationRequest;
-import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.employment.work_experience.dto.WorkExperienceRequest;
 import com.fractal.domain.employment.work_experience.dto.WorkExperienceResponse;
 
