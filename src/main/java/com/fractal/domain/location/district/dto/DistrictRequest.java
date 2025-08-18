@@ -13,5 +13,8 @@ public record DistrictRequest(
         String name,
         Long cityId,
         @NotNull
-        Long regionId
+        Long regionId,
+        @NotNull
+        Long areaTypeId
+
 ) { }

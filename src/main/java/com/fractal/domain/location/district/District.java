@@ -2,6 +2,7 @@ package com.fractal.domain.location.district;
 
 import com.fractal.domain.abstraction.Location;
 import com.fractal.domain.location.city.City;
+import com.fractal.domain.location.gender.AreaType;
 import com.fractal.domain.location.region.Region;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -24,4 +25,8 @@ public class District extends Location {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="region_id", referencedColumnName = "id")
     private Region region;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name ="area_type_id", referencedColumnName = "id")
+    private AreaType areaType;
 }

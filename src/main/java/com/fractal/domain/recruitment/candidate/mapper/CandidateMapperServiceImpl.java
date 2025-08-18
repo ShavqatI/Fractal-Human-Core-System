@@ -13,6 +13,7 @@ import com.fractal.domain.recruitment.candidate.dto.CandidateRequest;
 import com.fractal.domain.recruitment.candidate.dto.CandidateResponse;
 import com.fractal.domain.recruitment.candidate.education.mapper.CandidateEducationMapperService;
 import com.fractal.domain.recruitment.candidate.identification_document.mapper.CandidateIdentificationDocumentMapperService;
+import com.fractal.domain.recruitment.candidate.resource.mapper.CandidateResourceMapperService;
 import com.fractal.domain.recruitment.candidate.work_experience.mapper.CandidateWorkExperienceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,8 +37,9 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     private final CandidateContactMapperService contactMapperService;
     private final CandidateEducationMapperService educationMapperService;
     private final CandidateWorkExperienceMapperService workExperienceMapperService;
+    private final CandidateResourceMapperService resourceMapperService;
    // private final MilitaryServiceMapperService militaryServiceMapperService;
-    //private final EmploymentHistoryMapperService employmentHistoryMapperService;
+
 
     @Override
     public CandidateResponse toDTO(Candidate candidate) {
@@ -49,9 +51,9 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
                 candidate.getBirthDate(),
                 candidate.getTin(),
                 candidate.getSsn(),
-                candidate.getGender().getName(),
-                candidate.getMaritalStatus().getName(),
-                candidate.getNationality().getName(),
+                genderService.toDTO(candidate.getGender()),
+                maritalStatusService.toDTO(candidate.getMaritalStatus()),
+                nationalityService.toDTO(candidate.getNationality()),
                 Optional.ofNullable(candidate.getIdentificationDocuments())
                         .orElse(emptyList())
                         .stream()
@@ -92,11 +94,11 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
                         .stream()
                         .map(employmentHistoryMapperService::toDTO)
                         .collect(Collectors.toList()),*/
-                /*Optional.ofNullable(candidate.getResources())
+                Optional.ofNullable(candidate.getResources())
                         .orElse(emptyList())
                         .stream()
-                        .map(employeeResourceMapperService::toDTO)
-                        .collect(Collectors.toList()),*/
+                        .map(resourceMapperService::toDTO)
+                        .collect(Collectors.toList()),
                 statusService.toCompactDTO(candidate.getStatus()),
                 candidate.getCreatedDate()
 
@@ -139,6 +141,7 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
         candidate.setGender(genderService.getById(dto.genderId()));
         candidate.setMaritalStatus(maritalStatusService.getById(dto.maritalStatusId()));
         candidate.setNationality(nationalityService.getById(dto.nationalityId()));
+        candidate.setStatus(statusService.getById(dto.statusId()));
 
         dto.identificationDocuments().forEach(identificationDocument->candidate.addIdentificationDocument(identificationDocumentMapperService.toEntity(identificationDocument)));
         dto.citizenships().forEach(citizenship-> candidate.addCitizenship(citizenshipMapperService.toEntity(citizenship)));

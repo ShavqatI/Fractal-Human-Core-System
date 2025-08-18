@@ -4,6 +4,7 @@ import com.fractal.domain.location.city.CityService;
 import com.fractal.domain.location.district.dto.DistrictCompactResponse;
 import com.fractal.domain.location.district.dto.DistrictRequest;
 import com.fractal.domain.location.district.dto.DistrictResponse;
+import com.fractal.domain.location.gender.AreaTypeService;
 import com.fractal.domain.location.region.RegionService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ class DistrictServiceImpl implements DistrictService {
     private final DistrictRepository districtRepository;
     private final RegionService regionService;
     private final CityService cityService;
+    private final AreaTypeService areaTypeService;
 
     @Override
     public District create(DistrictRequest dto) {
@@ -58,6 +60,7 @@ class DistrictServiceImpl implements DistrictService {
             district.setName(dto.name());
             district.setCity(dto.cityId() != null ? cityService.getById(dto.cityId()) : null);
             district.setRegion(regionService.getById(dto.regionId()));
+            district.setAreaType(areaTypeService.getById(dto.areaTypeId()));
             return save(district);
         }
         catch (DataAccessException e){
@@ -80,6 +83,7 @@ class DistrictServiceImpl implements DistrictService {
                         .map(cityService::toDTO)
                         .orElse(null),
                 regionService.toDTO(district.getRegion()),
+                areaTypeService.toDTO(district.getAreaType()),
                 district.getCreatedDate()
         );
     }

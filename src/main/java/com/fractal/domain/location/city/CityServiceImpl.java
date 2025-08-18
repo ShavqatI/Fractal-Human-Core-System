@@ -3,6 +3,7 @@ package com.fractal.domain.location.city;
 import com.fractal.domain.location.city.dto.CityCompactResponse;
 import com.fractal.domain.location.city.dto.CityRequest;
 import com.fractal.domain.location.city.dto.CityResponse;
+import com.fractal.domain.location.gender.AreaTypeService;
 import com.fractal.domain.location.region.RegionService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
     private final RegionService regionService;
+    private final AreaTypeService areaTypeService;
 
     @Override
     public City create(CityRequest dto) {
@@ -50,6 +52,7 @@ class CityServiceImpl implements CityService {
             city.setCode(dto.code());
             city.setName(dto.name());
             city.setRegion(regionService.getById(dto.regionId()));
+            city.setAreaType(areaTypeService.getById(dto.areaTypeId()));
             return save(city);
         }
         catch (DataAccessException e){
@@ -69,6 +72,7 @@ class CityServiceImpl implements CityService {
                 city.getCode(),
                 city.getName(),
                 regionService.toDTO(city.getRegion()),
+                areaTypeService.toDTO(city.getAreaType()),
                 city.getCreatedDate()
         );
     }

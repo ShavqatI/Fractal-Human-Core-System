@@ -3,11 +3,13 @@ package com.fractal.domain.recruitment.candidate;
 
 import com.fractal.domain.abstraction.Person;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.education.resource.EducationResource;
 import com.fractal.domain.recruitment.candidate.address.CandidateAddress;
 import com.fractal.domain.recruitment.candidate.citizenship.CandidateCitizenship;
 import com.fractal.domain.recruitment.candidate.contact.CandidateContact;
 import com.fractal.domain.recruitment.candidate.education.CandidateEducation;
 import com.fractal.domain.recruitment.candidate.identification_document.CandidateIdentificationDocument;
+import com.fractal.domain.recruitment.candidate.resource.CandidateResource;
 import com.fractal.domain.recruitment.candidate.work_experience.CandidateWorkExperience;
 import com.fractal.domain.recruitment.vacncy.Vacancy;
 import jakarta.persistence.*;
@@ -53,6 +55,9 @@ public class Candidate extends Person {
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<CandidateWorkExperience> workExperiences = new ArrayList<>();
+
+    @OneToMany(mappedBy = "candidate",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<CandidateResource> resources = new ArrayList<>();
 
     @Transactional
     public void addIdentificationDocument(CandidateIdentificationDocument identificationDocument) {
@@ -124,6 +129,16 @@ public class Candidate extends Person {
     public void removeWorkExperience(CandidateWorkExperience workExperience) {
         if (workExperiences != null && !workExperiences.isEmpty())
             workExperiences.remove(workExperience);
+    }
+
+    public void addResource(CandidateResource resource) {
+        if (resources == null) resources = new ArrayList<>();
+        resource.setCandidate(this);
+        resources.add(resource);
+    }
+    public void removeResource(CandidateResource resource) {
+        if (resources != null && !resources.isEmpty())
+            resources.remove(resource);
     }
 
 }

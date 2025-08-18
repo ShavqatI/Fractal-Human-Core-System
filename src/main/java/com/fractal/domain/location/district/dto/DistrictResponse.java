@@ -1,6 +1,7 @@
 package com.fractal.domain.location.district.dto;
 
 import com.fractal.domain.location.city.dto.CityResponse;
+import com.fractal.domain.location.gender.dto.AreaTypeResponse;
 import com.fractal.domain.location.region.dto.RegionResponse;
 
 import java.time.LocalDateTime;
@@ -11,5 +12,6 @@ public record DistrictResponse(
         String name,
         CityResponse city,
         RegionResponse region,
+        AreaTypeResponse areaType,
         LocalDateTime createdDate
 ) { }

@@ -27,6 +27,8 @@ public record CandidateRequest(
         List<ContactRequest> contacts,
         List<EducationRequest> educations,
         List<WorkExperienceRequest> workExperiences,
+
+        Long statusId,
         ///List<MilitaryServiceRequest> militaryServices,
         List<MultipartFile> files
 

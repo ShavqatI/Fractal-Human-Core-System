@@ -54,7 +54,7 @@ public class EducationResourceServiceImpl implements EducationResourceService {
         var education = educationService.getById(educationId);
         var resource = education.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(educationId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
         education.removeResource(resource);
         educationService.save(education);
     }
