@@ -10,7 +10,7 @@ import com.fractal.domain.employee_management.education.EmployeeEducation;
 import com.fractal.domain.employee_management.employee.resource.EmployeeResource;
 import com.fractal.domain.employee_management.employment.EmploymentHistory;
 import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
-import com.fractal.domain.employee_management.military_service.MilitaryService;
+import com.fractal.domain.employee_management.military_service.EmployeeMilitaryService;
 import com.fractal.domain.employee_management.performance.Performance;
 import com.fractal.domain.employee_management.relative.Relative;
 import com.fractal.domain.employee_management.subordinate.Subordinate;
@@ -57,7 +57,7 @@ public class Employee extends Person {
     private  List<Relative> relatives  = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private  List<MilitaryService> militaryServices  = new ArrayList<>();
+    private  List<EmployeeMilitaryService> militaryServices = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmploymentHistory> employmentHistories  = new ArrayList<>();
@@ -152,13 +152,13 @@ public class Employee extends Person {
     }
 
     @Transactional
-    public void addMilitaryService(MilitaryService militaryService) {
+    public void addMilitaryService(EmployeeMilitaryService militaryService) {
         if (militaryServices == null) militaryServices = new ArrayList<>();
         militaryService.setEmployee(this);
         militaryServices.add(militaryService);
     }
     @Transactional
-    public void removeMilitaryService(MilitaryService militaryService) {
+    public void removeMilitaryService(EmployeeMilitaryService militaryService) {
         if (militaryServices != null && !militaryServices.isEmpty())
             militaryServices.remove(militaryService);
     }

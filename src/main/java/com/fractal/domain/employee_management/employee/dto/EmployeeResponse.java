@@ -5,9 +5,9 @@ import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryResponse;
-import com.fractal.domain.employee_management.military_service.dto.MilitaryServiceResponse;
 import com.fractal.domain.employee_management.relative.dto.RelativeResponse;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
+import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
 import com.fractal.domain.resource.dto.ResourceResponse;
 
 import java.time.LocalDate;

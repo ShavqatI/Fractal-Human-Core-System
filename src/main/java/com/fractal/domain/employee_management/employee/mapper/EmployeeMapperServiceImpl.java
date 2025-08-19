@@ -14,7 +14,7 @@ import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employee.resource.mapper.EmployeeResourceMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmploymentHistoryMapperService;
 import com.fractal.domain.employee_management.identification_document.mapper.EmployeeIdentificationDocumentMapperService;
-import com.fractal.domain.employee_management.military_service.mapper.MilitaryServiceMapperService;
+import com.fractal.domain.employee_management.military_service.mapper.EmployeeMilitaryServiceMapperService;
 import com.fractal.domain.employee_management.relative.mapper.RelativeMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
     private final EmployeeContactMapperService contactMapperService;
     private final EmployeeEducationMapperService employeeEducationMapperService;
     private final RelativeMapperService relativeMapperService;
-    private final MilitaryServiceMapperService militaryServiceMapperService;
+    private final EmployeeMilitaryServiceMapperService militaryServiceMapperService;
     private final EmploymentHistoryMapperService employmentHistoryMapperService;
     private final EmployeeResourceMapperService employeeResourceMapperService;
 

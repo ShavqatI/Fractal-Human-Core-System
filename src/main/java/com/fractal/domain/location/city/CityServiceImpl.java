@@ -3,7 +3,7 @@ package com.fractal.domain.location.city;
 import com.fractal.domain.location.city.dto.CityCompactResponse;
 import com.fractal.domain.location.city.dto.CityRequest;
 import com.fractal.domain.location.city.dto.CityResponse;
-import com.fractal.domain.location.gender.AreaTypeService;
+import com.fractal.domain.location.area_type.AreaTypeService;
 import com.fractal.domain.location.region.RegionService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;

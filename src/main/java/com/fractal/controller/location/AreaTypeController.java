@@ -1,9 +1,9 @@
 package com.fractal.controller.location;
 
 
-import com.fractal.domain.location.gender.AreaTypeService;
-import com.fractal.domain.location.gender.dto.AreaTypeRequest;
-import com.fractal.domain.location.gender.dto.AreaTypeResponse;
+import com.fractal.domain.location.area_type.AreaTypeService;
+import com.fractal.domain.location.area_type.dto.AreaTypeRequest;
+import com.fractal.domain.location.area_type.dto.AreaTypeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

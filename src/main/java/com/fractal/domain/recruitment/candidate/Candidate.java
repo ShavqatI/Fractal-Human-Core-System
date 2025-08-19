@@ -4,11 +4,13 @@ package com.fractal.domain.recruitment.candidate;
 import com.fractal.domain.abstraction.Person;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.education.resource.EducationResource;
+import com.fractal.domain.employee_management.military_service.EmployeeMilitaryService;
 import com.fractal.domain.recruitment.candidate.address.CandidateAddress;
 import com.fractal.domain.recruitment.candidate.citizenship.CandidateCitizenship;
 import com.fractal.domain.recruitment.candidate.contact.CandidateContact;
 import com.fractal.domain.recruitment.candidate.education.CandidateEducation;
 import com.fractal.domain.recruitment.candidate.identification_document.CandidateIdentificationDocument;
+import com.fractal.domain.recruitment.candidate.military_service.CandidateMilitaryService;
 import com.fractal.domain.recruitment.candidate.resource.CandidateResource;
 import com.fractal.domain.recruitment.candidate.work_experience.CandidateWorkExperience;
 import com.fractal.domain.recruitment.vacncy.Vacancy;
@@ -58,6 +60,9 @@ public class Candidate extends Person {
 
     @OneToMany(mappedBy = "candidate",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<CandidateResource> resources = new ArrayList<>();
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private  List<CandidateMilitaryService> militaryServices = new ArrayList<>();
 
     @Transactional
     public void addIdentificationDocument(CandidateIdentificationDocument identificationDocument) {
@@ -139,6 +144,18 @@ public class Candidate extends Person {
     public void removeResource(CandidateResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);
+    }
+
+    @Transactional
+    public void addMilitaryService(CandidateMilitaryService militaryService) {
+        if (militaryServices == null) militaryServices = new ArrayList<>();
+        militaryService.setCandidate(this);
+        militaryServices.add(militaryService);
+    }
+    @Transactional
+    public void removeMilitaryService(CandidateMilitaryService militaryService) {
+        if (militaryServices != null && !militaryServices.isEmpty())
+            militaryServices.remove(militaryService);
     }
 
 }
