@@ -10,7 +10,6 @@ public record CityResponse(
         String code,
         String name,
         RegionResponse region,
-
         AreaTypeResponse areaType,
         LocalDateTime createdDate
 ) { }
