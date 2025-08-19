@@ -37,8 +37,8 @@ class CandidateCitizenshipServiceImpl implements CandidateCitizenshipService {
     }
 
     @Override
-    public CandidateCitizenship getById(Long employeeId, Long id) {
-        return citizenshipRepository.findByCandidateIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
+    public CandidateCitizenship getById(Long candidateId, Long id) {
+        return citizenshipRepository.findByCandidateIdAndId(candidateId,id).orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
     }
 
     @Override
