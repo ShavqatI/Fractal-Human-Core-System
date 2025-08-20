@@ -9,13 +9,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 
 @Entity
-@Table(name = "employee_military_service", schema = "employee_schema", catalog = "fractal")
+@Table(name = "candidate_military_service", schema = "recruitment_schema", catalog = "fractal")
 @Data
-@Builder
-@AllArgsConstructor
+@SuperBuilder
 @NoArgsConstructor
 public class CandidateMilitaryService extends MilitaryService {
 

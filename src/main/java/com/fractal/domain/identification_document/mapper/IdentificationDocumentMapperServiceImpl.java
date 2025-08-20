@@ -28,7 +28,7 @@ class IdentificationDocumentMapperServiceImpl implements IdentificationDocumentM
     public IdentificationDocumentResponse toDTO(IdentificationDocument identificationDocument) {
         return new IdentificationDocumentResponse(
                 identificationDocument.getId(),
-                identificationDocument.getIdentificationDocumentType().getName(),
+                identificationDocumentTypeService.toDTO(identificationDocument.getIdentificationDocumentType()),
                 identificationDocument.getSeries(),
                 identificationDocument.getNumber(),
                 identificationDocument.getIssueDate(),
@@ -36,7 +36,7 @@ class IdentificationDocumentMapperServiceImpl implements IdentificationDocumentM
                 identificationDocument.getTermInYears(),
                 identificationDocument.getIssueOrganization(),
                 identificationDocument.getIssueOrganizationAddress(),
-                identificationDocument.getStatus().getName(),
+                statusService.toCompactDTO(identificationDocument.getStatus()),
                 Optional.ofNullable(identificationDocument.getResources())
                         .orElse(emptyList())
                         .stream()

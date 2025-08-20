@@ -91,6 +91,7 @@ class CityServiceImpl implements CityService {
                 .code(dto.code())
                 .name(dto.name())
                 .region(regionService.getById(dto.regionId()))
+                .areaType(areaTypeService.getById(dto.areaTypeId()))
                 .build();
     }
 

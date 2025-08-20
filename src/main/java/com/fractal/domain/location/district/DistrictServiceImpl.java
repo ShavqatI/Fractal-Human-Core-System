@@ -103,6 +103,7 @@ class DistrictServiceImpl implements DistrictService {
                 .name(dto.name())
                 .city(dto.cityId() != null ? cityService.getById(dto.cityId()) : null)
                 .region(regionService.getById(dto.regionId()))
+                .areaType(areaTypeService.getById(dto.areaTypeId()))
                 .build();
     }
 
