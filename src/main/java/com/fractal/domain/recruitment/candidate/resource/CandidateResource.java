@@ -1,8 +1,8 @@
 package com.fractal.domain.recruitment.candidate.resource;
 
 
-import com.fractal.domain.education.Education;
 import com.fractal.domain.recruitment.candidate.Candidate;
+import com.fractal.domain.recruitment.candidate.resource.type.CandidateResourceType;
 import com.fractal.domain.resource.Resource;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -19,5 +19,9 @@ public class CandidateResource extends Resource {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "candidate_id", referencedColumnName = "id")
     private Candidate candidate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "candidate_resource_type_id", referencedColumnName = "id")
+    private CandidateResourceType candidateResourceType;
 
 }

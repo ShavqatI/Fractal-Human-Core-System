@@ -36,20 +36,20 @@ class EducationMapperServiceImpl implements EducationMapperService {
     public EducationResponse toDTO(Education education) {
         return new EducationResponse(
                 education.getId(),
-                education.getEducationType().getName(),
-                education.getEducationDocumentType().getName(),
+                educationTypeService.toDTO(education.getEducationType()),
+                educationDocumentTypeService.toDTO(education.getEducationDocumentType()),
                 education.getBeginDate(),
                 education.getEndDate(),
                 education.getInstitutionName(),
                 education.getInstitutionAddress(),
                 education.getIsForeignInstitution(),
                 education.getSpecialization(),
-                education.getDegreeType().getName(),
-                education.getGradePointAverage().getValue(),
-                education.getAccreditationStatus().getName(),
+                degreeTypeService.toDTO(education.getDegreeType()),
+                gradePointAverageService.toDTO(education.getGradePointAverage()),
+                accreditationStatusService.toDTO(education.getAccreditationStatus()),
                 education.getDocumentVerified(),
                 education.getVerificationNotes(),
-                education.getStatus().getName(),
+                statusService.toCompactDTO(education.getStatus()),
                 Optional.ofNullable(education.getResources())
                         .orElse(emptyList())
                         .stream()

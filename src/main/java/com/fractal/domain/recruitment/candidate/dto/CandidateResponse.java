@@ -11,6 +11,7 @@ import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.employment.work_experience.dto.WorkExperienceResponse;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
 import com.fractal.domain.recruitment.candidate.address.dto.CandidateAddressResponse;
+import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceResponse;
 import com.fractal.domain.resource.dto.ResourceResponse;
 
 import java.time.LocalDate;
@@ -35,7 +36,7 @@ public record CandidateResponse(
         List<EducationResponse> educations,
         List<WorkExperienceResponse> workExperiences,
         //List<MilitaryServiceResponse> militaryServices,
-        List<ResourceResponse> resources,
+        List<CandidateResourceResponse> resources,
         StatusCompactResponse status,
         LocalDateTime createdDate
 )

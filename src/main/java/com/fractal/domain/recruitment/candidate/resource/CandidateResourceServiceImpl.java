@@ -1,6 +1,8 @@
 package com.fractal.domain.recruitment.candidate.resource;
 
 import com.fractal.domain.recruitment.candidate.CandidateService;
+import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceRequest;
+import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceResponse;
 import com.fractal.domain.recruitment.candidate.resource.mapper.CandidateResourceMapperService;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import com.fractal.exception.ResourceNotFoundException;
@@ -19,9 +21,9 @@ public class CandidateResourceServiceImpl implements CandidateResourceService {
     private final CandidateService candidateService;
 
     @Override
-    public CandidateResource create(Long candidateId, MultipartFile file) {
+    public CandidateResource create(Long candidateId, CandidateResourceRequest dto) {
         var candidate = candidateService.getById(candidateId);
-        var resource =  resourceMapperService.toEntity(file,null);
+        var resource =  resourceMapperService.toEntity(dto,null);
         candidate.addResource(resource);
         candidateService.save(candidate);
         return resource;
@@ -38,12 +40,12 @@ public class CandidateResourceServiceImpl implements CandidateResourceService {
     }
 
     @Override
-    public CandidateResource update(Long candidateId, Long id, MultipartFile file) {
+    public CandidateResource update(Long candidateId,Long id,CandidateResourceRequest dto) {
         var candidate = candidateService.getById(candidateId);
         var resource = candidate.getResources()
                 .stream()
                 .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate Resource  with id: " + id + " not found"));
-        resource = resourceMapperService.toEntity(resource,resourceMapperService.fileToRequest(file,null));
+        resource = resourceMapperService.toEntity(resource,dto,null);
         resourceRepository.save(resource);
         candidateService.save(candidate);
         return resource;
@@ -60,7 +62,7 @@ public class CandidateResourceServiceImpl implements CandidateResourceService {
     }
 
     @Override
-    public ResourceResponse toDTO(CandidateResource resource) {
+    public CandidateResourceResponse toDTO(CandidateResource resource) {
         return resourceMapperService.toDTO(resource);
     }
 }

@@ -5,5 +5,4 @@ public record ResourceRequest(
         String fileName,
         String contentType,
         Long sizeInBytes
-) {
-}
+) { }
