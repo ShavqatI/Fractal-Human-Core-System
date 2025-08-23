@@ -150,9 +150,8 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
         dto.contacts().forEach(contact->candidate.addContact(contactMapperService.toEntity(contact)));
         dto.educations().forEach(education->candidate.addEducation(educationMapperService.toEntity(education)));
         dto.workExperiences().forEach(workExperience->candidate.addWorkExperience(workExperienceMapperService.toEntity(workExperience)));
-        //dto.militaryServices().forEach(militaryService->employee.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
-        //dto.employmentHistories().forEach(employmentHistory->employee.addEmploymentHistory(employmentHistoryMapperService.toEntity(employmentHistory)));
-        //dto.files().forEach(file-> employee.addResource(employeeResourceMapperService.toEntity(file,null)));
+        dto.militaryServices().forEach(militaryService->candidate.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
+        dto.resources().forEach(file-> candidate.addResource(resourceMapperService.toEntity(file,null)));
         return candidate;
     }
 }
