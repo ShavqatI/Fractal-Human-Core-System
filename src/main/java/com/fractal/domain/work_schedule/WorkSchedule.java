@@ -2,6 +2,7 @@ package com.fractal.domain.work_schedule;
 
 
 import com.fractal.domain.abstraction.AbstractEmploymentHistory;
+import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.dictionary.week_day.WeekDay;
 import jakarta.persistence.*;
@@ -19,7 +20,7 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Inheritance(strategy = InheritanceType.JOINED)
-public class WorkSchedule extends AbstractEmploymentHistory {
+public class WorkSchedule extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "week_day_id", referencedColumnName = "id")

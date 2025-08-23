@@ -39,7 +39,7 @@ class OrganizationWorkScheduleMapperServiceImpl implements OrganizationWorkSched
     private OrganizationWorkSchedule convert(OrganizationWorkSchedule organizationWorkSchedule, WorkSchedule workSchedule) {
         organizationWorkSchedule.setWeekDay(workSchedule.getWeekDay());
         organizationWorkSchedule.setStartTime(workSchedule.getStartTime());
-        organizationWorkSchedule.setEndDate(workSchedule.getEndDate());
+        organizationWorkSchedule.setEndTime(workSchedule.getEndTime());
         organizationWorkSchedule.setStatus(workSchedule.getStatus());
         return organizationWorkSchedule;
     }
