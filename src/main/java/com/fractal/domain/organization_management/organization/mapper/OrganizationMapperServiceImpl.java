@@ -6,6 +6,8 @@ import com.fractal.domain.organization_management.organization.contact.mapper.Or
 import com.fractal.domain.organization_management.organization.dto.OrganizationCompactResponse;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
+import com.fractal.domain.organization_management.organization.work_schedule.OrganizationWorkSchedule;
+import com.fractal.domain.organization_management.organization.work_schedule.mapper.OrganizationWorkScheduleMapperService;
 import com.fractal.domain.organization_management.unit.OrganizationUnitService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,7 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
     private final OrganizationUnitService organizationUnitService;
     private final OrganizationAddressMapperService addressMapperService;
     private final OrganizationContactMapperService contactMapperService;
+    private final OrganizationWorkScheduleMapperService workScheduleMapperService;
     @Override
     public OrganizationResponse toDTO(Organization organization) {
         return new OrganizationResponse(
@@ -47,6 +50,11 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
                         .orElse(emptyList())
                         .stream()
                         .map(contactMapperService::toDTO)
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(organization.getWorkSchedules())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(workScheduleMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(organization.getChildren())
                         .orElse(emptyList())
@@ -89,6 +97,7 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
         organization.setOrganizationUnit(organizationUnitService.getById(dto.organizationUnitId()));
         dto.addresses().forEach(address -> organization.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact -> organization.addContact(contactMapperService.toEntity(contact)));
+        dto.workSchedules().forEach(workSchedule -> organization.addWorkSchedule(workScheduleMapperService.toEntity(workSchedule)));
         dto.children().forEach(child->organization.addChild(toEntity(child)));
         return organization;
     }
