@@ -30,6 +30,7 @@ class CandidateIdentificationDocumentMapperServiceImpl implements CandidateIdent
     }
 
     private CandidateIdentificationDocument convert(CandidateIdentificationDocument candidateIdentificationDocument, IdentificationDocument identificationDocument) {
+        System.out.println(identificationDocument);
         candidateIdentificationDocument.setIdentificationDocumentType(identificationDocument.getIdentificationDocumentType());
         candidateIdentificationDocument.setSeries(identificationDocument.getSeries());
         candidateIdentificationDocument.setNumber(identificationDocument.getNumber());

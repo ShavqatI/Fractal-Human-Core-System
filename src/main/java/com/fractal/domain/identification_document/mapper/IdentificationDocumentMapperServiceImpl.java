@@ -57,7 +57,7 @@ class IdentificationDocumentMapperServiceImpl implements IdentificationDocumentM
     }
 
     private IdentificationDocument mapToEntity(IdentificationDocument identificationDocument, IdentificationDocumentRequest dto) {
-        identificationDocument.setIdentificationDocumentType(identificationDocumentTypeService.getById(dto.identificationTypeId()));
+        identificationDocument.setIdentificationDocumentType(identificationDocumentTypeService.getById(dto.identificationDocumentTypeId()));
         identificationDocument.setSeries(dto.series());
         identificationDocument.setNumber(dto.number());
         identificationDocument.setIssueDate(dto.issueDate());

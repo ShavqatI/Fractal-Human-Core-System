@@ -8,6 +8,7 @@ import com.fractal.domain.employee_management.work_experience.EmployeeWorkExperi
 import com.fractal.domain.employment.work_experience.dto.WorkExperienceRequest;
 import com.fractal.domain.employment.work_experience.dto.WorkExperienceResponse;
 import com.fractal.domain.organization_management.organization.work_schedule.OrganizationWorkSchedule;
+import com.fractal.domain.work_schedule.WorkSchedule;
 import com.fractal.domain.work_schedule.dto.WorkScheduleRequest;
 import com.fractal.domain.work_schedule.dto.WorkScheduleResponse;
 import com.fractal.domain.work_schedule.mapper.WorkScheduleMapperService;
@@ -26,11 +27,20 @@ class OrganizationWorkScheduleMapperServiceImpl implements OrganizationWorkSched
 
     @Override
     public OrganizationWorkSchedule toEntity(WorkScheduleRequest dto) {
-        return (OrganizationWorkSchedule) mapperService.toEntity(dto);
+        return convert(new OrganizationWorkSchedule(),mapperService.toEntity(dto));
     }
 
     @Override
     public OrganizationWorkSchedule toEntity(OrganizationWorkSchedule workSchedule, WorkScheduleRequest dto) {
-        return (OrganizationWorkSchedule) mapperService.toEntity(workSchedule,dto);
+        return convert(workSchedule,mapperService.toEntity(workSchedule,dto));
+    }
+
+
+    private OrganizationWorkSchedule convert(OrganizationWorkSchedule organizationWorkSchedule, WorkSchedule workSchedule) {
+        organizationWorkSchedule.setWeekDay(workSchedule.getWeekDay());
+        organizationWorkSchedule.setStartTime(workSchedule.getStartTime());
+        organizationWorkSchedule.setEndDate(workSchedule.getEndDate());
+        organizationWorkSchedule.setStatus(workSchedule.getStatus());
+        return organizationWorkSchedule;
     }
 }

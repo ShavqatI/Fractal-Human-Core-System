@@ -31,8 +31,8 @@ public class CandidateIdentificationDocumentServiceImpl implements CandidateIden
     }
 
     @Override
-    public List<CandidateIdentificationDocument> getAllByCandidateId(Long employeeId) {
-        return candidateIdentificationDocumentRepository.findAllByCandidateId(employeeId);
+    public List<CandidateIdentificationDocument> getAllByCandidateId(Long candidateId) {
+        return candidateIdentificationDocumentRepository.findAllByCandidateId(candidateId);
     }
 
     @Override
@@ -51,8 +51,8 @@ public class CandidateIdentificationDocumentServiceImpl implements CandidateIden
 
     @Override
     @Transactional
-    public CandidateIdentificationDocument update(Long employeeId, Long id, IdentificationDocumentRequest dto) {
-        var candidate = candidateService.getById(employeeId);
+    public CandidateIdentificationDocument update(Long candidateId, Long id, IdentificationDocumentRequest dto) {
+        var candidate = candidateService.getById(candidateId);
         var identificationDocument = candidate.getIdentificationDocuments()
                 .stream()
                 .filter(i-> i.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification document with id: " + id + " not found"));

@@ -41,7 +41,7 @@ class WorkScheduleMapperServiceImpl implements WorkScheduleMapperService {
     private WorkSchedule mapToEntity(WorkSchedule workSchedule, WorkScheduleRequest dto) {
         workSchedule.setWeekDay(weekDayService.getById(dto.weekDayId()));
         workSchedule.setStartTime(dto.startTime());
-        workSchedule.setStartTime(dto.endTime());
+        workSchedule.setEndTime(dto.endTime());
         workSchedule.setStatus(statusService.getById(dto.statusId()));
         return workSchedule;
     }

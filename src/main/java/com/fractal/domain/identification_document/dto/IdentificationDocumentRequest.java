@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record IdentificationDocumentRequest(
-        Long identificationTypeId,
+        Long identificationDocumentTypeId,
         String series,
         Integer number,
         LocalDate issueDate,
