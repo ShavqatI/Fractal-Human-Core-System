@@ -1,8 +1,10 @@
 package com.fractal.domain.recruitment.candidate.contact.mapper;
 
+import com.fractal.domain.contact.Contact;
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.contact.mapper.ContactMapperService;
+import com.fractal.domain.organization_management.organization.contact.OrganizationContact;
 import com.fractal.domain.recruitment.candidate.contact.CandidateContact;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,11 +20,17 @@ class CandidateContactMapperServiceImpl implements CandidateContactMapperService
 
     @Override
     public CandidateContact toEntity(ContactRequest dto) {
-        return (CandidateContact) mapperService.toEntity(dto);
+        return mapToEntity(new CandidateContact(),mapperService.toEntity(dto));
     }
 
     @Override
     public CandidateContact toEntity(CandidateContact contact, ContactRequest dto) {
-        return (CandidateContact) mapperService.toEntity(contact,dto);
+        return mapToEntity(contact,mapperService.toEntity(contact,dto));
+    }
+
+    private CandidateContact mapToEntity(CandidateContact candidateContact, Contact contact) {
+        candidateContact.setContactType(contact.getContactType());
+        candidateContact.setValue(contact.getValue());
+        return candidateContact;
     }
 }

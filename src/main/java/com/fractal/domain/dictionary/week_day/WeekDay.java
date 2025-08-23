@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 @Entity
-@Table(name = "category", schema = "employee_schema", catalog = "fractal")
+@Table(name = "week_day", schema = "dictionary_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @NoArgsConstructor

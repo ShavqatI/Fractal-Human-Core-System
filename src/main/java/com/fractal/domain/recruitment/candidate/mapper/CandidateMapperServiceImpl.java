@@ -13,6 +13,7 @@ import com.fractal.domain.recruitment.candidate.dto.CandidateRequest;
 import com.fractal.domain.recruitment.candidate.dto.CandidateResponse;
 import com.fractal.domain.recruitment.candidate.education.mapper.CandidateEducationMapperService;
 import com.fractal.domain.recruitment.candidate.identification_document.mapper.CandidateIdentificationDocumentMapperService;
+import com.fractal.domain.recruitment.candidate.military_service.mapper.CandidateMilitaryServiceMapperService;
 import com.fractal.domain.recruitment.candidate.resource.mapper.CandidateResourceMapperService;
 import com.fractal.domain.recruitment.candidate.work_experience.mapper.CandidateWorkExperienceMapperService;
 import lombok.RequiredArgsConstructor;
@@ -38,7 +39,7 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     private final CandidateEducationMapperService educationMapperService;
     private final CandidateWorkExperienceMapperService workExperienceMapperService;
     private final CandidateResourceMapperService resourceMapperService;
-   // private final MilitaryServiceMapperService militaryServiceMapperService;
+    private final CandidateMilitaryServiceMapperService militaryServiceMapperService;
 
 
     @Override
@@ -84,11 +85,11 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
                         .stream()
                         .map(workExperienceMapperService::toDTO)
                         .collect(Collectors.toList()),
-                /*Optional.ofNullable(candidate.getMilitaryServices())
+                Optional.ofNullable(candidate.getMilitaryServices())
                         .orElse(emptyList())
                         .stream()
                         .map(militaryServiceMapperService::toDTO)
-                        .collect(Collectors.toList()),*/
+                        .collect(Collectors.toList()),
                 /*Optional.ofNullable(candidate.getEmploymentHistories())
                         .orElse(emptyList())
                         .stream()

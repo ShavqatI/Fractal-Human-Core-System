@@ -1,4 +1,4 @@
-package com.fractal.domain.dictionary.nationality;
+package com.fractal.domain.recruitment.interview.type;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;
@@ -7,11 +7,13 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+
 @Entity
-@Table(name = "nationality", schema = "dictionary_schema", catalog = "fractal")
+@Table(name = "interview_type", schema = "recruitment_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Nationality extends Dictionary {
+public class InterviewType extends Dictionary {
+
 }
