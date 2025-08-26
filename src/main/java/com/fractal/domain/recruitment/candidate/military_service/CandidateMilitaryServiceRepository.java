@@ -9,6 +9,6 @@ import java.util.Optional;
 @Repository
 interface CandidateMilitaryServiceRepository extends JpaRepository<CandidateMilitaryService,Long> {
 
-    List<CandidateMilitaryService> findAllByCandidateId(Long employeeId);
-    Optional<CandidateMilitaryService> findByCandidateIdAndId(Long employeeId, Long id);
+    List<CandidateMilitaryService> findAllByCandidateId(Long candidateId);
+    Optional<CandidateMilitaryService> findByCandidateIdAndId(Long candidateId, Long id);
 }

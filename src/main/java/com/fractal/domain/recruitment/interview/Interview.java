@@ -4,6 +4,7 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.recruitment.candidate.Candidate;
+import com.fractal.domain.recruitment.interview.interviewee.Interviewee;
 import com.fractal.domain.recruitment.interview.interviewer.Interviewer;
 import com.fractal.domain.recruitment.interview.type.InterviewType;
 import jakarta.persistence.*;
@@ -48,6 +49,9 @@ public class Interview extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "interview",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "interview",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Interviewer> interviewers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "interview",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<Interviewee> interviewees = new ArrayList<>();
 }
