@@ -10,6 +10,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "position", schema = "organization_schema", catalog = "fractal")
 @Data
@@ -34,6 +36,12 @@ public class Position extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "grade_id", referencedColumnName = "id")
     private Grade grade;
+
+    @Column(name = "open_date")
+    private LocalDate openDate;
+
+    @Column(name = "close_date")
+    private LocalDate closeDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id",referencedColumnName = "id")
