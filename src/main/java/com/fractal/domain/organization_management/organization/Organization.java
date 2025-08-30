@@ -1,6 +1,7 @@
 package com.fractal.domain.organization_management.organization;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.abstraction.Lifecycle;
 import com.fractal.domain.organization_management.organization.address.OrganizationAddress;
 import com.fractal.domain.organization_management.organization.contact.OrganizationContact;
 import com.fractal.domain.organization_management.organization.work_schedule.OrganizationWorkSchedule;
@@ -20,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class Organization extends AbstractEntity {
+public class Organization extends Lifecycle {
 
     @Column(name = "code",unique = true)
     private String code;
@@ -33,12 +34,6 @@ public class Organization extends AbstractEntity {
 
     @Column(name = "tin_number")
     private String tinNumber;
-
-    @Column(name = "open_date")
-    private LocalDate openDate;
-
-    @Column(name = "close_date")
-    private LocalDate closeDate;
 
     @Column(name = "level")
     private Integer level;

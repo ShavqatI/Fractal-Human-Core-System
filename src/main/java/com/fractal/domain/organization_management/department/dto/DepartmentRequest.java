@@ -1,10 +1,12 @@
 package com.fractal.domain.organization_management.department.dto;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public record DepartmentRequest(
@@ -24,6 +26,10 @@ public record DepartmentRequest(
     String levelMap,
     @NotNull
     Long organizationUnitId,
+    LocalDate openDate,
+    String openReason,
+    LocalDate closeDate,
+    String closeReason,
     Long statusId,
     List<DepartmentRequest> children
     )

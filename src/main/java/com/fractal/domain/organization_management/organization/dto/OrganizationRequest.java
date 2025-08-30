@@ -32,7 +32,9 @@ public record OrganizationRequest(
         String tinNumber,
         @NotNull
         LocalDate openDate,
+        String openReason,
         LocalDate closeDate,
+        String closeReason,
         @NotNull
         Integer level,
         @NotBlank

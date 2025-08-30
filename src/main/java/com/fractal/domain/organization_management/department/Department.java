@@ -1,8 +1,6 @@
 package com.fractal.domain.organization_management.department;
 
-import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.abstraction.Lifecycle;
-import com.fractal.domain.abstraction.LifecycleRecord;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.unit.OrganizationUnit;
 import jakarta.persistence.*;
@@ -11,7 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

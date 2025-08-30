@@ -4,6 +4,7 @@ package com.fractal.domain.abstraction;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -13,17 +14,18 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+@Data
 public abstract class Lifecycle extends AbstractEntity {
 
     @Column(name = "open_date")
-    private LocalDate openDate;
+    protected LocalDate openDate;
 
     @Column(name = "open_reason")
-    private String openReason;
+    protected String openReason;
 
     @Column(name = "close_date")
-    private LocalDate closeDate;
+    protected LocalDate closeDate;
 
     @Column(name = "close_reason")
-    private String closeReason;
+    protected String closeReason;
 }

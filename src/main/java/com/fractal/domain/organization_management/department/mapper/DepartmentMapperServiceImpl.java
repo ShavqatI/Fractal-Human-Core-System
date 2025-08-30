@@ -38,6 +38,10 @@ class DepartmentMapperServiceImpl implements DepartmentMapperService {
                         .map(this::toDTO)
                         .collect(Collectors.toList()),
                 organizationUnitService.toDTO(department.getOrganizationUnit()),
+                department.getOpenDate(),
+                department.getOpenReason(),
+                department.getCloseDate(),
+                department.getCloseReason(),
                 statusService.toCompactDTO(department.getStatus()),
                 department.getCreatedDate()
         );
@@ -67,6 +71,10 @@ class DepartmentMapperServiceImpl implements DepartmentMapperService {
         department.setLevel(dto.level());
         department.setLevelMap(dto.levelMap());
         department.setOrganizationUnit(organizationUnitService.getById(dto.organizationUnitId()));
+        department.setOpenDate(dto.openDate());
+        department.setOpenReason(dto.openReason());
+        department.setCloseDate(dto.closeDate());
+        department.setCloseReason(dto.closeReason());
         department.setStatus(statusService.getById(dto.statusId()));
         dto.children().forEach(child->department.addChild(toEntity(child)));
         return department;

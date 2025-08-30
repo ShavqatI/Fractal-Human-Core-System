@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
+
 public record PositionRequest(
 
         @NotNull
@@ -27,7 +29,10 @@ public record PositionRequest(
 
         @NotNull
         Long gradeId,
-
+        LocalDate openDate,
+        String openReason,
+        LocalDate closeDate,
+        String closeReason,
         @NotNull
         Long statusId
 ) {

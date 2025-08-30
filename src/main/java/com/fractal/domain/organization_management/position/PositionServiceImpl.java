@@ -73,6 +73,10 @@ class PositionServiceImpl implements PositionService {
                 position.getDescription(),
                 departmentService.toCompactDTO(position.getDepartment()),
                 gradeService.toCompactDTO(position.getGrade()),
+                position.getOpenDate(),
+                position.getOpenReason(),
+                position.getCloseDate(),
+                position.getCloseReason(),
                 statusService.toCompactDTO(position.getStatus()),
                 position.getCreatedDate()
         );
@@ -93,6 +97,10 @@ class PositionServiceImpl implements PositionService {
                 .name(dto.name())
                 .description(dto.description())
                 .department(departmentService.getById(dto.departmentId()))
+                .openDate(dto.openDate())
+                .openReason(dto.openReason())
+                .closeDate(dto.closeDate())
+                .closeReason(dto.closeReason())
                 .status(statusService.getById(dto.statusId()))
                 .grade(gradeService.getById(dto.gradeId()))
                 .build();

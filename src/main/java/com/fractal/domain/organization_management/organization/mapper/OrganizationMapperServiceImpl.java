@@ -34,7 +34,9 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
                 organization.getFullName(),
                 organization.getTinNumber(),
                 organization.getOpenDate(),
+                organization.getOpenReason(),
                 organization.getCloseDate(),
+                organization.getCloseReason(),
                 organization.getLevel(),
                 organization.getLevelMap(),
                 organizationUnitService.toDTO(organization.getOrganizationUnit()),
@@ -90,7 +92,9 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
         organization.setFullName(dto.fullName());
         organization.setTinNumber(dto.tinNumber());
         organization.setOpenDate(dto.openDate());
+        organization.setOpenReason(dto.openReason());
         organization.setCloseDate(dto.closeDate());
+        organization.setCloseReason(dto.closeReason());
         organization.setLevel(dto.level());
         organization.setLevelMap(dto.levelMap());
         organization.setLevelMap(dto.levelMap());

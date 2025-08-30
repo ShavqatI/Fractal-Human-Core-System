@@ -1,6 +1,7 @@
 package com.fractal.domain.organization_management.position;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.abstraction.Lifecycle;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.grade.Grade;
@@ -18,7 +19,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
-public class Position extends AbstractEntity {
+public class Position extends Lifecycle {
 
     @Column(name = "code",unique = true)
     private String code;
