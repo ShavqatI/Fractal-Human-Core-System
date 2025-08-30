@@ -1,7 +1,6 @@
 package com.fractal.domain.work_schedule;
 
 
-import com.fractal.domain.abstraction.AbstractEmploymentHistory;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.dictionary.week_day.WeekDay;

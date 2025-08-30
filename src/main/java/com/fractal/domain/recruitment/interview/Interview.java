@@ -2,8 +2,6 @@ package com.fractal.domain.recruitment.interview;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.employee_management.employee.Employee;
-import com.fractal.domain.recruitment.candidate.Candidate;
 import com.fractal.domain.recruitment.interview.interviewee.Interviewee;
 import com.fractal.domain.recruitment.interview.interviewer.Interviewer;
 import com.fractal.domain.recruitment.interview.type.InterviewType;

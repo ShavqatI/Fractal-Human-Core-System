@@ -7,9 +7,7 @@ import com.fractal.domain.employment.work_experience.dto.WorkExperienceRequest;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.recruitment.candidate.address.dto.CandidateAddressRequest;
-import com.fractal.domain.recruitment.candidate.resource.CandidateResource;
 import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceRequest;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;

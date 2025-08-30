@@ -1,7 +1,6 @@
 package com.fractal.domain.organization_management.organization.work_schedule;
 
 
-import com.fractal.domain.contact.Contact;
 import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.work_schedule.WorkSchedule;
 import jakarta.persistence.Entity;

@@ -1,11 +1,5 @@
 package com.fractal.domain.military_service;
 
-import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
-import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
-
-import java.util.List;
-
-
 public interface MilitaryServiceService {
 
     /*MilitaryService create(Long employeeId, MilitaryServiceRequest dto);

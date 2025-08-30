@@ -4,11 +4,9 @@ import com.fractal.domain.recruitment.candidate.CandidateService;
 import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceRequest;
 import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceResponse;
 import com.fractal.domain.recruitment.candidate.resource.mapper.CandidateResourceMapperService;
-import com.fractal.domain.resource.dto.ResourceResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 

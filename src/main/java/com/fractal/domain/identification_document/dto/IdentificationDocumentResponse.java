@@ -1,7 +1,6 @@
 package com.fractal.domain.identification_document.dto;
 
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
-import com.fractal.domain.identification_document.IdentificationDocument;
 import com.fractal.domain.identification_document.type.dto.IdentificationDocumentTypeResponse;
 import com.fractal.domain.resource.dto.ResourceResponse;
 

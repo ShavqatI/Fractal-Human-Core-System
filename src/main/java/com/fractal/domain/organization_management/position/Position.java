@@ -1,6 +1,5 @@
 package com.fractal.domain.organization_management.position;
 
-import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.abstraction.Lifecycle;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.department.Department;

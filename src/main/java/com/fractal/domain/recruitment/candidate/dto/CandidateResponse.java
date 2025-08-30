@@ -3,7 +3,6 @@ package com.fractal.domain.recruitment.candidate.dto;
 import com.fractal.domain.citizenship.dto.CitizenshipResponse;
 import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.dictionary.gender.dto.GenderResponse;
-import com.fractal.domain.dictionary.marital_status.MaritalStatus;
 import com.fractal.domain.dictionary.marital_status.dto.MaritalStatusResponse;
 import com.fractal.domain.dictionary.nationality.dto.NationalityResponse;
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
@@ -13,7 +12,6 @@ import com.fractal.domain.identification_document.dto.IdentificationDocumentResp
 import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
 import com.fractal.domain.recruitment.candidate.address.dto.CandidateAddressResponse;
 import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceResponse;
-import com.fractal.domain.resource.dto.ResourceResponse;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

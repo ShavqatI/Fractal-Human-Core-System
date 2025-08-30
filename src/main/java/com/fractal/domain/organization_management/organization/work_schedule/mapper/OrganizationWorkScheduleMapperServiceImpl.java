@@ -1,12 +1,5 @@
 package com.fractal.domain.organization_management.organization.work_schedule.mapper;
 
-import com.fractal.domain.contact.Contact;
-import com.fractal.domain.contact.dto.ContactRequest;
-import com.fractal.domain.contact.dto.ContactResponse;
-import com.fractal.domain.contact.mapper.ContactMapperService;
-import com.fractal.domain.employee_management.work_experience.EmployeeWorkExperience;
-import com.fractal.domain.employment.work_experience.dto.WorkExperienceRequest;
-import com.fractal.domain.employment.work_experience.dto.WorkExperienceResponse;
 import com.fractal.domain.organization_management.organization.work_schedule.OrganizationWorkSchedule;
 import com.fractal.domain.work_schedule.WorkSchedule;
 import com.fractal.domain.work_schedule.dto.WorkScheduleRequest;

@@ -6,7 +6,6 @@ import com.fractal.domain.organization_management.organization.contact.mapper.Or
 import com.fractal.domain.organization_management.organization.dto.OrganizationCompactResponse;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
-import com.fractal.domain.organization_management.organization.work_schedule.OrganizationWorkSchedule;
 import com.fractal.domain.organization_management.organization.work_schedule.mapper.OrganizationWorkScheduleMapperService;
 import com.fractal.domain.organization_management.unit.OrganizationUnitService;
 import lombok.RequiredArgsConstructor;

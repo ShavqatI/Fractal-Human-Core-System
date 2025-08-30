@@ -2,7 +2,6 @@ package com.fractal.domain.work_schedule.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.dictionary.week_day.WeekDayService;
-import com.fractal.domain.employment.type.EmploymentTypeService;
 import com.fractal.domain.work_schedule.WorkSchedule;
 import com.fractal.domain.work_schedule.dto.WorkScheduleRequest;
 import com.fractal.domain.work_schedule.dto.WorkScheduleResponse;

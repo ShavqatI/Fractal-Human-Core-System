@@ -1,10 +1,10 @@
 package com.fractal.domain.location.district;
 
+import com.fractal.domain.location.area_type.AreaTypeService;
 import com.fractal.domain.location.city.CityService;
 import com.fractal.domain.location.district.dto.DistrictCompactResponse;
 import com.fractal.domain.location.district.dto.DistrictRequest;
 import com.fractal.domain.location.district.dto.DistrictResponse;
-import com.fractal.domain.location.area_type.AreaTypeService;
 import com.fractal.domain.location.region.RegionService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;

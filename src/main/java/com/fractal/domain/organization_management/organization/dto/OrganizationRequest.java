@@ -2,7 +2,6 @@ package com.fractal.domain.organization_management.organization.dto;
 
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.organization_management.organization.address.dto.OrganizationAddressRequest;
-import com.fractal.domain.work_schedule.WorkSchedule;
 import com.fractal.domain.work_schedule.dto.WorkScheduleRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -14,7 +13,6 @@ import java.util.List;
 
 public record OrganizationRequest(
         @NotBlank
-        @NotNull
         @Pattern(regexp = "^[A-Z]{2,20}$", message = "Code must be in Latin uppercase letters")
         String code,
         @NotBlank
@@ -38,7 +36,6 @@ public record OrganizationRequest(
         @NotNull
         Integer level,
         @NotBlank
-        @NotNull
         String levelMap,
         @NotNull
         Long organizationUnitId,

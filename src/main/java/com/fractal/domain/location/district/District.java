@@ -1,8 +1,8 @@
 package com.fractal.domain.location.district;
 
 import com.fractal.domain.abstraction.Location;
-import com.fractal.domain.location.city.City;
 import com.fractal.domain.location.area_type.AreaType;
+import com.fractal.domain.location.city.City;
 import com.fractal.domain.location.region.Region;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

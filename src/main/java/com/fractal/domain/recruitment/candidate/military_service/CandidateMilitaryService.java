@@ -1,12 +1,9 @@
 package com.fractal.domain.recruitment.candidate.military_service;
 
 
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.military_service.MilitaryService;
 import com.fractal.domain.recruitment.candidate.Candidate;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
