@@ -29,7 +29,7 @@ public class Question extends AbstractEntity {
     @JoinColumn(name = "question_type_id", referencedColumnName = "id")
     private QuestionType questionType;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Answer> answers = new ArrayList<>();
 
     @Column(name = "max_selectable_options")

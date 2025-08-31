@@ -1,14 +1,17 @@
 package com.fractal.domain.recruitment.interview.evaluation;
 
-import com.fractal.domain.abstraction.AbstractEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fractal.domain.abstraction.ApprovalWorkflow;
+import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.recruitment.interview.evaluation.section.InterviewEvaluationSection;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -17,15 +20,35 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-public class InterviewEvaluation extends AbstractEntity {
+public class InterviewEvaluation extends ApprovalWorkflow {
 
-    private LocalDateTime date;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    /*@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "interview_id",referencedColumnName = "id")
-    private Interview interview;
+    @Column(name = "code",unique = true)
+    protected String code;
+
+    @Column(name = "name")
+    protected String name;
+
+    @OneToMany(mappedBy = "interviewEvaluation",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<InterviewEvaluationSection> sections = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id",referencedColumnName = "id")
-    private Employee employee;*/
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    private Status status;
+
+    @Transactional
+    public void addSection(InterviewEvaluationSection section) {
+        if (sections == null) sections = new ArrayList<>();
+        section.setInterviewEvaluation(this);
+        sections.add(section);
+    }
+
+    @Transactional
+    public void removeSection(InterviewEvaluationSection section) {
+        if (sections != null && !sections.isEmpty())
+            sections.remove(section);
+    }
 }

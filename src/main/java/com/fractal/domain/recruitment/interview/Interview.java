@@ -2,6 +2,8 @@ package com.fractal.domain.recruitment.interview;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.recruitment.interview.evaluation.InterviewEvaluation;
+import com.fractal.domain.recruitment.interview.evaluation.session.InterviewEvaluationSession;
 import com.fractal.domain.recruitment.interview.interviewee.Interviewee;
 import com.fractal.domain.recruitment.interview.interviewer.Interviewer;
 import com.fractal.domain.recruitment.interview.type.InterviewType;
@@ -52,4 +54,7 @@ public class Interview extends AbstractEntity {
 
     @OneToMany(mappedBy = "interview",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Interviewee> interviewees = new ArrayList<>();
+
+    @OneToMany(mappedBy = "interview",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<InterviewEvaluationSession> evaluationSessions = new ArrayList<>();
 }
