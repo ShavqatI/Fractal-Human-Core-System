@@ -1,6 +1,5 @@
 package com.fractal.domain.recruitment.interview.evaluation.section.question.dto;
 
-import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.InterviewEvaluationAnswer;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.dto.InterviewEvaluationAnswerRequest;
 
 import java.util.List;

@@ -1,18 +1,12 @@
 package com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.recruitment.interview.evaluation.InterviewEvaluation;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.mapper.InterviewEvaluationAnswerMapperService;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.InterviewEvaluationSessionSelectedAnswer;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerRequest;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor

@@ -1,6 +1,5 @@
 package com.fractal.domain.recruitment.interview.evaluation.section.question.answer;
 
-import com.fractal.domain.education.Education;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.InterviewEvaluationQuestionService;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.dto.InterviewEvaluationAnswerRequest;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.dto.InterviewEvaluationAnswerResponse;
@@ -8,7 +7,6 @@ import com.fractal.domain.recruitment.interview.evaluation.section.question.answ
 import com.fractal.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

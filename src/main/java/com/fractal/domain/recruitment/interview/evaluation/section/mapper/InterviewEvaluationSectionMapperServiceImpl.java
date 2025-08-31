@@ -2,6 +2,7 @@ package com.fractal.domain.recruitment.interview.evaluation.section.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.recruitment.interview.evaluation.section.InterviewEvaluationSection;
+import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionCompactResponse;
 import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionRequest;
 import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionResponse;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.mapper.InterviewEvaluationQuestionMapperService;
@@ -40,6 +41,16 @@ class InterviewEvaluationSectionMapperServiceImpl implements InterviewEvaluation
                 section.getCreatedDate()
         );
     }
+
+    @Override
+    public InterviewEvaluationSectionCompactResponse toCompactDTO(InterviewEvaluationSection section) {
+        return new InterviewEvaluationSectionCompactResponse(
+                section.getId(),
+                section.getCode(),
+                section.getName()
+        );
+    }
+
     @Override
     public InterviewEvaluationSection toEntity(InterviewEvaluationSectionRequest dto) {
         return mapToEntity(new InterviewEvaluationSection(),dto);

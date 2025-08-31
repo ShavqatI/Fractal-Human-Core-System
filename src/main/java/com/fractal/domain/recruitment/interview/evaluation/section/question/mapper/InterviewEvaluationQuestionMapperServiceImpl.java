@@ -2,7 +2,6 @@ package com.fractal.domain.recruitment.interview.evaluation.section.question.map
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.InterviewEvaluationQuestion;
-import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.InterviewEvaluationAnswer;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.mapper.InterviewEvaluationAnswerMapperService;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.dto.InterviewEvaluationQuestionCompactResponse;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.dto.InterviewEvaluationQuestionRequest;

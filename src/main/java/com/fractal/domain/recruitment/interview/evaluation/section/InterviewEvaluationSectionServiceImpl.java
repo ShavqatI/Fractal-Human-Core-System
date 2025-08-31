@@ -1,6 +1,7 @@
 package com.fractal.domain.recruitment.interview.evaluation.section;
 
 import com.fractal.domain.recruitment.interview.evaluation.InterviewEvaluationService;
+import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionCompactResponse;
 import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionRequest;
 import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionResponse;
 import com.fractal.domain.recruitment.interview.evaluation.section.mapper.InterviewEvaluationSectionMapperService;
@@ -69,10 +70,40 @@ class InterviewEvaluationSectionServiceImpl implements InterviewEvaluationSectio
         return mapperService.toDTO(section);
     }
 
-    /*@Override
-    public InterviewEvaluationQuestionCompactResponse toCompactDTO(InterviewEvaluationQuestion question) {
-        return mapperService.toCompactDTO(question);
-    }*/
+    @Override
+    public InterviewEvaluationSectionCompactResponse toCompactDTO(InterviewEvaluationSection section) {
+        return mapperService.toCompactDTO(section);
+    }
+
+    @Override
+    public InterviewEvaluationSection addChild(Long id, InterviewEvaluationSectionRequest dto) {
+        var section = getById(id);
+        var child = mapperService.toEntity(dto);
+        section.addChild(child);
+        return save(section);
+    }
+
+    @Override
+    public InterviewEvaluationSection updateChild(Long id, Long childId, InterviewEvaluationSectionRequest dto) {
+        var section = getById(id);
+        var child = section.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        try {
+            child = mapperService.toEntity(child,dto);
+            save(child);
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
+        return save(section);
+    }
+
+    @Override
+    public InterviewEvaluationSection deleteChild(Long id, Long childId) {
+        var section = getById(id);
+        var child = section.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        section.removeChild(child);
+        return section;
+    }
 
     @Override
     public InterviewEvaluationSection getById(Long id) {

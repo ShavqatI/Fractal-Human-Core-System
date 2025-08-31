@@ -1,11 +1,8 @@
 package com.fractal.domain.recruitment.interview.evaluation.section;
 
+import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionCompactResponse;
 import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionRequest;
 import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionResponse;
-import com.fractal.domain.recruitment.interview.evaluation.section.question.InterviewEvaluationQuestion;
-import com.fractal.domain.recruitment.interview.evaluation.section.question.dto.InterviewEvaluationQuestionCompactResponse;
-import com.fractal.domain.recruitment.interview.evaluation.section.question.dto.InterviewEvaluationQuestionRequest;
-import com.fractal.domain.recruitment.interview.evaluation.section.question.dto.InterviewEvaluationQuestionResponse;
 
 import java.util.List;
 
@@ -19,6 +16,10 @@ public interface InterviewEvaluationSectionService {
     void delete(Long evaluationId, Long id);
     InterviewEvaluationSection save(InterviewEvaluationSection section);
     InterviewEvaluationSectionResponse toDTO(InterviewEvaluationSection section);
-    //InterviewEvaluationQuestionCompactResponse toCompactDTO(InterviewEvaluationSection section);
+    InterviewEvaluationSectionCompactResponse toCompactDTO(InterviewEvaluationSection section);
+
+    InterviewEvaluationSection addChild(Long id, InterviewEvaluationSectionRequest dto);
+    InterviewEvaluationSection updateChild(Long id, Long childId, InterviewEvaluationSectionRequest dto);
+    InterviewEvaluationSection deleteChild(Long id, Long childId);
 
 }

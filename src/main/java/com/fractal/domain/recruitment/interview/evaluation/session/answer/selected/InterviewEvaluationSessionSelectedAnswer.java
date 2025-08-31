@@ -3,8 +3,6 @@ package com.fractal.domain.recruitment.interview.evaluation.session.answer.selec
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.InterviewEvaluationAnswer;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.InterviewEvaluationSessionAnswerSubmission;
-import com.fractal.domain.testing.question.Answer;
-import com.fractal.domain.testing.test.session.answer.AnswerSubmission;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

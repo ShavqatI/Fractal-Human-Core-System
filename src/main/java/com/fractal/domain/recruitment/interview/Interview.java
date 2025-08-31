@@ -2,7 +2,6 @@ package com.fractal.domain.recruitment.interview;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.recruitment.interview.evaluation.InterviewEvaluation;
 import com.fractal.domain.recruitment.interview.evaluation.session.InterviewEvaluationSession;
 import com.fractal.domain.recruitment.interview.interviewee.Interviewee;
 import com.fractal.domain.recruitment.interview.interviewer.Interviewer;

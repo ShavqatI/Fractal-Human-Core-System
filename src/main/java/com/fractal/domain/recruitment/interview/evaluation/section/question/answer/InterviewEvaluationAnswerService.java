@@ -1,7 +1,5 @@
 package com.fractal.domain.recruitment.interview.evaluation.section.question.answer;
 
-import com.fractal.domain.education.Education;
-import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.dto.InterviewEvaluationAnswerRequest;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.dto.InterviewEvaluationAnswerResponse;
 

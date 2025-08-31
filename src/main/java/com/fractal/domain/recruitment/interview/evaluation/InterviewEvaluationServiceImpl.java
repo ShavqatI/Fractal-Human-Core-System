@@ -3,7 +3,6 @@ package com.fractal.domain.recruitment.interview.evaluation;
 import com.fractal.domain.recruitment.interview.evaluation.dto.InterviewEvaluationRequest;
 import com.fractal.domain.recruitment.interview.evaluation.dto.InterviewEvaluationResponse;
 import com.fractal.domain.recruitment.interview.evaluation.mapper.InterviewEvaluationMapperService;
-import com.fractal.domain.recruitment.interview.evaluation.section.InterviewEvaluationSection;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;

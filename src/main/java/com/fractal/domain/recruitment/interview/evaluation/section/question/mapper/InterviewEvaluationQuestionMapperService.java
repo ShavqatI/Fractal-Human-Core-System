@@ -1,7 +1,6 @@
 package com.fractal.domain.recruitment.interview.evaluation.section.question.mapper;
 
 import com.fractal.domain.recruitment.interview.evaluation.section.question.InterviewEvaluationQuestion;
-import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.InterviewEvaluationAnswer;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.dto.InterviewEvaluationQuestionCompactResponse;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.dto.InterviewEvaluationQuestionRequest;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.dto.InterviewEvaluationQuestionResponse;

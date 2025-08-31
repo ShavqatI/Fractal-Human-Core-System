@@ -1,6 +1,5 @@
 package com.fractal.domain.recruitment.interview.evaluation.section.question.answer;
 
-import com.fractal.domain.education.Education;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

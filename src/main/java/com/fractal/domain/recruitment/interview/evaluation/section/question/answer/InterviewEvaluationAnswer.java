@@ -3,7 +3,6 @@ package com.fractal.domain.recruitment.interview.evaluation.section.question.ans
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.InterviewEvaluationQuestion;
-import com.fractal.domain.testing.question.Question;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
