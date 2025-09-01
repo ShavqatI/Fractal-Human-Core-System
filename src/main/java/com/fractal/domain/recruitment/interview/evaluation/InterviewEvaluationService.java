@@ -14,6 +14,5 @@ public interface InterviewEvaluationService {
     void deleteById(Long id);
     InterviewEvaluation save(InterviewEvaluation interviewEvaluation);
     InterviewEvaluationResponse toDTO(InterviewEvaluation interviewEvaluation);
-    //MenuCompactResponse toCompactDTO(Menu menu);
 
 }
