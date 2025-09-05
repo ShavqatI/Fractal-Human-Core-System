@@ -10,7 +10,7 @@ import java.util.List;
 public record InterviewEvaluationSessionAnswerSubmissionResponse(
         Long id,
         InterviewEvaluationQuestionResponse question,
-        List<InterviewEvaluationSessionSelectedAnswerResponse> answers,
+        List<InterviewEvaluationSessionSelectedAnswerResponse> selectedAnswers,
         StatusCompactResponse status,
         LocalDateTime createdDate
 

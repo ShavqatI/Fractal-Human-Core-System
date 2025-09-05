@@ -6,6 +6,6 @@ import java.util.List;
 
 public record InterviewEvaluationSessionAnswerSubmissionRequest(
         Long questionId,
-        List<InterviewEvaluationSessionSelectedAnswerRequest> answers,
+        List<InterviewEvaluationSessionSelectedAnswerRequest> selectedAnswers,
         Long statusId
 ) {}

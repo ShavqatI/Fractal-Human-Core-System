@@ -4,9 +4,8 @@ import com.fractal.domain.recruitment.interview.evaluation.section.question.answ
 
 import java.time.LocalDateTime;
 
-public record InterviewEvaluationSessionSelectedAnswerResponse(
+public record InterviewEvaluationSessionSelectedAnswerCompactResponse(
         Long id,
-        InterviewEvaluationAnswerResponse answer,
         LocalDateTime selectedDate,
         LocalDateTime createdDate
 

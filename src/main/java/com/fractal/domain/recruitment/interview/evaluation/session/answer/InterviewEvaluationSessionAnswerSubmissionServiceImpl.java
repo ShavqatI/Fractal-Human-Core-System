@@ -1,13 +1,10 @@
 package com.fractal.domain.recruitment.interview.evaluation.session.answer;
 
-import com.fractal.domain.recruitment.interview.evaluation.InterviewEvaluationService;
-import com.fractal.domain.recruitment.interview.evaluation.section.InterviewEvaluationSection;
-import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionCompactResponse;
-import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionRequest;
-import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionResponse;
-import com.fractal.domain.recruitment.interview.evaluation.session.InterviewEvaluationSession;
-import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.InterviewEvaluationSessionSelectedAnswer;
-import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.mapper.InterviewEvaluationSessionSelectedAnswerMapperService;
+import com.fractal.domain.recruitment.interview.evaluation.session.InterviewEvaluationSessionService;
+import com.fractal.domain.recruitment.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionCompactResponse;
+import com.fractal.domain.recruitment.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionRequest;
+import com.fractal.domain.recruitment.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionResponse;
+import com.fractal.domain.recruitment.interview.evaluation.session.answer.mapper.InterviewEvaluationSessionAnswerSubmissionMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -20,103 +17,73 @@ import java.util.List;
 @RequiredArgsConstructor
 class InterviewEvaluationSessionAnswerSubmissionServiceImpl implements InterviewEvaluationSessionAnswerSubmissionService {
 
-    private final InterviewEvaluationSessionAnswerSubmissionRepository answerRepository;
-    private final InterviewEvaluationSessionSelectedAnswerMapperService mapperService;
-    private final InterviewEvaluationService interviewEvaluationService;
+    private final InterviewEvaluationSessionAnswerSubmissionRepository submissionRepository;
+    private final InterviewEvaluationSessionAnswerSubmissionMapperService mapperService;
+    private final InterviewEvaluationSessionService evaluationSessionService;
 
 
     @Override
     @Transactional
-    public InterviewEvaluationSessionSelectedAnswer create(Long submissionId, InterviewEvaluationSectionRequest dto) {
-        var evaluation = interviewEvaluationService.getById(submissionId);
-        var section = mapperService.toEntity(dto);
-        evaluation.addSection(section);
-        interviewEvaluationService.save(evaluation);
-       return section;
+    public InterviewEvaluationSessionAnswerSubmission create(Long evaluationSessionId, InterviewEvaluationSessionAnswerSubmissionRequest dto) {
+        var evaluationSession = evaluationSessionService.getById(evaluationSessionId);
+        var answerSubmission = mapperService.toEntity(dto);
+        evaluationSession.addSubmission(answerSubmission);
+        evaluationSessionService.save(evaluationSession);
+       return answerSubmission;
     }
 
     @Override
-    public List<InterviewEvaluationSession> getAllByInterviewEvaluationId(Long evaluationId) {
-        return answerRepository.findAllByInterviewEvaluationId(evaluationId);
+    public List<InterviewEvaluationSessionAnswerSubmission> getAllByInterviewEvaluationSessionId(Long evaluationSessionId) {
+        return submissionRepository.findAllByInterviewEvaluationSessionId(evaluationSessionId);
     }
 
     @Override
-    public InterviewEvaluationSession getById(Long evaluationId, Long id) {
-        return answerRepository.findByInterviewEvaluationIdAndId(evaluationId,id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Section with id: " + id + " not found"));
+    public InterviewEvaluationSessionAnswerSubmission getById(Long evaluationSessionId, Long id) {
+        return submissionRepository.findByInterviewEvaluationSessionIdAndId(evaluationSessionId,id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Session Answer Submission with id: " + id + " not found"));
+    }
+
+    @Override
+    public InterviewEvaluationSessionAnswerSubmission getById(Long id) {
+        return submissionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Session Answer Submission with id: " + id + " not found"));
     }
 
     @Override
     @Transactional
-    public InterviewEvaluationSection update(Long evaluationId, Long id, InterviewEvaluationSectionRequest dto) {
-        var evaluation = interviewEvaluationService.getById(evaluationId);
-        var section = evaluation.getSections()
+    public InterviewEvaluationSessionAnswerSubmission update(Long evaluationId, Long id, InterviewEvaluationSessionAnswerSubmissionRequest dto) {
+        var evaluationSession = evaluationSessionService.getById(evaluationId);
+        var answerSubmission = evaluationSession.getSubmissions()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education with id: " + id + " not found"));
-        section = answerRepository.save(mapperService.toEntity(section,dto));
-        interviewEvaluationService.save(evaluation);
-        return section;
+                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Session Answer Submission with id: " + id + " not found"));
+        answerSubmission = submissionRepository.save(mapperService.toEntity(answerSubmission,dto));
+        evaluationSessionService.save(evaluationSession);
+        return answerSubmission;
     }
 
     @Override
     @Transactional
     public void delete(Long employeeId, Long id) {
-        var evaluation = interviewEvaluationService.getById(employeeId);
-        var section = evaluation.getSections()
+        var evaluationSession = evaluationSessionService.getById(employeeId);
+        var answerSubmission = evaluationSession.getSubmissions()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education with id: " + id + " not found"));
-        evaluation.removeSection(section);
-        interviewEvaluationService.save(evaluation);
+                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Session Answer Submission with id: " + id + " not found"));
+        evaluationSession.removeSubmission(answerSubmission);
+        evaluationSessionService.save(evaluationSession);
     }
 
     @Override
-    public InterviewEvaluationSectionResponse toDTO(InterviewEvaluationSection section) {
-        return mapperService.toDTO(section);
+    public InterviewEvaluationSessionAnswerSubmissionResponse toDTO(InterviewEvaluationSessionAnswerSubmission submission) {
+        return mapperService.toDTO(submission);
     }
 
     @Override
-    public InterviewEvaluationSectionCompactResponse toCompactDTO(InterviewEvaluationSection section) {
-        return mapperService.toCompactDTO(section);
+    public InterviewEvaluationSessionAnswerSubmissionCompactResponse toCompactDTO(InterviewEvaluationSessionAnswerSubmission answerSubmission) {
+        return mapperService.toCompactDTO(answerSubmission);
     }
 
     @Override
-    public InterviewEvaluationSection addChild(Long id, InterviewEvaluationSectionRequest dto) {
-        var section = getById(id);
-        var child = mapperService.toEntity(dto);
-        section.addChild(child);
-        return save(section);
-    }
-
-    @Override
-    public InterviewEvaluationSection updateChild(Long id, Long childId, InterviewEvaluationSectionRequest dto) {
-        var section = getById(id);
-        var child = section.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+    public InterviewEvaluationSessionAnswerSubmission save(InterviewEvaluationSessionAnswerSubmission answerSubmission) {
         try {
-            child = mapperService.toEntity(child,dto);
-            save(child);
-        }
-        catch (DataAccessException e) {
-            throw new RuntimeException(e.getMostSpecificCause().getMessage());
-        }
-        return save(section);
-    }
-
-    @Override
-    public InterviewEvaluationSection deleteChild(Long id, Long childId) {
-        var section = getById(id);
-        var child = section.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
-        section.removeChild(child);
-        return section;
-    }
-
-    @Override
-    public InterviewEvaluationSection getById(Long id) {
-        return sectionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Section with id: " + id + " not found"));
-    }
-
-    @Override
-    public InterviewEvaluationSection save(InterviewEvaluationSection section) {
-        try {
-            return sectionRepository.save(section);
+            return submissionRepository.save(answerSubmission);
         }
         catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());

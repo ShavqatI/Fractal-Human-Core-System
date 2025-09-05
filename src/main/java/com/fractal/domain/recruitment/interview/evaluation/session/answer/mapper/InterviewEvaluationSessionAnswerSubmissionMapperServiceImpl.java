@@ -2,6 +2,7 @@ package com.fractal.domain.recruitment.interview.evaluation.session.answer.mappe
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.InterviewEvaluationSessionAnswerSubmission;
+import com.fractal.domain.recruitment.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionCompactResponse;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionRequest;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionResponse;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.mapper.InterviewEvaluationSessionSelectedAnswerMapperService;
@@ -22,19 +23,35 @@ class InterviewEvaluationSessionAnswerSubmissionMapperServiceImpl implements Int
 
 
     @Override
-    public InterviewEvaluationSessionAnswerSubmissionResponse toDTO(InterviewEvaluationSessionAnswerSubmission submission) {
+    public InterviewEvaluationSessionAnswerSubmissionResponse toDTO(InterviewEvaluationSessionAnswerSubmission answerSubmission) {
         return new InterviewEvaluationSessionAnswerSubmissionResponse(
-                submission.getId(),
+                answerSubmission.getId(),
                 null,
-                Optional.ofNullable(submission.getSelectedAnswers())
+                Optional.ofNullable(answerSubmission.getSelectedAnswers())
                         .orElse(emptyList())
                         .stream()
                         .map(answerMapperService::toDTO)
                         .collect(Collectors.toList()),
-                statusService.toCompactDTO(submission.getStatus()),
-                submission.getCreatedDate()
+                statusService.toCompactDTO(answerSubmission.getStatus()),
+                answerSubmission.getCreatedDate()
         );
     }
+
+    @Override
+    public InterviewEvaluationSessionAnswerSubmissionCompactResponse toCompactDTO(InterviewEvaluationSessionAnswerSubmission answerSubmission) {
+        return new InterviewEvaluationSessionAnswerSubmissionCompactResponse(
+                answerSubmission.getId(),
+                null,
+                Optional.ofNullable(answerSubmission.getSelectedAnswers())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(answerMapperService::toDTO)
+                        .collect(Collectors.toList()),
+                statusService.toCompactDTO(answerSubmission.getStatus()),
+                answerSubmission.getCreatedDate()
+        );
+    }
+
     @Override
     public InterviewEvaluationSessionAnswerSubmission toEntity(InterviewEvaluationSessionAnswerSubmissionRequest dto) {
         return mapToEntity(new InterviewEvaluationSessionAnswerSubmission(),dto);
@@ -47,7 +64,7 @@ class InterviewEvaluationSessionAnswerSubmissionMapperServiceImpl implements Int
 
     private InterviewEvaluationSessionAnswerSubmission mapToEntity(InterviewEvaluationSessionAnswerSubmission submission, InterviewEvaluationSessionAnswerSubmissionRequest dto) {
         //submission.setQuestion(null);
-        dto.answers().forEach(answer -> submission.addAnswer(answerMapperService.toEntity(answer)));
+        dto.selectedAnswers().forEach(answer -> submission.addAnswer(answerMapperService.toEntity(answer)));
         submission.setStatus(statusService.getById(dto.statusId()));
         return submission;
 

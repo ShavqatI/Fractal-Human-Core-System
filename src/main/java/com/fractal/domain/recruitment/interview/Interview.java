@@ -2,6 +2,7 @@ package com.fractal.domain.recruitment.interview;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.recruitment.interview.evaluation.section.InterviewEvaluationSection;
 import com.fractal.domain.recruitment.interview.evaluation.session.InterviewEvaluationSession;
 import com.fractal.domain.recruitment.interview.interviewee.Interviewee;
 import com.fractal.domain.recruitment.interview.interviewer.Interviewer;
@@ -11,6 +12,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -56,4 +58,30 @@ public class Interview extends AbstractEntity {
 
     @OneToMany(mappedBy = "interview",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<InterviewEvaluationSession> evaluationSessions = new ArrayList<>();
+
+    @Transactional
+    public void addInterviewer(Interviewer interviewer) {
+        if (interviewers == null) interviewers = new ArrayList<>();
+        interviewer.setInterview(this);
+        interviewers.add(interviewer);
+    }
+
+    @Transactional
+    public void removeInterviewer(Interviewer interviewer) {
+        if (interviewers != null && !interviewers.isEmpty())
+            interviewers.remove(interviewer);
+    }
+
+    @Transactional
+    public void addInterviewee(Interviewee interviewee) {
+        if (interviewees == null) interviewees = new ArrayList<>();
+        interviewee.setInterview(this);
+        interviewees.add(interviewee);
+    }
+
+    @Transactional
+    public void removeInterviewee(Interviewee interviewee) {
+        if (interviewees != null && !interviewees.isEmpty())
+            interviewees.remove(interviewee);
+    }
 }

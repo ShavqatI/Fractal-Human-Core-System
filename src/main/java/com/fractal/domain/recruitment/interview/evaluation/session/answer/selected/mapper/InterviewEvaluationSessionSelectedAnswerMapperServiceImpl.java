@@ -3,6 +3,7 @@ package com.fractal.domain.recruitment.interview.evaluation.session.answer.selec
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.mapper.InterviewEvaluationAnswerMapperService;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.InterviewEvaluationSessionSelectedAnswer;
+import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerCompactResponse;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerRequest;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerResponse;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,16 @@ class InterviewEvaluationSessionSelectedAnswerMapperServiceImpl implements Inter
                 selectedAnswer.getCreatedDate()
         );
     }
+
+    @Override
+    public InterviewEvaluationSessionSelectedAnswerCompactResponse toCompactDTO(InterviewEvaluationSessionSelectedAnswer selectedAnswer) {
+        return new InterviewEvaluationSessionSelectedAnswerCompactResponse(
+                selectedAnswer.getId(),
+                selectedAnswer.getSelectedDate(),
+                selectedAnswer.getCreatedDate()
+        );
+    }
+
     @Override
     public InterviewEvaluationSessionSelectedAnswer toEntity(InterviewEvaluationSessionSelectedAnswerRequest dto) {
         return mapToEntity(new InterviewEvaluationSessionSelectedAnswer(),dto);
