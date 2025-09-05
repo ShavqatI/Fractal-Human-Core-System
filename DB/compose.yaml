@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_DB=fractal'
+      - 'POSTGRES_PASSWORD=Fractal@2025'
+      - 'POSTGRES_USER=fractal'
+    ports:
+      - '5435:5432'
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+        - auth-network
+volumes:
+  postgres-data:
+    driver: local
+networks:
+  auth-network:
+    driver: bridge
