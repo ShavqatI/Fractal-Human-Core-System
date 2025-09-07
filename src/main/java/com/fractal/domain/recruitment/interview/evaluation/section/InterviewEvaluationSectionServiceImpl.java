@@ -34,12 +34,12 @@ class InterviewEvaluationSectionServiceImpl implements InterviewEvaluationSectio
 
     @Override
     public List<InterviewEvaluationSection> getAllByInterviewEvaluationId(Long evaluationId) {
-        return sectionRepository.findAllByEvaluationId(evaluationId);
+        return sectionRepository.findAllByInterviewEvaluationId(evaluationId);
     }
 
     @Override
     public InterviewEvaluationSection getById(Long evaluationId, Long id) {
-        return sectionRepository.findByEvaluationIdAndId(evaluationId,id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Section with id: " + id + " not found"));
+        return sectionRepository.findByInterviewEvaluationIdAndId(evaluationId,id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Section with id: " + id + " not found"));
     }
 
     @Override

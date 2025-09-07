@@ -1,22 +1,20 @@
 package com.fractal.domain.recruitment.interview.evaluation.session;
 
-import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionResponse;
-import com.fractal.domain.recruitment.interview.evaluation.session.answer.InterviewEvaluationSessionAnswerSubmission;
-import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.InterviewEvaluationSessionSelectedAnswer;
-import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerRequest;
+import com.fractal.domain.recruitment.interview.evaluation.session.dto.InterviewEvaluationSessionRequest;
+import com.fractal.domain.recruitment.interview.evaluation.session.dto.InterviewEvaluationSessionResponse;
 
 import java.util.List;
 
 
 public interface InterviewEvaluationSessionService {
-    InterviewEvaluationSession create(Long interviewId, InterviewEvaluationSessionSelectedAnswerRequest dto);
-    List<InterviewEvaluationSession> getAllByInterviewId(Long interviewId);
-    InterviewEvaluationSession getById(Long interviewId , Long id);
+    InterviewEvaluationSession create(Long interviewerId, InterviewEvaluationSessionRequest dto);
+    List<InterviewEvaluationSession> getAllByInterviewerId(Long interviewerId);
+    InterviewEvaluationSession getById(Long interviewerId , Long id);
     InterviewEvaluationSession getById(Long id);
-    InterviewEvaluationSession update(Long interviewId, Long id,InterviewEvaluationSessionSelectedAnswerRequest dto);
-    void delete(Long interviewId, Long id);
+    InterviewEvaluationSession update(Long interviewerId, Long id, InterviewEvaluationSessionRequest dto);
+    void delete(Long interviewerId, Long id);
     InterviewEvaluationSession save(InterviewEvaluationSession session);
-    //InterviewEvaluationSessionResponse toDTO(InterviewEvaluationSessionSelectedAnswer selectedAnswer);
+    InterviewEvaluationSessionResponse toDTO(InterviewEvaluationSession evaluationSession);
     //InterviewEvaluationSectionCompactResponse toCompactDTO(InterviewEvaluationSection section);
 
 

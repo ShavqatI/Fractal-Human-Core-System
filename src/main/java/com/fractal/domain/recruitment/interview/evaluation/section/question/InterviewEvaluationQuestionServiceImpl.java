@@ -34,12 +34,12 @@ class InterviewEvaluationQuestionServiceImpl implements InterviewEvaluationQuest
 
     @Override
     public List<InterviewEvaluationQuestion> getAllBySectionId(Long sectionId) {
-        return questionRepository.findAllBySectionId(sectionId);
+        return questionRepository.findAllByInterviewEvaluationSectionId(sectionId);
     }
 
     @Override
     public InterviewEvaluationQuestion getById(Long employeeId, Long id) {
-        return questionRepository.findBySectionIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Question with id: " + id + " not found"));
+        return questionRepository.findByInterviewEvaluationSectionIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Question with id: " + id + " not found"));
     }
 
     @Override

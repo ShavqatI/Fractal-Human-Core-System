@@ -1,9 +1,8 @@
 package com.fractal.domain.recruitment.interview;
 
-import com.fractal.domain.recruitment.interview.evaluation.InterviewEvaluation;
-import com.fractal.domain.recruitment.interview.evaluation.dto.InterviewEvaluationRequest;
-import com.fractal.domain.recruitment.interview.evaluation.dto.InterviewEvaluationResponse;
-import com.fractal.domain.recruitment.interview.evaluation.mapper.InterviewEvaluationMapperService;
+import com.fractal.domain.recruitment.interview.dto.InterviewRequest;
+import com.fractal.domain.recruitment.interview.dto.InterviewResponse;
+import com.fractal.domain.recruitment.interview.mapper.InterviewMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -16,28 +15,28 @@ import java.util.List;
 class InterviewServiceImpl implements InterviewService {
 
     private final InterviewRepository interviewRepository;
-    private final InterviewEvaluationMapperService mapperService;
+    private final InterviewMapperService mapperService;
 
 
     @Override
-    public InterviewEvaluation create(InterviewEvaluationRequest dto) {
+    public Interview create(InterviewRequest dto) {
         return save(mapperService.toEntity(dto));
     }
 
     @Override
-    public List<InterviewEvaluation> getAll() {
+    public List<Interview> getAll() {
         return interviewRepository.findAll();
     }
 
 
 
     @Override
-    public InterviewEvaluation getById(Long id) {
+    public Interview getById(Long id) {
      return findById(id);
     }
 
     @Override
-    public InterviewEvaluation update(Long id, InterviewEvaluationRequest dto) {
+    public Interview update(Long id, InterviewRequest dto) {
         try {
             return save(mapperService.toEntity(findById(id),dto));
         }
@@ -52,9 +51,9 @@ class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
-    public InterviewEvaluation save(InterviewEvaluation interviewEvaluation) {
+    public Interview save(Interview interview) {
         try {
-            return interviewRepository.save(interviewEvaluation);
+            return interviewRepository.save(interview);
         }
         catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
@@ -62,12 +61,12 @@ class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
-    public InterviewEvaluationResponse toDTO(InterviewEvaluation interviewEvaluation) {
-        return mapperService.toDTO(interviewEvaluation);
+    public InterviewResponse toDTO(Interview interview) {
+        return mapperService.toDTO(interview);
     }
 
-    private InterviewEvaluation findById(Long id) {
-        return interviewRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation with id: " + id + " not found"));
+    private Interview findById(Long id) {
+        return interviewRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Interview with id: " + id + " not found"));
 
     }
 }

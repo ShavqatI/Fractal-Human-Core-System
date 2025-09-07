@@ -1,16 +1,10 @@
 package com.fractal.domain.recruitment.interview.evaluation.session;
 
-import com.fractal.domain.recruitment.interview.InterviewService;
-import com.fractal.domain.recruitment.interview.evaluation.InterviewEvaluationService;
-import com.fractal.domain.recruitment.interview.evaluation.section.InterviewEvaluationSection;
-import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionCompactResponse;
-import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionRequest;
-import com.fractal.domain.recruitment.interview.evaluation.section.dto.InterviewEvaluationSectionResponse;
-import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.InterviewEvaluationSessionSelectedAnswer;
-import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerRequest;
-import com.fractal.domain.recruitment.interview.evaluation.session.answer.selected.mapper.InterviewEvaluationSessionSelectedAnswerMapperService;
+import com.fractal.domain.recruitment.interview.evaluation.session.dto.InterviewEvaluationSessionRequest;
+import com.fractal.domain.recruitment.interview.evaluation.session.dto.InterviewEvaluationSessionResponse;
+import com.fractal.domain.recruitment.interview.evaluation.session.mapper.InterviewEvaluationSessionMapperService;
+import com.fractal.domain.recruitment.interview.interviewer.InterviewerService;
 import com.fractal.exception.ResourceNotFoundException;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -22,28 +16,27 @@ import java.util.List;
 class InterviewEvaluationSessionServiceImpl implements InterviewEvaluationSessionService {
 
     private final InterviewEvaluationSessionRepository evaluationSessionRepository;
-    private final InterviewEvaluationSessionSelectedAnswerMapperService mapperService;
-    private final InterviewService interviewService;
+    private final InterviewEvaluationSessionMapperService mapperService;
+    private final InterviewerService interviewerService;
 
 
     @Override
-    public InterviewEvaluationSession create(Long evaluationId, InterviewEvaluationSessionSelectedAnswerRequest dto) {
-        var evaluation = interviewEvaluationService.getById(evaluationId);
-        var section = mapperService.toEntity(dto);
-        evaluation.addSection(section);
-        interviewEvaluationService.save(evaluation);
-        return section;
+    public InterviewEvaluationSession create(Long interviewerId, InterviewEvaluationSessionRequest dto) {
+        var interviewer = interviewerService.getById(interviewerId);
+        var evaluationSession = mapperService.toEntity(dto);
+        interviewer.addEvaluationSession(evaluationSession);
+        interviewerService.save(interviewer);
+        return evaluationSession;
     }
 
     @Override
-    public List<InterviewEvaluationSession> getAllByInterviewId(Long interviewId) {
-        return evaluationSessionRepository.findAllByInterviewId(interviewId);
+    public List<InterviewEvaluationSession> getAllByInterviewerId(Long interviewerId) {
+        return evaluationSessionRepository.findAllByInterviewerId(interviewerId);
     }
 
     @Override
-    public InterviewEvaluationSession getById(Long interviewId, Long id) {
-       return evaluationSessionRepository.findByInterviewIdAndId(interviewId,id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Session with id: " + id + " not found"));
-
+    public InterviewEvaluationSession getById(Long interviewerId, Long id) {
+        return evaluationSessionRepository.findByInterviewerIdAndId(interviewerId,id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Session with id: " + id + " not found"));
     }
 
     @Override
@@ -52,14 +45,27 @@ class InterviewEvaluationSessionServiceImpl implements InterviewEvaluationSessio
     }
 
     @Override
-    public InterviewEvaluationSession update(Long evaluationId, Long id, InterviewEvaluationSessionSelectedAnswerRequest dto) {
-        return null;
+    public InterviewEvaluationSession update(Long interviewerId, Long id, InterviewEvaluationSessionRequest dto) {
+        var interviewer = interviewerService.getById(interviewerId);
+        var evaluationSession = interviewer.getEvaluationSessions()
+                .stream()
+                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Session id: " + id + " not found"));
+        evaluationSession = evaluationSessionRepository.save(mapperService.toEntity(evaluationSession,dto));
+        interviewerService.save(interviewer);
+        return evaluationSession;
     }
 
     @Override
-    public void delete(Long evaluationId, Long id) {
-
+    public void delete(Long interviewerId, Long id) {
+        var interviewer = interviewerService.getById(interviewerId);
+        var evaluationSession = interviewer.getEvaluationSessions()
+                .stream()
+                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Session id: " + id + " not found"));
+        interviewer.removeEvaluationSession(evaluationSession);
+        interviewerService.save(interviewer);
     }
+
+
     @Override
     public InterviewEvaluationSession save(InterviewEvaluationSession session) {
         try {
@@ -68,5 +74,10 @@ class InterviewEvaluationSessionServiceImpl implements InterviewEvaluationSessio
         catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
+    }
+
+    @Override
+    public InterviewEvaluationSessionResponse toDTO(InterviewEvaluationSession evaluationSession) {
+        return mapperService.toDTO(evaluationSession);
     }
 }

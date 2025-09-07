@@ -27,7 +27,6 @@ class InterviewMapperServiceImpl implements InterviewMapperService {
 
     private final StatusService statusService;
     private final InterviewTypeService interviewTypeService;
-    private final InterviewEvaluationSessionMapperService sessionMapperService;
     private final InterviewerMapperService interviewerMapperService;
     private final IntervieweeMapperService intervieweeMapperService;
 
@@ -50,11 +49,6 @@ class InterviewMapperServiceImpl implements InterviewMapperService {
                         .orElse(emptyList())
                         .stream()
                         .map(intervieweeMapperService::toDTO)
-                        .collect(Collectors.toList()),
-                Optional.ofNullable(interview.getEvaluationSessions())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(sessionMapperService::toDTO)
                         .collect(Collectors.toList()),
                 statusService.toCompactDTO(interview.getStatus()),
                 interview.getCreatedDate()

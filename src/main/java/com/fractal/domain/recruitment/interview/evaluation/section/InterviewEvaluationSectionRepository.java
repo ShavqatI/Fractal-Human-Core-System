@@ -9,7 +9,7 @@ import java.util.Optional;
 @Repository
 interface InterviewEvaluationSectionRepository extends JpaRepository<InterviewEvaluationSection,Long> {
 
-    List<InterviewEvaluationSection> findAllByEvaluationId(Long evaluationId);
+    List<InterviewEvaluationSection> findAllByInterviewEvaluationId(Long evaluationId);
 
-    Optional<InterviewEvaluationSection> findByEvaluationIdAndId(Long evaluationId, Long id);
+    Optional<InterviewEvaluationSection> findByInterviewEvaluationIdAndId(Long evaluationId, Long id);
 }

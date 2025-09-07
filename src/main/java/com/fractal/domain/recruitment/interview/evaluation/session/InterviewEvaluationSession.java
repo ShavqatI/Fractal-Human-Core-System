@@ -7,6 +7,7 @@ import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.recruitment.interview.Interview;
 import com.fractal.domain.recruitment.interview.evaluation.InterviewEvaluation;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.InterviewEvaluationSessionAnswerSubmission;
+import com.fractal.domain.recruitment.interview.interviewer.Interviewer;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -37,9 +38,13 @@ public class InterviewEvaluationSession extends ApprovalWorkflow {
     @JoinColumn(name = "interview_evaluation_id", referencedColumnName = "id")
     private InterviewEvaluation interviewEvaluation;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    /*@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interview_id", referencedColumnName = "id")
-    private Interview interview;
+    private Interview interview;*/
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "interviewer_id", referencedColumnName = "id")
+    private Interviewer interviewer;
 
     @Column(name = "start_date")
     private LocalDateTime startDate;

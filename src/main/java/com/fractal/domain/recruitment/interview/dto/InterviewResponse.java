@@ -21,7 +21,6 @@ public record InterviewResponse(
         String details,
         List<InterviewerResponse> interviewers,
         List<IntervieweeResponse> interviewees,
-        List<InterviewEvaluationSessionResponse> evaluationSessions,
         StatusCompactResponse status,
         LocalDateTime createdDate
 ) {}

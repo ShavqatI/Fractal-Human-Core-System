@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 interface InterviewEvaluationSessionRepository extends JpaRepository<InterviewEvaluationSession,Long> {
 
-    Optional<InterviewEvaluationSession> findByInterviewIdAndId(Long interviewId, Long id);
+    Optional<InterviewEvaluationSession> findByInterviewerIdAndId(Long interviewerId, Long id);
 
-    List<InterviewEvaluationSession> findAllByInterviewId(Long interviewId);
+    List<InterviewEvaluationSession> findAllByInterviewerId(Long interviewerId);
 }

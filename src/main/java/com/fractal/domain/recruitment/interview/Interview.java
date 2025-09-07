@@ -56,8 +56,6 @@ public class Interview extends AbstractEntity {
     @OneToMany(mappedBy = "interview",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Interviewee> interviewees = new ArrayList<>();
 
-    @OneToMany(mappedBy = "interview",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<InterviewEvaluationSession> evaluationSessions = new ArrayList<>();
 
     @Transactional
     public void addInterviewer(Interviewer interviewer) {
