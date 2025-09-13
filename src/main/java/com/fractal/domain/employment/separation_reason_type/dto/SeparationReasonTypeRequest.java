@@ -1,4 +1,4 @@
-package com.fractal.domain.dictionary.separation_reason_type.dto;
+package com.fractal.domain.employment.separation_reason_type.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

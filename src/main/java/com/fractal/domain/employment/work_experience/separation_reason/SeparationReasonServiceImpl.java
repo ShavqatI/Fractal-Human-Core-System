@@ -1,6 +1,6 @@
 package com.fractal.domain.employment.work_experience.separation_reason;
 
-import com.fractal.domain.dictionary.separation_reason_type.SeparationReasonTypeService;
+import com.fractal.domain.employment.separation_reason_type.SeparationReasonTypeService;
 import com.fractal.domain.employment.work_experience.WorkExperienceService;
 import com.fractal.domain.employment.work_experience.separation_reason.dto.SeparationReasonRequest;
 import com.fractal.domain.employment.work_experience.separation_reason.dto.SeparationReasonResponse;

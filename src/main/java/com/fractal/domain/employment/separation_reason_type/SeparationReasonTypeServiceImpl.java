@@ -1,8 +1,8 @@
-package com.fractal.domain.dictionary.separation_reason_type;
+package com.fractal.domain.employment.separation_reason_type;
 
-import com.fractal.domain.dictionary.separation_reason_type.dto.SeparationReasonTypeCompactResponse;
-import com.fractal.domain.dictionary.separation_reason_type.dto.SeparationReasonTypeRequest;
-import com.fractal.domain.dictionary.separation_reason_type.dto.SeparationReasonTypeResponse;
+import com.fractal.domain.employment.separation_reason_type.dto.SeparationReasonTypeCompactResponse;
+import com.fractal.domain.employment.separation_reason_type.dto.SeparationReasonTypeRequest;
+import com.fractal.domain.employment.separation_reason_type.dto.SeparationReasonTypeResponse;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;

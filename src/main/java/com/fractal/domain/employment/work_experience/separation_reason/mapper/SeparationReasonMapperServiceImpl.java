@@ -1,18 +1,11 @@
 package com.fractal.domain.employment.work_experience.separation_reason.mapper;
 
-import com.fractal.domain.dictionary.separation_reason_type.SeparationReasonTypeService;
-import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employment.separation_reason_type.SeparationReasonTypeService;
 import com.fractal.domain.employment.work_experience.separation_reason.SeparationReason;
-import com.fractal.domain.employment.work_experience.separation_reason.dto.SeparationReasonCompactResponse;
 import com.fractal.domain.employment.work_experience.separation_reason.dto.SeparationReasonRequest;
 import com.fractal.domain.employment.work_experience.separation_reason.dto.SeparationReasonResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor

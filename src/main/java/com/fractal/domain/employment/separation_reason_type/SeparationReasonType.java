@@ -1,4 +1,4 @@
-package com.fractal.domain.dictionary.separation_reason_type;
+package com.fractal.domain.employment.separation_reason_type;
 
 
 import com.fractal.domain.abstraction.Dictionary;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "separation_reason_type", schema = "dictionary_schema", catalog = "fractal")
+@Table(name = "separation_reason_type", schema = "employment_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @NoArgsConstructor

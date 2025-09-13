@@ -1,19 +1,12 @@
 package com.fractal.domain.employment.work_experience.separation_reason;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.abstraction.Lifecycle;
-import com.fractal.domain.dictionary.separation_reason_type.SeparationReasonType;
-import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.employment.separation_reason_type.SeparationReasonType;
 import com.fractal.domain.employment.work_experience.WorkExperience;
-import com.fractal.domain.organization_management.unit.OrganizationUnit;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "separation_reason", schema = "employment_schema", catalog = "fractal")
