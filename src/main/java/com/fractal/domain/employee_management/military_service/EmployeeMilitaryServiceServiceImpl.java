@@ -61,7 +61,6 @@ class EmployeeMilitaryServiceServiceImpl implements EmployeeMilitaryServiceServi
                 .stream()
                 .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Military Service with id: " + id + " not found"));
         employee.removeMilitaryService(militaryService);
-        militaryServiceRepository.delete(militaryService);
         employeeService.save(employee);
     }
 

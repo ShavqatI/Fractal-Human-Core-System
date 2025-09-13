@@ -1,6 +1,5 @@
 package com.fractal.domain.recruitment.interview.evaluation.session.answer;
 
-import com.fractal.domain.recruitment.interview.evaluation.InterviewEvaluation;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionCompactResponse;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionRequest;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionResponse;

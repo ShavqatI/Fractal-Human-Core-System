@@ -4,7 +4,6 @@ package com.fractal.domain.recruitment.interview.evaluation.session;
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.recruitment.interview.Interview;
 import com.fractal.domain.recruitment.interview.evaluation.InterviewEvaluation;
 import com.fractal.domain.recruitment.interview.evaluation.session.answer.InterviewEvaluationSessionAnswerSubmission;
 import com.fractal.domain.recruitment.interview.interviewer.Interviewer;

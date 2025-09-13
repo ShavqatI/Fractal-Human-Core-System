@@ -8,6 +8,7 @@ import com.fractal.domain.recruitment.candidate.citizenship.CandidateCitizenship
 import com.fractal.domain.recruitment.candidate.contact.CandidateContact;
 import com.fractal.domain.recruitment.candidate.education.CandidateEducation;
 import com.fractal.domain.recruitment.candidate.identification_document.CandidateIdentificationDocument;
+import com.fractal.domain.recruitment.candidate.language_skill.CandidateLanguageSkill;
 import com.fractal.domain.recruitment.candidate.military_service.CandidateMilitaryService;
 import com.fractal.domain.recruitment.candidate.resource.CandidateResource;
 import com.fractal.domain.recruitment.candidate.work_experience.CandidateWorkExperience;
@@ -52,6 +53,9 @@ public class Candidate extends Person {
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<CandidateEducation> educations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private  List<CandidateLanguageSkill> languageSkills = new ArrayList<>();
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<CandidateWorkExperience> workExperiences = new ArrayList<>();
@@ -120,6 +124,17 @@ public class Candidate extends Person {
     public void removeEducation(CandidateEducation education) {
         if (educations != null && !educations.isEmpty())
             educations.remove(education);
+    }
+    @Transactional
+    public void addLanguageSkill(CandidateLanguageSkill languageSkill) {
+        if (languageSkills == null) languageSkills = new ArrayList<>();
+        languageSkill.setCandidate(this);
+        languageSkills.add(languageSkill);
+    }
+    @Transactional
+    public void removeLanguageSkill(CandidateLanguageSkill languageSkill) {
+        if (languageSkills != null && !languageSkills.isEmpty())
+            languageSkills.remove(languageSkill);
     }
 
     @Transactional

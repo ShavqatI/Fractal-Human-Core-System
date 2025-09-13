@@ -4,7 +4,6 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.recruitment.interview.Interview;
-import com.fractal.domain.recruitment.interview.evaluation.InterviewEvaluation;
 import com.fractal.domain.recruitment.interview.evaluation.session.InterviewEvaluationSession;
 import jakarta.persistence.*;
 import lombok.Data;

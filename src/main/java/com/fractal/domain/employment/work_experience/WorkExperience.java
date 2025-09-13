@@ -4,7 +4,6 @@ package com.fractal.domain.employment.work_experience;
 import com.fractal.domain.abstraction.AbstractEmploymentHistory;
 import com.fractal.domain.employment.work_experience.separation_reason.SeparationReason;
 import com.fractal.domain.location.country.Country;
-import com.fractal.domain.organization_management.department.Department;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

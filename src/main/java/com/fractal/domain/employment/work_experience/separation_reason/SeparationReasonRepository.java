@@ -1,6 +1,5 @@
 package com.fractal.domain.employment.work_experience.separation_reason;
 
-import com.fractal.domain.employment.work_experience.WorkExperience;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

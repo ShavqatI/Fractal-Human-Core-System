@@ -1,11 +1,7 @@
 package com.fractal.domain.employment.work_experience.separation_reason;
 
-import com.fractal.domain.employment.work_experience.separation_reason.dto.SeparationReasonCompactResponse;
 import com.fractal.domain.employment.work_experience.separation_reason.dto.SeparationReasonRequest;
 import com.fractal.domain.employment.work_experience.separation_reason.dto.SeparationReasonResponse;
-import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.InterviewEvaluationAnswer;
-import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.dto.InterviewEvaluationAnswerRequest;
-import com.fractal.domain.recruitment.interview.evaluation.section.question.answer.dto.InterviewEvaluationAnswerResponse;
 
 import java.util.List;
 

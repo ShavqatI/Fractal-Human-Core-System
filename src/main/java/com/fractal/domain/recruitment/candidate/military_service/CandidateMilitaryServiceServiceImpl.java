@@ -23,10 +23,10 @@ class CandidateMilitaryServiceServiceImpl implements CandidateMilitaryServiceSer
     @Override
     @Transactional
     public CandidateMilitaryService create(Long candidateId, MilitaryServiceRequest dto) {
-        var employee = candidateService.getById(candidateId);
+        var candidate = candidateService.getById(candidateId);
         var militaryService = militaryServiceMapperService.toEntity(dto);
-        employee.addMilitaryService(militaryService);
-        candidateService.save(employee);
+        candidate.addMilitaryService(militaryService);
+        candidateService.save(candidate);
        return militaryService;
     }
 
@@ -43,26 +43,25 @@ class CandidateMilitaryServiceServiceImpl implements CandidateMilitaryServiceSer
     @Override
     @Transactional
     public CandidateMilitaryService update(Long candidateId, Long id, MilitaryServiceRequest dto) {
-        var employee = candidateService.getById(candidateId);
-        var militaryService = employee.getMilitaryServices()
+        var candidate = candidateService.getById(candidateId);
+        var militaryService = candidate.getMilitaryServices()
                 .stream()
                 .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Military Service with id: " + id + " not found"));
         militaryService = militaryServiceMapperService.toEntity(militaryService,dto);
         militaryServiceRepository.save(militaryService);
-        candidateService.save(employee);
+        candidateService.save(candidate);
        return militaryService;
     }
 
     @Override
     @Transactional
     public void delete(Long employeeId, Long id) {
-        var employee = candidateService.getById(employeeId);
-        var militaryService = employee.getMilitaryServices()
+        var candidate = candidateService.getById(employeeId);
+        var militaryService = candidate.getMilitaryServices()
                 .stream()
                 .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Military Service with id: " + id + " not found"));
-        employee.removeMilitaryService(militaryService);
-        militaryServiceRepository.delete(militaryService);
-        candidateService.save(employee);
+        candidate.removeMilitaryService(militaryService);
+        candidateService.save(candidate);
     }
 
     @Override
