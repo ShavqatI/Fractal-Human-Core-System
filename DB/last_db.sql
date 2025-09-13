@@ -181,17 +181,17 @@ ALTER TABLE IF EXISTS ONLY recruitment_schema.interview_evaluation_section DROP 
 ALTER TABLE IF EXISTS ONLY organization_schema.organization DROP CONSTRAINT IF EXISTS fkt4gf01gb3wep67ywcpfemqro3;
 ALTER TABLE IF EXISTS ONLY organization_schema.organization DROP CONSTRAINT IF EXISTS fkstgsvhc6dn2t32td4knbssjky;
 ALTER TABLE IF EXISTS ONLY organization_schema.reporting_line DROP CONSTRAINT IF EXISTS fksj9u0slv7itvaqaslj6rq28j4;
-ALTER TABLE IF EXISTS ONLY organization_schema.department DROP CONSTRAINT IF EXISTS fksj0beotu978kowumc6hklbl4c;
+ALTER TABLE IF EXISTS ONLY organization_schema.separationReason DROP CONSTRAINT IF EXISTS fksj0beotu978kowumc6hklbl4c;
 ALTER TABLE IF EXISTS ONLY organization_schema.organization_unit DROP CONSTRAINT IF EXISTS fks84y3cn9levaa67l9lkm6r05e;
 ALTER TABLE IF EXISTS ONLY organization_schema.authority DROP CONSTRAINT IF EXISTS fkrxxda3cfyp3e4glgb5wx6r7je;
 ALTER TABLE IF EXISTS ONLY organization_schema.organization_contact DROP CONSTRAINT IF EXISTS fkrxldtwyw0ewgd16nh1dbpk9on;
 ALTER TABLE IF EXISTS ONLY organization_schema.reporting_line_type DROP CONSTRAINT IF EXISTS fkrpfhg91rakqg4p48mse920f7w;
 ALTER TABLE IF EXISTS ONLY organization_schema.grade_step DROP CONSTRAINT IF EXISTS fkrd14k2gwjpwffpnpuy1puqdbv;
-ALTER TABLE IF EXISTS ONLY organization_schema.department DROP CONSTRAINT IF EXISTS fkovdg8bvkum4mh0ikrdr7q6rlm;
+ALTER TABLE IF EXISTS ONLY organization_schema.separationReason DROP CONSTRAINT IF EXISTS fkovdg8bvkum4mh0ikrdr7q6rlm;
 ALTER TABLE IF EXISTS ONLY organization_schema.key_performance_indicator DROP CONSTRAINT IF EXISTS fkodjy4q0ojg5u9tirx6hcjswss;
 ALTER TABLE IF EXISTS ONLY organization_schema.grade_step DROP CONSTRAINT IF EXISTS fko0gt0b9re6s104ys5k8o1neno;
 ALTER TABLE IF EXISTS ONLY organization_schema.reporting_line DROP CONSTRAINT IF EXISTS fknug7san1s41lpsmtbp9j4v2nl;
-ALTER TABLE IF EXISTS ONLY organization_schema.department DROP CONSTRAINT IF EXISTS fkmgsnnmudxrwqidn4f64q8rp4o;
+ALTER TABLE IF EXISTS ONLY organization_schema.separationReason DROP CONSTRAINT IF EXISTS fkmgsnnmudxrwqidn4f64q8rp4o;
 ALTER TABLE IF EXISTS ONLY organization_schema.work_schedule DROP CONSTRAINT IF EXISTS fkm74jkkch72jh8o9x9owhjdh6v;
 ALTER TABLE IF EXISTS ONLY organization_schema."position" DROP CONSTRAINT IF EXISTS fkm3sbyitwagg27v6n7kobokau5;
 ALTER TABLE IF EXISTS ONLY organization_schema.work_schedule DROP CONSTRAINT IF EXISTS fklc197h6r7la0hehtvxj3nsfeb;
@@ -209,7 +209,7 @@ ALTER TABLE IF EXISTS ONLY organization_schema.required_experience DROP CONSTRAI
 ALTER TABLE IF EXISTS ONLY organization_schema.grade DROP CONSTRAINT IF EXISTS fkhkm4gynm673v44jgryiy9odh2;
 ALTER TABLE IF EXISTS ONLY organization_schema.authority DROP CONSTRAINT IF EXISTS fkgm1gbyt6evane5dgvf4200jbs;
 ALTER TABLE IF EXISTS ONLY organization_schema.responsibility DROP CONSTRAINT IF EXISTS fkg3vsmwqbvklt9127snmnvselc;
-ALTER TABLE IF EXISTS ONLY organization_schema.department DROP CONSTRAINT IF EXISTS fkfqtv5nnif1gd3tjiey0mvcsqv;
+ALTER TABLE IF EXISTS ONLY organization_schema.separationReason DROP CONSTRAINT IF EXISTS fkfqtv5nnif1gd3tjiey0mvcsqv;
 ALTER TABLE IF EXISTS ONLY organization_schema.grade_step DROP CONSTRAINT IF EXISTS fkfik8o7842uqxnu3y6w60m4av7;
 ALTER TABLE IF EXISTS ONLY organization_schema.authority DROP CONSTRAINT IF EXISTS fkesexn44wmq0k58w2v6ayfbwlu;
 ALTER TABLE IF EXISTS ONLY organization_schema.key_performance_indicator DROP CONSTRAINT IF EXISTS fkeibmd61goas4hpm9oul965tnb;
@@ -234,7 +234,7 @@ ALTER TABLE IF EXISTS ONLY organization_schema.grade DROP CONSTRAINT IF EXISTS f
 ALTER TABLE IF EXISTS ONLY organization_schema.accountability DROP CONSTRAINT IF EXISTS fk7xqcppjg3kworxvy4srmp01o3;
 ALTER TABLE IF EXISTS ONLY organization_schema.responsibility DROP CONSTRAINT IF EXISTS fk7plhr1v02ns1cbc0avfrxa5q0;
 ALTER TABLE IF EXISTS ONLY organization_schema.job_description DROP CONSTRAINT IF EXISTS fk6aggivxmolyw8miurbqfkp2n4;
-ALTER TABLE IF EXISTS ONLY organization_schema.department DROP CONSTRAINT IF EXISTS fk5ptf7l6on51fsf8aa2jx9rnlf;
+ALTER TABLE IF EXISTS ONLY organization_schema.separationReason DROP CONSTRAINT IF EXISTS fk5ptf7l6on51fsf8aa2jx9rnlf;
 ALTER TABLE IF EXISTS ONLY organization_schema."position" DROP CONSTRAINT IF EXISTS fk4m4tca2i2jjfx6vydbs3l0ul2;
 ALTER TABLE IF EXISTS ONLY organization_schema.organization_address DROP CONSTRAINT IF EXISTS fk4bxk7tixquspybhj8mdi6vyhi;
 ALTER TABLE IF EXISTS ONLY organization_schema.accountability DROP CONSTRAINT IF EXISTS fk3yhcetalvpxeyscd4i2gbisce;
@@ -622,7 +622,7 @@ ALTER TABLE IF EXISTS ONLY recruitment_schema.candidate_citizenship DROP CONSTRA
 ALTER TABLE IF EXISTS ONLY recruitment_schema.candidate_address DROP CONSTRAINT IF EXISTS candidate_address_pkey;
 ALTER TABLE IF EXISTS ONLY organization_schema.work_schedule DROP CONSTRAINT IF EXISTS work_schedule_pkey;
 ALTER TABLE IF EXISTS ONLY organization_schema.reporting_line_type DROP CONSTRAINT IF EXISTS ukrs8vcxrd9geshgoit5p4u7i0h;
-ALTER TABLE IF EXISTS ONLY organization_schema.department DROP CONSTRAINT IF EXISTS ukq8ymhgj6pt1msox0o3bg51uvo;
+ALTER TABLE IF EXISTS ONLY organization_schema.separationReason DROP CONSTRAINT IF EXISTS ukq8ymhgj6pt1msox0o3bg51uvo;
 ALTER TABLE IF EXISTS ONLY organization_schema.grade DROP CONSTRAINT IF EXISTS ukmfpeq9u7tfkalk2vbwwibtf4f;
 ALTER TABLE IF EXISTS ONLY organization_schema.grade_level DROP CONSTRAINT IF EXISTS ukbjrlvdyf754q4tuy7y3d6yv0x;
 ALTER TABLE IF EXISTS ONLY organization_schema."position" DROP CONSTRAINT IF EXISTS ukaqoegu9tj6s7t7f31abslcng;
@@ -643,7 +643,7 @@ ALTER TABLE IF EXISTS ONLY organization_schema.job_description DROP CONSTRAINT I
 ALTER TABLE IF EXISTS ONLY organization_schema.grade_step DROP CONSTRAINT IF EXISTS grade_step_pkey;
 ALTER TABLE IF EXISTS ONLY organization_schema.grade DROP CONSTRAINT IF EXISTS grade_pkey;
 ALTER TABLE IF EXISTS ONLY organization_schema.grade_level DROP CONSTRAINT IF EXISTS grade_level_pkey;
-ALTER TABLE IF EXISTS ONLY organization_schema.department DROP CONSTRAINT IF EXISTS department_pkey;
+ALTER TABLE IF EXISTS ONLY organization_schema.separationReason DROP CONSTRAINT IF EXISTS department_pkey;
 ALTER TABLE IF EXISTS ONLY organization_schema.authority DROP CONSTRAINT IF EXISTS authority_pkey;
 ALTER TABLE IF EXISTS ONLY organization_schema.accountability DROP CONSTRAINT IF EXISTS accountability_pkey;
 ALTER TABLE IF EXISTS ONLY navigation_schema.action_category DROP CONSTRAINT IF EXISTS uks7ch6269v14wjpa05sp193rhn;
@@ -854,7 +854,7 @@ DROP TABLE IF EXISTS organization_schema.job_description;
 DROP TABLE IF EXISTS organization_schema.grade_step;
 DROP TABLE IF EXISTS organization_schema.grade_level;
 DROP TABLE IF EXISTS organization_schema.grade;
-DROP TABLE IF EXISTS organization_schema.department;
+DROP TABLE IF EXISTS organization_schema.separationReason;
 DROP TABLE IF EXISTS organization_schema.authority;
 DROP TABLE IF EXISTS organization_schema.accountability;
 DROP TABLE IF EXISTS navigation_schema.public_url;
@@ -3178,7 +3178,7 @@ CREATE TABLE employment_schema.work_experience (
     end_date date,
     start_date date,
     achievements text,
-    department character varying(255),
+    separationReason character varying(255),
     division character varying(255),
     leave_reason text,
     location character varying(255),
@@ -4170,10 +4170,10 @@ ALTER TABLE organization_schema.authority ALTER COLUMN id ADD GENERATED BY DEFAU
 
 
 --
--- Name: department; Type: TABLE; Schema: organization_schema; Owner: fractal
+-- Name: separationReason; Type: TABLE; Schema: organization_schema; Owner: fractal
 --
 
-CREATE TABLE organization_schema.department (
+CREATE TABLE organization_schema.separationReason (
     id bigint NOT NULL,
     created_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_date timestamp(6) without time zone,
@@ -4193,13 +4193,13 @@ CREATE TABLE organization_schema.department (
 );
 
 
-ALTER TABLE organization_schema.department OWNER TO fractal;
+ALTER TABLE organization_schema.separationReason OWNER TO fractal;
 
 --
 -- Name: department_id_seq; Type: SEQUENCE; Schema: organization_schema; Owner: fractal
 --
 
-ALTER TABLE organization_schema.department ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+ALTER TABLE organization_schema.separationReason ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
     SEQUENCE NAME organization_schema.department_id_seq
     START WITH 1
     INCREMENT BY 1
@@ -7028,7 +7028,7 @@ COPY employment_schema.employment_type (id, created_date, updated_date, code, na
 -- Data for Name: work_experience; Type: TABLE DATA; Schema: employment_schema; Owner: fractal
 --
 
-COPY employment_schema.work_experience (id, created_date, updated_date, end_date, start_date, achievements, department, division, leave_reason, location, organization, "position", responsibilities, created_user_id, updated_user_id, employment_type_id, country_id, status_id) FROM stdin;
+COPY employment_schema.work_experience (id, created_date, updated_date, end_date, start_date, achievements, separationReason, division, leave_reason, location, organization, "position", responsibilities, created_user_id, updated_user_id, employment_type_id, country_id, status_id) FROM stdin;
 5	2025-08-24 16:52:02.438169	\N	2025-12-03	2025-08-06	цйв	цйв	йцв	цйв	вйцв	йцв	цв	йцв	\N	\N	1	3	5
 6	2025-08-24 17:10:47.949779	\N	2025-11-19	2025-08-06	new projects	IT	Support	working now	Душанбе	FMFB	Manager of support IT	Manager	\N	\N	1	3	5
 \.
@@ -7108,7 +7108,7 @@ COPY localization_schema.layout_label (id, created_date, updated_date, name, cre
 35	2025-07-31 12:28:41.33393	2025-07-31 12:29:22.685526	reset_password	\N	\N
 36	2025-07-31 13:59:53.38682	\N	change_password	\N	\N
 37	2025-08-01 10:30:40.832937	\N	organization_management	\N	\N
-38	2025-08-01 10:31:15.031298	\N	department	\N	\N
+38	2025-08-01 10:31:15.031298	\N	separationReason	\N	\N
 39	2025-08-01 10:31:40.433484	\N	position	\N	\N
 40	2025-08-01 10:31:53.678408	\N	job_description	\N	\N
 41	2025-08-01 10:32:10.51423	\N	organization	\N	\N
@@ -7563,7 +7563,7 @@ COPY navigation_schema.menu (id, created_date, updated_date, class_name, icon, l
 48	2025-08-03 16:59:45.021762	\N	\N	CONTACT	2	Contact Type	6	contact-type	\N	\N	43	1
 49	2025-08-05 12:42:31.006339	\N	\N	LOCATION	3	Organization Address	1	organization-address	\N	\N	44	43
 50	2025-08-05 12:44:29.971045	\N	\N	CONTACT	3	Organization Contact	2	organization-contact	\N	\N	45	43
-44	2025-08-01 10:37:07.926638	2025-08-06 13:41:31.931738	\N	GROUP	2	Department	2	department	\N	\N	38	42
+44	2025-08-01 10:37:07.926638	2025-08-06 13:41:31.931738	\N	GROUP	2	Department	2	separationReason	\N	\N	38	42
 45	2025-08-01 10:37:07.931601	2025-08-06 13:42:05.972136	\N	BRIEFCASE	2	Position	3	position	\N	\N	39	42
 46	2025-08-01 10:37:07.941492	2025-08-06 13:42:37.743527	\N	SITEMAP	2	Organization Unit	4	organization-unit	\N	\N	42	42
 42	2025-08-01 10:37:07.901045	2025-08-06 13:43:19.383519	\N	BUILDING	1	Organization Managment	5	organization-management	\N	\N	37	\N
@@ -7871,10 +7871,10 @@ COPY organization_schema.authority (id, created_date, updated_date, description,
 
 
 --
--- Data for Name: department; Type: TABLE DATA; Schema: organization_schema; Owner: fractal
+-- Data for Name: separationReason; Type: TABLE DATA; Schema: organization_schema; Owner: fractal
 --
 
-COPY organization_schema.department (id, created_date, updated_date, code, level, level_map, name, created_user_id, updated_user_id, organization_unit_id, parent_id, status_id, close_date, close_reason, open_date, open_reason) FROM stdin;
+COPY organization_schema.separationReason (id, created_date, updated_date, code, level, level_map, name, created_user_id, updated_user_id, organization_unit_id, parent_id, status_id, close_date, close_reason, open_date, open_reason) FROM stdin;
 14	2025-09-01 18:34:36.395309	\N	SUPPORT	1	ewrwer	Support	\N	\N	1	\N	5	2025-09-17		2025-09-10	ewrwer
 \.
 
@@ -10548,10 +10548,10 @@ ALTER TABLE ONLY organization_schema.authority
 
 
 --
--- Name: department department_pkey; Type: CONSTRAINT; Schema: organization_schema; Owner: fractal
+-- Name: separationReason department_pkey; Type: CONSTRAINT; Schema: organization_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY organization_schema.department
+ALTER TABLE ONLY organization_schema.separationReason
     ADD CONSTRAINT department_pkey PRIMARY KEY (id);
 
 
@@ -10716,10 +10716,10 @@ ALTER TABLE ONLY organization_schema.grade
 
 
 --
--- Name: department ukq8ymhgj6pt1msox0o3bg51uvo; Type: CONSTRAINT; Schema: organization_schema; Owner: fractal
+-- Name: separationReason ukq8ymhgj6pt1msox0o3bg51uvo; Type: CONSTRAINT; Schema: organization_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY organization_schema.department
+ALTER TABLE ONLY organization_schema.separationReason
     ADD CONSTRAINT ukq8ymhgj6pt1msox0o3bg51uvo UNIQUE (code);
 
 
@@ -12200,7 +12200,7 @@ ALTER TABLE ONLY employee_schema.performance_type
 --
 
 ALTER TABLE ONLY employee_schema.employment_history
-    ADD CONSTRAINT fk9k4h43a85ahbrlpsyy0g6fj3l FOREIGN KEY (department_id) REFERENCES organization_schema.department(id);
+    ADD CONSTRAINT fk9k4h43a85ahbrlpsyy0g6fj3l FOREIGN KEY (department_id) REFERENCES organization_schema.separationReason(id);
 
 
 --
@@ -13820,10 +13820,10 @@ ALTER TABLE ONLY organization_schema."position"
 
 
 --
--- Name: department fk5ptf7l6on51fsf8aa2jx9rnlf; Type: FK CONSTRAINT; Schema: organization_schema; Owner: fractal
+-- Name: separationReason fk5ptf7l6on51fsf8aa2jx9rnlf; Type: FK CONSTRAINT; Schema: organization_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY organization_schema.department
+ALTER TABLE ONLY organization_schema.separationReason
     ADD CONSTRAINT fk5ptf7l6on51fsf8aa2jx9rnlf FOREIGN KEY (organization_unit_id) REFERENCES organization_schema.organization_unit(id);
 
 
@@ -14020,10 +14020,10 @@ ALTER TABLE ONLY organization_schema.grade_step
 
 
 --
--- Name: department fkfqtv5nnif1gd3tjiey0mvcsqv; Type: FK CONSTRAINT; Schema: organization_schema; Owner: fractal
+-- Name: separationReason fkfqtv5nnif1gd3tjiey0mvcsqv; Type: FK CONSTRAINT; Schema: organization_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY organization_schema.department
+ALTER TABLE ONLY organization_schema.separationReason
     ADD CONSTRAINT fkfqtv5nnif1gd3tjiey0mvcsqv FOREIGN KEY (updated_user_id) REFERENCES user_schema."user"(id);
 
 
@@ -14152,7 +14152,7 @@ ALTER TABLE ONLY organization_schema.work_schedule
 --
 
 ALTER TABLE ONLY organization_schema."position"
-    ADD CONSTRAINT fkm3sbyitwagg27v6n7kobokau5 FOREIGN KEY (department_id) REFERENCES organization_schema.department(id);
+    ADD CONSTRAINT fkm3sbyitwagg27v6n7kobokau5 FOREIGN KEY (department_id) REFERENCES organization_schema.separationReason(id);
 
 
 --
@@ -14164,11 +14164,11 @@ ALTER TABLE ONLY organization_schema.work_schedule
 
 
 --
--- Name: department fkmgsnnmudxrwqidn4f64q8rp4o; Type: FK CONSTRAINT; Schema: organization_schema; Owner: fractal
+-- Name: separationReason fkmgsnnmudxrwqidn4f64q8rp4o; Type: FK CONSTRAINT; Schema: organization_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY organization_schema.department
-    ADD CONSTRAINT fkmgsnnmudxrwqidn4f64q8rp4o FOREIGN KEY (parent_id) REFERENCES organization_schema.department(id);
+ALTER TABLE ONLY organization_schema.separationReason
+    ADD CONSTRAINT fkmgsnnmudxrwqidn4f64q8rp4o FOREIGN KEY (parent_id) REFERENCES organization_schema.separationReason(id);
 
 
 --
@@ -14196,10 +14196,10 @@ ALTER TABLE ONLY organization_schema.key_performance_indicator
 
 
 --
--- Name: department fkovdg8bvkum4mh0ikrdr7q6rlm; Type: FK CONSTRAINT; Schema: organization_schema; Owner: fractal
+-- Name: separationReason fkovdg8bvkum4mh0ikrdr7q6rlm; Type: FK CONSTRAINT; Schema: organization_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY organization_schema.department
+ALTER TABLE ONLY organization_schema.separationReason
     ADD CONSTRAINT fkovdg8bvkum4mh0ikrdr7q6rlm FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
 
 
@@ -14244,10 +14244,10 @@ ALTER TABLE ONLY organization_schema.organization_unit
 
 
 --
--- Name: department fksj0beotu978kowumc6hklbl4c; Type: FK CONSTRAINT; Schema: organization_schema; Owner: fractal
+-- Name: separationReason fksj0beotu978kowumc6hklbl4c; Type: FK CONSTRAINT; Schema: organization_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY organization_schema.department
+ALTER TABLE ONLY organization_schema.separationReason
     ADD CONSTRAINT fksj0beotu978kowumc6hklbl4c FOREIGN KEY (created_user_id) REFERENCES user_schema."user"(id);
 
 

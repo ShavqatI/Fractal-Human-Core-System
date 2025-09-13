@@ -29,7 +29,7 @@ public class InterviewEvaluationSessionSelectedAnswer extends ApprovalWorkflow {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interview_evaluation_session_answer_submission_id", nullable = false)
-    private InterviewEvaluationSessionAnswerSubmission answerSubmission;
+    private InterviewEvaluationSessionAnswerSubmission interviewEvaluationSessionAnswerSubmission;
 
     private LocalDateTime selectedDate;
 

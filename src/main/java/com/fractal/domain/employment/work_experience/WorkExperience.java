@@ -2,13 +2,18 @@ package com.fractal.domain.employment.work_experience;
 
 
 import com.fractal.domain.abstraction.AbstractEmploymentHistory;
-import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.employment.work_experience.separation_reason.SeparationReason;
 import com.fractal.domain.location.country.Country;
+import com.fractal.domain.organization_management.department.Department;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "work_experience", schema = "employment_schema", catalog = "fractal")
@@ -47,9 +52,21 @@ public class WorkExperience extends AbstractEmploymentHistory {
     @Column(name = "leave_reason", columnDefinition = "TEXT")
     private String leaveReason;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
-    private Status status;
+    @OneToMany(mappedBy = "workExperience", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<SeparationReason> separationReasons = new ArrayList<>();
 
+
+    @Transactional
+    public void addSeparationReason(SeparationReason separationReason) {
+        if (separationReasons == null) separationReasons = new ArrayList<>();
+        separationReason.setWorkExperience(this);
+        separationReasons.add(separationReason);
+    }
+
+    @Transactional
+    public void removeSeparationReason(SeparationReason separationReason) {
+        if (separationReasons != null && !separationReasons.isEmpty())
+            separationReasons.remove(separationReason);
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.fractal.domain.abstraction;
 
+import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employment.type.EmploymentType;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -23,4 +24,8 @@ public abstract class AbstractEmploymentHistory extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employment_type_id", referencedColumnName = "id")
     private EmploymentType employmentType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    protected Status status;
 }

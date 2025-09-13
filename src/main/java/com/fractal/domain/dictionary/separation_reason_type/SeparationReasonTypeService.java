@@ -1,0 +1,19 @@
+package com.fractal.domain.dictionary.separation_reason_type;
+
+import com.fractal.domain.dictionary.separation_reason_type.dto.SeparationReasonTypeCompactResponse;
+import com.fractal.domain.dictionary.separation_reason_type.dto.SeparationReasonTypeRequest;
+import com.fractal.domain.dictionary.separation_reason_type.dto.SeparationReasonTypeResponse;
+
+import java.util.List;
+
+public interface SeparationReasonTypeService {
+
+    SeparationReasonType create(SeparationReasonTypeRequest dto);
+    List<SeparationReasonType> getAll();
+    SeparationReasonType getByCode(String code);
+    SeparationReasonType getById(Long id);
+    SeparationReasonType update(Long id, SeparationReasonTypeRequest dto);
+    void deleteById(Long id);
+    SeparationReasonTypeResponse toDTO(SeparationReasonType separationReasonType);
+    SeparationReasonTypeCompactResponse toCompactDTO(SeparationReasonType separationReasonType);
+}

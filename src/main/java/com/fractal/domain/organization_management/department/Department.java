@@ -35,7 +35,7 @@ public class Department extends Lifecycle  {
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Department parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Department> children = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

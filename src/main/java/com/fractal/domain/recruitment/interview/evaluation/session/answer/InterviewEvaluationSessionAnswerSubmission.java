@@ -37,13 +37,13 @@ public class InterviewEvaluationSessionAnswerSubmission extends ApprovalWorkflow
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "answerSubmission", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "interviewEvaluationSessionAnswerSubmission", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<InterviewEvaluationSessionSelectedAnswer> selectedAnswers = new ArrayList<>();
 
     @Transactional
     public void addAnswer(InterviewEvaluationSessionSelectedAnswer selectedAnswer) {
         if (selectedAnswers == null) selectedAnswers = new ArrayList<>();
-        selectedAnswer.setAnswerSubmission(this);
+        selectedAnswer.setInterviewEvaluationSessionAnswerSubmission(this);
         selectedAnswers.add(selectedAnswer);
     }
 

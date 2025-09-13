@@ -44,10 +44,6 @@ public class EmploymentHistory extends AbstractEmploymentHistory {
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position position;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
-    private Status status;
-
     @OneToMany(mappedBy = "employmentHistory", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private  List<Agreement> agreements   = new ArrayList<>();
 
