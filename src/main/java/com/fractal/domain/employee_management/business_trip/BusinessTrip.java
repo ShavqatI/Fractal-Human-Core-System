@@ -2,6 +2,7 @@ package com.fractal.domain.employee_management.business_trip;
 
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.employee_management.business_trip.expense.BusinessTripExpense;
 import com.fractal.domain.employee_management.business_trip.order.BusinessTripOrder;
 import com.fractal.domain.employee_management.business_trip.resource.BusinessTripResource;
 import com.fractal.domain.employee_management.business_trip.type.BusinessTripType;
@@ -62,11 +63,14 @@ public class BusinessTrip extends ApprovalWorkflow {
     @Column(name = "days")
     private Integer days;
 
-    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<BusinessTripOrder> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "businessTrip",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "businessTrip",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<BusinessTripResource> resources = new ArrayList<>();
+
+    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<BusinessTripExpense> expenses = new ArrayList<>();
 
     public void addOrder(BusinessTripOrder order) {
         if (orders == null) orders = new ArrayList<>();
@@ -86,5 +90,15 @@ public class BusinessTrip extends ApprovalWorkflow {
     public void removeResource(BusinessTripResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);
+    }
+
+    public void addExpense(BusinessTripExpense expense) {
+        if (expenses == null) expenses = new ArrayList<>();
+        expense.setBusinessTrip(this);
+        expenses.add(expense);
+    }
+    public void removeExpense(BusinessTripExpense expense) {
+        if (expenses != null && !expenses.isEmpty())
+            expenses.remove(expense);
     }
 }

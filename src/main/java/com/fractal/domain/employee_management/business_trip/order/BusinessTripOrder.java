@@ -25,7 +25,7 @@ public class BusinessTripOrder extends Order {
     @Setter(AccessLevel.NONE)
     private Long number;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "business_trip_id", referencedColumnName = "id")
     private BusinessTrip businessTrip;
 

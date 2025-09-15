@@ -10,12 +10,14 @@ import com.fractal.domain.employee_management.education.EmployeeEducation;
 import com.fractal.domain.employee_management.employee.resource.EmployeeResource;
 import com.fractal.domain.employee_management.employment.EmploymentHistory;
 import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
+import com.fractal.domain.employee_management.language_skill.EmployeeLanguageSkill;
 import com.fractal.domain.employee_management.military_service.EmployeeMilitaryService;
 import com.fractal.domain.employee_management.performance.Performance;
 import com.fractal.domain.employee_management.relative.Relative;
 import com.fractal.domain.employee_management.subordinate.Subordinate;
 import com.fractal.domain.employee_management.vacation.Vacation;
 import com.fractal.domain.employee_management.work_experience.EmployeeWorkExperience;
+import com.fractal.domain.recruitment.candidate.language_skill.CandidateLanguageSkill;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -52,6 +54,9 @@ public class Employee extends Person {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmployeeEducation> educations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private  List<EmployeeLanguageSkill> languageSkills = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<Relative> relatives  = new ArrayList<>();
@@ -136,6 +141,18 @@ public class Employee extends Person {
     public void removeEducation(EmployeeEducation education) {
         if (educations != null && !educations.isEmpty())
             educations.remove(education);
+    }
+
+    @Transactional
+    public void addLanguageSkill(EmployeeLanguageSkill languageSkill) {
+        if (languageSkills == null) languageSkills = new ArrayList<>();
+        languageSkill.setEmployee(this);
+        languageSkills.add(languageSkill);
+    }
+    @Transactional
+    public void removeLanguageSkill(EmployeeLanguageSkill languageSkill) {
+        if (languageSkills != null && !languageSkills.isEmpty())
+            languageSkills.remove(languageSkill);
     }
 
     @Transactional
