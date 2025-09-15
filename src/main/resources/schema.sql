@@ -19,4 +19,5 @@ CREATE SCHEMA IF NOT EXISTS employment_schema;
 CREATE SCHEMA IF NOT EXISTS work_schedule_schema;
 CREATE SCHEMA IF NOT EXISTS military_schema;
 CREATE SCHEMA IF NOT EXISTS state_schema;
+CREATE SCHEMA IF NOT EXISTS insurance_schema;
 
