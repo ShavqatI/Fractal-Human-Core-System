@@ -34,7 +34,7 @@ public class BusinessTripExpenseResourceServiceImpl implements BusinessTripExpen
 
     @Override
     public BusinessTripExpenseResource getById(Long businessTripExpenseId, Long id) {
-        return resourceRepository.findByByBusinessTripExpenseIdAndId(businessTripExpenseId,id).orElseThrow(()-> new ResourceNotFoundException("Business Trip Resource with id: " + id + " not found"));
+        return resourceRepository.findByBusinessTripExpenseIdAndId(businessTripExpenseId,id).orElseThrow(()-> new ResourceNotFoundException("Business Trip Resource with id: " + id + " not found"));
     }
 
     @Override

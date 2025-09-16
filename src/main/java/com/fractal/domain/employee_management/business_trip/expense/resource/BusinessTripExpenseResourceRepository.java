@@ -11,6 +11,6 @@ import java.util.Optional;
 public interface BusinessTripExpenseResourceRepository extends JpaRepository<BusinessTripExpenseResource,Long> {
 
     List<BusinessTripExpenseResource> findAllByBusinessTripExpenseId(Long businessTripExpenseId);
-    Optional<BusinessTripExpenseResource> findByByBusinessTripExpenseIdAndId(Long businessTripExpenseId, Long id);
+    Optional<BusinessTripExpenseResource> findByBusinessTripExpenseIdAndId(Long businessTripExpenseId, Long id);
 
 }
