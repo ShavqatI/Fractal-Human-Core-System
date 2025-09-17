@@ -10,6 +10,7 @@ import com.fractal.domain.employee_management.education.EmployeeEducation;
 import com.fractal.domain.employee_management.employee.resource.EmployeeResource;
 import com.fractal.domain.employee_management.employment.EmploymentHistory;
 import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
+import com.fractal.domain.employee_management.insurance.Insurance;
 import com.fractal.domain.employee_management.language_skill.EmployeeLanguageSkill;
 import com.fractal.domain.employee_management.military_service.EmployeeMilitaryService;
 import com.fractal.domain.employee_management.performance.Performance;
@@ -85,6 +86,9 @@ public class Employee extends Person {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmployeeWorkExperience> workExperiences = new ArrayList<>();
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private  List<Insurance> insurances = new ArrayList<>();
 
 
     @Transactional
@@ -214,6 +218,17 @@ public class Employee extends Person {
             resources.remove(resource);
     }
 
+    @Transactional
+    public void addInsurance(Insurance insurance) {
+        if (insurances == null) insurances = new ArrayList<>();
+        insurance.setEmployee(this);
+        insurances.add(insurance);
+    }
+    @Transactional
+    public void removeInsurance(Insurance insurance) {
+        if (insurances != null && !insurances.isEmpty())
+            insurances.remove(insurance);
+    }
 
 
 }

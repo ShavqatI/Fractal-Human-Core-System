@@ -1,4 +1,4 @@
-package com.fractal.controller.insurance;
+package com.fractal.controller.employee_management.insurance;
 
 
 import com.fractal.domain.insurance.type.InsuranceTypeService;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/insurance/type")
+@RequestMapping("/api/v1/employee-management/insurance/type")
 @RequiredArgsConstructor
 public class InsuranceTypeController {
 

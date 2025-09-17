@@ -5,9 +5,9 @@ import com.fractal.domain.employee_management.business_trip.expense.dto.Business
 import com.fractal.domain.employee_management.business_trip.expense.dto.BusinessTripExpenseResponse;
 
 public interface BusinessTripExpenseMapperService {
-    BusinessTripExpenseResponse toDTO(BusinessTripExpense order);
+    BusinessTripExpenseResponse toDTO(BusinessTripExpense expense);
     BusinessTripExpense toEntity(BusinessTripExpenseRequest dto);
-    BusinessTripExpense toEntity(BusinessTripExpense order, BusinessTripExpenseRequest dto);
+    BusinessTripExpense toEntity(BusinessTripExpense expense, BusinessTripExpenseRequest dto);
 }
 
 
