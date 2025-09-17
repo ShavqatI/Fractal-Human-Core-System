@@ -87,8 +87,6 @@ public class Employee extends Person {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmployeeWorkExperience> workExperiences = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private  List<Insurance> insurances = new ArrayList<>();
 
 
     @Transactional
@@ -217,18 +215,4 @@ public class Employee extends Person {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);
     }
-
-    @Transactional
-    public void addInsurance(Insurance insurance) {
-        if (insurances == null) insurances = new ArrayList<>();
-        insurance.setEmployee(this);
-        insurances.add(insurance);
-    }
-    @Transactional
-    public void removeInsurance(Insurance insurance) {
-        if (insurances != null && !insurances.isEmpty())
-            insurances.remove(insurance);
-    }
-
-
 }

@@ -1,14 +1,12 @@
 package com.fractal.domain.employee_management.insurance.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.insurance.Insurance;
-import com.fractal.domain.employee_management.insurance.coverage.InsuranceCoverage;
-import com.fractal.domain.employee_management.insurance.coverage.InsuranceCoverageService;
 import com.fractal.domain.employee_management.insurance.coverage.mapper.InsuranceCoverageMapperService;
 import com.fractal.domain.employee_management.insurance.dto.InsuranceRequest;
 import com.fractal.domain.employee_management.insurance.dto.InsuranceResponse;
+import com.fractal.domain.insurance.provider.InsuranceProviderService;
 import com.fractal.domain.insurance.type.InsuranceTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +23,7 @@ class InsuranceMapperServiceImpl implements InsuranceMapperService {
     private final EmployeeService employeeService;
     private final InsuranceTypeService insuranceTypeService;
     private final InsuranceCoverageMapperService coverageMapperService;
+    private final InsuranceProviderService insuranceProviderService;
     private final StatusService statusService;
 
     @Override
@@ -33,7 +32,7 @@ class InsuranceMapperServiceImpl implements InsuranceMapperService {
                    insurance.getId(),
                    null,
                    insuranceTypeService.toDTO(insurance.getInsuranceType()),
-                   null, //insurance.getInsuranceProvider(),
+                   insuranceProviderService.toCompactDTO(insurance.getInsuranceProvider()),
                    insurance.getPolicyNumber(),
                    insurance.getStartDate(),
                    insurance.getEndDate(),
@@ -61,7 +60,7 @@ class InsuranceMapperServiceImpl implements InsuranceMapperService {
     private Insurance mapToEntity(Insurance insurance, InsuranceRequest dto) {
         insurance.setEmployee(employeeService.getById(dto.employeeId()));
         insurance.setInsuranceType(insuranceTypeService.getById(dto.insuranceTypeId()));
-        insurance.setInsuranceProvider(null);
+        insurance.setInsuranceProvider(insuranceProviderService.getById(dto.insuranceProviderId()));
         insurance.setPolicyNumber(dto.policyNumber());
         insurance.setStartDate(dto.startDate());
         insurance.setEndDate(dto.endDate());
