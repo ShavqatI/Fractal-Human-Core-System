@@ -30,7 +30,7 @@ class SelectedAnswerServiceImpl implements SelectedAnswerService {
     }
 
     @Override
-    public List<SelectedAnswer> getAllByQuestionId(Long questionId) {
+    public List<SelectedAnswer> getAllByAnswerSubmissionId(Long questionId) {
         return selectedAnswerRepository.findAllByAnswerSubmissionId(questionId);
     }
 
