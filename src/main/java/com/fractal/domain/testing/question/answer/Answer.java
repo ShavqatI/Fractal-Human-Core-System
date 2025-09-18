@@ -1,6 +1,7 @@
-package com.fractal.domain.testing.question;
+package com.fractal.domain.testing.question.answer;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.testing.question.Question;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

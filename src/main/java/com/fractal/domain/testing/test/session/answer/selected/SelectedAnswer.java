@@ -1,7 +1,7 @@
 package com.fractal.domain.testing.test.session.answer.selected;
 
 import com.fractal.domain.abstraction.ApprovalWorkflow;
-import com.fractal.domain.testing.question.Answer;
+import com.fractal.domain.testing.question.answer.Answer;
 import com.fractal.domain.testing.test.session.answer.AnswerSubmission;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "selected_answer", schema = "testing_schema", catalog = "fractal")

@@ -39,5 +39,15 @@ public class AnswerSubmission extends ApprovalWorkflow {
     @OneToMany(mappedBy = "answerSubmission", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SelectedAnswer> selectedAnswers = new ArrayList<>();
 
+    public void addAnswer(SelectedAnswer selectedAnswer) {
+        if (selectedAnswers == null) selectedAnswers = new ArrayList<>();
+        selectedAnswer.setAnswerSubmission(this);
+        selectedAnswers.add(selectedAnswer);
+    }
+    public void removeAnswer(SelectedAnswer answer) {
+        if (selectedAnswers != null && !selectedAnswers.isEmpty())
+            selectedAnswers.remove(answer);
+    }
+
 
 }

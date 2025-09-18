@@ -4,10 +4,13 @@ import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.testing.test.Test;
+import com.fractal.domain.testing.test.session.answer.AnswerSubmission;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -41,4 +44,19 @@ public class TestSession extends ApprovalWorkflow {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
+
+    @OneToMany(mappedBy = "testSession", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<AnswerSubmission> submissions = new ArrayList<>();
+
+    public void addAnswerSubmission(AnswerSubmission submission) {
+        if (submissions == null) submissions = new ArrayList<>();
+        submission.setTestSession(this);
+        submissions.add(submission);
+    }
+
+    public void removeAnswerSubmission(AnswerSubmission submission) {
+        if (submissions != null && !submissions.isEmpty())
+            submissions.remove(submission);
+            submission.setTestSession(null);
+    }
 }

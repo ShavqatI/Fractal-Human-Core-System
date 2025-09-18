@@ -2,6 +2,7 @@ package com.fractal.domain.testing.question;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.testing.question.answer.Answer;
 import com.fractal.domain.testing.question.type.QuestionType;
 import com.fractal.domain.testing.test.Test;
 import jakarta.persistence.*;
@@ -42,4 +43,14 @@ public class Question extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "test_id", referencedColumnName = "id")
     private Test test;
+
+    public void addAnswer(Answer answer) {
+        if (answers == null) answers = new ArrayList<>();
+        answer.setQuestion(this);
+        answers.add(answer);
+    }
+    public void removeAnswer(Answer answer) {
+        if (answers != null && !answers.isEmpty())
+            answers.remove(answer);
+    }
 }
