@@ -25,11 +25,11 @@ public class Goal extends AbstractEntity {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "goal_achieved")
+    @Column(name = "achieved")
     private Boolean achieved;
 
-    @Column(name = "achievement_date")
-    private LocalDate achievementDate;
+    @Column(name = "achieved_date")
+    private LocalDate achievedDate;
 
     @Column(name = "remarks")
     private String remarks;

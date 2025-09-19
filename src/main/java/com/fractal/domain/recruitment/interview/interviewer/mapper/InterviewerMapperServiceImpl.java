@@ -1,6 +1,7 @@
 package com.fractal.domain.recruitment.interview.interviewer.mapper;
 
-import com.fractal.domain.recruitment.interview.dto.InterviewRequest;
+import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.recruitment.interview.interviewer.Interviewer;
 import com.fractal.domain.recruitment.interview.interviewer.dto.InterviewerRequest;
 import com.fractal.domain.recruitment.interview.interviewer.dto.InterviewerResponse;
@@ -11,7 +12,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class InterviewerMapperServiceImpl implements InterviewerMapperService {
 
-
+   private final EmployeeService employeeService;
+   private final StatusService statusService;
     @Override
     public InterviewerResponse toDTO(Interviewer interviewer) {
         return null;
@@ -19,11 +21,20 @@ class InterviewerMapperServiceImpl implements InterviewerMapperService {
 
     @Override
     public Interviewer toEntity(InterviewerRequest dto) {
-        return null;
+        return mapToEntity(new Interviewer(),dto);
     }
 
     @Override
-    public Interviewer toEntity(Interviewer interviewer, InterviewRequest dto) {
-        return null;
+    public Interviewer toEntity(Interviewer interviewer, InterviewerRequest dto) {
+        return mapToEntity(interviewer,dto);
+    }
+
+    private Interviewer mapToEntity(Interviewer interviewer , InterviewerRequest dto) {
+        interviewer.setEmployee(employeeService.getById(dto.employeeId()));
+        interviewer.setScheduledTime(dto.scheduledTime());
+        interviewer.setDurationMinutes(dto.durationMinutes());
+        interviewer.setStatus(statusService.getById(dto.statusId()));
+        return interviewer;
+
     }
 }

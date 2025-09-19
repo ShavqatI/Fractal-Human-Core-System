@@ -12,7 +12,6 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 
-
 @Entity
 @Table(name = "interviewee", schema = "recruitment_schema", catalog = "fractal")
 @Data

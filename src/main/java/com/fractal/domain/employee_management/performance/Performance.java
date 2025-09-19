@@ -6,6 +6,8 @@ import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.performance.goal.Goal;
 import com.fractal.domain.employee_management.performance.improvement.Improvement;
 import com.fractal.domain.employee_management.performance.type.PerformanceType;
+import com.fractal.domain.testing.question.Question;
+import com.fractal.domain.testing.test.session.answer.AnswerSubmission;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,6 +15,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -50,16 +53,38 @@ public class Performance extends AbstractEntity {
     @Column(name = "comments", length = 2000)
     private String comments;
 
-    @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Goal> goals;
 
-    @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Improvement> improvements;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
+
+    public void addGoal(Goal goal) {
+        if (goals == null) goals = new ArrayList<>();
+        goal.setPerformance(this);
+        goals.add(goal);
+    }
+
+    public void removeGoal(Goal goal) {
+        if (goals != null && !goals.isEmpty())
+            goals.remove(goal);
+    }
+
+    public void addImprovement(Improvement improvement) {
+        if (improvements == null) improvements = new ArrayList<>();
+        improvement.setPerformance(this);
+        improvements.add(improvement);
+    }
+
+    public void removeImprovement(Improvement improvement) {
+        if (improvements != null && !improvements.isEmpty())
+            improvements.remove(improvement);
+    }
 
 
 }
