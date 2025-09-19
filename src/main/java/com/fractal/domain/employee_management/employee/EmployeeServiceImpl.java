@@ -1,5 +1,6 @@
 package com.fractal.domain.employee_management.employee;
 
+import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employee.mapper.EmployeeMapperService;
@@ -55,6 +56,11 @@ class EmployeeServiceImpl implements EmployeeService {
     @Override
     public EmployeeResponse toDTO(Employee employee) {
        return employeeMapperService.toDTO(employee);
+    }
+
+    @Override
+    public EmployeeCompactResponse toCompactDTO(Employee employee) {
+        return employeeMapperService.toCompactDTO(employee);
     }
 
     @Override

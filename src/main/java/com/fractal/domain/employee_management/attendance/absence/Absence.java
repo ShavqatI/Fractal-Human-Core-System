@@ -1,6 +1,7 @@
 package com.fractal.domain.employee_management.attendance.absence;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.attendance.absence.type.AbsenceType;
 import com.fractal.domain.employee_management.employee.Employee;
 import jakarta.persistence.*;
@@ -19,13 +20,17 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Absence extends AbstractEntity {
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "absence_type_id", referencedColumnName = "id")
     private AbsenceType absenceType;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    private Status status;
 
     @Column(name = "start_date")
     private LocalDate startDate;

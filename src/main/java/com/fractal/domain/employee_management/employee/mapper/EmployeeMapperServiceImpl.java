@@ -9,6 +9,7 @@ import com.fractal.domain.employee_management.citizenship.mapper.EmployeeCitizen
 import com.fractal.domain.employee_management.contact.mapper.EmployeeContactMapperService;
 import com.fractal.domain.employee_management.education.mapper.EmployeeEducationMapperService;
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employee.resource.mapper.EmployeeResourceMapperService;
@@ -114,6 +115,22 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
     @Override
     public Employee toEntity(Employee employee, EmployeeRequest dto) {
        return mapToEntity(employee,dto);
+    }
+
+    @Override
+    public EmployeeCompactResponse toCompactDTO(Employee employee) {
+        return new EmployeeCompactResponse(
+                employee.getId(),
+                employee.getLastName(),
+                employee.getFirstName(),
+                employee.getPatronymicName(),
+                employee.getBirthDate(),
+                employee.getTin(),
+                employee.getSsn(),
+                genderService.toDTO(employee.getGender()),
+                maritalStatusService.toDTO(employee.getMaritalStatus()),
+                nationalityService.toDTO(employee.getNationality())
+        );
     }
 
     private Employee mapToEntity(Employee employee, EmployeeRequest dto) {

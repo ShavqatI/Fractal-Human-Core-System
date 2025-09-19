@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management;
+package com.fractal.controller.employee_management.attendance;
 
 
 import com.fractal.domain.employee_management.attendance.absence.type.AbsenceTypeService;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/absence-type")
+@RequestMapping("/api/v1/employee-management/attendance/absence/type")
 @RequiredArgsConstructor
 public class AbsenceTypeController {
 

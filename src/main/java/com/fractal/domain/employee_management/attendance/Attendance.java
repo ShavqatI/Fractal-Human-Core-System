@@ -38,10 +38,10 @@ public class Attendance extends AbstractEntity {
     private LocalTime endTime;
 
     @Column(name = "hours_worked")
-    private int hoursWorked;
+    private long hoursWorked;
 
     @Column(name = "overtime_hours")
-    private int overtimeHours;
+    private long overtimeHours;
 
     @Column(name = "remarks")
     private String remarks;
