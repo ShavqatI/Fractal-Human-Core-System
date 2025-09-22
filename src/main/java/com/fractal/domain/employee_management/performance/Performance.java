@@ -6,8 +6,6 @@ import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.performance.goal.Goal;
 import com.fractal.domain.employee_management.performance.improvement.Improvement;
 import com.fractal.domain.employee_management.performance.type.PerformanceType;
-import com.fractal.domain.testing.question.Question;
-import com.fractal.domain.testing.test.session.answer.AnswerSubmission;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -59,6 +57,7 @@ public class Performance extends AbstractEntity {
     @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<Improvement> improvements;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
@@ -85,6 +84,7 @@ public class Performance extends AbstractEntity {
         if (improvements != null && !improvements.isEmpty())
             improvements.remove(improvement);
     }
+
 
 
 }

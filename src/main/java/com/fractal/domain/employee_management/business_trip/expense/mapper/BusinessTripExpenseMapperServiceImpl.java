@@ -1,13 +1,12 @@
 package com.fractal.domain.employee_management.business_trip.expense.mapper;
 
 import com.fractal.domain.dictionary.currency.CurrencyService;
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.business_trip.expense.BusinessTripExpense;
 import com.fractal.domain.employee_management.business_trip.expense.dto.BusinessTripExpenseRequest;
 import com.fractal.domain.employee_management.business_trip.expense.dto.BusinessTripExpenseResponse;
-import com.fractal.domain.employee_management.business_trip.expense.resource.mapper.BusinessTripExpenseResourceMapperService;
-import com.fractal.domain.employee_management.business_trip.expense.type.BusinessTripExpenseTypeService;
-import com.fractal.domain.employee_management.order.resource.mapper.OrderResourceMapperService;
-import com.fractal.domain.employee_management.order.type.OrderTypeService;
+import com.fractal.domain.finance.expense.resource.mapper.ExpenseResourceMapperService;
+import com.fractal.domain.finance.expense.type.ExpenseTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,15 +19,16 @@ import static java.util.Collections.emptyList;
 @RequiredArgsConstructor
 class BusinessTripExpenseMapperServiceImpl implements BusinessTripExpenseMapperService {
 
-    private final BusinessTripExpenseTypeService expenseTypeService;
-    private final BusinessTripExpenseResourceMapperService resourceMapperService;
+    private final ExpenseTypeService expenseTypeService;
+    private final ExpenseResourceMapperService resourceMapperService;
     private final CurrencyService currencyService;
+    private final StatusService statusService;
 
     @Override
     public BusinessTripExpenseResponse toDTO(BusinessTripExpense expense) {
         return new BusinessTripExpenseResponse(
                    expense.getId(),
-                   expenseTypeService.toDTO(expense.getBusinessTripExpenseType()),
+                   expenseTypeService.toCompactDTO(expense.getExpenseType()),
                    currencyService.toCompactDTO(expense.getCurrency()),
                    expense.getAmount(),
                    expense.getDescription(),
@@ -38,6 +38,7 @@ class BusinessTripExpenseMapperServiceImpl implements BusinessTripExpenseMapperS
                         .stream()
                         .map(resourceMapperService::toDTO)
                         .collect(Collectors.toList()),
+                   statusService.toCompactDTO(expense.getStatus()),
                    expense.getCreatedDate()
 
         );
@@ -54,11 +55,12 @@ class BusinessTripExpenseMapperServiceImpl implements BusinessTripExpenseMapperS
     }
 
     private BusinessTripExpense mapToEntity(BusinessTripExpense expense, BusinessTripExpenseRequest dto) {
-        expense.setBusinessTripExpenseType(expenseTypeService.getById(dto.businessTripExpenseTypeId()));
+        expense.setExpenseType(expenseTypeService.getById(dto.expenseTypeId()));
         expense.setCurrency(currencyService.getById(dto.currencyId()));
         expense.setAmount(dto.amount());
         expense.setDate(dto.date());
         expense.setDescription(dto.description());
+        expense.setStatus(statusService.getById(dto.statusId()));
         dto.files().forEach(file-> expense.addResource(resourceMapperService.toEntity(file,null)));
         return expense;
     }

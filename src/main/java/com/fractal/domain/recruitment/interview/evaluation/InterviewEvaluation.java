@@ -39,14 +39,11 @@ public class InterviewEvaluation extends ApprovalWorkflow {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @Transactional
     public void addSection(InterviewEvaluationSection section) {
         if (sections == null) sections = new ArrayList<>();
         section.setInterviewEvaluation(this);
         sections.add(section);
     }
-
-    @Transactional
     public void removeSection(InterviewEvaluationSection section) {
         if (sections != null && !sections.isEmpty())
             sections.remove(section);

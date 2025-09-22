@@ -60,48 +60,41 @@ public class Organization extends Lifecycle {
     @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<OrganizationWorkSchedule> workSchedules = new ArrayList<>();
 
-    @Transactional
+
     public void addAddress(OrganizationAddress address) {
         if (addresses == null) addresses = new ArrayList<>();
         address.setOrganization(this);
         addresses.add(address);
     }
-    @Transactional
     public void removeAddress(OrganizationAddress address) {
         if (addresses != null && !addresses.isEmpty()) {
             addresses.remove(address);
         }
-
     }
-    @Transactional
+
     public void addContact(OrganizationContact contact) {
         if (contacts == null) contacts = new ArrayList<>();
         contact.setOrganization(this);
         contacts.add(contact);
     }
-    @Transactional
     public void removeContact(OrganizationContact contact) {
         if (contacts != null && !contacts.isEmpty())
             contacts.remove(contact);
     }
-    @Transactional
     public void addChild(Organization organization) {
         if (children == null) children = new ArrayList<>();
         organization.setParent(this);
         children.add(organization);
     }
-    @Transactional
     public void removeChild(Organization organization) {
         if (children != null && !children.isEmpty())
             children.remove(organization);
     }
-    @Transactional
     public void addWorkSchedule(OrganizationWorkSchedule workSchedule) {
         if (workSchedules == null) workSchedules = new ArrayList<>();
         workSchedule.setOrganization(this);
         workSchedules.add(workSchedule);
     }
-    @Transactional
     public void removeWorkSchedule(OrganizationWorkSchedule workSchedule) {
         if (workSchedules != null && !workSchedules.isEmpty())
             workSchedules.remove(workSchedule);

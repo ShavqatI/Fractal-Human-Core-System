@@ -47,7 +47,7 @@ ALTER TABLE IF EXISTS ONLY testing_schema.test_session DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS ONLY testing_schema.question_type DROP CONSTRAINT IF EXISTS fko0hkdkvvyoll4tntb0g9587oe;
 ALTER TABLE IF EXISTS ONLY testing_schema.test_session DROP CONSTRAINT IF EXISTS fkkl4i44nynqodqm7kwb7pe06dy;
 ALTER TABLE IF EXISTS ONLY testing_schema.test_session DROP CONSTRAINT IF EXISTS fkkh1ht4vg34ydhaostpy3s521n;
-ALTER TABLE IF EXISTS ONLY testing_schema.question DROP CONSTRAINT IF EXISTS fkjnivhuqvrqq9f1wlss478gcay;
+ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS fkjnivhuqvrqq9f1wlss478gcay;
 ALTER TABLE IF EXISTS ONLY testing_schema.selected_answer DROP CONSTRAINT IF EXISTS fkgnuqu8ii6d63lp306s0s91yml;
 ALTER TABLE IF EXISTS ONLY testing_schema.test DROP CONSTRAINT IF EXISTS fket9b55yu7wvongn1kcncwp9kp;
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS fkelbfxfjab82ywu83blabtjr8i;
@@ -58,16 +58,16 @@ ALTER TABLE IF EXISTS ONLY testing_schema.test_session DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS fkd52kmu0cg4eeuxu1x3332m7bb;
 ALTER TABLE IF EXISTS ONLY testing_schema.test DROP CONSTRAINT IF EXISTS fkcfsqecxjr6vitg231cl4guck8;
 ALTER TABLE IF EXISTS ONLY testing_schema.selectedAnswer DROP CONSTRAINT IF EXISTS fkbbuf3p3qngi2qtqu5n9civqgf;
-ALTER TABLE IF EXISTS ONLY testing_schema.question DROP CONSTRAINT IF EXISTS fk9ypfwi38va5u5u22d95lc6rw7;
-ALTER TABLE IF EXISTS ONLY testing_schema.question DROP CONSTRAINT IF EXISTS fk8hejcpbbiq1qje11346akp3uj;
+ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS fk9ypfwi38va5u5u22d95lc6rw7;
+ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS fk8hejcpbbiq1qje11346akp3uj;
 ALTER TABLE IF EXISTS ONLY testing_schema.selectedAnswer DROP CONSTRAINT IF EXISTS fk8frr4bcabmmeyyu60qt7iiblo;
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS fk873bn33h42yxrwbh95qeljv2o;
-ALTER TABLE IF EXISTS ONLY testing_schema.question DROP CONSTRAINT IF EXISTS fk7svspov4rexjawqdvi2jni81u;
+ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS fk7svspov4rexjawqdvi2jni81u;
 ALTER TABLE IF EXISTS ONLY testing_schema.test DROP CONSTRAINT IF EXISTS fk6n9a04fkvgp72bc01354sa8cn;
-ALTER TABLE IF EXISTS ONLY testing_schema.question DROP CONSTRAINT IF EXISTS fk6e9te6j9nvngv9ndvrtt25kd;
+ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS fk6e9te6j9nvngv9ndvrtt25kd;
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS fk5ryo4cllkcxwr664iv7r13dq0;
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS fk5drbo3r7nammrmj5xdynimfso;
-ALTER TABLE IF EXISTS ONLY testing_schema.question DROP CONSTRAINT IF EXISTS fk5cike7u36rpj3o7melmsga9xo;
+ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS fk5cike7u36rpj3o7melmsga9xo;
 ALTER TABLE IF EXISTS ONLY testing_schema.test DROP CONSTRAINT IF EXISTS fk5bb7ma72lj1fhp7x0jbb0peim;
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS fk4rol0t47bkou4mrostdxldjel;
 ALTER TABLE IF EXISTS ONLY testing_schema.test_session DROP CONSTRAINT IF EXISTS fk42kp884nu38qvylfkxa76evuj;
@@ -507,7 +507,7 @@ ALTER TABLE IF EXISTS ONLY education_schema.education_type DROP CONSTRAINT IF EX
 ALTER TABLE IF EXISTS ONLY dictionary_schema.priority DROP CONSTRAINT IF EXISTS fkun6j2rgytvacmats39hieqwh;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.status_category DROP CONSTRAINT IF EXISTS fkt5mnpkn0rsetqfv1eke2n5780;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.color DROP CONSTRAINT IF EXISTS fkri4odaxpfogqs7e6gqxgdb84;
-ALTER TABLE IF EXISTS ONLY dictionary_schema.status DROP CONSTRAINT IF EXISTS fkrcjlv19qxa2fv7d5gfhu56d74;
+ALTER TABLE IF EXISTS ONLY dictionary_schema.expenseType DROP CONSTRAINT IF EXISTS fkrcjlv19qxa2fv7d5gfhu56d74;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.color DROP CONSTRAINT IF EXISTS fkon8d69le0cfp0uc95pfihqokr;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.status_category DROP CONSTRAINT IF EXISTS fknrjn4nrgn32pyui38e7iv0e4b;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.entity_type DROP CONSTRAINT IF EXISTS fkn5e8fh3fmigodflmm3n67vwwd;
@@ -516,10 +516,10 @@ ALTER TABLE IF EXISTS ONLY dictionary_schema.nationality DROP CONSTRAINT IF EXIS
 ALTER TABLE IF EXISTS ONLY dictionary_schema.entity_type DROP CONSTRAINT IF EXISTS fkjhrfynx5cv2xgpuhjwdqw2epa;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.profile_attribute DROP CONSTRAINT IF EXISTS fkjb1vvumo8kehaqu8wp1p7xkyq;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.gender DROP CONSTRAINT IF EXISTS fkfbabbrlhfpcge0qak10pvkn3k;
-ALTER TABLE IF EXISTS ONLY dictionary_schema.status DROP CONSTRAINT IF EXISTS fkdfgxuugw1cosvegie2xvo9m80;
+ALTER TABLE IF EXISTS ONLY dictionary_schema.expenseType DROP CONSTRAINT IF EXISTS fkdfgxuugw1cosvegie2xvo9m80;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.week_day DROP CONSTRAINT IF EXISTS fkdert1h6nrmbc9w53ovre07qkr;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.notification_template DROP CONSTRAINT IF EXISTS fkdd8bgvdp58lrm9o9fg3umqtm;
-ALTER TABLE IF EXISTS ONLY dictionary_schema.status DROP CONSTRAINT IF EXISTS fkd9qn37uaaw1ovkp6hqapathx4;
+ALTER TABLE IF EXISTS ONLY dictionary_schema.expenseType DROP CONSTRAINT IF EXISTS fkd9qn37uaaw1ovkp6hqapathx4;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.nationality DROP CONSTRAINT IF EXISTS fkd62o8lro0tqmk3igphwcb9qe5;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.priority DROP CONSTRAINT IF EXISTS fkcw8i98r8l4dsndogbr48n8lt7;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.currency DROP CONSTRAINT IF EXISTS fka1xqilmjmlheudk4sayosgw35;
@@ -580,7 +580,7 @@ ALTER TABLE IF EXISTS ONLY testing_schema.test_session DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS ONLY testing_schema.test DROP CONSTRAINT IF EXISTS test_pkey;
 ALTER TABLE IF EXISTS ONLY testing_schema.selected_answer DROP CONSTRAINT IF EXISTS selected_answer_pkey;
 ALTER TABLE IF EXISTS ONLY testing_schema.question_type DROP CONSTRAINT IF EXISTS question_type_pkey;
-ALTER TABLE IF EXISTS ONLY testing_schema.question DROP CONSTRAINT IF EXISTS question_pkey;
+ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS question_pkey;
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS answer_submission_pkey;
 ALTER TABLE IF EXISTS ONLY testing_schema.selectedAnswer DROP CONSTRAINT IF EXISTS answer_pkey;
 ALTER TABLE IF EXISTS ONLY system_schema.service_provider_type DROP CONSTRAINT IF EXISTS ukm91w434gce8g8e532nb0sqbj5;
@@ -759,13 +759,13 @@ ALTER TABLE IF EXISTS ONLY dictionary_schema.currency DROP CONSTRAINT IF EXISTS 
 ALTER TABLE IF EXISTS ONLY dictionary_schema.nationality DROP CONSTRAINT IF EXISTS ukfhrdubfm3may69kh6fx05ndk;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.status_category DROP CONSTRAINT IF EXISTS ukdldakj77yydalqni2sj0u6inw;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.color DROP CONSTRAINT IF EXISTS ukcbnc5ktj6whhh690w32k8cyh8;
-ALTER TABLE IF EXISTS ONLY dictionary_schema.status DROP CONSTRAINT IF EXISTS uk90n0sv25slo1kmu0tcakhjjed;
+ALTER TABLE IF EXISTS ONLY dictionary_schema.expenseType DROP CONSTRAINT IF EXISTS uk90n0sv25slo1kmu0tcakhjjed;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.entity_type DROP CONSTRAINT IF EXISTS uk8ykg7p8p3n0hjnpwl9gft36g3;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.notification_template DROP CONSTRAINT IF EXISTS uk78ljxu1rtyj29qj8a3bao9bfx;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.priority DROP CONSTRAINT IF EXISTS uk639erqxmw75u6kt3lfksougmb;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.marital_status DROP CONSTRAINT IF EXISTS uk2pst8q940ve55w5fcb8rals9t;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.profile_attribute DROP CONSTRAINT IF EXISTS uk15s1544boy61ldqmww1udf0wm;
-ALTER TABLE IF EXISTS ONLY dictionary_schema.status DROP CONSTRAINT IF EXISTS status_pkey;
+ALTER TABLE IF EXISTS ONLY dictionary_schema.expenseType DROP CONSTRAINT IF EXISTS status_pkey;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.status_category DROP CONSTRAINT IF EXISTS status_category_pkey;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.profile_attribute DROP CONSTRAINT IF EXISTS profile_attribute_pkey;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.priority DROP CONSTRAINT IF EXISTS priority_pkey;
@@ -799,7 +799,7 @@ DROP TABLE IF EXISTS testing_schema.test_session;
 DROP TABLE IF EXISTS testing_schema.test;
 DROP TABLE IF EXISTS testing_schema.selected_answer;
 DROP TABLE IF EXISTS testing_schema.question_type;
-DROP TABLE IF EXISTS testing_schema.question;
+DROP TABLE IF EXISTS testing_schema.trainingParticipation;
 DROP TABLE IF EXISTS testing_schema.answer_submission;
 DROP TABLE IF EXISTS testing_schema.selectedAnswer;
 DROP TABLE IF EXISTS system_schema.service_provider_type;
@@ -938,7 +938,7 @@ DROP TABLE IF EXISTS education_schema.degree_type;
 DROP TABLE IF EXISTS education_schema.accreditation_status;
 DROP TABLE IF EXISTS dictionary_schema.week_day;
 DROP TABLE IF EXISTS dictionary_schema.status_category;
-DROP TABLE IF EXISTS dictionary_schema.status;
+DROP TABLE IF EXISTS dictionary_schema.expenseType;
 DROP TABLE IF EXISTS dictionary_schema.profile_attribute;
 DROP TABLE IF EXISTS dictionary_schema.priority;
 DROP TABLE IF EXISTS dictionary_schema.notification_template;
@@ -1767,10 +1767,10 @@ ALTER TABLE dictionary_schema.profile_attribute ALTER COLUMN id ADD GENERATED BY
 
 
 --
--- Name: status; Type: TABLE; Schema: dictionary_schema; Owner: fractal
+-- Name: expenseType; Type: TABLE; Schema: dictionary_schema; Owner: fractal
 --
 
-CREATE TABLE dictionary_schema.status (
+CREATE TABLE dictionary_schema.expenseType (
     id bigint NOT NULL,
     created_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_date timestamp(6) without time zone,
@@ -1783,7 +1783,7 @@ CREATE TABLE dictionary_schema.status (
 );
 
 
-ALTER TABLE dictionary_schema.status OWNER TO fractal;
+ALTER TABLE dictionary_schema.expenseType OWNER TO fractal;
 
 --
 -- Name: status_category; Type: TABLE; Schema: dictionary_schema; Owner: fractal
@@ -1820,7 +1820,7 @@ ALTER TABLE dictionary_schema.status_category ALTER COLUMN id ADD GENERATED BY D
 -- Name: status_id_seq; Type: SEQUENCE; Schema: dictionary_schema; Owner: fractal
 --
 
-ALTER TABLE dictionary_schema.status ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+ALTER TABLE dictionary_schema.expenseType ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
     SEQUENCE NAME dictionary_schema.status_id_seq
     START WITH 1
     INCREMENT BY 1
@@ -5688,10 +5688,10 @@ ALTER TABLE testing_schema.answer_submission ALTER COLUMN id ADD GENERATED BY DE
 
 
 --
--- Name: question; Type: TABLE; Schema: testing_schema; Owner: fractal
+-- Name: trainingParticipation; Type: TABLE; Schema: testing_schema; Owner: fractal
 --
 
-CREATE TABLE testing_schema.question (
+CREATE TABLE testing_schema.trainingParticipation (
     id bigint NOT NULL,
     created_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_date timestamp(6) without time zone,
@@ -5705,13 +5705,13 @@ CREATE TABLE testing_schema.question (
 );
 
 
-ALTER TABLE testing_schema.question OWNER TO fractal;
+ALTER TABLE testing_schema.trainingParticipation OWNER TO fractal;
 
 --
 -- Name: question_id_seq; Type: SEQUENCE; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE testing_schema.question ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+ALTER TABLE testing_schema.trainingParticipation ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
     SEQUENCE NAME testing_schema.question_id_seq
     START WITH 1
     INCREMENT BY 1
@@ -6541,10 +6541,10 @@ COPY dictionary_schema.profile_attribute (id, created_date, updated_date, code, 
 
 
 --
--- Data for Name: status; Type: TABLE DATA; Schema: dictionary_schema; Owner: fractal
+-- Data for Name: expenseType; Type: TABLE DATA; Schema: dictionary_schema; Owner: fractal
 --
 
-COPY dictionary_schema.status (id, created_date, updated_date, code, name, description, created_user_id, updated_user_id, status_category_id) FROM stdin;
+COPY dictionary_schema.expenseType (id, created_date, updated_date, code, name, description, created_user_id, updated_user_id, status_category_id) FROM stdin;
 3	2025-07-13 10:26:27.059726	2025-07-17 14:04:07.778756	CLOSE	Close	fwefef	\N	\N	4
 5	2025-07-19 14:42:47.646154	\N	ACTIVE	Active	Active	\N	\N	4
 \.
@@ -7104,7 +7104,7 @@ COPY localization_schema.layout_label (id, created_date, updated_date, name, cre
 31	2025-07-28 14:43:59.911687	\N	district	\N	\N
 32	2025-07-29 13:06:20.835828	\N	country	\N	\N
 33	2025-07-29 13:39:52.620618	\N	city	\N	\N
-34	2025-07-29 14:09:10.120034	\N	status	\N	\N
+34	2025-07-29 14:09:10.120034	\N	expenseType	\N	\N
 35	2025-07-31 12:28:41.33393	2025-07-31 12:29:22.685526	reset_password	\N	\N
 36	2025-07-31 13:59:53.38682	\N	change_password	\N	\N
 37	2025-08-01 10:30:40.832937	\N	organization_management	\N	\N
@@ -7181,7 +7181,7 @@ COPY localization_schema.layout_label_detail (id, created_date, updated_date, de
 18	2025-07-23 11:58:32.960005	\N	Gender	\N	\N	3	6
 19	2025-07-23 13:04:07.882032	\N	Аҳволи оилавӣ	\N	\N	1	7
 20	2025-07-23 13:04:07.886535	\N	Семейное положение	\N	\N	2	7
-21	2025-07-23 13:04:07.889401	\N	Marital status	\N	\N	3	7
+21	2025-07-23 13:04:07.889401	\N	Marital expenseType	\N	\N	3	7
 22	2025-07-23 13:40:54.713583	\N	Дохилкуни	\N	\N	1	8
 23	2025-07-23 13:40:54.722039	\N	Добавить	\N	\N	2	8
 24	2025-07-23 13:40:54.727966	\N	Add	\N	\N	3	8
@@ -7543,7 +7543,7 @@ COPY navigation_schema.menu (id, created_date, updated_date, class_name, icon, l
 25	2025-07-26 12:37:15.568609	2025-07-29 13:48:42.354441	\N	AUTOMATION	2	Action Type	3	action-type	\N	\N	23	7
 26	2025-07-26 12:37:43.598787	2025-07-29 13:49:17.489721	\N	COLLECTION	2	Action Category	4	action-category	\N	\N	22	7
 9	2025-07-24 12:56:04.777264	2025-07-29 13:50:14.815914	\N	FLASH	2	Action	2	action	\N	\N	12	7
-41	2025-07-29 14:11:29.844598	\N	\N	CHECK	2	Status	5	status	\N	\N	34	1
+41	2025-07-29 14:11:29.844598	\N	\N	CHECK	2	Status	5	expenseType	\N	\N	34	1
 43	2025-08-01 10:37:07.922843	\N	\N	BRANCH	2	Organization	1	organization	\N	\N	41	42
 31	2025-07-27 11:56:09.122499	2025-07-27 13:42:01.894921	\N	LAYOUT	2	Layout Label	2	layout-label	\N	\N	19	29
 32	2025-07-27 11:57:09.742139	2025-07-27 13:42:54.251512	\N	DETAIL	3	Layout Label Details	1	layout-label-detail	\N	\N	20	31
@@ -7551,14 +7551,14 @@ COPY navigation_schema.menu (id, created_date, updated_date, class_name, icon, l
 27	2025-07-27 08:43:36.4331	2025-07-27 14:09:58.038111	\N	MENU	3	Role Menu	1	role-menu	\N	\N	24	6
 24	2025-07-26 10:13:04.601622	2025-07-27 14:10:07.904758	\N	MENU	3	Menu Action	1	menu-action	\N	\N	25	8
 2	2025-07-23 12:05:06.992077	2025-07-28 11:21:08.592145	\N	MALE	2	Gender	1	gender	\N	\N	6	1
-3	2025-07-23 13:05:38.383789	2025-07-28 11:21:50.518153	\N	USER_CARD	2	Marital status	2	marital-status	\N	\N	7	1
+3	2025-07-23 13:05:38.383789	2025-07-28 11:21:50.518153	\N	USER_CARD	2	Marital expenseType	2	marital-expenseType	\N	\N	7	1
 30	2025-07-27 11:56:09.118354	2025-07-28 11:23:36.561176	\N	FLAG	2	Language	1	language	\N	\N	17	29
 29	2025-07-27 11:56:09.078333	2025-07-28 11:24:24.139094	\N	GLOBE	1	Localization	3	localization	\N	\N	18	\N
 4	2025-07-24 12:53:31.800519	2025-07-28 11:25:19.472725	\N	SIGN_IN	1	Authorization	2	authorization	\N	\N	15	\N
 6	2025-07-24 12:53:31.818747	2025-07-28 11:25:45.00487	\N	USER_STAR	2	Role	1	role	\N	\N	14	4
 7	2025-07-24 12:56:04.770544	2025-07-28 11:28:02.928663	\N	COMPASS	1	Navigation	3	navigation	\N	\N	10	\N
 33	2025-07-28 12:07:18.003651	\N	\N	FLAG	2	Nationality	3	nationality	\N	\N	26	1
-34	2025-07-28 12:21:30.649273	\N	\N	TAGS	2	Status Category	4	status-category	\N	\N	27	1
+34	2025-07-28 12:21:30.649273	\N	\N	TAGS	2	Status Category	4	expenseType-category	\N	\N	27	1
 47	2025-08-01 10:41:34.943319	\N	\N		2	Job Description	6	job-description	\N	\N	40	42
 48	2025-08-03 16:59:45.021762	\N	\N	CONTACT	2	Contact Type	6	contact-type	\N	\N	43	1
 49	2025-08-05 12:42:31.006339	\N	\N	LOCATION	3	Organization Address	1	organization-address	\N	\N	44	43
@@ -7591,7 +7591,7 @@ COPY navigation_schema.menu (id, created_date, updated_date, class_name, icon, l
 75	2025-08-17 14:52:49.185249	\N	\N	TYPE	2	Education Type	1	education-type	\N	\N	68	74
 76	2025-08-17 15:10:45.550104	\N	\N	DEGREE	2	Degree Type	2	degree-type	\N	\N	69	74
 77	2025-08-17 15:59:34.037722	\N	\N	DOCUMENT	2	Education Document Type	3	education-document-type	\N	\N	70	74
-78	2025-08-17 16:16:03.072203	\N	\N	Accreditation	2	Accreditation Status	4	accreditation-status	\N	\N	71	74
+78	2025-08-17 16:16:03.072203	\N	\N	Accreditation	2	Accreditation Status	4	accreditation-expenseType	\N	\N	71	74
 79	2025-08-17 16:33:57.796577	\N	\N	GRADE	2	Grade Point Average	5	grade-point-average	\N	\N	72	74
 80	2025-08-17 16:56:08.093056	\N	\N	Document 	2	Identification Document Type	9	identification-document-type	\N	\N	65	1
 81	2025-08-18 16:31:26.886104	\N	\N	Recruitment	1	Recruitment	9	recruitment	\N	\N	73	\N
@@ -8354,10 +8354,10 @@ COPY testing_schema.answer_submission (id, created_date, updated_date, approved_
 
 
 --
--- Data for Name: question; Type: TABLE DATA; Schema: testing_schema; Owner: fractal
+-- Data for Name: trainingParticipation; Type: TABLE DATA; Schema: testing_schema; Owner: fractal
 --
 
-COPY testing_schema.question (id, created_date, updated_date, text, created_user_id, updated_user_id, question_type_id, max_selectable_options, status_id, test_id) FROM stdin;
+COPY testing_schema.trainingParticipation (id, created_date, updated_date, text, created_user_id, updated_user_id, question_type_id, max_selectable_options, status_id, test_id) FROM stdin;
 \.
 
 
@@ -9572,10 +9572,10 @@ ALTER TABLE ONLY dictionary_schema.status_category
 
 
 --
--- Name: status status_pkey; Type: CONSTRAINT; Schema: dictionary_schema; Owner: fractal
+-- Name: expenseType status_pkey; Type: CONSTRAINT; Schema: dictionary_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY dictionary_schema.status
+ALTER TABLE ONLY dictionary_schema.expenseType
     ADD CONSTRAINT status_pkey PRIMARY KEY (id);
 
 
@@ -9620,10 +9620,10 @@ ALTER TABLE ONLY dictionary_schema.entity_type
 
 
 --
--- Name: status uk90n0sv25slo1kmu0tcakhjjed; Type: CONSTRAINT; Schema: dictionary_schema; Owner: fractal
+-- Name: expenseType uk90n0sv25slo1kmu0tcakhjjed; Type: CONSTRAINT; Schema: dictionary_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY dictionary_schema.status
+ALTER TABLE ONLY dictionary_schema.expenseType
     ADD CONSTRAINT uk90n0sv25slo1kmu0tcakhjjed UNIQUE (code);
 
 
@@ -11052,10 +11052,10 @@ ALTER TABLE ONLY testing_schema.answer_submission
 
 
 --
--- Name: question question_pkey; Type: CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: trainingParticipation question_pkey; Type: CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.question
+ALTER TABLE ONLY testing_schema.trainingParticipation
     ADD CONSTRAINT question_pkey PRIMARY KEY (id);
 
 
@@ -11176,7 +11176,7 @@ ALTER TABLE ONLY work_schedule_schema.work_schedule
 --
 
 ALTER TABLE ONLY authorization_schema.role_menu
-    ADD CONSTRAINT fk1qnjbh7xgyidgxp4y91j54kfu FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk1qnjbh7xgyidgxp4y91j54kfu FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -11200,7 +11200,7 @@ ALTER TABLE ONLY authorization_schema.permission
 --
 
 ALTER TABLE ONLY authorization_schema.permission
-    ADD CONSTRAINT fk78dqnhvwivyqqvxk94cm9jknn FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk78dqnhvwivyqqvxk94cm9jknn FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -11272,7 +11272,7 @@ ALTER TABLE ONLY authorization_schema."user"
 --
 
 ALTER TABLE ONLY authorization_schema.user_role
-    ADD CONSTRAINT fki9a4o2ub6hnix7u6v954kq13e FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fki9a4o2ub6hnix7u6v954kq13e FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -11540,10 +11540,10 @@ ALTER TABLE ONLY dictionary_schema.nationality
 
 
 --
--- Name: status fkd9qn37uaaw1ovkp6hqapathx4; Type: FK CONSTRAINT; Schema: dictionary_schema; Owner: fractal
+-- Name: expenseType fkd9qn37uaaw1ovkp6hqapathx4; Type: FK CONSTRAINT; Schema: dictionary_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY dictionary_schema.status
+ALTER TABLE ONLY dictionary_schema.expenseType
     ADD CONSTRAINT fkd9qn37uaaw1ovkp6hqapathx4 FOREIGN KEY (status_category_id) REFERENCES dictionary_schema.status_category(id);
 
 
@@ -11564,10 +11564,10 @@ ALTER TABLE ONLY dictionary_schema.week_day
 
 
 --
--- Name: status fkdfgxuugw1cosvegie2xvo9m80; Type: FK CONSTRAINT; Schema: dictionary_schema; Owner: fractal
+-- Name: expenseType fkdfgxuugw1cosvegie2xvo9m80; Type: FK CONSTRAINT; Schema: dictionary_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY dictionary_schema.status
+ALTER TABLE ONLY dictionary_schema.expenseType
     ADD CONSTRAINT fkdfgxuugw1cosvegie2xvo9m80 FOREIGN KEY (updated_user_id) REFERENCES user_schema."user"(id);
 
 
@@ -11636,10 +11636,10 @@ ALTER TABLE ONLY dictionary_schema.color
 
 
 --
--- Name: status fkrcjlv19qxa2fv7d5gfhu56d74; Type: FK CONSTRAINT; Schema: dictionary_schema; Owner: fractal
+-- Name: expenseType fkrcjlv19qxa2fv7d5gfhu56d74; Type: FK CONSTRAINT; Schema: dictionary_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY dictionary_schema.status
+ALTER TABLE ONLY dictionary_schema.expenseType
     ADD CONSTRAINT fkrcjlv19qxa2fv7d5gfhu56d74 FOREIGN KEY (created_user_id) REFERENCES user_schema."user"(id);
 
 
@@ -11792,7 +11792,7 @@ ALTER TABLE ONLY education_schema.education
 --
 
 ALTER TABLE ONLY education_schema.education
-    ADD CONSTRAINT fkkhui07xo70funlw7srna0pph8 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkkhui07xo70funlw7srna0pph8 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -12120,7 +12120,7 @@ ALTER TABLE ONLY employee_schema.business_trip
 --
 
 ALTER TABLE ONLY employee_schema.agreement
-    ADD CONSTRAINT fk7t04a71205tk67nr8wle31yie FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk7t04a71205tk67nr8wle31yie FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -12152,7 +12152,7 @@ ALTER TABLE ONLY employee_schema.performance
 --
 
 ALTER TABLE ONLY employee_schema.employment_history
-    ADD CONSTRAINT fk82jjwu4lybe98hl25tea0xer2 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk82jjwu4lybe98hl25tea0xer2 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -12184,7 +12184,7 @@ ALTER TABLE ONLY employee_schema.business_trip_type
 --
 
 ALTER TABLE ONLY employee_schema.performance
-    ADD CONSTRAINT fk8sam0gkv7e7nxo6xpnrcpjulc FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk8sam0gkv7e7nxo6xpnrcpjulc FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -12448,7 +12448,7 @@ ALTER TABLE ONLY employee_schema.citizenship
 --
 
 ALTER TABLE ONLY employee_schema.employee
-    ADD CONSTRAINT fkf5rstedundygjfga5oke6vdy9 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkf5rstedundygjfga5oke6vdy9 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -12584,7 +12584,7 @@ ALTER TABLE ONLY employee_schema.agreement
 --
 
 ALTER TABLE ONLY employee_schema.business_trip
-    ADD CONSTRAINT fkkb7gn0shpi8cr4k4hhdpgngbo FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkkb7gn0shpi8cr4k4hhdpgngbo FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -12664,7 +12664,7 @@ ALTER TABLE ONLY employee_schema.agreement_resource
 --
 
 ALTER TABLE ONLY employee_schema.subordinate
-    ADD CONSTRAINT fkmeqwlhltnv1awlfqp9wnou4q9 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkmeqwlhltnv1awlfqp9wnou4q9 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -12752,7 +12752,7 @@ ALTER TABLE ONLY employee_schema.relation_type
 --
 
 ALTER TABLE ONLY employee_schema.attendance
-    ADD CONSTRAINT fkpnkxqq4luu1ayfdc72oeln9n0 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkpnkxqq4luu1ayfdc72oeln9n0 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -12872,7 +12872,7 @@ ALTER TABLE ONLY employee_schema.business_trip
 --
 
 ALTER TABLE ONLY employee_schema.vacation
-    ADD CONSTRAINT fkrnc387fqpngthsvkbdqijdhtw FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkrnc387fqpngthsvkbdqijdhtw FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -12888,7 +12888,7 @@ ALTER TABLE ONLY employee_schema.absence
 --
 
 ALTER TABLE ONLY employee_schema.improvement_area
-    ADD CONSTRAINT fksaug9hol96j1l6su4efmch5j7 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fksaug9hol96j1l6su4efmch5j7 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -12960,7 +12960,7 @@ ALTER TABLE ONLY employment_schema.work_experience
 --
 
 ALTER TABLE ONLY employment_schema.work_experience
-    ADD CONSTRAINT fkjp8qgildg69x3vyoy2jtg1xlj FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkjp8qgildg69x3vyoy2jtg1xlj FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -12992,7 +12992,7 @@ ALTER TABLE ONLY identification_schema.identification_document_type
 --
 
 ALTER TABLE ONLY identification_schema.identification_document
-    ADD CONSTRAINT fk9fhx2j37s5l15ccoj7mjl9afd FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk9fhx2j37s5l15ccoj7mjl9afd FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -13376,7 +13376,7 @@ ALTER TABLE ONLY navigation_schema.configuration
 --
 
 ALTER TABLE ONLY navigation_schema.menu_transition
-    ADD CONSTRAINT fk46ka2sm0om1v7i3o6yg4mamyb FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk46ka2sm0om1v7i3o6yg4mamyb FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -13392,7 +13392,7 @@ ALTER TABLE ONLY navigation_schema.action
 --
 
 ALTER TABLE ONLY navigation_schema.menu_action
-    ADD CONSTRAINT fk5uvjvyklimqf3vsy4b7i8bpxy FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk5uvjvyklimqf3vsy4b7i8bpxy FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -13432,7 +13432,7 @@ ALTER TABLE ONLY navigation_schema.action
 --
 
 ALTER TABLE ONLY navigation_schema.form_component_attributes
-    ADD CONSTRAINT fk7evhr508p9w32o48rhjffooes FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk7evhr508p9w32o48rhjffooes FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -13472,7 +13472,7 @@ ALTER TABLE ONLY navigation_schema.menu_action
 --
 
 ALTER TABLE ONLY navigation_schema.form_components
-    ADD CONSTRAINT fk992xbdp3e46h98jal5etaflc0 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk992xbdp3e46h98jal5etaflc0 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -13480,7 +13480,7 @@ ALTER TABLE ONLY navigation_schema.form_components
 --
 
 ALTER TABLE ONLY navigation_schema.menu_action_form_component
-    ADD CONSTRAINT fka4021gyr6r3cj2v3ei6vavifd FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fka4021gyr6r3cj2v3ei6vavifd FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -13584,7 +13584,7 @@ ALTER TABLE ONLY navigation_schema.form_component_attributes
 --
 
 ALTER TABLE ONLY navigation_schema.menu_configuration
-    ADD CONSTRAINT fkifvwi920ejmjq15f696trx3rl FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkifvwi920ejmjq15f696trx3rl FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -13640,7 +13640,7 @@ ALTER TABLE ONLY navigation_schema.menu_configuration
 --
 
 ALTER TABLE ONLY navigation_schema.public_url
-    ADD CONSTRAINT fkmqcyrqxkqac7esmv7ewuj7w68 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkmqcyrqxkqac7esmv7ewuj7w68 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -13704,7 +13704,7 @@ ALTER TABLE ONLY navigation_schema.menu_transition
 --
 
 ALTER TABLE ONLY navigation_schema.menu_action_transition
-    ADD CONSTRAINT fkp5yicewv25gchxamqa9jr599a FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkp5yicewv25gchxamqa9jr599a FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -13960,7 +13960,7 @@ ALTER TABLE ONLY organization_schema.reporting_line
 --
 
 ALTER TABLE ONLY organization_schema.grade
-    ADD CONSTRAINT fkdprna7hy65wr3ngm14ryynsvu FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkdprna7hy65wr3ngm14ryynsvu FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -13968,7 +13968,7 @@ ALTER TABLE ONLY organization_schema.grade
 --
 
 ALTER TABLE ONLY organization_schema."position"
-    ADD CONSTRAINT fkdw61fctruyml0gypg10jucjw9 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkdw61fctruyml0gypg10jucjw9 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14016,7 +14016,7 @@ ALTER TABLE ONLY organization_schema.authority
 --
 
 ALTER TABLE ONLY organization_schema.grade_step
-    ADD CONSTRAINT fkfik8o7842uqxnu3y6w60m4av7 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkfik8o7842uqxnu3y6w60m4av7 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14128,7 +14128,7 @@ ALTER TABLE ONLY organization_schema.organization
 --
 
 ALTER TABLE ONLY organization_schema.job_description
-    ADD CONSTRAINT fkl5c84b66s1vutn7j1avntv8hn FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkl5c84b66s1vutn7j1avntv8hn FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14200,7 +14200,7 @@ ALTER TABLE ONLY organization_schema.key_performance_indicator
 --
 
 ALTER TABLE ONLY organization_schema.separationReason
-    ADD CONSTRAINT fkovdg8bvkum4mh0ikrdr7q6rlm FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkovdg8bvkum4mh0ikrdr7q6rlm FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14256,7 +14256,7 @@ ALTER TABLE ONLY organization_schema.separationReason
 --
 
 ALTER TABLE ONLY organization_schema.reporting_line
-    ADD CONSTRAINT fksj9u0slv7itvaqaslj6rq28j4 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fksj9u0slv7itvaqaslj6rq28j4 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14336,7 +14336,7 @@ ALTER TABLE ONLY recruitment_schema.interview_evaluation
 --
 
 ALTER TABLE ONLY recruitment_schema.interview_evaluation_answer
-    ADD CONSTRAINT fk4lqfgorrql9ypd4h3jjtupni7 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk4lqfgorrql9ypd4h3jjtupni7 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14344,7 +14344,7 @@ ALTER TABLE ONLY recruitment_schema.interview_evaluation_answer
 --
 
 ALTER TABLE ONLY recruitment_schema.candidate
-    ADD CONSTRAINT fk4sn940s55wnxxa7k1bmjjy00w FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk4sn940s55wnxxa7k1bmjjy00w FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14416,7 +14416,7 @@ ALTER TABLE ONLY recruitment_schema.interview
 --
 
 ALTER TABLE ONLY recruitment_schema.interview_evaluation
-    ADD CONSTRAINT fk83ut75dsjvq7yurmn0d59ew8p FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk83ut75dsjvq7yurmn0d59ew8p FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14544,7 +14544,7 @@ ALTER TABLE ONLY recruitment_schema.interviewee
 --
 
 ALTER TABLE ONLY recruitment_schema.interviewer
-    ADD CONSTRAINT fkej785e8f0yivx50xu8bgwpwgq FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkej785e8f0yivx50xu8bgwpwgq FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14560,7 +14560,7 @@ ALTER TABLE ONLY recruitment_schema.skill
 --
 
 ALTER TABLE ONLY recruitment_schema.vacancy
-    ADD CONSTRAINT fkf48sb61yr0bwkea2q5brcum23 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkf48sb61yr0bwkea2q5brcum23 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14664,7 +14664,7 @@ ALTER TABLE ONLY recruitment_schema.interview_type
 --
 
 ALTER TABLE ONLY recruitment_schema.interviewee
-    ADD CONSTRAINT fkjxqkw7b2kpvoyw3mc59tqekrx FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkjxqkw7b2kpvoyw3mc59tqekrx FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14672,7 +14672,7 @@ ALTER TABLE ONLY recruitment_schema.interviewee
 --
 
 ALTER TABLE ONLY recruitment_schema.interview_evaluation_question
-    ADD CONSTRAINT fkkgun5deh39jfehfdnamfo4vdd FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkkgun5deh39jfehfdnamfo4vdd FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14728,7 +14728,7 @@ ALTER TABLE ONLY recruitment_schema.candidate_address
 --
 
 ALTER TABLE ONLY recruitment_schema.interview_evaluation_section
-    ADD CONSTRAINT fkmx31gcxx0ahoj5k1pt0e6okrw FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkmx31gcxx0ahoj5k1pt0e6okrw FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14744,7 +14744,7 @@ ALTER TABLE ONLY recruitment_schema.skill
 --
 
 ALTER TABLE ONLY recruitment_schema.interview
-    ADD CONSTRAINT fknvejb31tcs8k0yhvv4eskd04k FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fknvejb31tcs8k0yhvv4eskd04k FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14928,7 +14928,7 @@ ALTER TABLE ONLY state_schema.entity_state
 --
 
 ALTER TABLE ONLY state_schema.entity_state
-    ADD CONSTRAINT fkontagti85jl7b02rkm5qek6do FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkontagti85jl7b02rkm5qek6do FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -14944,7 +14944,7 @@ ALTER TABLE ONLY system_schema.notification
 --
 
 ALTER TABLE ONLY system_schema.notification
-    ADD CONSTRAINT fk5tak5s7d8v964omfb11iogqun FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk5tak5s7d8v964omfb11iogqun FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -15096,7 +15096,7 @@ ALTER TABLE ONLY system_schema.notification
 --
 
 ALTER TABLE ONLY system_schema.service_provider
-    ADD CONSTRAINT fktru4vagqafrm2enw3ixkm49vx FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fktru4vagqafrm2enw3ixkm49vx FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -15144,7 +15144,7 @@ ALTER TABLE ONLY testing_schema.test_session
 --
 
 ALTER TABLE ONLY testing_schema.answer_submission
-    ADD CONSTRAINT fk4rol0t47bkou4mrostdxldjel FOREIGN KEY (question_id) REFERENCES testing_schema.question(id);
+    ADD CONSTRAINT fk4rol0t47bkou4mrostdxldjel FOREIGN KEY (question_id) REFERENCES testing_schema.trainingParticipation(id);
 
 
 --
@@ -15152,14 +15152,14 @@ ALTER TABLE ONLY testing_schema.answer_submission
 --
 
 ALTER TABLE ONLY testing_schema.test
-    ADD CONSTRAINT fk5bb7ma72lj1fhp7x0jbb0peim FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk5bb7ma72lj1fhp7x0jbb0peim FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
--- Name: question fk5cike7u36rpj3o7melmsga9xo; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: trainingParticipation fk5cike7u36rpj3o7melmsga9xo; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.question
+ALTER TABLE ONLY testing_schema.trainingParticipation
     ADD CONSTRAINT fk5cike7u36rpj3o7melmsga9xo FOREIGN KEY (updated_user_id) REFERENCES authorization_schema."user"(id);
 
 
@@ -15180,11 +15180,11 @@ ALTER TABLE ONLY testing_schema.answer_submission
 
 
 --
--- Name: question fk6e9te6j9nvngv9ndvrtt25kd; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: trainingParticipation fk6e9te6j9nvngv9ndvrtt25kd; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.question
-    ADD CONSTRAINT fk6e9te6j9nvngv9ndvrtt25kd FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+ALTER TABLE ONLY testing_schema.trainingParticipation
+    ADD CONSTRAINT fk6e9te6j9nvngv9ndvrtt25kd FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -15196,10 +15196,10 @@ ALTER TABLE ONLY testing_schema.test
 
 
 --
--- Name: question fk7svspov4rexjawqdvi2jni81u; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: trainingParticipation fk7svspov4rexjawqdvi2jni81u; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.question
+ALTER TABLE ONLY testing_schema.trainingParticipation
     ADD CONSTRAINT fk7svspov4rexjawqdvi2jni81u FOREIGN KEY (question_type_id) REFERENCES testing_schema.question_type(id);
 
 
@@ -15216,22 +15216,22 @@ ALTER TABLE ONLY testing_schema.answer_submission
 --
 
 ALTER TABLE ONLY testing_schema.selectedAnswer
-    ADD CONSTRAINT fk8frr4bcabmmeyyu60qt7iiblo FOREIGN KEY (question_id) REFERENCES testing_schema.question(id);
+    ADD CONSTRAINT fk8frr4bcabmmeyyu60qt7iiblo FOREIGN KEY (question_id) REFERENCES testing_schema.trainingParticipation(id);
 
 
 --
--- Name: question fk8hejcpbbiq1qje11346akp3uj; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: trainingParticipation fk8hejcpbbiq1qje11346akp3uj; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.question
+ALTER TABLE ONLY testing_schema.trainingParticipation
     ADD CONSTRAINT fk8hejcpbbiq1qje11346akp3uj FOREIGN KEY (test_id) REFERENCES testing_schema.test(id);
 
 
 --
--- Name: question fk9ypfwi38va5u5u22d95lc6rw7; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: trainingParticipation fk9ypfwi38va5u5u22d95lc6rw7; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.question
+ALTER TABLE ONLY testing_schema.trainingParticipation
     ADD CONSTRAINT fk9ypfwi38va5u5u22d95lc6rw7 FOREIGN KEY (created_user_id) REFERENCES authorization_schema."user"(id);
 
 
@@ -15296,7 +15296,7 @@ ALTER TABLE ONLY testing_schema.selected_answer
 --
 
 ALTER TABLE ONLY testing_schema.answer_submission
-    ADD CONSTRAINT fkelbfxfjab82ywu83blabtjr8i FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkelbfxfjab82ywu83blabtjr8i FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -15316,10 +15316,10 @@ ALTER TABLE ONLY testing_schema.selected_answer
 
 
 --
--- Name: question fkjnivhuqvrqq9f1wlss478gcay; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: trainingParticipation fkjnivhuqvrqq9f1wlss478gcay; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.question
+ALTER TABLE ONLY testing_schema.trainingParticipation
     ADD CONSTRAINT fkjnivhuqvrqq9f1wlss478gcay FOREIGN KEY (question_type_id) REFERENCES location_schema.address_type(id);
 
 
@@ -15368,7 +15368,7 @@ ALTER TABLE ONLY testing_schema.answer_submission
 --
 
 ALTER TABLE ONLY testing_schema.test_session
-    ADD CONSTRAINT fkqgfs6dunmy1s4q65hxkgj1fmg FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkqgfs6dunmy1s4q65hxkgj1fmg FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -15416,7 +15416,7 @@ ALTER TABLE ONLY ui_schema.component_attributes
 --
 
 ALTER TABLE ONLY ui_schema.component_attributes
-    ADD CONSTRAINT fkghev9yiljhqvvg6umw7fcq2nv FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkghev9yiljhqvvg6umw7fcq2nv FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -15464,7 +15464,7 @@ ALTER TABLE ONLY ui_schema.component_attributes
 --
 
 ALTER TABLE ONLY user_schema.authentication
-    ADD CONSTRAINT fk9xt16jflwvobkox5d9j9uesp3 FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fk9xt16jflwvobkox5d9j9uesp3 FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -15512,7 +15512,7 @@ ALTER TABLE ONLY user_schema."user"
 --
 
 ALTER TABLE ONLY user_schema.profile
-    ADD CONSTRAINT fki5u47g47odeweeaug77ku10d FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fki5u47g47odeweeaug77ku10d FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --
@@ -15544,7 +15544,7 @@ ALTER TABLE ONLY work_schedule_schema.work_schedule
 --
 
 ALTER TABLE ONLY work_schedule_schema.work_schedule
-    ADD CONSTRAINT fkgs7xosqe71roi8nmh14u7jh2k FOREIGN KEY (status_id) REFERENCES dictionary_schema.status(id);
+    ADD CONSTRAINT fkgs7xosqe71roi8nmh14u7jh2k FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
 --

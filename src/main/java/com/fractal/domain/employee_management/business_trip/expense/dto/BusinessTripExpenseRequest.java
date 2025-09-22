@@ -7,12 +7,14 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record BusinessTripExpenseRequest(
-        Long businessTripExpenseTypeId,
+        Long expenseTypeId,
+        LocalDate date,
         Long currencyId,
         BigDecimal amount,
         String description,
-        LocalDate date,
-        List<MultipartFile> files
+        List<MultipartFile> files,
+        Long statusId
+
 
 ) {
 }
