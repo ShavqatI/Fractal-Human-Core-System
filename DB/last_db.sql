@@ -47,7 +47,7 @@ ALTER TABLE IF EXISTS ONLY testing_schema.test_session DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS ONLY testing_schema.question_type DROP CONSTRAINT IF EXISTS fko0hkdkvvyoll4tntb0g9587oe;
 ALTER TABLE IF EXISTS ONLY testing_schema.test_session DROP CONSTRAINT IF EXISTS fkkl4i44nynqodqm7kwb7pe06dy;
 ALTER TABLE IF EXISTS ONLY testing_schema.test_session DROP CONSTRAINT IF EXISTS fkkh1ht4vg34ydhaostpy3s521n;
-ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS fkjnivhuqvrqq9f1wlss478gcay;
+ALTER TABLE IF EXISTS ONLY testing_schema.learningSessionEnrollment DROP CONSTRAINT IF EXISTS fkjnivhuqvrqq9f1wlss478gcay;
 ALTER TABLE IF EXISTS ONLY testing_schema.selected_answer DROP CONSTRAINT IF EXISTS fkgnuqu8ii6d63lp306s0s91yml;
 ALTER TABLE IF EXISTS ONLY testing_schema.test DROP CONSTRAINT IF EXISTS fket9b55yu7wvongn1kcncwp9kp;
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS fkelbfxfjab82ywu83blabtjr8i;
@@ -58,16 +58,16 @@ ALTER TABLE IF EXISTS ONLY testing_schema.test_session DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS fkd52kmu0cg4eeuxu1x3332m7bb;
 ALTER TABLE IF EXISTS ONLY testing_schema.test DROP CONSTRAINT IF EXISTS fkcfsqecxjr6vitg231cl4guck8;
 ALTER TABLE IF EXISTS ONLY testing_schema.selectedAnswer DROP CONSTRAINT IF EXISTS fkbbuf3p3qngi2qtqu5n9civqgf;
-ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS fk9ypfwi38va5u5u22d95lc6rw7;
-ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS fk8hejcpbbiq1qje11346akp3uj;
+ALTER TABLE IF EXISTS ONLY testing_schema.learningSessionEnrollment DROP CONSTRAINT IF EXISTS fk9ypfwi38va5u5u22d95lc6rw7;
+ALTER TABLE IF EXISTS ONLY testing_schema.learningSessionEnrollment DROP CONSTRAINT IF EXISTS fk8hejcpbbiq1qje11346akp3uj;
 ALTER TABLE IF EXISTS ONLY testing_schema.selectedAnswer DROP CONSTRAINT IF EXISTS fk8frr4bcabmmeyyu60qt7iiblo;
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS fk873bn33h42yxrwbh95qeljv2o;
-ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS fk7svspov4rexjawqdvi2jni81u;
+ALTER TABLE IF EXISTS ONLY testing_schema.learningSessionEnrollment DROP CONSTRAINT IF EXISTS fk7svspov4rexjawqdvi2jni81u;
 ALTER TABLE IF EXISTS ONLY testing_schema.test DROP CONSTRAINT IF EXISTS fk6n9a04fkvgp72bc01354sa8cn;
-ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS fk6e9te6j9nvngv9ndvrtt25kd;
+ALTER TABLE IF EXISTS ONLY testing_schema.learningSessionEnrollment DROP CONSTRAINT IF EXISTS fk6e9te6j9nvngv9ndvrtt25kd;
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS fk5ryo4cllkcxwr664iv7r13dq0;
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS fk5drbo3r7nammrmj5xdynimfso;
-ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS fk5cike7u36rpj3o7melmsga9xo;
+ALTER TABLE IF EXISTS ONLY testing_schema.learningSessionEnrollment DROP CONSTRAINT IF EXISTS fk5cike7u36rpj3o7melmsga9xo;
 ALTER TABLE IF EXISTS ONLY testing_schema.test DROP CONSTRAINT IF EXISTS fk5bb7ma72lj1fhp7x0jbb0peim;
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS fk4rol0t47bkou4mrostdxldjel;
 ALTER TABLE IF EXISTS ONLY testing_schema.test_session DROP CONSTRAINT IF EXISTS fk42kp884nu38qvylfkxa76evuj;
@@ -515,7 +515,7 @@ ALTER TABLE IF EXISTS ONLY dictionary_schema.profile_attribute DROP CONSTRAINT I
 ALTER TABLE IF EXISTS ONLY dictionary_schema.nationality DROP CONSTRAINT IF EXISTS fkkkh3nipii8lshje7x9mtrvwos;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.entity_type DROP CONSTRAINT IF EXISTS fkjhrfynx5cv2xgpuhjwdqw2epa;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.profile_attribute DROP CONSTRAINT IF EXISTS fkjb1vvumo8kehaqu8wp1p7xkyq;
-ALTER TABLE IF EXISTS ONLY dictionary_schema.gender DROP CONSTRAINT IF EXISTS fkfbabbrlhfpcge0qak10pvkn3k;
+ALTER TABLE IF EXISTS ONLY dictionary_schema.instructorAssignmentType DROP CONSTRAINT IF EXISTS fkfbabbrlhfpcge0qak10pvkn3k;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.expenseType DROP CONSTRAINT IF EXISTS fkdfgxuugw1cosvegie2xvo9m80;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.week_day DROP CONSTRAINT IF EXISTS fkdert1h6nrmbc9w53ovre07qkr;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.notification_template DROP CONSTRAINT IF EXISTS fkdd8bgvdp58lrm9o9fg3umqtm;
@@ -530,7 +530,7 @@ ALTER TABLE IF EXISTS ONLY dictionary_schema.currency DROP CONSTRAINT IF EXISTS 
 ALTER TABLE IF EXISTS ONLY dictionary_schema.marital_status DROP CONSTRAINT IF EXISTS fk40f9yjfi56ggrpk0awkdcl2hv;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.week_day DROP CONSTRAINT IF EXISTS fk3qjdeyq3j3xq7240wf2wwe7eg;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.notification_template DROP CONSTRAINT IF EXISTS fk39qy1mf664q9dw7ggc3vd0mtf;
-ALTER TABLE IF EXISTS ONLY dictionary_schema.gender DROP CONSTRAINT IF EXISTS fk1tq6qdh89422se45pax0grn09;
+ALTER TABLE IF EXISTS ONLY dictionary_schema.instructorAssignmentType DROP CONSTRAINT IF EXISTS fk1tq6qdh89422se45pax0grn09;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.currency DROP CONSTRAINT IF EXISTS fk17ygkjm2gdj1c9xwqc9ypqy00;
 ALTER TABLE IF EXISTS ONLY contact_schema.contact_type DROP CONSTRAINT IF EXISTS fkr37miqa9wwlta390e7y1g11qg;
 ALTER TABLE IF EXISTS ONLY contact_schema.contact DROP CONSTRAINT IF EXISTS fkq3txv43jn2phda1erhgna376;
@@ -580,7 +580,7 @@ ALTER TABLE IF EXISTS ONLY testing_schema.test_session DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS ONLY testing_schema.test DROP CONSTRAINT IF EXISTS test_pkey;
 ALTER TABLE IF EXISTS ONLY testing_schema.selected_answer DROP CONSTRAINT IF EXISTS selected_answer_pkey;
 ALTER TABLE IF EXISTS ONLY testing_schema.question_type DROP CONSTRAINT IF EXISTS question_type_pkey;
-ALTER TABLE IF EXISTS ONLY testing_schema.trainingParticipation DROP CONSTRAINT IF EXISTS question_pkey;
+ALTER TABLE IF EXISTS ONLY testing_schema.learningSessionEnrollment DROP CONSTRAINT IF EXISTS question_pkey;
 ALTER TABLE IF EXISTS ONLY testing_schema.answer_submission DROP CONSTRAINT IF EXISTS answer_submission_pkey;
 ALTER TABLE IF EXISTS ONLY testing_schema.selectedAnswer DROP CONSTRAINT IF EXISTS answer_pkey;
 ALTER TABLE IF EXISTS ONLY system_schema.service_provider_type DROP CONSTRAINT IF EXISTS ukm91w434gce8g8e532nb0sqbj5;
@@ -752,7 +752,7 @@ ALTER TABLE IF EXISTS ONLY education_schema.education_document_type DROP CONSTRA
 ALTER TABLE IF EXISTS ONLY education_schema.degree_type DROP CONSTRAINT IF EXISTS degree_type_pkey;
 ALTER TABLE IF EXISTS ONLY education_schema.accreditation_status DROP CONSTRAINT IF EXISTS accreditation_status_pkey;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.week_day DROP CONSTRAINT IF EXISTS week_day_pkey;
-ALTER TABLE IF EXISTS ONLY dictionary_schema.gender DROP CONSTRAINT IF EXISTS ukmxvfcsf1euhi5hsw1uecvke7b;
+ALTER TABLE IF EXISTS ONLY dictionary_schema.instructorAssignmentType DROP CONSTRAINT IF EXISTS ukmxvfcsf1euhi5hsw1uecvke7b;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.boolean_type DROP CONSTRAINT IF EXISTS ukkfut4g2l7kkee3l47xjsmn3w3;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.week_day DROP CONSTRAINT IF EXISTS ukhq6bi56xgu0lkj3a8x55ibm08;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.currency DROP CONSTRAINT IF EXISTS ukh84pd2rtr12isnifnj655rkra;
@@ -772,7 +772,7 @@ ALTER TABLE IF EXISTS ONLY dictionary_schema.priority DROP CONSTRAINT IF EXISTS 
 ALTER TABLE IF EXISTS ONLY dictionary_schema.notification_template DROP CONSTRAINT IF EXISTS notification_template_pkey;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.nationality DROP CONSTRAINT IF EXISTS nationality_pkey;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.marital_status DROP CONSTRAINT IF EXISTS marital_status_pkey;
-ALTER TABLE IF EXISTS ONLY dictionary_schema.gender DROP CONSTRAINT IF EXISTS gender_pkey;
+ALTER TABLE IF EXISTS ONLY dictionary_schema.instructorAssignmentType DROP CONSTRAINT IF EXISTS gender_pkey;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.entity_type DROP CONSTRAINT IF EXISTS entity_type_pkey;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.currency DROP CONSTRAINT IF EXISTS currency_pkey;
 ALTER TABLE IF EXISTS ONLY dictionary_schema.color DROP CONSTRAINT IF EXISTS color_pkey;
@@ -799,7 +799,7 @@ DROP TABLE IF EXISTS testing_schema.test_session;
 DROP TABLE IF EXISTS testing_schema.test;
 DROP TABLE IF EXISTS testing_schema.selected_answer;
 DROP TABLE IF EXISTS testing_schema.question_type;
-DROP TABLE IF EXISTS testing_schema.trainingParticipation;
+DROP TABLE IF EXISTS testing_schema.learningSessionEnrollment;
 DROP TABLE IF EXISTS testing_schema.answer_submission;
 DROP TABLE IF EXISTS testing_schema.selectedAnswer;
 DROP TABLE IF EXISTS system_schema.service_provider_type;
@@ -944,7 +944,7 @@ DROP TABLE IF EXISTS dictionary_schema.priority;
 DROP TABLE IF EXISTS dictionary_schema.notification_template;
 DROP TABLE IF EXISTS dictionary_schema.nationality;
 DROP TABLE IF EXISTS dictionary_schema.marital_status;
-DROP TABLE IF EXISTS dictionary_schema.gender;
+DROP TABLE IF EXISTS dictionary_schema.instructorAssignmentType;
 DROP TABLE IF EXISTS dictionary_schema.entity_type;
 DROP TABLE IF EXISTS dictionary_schema.currency;
 DROP TABLE IF EXISTS dictionary_schema.color;
@@ -1579,10 +1579,10 @@ ALTER TABLE dictionary_schema.entity_type ALTER COLUMN id ADD GENERATED BY DEFAU
 
 
 --
--- Name: gender; Type: TABLE; Schema: dictionary_schema; Owner: fractal
+-- Name: instructorAssignmentType; Type: TABLE; Schema: dictionary_schema; Owner: fractal
 --
 
-CREATE TABLE dictionary_schema.gender (
+CREATE TABLE dictionary_schema.instructorAssignmentType (
     id bigint NOT NULL,
     created_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_date timestamp(6) without time zone,
@@ -1593,13 +1593,13 @@ CREATE TABLE dictionary_schema.gender (
 );
 
 
-ALTER TABLE dictionary_schema.gender OWNER TO fractal;
+ALTER TABLE dictionary_schema.instructorAssignmentType OWNER TO fractal;
 
 --
 -- Name: gender_id_seq; Type: SEQUENCE; Schema: dictionary_schema; Owner: fractal
 --
 
-ALTER TABLE dictionary_schema.gender ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+ALTER TABLE dictionary_schema.instructorAssignmentType ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
     SEQUENCE NAME dictionary_schema.gender_id_seq
     START WITH 1
     INCREMENT BY 1
@@ -5688,10 +5688,10 @@ ALTER TABLE testing_schema.answer_submission ALTER COLUMN id ADD GENERATED BY DE
 
 
 --
--- Name: trainingParticipation; Type: TABLE; Schema: testing_schema; Owner: fractal
+-- Name: learningSessionEnrollment; Type: TABLE; Schema: testing_schema; Owner: fractal
 --
 
-CREATE TABLE testing_schema.trainingParticipation (
+CREATE TABLE testing_schema.learningSessionEnrollment (
     id bigint NOT NULL,
     created_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_date timestamp(6) without time zone,
@@ -5705,13 +5705,13 @@ CREATE TABLE testing_schema.trainingParticipation (
 );
 
 
-ALTER TABLE testing_schema.trainingParticipation OWNER TO fractal;
+ALTER TABLE testing_schema.learningSessionEnrollment OWNER TO fractal;
 
 --
 -- Name: question_id_seq; Type: SEQUENCE; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE testing_schema.trainingParticipation ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
+ALTER TABLE testing_schema.learningSessionEnrollment ALTER COLUMN id ADD GENERATED BY DEFAULT AS IDENTITY (
     SEQUENCE NAME testing_schema.question_id_seq
     START WITH 1
     INCREMENT BY 1
@@ -6487,10 +6487,10 @@ COPY dictionary_schema.entity_type (id, created_date, updated_date, code, name, 
 
 
 --
--- Data for Name: gender; Type: TABLE DATA; Schema: dictionary_schema; Owner: fractal
+-- Data for Name: instructorAssignmentType; Type: TABLE DATA; Schema: dictionary_schema; Owner: fractal
 --
 
-COPY dictionary_schema.gender (id, created_date, updated_date, code, name, created_user_id, updated_user_id) FROM stdin;
+COPY dictionary_schema.instructorAssignmentType (id, created_date, updated_date, code, name, created_user_id, updated_user_id) FROM stdin;
 1	2025-05-29 17:10:33.280328	\N	MALE	Male	\N	\N
 20	2025-07-23 13:19:09.345149	2025-07-23 14:23:21.633183	FEMALE	Female	\N	\N
 \.
@@ -7077,7 +7077,7 @@ COPY localization_schema.layout_label (id, created_date, updated_date, name, cre
 3	2025-07-23 11:47:24.876854	\N	update	\N	\N
 4	2025-07-23 11:47:58.876789	\N	delete	\N	\N
 5	2025-07-23 11:57:41.354478	\N	dictionaries	\N	\N
-6	2025-07-23 11:58:32.951626	\N	gender	\N	\N
+6	2025-07-23 11:58:32.951626	\N	instructorAssignmentType	\N	\N
 7	2025-07-23 13:04:07.877673	\N	marital_status	\N	\N
 8	2025-07-23 13:40:54.706919	\N	add	\N	\N
 9	2025-07-23 13:41:42.335986	\N	edit	\N	\N
@@ -7550,7 +7550,7 @@ COPY navigation_schema.menu (id, created_date, updated_date, class_name, icon, l
 28	2025-07-27 08:50:29.55585	2025-07-27 13:44:07.762891	\N	KEY	2	Permission	3	permission	\N	\N	21	4
 27	2025-07-27 08:43:36.4331	2025-07-27 14:09:58.038111	\N	MENU	3	Role Menu	1	role-menu	\N	\N	24	6
 24	2025-07-26 10:13:04.601622	2025-07-27 14:10:07.904758	\N	MENU	3	Menu Action	1	menu-action	\N	\N	25	8
-2	2025-07-23 12:05:06.992077	2025-07-28 11:21:08.592145	\N	MALE	2	Gender	1	gender	\N	\N	6	1
+2	2025-07-23 12:05:06.992077	2025-07-28 11:21:08.592145	\N	MALE	2	Gender	1	instructorAssignmentType	\N	\N	6	1
 3	2025-07-23 13:05:38.383789	2025-07-28 11:21:50.518153	\N	USER_CARD	2	Marital expenseType	2	marital-expenseType	\N	\N	7	1
 30	2025-07-27 11:56:09.118354	2025-07-28 11:23:36.561176	\N	FLAG	2	Language	1	language	\N	\N	17	29
 29	2025-07-27 11:56:09.078333	2025-07-28 11:24:24.139094	\N	GLOBE	1	Localization	3	localization	\N	\N	18	\N
@@ -8354,10 +8354,10 @@ COPY testing_schema.answer_submission (id, created_date, updated_date, approved_
 
 
 --
--- Data for Name: trainingParticipation; Type: TABLE DATA; Schema: testing_schema; Owner: fractal
+-- Data for Name: learningSessionEnrollment; Type: TABLE DATA; Schema: testing_schema; Owner: fractal
 --
 
-COPY testing_schema.trainingParticipation (id, created_date, updated_date, text, created_user_id, updated_user_id, question_type_id, max_selectable_options, status_id, test_id) FROM stdin;
+COPY testing_schema.learningSessionEnrollment (id, created_date, updated_date, text, created_user_id, updated_user_id, question_type_id, max_selectable_options, status_id, test_id) FROM stdin;
 \.
 
 
@@ -9516,10 +9516,10 @@ ALTER TABLE ONLY dictionary_schema.entity_type
 
 
 --
--- Name: gender gender_pkey; Type: CONSTRAINT; Schema: dictionary_schema; Owner: fractal
+-- Name: instructorAssignmentType gender_pkey; Type: CONSTRAINT; Schema: dictionary_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY dictionary_schema.gender
+ALTER TABLE ONLY dictionary_schema.instructorAssignmentType
     ADD CONSTRAINT gender_pkey PRIMARY KEY (id);
 
 
@@ -9676,10 +9676,10 @@ ALTER TABLE ONLY dictionary_schema.boolean_type
 
 
 --
--- Name: gender ukmxvfcsf1euhi5hsw1uecvke7b; Type: CONSTRAINT; Schema: dictionary_schema; Owner: fractal
+-- Name: instructorAssignmentType ukmxvfcsf1euhi5hsw1uecvke7b; Type: CONSTRAINT; Schema: dictionary_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY dictionary_schema.gender
+ALTER TABLE ONLY dictionary_schema.instructorAssignmentType
     ADD CONSTRAINT ukmxvfcsf1euhi5hsw1uecvke7b UNIQUE (code);
 
 
@@ -11052,10 +11052,10 @@ ALTER TABLE ONLY testing_schema.answer_submission
 
 
 --
--- Name: trainingParticipation question_pkey; Type: CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: learningSessionEnrollment question_pkey; Type: CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.trainingParticipation
+ALTER TABLE ONLY testing_schema.learningSessionEnrollment
     ADD CONSTRAINT question_pkey PRIMARY KEY (id);
 
 
@@ -11452,10 +11452,10 @@ ALTER TABLE ONLY dictionary_schema.currency
 
 
 --
--- Name: gender fk1tq6qdh89422se45pax0grn09; Type: FK CONSTRAINT; Schema: dictionary_schema; Owner: fractal
+-- Name: instructorAssignmentType fk1tq6qdh89422se45pax0grn09; Type: FK CONSTRAINT; Schema: dictionary_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY dictionary_schema.gender
+ALTER TABLE ONLY dictionary_schema.instructorAssignmentType
     ADD CONSTRAINT fk1tq6qdh89422se45pax0grn09 FOREIGN KEY (updated_user_id) REFERENCES user_schema."user"(id);
 
 
@@ -11572,10 +11572,10 @@ ALTER TABLE ONLY dictionary_schema.expenseType
 
 
 --
--- Name: gender fkfbabbrlhfpcge0qak10pvkn3k; Type: FK CONSTRAINT; Schema: dictionary_schema; Owner: fractal
+-- Name: instructorAssignmentType fkfbabbrlhfpcge0qak10pvkn3k; Type: FK CONSTRAINT; Schema: dictionary_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY dictionary_schema.gender
+ALTER TABLE ONLY dictionary_schema.instructorAssignmentType
     ADD CONSTRAINT fkfbabbrlhfpcge0qak10pvkn3k FOREIGN KEY (created_user_id) REFERENCES user_schema."user"(id);
 
 
@@ -12400,7 +12400,7 @@ ALTER TABLE ONLY employee_schema.subordinate
 --
 
 ALTER TABLE ONLY employee_schema.employee
-    ADD CONSTRAINT fke0w26qjedr99vwno4pqauw9i9 FOREIGN KEY (gender_id) REFERENCES dictionary_schema.gender(id);
+    ADD CONSTRAINT fke0w26qjedr99vwno4pqauw9i9 FOREIGN KEY (gender_id) REFERENCES dictionary_schema.instructorAssignmentType(id);
 
 
 --
@@ -12544,7 +12544,7 @@ ALTER TABLE ONLY employee_schema.employment_history_order
 --
 
 ALTER TABLE ONLY employee_schema.relative
-    ADD CONSTRAINT fkis2bmbjevbyykx3r3kwqennmo FOREIGN KEY (gender_id) REFERENCES dictionary_schema.gender(id);
+    ADD CONSTRAINT fkis2bmbjevbyykx3r3kwqennmo FOREIGN KEY (gender_id) REFERENCES dictionary_schema.instructorAssignmentType(id);
 
 
 --
@@ -14688,7 +14688,7 @@ ALTER TABLE ONLY recruitment_schema.duty
 --
 
 ALTER TABLE ONLY recruitment_schema.candidate
-    ADD CONSTRAINT fkl3y9fhd8h6cy4c0y120c0j3hx FOREIGN KEY (gender_id) REFERENCES dictionary_schema.gender(id);
+    ADD CONSTRAINT fkl3y9fhd8h6cy4c0y120c0j3hx FOREIGN KEY (gender_id) REFERENCES dictionary_schema.instructorAssignmentType(id);
 
 
 --
@@ -15144,7 +15144,7 @@ ALTER TABLE ONLY testing_schema.test_session
 --
 
 ALTER TABLE ONLY testing_schema.answer_submission
-    ADD CONSTRAINT fk4rol0t47bkou4mrostdxldjel FOREIGN KEY (question_id) REFERENCES testing_schema.trainingParticipation(id);
+    ADD CONSTRAINT fk4rol0t47bkou4mrostdxldjel FOREIGN KEY (question_id) REFERENCES testing_schema.learningSessionEnrollment(id);
 
 
 --
@@ -15156,10 +15156,10 @@ ALTER TABLE ONLY testing_schema.test
 
 
 --
--- Name: trainingParticipation fk5cike7u36rpj3o7melmsga9xo; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: learningSessionEnrollment fk5cike7u36rpj3o7melmsga9xo; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.trainingParticipation
+ALTER TABLE ONLY testing_schema.learningSessionEnrollment
     ADD CONSTRAINT fk5cike7u36rpj3o7melmsga9xo FOREIGN KEY (updated_user_id) REFERENCES authorization_schema."user"(id);
 
 
@@ -15180,10 +15180,10 @@ ALTER TABLE ONLY testing_schema.answer_submission
 
 
 --
--- Name: trainingParticipation fk6e9te6j9nvngv9ndvrtt25kd; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: learningSessionEnrollment fk6e9te6j9nvngv9ndvrtt25kd; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.trainingParticipation
+ALTER TABLE ONLY testing_schema.learningSessionEnrollment
     ADD CONSTRAINT fk6e9te6j9nvngv9ndvrtt25kd FOREIGN KEY (status_id) REFERENCES dictionary_schema.expenseType(id);
 
 
@@ -15196,10 +15196,10 @@ ALTER TABLE ONLY testing_schema.test
 
 
 --
--- Name: trainingParticipation fk7svspov4rexjawqdvi2jni81u; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: learningSessionEnrollment fk7svspov4rexjawqdvi2jni81u; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.trainingParticipation
+ALTER TABLE ONLY testing_schema.learningSessionEnrollment
     ADD CONSTRAINT fk7svspov4rexjawqdvi2jni81u FOREIGN KEY (question_type_id) REFERENCES testing_schema.question_type(id);
 
 
@@ -15216,22 +15216,22 @@ ALTER TABLE ONLY testing_schema.answer_submission
 --
 
 ALTER TABLE ONLY testing_schema.selectedAnswer
-    ADD CONSTRAINT fk8frr4bcabmmeyyu60qt7iiblo FOREIGN KEY (question_id) REFERENCES testing_schema.trainingParticipation(id);
+    ADD CONSTRAINT fk8frr4bcabmmeyyu60qt7iiblo FOREIGN KEY (question_id) REFERENCES testing_schema.learningSessionEnrollment(id);
 
 
 --
--- Name: trainingParticipation fk8hejcpbbiq1qje11346akp3uj; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: learningSessionEnrollment fk8hejcpbbiq1qje11346akp3uj; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.trainingParticipation
+ALTER TABLE ONLY testing_schema.learningSessionEnrollment
     ADD CONSTRAINT fk8hejcpbbiq1qje11346akp3uj FOREIGN KEY (test_id) REFERENCES testing_schema.test(id);
 
 
 --
--- Name: trainingParticipation fk9ypfwi38va5u5u22d95lc6rw7; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: learningSessionEnrollment fk9ypfwi38va5u5u22d95lc6rw7; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.trainingParticipation
+ALTER TABLE ONLY testing_schema.learningSessionEnrollment
     ADD CONSTRAINT fk9ypfwi38va5u5u22d95lc6rw7 FOREIGN KEY (created_user_id) REFERENCES authorization_schema."user"(id);
 
 
@@ -15316,10 +15316,10 @@ ALTER TABLE ONLY testing_schema.selected_answer
 
 
 --
--- Name: trainingParticipation fkjnivhuqvrqq9f1wlss478gcay; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
+-- Name: learningSessionEnrollment fkjnivhuqvrqq9f1wlss478gcay; Type: FK CONSTRAINT; Schema: testing_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY testing_schema.trainingParticipation
+ALTER TABLE ONLY testing_schema.learningSessionEnrollment
     ADD CONSTRAINT fkjnivhuqvrqq9f1wlss478gcay FOREIGN KEY (question_type_id) REFERENCES location_schema.address_type(id);
 
 

@@ -9,7 +9,7 @@ public interface CandidateResourceMapperService {
     CandidateResource toEntity(CandidateResourceRequest dto,String url);
     CandidateResource toEntity(CandidateResource resource, CandidateResourceRequest dto,String url);
     //CandidateResource toEntity(CandidateResource resource, CandidateResourceRequest dto);
-    //CandidateResourceRequest fileToRequest(Long candidateResourceTypeId,MultipartFile file,String url);
+    //CandidateResourceRequest fileToRequest(Long resourceTypeId,MultipartFile file,String url);
 }
 
 

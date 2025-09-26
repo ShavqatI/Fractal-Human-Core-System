@@ -31,8 +31,8 @@ class CandidateResourceMapperServiceImpl implements CandidateResourceMapperServi
     }
 
     /*@Override
-    public CandidateResource toEntity(Long candidateResourceTypeId,MultipartFile file,String url) {
-        return toEntity(new CandidateResource(),fileToRequest(candidateResourceTypeId,file,url));
+    public CandidateResource toEntity(Long resourceTypeId,MultipartFile file,String url) {
+        return toEntity(new CandidateResource(),fileToRequest(resourceTypeId,file,url));
     }*/
 
     @Override
@@ -41,8 +41,8 @@ class CandidateResourceMapperServiceImpl implements CandidateResourceMapperServi
     }
 
     /* @Override
-    public CandidateResourceRequest fileToRequest(Long candidateResourceTypeId,MultipartFile file, String url) {
-        return new CandidateResourceRequest(candidateResourceTypeId,url,file.getOriginalFilename(),file.getContentType(),file.getSize());
+    public CandidateResourceRequest fileToRequest(Long resourceTypeId,MultipartFile file, String url) {
+        return new CandidateResourceRequest(resourceTypeId,url,file.getOriginalFilename(),file.getContentType(),file.getSize());
     }*/
 
 
