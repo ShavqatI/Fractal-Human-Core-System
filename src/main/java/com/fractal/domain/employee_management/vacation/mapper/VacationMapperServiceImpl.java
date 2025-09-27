@@ -23,16 +23,14 @@ class VacationMapperServiceImpl implements VacationMapperService {
     public VacationResponse toDTO(Vacation vacation) {
         return new VacationResponse(
                 vacation.getId(),
-                vacation.getEmployee().getFirstName(),
-                vacation.getSuccessorEmployee().getFirstName(),
+                employeeService.toCompactDTO(vacation.getEmployee()),
+                employeeService.toCompactDTO(vacation.getSuccessorEmployee()),
                 vacationCategoryService.toDTO(vacation.getVacationCategory()),
                 vacationTypeService.toDTO(vacation.getVacationType()),
-                statusService.toDTO(vacation.getStatus()),
+                statusService.toCompactDTO(vacation.getStatus()),
                 vacation.getStartDate(),
                 vacation.getEndDate(),
                 vacation.getDays(),
-                vacation.getOrderNumber(),
-                vacation.getOrderDate(),
                 vacation.getDescription(),
                 vacation.getCreatedDate()
         );

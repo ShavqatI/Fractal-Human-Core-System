@@ -1,8 +1,8 @@
 package com.fractal.domain.employee_management.performance;
 
-import com.fractal.domain.recruitment.interview.Interview;
-import com.fractal.domain.recruitment.interview.dto.InterviewRequest;
-import com.fractal.domain.recruitment.interview.dto.InterviewResponse;
+import com.fractal.domain.interview.Interview;
+import com.fractal.domain.interview.dto.InterviewRequest;
+import com.fractal.domain.interview.dto.InterviewResponse;
 
 import java.util.List;
 

@@ -56,7 +56,8 @@ class VacationServiceImpl implements VacationService {
         return mapperService.toDTO(vacation);
     }
 
-    private Vacation save(Vacation vacation) {
+    @Override
+    public Vacation save(Vacation vacation) {
         try {
             return vacationRepository.save(vacation);
         }

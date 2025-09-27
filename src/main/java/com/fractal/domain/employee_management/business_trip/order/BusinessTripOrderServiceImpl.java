@@ -60,7 +60,6 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
                 .stream()
                 .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
         businessTrip.removeOrder(order);
-        orderRepository.delete(order);
         businessTripService.save(businessTrip);
     }
 

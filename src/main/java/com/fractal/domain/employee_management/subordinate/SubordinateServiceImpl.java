@@ -66,10 +66,10 @@ class SubordinateServiceImpl implements SubordinateService {
     public SubordinateResponse toDTO(Subordinate subordinate) {
         return new SubordinateResponse(
                 subordinate.getId(),
-                subordinate.getEmployee().getFirstName(),
-                subordinate.getSubordinateEmployee().getFirstName(),
-                subordinate.getSubordinateType().getName(),
-                subordinate.getStatus().getName(),
+                employeeService.toCompactDTO(subordinate.getEmployee()),
+                employeeService.toCompactDTO(subordinate.getSubordinateEmployee()),
+                subordinateTypeService.toDTO(subordinate.getSubordinateType()),
+                statusService.toCompactDTO(subordinate.getStatus()),
                 subordinate.getStartDate(),
                 subordinate.getEndDate(),
                 subordinate.getCreatedDate()

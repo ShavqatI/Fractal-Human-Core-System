@@ -95,6 +95,7 @@ class SeparationReasonTypeServiceImpl implements SeparationReasonTypeService {
         var separationReason = SeparationReasonType.builder()
                 .code(dto.code())
                 .name(dto.name())
+                .status(statusService.getById(dto.statusId()))
                 .build();
         dto.children().forEach(separationReasonTypeRequest -> separationReason.addChild(toEntity(separationReasonTypeRequest)));
     return separationReason;

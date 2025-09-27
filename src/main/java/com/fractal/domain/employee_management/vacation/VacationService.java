@@ -13,4 +13,5 @@ public interface VacationService {
     Vacation update(Long id, VacationRequest dto);
     void deleteById(Long id);
     VacationResponse toDTO(Vacation vacation);
+    Vacation save(Vacation vacation);
 }

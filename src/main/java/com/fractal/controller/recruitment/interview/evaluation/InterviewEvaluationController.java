@@ -1,9 +1,9 @@
 package com.fractal.controller.recruitment.interview.evaluation;
 
 
-import com.fractal.domain.recruitment.interview.evaluation.InterviewEvaluationService;
-import com.fractal.domain.recruitment.interview.evaluation.dto.InterviewEvaluationRequest;
-import com.fractal.domain.recruitment.interview.evaluation.dto.InterviewEvaluationResponse;
+import com.fractal.domain.interview.evaluation.InterviewEvaluationService;
+import com.fractal.domain.interview.evaluation.dto.InterviewEvaluationRequest;
+import com.fractal.domain.interview.evaluation.dto.InterviewEvaluationResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
