@@ -1,8 +1,11 @@
 package com.fractal.domain.employee_management.vacation.dto;
 
+import com.fractal.domain.employee_management.vacation.order.VacationOrder;
+import com.fractal.domain.employee_management.vacation.order.dto.VacationOrderRequest;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public record VacationRequest(
     @NotNull
@@ -13,13 +16,14 @@ public record VacationRequest(
     Long vacationCategoryId,
     @NotNull
     Long vacationTypeId,
-    Long statusId,
+    @NotNull
     LocalDate startDate,
+    @NotNull
     LocalDate endDate,
     Integer days,
-    String orderNumber,
-    LocalDate orderDate,
-    String description
+    List<VacationOrderRequest> orders,
+    String description,
+    Long statusId
 
     )
 

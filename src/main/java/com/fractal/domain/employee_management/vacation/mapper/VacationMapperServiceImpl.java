@@ -6,9 +6,15 @@ import com.fractal.domain.employee_management.vacation.Vacation;
 import com.fractal.domain.employee_management.vacation.category.VacationCategoryService;
 import com.fractal.domain.employee_management.vacation.dto.VacationRequest;
 import com.fractal.domain.employee_management.vacation.dto.VacationResponse;
+import com.fractal.domain.employee_management.vacation.order.mapper.VacationOrderMapperService;
 import com.fractal.domain.employee_management.vacation.type.VacationTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +24,7 @@ class VacationMapperServiceImpl implements VacationMapperService {
     private final StatusService statusService;
     private final VacationTypeService vacationTypeService;
     private final VacationCategoryService vacationCategoryService;
+    private final VacationOrderMapperService orderMapperService;
 
     @Override
     public VacationResponse toDTO(Vacation vacation) {
@@ -27,11 +34,16 @@ class VacationMapperServiceImpl implements VacationMapperService {
                 employeeService.toCompactDTO(vacation.getSuccessorEmployee()),
                 vacationCategoryService.toDTO(vacation.getVacationCategory()),
                 vacationTypeService.toDTO(vacation.getVacationType()),
-                statusService.toCompactDTO(vacation.getStatus()),
                 vacation.getStartDate(),
                 vacation.getEndDate(),
                 vacation.getDays(),
                 vacation.getDescription(),
+                Optional.ofNullable(vacation.getOrders())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(orderMapperService::toDTO)
+                        .collect(Collectors.toList()),
+                statusService.toCompactDTO(vacation.getStatus()),
                 vacation.getCreatedDate()
         );
     }
@@ -55,8 +67,6 @@ class VacationMapperServiceImpl implements VacationMapperService {
         vacation.setStartDate(dto.startDate());
         vacation.setEndDate(dto.endDate());
         vacation.setDays(dto.days());
-        vacation.setOrderNumber(dto.orderNumber());
-        vacation.setOrderDate(dto.orderDate());
         vacation.setDescription(dto.description());
         return vacation;
     }
