@@ -7,6 +7,7 @@ import com.fractal.domain.employee_management.address.dto.EmployeeAddressRespons
 import com.fractal.domain.employee_management.employment.dto.EmploymentHistoryResponse;
 import com.fractal.domain.employee_management.relative.dto.RelativeResponse;
 import com.fractal.domain.employment.dto.EmploymentRequest;
+import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
 import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
 import com.fractal.domain.resource.dto.ResourceResponse;
@@ -33,8 +34,7 @@ public record EmployeeResponse(
         List<EducationResponse> educations,
         List<RelativeResponse> relatives,
         List<MilitaryServiceResponse> militaryServices,
-        List<EmploymentHistoryResponse> employmentHistories,
-        List<EmploymentRequest> employments,
+        List<EmploymentResponse> employments,
         List<ResourceResponse> resources,
         String status,
         LocalDateTime createdDate

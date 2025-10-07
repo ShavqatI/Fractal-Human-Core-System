@@ -31,7 +31,6 @@ public record EmployeeRequest(
         List<EducationRequest> educations,
         List<RelativeRequest> relatives,
         List<MilitaryServiceRequest> militaryServices,
-        List<EmploymentHistoryRequest> employmentHistories,
         List<EmploymentRequest> employments,
         List<MultipartFile> files,
         Long statusId
