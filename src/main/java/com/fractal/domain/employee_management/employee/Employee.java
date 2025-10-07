@@ -9,6 +9,7 @@ import com.fractal.domain.employee_management.contact.EmployeeContact;
 import com.fractal.domain.employee_management.education.EmployeeEducation;
 import com.fractal.domain.employee_management.employee.resource.EmployeeResource;
 import com.fractal.domain.employee_management.employment.EmploymentHistory;
+import com.fractal.domain.employee_management.employment.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
 import com.fractal.domain.employee_management.insurance.Insurance;
 import com.fractal.domain.employee_management.language_skill.EmployeeLanguageSkill;
@@ -68,6 +69,10 @@ public class Employee extends Person {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmploymentHistory> employmentHistories  = new ArrayList<>();
 
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private  List<EmployeeEmployment> employments  = new ArrayList<>();
+
+
     @OneToMany(mappedBy = "employee",cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
     private List<EmployeeResource> resources = new ArrayList<>();
 
@@ -89,128 +94,116 @@ public class Employee extends Person {
 
 
 
-    @Transactional
     public void addIdentificationDocument(EmployeeIdentificationDocument identificationDocument) {
         if (identificationDocuments == null) identificationDocuments = new ArrayList<>();
         identificationDocument.setEmployee(this);
         identificationDocuments.add(identificationDocument);
     }
-    @Transactional
     public void removeIdentificationDocument(EmployeeIdentificationDocument identificationDocument) {
         if (identificationDocuments != null && !identificationDocuments.isEmpty())
             identificationDocuments.remove(identificationDocument);
     }
-    @Transactional
     public void addCitizenship(EmployeeCitizenship employeeCitizenship) {
         if (citizenships == null) citizenships = new ArrayList<>();
         employeeCitizenship.setEmployee(this);
         citizenships.add(employeeCitizenship);
     }
-    @Transactional
     public void removeCitizenship(EmployeeCitizenship employeeCitizenship) {
         if (citizenships != null && !citizenships.isEmpty())
             citizenships.remove(employeeCitizenship);
     }
-    @Transactional
     public void addAddress(EmployeeAddress address) {
         if (addresses == null) addresses = new ArrayList<>();
         address.setEmployee(this);
         addresses.add(address);
     }
-    @Transactional
     public void removeAddress(EmployeeAddress address) {
         if (addresses != null && !addresses.isEmpty())
             addresses.remove(address);
     }
-    @Transactional
     public void addContact(EmployeeContact contact) {
         if (contacts == null) contacts = new ArrayList<>();
         contact.setEmployee(this);
         contacts.add(contact);
     }
-    @Transactional
     public void removeContact(EmployeeContact contact) {
         if (contacts != null && !contacts.isEmpty())
             contacts.remove(contact);
     }
-    @Transactional
     public void addEducation(EmployeeEducation education) {
         if (educations == null) educations = new ArrayList<>();
         education.setEmployee(this);
         educations.add(education);
     }
-    @Transactional
     public void removeEducation(EmployeeEducation education) {
         if (educations != null && !educations.isEmpty())
             educations.remove(education);
     }
 
-    @Transactional
     public void addLanguageSkill(EmployeeLanguageSkill languageSkill) {
         if (languageSkills == null) languageSkills = new ArrayList<>();
         languageSkill.setEmployee(this);
         languageSkills.add(languageSkill);
     }
-    @Transactional
     public void removeLanguageSkill(EmployeeLanguageSkill languageSkill) {
         if (languageSkills != null && !languageSkills.isEmpty())
             languageSkills.remove(languageSkill);
     }
 
-    @Transactional
     public void addRelative(Relative relative) {
         if (relatives == null) relatives = new ArrayList<>();
         relative.setEmployee(this);
         relatives.add(relative);
     }
 
-    @Transactional
     public void removeRelative(Relative relative) {
         if (relatives != null && !relatives.isEmpty())
             relatives.remove(relative);
     }
 
-    @Transactional
     public void addMilitaryService(EmployeeMilitaryService militaryService) {
         if (militaryServices == null) militaryServices = new ArrayList<>();
         militaryService.setEmployee(this);
         militaryServices.add(militaryService);
     }
-    @Transactional
     public void removeMilitaryService(EmployeeMilitaryService militaryService) {
         if (militaryServices != null && !militaryServices.isEmpty())
             militaryServices.remove(militaryService);
     }
-    @Transactional
     public void addEmploymentHistory(EmploymentHistory employmentHistory) {
         if (employmentHistories == null) employmentHistories = new ArrayList<>();
         employmentHistory.setEmployee(this);
         employmentHistories.add(employmentHistory);
     }
-    @Transactional
     public void removeEmploymentHistory(EmploymentHistory employmentHistory) {
         if (employmentHistories != null && !employmentHistories.isEmpty())
             employmentHistories.remove(employmentHistory);
     }
 
-    @Transactional
+    public void addEmployment(EmployeeEmployment employment) {
+        if (employments == null) employments = new ArrayList<>();
+        employment.setEmployee(this);
+        employments.add(employment);
+    }
+    public void removeEmployment(EmployeeEmployment employment) {
+        if (employments != null && !employments.isEmpty())
+            employments.remove(employment);
+    }
+
     public void addWorkExperience(EmployeeWorkExperience workExperience) {
         if (workExperiences == null) workExperiences = new ArrayList<>();
         workExperience.setEmployee(this);
         workExperiences.add(workExperience);
     }
-    @Transactional
     public void removeWorkExperience(EmployeeWorkExperience workExperience) {
         if (workExperiences != null && !workExperiences.isEmpty())
             workExperiences.remove(workExperience);
     }
-    @Transactional
     public void addResource(EmployeeResource resource) {
         if (resources == null) resources = new ArrayList<>();
         resource.setEmployee(this);
         resources.add(resource);
     }
-    @Transactional
     public void removeResource(EmployeeResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);
