@@ -65,9 +65,11 @@ public class Employee extends Person {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmployeeMilitaryService> militaryServices = new ArrayList<>();
+/*
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmploymentHistory> employmentHistories  = new ArrayList<>();
+*/
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmployeeEmployment> employments  = new ArrayList<>();
@@ -89,9 +91,9 @@ public class Employee extends Person {
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<Subordinate> subordinates   = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+  /*  @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<EmployeeWorkExperience> workExperiences = new ArrayList<>();
-
+*/
 
 
     public void addIdentificationDocument(EmployeeIdentificationDocument identificationDocument) {
@@ -170,7 +172,7 @@ public class Employee extends Person {
         if (militaryServices != null && !militaryServices.isEmpty())
             militaryServices.remove(militaryService);
     }
-    public void addEmploymentHistory(EmploymentHistory employmentHistory) {
+   /* public void addEmploymentHistory(EmploymentHistory employmentHistory) {
         if (employmentHistories == null) employmentHistories = new ArrayList<>();
         employmentHistory.setEmployee(this);
         employmentHistories.add(employmentHistory);
@@ -178,7 +180,7 @@ public class Employee extends Person {
     public void removeEmploymentHistory(EmploymentHistory employmentHistory) {
         if (employmentHistories != null && !employmentHistories.isEmpty())
             employmentHistories.remove(employmentHistory);
-    }
+    }*/
 
     public void addEmployment(EmployeeEmployment employment) {
         if (employments == null) employments = new ArrayList<>();
@@ -190,7 +192,7 @@ public class Employee extends Person {
             employments.remove(employment);
     }
 
-    public void addWorkExperience(EmployeeWorkExperience workExperience) {
+    /*public void addWorkExperience(EmployeeWorkExperience workExperience) {
         if (workExperiences == null) workExperiences = new ArrayList<>();
         workExperience.setEmployee(this);
         workExperiences.add(workExperience);
@@ -198,7 +200,7 @@ public class Employee extends Person {
     public void removeWorkExperience(EmployeeWorkExperience workExperience) {
         if (workExperiences != null && !workExperiences.isEmpty())
             workExperiences.remove(workExperience);
-    }
+    }*/
     public void addResource(EmployeeResource resource) {
         if (resources == null) resources = new ArrayList<>();
         resource.setEmployee(this);
