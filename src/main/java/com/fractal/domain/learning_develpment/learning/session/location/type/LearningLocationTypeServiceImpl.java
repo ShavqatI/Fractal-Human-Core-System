@@ -11,9 +11,9 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-class TrainingLocationTypeServiceImpl implements TrainingLocationTypeService {
+class LearningLocationTypeServiceImpl implements LearningLocationTypeService {
 
-    private final TrainingLocationTypeRepository trainingLocationTypeRepository;
+    private final LearningLocationTypeRepository learningLocationTypeRepository;
     @Override
     public LearningLocationType create(LearningLocationTypeRequest dto) {
        return save(toEntity(dto));
@@ -35,12 +35,12 @@ class TrainingLocationTypeServiceImpl implements TrainingLocationTypeService {
 
     @Override
     public List<LearningLocationType> getAll() {
-        return trainingLocationTypeRepository.findAll();
+        return learningLocationTypeRepository.findAll();
     }
 
     @Override
     public LearningLocationType getByCode(String code) {
-        return trainingLocationTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
+        return learningLocationTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
     }
 
     @Override
@@ -50,7 +50,7 @@ class TrainingLocationTypeServiceImpl implements TrainingLocationTypeService {
 
     @Override
     public void deleteById(Long id) {
-       trainingLocationTypeRepository.delete(findById(id));
+       learningLocationTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -71,7 +71,7 @@ class TrainingLocationTypeServiceImpl implements TrainingLocationTypeService {
 
     private LearningLocationType save(LearningLocationType learningLocationType) {
         try {
-            return trainingLocationTypeRepository.save(learningLocationType);
+            return learningLocationTypeRepository.save(learningLocationType);
         }
         catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
@@ -79,7 +79,7 @@ class TrainingLocationTypeServiceImpl implements TrainingLocationTypeService {
     }
 
     private LearningLocationType findById(Long id) {
-        return trainingLocationTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
+        return learningLocationTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
     }
 
 }

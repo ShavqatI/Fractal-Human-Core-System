@@ -31,7 +31,7 @@ public class InterviewTemplate extends ApprovalWorkflow {
     @Column(name = "name")
     protected String name;
 
-    @OneToMany(mappedBy = "interviewEvaluation",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "interviewTemplate",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<InterviewTemplateSection> sections = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

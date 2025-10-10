@@ -13,7 +13,7 @@ import java.util.List;
 
 public record OrganizationRequest(
         @NotBlank
-        @Pattern(regexp = "^[A-Z]{2,20}$", message = "Code must be in Latin uppercase letters")
+        @Pattern(regexp = "^[A-Z_]{2,50}$", message = "Code must be in Latin uppercase letters")
         String code,
         @NotBlank
         @NotNull
@@ -25,10 +25,7 @@ public record OrganizationRequest(
         @Pattern(regexp = "^\\p{L}[\\p{L}\\p{M}\\p{S}\\p{P}\\p{N}\\s]*$",message = "Only Unicode letters, symbols, punctuation, numbers and spaces are allowed")
         @NotNull
         String fullName,
-        @NotNull
-        @NotBlank
         String tinNumber,
-        @NotNull
         LocalDate openDate,
         String openReason,
         LocalDate closeDate,

@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+/*
 @Entity
 @Table(name = "separation_reason", schema = "employment_schema", catalog = "fractal")
 @Data
@@ -26,3 +27,4 @@ public class SeparationReason extends AbstractEntity {
 
 
 }
+*/

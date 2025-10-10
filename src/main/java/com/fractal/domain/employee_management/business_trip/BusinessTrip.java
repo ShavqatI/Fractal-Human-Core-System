@@ -3,6 +3,7 @@ package com.fractal.domain.employee_management.business_trip;
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.business_trip.expense.BusinessTripExpense;
+import com.fractal.domain.employee_management.business_trip.location.BusinessTripLocation;
 import com.fractal.domain.employee_management.business_trip.order.BusinessTripOrder;
 import com.fractal.domain.employee_management.business_trip.resource.BusinessTripResource;
 import com.fractal.domain.employee_management.business_trip.type.BusinessTripType;
@@ -34,10 +35,6 @@ public class BusinessTrip extends ApprovalWorkflow {
     private Employee employee;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organization_id", referencedColumnName = "id")
-    private Organization organization;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "business_trip_type_id", referencedColumnName = "id")
     private BusinessTripType businessTripType;
 
@@ -50,9 +47,6 @@ public class BusinessTrip extends ApprovalWorkflow {
 
     @Column(name = "description",length = 1000)
     private String description;
-
-    @Column(name = "location",length = 1000)
-    private String location;
 
     @Column(name = "start_date")
     private LocalDate startDate;
@@ -71,6 +65,9 @@ public class BusinessTrip extends ApprovalWorkflow {
 
     @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<BusinessTripExpense> expenses = new ArrayList<>();
+
+    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<BusinessTripLocation> locations = new ArrayList<>();
 
     public void addOrder(BusinessTripOrder order) {
         if (orders == null) orders = new ArrayList<>();
@@ -100,5 +97,15 @@ public class BusinessTrip extends ApprovalWorkflow {
     public void removeExpense(BusinessTripExpense expense) {
         if (expenses != null && !expenses.isEmpty())
             expenses.remove(expense);
+    }
+
+    public void addLocation(BusinessTripLocation location) {
+        if (locations == null) locations = new ArrayList<>();
+        location.setBusinessTrip(this);
+        locations.add(location);
+    }
+    public void removeLocation(BusinessTripLocation location) {
+        if (locations != null && !locations.isEmpty())
+            locations.remove(location);
     }
 }

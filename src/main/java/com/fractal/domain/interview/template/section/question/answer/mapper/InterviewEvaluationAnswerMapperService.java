@@ -1,3 +1,4 @@
+/*
 package com.fractal.domain.interview.template.section.question.answer.mapper;
 
 import com.fractal.domain.interview.template.section.question.answer.InterviewTemplateAnswer;
@@ -11,3 +12,4 @@ public interface InterviewEvaluationAnswerMapperService {
 }
 
 
+*/

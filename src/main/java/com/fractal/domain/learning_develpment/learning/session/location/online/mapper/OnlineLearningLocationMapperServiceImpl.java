@@ -4,7 +4,7 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.learning_develpment.learning.session.location.online.OnlineLearningLocation;
 import com.fractal.domain.learning_develpment.learning.session.location.online.dto.OnlineLearningLocationRequest;
 import com.fractal.domain.learning_develpment.learning.session.location.online.dto.OnlineLearningLocationResponse;
-import com.fractal.domain.learning_develpment.learning.session.location.type.TrainingLocationTypeService;
+import com.fractal.domain.learning_develpment.learning.session.location.type.LearningLocationTypeService;
 import com.fractal.domain.learning_develpment.learning.platform.OnlinePlatformService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class OnlineLearningLocationMapperServiceImpl implements OnlineLearningLocationMapperService {
 
-    private final TrainingLocationTypeService locationTypeService;
+    private final LearningLocationTypeService locationTypeService;
     private final OnlinePlatformService onlinePlatformService;
     private final StatusService statusService;
 

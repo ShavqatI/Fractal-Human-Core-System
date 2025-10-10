@@ -1,7 +1,7 @@
 package com.fractal.domain.finance.expense;
 
 import com.fractal.domain.abstraction.ApprovalWorkflow;
-import com.fractal.domain.dictionary.currency.Currency;
+import com.fractal.domain.finance.currency.Currency;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.finance.expense.resource.ExpenseResource;
 import com.fractal.domain.finance.expense.type.ExpenseType;

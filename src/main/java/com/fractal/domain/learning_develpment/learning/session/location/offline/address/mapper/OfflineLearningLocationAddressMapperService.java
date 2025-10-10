@@ -11,8 +11,6 @@ public interface OfflineLearningLocationAddressMapperService {
     OfflineLearningLocationAddress toEntity(ExternalOfflineLearningLocationAddressRequest dto);
     OfflineLearningLocationAddress toEntity(InternalOfflineLearningLocationAddressRequest dto);
     OfflineLearningLocationAddress toEntity(OfflineLearningLocationAddressRequest dto);
-    //OfflineLearningLocationAddress toEntity(OfflineLearningLocationAddress address, ExternalOfflineLearningLocationAddressRequest dto);
-    //OfflineLearningLocationAddress toEntity(OfflineLearningLocationAddress address, InternalOfflineLearningLocationAddressRequest dto);
     OfflineLearningLocationAddress toEntity(OfflineLearningLocationAddress address, OfflineLearningLocationAddressRequest dto);
 }
 

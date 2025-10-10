@@ -1,9 +1,10 @@
+/*
 package com.fractal.domain.interview.template.section.question.answer;
 
+import com.fractal.domain.interview.evaluation.section.question.answer.mapper.InterviewEvaluationAnswerMapperService;
 import com.fractal.domain.interview.template.section.question.InterviewTemplateQuestionService;
 import com.fractal.domain.interview.template.section.question.answer.dto.InterviewTemplateAnswerRequest;
 import com.fractal.domain.interview.template.section.question.answer.dto.InterviewTemplateAnswerResponse;
-import com.fractal.domain.interview.template.section.question.answer.mapper.InterviewEvaluationAnswerMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -70,3 +71,4 @@ class InterviewTemplateAnswerServiceImpl implements InterviewTemplateAnswerServi
         return mapperService.toDTO(answer);
     }
 }
+*/

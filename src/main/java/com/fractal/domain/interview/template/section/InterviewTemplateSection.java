@@ -41,7 +41,7 @@ public class InterviewTemplateSection extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "interviewEvaluationSection",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "interviewTemplateSection",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<InterviewTemplateQuestion> questions = new ArrayList<>();
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)

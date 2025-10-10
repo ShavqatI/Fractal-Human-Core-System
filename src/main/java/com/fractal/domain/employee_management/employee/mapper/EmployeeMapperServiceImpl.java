@@ -156,7 +156,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
         dto.educations().forEach(education->employee.addEducation(employeeEducationMapperService.toEntity(education)));
         dto.relatives().forEach(relative->employee.addRelative(relativeMapperService.toEntity(relative)));
         dto.militaryServices().forEach(militaryService->employee.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
-        dto.employments().forEach(employment->employee.addEmployment(employmentMapperService.toEntity(employment)));
+        //dto.employments().forEach(employment->employee.addEmployment(employmentMapperService.toEntity(employment)));
         dto.files().forEach(file-> employee.addResource(employeeResourceMapperService.toEntity(file,null)));
        return employee;
     }

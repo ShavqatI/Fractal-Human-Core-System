@@ -1,10 +1,11 @@
+/*
 package com.fractal.domain.employment.work_experience.separation_reason;
 
 import com.fractal.domain.employment.separation_reason_type.SeparationReasonTypeService;
 import com.fractal.domain.employment.work_experience.WorkExperienceService;
 import com.fractal.domain.employment.work_experience.separation_reason.dto.SeparationReasonRequest;
 import com.fractal.domain.employment.work_experience.separation_reason.dto.SeparationReasonResponse;
-import com.fractal.domain.employment.work_experience.separation_reason.mapper.SeparationReasonMapperService;
+import com.fractal.domain.employment.work_experience.separation_reason.mapper.SeparationReason2MapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ import java.util.List;
 class SeparationReasonServiceImpl implements SeparationReasonService {
 
     private final SeparationReasonRepository separationReasonRepository;
-    private final SeparationReasonMapperService mapperService;
+    private final SeparationReason2MapperService mapperService;
     private final WorkExperienceService workExperienceService;
     private final SeparationReasonTypeService separationReasonTypeService;
 
@@ -70,3 +71,4 @@ class SeparationReasonServiceImpl implements SeparationReasonService {
         );
     }
 }
+*/

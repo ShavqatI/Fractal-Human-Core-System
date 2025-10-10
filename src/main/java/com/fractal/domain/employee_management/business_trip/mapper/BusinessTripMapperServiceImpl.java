@@ -31,7 +31,7 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
 
     @Override
     public BusinessTripResponse toDTO(BusinessTrip businessTrip) {
-        return new BusinessTripResponse(
+        return null; /*new BusinessTripResponse(
                 businessTrip.getId(),
                 businessTrip.getEmployee().getFirstName(),
                 businessTrip.getOrganization().getName(),
@@ -54,7 +54,7 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
                         .map(resourceMapperService::toDTO)
                         .collect(Collectors.toList()),
                 businessTrip.getCreatedDate()
-        );
+        );*/
     }
 
     @Override
@@ -68,7 +68,7 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
     }
 
     private BusinessTrip mapToEntity(BusinessTrip businessTrip, BusinessTripRequest dto) {
-        businessTrip.setEmployee(employeeService.getById(dto.employeeId()));
+        /*businessTrip.setEmployee(employeeService.getById(dto.employeeId()));
         businessTrip.setOrganization(organizationService.getById(dto.organizationId()));
         businessTrip.setBusinessTripType(businessTripTypeService.getById(dto.businessTripTypeId()));
         businessTrip.setStatus(statusService.getById(dto.statusId()));
@@ -79,7 +79,7 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
         businessTrip.setEndDate(dto.endDate());
         businessTrip.setDays(dto.days());
         dto.orders().forEach(order-> businessTrip.addOrder(orderMapperService.toEntity(order)));
-        dto.files().forEach(file-> businessTrip.addResource(resourceMapperService.toEntity(file,null)));
+        dto.files().forEach(file-> businessTrip.addResource(resourceMapperService.toEntity(file,null)));*/
       return businessTrip;
     }
 }

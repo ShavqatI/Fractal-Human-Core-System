@@ -1,4 +1,4 @@
-package com.fractal.domain.dictionary.currency;
+package com.fractal.domain.finance.currency;
 
 import com.fractal.domain.abstraction.Dictionary;
 import com.fractal.domain.location.country.Country;

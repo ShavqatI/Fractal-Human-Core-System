@@ -3,6 +3,7 @@ package com.fractal.domain.employee_management.business_trip.dto;
 import com.fractal.domain.dictionary.status.dto.StatusResponse;
 import com.fractal.domain.employee_management.business_trip.order.dto.BusinessTripOrderResponse;
 import com.fractal.domain.employee_management.business_trip.type.dto.BusinessTripTypeResponse;
+import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.resource.dto.ResourceResponse;
 
 import java.time.LocalDate;
@@ -11,9 +12,8 @@ import java.util.List;
 
 public record BusinessTripResponse(
         Long id,
-        String employee,
-        String organization,
         BusinessTripTypeResponse businessTripTypeResponse,
+        EmployeeCompactResponse employee,
         StatusResponse status,
         String purpose,
         String description,

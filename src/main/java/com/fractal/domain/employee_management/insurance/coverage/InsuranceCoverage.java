@@ -1,9 +1,7 @@
 package com.fractal.domain.employee_management.insurance.coverage;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.dictionary.currency.Currency;
 import com.fractal.domain.employee_management.insurance.Insurance;
-import com.fractal.domain.insurance.provider.InsuranceProvider;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

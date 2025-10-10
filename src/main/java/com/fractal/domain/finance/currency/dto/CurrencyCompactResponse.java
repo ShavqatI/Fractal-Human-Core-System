@@ -1,4 +1,4 @@
-package com.fractal.domain.dictionary.currency.dto;
+package com.fractal.domain.finance.currency.dto;
 
 public record CurrencyCompactResponse(
         Long id,

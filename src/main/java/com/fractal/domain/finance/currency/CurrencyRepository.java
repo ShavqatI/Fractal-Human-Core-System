@@ -1,4 +1,4 @@
-package com.fractal.domain.dictionary.currency;
+package com.fractal.domain.finance.currency;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

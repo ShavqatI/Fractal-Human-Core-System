@@ -40,7 +40,7 @@ public class Employment extends Auditable {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     protected Status status;
 
-    @OneToMany(mappedBy = "workExperience", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employment", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<SeparationReason> separationReasons = new ArrayList<>();
 
 

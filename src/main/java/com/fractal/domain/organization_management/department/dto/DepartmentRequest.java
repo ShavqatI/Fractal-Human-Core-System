@@ -11,7 +11,7 @@ import java.util.List;
 public record DepartmentRequest(
     @NotBlank
     @NotNull
-    @Pattern(regexp = "^[A-Z]{2,20}$", message = "Code must be in Latin uppercase letters")
+    @Pattern(regexp = "^[A-Z_]{2,50}$", message = "Code must be in Latin uppercase letters")
     String code,
     @NotNull
     @NotBlank

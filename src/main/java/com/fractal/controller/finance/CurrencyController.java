@@ -1,9 +1,9 @@
-package com.fractal.controller.dictionary;
+package com.fractal.controller.finance;
 
-import com.fractal.domain.dictionary.currency.CurrencyService;
-import com.fractal.domain.dictionary.currency.dto.CurrencyCompactResponse;
-import com.fractal.domain.dictionary.currency.dto.CurrencyRequest;
-import com.fractal.domain.dictionary.currency.dto.CurrencyResponse;
+import com.fractal.domain.finance.currency.CurrencyService;
+import com.fractal.domain.finance.currency.dto.CurrencyCompactResponse;
+import com.fractal.domain.finance.currency.dto.CurrencyRequest;
+import com.fractal.domain.finance.currency.dto.CurrencyResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/dictionary/currency")
+@RequestMapping("/api/v1/finance/currency")
 @RequiredArgsConstructor
 public class CurrencyController {
 

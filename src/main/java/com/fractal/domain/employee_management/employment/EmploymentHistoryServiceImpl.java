@@ -25,7 +25,7 @@ class EmploymentHistoryServiceImpl implements EmploymentHistoryService {
     public EmploymentHistory create(Long employeeId, EmploymentHistoryRequest dto) {
         var employee = employeeService.getById(employeeId);
         var employmentHistory = employmentHistoryMapperService.toEntity(dto);
-        employee.addEmploymentHistory(employmentHistory);
+        //employee.addEmploymentHistory(employmentHistory);
         employeeService.save(employee);
         return employmentHistory;
     }
@@ -49,25 +49,25 @@ class EmploymentHistoryServiceImpl implements EmploymentHistoryService {
     @Transactional
     public EmploymentHistory update(Long employeeId, Long id, EmploymentHistoryRequest dto) {
         var employee = employeeService.getById(employeeId);
-        var employmentHistory = employee.getEmploymentHistories()
+        /*var employmentHistory = employee.getEmploymentHistories()
                 .stream()
                 .filter(eh-> eh.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employment History with id: " + id + " not found"));
         employmentHistory = employmentHistoryMapperService.toEntity(employmentHistory,dto);
         employmentHistoryRepository.save(employmentHistory);
-        employeeService.save(employee);
-        return employmentHistory;
+        employeeService.save(employee);*/
+        return null;
     }
 
     @Override
     @Transactional
     public void delete(Long employeeId, Long id) {
-        var employee = employeeService.getById(employeeId);
+        /*var employee = employeeService.getById(employeeId);
         var employmentHistory = employee.getEmploymentHistories()
                 .stream()
                 .filter(eh-> eh.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employment History with id: " + id + " not found"));
         employee.removeEmploymentHistory(employmentHistory);
         employmentHistoryRepository.delete(employmentHistory);
-        employeeService.save(employee);
+        employeeService.save(employee);*/
     }
 
     @Override

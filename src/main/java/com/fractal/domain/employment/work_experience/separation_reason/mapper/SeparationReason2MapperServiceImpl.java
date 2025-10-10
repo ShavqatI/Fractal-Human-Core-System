@@ -1,3 +1,4 @@
+/*
 package com.fractal.domain.employment.work_experience.separation_reason.mapper;
 
 import com.fractal.domain.employment.separation_reason_type.SeparationReasonTypeService;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-class SeparationReasonMapperServiceImpl implements SeparationReasonMapperService {
+class SeparationReason2MapperServiceImpl implements SeparationReason2MapperService {
 
     private final SeparationReasonTypeService separationReasonTypeService;
 
@@ -39,3 +40,4 @@ class SeparationReasonMapperServiceImpl implements SeparationReasonMapperService
 
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.fractal.domain.interview.template.section;
 
 import com.fractal.domain.interview.template.InterviewTemplateService;
@@ -121,3 +122,4 @@ class InterviewTemplateSectionServiceImpl implements InterviewTemplateSectionSer
         }
     }
 }
+*/

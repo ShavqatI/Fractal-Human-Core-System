@@ -36,7 +36,7 @@ class OfflineLearningLocationServiceImpl implements OfflineLearningLocationServi
 
     @Override
     public OfflineLearningLocation getById(Long sessionId, Long id) {
-        return locationRepository.findByLearningSessionIdAndId(sessionId,id).orElseThrow(()->new ResourceNotFoundException("External Training Location with id: " + id + " not found"));
+        return locationRepository.findByLearningSessionIdAndId(sessionId,id).orElseThrow(()->new ResourceWithIdNotFoundException(this,id));
     }
 
     @Override
@@ -54,7 +54,7 @@ class OfflineLearningLocationServiceImpl implements OfflineLearningLocationServi
         var session = learningSessionService.getById(sessionId);
         var location = (OfflineLearningLocation) session.getLocations()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("External Training Location  with id: " + id + " not found"));
+                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
         location = mapperService.toEntity( location,dto);
         locationRepository.save(location);
         learningSessionService.save(session);
@@ -66,7 +66,7 @@ class OfflineLearningLocationServiceImpl implements OfflineLearningLocationServi
         var session = learningSessionService.getById(sessionId);
         var location = (OfflineLearningLocation) session.getLocations()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("External Training Location  with id: " + id + " not found"));
+                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
         session.removeLocation(location);
         learningSessionService.save(session);
     }

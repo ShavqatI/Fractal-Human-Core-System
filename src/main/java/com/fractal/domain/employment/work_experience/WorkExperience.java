@@ -2,7 +2,6 @@ package com.fractal.domain.employment.work_experience;
 
 
 import com.fractal.domain.abstraction.AbstractEmploymentHistory;
-import com.fractal.domain.employment.work_experience.separation_reason.SeparationReason;
 import com.fractal.domain.location.country.Country;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -51,7 +50,7 @@ public class WorkExperience extends AbstractEmploymentHistory {
     @Column(name = "leave_reason", columnDefinition = "TEXT")
     private String leaveReason;
 
-    @OneToMany(mappedBy = "workExperience", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    /*@OneToMany(mappedBy = "workExperience", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<SeparationReason> separationReasons = new ArrayList<>();
 
 
@@ -66,6 +65,6 @@ public class WorkExperience extends AbstractEmploymentHistory {
     public void removeSeparationReason(SeparationReason separationReason) {
         if (separationReasons != null && !separationReasons.isEmpty())
             separationReasons.remove(separationReason);
-    }
+    }*/
 
 }

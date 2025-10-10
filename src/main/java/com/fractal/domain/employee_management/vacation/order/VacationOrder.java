@@ -8,7 +8,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "business_trip_order", schema = "employee_schema", catalog = "fractal")
+@Table(name = "vacation_order", schema = "employee_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @AllArgsConstructor

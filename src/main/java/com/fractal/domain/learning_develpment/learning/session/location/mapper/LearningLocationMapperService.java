@@ -7,8 +7,7 @@ import com.fractal.domain.learning_develpment.learning.session.location.dto.Lear
 public interface LearningLocationMapperService {
     LearningLocationResponse toDTO(LearningLocation location);
     LearningLocation toEntity(LearningLocationRequest dto);
-    //OnlineLearningLocation toEntity(OnlineLearningLocationRequest dto);
-    //LearningLocation toEntity(OnlineLearningLocation location, OnlineLearningLocationRequest dto);
+
 }
 
 

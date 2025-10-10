@@ -19,6 +19,7 @@ import java.util.List;
 public class LearningCategory extends Dictionary {
 
     private String description;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id",referencedColumnName = "id")
     private LearningCategory parent;

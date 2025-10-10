@@ -1,6 +1,6 @@
 package com.fractal.domain.organization_management.grade.mapper;
 
-import com.fractal.domain.dictionary.currency.CurrencyService;
+import com.fractal.domain.finance.currency.CurrencyService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.organization_management.grade.Grade;
 import com.fractal.domain.organization_management.grade.dto.GradeCompactResponse;

@@ -39,7 +39,7 @@ public class InternalEmploymentAgreement extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "agreement",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "internalEmploymentAgreement",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<InternalEmploymentAgreementResource> resources = new ArrayList<>();
 
     public void addResource(InternalEmploymentAgreementResource resource) {

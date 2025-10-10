@@ -27,6 +27,7 @@ class OnlinePlatformServiceImpl implements OnlinePlatformService {
             OnlinePlatform onlinePlatform = findById(id);
             onlinePlatform.setCode(dto.code());
             onlinePlatform.setName(dto.name());
+            onlinePlatform.setOnlinePlatformType(platformTypeService.getById(dto.onlinePlatformTypeId()));
             return save(onlinePlatform);
         }
         catch (DataAccessException e) {

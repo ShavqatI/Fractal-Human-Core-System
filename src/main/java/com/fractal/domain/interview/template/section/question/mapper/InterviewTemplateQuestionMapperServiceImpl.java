@@ -1,3 +1,4 @@
+/*
 package com.fractal.domain.interview.template.section.question.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
@@ -69,3 +70,4 @@ class InterviewTemplateQuestionMapperServiceImpl implements InterviewTemplateQue
 
 
 }
+*/

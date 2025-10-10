@@ -1,8 +1,8 @@
-package com.fractal.domain.dictionary.currency;
+package com.fractal.domain.finance.currency;
 
-import com.fractal.domain.dictionary.currency.dto.CurrencyCompactResponse;
-import com.fractal.domain.dictionary.currency.dto.CurrencyRequest;
-import com.fractal.domain.dictionary.currency.dto.CurrencyResponse;
+import com.fractal.domain.finance.currency.dto.CurrencyCompactResponse;
+import com.fractal.domain.finance.currency.dto.CurrencyRequest;
+import com.fractal.domain.finance.currency.dto.CurrencyResponse;
 
 import java.util.List;
 

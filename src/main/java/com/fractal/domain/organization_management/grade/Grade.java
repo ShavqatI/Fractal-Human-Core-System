@@ -1,7 +1,7 @@
 package com.fractal.domain.organization_management.grade;
 
 import com.fractal.domain.abstraction.Dictionary;
-import com.fractal.domain.dictionary.currency.Currency;
+import com.fractal.domain.finance.currency.Currency;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.grade.level.GradeLevel;
 import com.fractal.domain.organization_management.grade.step.GradeStep;

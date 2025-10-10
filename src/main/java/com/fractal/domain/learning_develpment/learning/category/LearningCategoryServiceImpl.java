@@ -49,6 +49,7 @@ class LearningCategoryServiceImpl implements LearningCategoryService {
             LearningCategory learningCategory = findById(id);
             learningCategory.setCode(dto.code());
             learningCategory.setName(dto.name());
+            learningCategory.setDescription(dto.description());
             return save(learningCategory);
         }
         catch (DataAccessException e) {

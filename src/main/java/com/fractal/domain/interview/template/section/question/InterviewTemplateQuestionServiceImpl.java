@@ -1,3 +1,4 @@
+/*
 package com.fractal.domain.interview.template.section.question;
 
 import com.fractal.domain.interview.template.section.InterviewTemplateSectionService;
@@ -91,3 +92,4 @@ class InterviewTemplateQuestionServiceImpl implements InterviewTemplateQuestionS
         }
     }
 }
+*/

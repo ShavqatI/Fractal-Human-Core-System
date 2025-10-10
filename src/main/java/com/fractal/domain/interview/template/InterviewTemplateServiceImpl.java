@@ -1,3 +1,4 @@
+/*
 package com.fractal.domain.interview.template;
 
 import com.fractal.domain.interview.template.dto.InterviewTemplateRequest;
@@ -70,3 +71,4 @@ class InterviewTemplateServiceImpl implements InterviewTemplateService {
 
     }
 }
+*/

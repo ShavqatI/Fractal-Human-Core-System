@@ -1,3 +1,4 @@
+/*
 package com.fractal.domain.employment.work_experience.separation_reason;
 
 import com.fractal.domain.employment.work_experience.separation_reason.dto.SeparationReasonRequest;
@@ -13,3 +14,4 @@ public interface SeparationReasonService {
     void delete(Long workExperienceId, Long id);
     SeparationReasonResponse toDTO(SeparationReason separationReason);
 }
+*/

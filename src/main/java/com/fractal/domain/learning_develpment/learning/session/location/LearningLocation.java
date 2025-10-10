@@ -25,7 +25,7 @@ public class LearningLocation extends Auditable {
     protected Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "earning_location_type_id",referencedColumnName = "id")
+    @JoinColumn(name = "learning_location_type_id",referencedColumnName = "id")
     protected LearningLocationType learningLocationType;
 
     @ManyToOne(fetch = FetchType.LAZY)

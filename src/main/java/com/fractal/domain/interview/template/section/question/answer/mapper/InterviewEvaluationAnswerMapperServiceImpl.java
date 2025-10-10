@@ -1,3 +1,4 @@
+/*
 package com.fractal.domain.interview.template.section.question.answer.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
@@ -41,3 +42,4 @@ class InterviewEvaluationAnswerMapperServiceImpl implements InterviewEvaluationA
 
 
 }
+*/

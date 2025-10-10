@@ -25,7 +25,7 @@ public class EmployeeWorkExperienceServiceImpl implements EmployeeWorkExperience
     public EmployeeWorkExperience create(Long employeeId, WorkExperienceRequest dto) {
         var employee = employeeService.getById(employeeId);
         var workExperience = workExperienceMapperService.toEntity(dto);
-        employee.addWorkExperience(workExperience);
+        //employee.addWorkExperience(workExperience);
         employeeService.save(employee);
         return workExperience;
     }
@@ -43,23 +43,24 @@ public class EmployeeWorkExperienceServiceImpl implements EmployeeWorkExperience
     @Override
     @Transactional
     public EmployeeWorkExperience update(Long employeeId, Long id, WorkExperienceRequest dto) {
-        var employee = employeeService.getById(employeeId);
+        /*var employee = employeeService.getById(employeeId);
         var workExperience = employee.getWorkExperiences()
                 .stream()
                 .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate Work Experience  with id: " + id + " not found"));
         workExperience = workExperienceRepository.save(workExperienceMapperService.toEntity(workExperience,dto));
         employeeService.save(employee);
-        return workExperience;
+        return workExperience;*/
+        return null;
     }
 
     @Override
     public void delete(Long employeeId, Long id) {
-        var employee = employeeService.getById(employeeId);
+        /*var employee = employeeService.getById(employeeId);
         var workExperience = employee.getWorkExperiences()
                 .stream()
                 .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate Work Experience  with id: " + id + " not found"));
         employee.removeWorkExperience(workExperience);
-        employeeService.save(employee);
+        employeeService.save(employee);*/
     }
 
     @Override
