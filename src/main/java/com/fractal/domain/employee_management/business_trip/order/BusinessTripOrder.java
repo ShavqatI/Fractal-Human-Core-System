@@ -14,13 +14,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class BusinessTripOrder extends Order {
 
-    /*@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "business_trip_order_number_generator")
-    @SequenceGenerator(
-            name = "business_trip_order_number_generator",
-            sequenceName = "business_trip_order_number_seq",
-            initialValue = 1000,
-            allocationSize = 1
-    )*/
     @Column(name = "number")
     @Setter(AccessLevel.NONE)
     private Long number;
