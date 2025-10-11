@@ -1,5 +1,6 @@
 package com.fractal.domain.localization.layout_label;
 
+import com.fractal.domain.localization.layout_label.dto.LayoutLabelListRequest;
 import com.fractal.domain.localization.layout_label.dto.LayoutLabelRequest;
 import com.fractal.domain.localization.layout_label.dto.LayoutLabelResponse;
 import com.fractal.domain.localization.layout_label.mapper.LayoutLabelMapperService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +29,14 @@ class LayoutLabelServiceImpl implements LayoutLabelService {
     @Override
     public List<LayoutLabel> getAll() {
         return layoutLabelRepository.findAll();
+    }
+
+    @Override
+    public List<LayoutLabel> getAllByListAndLanguageCode(LayoutLabelListRequest dto) {
+        return layoutLabelRepository.findAllByNameIn(dto.list()).stream()
+                .filter(layoutLabel -> layoutLabel.getLayoutLabelDetails().stream()
+                        .anyMatch(detail -> detail.getLanguage().getCode().equals(dto.languageCode())))
+                .collect(Collectors.toList());
     }
 
     @Override
