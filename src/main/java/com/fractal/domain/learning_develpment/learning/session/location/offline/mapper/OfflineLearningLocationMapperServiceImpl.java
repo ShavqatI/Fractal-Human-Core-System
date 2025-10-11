@@ -6,7 +6,6 @@ import com.fractal.domain.learning_develpment.learning.session.location.offline.
 import com.fractal.domain.learning_develpment.learning.session.location.offline.dto.OfflineLearningLocationRequest;
 import com.fractal.domain.learning_develpment.learning.session.location.offline.dto.OfflineLearningLocationResponse;
 import com.fractal.domain.learning_develpment.learning.session.location.type.LearningLocationTypeService;
-import com.fractal.domain.organization_management.organization.OrganizationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

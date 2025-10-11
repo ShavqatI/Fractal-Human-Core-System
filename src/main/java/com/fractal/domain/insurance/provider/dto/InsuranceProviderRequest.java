@@ -1,10 +1,7 @@
 package com.fractal.domain.insurance.provider.dto;
 
 import com.fractal.domain.contact.dto.ContactRequest;
-import com.fractal.domain.contact.dto.ContactResponse;
-import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.insurance.provider.address.dto.InsuranceProviderAddressRequest;
-import com.fractal.domain.insurance.provider.address.dto.InsuranceProviderAddressResponse;
 
 import java.util.List;
 

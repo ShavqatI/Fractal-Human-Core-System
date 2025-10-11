@@ -12,6 +12,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -96,13 +97,13 @@ class PositionServiceImpl implements PositionService {
                 .code(dto.code())
                 .name(dto.name())
                 .description(dto.description())
-                .department(departmentService.getById(dto.departmentId()))
+                .department(Optional.of(departmentService.getById(dto.departmentId())).orElse(null))
                 .openDate(dto.openDate())
                 .openReason(dto.openReason())
                 .closeDate(dto.closeDate())
                 .closeReason(dto.closeReason())
                 .status(statusService.getById(dto.statusId()))
-                .grade(gradeService.getById(dto.gradeId()))
+                .grade(Optional.of(gradeService.getById(dto.gradeId())).orElse(null))
                 .build();
     }
 

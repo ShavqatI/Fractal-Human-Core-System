@@ -7,7 +7,6 @@ import com.fractal.domain.organization_management.organization.work_schedule.Org
 import com.fractal.domain.organization_management.unit.OrganizationUnit;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;

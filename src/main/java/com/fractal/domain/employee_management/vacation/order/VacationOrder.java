@@ -1,8 +1,7 @@
 package com.fractal.domain.employee_management.vacation.order;
 
-import com.fractal.domain.employee_management.business_trip.BusinessTrip;
-import com.fractal.domain.employee_management.order.Order;
 import com.fractal.domain.employee_management.vacation.Vacation;
+import com.fractal.domain.order.Order;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

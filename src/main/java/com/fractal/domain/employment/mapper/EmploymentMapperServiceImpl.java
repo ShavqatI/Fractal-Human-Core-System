@@ -9,13 +9,6 @@ import com.fractal.domain.employment.external.mapper.ExternalEmploymentMapperSer
 import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.mapper.InternalEmploymentMapperService;
-import com.fractal.domain.learning_develpment.learning.session.location.LearningLocation;
-import com.fractal.domain.learning_develpment.learning.session.location.dto.LearningLocationRequest;
-import com.fractal.domain.learning_develpment.learning.session.location.dto.LearningLocationResponse;
-import com.fractal.domain.learning_develpment.learning.session.location.offline.OfflineLearningLocation;
-import com.fractal.domain.learning_develpment.learning.session.location.offline.dto.OfflineLearningLocationRequest;
-import com.fractal.domain.learning_develpment.learning.session.location.online.OnlineLearningLocation;
-import com.fractal.domain.learning_develpment.learning.session.location.online.dto.OnlineLearningLocationRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

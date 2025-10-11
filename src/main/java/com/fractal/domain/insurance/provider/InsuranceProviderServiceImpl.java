@@ -4,11 +4,6 @@ import com.fractal.domain.insurance.provider.dto.InsuranceProviderCompactRespons
 import com.fractal.domain.insurance.provider.dto.InsuranceProviderRequest;
 import com.fractal.domain.insurance.provider.dto.InsuranceProviderResponse;
 import com.fractal.domain.insurance.provider.mapper.InsuranceProviderMapperService;
-import com.fractal.domain.recruitment.candidate.Candidate;
-import com.fractal.domain.recruitment.candidate.dto.CandidateCompactResponse;
-import com.fractal.domain.recruitment.candidate.dto.CandidateRequest;
-import com.fractal.domain.recruitment.candidate.dto.CandidateResponse;
-import com.fractal.domain.recruitment.candidate.mapper.CandidateMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;

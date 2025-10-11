@@ -8,7 +8,7 @@ import java.util.List;
 public interface CandidateResourceService {
 
     CandidateResource create(Long candidateId, CandidateResourceRequest dto);
-    List<CandidateResource> getAllByEducationId(Long candidateId);
+    List<CandidateResource> getAllByCandidateId(Long candidateId);
     CandidateResource getById(Long candidateId , Long id);
     CandidateResource update(Long candidateId,Long id,CandidateResourceRequest dto);
     void delete(Long candidateId,Long id);

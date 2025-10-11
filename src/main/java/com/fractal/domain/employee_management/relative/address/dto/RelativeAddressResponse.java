@@ -1,15 +1,21 @@
 package com.fractal.domain.employee_management.relative.address.dto;
 
+import com.fractal.domain.location.address.type.dto.AddressTypeResponse;
+import com.fractal.domain.location.city.dto.CityCompactResponse;
+import com.fractal.domain.location.country.dto.CountryCompactResponse;
+import com.fractal.domain.location.district.dto.DistrictCompactResponse;
+import com.fractal.domain.location.region.dto.RegionCompactResponse;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record RelativeAddressResponse(
         Long id,
-        String addressType,
-        String country,
-        String region,
-        String city,
-        String district,
+        AddressTypeResponse addressType,
+        CountryCompactResponse country,
+        RegionCompactResponse region,
+        CityCompactResponse city,
+        DistrictCompactResponse district,
         String street,
         String house,
         String apartment,

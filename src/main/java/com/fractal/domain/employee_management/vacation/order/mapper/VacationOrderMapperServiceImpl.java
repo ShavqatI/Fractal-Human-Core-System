@@ -1,10 +1,10 @@
 package com.fractal.domain.employee_management.vacation.order.mapper;
 
-import com.fractal.domain.employee_management.order.resource.mapper.OrderResourceMapperService;
-import com.fractal.domain.employee_management.order.type.OrderTypeService;
 import com.fractal.domain.employee_management.vacation.order.VacationOrder;
 import com.fractal.domain.employee_management.vacation.order.dto.VacationOrderRequest;
 import com.fractal.domain.employee_management.vacation.order.dto.VacationOrderResponse;
+import com.fractal.domain.order.resource.mapper.OrderResourceMapperService;
+import com.fractal.domain.order.type.OrderTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

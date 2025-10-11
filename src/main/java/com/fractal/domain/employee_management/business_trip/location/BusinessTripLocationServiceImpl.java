@@ -4,8 +4,6 @@ import com.fractal.domain.employee_management.business_trip.BusinessTripService;
 import com.fractal.domain.employee_management.business_trip.location.dto.BusinessTripLocationRequest;
 import com.fractal.domain.employee_management.business_trip.location.dto.BusinessTripLocationResponse;
 import com.fractal.domain.employee_management.business_trip.location.mapper.BusinessTripLocationMapperService;
-import com.fractal.domain.learning_develpment.learning.session.location.offline.OfflineLearningLocation;
-import com.fractal.domain.learning_develpment.learning.session.location.offline.mapper.OfflineLearningLocationMapperService;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;

@@ -3,8 +3,6 @@ package com.fractal.domain.learning_develpment.learning.category;
 import com.fractal.domain.learning_develpment.learning.category.dto.LearningCategoryCompactResponse;
 import com.fractal.domain.learning_develpment.learning.category.dto.LearningCategoryRequest;
 import com.fractal.domain.learning_develpment.learning.category.dto.LearningCategoryResponse;
-import com.fractal.domain.organization_management.department.Department;
-import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 
 import java.util.List;
 

@@ -3,8 +3,8 @@ package com.fractal.domain.learning_develpment.learning.session.location;
 
 import com.fractal.domain.abstraction.Auditable;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.learning_develpment.learning.session.location.type.LearningLocationType;
 import com.fractal.domain.learning_develpment.learning.session.LearningSession;
+import com.fractal.domain.learning_develpment.learning.session.location.type.LearningLocationType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

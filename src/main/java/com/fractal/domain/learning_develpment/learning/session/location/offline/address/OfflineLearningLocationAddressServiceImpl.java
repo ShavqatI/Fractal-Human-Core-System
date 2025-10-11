@@ -1,7 +1,6 @@
 package com.fractal.domain.learning_develpment.learning.session.location.offline.address;
 
 import com.fractal.domain.learning_develpment.learning.session.location.offline.OfflineLearningLocationService;
-import com.fractal.domain.learning_develpment.learning.session.location.offline.address.dto.ExternalOfflineLearningLocationAddressRequest;
 import com.fractal.domain.learning_develpment.learning.session.location.offline.address.dto.OfflineLearningLocationAddressRequest;
 import com.fractal.domain.learning_develpment.learning.session.location.offline.address.dto.OfflineLearningLocationAddressResponse;
 import com.fractal.domain.learning_develpment.learning.session.location.offline.address.mapper.OfflineLearningLocationAddressMapperService;

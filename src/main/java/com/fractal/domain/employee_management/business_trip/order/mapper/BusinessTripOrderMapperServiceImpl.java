@@ -3,8 +3,8 @@ package com.fractal.domain.employee_management.business_trip.order.mapper;
 import com.fractal.domain.employee_management.business_trip.order.BusinessTripOrder;
 import com.fractal.domain.employee_management.business_trip.order.dto.BusinessTripOrderRequest;
 import com.fractal.domain.employee_management.business_trip.order.dto.BusinessTripOrderResponse;
-import com.fractal.domain.employee_management.order.resource.mapper.OrderResourceMapperService;
-import com.fractal.domain.employee_management.order.type.OrderTypeService;
+import com.fractal.domain.order.resource.mapper.OrderResourceMapperService;
+import com.fractal.domain.order.type.OrderTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

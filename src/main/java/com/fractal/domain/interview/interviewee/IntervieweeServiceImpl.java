@@ -1,9 +1,9 @@
 package com.fractal.domain.interview.interviewee;
 
+import com.fractal.domain.interview.InterviewService;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeRequest;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeResponse;
 import com.fractal.domain.interview.interviewee.mapper.IntervieweeMapperService;
-import com.fractal.domain.interview.InterviewService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

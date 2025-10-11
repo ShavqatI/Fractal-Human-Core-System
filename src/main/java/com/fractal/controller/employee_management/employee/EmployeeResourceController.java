@@ -2,13 +2,13 @@ package com.fractal.controller.employee_management.employee;
 
 
 import com.fractal.domain.employee_management.employee.resource.EmployeeResourceService;
-import com.fractal.domain.resource.dto.ResourceResponse;
+import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceRequest;
+import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,20 +21,20 @@ public class EmployeeResourceController {
     private final EmployeeResourceService resourceService;
 
     @PostMapping()
-    public ResponseEntity<ResourceResponse> create(@PathVariable Long employeeId, @RequestBody @Valid MultipartFile file) {
-        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(employeeId,file)), HttpStatus.CREATED);
+    public ResponseEntity<EmployeeResourceResponse> create(@PathVariable Long employeeId, @RequestBody @Valid EmployeeResourceRequest dto) {
+        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(employeeId,dto)), HttpStatus.CREATED);
     }
     @GetMapping
-    public ResponseEntity<List<ResourceResponse>> getAll(@PathVariable Long employeeId) {
+    public ResponseEntity<List<EmployeeResourceResponse>> getAll(@PathVariable Long employeeId) {
         return ResponseEntity.ok(resourceService.getAllByEmployeeId(employeeId).stream().map(resourceService::toDTO).collect(Collectors.toList()));
     }
     @GetMapping("/{id}")
-    public ResponseEntity<ResourceResponse> getById(@PathVariable Long employeeId,@PathVariable Long id) {
+    public ResponseEntity<EmployeeResourceResponse> getById(@PathVariable Long employeeId,@PathVariable Long id) {
         return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(employeeId,id)));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<ResourceResponse> update(@PathVariable Long employeeId, @PathVariable Long id, @RequestBody @Valid MultipartFile file) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(employeeId,id, file)));
+    public ResponseEntity<EmployeeResourceResponse> update(@PathVariable Long employeeId, @PathVariable Long id, @RequestBody @Valid EmployeeResourceRequest dto) {
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(employeeId,id, dto)));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long employeeId, @PathVariable Long id) {

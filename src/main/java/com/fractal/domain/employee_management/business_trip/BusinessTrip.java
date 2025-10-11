@@ -8,7 +8,6 @@ import com.fractal.domain.employee_management.business_trip.order.BusinessTripOr
 import com.fractal.domain.employee_management.business_trip.resource.BusinessTripResource;
 import com.fractal.domain.employee_management.business_trip.type.BusinessTripType;
 import com.fractal.domain.employee_management.employee.Employee;
-import com.fractal.domain.organization_management.organization.Organization;
 import jakarta.persistence.*;
 import lombok.*;
 

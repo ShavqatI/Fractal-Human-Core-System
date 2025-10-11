@@ -2,9 +2,6 @@ package com.fractal.domain.employee_management.business_trip.location;
 
 import com.fractal.domain.employee_management.business_trip.location.dto.BusinessTripLocationRequest;
 import com.fractal.domain.employee_management.business_trip.location.dto.BusinessTripLocationResponse;
-import com.fractal.domain.learning_develpment.learning.session.location.offline.OfflineLearningLocation;
-import com.fractal.domain.learning_develpment.learning.session.location.offline.dto.OfflineLearningLocationRequest;
-import com.fractal.domain.learning_develpment.learning.session.location.offline.dto.OfflineLearningLocationResponse;
 
 import java.util.List;
 

@@ -96,7 +96,7 @@ class LearningMapperServiceImpl implements LearningMapperService {
         learning.setStartTime(dto.startTime());
         learning.setEndTime(dto.endTime());
         learning.setCapacity(dto.capacity());
-        learning.setCapacity(dto.capacity());
+        learning.setMandatory(dto.mandatory());
         learning.setStatus(statusService.getById(dto.statusId()));
         dto.sessions().forEach(session-> learning.addSession(sessionMapperService.toEntity(session)));
         return learning;

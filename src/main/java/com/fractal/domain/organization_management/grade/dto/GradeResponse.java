@@ -1,7 +1,7 @@
 package com.fractal.domain.organization_management.grade.dto;
 
-import com.fractal.domain.finance.currency.dto.CurrencyCompactResponse;
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
+import com.fractal.domain.finance.currency.dto.CurrencyCompactResponse;
 import com.fractal.domain.organization_management.grade.level.dto.GradeLevelResponse;
 import com.fractal.domain.organization_management.grade.step.dto.GradeStepResponse;
 

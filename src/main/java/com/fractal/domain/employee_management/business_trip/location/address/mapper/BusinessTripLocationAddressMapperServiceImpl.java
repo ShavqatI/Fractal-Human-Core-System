@@ -1,10 +1,10 @@
 package com.fractal.domain.employee_management.business_trip.location.address.mapper;
 
 import com.fractal.domain.employee_management.business_trip.location.address.BusinessTripLocationAddress;
-import com.fractal.domain.employee_management.business_trip.location.address.dto.InternalBusinessTripLocationAddressRequest;
-import com.fractal.domain.employee_management.business_trip.location.address.dto.ExternalBusinessTripLocationAddressRequest;
 import com.fractal.domain.employee_management.business_trip.location.address.dto.BusinessTripLocationAddressRequest;
 import com.fractal.domain.employee_management.business_trip.location.address.dto.BusinessTripLocationAddressResponse;
+import com.fractal.domain.employee_management.business_trip.location.address.dto.ExternalBusinessTripLocationAddressRequest;
+import com.fractal.domain.employee_management.business_trip.location.address.dto.InternalBusinessTripLocationAddressRequest;
 import com.fractal.domain.location.address.Address;
 import com.fractal.domain.location.address.type.AddressTypeService;
 import com.fractal.domain.location.city.CityService;

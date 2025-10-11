@@ -1,9 +1,9 @@
 package com.fractal.controller.employee_management;
 
 
-import com.fractal.domain.employee_management.order.type.OrderTypeService;
-import com.fractal.domain.employee_management.order.type.dto.OrderTypeRequest;
-import com.fractal.domain.employee_management.order.type.dto.OrderTypeResponse;
+import com.fractal.domain.order.type.OrderTypeService;
+import com.fractal.domain.order.type.dto.OrderTypeRequest;
+import com.fractal.domain.order.type.dto.OrderTypeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

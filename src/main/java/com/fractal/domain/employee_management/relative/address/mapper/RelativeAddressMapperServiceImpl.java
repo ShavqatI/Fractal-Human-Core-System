@@ -11,6 +11,8 @@ import com.fractal.domain.location.region.RegionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 class RelativeAddressMapperServiceImpl implements RelativeAddressMapperService {
@@ -25,11 +27,11 @@ class RelativeAddressMapperServiceImpl implements RelativeAddressMapperService {
     public RelativeAddressResponse toDTO(RelativeAddress address) {
         return new RelativeAddressResponse(
                 address.getId(),
-                address.getAddressType().getName(),
-                address.getCountry().getName(),
-                address.getRegion().getName(),
-                address.getCity().getName(),
-                address.getDistrict().getName(),
+                addressTypeService.toDTO(address.getAddressType()),
+                countryService.toCompactDTO(address.getCountry()),
+                regionService.toCompactDTO(address.getRegion()),
+                cityService.toCompactDTO(address.getCity()),
+                districtService.toCompactDTO(address.getDistrict()),
                 address.getStreet(),
                 address.getHouse(),
                 address.getApartment(),
@@ -58,9 +60,9 @@ class RelativeAddressMapperServiceImpl implements RelativeAddressMapperService {
     private RelativeAddress mapToEntity(RelativeAddress address, RelativeAddressRequest dto) {
         address.setAddressType(addressTypeService.getById(dto.addressTypeId()));
         address.setCountry(countryService.getById(dto.countryId()));
-        address.setRegion(regionService.getById(dto.regionId()));
-        address.setCity(cityService.getById(dto.cityId()));
-        address.setDistrict(districtService.getById(dto.districtId()));
+        address.setRegion(Optional.of(regionService.getById(dto.regionId())).orElse(null));
+        address.setCity(Optional.of(cityService.getById(dto.cityId())).orElse(null));
+        address.setDistrict(Optional.of(districtService.getById(dto.districtId())).orElse(null));
         address.setStreet(dto.street());
         address.setHouse(dto.house());
         address.setApartment(dto.apartment());

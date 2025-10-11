@@ -2,11 +2,9 @@ package com.fractal.domain.employee_management.employee.resource;
 
 
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.employee_management.employee.resource.type.EmployeeResourceType;
 import com.fractal.domain.resource.Resource;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -22,4 +20,7 @@ public class EmployeeResource extends Resource {
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_resource_type_id", referencedColumnName = "id")
+    private EmployeeResourceType employeeResourceType;
 }

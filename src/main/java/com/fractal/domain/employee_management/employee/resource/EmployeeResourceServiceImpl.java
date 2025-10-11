@@ -1,12 +1,12 @@
 package com.fractal.domain.employee_management.employee.resource;
 
 import com.fractal.domain.employee_management.employee.EmployeeService;
+import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceRequest;
+import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceResponse;
 import com.fractal.domain.employee_management.employee.resource.mapper.EmployeeResourceMapperService;
-import com.fractal.domain.resource.dto.ResourceResponse;
-import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,9 +19,9 @@ public class EmployeeResourceServiceImpl implements EmployeeResourceService {
     private final EmployeeService employeeService;
 
     @Override
-    public EmployeeResource create(Long employeeId, MultipartFile file) {
+    public EmployeeResource create(Long employeeId, EmployeeResourceRequest dto) {
         var employee = employeeService.getById(employeeId);
-        var resource = resourceMapperService.toEntity(file,null);
+        var resource =  resourceMapperService.toEntity(dto,null);
         employee.addResource(resource);
         employeeService.save(employee);
         return resource;
@@ -34,16 +34,16 @@ public class EmployeeResourceServiceImpl implements EmployeeResourceService {
 
     @Override
     public EmployeeResource getById(Long employeeId, Long id) {
-        return resourceRepository.findByEmployeeIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Employee Resource  with id: " + id + " not found"));
+        return resourceRepository.findByEmployeeIdAndId(employeeId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 
     @Override
-    public EmployeeResource update(Long employeeId, Long id, MultipartFile file) {
+    public EmployeeResource update(Long employeeId,Long id,EmployeeResourceRequest dto) {
         var employee = employeeService.getById(employeeId);
         var resource = employee.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee Resource  with id: " + id + " not found"));
-        resource = resourceMapperService.toEntity(resource,resourceMapperService.fileToRequest(file,null));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        resource = resourceMapperService.toEntity(resource,dto,null);
         resourceRepository.save(resource);
         employeeService.save(employee);
         return resource;
@@ -54,13 +54,13 @@ public class EmployeeResourceServiceImpl implements EmployeeResourceService {
         var employee = employeeService.getById(employeeId);
         var resource = employee.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee Resource  with id: " + id + " not found"));
-        resourceRepository.delete(resource);
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        employee.removeResource(resource);
         employeeService.save(employee);
     }
 
     @Override
-    public ResourceResponse toDTO(EmployeeResource resource) {
+    public EmployeeResourceResponse toDTO(EmployeeResource resource) {
         return resourceMapperService.toDTO(resource);
     }
 }

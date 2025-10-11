@@ -1,7 +1,7 @@
 package com.fractal.domain.learning_develpment.learning.session.location.online;
 
-import com.fractal.domain.learning_develpment.learning.session.location.LearningLocation;
 import com.fractal.domain.learning_develpment.learning.platform.OnlinePlatform;
+import com.fractal.domain.learning_develpment.learning.session.location.LearningLocation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
