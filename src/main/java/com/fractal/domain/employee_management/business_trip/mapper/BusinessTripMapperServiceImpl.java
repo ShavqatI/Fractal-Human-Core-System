@@ -12,11 +12,6 @@ import com.fractal.domain.organization_management.organization.OrganizationServi
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
-
 @Service
 @RequiredArgsConstructor
 class BusinessTripMapperServiceImpl implements BusinessTripMapperService {

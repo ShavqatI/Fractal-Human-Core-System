@@ -1,7 +1,7 @@
 package com.fractal.controller.employee_management.business_trip;
 
 
-import com.fractal.domain.employee_management.order.resource.OrderResourceService;
+import com.fractal.domain.order.resource.OrderResourceService;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

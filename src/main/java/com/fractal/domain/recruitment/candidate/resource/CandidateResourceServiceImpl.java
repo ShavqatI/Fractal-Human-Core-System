@@ -28,13 +28,13 @@ public class CandidateResourceServiceImpl implements CandidateResourceService {
     }
 
     @Override
-    public List<CandidateResource> getAllByEducationId(Long educationId) {
-        return resourceRepository.findAllByCandidateId(educationId);
+    public List<CandidateResource> getAllByCandidateId(Long candidateId) {
+        return resourceRepository.findAllByCandidateId(candidateId);
     }
 
     @Override
-    public CandidateResource getById(Long educationId, Long id) {
-        return resourceRepository.findByCandidateIdAndId(educationId,id).orElseThrow(()-> new ResourceNotFoundException("Candidate Resource  with id: " + id + " not found"));
+    public CandidateResource getById(Long candidateId, Long id) {
+        return resourceRepository.findByCandidateIdAndId(candidateId,id).orElseThrow(()-> new ResourceNotFoundException("Candidate Resource  with id: " + id + " not found"));
     }
 
     @Override

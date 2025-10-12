@@ -2,7 +2,6 @@ package com.fractal.domain.learning_develpment.learning.session.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.learning_develpment.learning.delivery_mode.LearningDeliveryModeService;
-import com.fractal.domain.learning_develpment.learning.session.location.mapper.LearningLocationMapperService;
 import com.fractal.domain.learning_develpment.learning.session.LearningSession;
 import com.fractal.domain.learning_develpment.learning.session.dto.LearningSessionCompactResponse;
 import com.fractal.domain.learning_develpment.learning.session.dto.LearningSessionRequest;
@@ -10,6 +9,7 @@ import com.fractal.domain.learning_develpment.learning.session.dto.LearningSessi
 import com.fractal.domain.learning_develpment.learning.session.enrollment.mapper.LearningSessionEnrollmentMapperService;
 import com.fractal.domain.learning_develpment.learning.session.expense.mapper.LearningSessionExpenseMapperService;
 import com.fractal.domain.learning_develpment.learning.session.instructor.mapper.InstructorAssignmentMapperService;
+import com.fractal.domain.learning_develpment.learning.session.location.mapper.LearningLocationMapperService;
 import com.fractal.domain.learning_develpment.learning.session.resource.mapper.LearningSessionResourceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

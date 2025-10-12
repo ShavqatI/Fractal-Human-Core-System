@@ -2,7 +2,6 @@ package com.fractal.domain.employee_management.vacation;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.employee_management.business_trip.order.BusinessTripOrder;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.vacation.category.VacationCategory;
 import com.fractal.domain.employee_management.vacation.order.VacationOrder;

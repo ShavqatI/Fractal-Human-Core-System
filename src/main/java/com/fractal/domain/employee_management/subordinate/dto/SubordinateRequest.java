@@ -9,7 +9,9 @@ public record SubordinateRequest(
     Long employeeId,
     @NotNull
     Long subordinateEmployeeId,
+    @NotNull
     Long subordinateTypeId,
+    @NotNull
     Long statusId,
     LocalDate startDate,
     LocalDate endDate

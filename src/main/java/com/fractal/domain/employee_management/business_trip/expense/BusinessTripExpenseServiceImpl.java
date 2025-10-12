@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.business_trip.expense;
 
-import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.business_trip.BusinessTripService;
 import com.fractal.domain.employee_management.business_trip.expense.dto.BusinessTripExpenseRequest;
 import com.fractal.domain.employee_management.business_trip.expense.dto.BusinessTripExpenseResponse;

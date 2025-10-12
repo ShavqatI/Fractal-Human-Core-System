@@ -1,11 +1,11 @@
 package com.fractal.domain.learning_develpment.learning.session.location.online.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.learning_develpment.learning.platform.OnlinePlatformService;
 import com.fractal.domain.learning_develpment.learning.session.location.online.OnlineLearningLocation;
 import com.fractal.domain.learning_develpment.learning.session.location.online.dto.OnlineLearningLocationRequest;
 import com.fractal.domain.learning_develpment.learning.session.location.online.dto.OnlineLearningLocationResponse;
 import com.fractal.domain.learning_develpment.learning.session.location.type.LearningLocationTypeService;
-import com.fractal.domain.learning_develpment.learning.platform.OnlinePlatformService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

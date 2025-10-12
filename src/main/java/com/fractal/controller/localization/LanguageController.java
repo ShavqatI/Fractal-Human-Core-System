@@ -27,6 +27,7 @@ public class LanguageController {
     public ResponseEntity<List<LanguageResponse>> getAll() {
         return ResponseEntity.ok(languageService.getAll().stream().map(languageService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<LanguageResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(languageService.toDTO(languageService.getById(id)));

@@ -3,7 +3,6 @@ package com.fractal.domain.employment.separation_reason;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.separation_reason_type.SeparationReasonType;
-import com.fractal.domain.employment.work_experience.WorkExperience;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

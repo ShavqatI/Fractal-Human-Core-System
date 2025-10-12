@@ -5,8 +5,6 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.insurance.provider.address.InsuranceProviderAddress;
 import com.fractal.domain.insurance.provider.contact.InsuranceProviderContact;
-import com.fractal.domain.recruitment.candidate.address.CandidateAddress;
-import com.fractal.domain.recruitment.candidate.contact.CandidateContact;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

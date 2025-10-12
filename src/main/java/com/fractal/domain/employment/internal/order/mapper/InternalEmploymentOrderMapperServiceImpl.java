@@ -1,10 +1,10 @@
 package com.fractal.domain.employment.internal.order.mapper;
 
-import com.fractal.domain.employee_management.order.resource.mapper.OrderResourceMapperService;
-import com.fractal.domain.employee_management.order.type.OrderTypeService;
 import com.fractal.domain.employment.internal.order.InternalEmploymentOrder;
 import com.fractal.domain.employment.internal.order.dto.InternalEmploymentOrderRequest;
 import com.fractal.domain.employment.internal.order.dto.InternalEmploymentOrderResponse;
+import com.fractal.domain.order.resource.mapper.OrderResourceMapperService;
+import com.fractal.domain.order.type.OrderTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

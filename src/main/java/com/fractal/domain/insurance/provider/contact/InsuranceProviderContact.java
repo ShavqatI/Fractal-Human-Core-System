@@ -3,7 +3,6 @@ package com.fractal.domain.insurance.provider.contact;
 
 import com.fractal.domain.contact.Contact;
 import com.fractal.domain.insurance.provider.InsuranceProvider;
-import com.fractal.domain.recruitment.candidate.Candidate;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

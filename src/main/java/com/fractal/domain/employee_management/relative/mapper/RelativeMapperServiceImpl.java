@@ -38,10 +38,10 @@ class RelativeMapperServiceImpl implements RelativeMapperService {
                 relative.getBirthDate(),
                 relative.getTin(),
                 relative.getSsn(),
-                relative.getGender().getName(),
-                relative.getMaritalStatus().getName(),
-                relative.getNationality().getName(),
-                relative.getRelationType().getName(),
+                genderService.toDTO(relative.getGender()),
+                maritalStatusService.toDTO(relative.getMaritalStatus()),
+                nationalityService.toDTO(relative.getNationality()),
+                relationTypeService.toDTO(relative.getRelationType()),
                 Optional.ofNullable(relative.getAddresses())
                         .orElse(emptyList())
                         .stream()

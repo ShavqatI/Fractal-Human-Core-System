@@ -1,7 +1,7 @@
 package com.fractal.domain.employee_management.business_trip.location.address;
 
-import com.fractal.domain.employee_management.business_trip.location.address.dto.BusinessTripLocationAddressResponse;
 import com.fractal.domain.employee_management.business_trip.location.address.dto.BusinessTripLocationAddressRequest;
+import com.fractal.domain.employee_management.business_trip.location.address.dto.BusinessTripLocationAddressResponse;
 
 import java.util.List;
 

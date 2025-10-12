@@ -2,8 +2,8 @@ package com.fractal.domain.interview.interviewee;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.recruitment.candidate.Candidate;
 import com.fractal.domain.interview.Interview;
+import com.fractal.domain.recruitment.candidate.Candidate;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

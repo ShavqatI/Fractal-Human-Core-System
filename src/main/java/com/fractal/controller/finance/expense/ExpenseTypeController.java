@@ -18,39 +18,38 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ExpenseTypeController {
 
-    private final ExpenseTypeService expenseTypeService;
+    private final ExpenseTypeService typeService;
 
 
     @PostMapping
     public ResponseEntity<ExpenseTypeResponse> create(@RequestBody @Valid ExpenseTypeRequest dto) {
-        return new ResponseEntity<>(expenseTypeService.toDTO(expenseTypeService.create(dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(typeService.toDTO(typeService.create(dto)), HttpStatus.CREATED);
     }
     @GetMapping
     public ResponseEntity<List<ExpenseTypeResponse>> getAll() {
-        return ResponseEntity.ok(expenseTypeService.getAll().stream().map(expenseTypeService::toDTO).collect(Collectors.toList()));
+        return ResponseEntity.ok(typeService.getAll().stream().map(typeService::toDTO).collect(Collectors.toList()));
     }
     @GetMapping("/{id}")
     public ResponseEntity<ExpenseTypeResponse> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(expenseTypeService.toDTO(expenseTypeService.getById(id)));
+        return ResponseEntity.ok(typeService.toDTO(typeService.getById(id)));
     }
     @GetMapping("/code/{code}")
     public ResponseEntity<ExpenseTypeResponse> getByCode(@PathVariable String code) {
-        return ResponseEntity.ok(expenseTypeService.toDTO(expenseTypeService.getByCode(code)));
+        return ResponseEntity.ok(typeService.toDTO(typeService.getByCode(code)));
     }
-
     @GetMapping("/compact")
     public ResponseEntity<List<ExpenseTypeCompactResponse>> getAllCompact() {
-        return ResponseEntity.ok(expenseTypeService.getAll().stream().map(expenseTypeService::toCompactDTO).collect(Collectors.toList()));
+        return ResponseEntity.ok(typeService.getAll().stream().map(typeService::toCompactDTO).collect(Collectors.toList()));
     }
     @PutMapping("/{id}")
     public ResponseEntity<ExpenseTypeResponse> update(@PathVariable Long id, @RequestBody @Valid ExpenseTypeRequest dto) {
-      return  ResponseEntity.ok(expenseTypeService.toDTO(expenseTypeService.update(id, dto)));
+        return  ResponseEntity.ok(typeService.toDTO(typeService.update(id, dto)));
 
 
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        expenseTypeService.deleteById(id);
+        typeService.deleteById(id);
         return ResponseEntity.noContent().build();
 
     }

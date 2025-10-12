@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.business_trip.location;
 
-import com.fractal.domain.learning_develpment.learning.session.location.offline.OfflineLearningLocation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

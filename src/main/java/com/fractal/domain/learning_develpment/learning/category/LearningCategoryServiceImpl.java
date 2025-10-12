@@ -3,7 +3,6 @@ package com.fractal.domain.learning_develpment.learning.category;
 import com.fractal.domain.learning_develpment.learning.category.dto.LearningCategoryCompactResponse;
 import com.fractal.domain.learning_develpment.learning.category.dto.LearningCategoryRequest;
 import com.fractal.domain.learning_develpment.learning.category.dto.LearningCategoryResponse;
-import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithCodeNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;

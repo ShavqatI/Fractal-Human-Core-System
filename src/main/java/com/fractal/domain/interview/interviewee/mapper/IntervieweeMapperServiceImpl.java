@@ -3,8 +3,8 @@ package com.fractal.domain.interview.interviewee.mapper;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.interview.interviewee.Interviewee;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeRequest;
-import com.fractal.domain.recruitment.candidate.CandidateService;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeResponse;
+import com.fractal.domain.recruitment.candidate.CandidateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

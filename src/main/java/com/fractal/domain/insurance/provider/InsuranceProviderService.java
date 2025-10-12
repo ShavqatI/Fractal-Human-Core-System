@@ -3,10 +3,6 @@ package com.fractal.domain.insurance.provider;
 import com.fractal.domain.insurance.provider.dto.InsuranceProviderCompactResponse;
 import com.fractal.domain.insurance.provider.dto.InsuranceProviderRequest;
 import com.fractal.domain.insurance.provider.dto.InsuranceProviderResponse;
-import com.fractal.domain.recruitment.candidate.Candidate;
-import com.fractal.domain.recruitment.candidate.dto.CandidateCompactResponse;
-import com.fractal.domain.recruitment.candidate.dto.CandidateRequest;
-import com.fractal.domain.recruitment.candidate.dto.CandidateResponse;
 
 import java.util.List;
 
