@@ -1,11 +1,6 @@
 package com.fractal.controller.finance.expense;
 
-import com.fractal.domain.finance.currency.dto.CurrencyCompactResponse;
-import com.fractal.domain.finance.currency.dto.CurrencyRequest;
-import com.fractal.domain.finance.currency.dto.CurrencyResponse;
 import com.fractal.domain.finance.expense.type.ExpenseTypeService;
-import com.fractal.domain.finance.expense.type.category.dto.ExpenseTypeCategoryRequest;
-import com.fractal.domain.finance.expense.type.category.dto.ExpenseTypeCategoryResponse;
 import com.fractal.domain.finance.expense.type.dto.ExpenseTypeCompactResponse;
 import com.fractal.domain.finance.expense.type.dto.ExpenseTypeRequest;
 import com.fractal.domain.finance.expense.type.dto.ExpenseTypeResponse;

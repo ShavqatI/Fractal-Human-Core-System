@@ -1,8 +1,6 @@
 package com.fractal.controller.localization.layout_label;
 
 
-import com.fractal.domain.localization.language.dto.LanguageResponse;
-import com.fractal.domain.localization.layout_label.LayoutLabel;
 import com.fractal.domain.localization.layout_label.LayoutLabelService;
 import com.fractal.domain.localization.layout_label.dto.LayoutLabelListRequest;
 import com.fractal.domain.localization.layout_label.dto.LayoutLabelRequest;

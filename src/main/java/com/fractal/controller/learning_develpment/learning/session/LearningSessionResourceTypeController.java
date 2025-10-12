@@ -4,8 +4,6 @@ package com.fractal.controller.learning_develpment.learning.session;
 import com.fractal.domain.learning_develpment.learning.session.resource.type.LearningSessionResourceTypeService;
 import com.fractal.domain.learning_develpment.learning.session.resource.type.dto.LearningSessionResourceTypeRequest;
 import com.fractal.domain.learning_develpment.learning.session.resource.type.dto.LearningSessionResourceTypeResponse;
-import com.fractal.domain.recruitment.candidate.resource.type.dto.CandidateResourceTypeRequest;
-import com.fractal.domain.recruitment.candidate.resource.type.dto.CandidateResourceTypeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
