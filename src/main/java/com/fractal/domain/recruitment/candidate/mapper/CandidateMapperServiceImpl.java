@@ -4,6 +4,7 @@ import com.fractal.domain.dictionary.gender.GenderService;
 import com.fractal.domain.dictionary.marital_status.MaritalStatusService;
 import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employment.external.dto.ExternalEmploymentResponse;
 import com.fractal.domain.recruitment.candidate.Candidate;
 import com.fractal.domain.recruitment.candidate.address.mapper.CandidateAddressMapperService;
 import com.fractal.domain.recruitment.candidate.citizenship.mapper.CandidateCitizenshipMapperService;
@@ -12,10 +13,10 @@ import com.fractal.domain.recruitment.candidate.dto.CandidateCompactResponse;
 import com.fractal.domain.recruitment.candidate.dto.CandidateRequest;
 import com.fractal.domain.recruitment.candidate.dto.CandidateResponse;
 import com.fractal.domain.recruitment.candidate.education.mapper.CandidateEducationMapperService;
+import com.fractal.domain.recruitment.candidate.employment.mapper.CandidateEmploymentMapperService;
 import com.fractal.domain.recruitment.candidate.identification_document.mapper.CandidateIdentificationDocumentMapperService;
 import com.fractal.domain.recruitment.candidate.military_service.mapper.CandidateMilitaryServiceMapperService;
 import com.fractal.domain.recruitment.candidate.resource.mapper.CandidateResourceMapperService;
-import com.fractal.domain.recruitment.candidate.work_experience.mapper.CandidateWorkExperienceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +38,7 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     private final CandidateAddressMapperService addressMapperService;
     private final CandidateContactMapperService contactMapperService;
     private final CandidateEducationMapperService educationMapperService;
-    private final CandidateWorkExperienceMapperService workExperienceMapperService;
+    private final CandidateEmploymentMapperService employmentMapperService;
     private final CandidateResourceMapperService resourceMapperService;
     private final CandidateMilitaryServiceMapperService militaryServiceMapperService;
 
@@ -80,10 +81,10 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
                         .stream()
                         .map(educationMapperService::toDTO)
                         .collect(Collectors.toList()),
-                Optional.ofNullable(candidate.getWorkExperiences())
+                Optional.ofNullable(candidate.getEmployments())
                         .orElse(emptyList())
                         .stream()
-                        .map(workExperienceMapperService::toDTO)
+                        .map(employmentMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(candidate.getMilitaryServices())
                         .orElse(emptyList())
@@ -149,7 +150,7 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
         dto.addresses().forEach(address->candidate.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact->candidate.addContact(contactMapperService.toEntity(contact)));
         dto.educations().forEach(education->candidate.addEducation(educationMapperService.toEntity(education)));
-        dto.workExperiences().forEach(workExperience->candidate.addWorkExperience(workExperienceMapperService.toEntity(workExperience)));
+        dto.employments().forEach(employment->candidate.addEmployment(employmentMapperService.toEntity(employment)));
         dto.militaryServices().forEach(militaryService->candidate.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
         dto.resources().forEach(file-> candidate.addResource(resourceMapperService.toEntity(file,null)));
         return candidate;

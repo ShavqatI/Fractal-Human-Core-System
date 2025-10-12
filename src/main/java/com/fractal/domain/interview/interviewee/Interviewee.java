@@ -3,7 +3,6 @@ package com.fractal.domain.interview.interviewee;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.interview.Interview;
-import com.fractal.domain.recruitment.candidate.Candidate;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,15 +17,12 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Interviewee extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interview_id",referencedColumnName = "id")
     private Interview interview;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "candidate_id",referencedColumnName = "id")
-    private Candidate candidate;
 
     @Column(name = "scheduled_time", nullable = false)
     private LocalDateTime scheduledTime;

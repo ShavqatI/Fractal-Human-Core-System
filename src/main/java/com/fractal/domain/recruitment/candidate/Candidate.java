@@ -7,11 +7,11 @@ import com.fractal.domain.recruitment.candidate.address.CandidateAddress;
 import com.fractal.domain.recruitment.candidate.citizenship.CandidateCitizenship;
 import com.fractal.domain.recruitment.candidate.contact.CandidateContact;
 import com.fractal.domain.recruitment.candidate.education.CandidateEducation;
+import com.fractal.domain.recruitment.candidate.employment.CandidateEmployment;
 import com.fractal.domain.recruitment.candidate.identification_document.CandidateIdentificationDocument;
 import com.fractal.domain.recruitment.candidate.language_skill.CandidateLanguageSkill;
 import com.fractal.domain.recruitment.candidate.military_service.CandidateMilitaryService;
 import com.fractal.domain.recruitment.candidate.resource.CandidateResource;
-import com.fractal.domain.recruitment.candidate.work_experience.CandidateWorkExperience;
 import com.fractal.domain.recruitment.vacncy.Vacancy;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -56,16 +56,17 @@ public class Candidate extends Person {
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<CandidateLanguageSkill> languageSkills = new ArrayList<>();
 
-    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private  List<CandidateWorkExperience> workExperiences = new ArrayList<>();
-
     @OneToMany(mappedBy = "candidate",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<CandidateResource> resources = new ArrayList<>();
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<CandidateMilitaryService> militaryServices = new ArrayList<>();
 
-    
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private  List<CandidateEmployment> employments  = new ArrayList<>();
+
+
+
     public void addIdentificationDocument(CandidateIdentificationDocument identificationDocument) {
         if (identificationDocuments == null) identificationDocuments = new ArrayList<>();
         identificationDocument.setCandidate(this);
@@ -136,18 +137,6 @@ public class Candidate extends Person {
             languageSkills.remove(languageSkill);
     }
 
-    
-    public void addWorkExperience(CandidateWorkExperience workExperience) {
-        if (workExperiences == null) workExperiences = new ArrayList<>();
-        workExperience.setCandidate(this);
-        workExperiences.add(workExperience);
-    }
-    
-    public void removeWorkExperience(CandidateWorkExperience workExperience) {
-        if (workExperiences != null && !workExperiences.isEmpty())
-            workExperiences.remove(workExperience);
-    }
-
     public void addResource(CandidateResource resource) {
         if (resources == null) resources = new ArrayList<>();
         resource.setCandidate(this);
@@ -169,5 +158,16 @@ public class Candidate extends Person {
         if (militaryServices != null && !militaryServices.isEmpty())
             militaryServices.remove(militaryService);
     }
+
+    public void addEmployment(CandidateEmployment employment) {
+        if (employments == null) employments = new ArrayList<>();
+        employment.setCandidate(this);
+        employments.add(employment);
+    }
+    public void removeEmployment(CandidateEmployment employment) {
+        if (employments != null && !employments.isEmpty())
+            employments.remove(employment);
+    }
+
 
 }

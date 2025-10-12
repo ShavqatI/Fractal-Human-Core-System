@@ -58,7 +58,7 @@ class DistrictServiceImpl implements DistrictService {
             District district = findById(id);
             district.setCode(dto.code());
             district.setName(dto.name());
-            district.setCity(dto.cityId() != null ? cityService.getById(dto.cityId()) : null);
+            district.setCity(Optional.of(cityService.getById(dto.cityId())).orElse(null));
             district.setRegion(regionService.getById(dto.regionId()));
             district.setAreaType(areaTypeService.getById(dto.areaTypeId()));
             return save(district);
