@@ -24,6 +24,7 @@ class InternalEmploymentOrderMapperServiceImpl implements InternalEmploymentOrde
     public InternalEmploymentOrderResponse toDTO(InternalEmploymentOrder order) {
         return new InternalEmploymentOrderResponse(
                    order.getId(),
+                   order.getDate(),
                    order.getNumber(),
                    orderTypeService.toDTO(order.getOrderType()),
                    Optional.ofNullable(order.getResources())
@@ -48,6 +49,8 @@ class InternalEmploymentOrderMapperServiceImpl implements InternalEmploymentOrde
 
     private InternalEmploymentOrder mapToEntity(InternalEmploymentOrder order, InternalEmploymentOrderRequest dto) {
         order.setOrderType(orderTypeService.getById(dto.orderTypeId()));
+        order.setDate(dto.date());
+        order.setNumber(dto.number());
         dto.files().forEach(file-> order.addResource(resourceMapperService.toEntity(file,null)));
         return order;
     }

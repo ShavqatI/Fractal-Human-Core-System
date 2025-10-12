@@ -5,11 +5,14 @@ import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.order.resource.OrderResource;
 import com.fractal.domain.order.type.OrderType;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +26,11 @@ public class Order extends ApprovalWorkflow {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Setter(AccessLevel.NONE)
     protected Long id;
 
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_type_id")
