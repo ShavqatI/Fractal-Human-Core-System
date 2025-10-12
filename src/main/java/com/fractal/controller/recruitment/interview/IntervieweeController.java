@@ -1,4 +1,3 @@
-/*
 package com.fractal.controller.recruitment.interview;
 
 
@@ -46,4 +45,4 @@ public class IntervieweeController {
 
 
 }
-*/
+

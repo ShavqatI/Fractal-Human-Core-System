@@ -4,7 +4,6 @@ import com.fractal.domain.dictionary.gender.GenderService;
 import com.fractal.domain.dictionary.marital_status.MaritalStatusService;
 import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.interview.dto.InterviewRequest;
 import com.fractal.domain.interview.interviewee.Interviewee;
 import com.fractal.domain.interview.interviewee.candidate.CandidateInterviewee;
 import com.fractal.domain.interview.interviewee.candidate.dto.CandidateIntervieweeRequest;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import static java.util.Collections.emptyEnumeration;
 import static java.util.Collections.emptyList;
 
 @Service

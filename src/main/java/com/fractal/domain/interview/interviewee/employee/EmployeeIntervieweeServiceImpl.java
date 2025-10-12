@@ -2,7 +2,9 @@ package com.fractal.domain.interview.interviewee.employee;
 
 import com.fractal.domain.interview.InterviewService;
 import com.fractal.domain.interview.interviewee.Interviewee;
+import com.fractal.domain.interview.interviewee.IntervieweeService;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeCompactResponse;
+import com.fractal.domain.interview.interviewee.dto.IntervieweeRequest;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeResponse;
 import com.fractal.domain.interview.interviewee.employee.dto.EmployeeIntervieweeRequest;
 import com.fractal.domain.interview.interviewee.employee.mapper.EmployeeIntervieweeMapperService;
@@ -14,16 +16,16 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-class EmployeeIntervieweeServiceImpl implements EmployeeIntervieweeService {
+class EmployeeIntervieweeServiceImpl implements IntervieweeService {
 
     private final EmployeeIntervieweeRepository intervieweeRepository;
     private final EmployeeIntervieweeMapperService mapperService;
     private final InterviewService interviewService;
 
     @Override
-    public EmployeeInterviewee create(Long interviewId, EmployeeIntervieweeRequest dto) {
+    public EmployeeInterviewee create(Long interviewId, IntervieweeRequest dto) {
         var interview = interviewService.getById(interviewId);
-        var interviewee = mapperService.toEntity(dto);
+        var interviewee = mapperService.toEntity((EmployeeIntervieweeRequest) dto);
         interview.addInterviewee(interviewee);
         interviewService.save(interview);
         return interviewee;
@@ -42,12 +44,12 @@ class EmployeeIntervieweeServiceImpl implements EmployeeIntervieweeService {
 
 
     @Override
-    public EmployeeInterviewee update(Long interviewId, Long id, EmployeeIntervieweeRequest dto) {
+    public EmployeeInterviewee update(Long interviewId, Long id, IntervieweeRequest dto) {
         var interview = interviewService.getById(interviewId);
         var interviewee = (EmployeeInterviewee) interview.getInterviewees()
                 .stream()
                 .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        interviewee = intervieweeRepository.save(mapperService.toEntity(interviewee,dto));
+        interviewee = intervieweeRepository.save(mapperService.toEntity(interviewee,(EmployeeIntervieweeRequest) dto));
         interviewService.save(interview);
         return interviewee;
     }
