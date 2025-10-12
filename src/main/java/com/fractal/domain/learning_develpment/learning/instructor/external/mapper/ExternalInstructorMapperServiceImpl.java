@@ -83,18 +83,18 @@ class ExternalInstructorMapperServiceImpl implements ExternalInstructorMapperSer
         return mapToEntity(instructor, dto);
     }
 
-    private ExternalInstructor mapToEntity(ExternalInstructor trainer, ExternalInstructorRequest dto) {
-        trainer.setLastName(dto.lastName());
-        trainer.setFirstName(dto.firstName());
-        trainer.setPatronymicName(dto.patronymicName());
-        trainer.setBirthDate(dto.birthDate());
-        trainer.setTin(dto.tin());
-        trainer.setSsn(dto.ssn());
-        trainer.setGender(genderService.getById(dto.genderId()));
-        trainer.setMaritalStatus(maritalStatusService.getById(dto.maritalStatusId()));
-        trainer.setNationality(nationalityService.getById(dto.nationalityId()));
-        trainer.setStatus(statusService.getById(dto.statusId()));
-        dto.contacts().forEach(contact->trainer.addContact(contactMapperService.toEntity(contact)));
-        return trainer;
+    private ExternalInstructor mapToEntity(ExternalInstructor instructor, ExternalInstructorRequest dto) {
+        instructor.setLastName(dto.lastName());
+        instructor.setFirstName(dto.firstName());
+        instructor.setPatronymicName(dto.patronymicName());
+        instructor.setBirthDate(dto.birthDate());
+        instructor.setTin(dto.tin());
+        instructor.setSsn(dto.ssn());
+        instructor.setGender(genderService.getById(dto.genderId()));
+        instructor.setMaritalStatus(maritalStatusService.getById(dto.maritalStatusId()));
+        instructor.setNationality(nationalityService.getById(dto.nationalityId()));
+        instructor.setStatus(statusService.getById(dto.statusId()));
+        dto.contacts().forEach(contact->instructor.addContact(contactMapperService.toEntity(contact)));
+        return instructor;
     }
 }
