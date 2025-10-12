@@ -3,7 +3,7 @@ package com.fractal.domain.recruitment.candidate.dto;
 import com.fractal.domain.citizenship.dto.CitizenshipRequest;
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.education.dto.EducationRequest;
-import com.fractal.domain.employment.work_experience.dto.WorkExperienceRequest;
+import com.fractal.domain.employment.external.dto.ExternalEmploymentRequest;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.recruitment.candidate.address.dto.CandidateAddressRequest;
@@ -27,7 +27,7 @@ public record CandidateRequest(
         List<CandidateAddressRequest> addresses,
         List<ContactRequest> contacts,
         List<EducationRequest> educations,
-        List<WorkExperienceRequest> workExperiences,
+        List<ExternalEmploymentRequest> employments,
         List<MilitaryServiceRequest> militaryServices,
         List<CandidateResourceRequest> resources,
         Long statusId

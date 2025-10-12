@@ -7,7 +7,7 @@ import com.fractal.domain.dictionary.marital_status.dto.MaritalStatusResponse;
 import com.fractal.domain.dictionary.nationality.dto.NationalityResponse;
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.education.dto.EducationResponse;
-import com.fractal.domain.employment.work_experience.dto.WorkExperienceResponse;
+import com.fractal.domain.employment.external.dto.ExternalEmploymentResponse;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
 import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
 import com.fractal.domain.recruitment.candidate.address.dto.CandidateAddressResponse;
@@ -33,7 +33,7 @@ public record CandidateResponse(
         List<CandidateAddressResponse> addresses,
         List<ContactResponse> contacts,
         List<EducationResponse> educations,
-        List<WorkExperienceResponse> workExperiences,
+        List<ExternalEmploymentResponse> employments,
         List<MilitaryServiceResponse> militaryServices,
         List<CandidateResourceResponse> resources,
         StatusCompactResponse status,
