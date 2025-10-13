@@ -10,6 +10,7 @@ import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.mapper.InternalEmploymentMapperService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +22,7 @@ class EmploymentMapperServiceImpl implements EmploymentMapperService {
 
     @Override
     public EmploymentResponse toDTO(Employment employment) {
+        employment = (Employment) Hibernate.unproxy(employment);
         if (employment instanceof InternalEmployment)
             return internalEmploymentMapperService.toDTO((InternalEmployment) employment);
         else return externalEmploymentMapperService.toDTO((ExternalEmployment) employment);

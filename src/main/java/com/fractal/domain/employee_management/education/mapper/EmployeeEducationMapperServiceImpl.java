@@ -1,9 +1,11 @@
 package com.fractal.domain.employee_management.education.mapper;
 
+import com.fractal.domain.education.Education;
 import com.fractal.domain.education.dto.EducationRequest;
 import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.education.mapper.EducationMapperService;
 import com.fractal.domain.employee_management.education.EmployeeEducation;
+import com.fractal.domain.recruitment.candidate.education.CandidateEducation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +21,33 @@ class EmployeeEducationMapperServiceImpl implements EmployeeEducationMapperServi
 
     @Override
     public EmployeeEducation toEntity(EducationRequest dto) {
-        return (EmployeeEducation) educationMapperService.toEntity(dto);
+        return convert(new EmployeeEducation(),educationMapperService.toEntity(dto));
     }
 
     @Override
     public EmployeeEducation toEntity(EmployeeEducation education, EducationRequest dto) {
-       return (EmployeeEducation) educationMapperService.toEntity(education,dto);
+        return convert(education,educationMapperService.toEntity(education,dto));
     }
+
+    private EmployeeEducation convert(EmployeeEducation employeeEducation, Education education) {
+        employeeEducation.setEducationType(education.getEducationType());
+        employeeEducation.setEducationDocumentType(education.getEducationDocumentType());
+        employeeEducation.setBeginDate(education.getBeginDate());
+        employeeEducation.setEndDate(education.getEndDate());
+        employeeEducation.setInstitutionName(education.getInstitutionName());
+        employeeEducation.setInstitutionAddress(education.getInstitutionAddress());
+        employeeEducation.setIsForeignInstitution(education.getIsForeignInstitution());
+        employeeEducation.setSpecialization(education.getSpecialization());
+        employeeEducation.setDegreeType(education.getDegreeType());
+        employeeEducation.setGradePointAverage(education.getGradePointAverage());
+        employeeEducation.setAccreditationStatus(education.getAccreditationStatus());
+        employeeEducation.setDocumentVerified(education.getDocumentVerified());
+        employeeEducation.setVerificationNotes(education.getVerificationNotes());
+        employeeEducation.setStatus(education.getStatus());
+        employeeEducation.setResources(education.getResources());
+        return employeeEducation;
+    }
+
 
 
 

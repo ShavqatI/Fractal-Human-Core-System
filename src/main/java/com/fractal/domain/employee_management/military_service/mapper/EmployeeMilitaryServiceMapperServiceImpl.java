@@ -1,9 +1,11 @@
 package com.fractal.domain.employee_management.military_service.mapper;
 
 import com.fractal.domain.employee_management.military_service.EmployeeMilitaryService;
+import com.fractal.domain.military_service.MilitaryService;
 import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
 import com.fractal.domain.military_service.mapper.MilitaryServiceMapperService;
+import com.fractal.domain.recruitment.candidate.military_service.CandidateMilitaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,13 +22,23 @@ class EmployeeMilitaryServiceMapperServiceImpl implements EmployeeMilitaryServic
 
     @Override
     public EmployeeMilitaryService toEntity(MilitaryServiceRequest dto) {
-        return (EmployeeMilitaryService) mapperService.toEntity(dto);
+        return convert(new EmployeeMilitaryService(),mapperService.toEntity(dto));
     }
 
     @Override
     public EmployeeMilitaryService toEntity(EmployeeMilitaryService militaryService, MilitaryServiceRequest dto) {
-        return (EmployeeMilitaryService) mapperService.toEntity(militaryService,dto);
+        return convert(militaryService,mapperService.toEntity(militaryService,dto));
     }
 
+    private EmployeeMilitaryService convert(EmployeeMilitaryService employeeMilitaryService, MilitaryService militaryService) {
+        employeeMilitaryService.setAccountNumber(militaryService.getAccountNumber());
+        employeeMilitaryService.setTitle(militaryService.getTitle());
+        employeeMilitaryService.setCategoryFund(militaryService.getCategoryFund());
+        employeeMilitaryService.setAddress(militaryService.getAddress());
+        employeeMilitaryService.setBeginDate(militaryService.getBeginDate());
+        employeeMilitaryService.setEndDate(militaryService.getEndDate());
+        employeeMilitaryService.setResources(militaryService.getResources());
+        return employeeMilitaryService;
+    }
 
 }

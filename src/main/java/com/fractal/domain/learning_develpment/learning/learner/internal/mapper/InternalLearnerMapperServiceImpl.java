@@ -6,8 +6,6 @@ import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.contact.mapper.EmployeeContactMapperService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
-import com.fractal.domain.learning_develpment.learning.learner.Learner;
-import com.fractal.domain.learning_develpment.learning.learner.dto.LearnerCompactResponse;
 import com.fractal.domain.learning_develpment.learning.learner.internal.InternalLearner;
 import com.fractal.domain.learning_develpment.learning.learner.internal.dto.InternalLearnerCompactResponse;
 import com.fractal.domain.learning_develpment.learning.learner.internal.dto.InternalLearnerRequest;
@@ -61,17 +59,6 @@ class InternalLearnerMapperServiceImpl implements InternalLearnerMapperService {
                 learner.getEmployee().getLastName(),
                 learner.getEmployee().getFirstName(),
                 learner.getEmployee().getPatronymicName()
-        );
-    }
-
-    @Override
-    public LearnerCompactResponse toCompactDTO(Learner learner) {
-        var internalParticipant = (InternalLearner) learner;
-        return new LearnerCompactResponse(
-                internalParticipant.getId(),
-                internalParticipant.getEmployee().getLastName(),
-                internalParticipant.getEmployee().getFirstName(),
-                internalParticipant.getEmployee().getPatronymicName()
         );
     }
 

@@ -1,8 +1,5 @@
 package com.fractal.domain.learning_develpment.learning.learner.internal;
 
-import com.fractal.domain.learning_develpment.learning.learner.Learner;
-import com.fractal.domain.learning_develpment.learning.learner.LearnerService;
-import com.fractal.domain.learning_develpment.learning.learner.dto.LearnerCompactResponse;
 import com.fractal.domain.learning_develpment.learning.learner.internal.dto.InternalLearnerCompactResponse;
 import com.fractal.domain.learning_develpment.learning.learner.internal.dto.InternalLearnerRequest;
 import com.fractal.domain.learning_develpment.learning.learner.internal.dto.InternalLearnerResponse;
@@ -18,8 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Primary
-class InternalLearnerServiceImpl implements InternalLearnerService, LearnerService {
+class InternalLearnerServiceImpl implements InternalLearnerService {
 
     private final InternalLearnerRepository learnerRepository;
     private final InternalLearnerMapperService mapperService;
@@ -38,11 +34,6 @@ class InternalLearnerServiceImpl implements InternalLearnerService, LearnerServi
     @Override
     public InternalLearner getById(Long id) {
         return findById(id);
-    }
-
-    @Override
-    public LearnerCompactResponse toCompactDTO(Learner learner) {
-        return mapperService.toCompactDTO(learner);
     }
 
     @Override

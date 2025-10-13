@@ -1,8 +1,5 @@
 package com.fractal.domain.learning_develpment.learning.learner.external;
 
-import com.fractal.domain.learning_develpment.learning.learner.Learner;
-import com.fractal.domain.learning_develpment.learning.learner.LearnerService;
-import com.fractal.domain.learning_develpment.learning.learner.dto.LearnerCompactResponse;
 import com.fractal.domain.learning_develpment.learning.learner.external.dto.ExternalLearnerCompactResponse;
 import com.fractal.domain.learning_develpment.learning.learner.external.dto.ExternalLearnerRequest;
 import com.fractal.domain.learning_develpment.learning.learner.external.dto.ExternalLearnerResponse;
@@ -17,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-class ExternalLearnerServiceImpl implements ExternalLearnerService, LearnerService {
+class ExternalLearnerServiceImpl implements ExternalLearnerService {
 
     private final ExternalLearnerRepository participantRepository;
     private final ExternalLearnerMapperService mapperService;
@@ -60,26 +57,19 @@ class ExternalLearnerServiceImpl implements ExternalLearnerService, LearnerServi
     }
 
     @Override
-    public ExternalLearnerResponse toDTO(ExternalLearner trainer) {
-        return mapperService.toDTO(trainer);
+    public ExternalLearnerResponse toDTO(ExternalLearner learner) {
+        return mapperService.toDTO(learner);
     }
 
     @Override
-    public ExternalLearnerCompactResponse toCompactDTO(ExternalLearner trainer) {
-        return mapperService.toCompactDTO(trainer);
-    }
-
-    @Override
-    public LearnerCompactResponse toCompactDTO(Learner learner) {
+    public ExternalLearnerCompactResponse toCompactDTO(ExternalLearner learner) {
         return mapperService.toCompactDTO(learner);
     }
-
-
     @Override
     @Transactional
-    public ExternalLearner save(ExternalLearner trainer) {
+    public ExternalLearner save(ExternalLearner learner) {
         try {
-            return participantRepository.save(trainer);
+            return participantRepository.save(learner);
         }
         catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());

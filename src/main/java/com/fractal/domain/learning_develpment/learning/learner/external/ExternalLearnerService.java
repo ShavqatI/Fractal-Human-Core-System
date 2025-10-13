@@ -12,9 +12,9 @@ public interface ExternalLearnerService {
     ExternalLearner getById(Long id);
     ExternalLearner update(Long id, ExternalLearnerRequest dto);
     void deleteById(Long id);
-    ExternalLearnerResponse toDTO(ExternalLearner trainer);
-    ExternalLearnerCompactResponse toCompactDTO(ExternalLearner trainer);
-    ExternalLearner save(ExternalLearner trainer);
+    ExternalLearnerResponse toDTO(ExternalLearner learner);
+    ExternalLearnerCompactResponse toCompactDTO(ExternalLearner learner);
+    ExternalLearner save(ExternalLearner learner);
 
 
 }

@@ -1,7 +1,5 @@
 package com.fractal.domain.learning_develpment.learning.learner.internal.mapper;
 
-import com.fractal.domain.learning_develpment.learning.learner.Learner;
-import com.fractal.domain.learning_develpment.learning.learner.dto.LearnerCompactResponse;
 import com.fractal.domain.learning_develpment.learning.learner.internal.InternalLearner;
 import com.fractal.domain.learning_develpment.learning.learner.internal.dto.InternalLearnerCompactResponse;
 import com.fractal.domain.learning_develpment.learning.learner.internal.dto.InternalLearnerRequest;
@@ -10,7 +8,6 @@ import com.fractal.domain.learning_develpment.learning.learner.internal.dto.Inte
 public interface InternalLearnerMapperService {
     InternalLearnerResponse toDTO(InternalLearner learner);
     InternalLearnerCompactResponse toCompactDTO(InternalLearner learner);
-    LearnerCompactResponse toCompactDTO(Learner learner);
     InternalLearner toEntity(InternalLearnerRequest dto);
     InternalLearner toEntity(InternalLearner trainer, InternalLearnerRequest dto);
 }

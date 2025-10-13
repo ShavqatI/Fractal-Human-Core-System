@@ -4,13 +4,13 @@ import com.fractal.domain.citizenship.dto.CitizenshipRequest;
 import com.fractal.domain.citizenship.dto.CitizenshipResponse;
 import com.fractal.domain.citizenship.mapper.CitizenshipMapperService;
 import com.fractal.domain.employee_management.citizenship.EmployeeCitizenship;
+import com.fractal.domain.recruitment.candidate.citizenship.CandidateCitizenship;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
 class EmployeeCitizenshipMapperServiceImpl implements EmployeeCitizenshipMapperService {
-
 
     private final CitizenshipMapperService citizenshipMapperService;
     @Override
@@ -20,11 +20,17 @@ class EmployeeCitizenshipMapperServiceImpl implements EmployeeCitizenshipMapperS
 
     @Override
     public EmployeeCitizenship toEntity(CitizenshipRequest dto) {
-        return (EmployeeCitizenship) citizenshipMapperService.toEntity(dto);
+        var citizenship = citizenshipMapperService.toEntity(dto);
+        var employeeCitizenship = new EmployeeCitizenship();
+        employeeCitizenship.setCountry(citizenship.getCountry());
+        return employeeCitizenship;
     }
 
     @Override
-    public EmployeeCitizenship toEntity(EmployeeCitizenship citizenship, CitizenshipRequest dto) {
-        return (EmployeeCitizenship) citizenshipMapperService.toEntity(citizenship,dto);
+    public EmployeeCitizenship toEntity(EmployeeCitizenship employeeCitizenship, CitizenshipRequest dto) {
+        var citizenship = citizenshipMapperService.toEntity(employeeCitizenship,dto);
+        employeeCitizenship.setCountry(citizenship.getCountry());
+        return employeeCitizenship;
     }
+
 }
