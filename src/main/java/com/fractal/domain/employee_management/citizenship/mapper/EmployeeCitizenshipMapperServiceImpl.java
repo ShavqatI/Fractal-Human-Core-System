@@ -4,7 +4,6 @@ import com.fractal.domain.citizenship.dto.CitizenshipRequest;
 import com.fractal.domain.citizenship.dto.CitizenshipResponse;
 import com.fractal.domain.citizenship.mapper.CitizenshipMapperService;
 import com.fractal.domain.employee_management.citizenship.EmployeeCitizenship;
-import com.fractal.domain.recruitment.candidate.citizenship.CandidateCitizenship;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

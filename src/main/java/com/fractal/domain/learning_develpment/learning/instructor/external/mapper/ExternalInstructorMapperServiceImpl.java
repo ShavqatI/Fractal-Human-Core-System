@@ -4,8 +4,6 @@ import com.fractal.domain.dictionary.gender.GenderService;
 import com.fractal.domain.dictionary.marital_status.MaritalStatusService;
 import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.learning_develpment.learning.instructor.Instructor;
-import com.fractal.domain.learning_develpment.learning.instructor.dto.InstructorCompactResponse;
 import com.fractal.domain.learning_develpment.learning.instructor.external.ExternalInstructor;
 import com.fractal.domain.learning_develpment.learning.instructor.external.contact.mapper.ExternalInstructorContactMapperService;
 import com.fractal.domain.learning_develpment.learning.instructor.external.dto.ExternalInstructorCompactResponse;
@@ -59,17 +57,6 @@ class ExternalInstructorMapperServiceImpl implements ExternalInstructorMapperSer
                 instructor.getLastName(),
                 instructor.getFirstName(),
                 instructor.getPatronymicName()
-        );
-    }
-
-    @Override
-    public InstructorCompactResponse toCompactDTO(Instructor instructor) {
-        var externalTrainer = (ExternalInstructor) instructor;
-        return new InstructorCompactResponse(
-                externalTrainer.getId(),
-                externalTrainer.getLastName(),
-                externalTrainer.getFirstName(),
-                externalTrainer.getPatronymicName()
         );
     }
 

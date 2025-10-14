@@ -3,7 +3,9 @@ package com.fractal.domain.employment.internal.order;
 import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.order.Order;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity

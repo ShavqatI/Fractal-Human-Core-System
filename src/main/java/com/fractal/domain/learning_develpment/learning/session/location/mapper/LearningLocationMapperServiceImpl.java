@@ -10,6 +10,7 @@ import com.fractal.domain.learning_develpment.learning.session.location.online.O
 import com.fractal.domain.learning_develpment.learning.session.location.online.dto.OnlineLearningLocationRequest;
 import com.fractal.domain.learning_develpment.learning.session.location.online.mapper.OnlineLearningLocationMapperService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +22,7 @@ class LearningLocationMapperServiceImpl implements LearningLocationMapperService
 
     @Override
     public LearningLocationResponse toDTO(LearningLocation location) {
+        location = (LearningLocation) Hibernate.unproxy(location);
         if (location instanceof OfflineLearningLocation)
             return offlineLearningLocationMapperService.toDTO((OfflineLearningLocation) location);
         else return onlineLearningLocationMapperService.toDTO((OnlineLearningLocation) location);

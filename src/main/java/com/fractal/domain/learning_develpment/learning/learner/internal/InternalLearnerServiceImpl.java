@@ -6,7 +6,6 @@ import com.fractal.domain.learning_develpment.learning.learner.internal.dto.Inte
 import com.fractal.domain.learning_develpment.learning.learner.internal.mapper.InternalLearnerMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

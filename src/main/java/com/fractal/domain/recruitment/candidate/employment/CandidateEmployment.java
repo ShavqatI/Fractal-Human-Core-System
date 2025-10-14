@@ -2,7 +2,6 @@ package com.fractal.domain.recruitment.candidate.employment;
 
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.recruitment.candidate.Candidate;
 import jakarta.persistence.*;

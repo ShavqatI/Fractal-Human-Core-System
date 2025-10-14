@@ -4,7 +4,6 @@ import com.fractal.domain.learning_develpment.learning.learner.dto.LearnerCompac
 import com.fractal.domain.learning_develpment.learning.learner.mapper.LearnerMapperService;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,12 +11,13 @@ import org.springframework.stereotype.Service;
 class LearnerServiceImpl implements LearnerService {
 
     private final LearnerRepository learnerRepository;
+    private final LearnerMapperService mapperService;
     @Override
     public Learner getById(Long id) {
         return learnerRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 
-    private final LearnerMapperService mapperService;
+
     @Override
     public LearnerCompactResponse toCompactDTO(Learner learner) {
         return mapperService.toCompactDTO(learner);

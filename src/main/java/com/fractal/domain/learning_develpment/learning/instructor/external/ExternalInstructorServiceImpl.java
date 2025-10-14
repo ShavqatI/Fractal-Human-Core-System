@@ -1,8 +1,5 @@
 package com.fractal.domain.learning_develpment.learning.instructor.external;
 
-import com.fractal.domain.learning_develpment.learning.instructor.Instructor;
-import com.fractal.domain.learning_develpment.learning.instructor.InstructorService;
-import com.fractal.domain.learning_develpment.learning.instructor.dto.InstructorCompactResponse;
 import com.fractal.domain.learning_develpment.learning.instructor.external.dto.ExternalInstructorCompactResponse;
 import com.fractal.domain.learning_develpment.learning.instructor.external.dto.ExternalInstructorRequest;
 import com.fractal.domain.learning_develpment.learning.instructor.external.dto.ExternalInstructorResponse;
@@ -17,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-class ExternalInstructorServiceImpl implements ExternalInstructorService, InstructorService {
+class ExternalInstructorServiceImpl implements ExternalInstructorService {
 
     private final ExternalInstructorRepository instructorRepository;
     private final ExternalInstructorMapperService mapperService;
@@ -69,10 +66,10 @@ class ExternalInstructorServiceImpl implements ExternalInstructorService, Instru
         return mapperService.toCompactDTO(instructor);
     }
 
-    @Override
+    /*@Override
     public InstructorCompactResponse toCompactDTO(Instructor instructor) {
         return mapperService.toCompactDTO(instructor);
-    }
+    }*/
 
 
     @Override

@@ -1,12 +1,9 @@
 package com.fractal.domain.recruitment.candidate.employment;
 
 import com.fractal.domain.employment.Employment;
-import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.employment.external.ExternalEmploymentService;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentRequest;
-import com.fractal.domain.employment.internal.InternalEmploymentService;
-import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.recruitment.candidate.CandidateService;
 import com.fractal.domain.recruitment.candidate.employment.mapper.CandidateEmploymentMapperService;
 import com.fractal.exception.ResourceWithIdNotFoundException;

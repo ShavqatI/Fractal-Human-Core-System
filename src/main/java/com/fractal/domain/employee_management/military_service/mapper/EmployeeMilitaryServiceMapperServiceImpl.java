@@ -5,7 +5,6 @@ import com.fractal.domain.military_service.MilitaryService;
 import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
 import com.fractal.domain.military_service.mapper.MilitaryServiceMapperService;
-import com.fractal.domain.recruitment.candidate.military_service.CandidateMilitaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

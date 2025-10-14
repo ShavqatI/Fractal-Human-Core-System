@@ -5,7 +5,6 @@ import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.contact.mapper.ContactMapperService;
 import com.fractal.domain.employee_management.contact.EmployeeContact;
-import com.fractal.domain.recruitment.candidate.contact.CandidateContact;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

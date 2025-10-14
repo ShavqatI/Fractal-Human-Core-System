@@ -5,7 +5,6 @@ import com.fractal.domain.identification_document.IdentificationDocument;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
 import com.fractal.domain.identification_document.mapper.IdentificationDocumentMapperService;
-import com.fractal.domain.recruitment.candidate.identification_document.CandidateIdentificationDocument;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
