@@ -44,7 +44,7 @@ public class ExpenseTypeServiceImpl implements ExpenseTypeService {
             ExpenseType expenseType = findById(id);
             expenseType.setCode(dto.code());
             expenseType.setName(dto.name());
-            expenseType.setExpenseTypeCategory(expenseTypeCategoryService.getById(dto.statusCategoryId()));
+            expenseType.setExpenseTypeCategory(expenseTypeCategoryService.getById(dto.categoryId()));
             expenseType.setDescription(dto.description());
             return save(expenseType);
         }
@@ -83,7 +83,7 @@ public class ExpenseTypeServiceImpl implements ExpenseTypeService {
         return ExpenseType.builder()
                 .code(dto.code())
                 .name(dto.name())
-                .expenseTypeCategory(expenseTypeCategoryService.getById(dto.statusCategoryId()))
+                .expenseTypeCategory(expenseTypeCategoryService.getById(dto.categoryId()))
                 .description(dto.description())
                 .build();
     }

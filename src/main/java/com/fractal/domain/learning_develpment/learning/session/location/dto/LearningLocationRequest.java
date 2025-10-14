@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,       // Use a type name in JSON
-        include = JsonTypeInfo.As.PROPERTY,
         property = "learningLocationType",      // JSON must include this field
         visible = true
 )

@@ -8,7 +8,7 @@ public record ExpenseTypeResponse(
         Long id,
         String code,
         String name,
-        ExpenseTypeCategoryResponse statusCategory,
+        ExpenseTypeCategoryResponse category,
         String description,
         LocalDateTime createdDate
 ) {

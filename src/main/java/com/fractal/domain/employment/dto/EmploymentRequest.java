@@ -13,8 +13,8 @@ import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
         visible = true
 )
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = ExternalEmploymentRequest.class, name = "external"),
-        @JsonSubTypes.Type(value = InternalEmploymentRequest.class, name = "internal")
+        @JsonSubTypes.Type(value = ExternalEmploymentRequest.class, name = "EXTERNAL"),
+        @JsonSubTypes.Type(value = InternalEmploymentRequest.class, name = "INTERNAL")
 })
 public interface EmploymentRequest {
 }
