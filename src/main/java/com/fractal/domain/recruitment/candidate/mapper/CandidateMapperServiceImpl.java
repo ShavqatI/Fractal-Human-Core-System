@@ -90,11 +90,6 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
                         .stream()
                         .map(militaryServiceMapperService::toDTO)
                         .collect(Collectors.toList()),
-                /*Optional.ofNullable(candidate.getEmploymentHistories())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(employmentHistoryMapperService::toDTO)
-                        .collect(Collectors.toList()),*/
                 Optional.ofNullable(candidate.getResources())
                         .orElse(emptyList())
                         .stream()

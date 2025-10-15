@@ -9,31 +9,22 @@ import java.time.LocalDate;
 
 public record PositionRequest(
 
-        @NotNull
         @NotBlank
-        @Pattern(regexp = "^[A-Z]{2,20}$", message = "Code must be in Latin uppercase letters")
+        @Pattern(regexp = "^[A-Z_]{2,50}$", message = "Code must be in Latin uppercase letters")
         String code,
-
-        @NotNull
         @NotBlank
         @Size(min = 3,max = 100,message = "The name length should be in (3 to 20 symbols)")
         @Pattern(regexp = "^\\p{L}[\\p{L}\\p{M}\\p{S}\\p{P}\\p{N}\\s]*$",message = "Only Unicode letters, symbols, punctuation, numbers and spaces are allowed")
         String name,
-
-        @NotNull
         @NotBlank
         String description,
-
         @NotNull
         Long departmentId,
-
-        @NotNull
         Long gradeId,
         LocalDate openDate,
         String openReason,
         LocalDate closeDate,
         String closeReason,
-        @NotNull
         Long statusId
 ) {
 
