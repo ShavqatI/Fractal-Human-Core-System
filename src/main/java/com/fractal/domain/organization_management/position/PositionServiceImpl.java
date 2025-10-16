@@ -125,7 +125,4 @@ class PositionServiceImpl implements PositionService {
     private Position findByCode(String code) {
         return positionRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Position with code : " + code + " not found"));
     }
-
-
-
 }

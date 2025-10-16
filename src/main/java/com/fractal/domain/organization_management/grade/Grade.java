@@ -3,11 +3,11 @@ package com.fractal.domain.organization_management.grade;
 import com.fractal.domain.abstraction.Dictionary;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.finance.currency.Currency;
+import com.fractal.domain.organization_management.grade.benchmarking.Benchmarking;
 import com.fractal.domain.organization_management.grade.level.GradeLevel;
 import com.fractal.domain.organization_management.grade.step.GradeStep;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -23,7 +23,7 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode(callSuper = true)
 public class Grade extends Dictionary {
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
     private Currency currency;
 
@@ -59,30 +59,36 @@ public class Grade extends Dictionary {
 
     @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<GradeStep> steps = new ArrayList<>();
-    @Transactional
+
+    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<Benchmarking> benchmarkings = new ArrayList<>();
     public void addChild(Grade grade) {
         if (children == null) children = new ArrayList<>();
         grade.setParent(this);
         children.add(grade);
     }
-
-    @Transactional
     public void removeChild(Grade grade) {
         if (children != null && !children.isEmpty())
             children.remove(grade);
     }
-
-    @Transactional
     public void addStep(GradeStep step) {
         if (steps == null) steps = new ArrayList<>();
         step.setGrade(this);
         steps.add(step);
     }
-
-    @Transactional
     public void removeStep(GradeStep step) {
         if (steps != null && !steps.isEmpty())
             steps.remove(step);
+    }
+
+    public void addBenchmarking(Benchmarking benchmarking) {
+        if (benchmarkings == null) benchmarkings = new ArrayList<>();
+        benchmarking.setGrade(this);
+        benchmarkings.add(benchmarking);
+    }
+    public void removeBenchmarking(Benchmarking benchmarking) {
+        if (benchmarkings != null && !benchmarkings.isEmpty())
+            benchmarkings.remove(benchmarking);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.fractal.domain.organization_management.grade.level;
+package com.fractal.domain.organization_management.grade.benchmarking.type;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;
@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "grade_level", schema = "organization_schema", catalog = "fractal")
-@EqualsAndHashCode(callSuper = true)
+@Table(name = "benchmarking_type", schema = "organization_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class GradeLevel extends Dictionary {
+@EqualsAndHashCode(callSuper = true)
+public class BenchmarkingType extends Dictionary {
 
 }
