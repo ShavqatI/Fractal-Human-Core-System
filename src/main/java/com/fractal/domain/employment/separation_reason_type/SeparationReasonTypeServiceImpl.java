@@ -50,6 +50,7 @@ class SeparationReasonTypeServiceImpl implements SeparationReasonTypeService {
             SeparationReasonType separationReasonType = findById(id);
             separationReasonType.setCode(dto.code());
             separationReasonType.setName(dto.name());
+            separationReasonType.setStatus(statusService.getById(dto.statusId()));
             dto.children().forEach(separationReasonTypeRequest -> separationReasonType.addChild(toEntity(separationReasonTypeRequest)));
             return save(separationReasonType);
         }
