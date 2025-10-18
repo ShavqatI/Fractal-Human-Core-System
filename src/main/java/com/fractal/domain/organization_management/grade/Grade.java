@@ -5,6 +5,7 @@ import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.finance.currency.Currency;
 import com.fractal.domain.organization_management.grade.band.GradeSalaryBand;
 import com.fractal.domain.organization_management.grade.benchmarking.Benchmarking;
+import com.fractal.domain.organization_management.grade.evaluation.GradeEvaluation;
 import com.fractal.domain.organization_management.grade.level.GradeLevel;
 import com.fractal.domain.organization_management.grade.matrix.GradeMatrix;
 import com.fractal.domain.organization_management.grade.step.GradeStep;
@@ -68,11 +69,11 @@ public class Grade extends Dictionary {
     @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<GradeMatrix> matrices = new ArrayList<>();
 
-
     @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<GradeSalaryBand> salaryBands = new ArrayList<>();
 
-
+    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<GradeEvaluation> evaluations = new ArrayList<>();
     public void addChild(Grade grade) {
         if (children == null) children = new ArrayList<>();
         grade.setParent(this);
@@ -120,6 +121,16 @@ public class Grade extends Dictionary {
     public void removeSalaryBand(GradeSalaryBand salaryBand) {
         if (salaryBands != null && !salaryBands.isEmpty())
             salaryBands.remove(salaryBand);
+    }
+
+    public void addEvaluation(GradeEvaluation evaluation) {
+        if (evaluations == null) evaluations = new ArrayList<>();
+        evaluation.setGrade(this);
+        evaluations.add(evaluation);
+    }
+    public void removeEvaluation(GradeEvaluation evaluation) {
+        if (evaluations != null && !evaluations.isEmpty())
+            evaluations.remove(evaluation);
     }
 
 }

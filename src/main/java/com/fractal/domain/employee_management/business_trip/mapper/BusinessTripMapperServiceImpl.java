@@ -70,7 +70,7 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
         businessTrip.setPurpose(dto.purpose());
         businessTrip.setDescription(dto.description());
         businessTrip.setLocation(dto.location());
-        businessTrip.setStartDate(dto.startDate());
+        businessTrip.setStartDate(dto.weight());
         businessTrip.setEndDate(dto.endDate());
         businessTrip.setDays(dto.days());
         dto.orders().forEach(order-> businessTrip.addOrder(orderMapperService.toEntity(order)));

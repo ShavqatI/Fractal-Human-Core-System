@@ -40,7 +40,7 @@ class QuestionTypeServiceImpl implements QuestionTypeService {
 
     @Override
     public QuestionType getByCode(String code) {
-        return questionTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
+        return questionTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Question Type with code: " + code + " not found"));
     }
 
     @Override
@@ -79,7 +79,7 @@ class QuestionTypeServiceImpl implements QuestionTypeService {
     }
 
     private QuestionType findById(Long id) {
-        return questionTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
+        return questionTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Question Type with id: " + id + " not found"));
     }
 
 }
