@@ -1,6 +1,5 @@
 package com.fractal.domain.organization_management.grade.dto;
 
-import com.fractal.domain.organization_management.grade.band.GradeSalaryBand;
 import com.fractal.domain.organization_management.grade.band.dto.GradeSalaryBandRequest;
 import com.fractal.domain.organization_management.grade.benchmarking.dto.BenchmarkingRequest;
 import com.fractal.domain.organization_management.grade.matrix.dto.GradeMatrixRequest;

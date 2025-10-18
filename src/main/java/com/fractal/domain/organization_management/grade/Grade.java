@@ -26,6 +26,7 @@ import java.util.List;
 @Builder
 @EqualsAndHashCode(callSuper = true)
 public class Grade extends Dictionary {
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "currency_id", referencedColumnName = "id")
     private Currency currency;

@@ -1,7 +1,5 @@
 package com.fractal.controller.organization_management.grade.hay;
 
-import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
-import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
 import com.fractal.domain.organization_management.grade.method.hay.factor.type.HayFactorTypeService;
 import com.fractal.domain.organization_management.grade.method.hay.factor.type.dto.HayFactorTypeRequest;
 import com.fractal.domain.organization_management.grade.method.hay.factor.type.dto.HayFactorTypeResponse;

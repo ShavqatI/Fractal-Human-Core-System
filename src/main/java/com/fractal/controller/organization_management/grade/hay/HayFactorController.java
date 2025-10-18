@@ -5,9 +5,6 @@ import com.fractal.domain.organization_management.grade.method.hay.factor.HayFac
 import com.fractal.domain.organization_management.grade.method.hay.factor.dto.HayFactorCompactResponse;
 import com.fractal.domain.organization_management.grade.method.hay.factor.dto.HayFactorRequest;
 import com.fractal.domain.organization_management.grade.method.hay.factor.dto.HayFactorResponse;
-import com.fractal.domain.organization_management.grade.method.hay.factor.type.dto.HayFactorTypeCompactResponse;
-import com.fractal.domain.organization_management.grade.method.hay.factor.type.dto.HayFactorTypeRequest;
-import com.fractal.domain.organization_management.grade.method.hay.factor.type.dto.HayFactorTypeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

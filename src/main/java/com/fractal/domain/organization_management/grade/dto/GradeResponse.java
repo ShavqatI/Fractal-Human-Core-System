@@ -2,14 +2,10 @@ package com.fractal.domain.organization_management.grade.dto;
 
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.finance.currency.dto.CurrencyCompactResponse;
-import com.fractal.domain.organization_management.grade.band.dto.GradeSalaryBandRequest;
 import com.fractal.domain.organization_management.grade.band.dto.GradeSalaryBandResponse;
-import com.fractal.domain.organization_management.grade.benchmarking.dto.BenchmarkingRequest;
 import com.fractal.domain.organization_management.grade.benchmarking.dto.BenchmarkingResponse;
 import com.fractal.domain.organization_management.grade.level.dto.GradeLevelResponse;
-import com.fractal.domain.organization_management.grade.matrix.dto.GradeMatrixRequest;
 import com.fractal.domain.organization_management.grade.matrix.dto.GradeMatrixResponse;
-import com.fractal.domain.organization_management.grade.method.dto.GradingEvaluationRequest;
 import com.fractal.domain.organization_management.grade.method.dto.GradingEvaluationResponse;
 import com.fractal.domain.organization_management.grade.step.dto.GradeStepResponse;
 

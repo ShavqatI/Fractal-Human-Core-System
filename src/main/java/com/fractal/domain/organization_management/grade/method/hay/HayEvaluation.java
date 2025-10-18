@@ -1,7 +1,6 @@
 package com.fractal.domain.organization_management.grade.method.hay;
 
 
-import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.grade.method.GradingEvaluation;
 import com.fractal.domain.organization_management.grade.method.hay.factor.HayFactor;
 import jakarta.persistence.*;
@@ -24,9 +23,7 @@ public class HayEvaluation extends GradingEvaluation {
 
     private Double point;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id", referencedColumnName = "id")
-    private Status status;
+
 
 
 }
