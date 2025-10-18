@@ -3,7 +3,6 @@ package com.fractal.domain.organization_management.grade.method.type;
 import com.fractal.domain.organization_management.grade.method.type.dto.GradingEvaluationTypeCompactResponse;
 import com.fractal.domain.organization_management.grade.method.type.dto.GradingEvaluationTypeRequest;
 import com.fractal.domain.organization_management.grade.method.type.dto.GradingEvaluationTypeResponse;
-import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithCodeNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;

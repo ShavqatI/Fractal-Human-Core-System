@@ -40,8 +40,8 @@ public class DepartmentController {
     }
 
     @GetMapping("/compact/{id}")
-    public ResponseEntity<DepartmentResponse> getByIdCompact(@PathVariable Long id) {
-        return ResponseEntity.ok(departmentService.toDTO(departmentService.getById(id)));
+    public ResponseEntity<DepartmentCompactResponse> getByIdCompact(@PathVariable Long id) {
+        return ResponseEntity.ok(departmentService.toCompactDTO(departmentService.getById(id)));
     }
 
     @GetMapping("/code/{code}")
