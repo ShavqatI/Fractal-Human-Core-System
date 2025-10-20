@@ -18,6 +18,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class HayFactorType extends Dictionary {
 
+    @Column(length = 1000)
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)

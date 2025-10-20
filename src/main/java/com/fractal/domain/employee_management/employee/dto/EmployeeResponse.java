@@ -2,6 +2,10 @@ package com.fractal.domain.employee_management.employee.dto;
 
 import com.fractal.domain.citizenship.dto.CitizenshipResponse;
 import com.fractal.domain.contact.dto.ContactResponse;
+import com.fractal.domain.dictionary.gender.dto.GenderResponse;
+import com.fractal.domain.dictionary.marital_status.dto.MaritalStatusResponse;
+import com.fractal.domain.dictionary.nationality.dto.NationalityResponse;
+import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
 import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceResponse;
@@ -22,9 +26,9 @@ public record EmployeeResponse(
         LocalDate birthDate,
         String tin,
         String ssn,
-        String gender,
-        String maritalStatus,
-        String nationality,
+        GenderResponse gender,
+        MaritalStatusResponse maritalStatus,
+        NationalityResponse nationality,
         List<IdentificationDocumentResponse> identificationDocuments,
         List<CitizenshipResponse> citizenships,
         List<EmployeeAddressResponse> addresses,
@@ -34,7 +38,7 @@ public record EmployeeResponse(
         List<MilitaryServiceResponse> militaryServices,
         List<EmploymentResponse> employments,
         List<EmployeeResourceResponse> resources,
-        String status,
+        StatusCompactResponse status,
         LocalDateTime createdDate
 
 ){

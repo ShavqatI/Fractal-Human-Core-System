@@ -53,9 +53,9 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                 employee.getBirthDate(),
                 employee.getTin(),
                 employee.getSsn(),
-                employee.getGender().getName(),
-                employee.getMaritalStatus().getName(),
-                employee.getNationality().getName(),
+                genderService.toDTO(employee.getGender()),
+                maritalStatusService.toDTO(employee.getMaritalStatus()),
+                nationalityService.toDTO(employee.getNationality()),
                 Optional.ofNullable(employee.getIdentificationDocuments())
                         .orElse(emptyList())
                         .stream()
@@ -101,7 +101,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                         .stream()
                         .map(employeeResourceMapperService::toDTO)
                         .collect(Collectors.toList()),
-                employee.getStatus().getName(),
+                statusService.toCompactDTO(employee.getStatus()),
                 employee.getCreatedDate()
 
         );

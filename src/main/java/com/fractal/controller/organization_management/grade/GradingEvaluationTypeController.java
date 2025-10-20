@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/organization-management/grading/evaluation-type")
+@RequestMapping("/api/v1/organization-management/grade-management/evaluation-type")
 @RequiredArgsConstructor
 public class GradingEvaluationTypeController {
 

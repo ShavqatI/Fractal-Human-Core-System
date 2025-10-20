@@ -12,5 +12,7 @@ public interface RoleMenuService {
     RoleMenu update(Long roleId,Long id, RoleMenuRequest dto);
     void delete(Long roleId,Long id);
     RoleMenuResponse toDTO(RoleMenu roleMenu);
+    RoleMenu getByRoleIdAndMenuId(Long roleId,Long menuId);
+    List<RoleMenu> getActiveMenus(Long id);
 
 }

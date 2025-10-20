@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/organization-management/grade/{gradeId}/child")
+@RequestMapping("/api/v1/organization-management/grade-management/grade/{gradeId}/child")
 @RequiredArgsConstructor
 public class GradeChildController {
 

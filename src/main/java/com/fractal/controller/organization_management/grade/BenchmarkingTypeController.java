@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/organization-management/grade/benchmarking-type")
+@RequestMapping("/api/v1/organization-management/grade-management/benchmarking-type")
 @RequiredArgsConstructor
 public class BenchmarkingTypeController {
 

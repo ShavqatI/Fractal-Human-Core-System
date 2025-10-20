@@ -25,10 +25,9 @@ public class Country extends Location {
     @Column(name = "phone_prefix", nullable = false)
     private String phonePrefix;
 
-    @Column(name = "numeric_code", unique = true)
-    private Integer numericCode;
+    @Column(name = "numeric_code", unique = true,length = 20)
+    private String numericCode;
 
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
     private List<Region> regions = new ArrayList<>();
-
 }

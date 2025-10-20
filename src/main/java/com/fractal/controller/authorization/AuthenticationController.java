@@ -4,8 +4,8 @@ import com.fractal.controller.authorization.dto.AuthRequest;
 import com.fractal.controller.authorization.dto.AuthResponse;
 import com.fractal.domain.authorization.permission.Permission;
 import com.fractal.domain.authorization.permission.PermissionService;
-import com.fractal.domain.authorization.role.RoleService;
 import com.fractal.domain.authorization.role.menu.RoleMenu;
+import com.fractal.domain.authorization.role.menu.RoleMenuService;
 import com.fractal.domain.authorization.user.UserService;
 import com.fractal.domain.navigation.action.ActionService;
 import com.fractal.domain.navigation.action.dto.ActionResponse;
@@ -33,7 +33,7 @@ public class AuthenticationController {
     private final AuthenticationManager authManager;
     private final JwtService jwtService;
     private final UserService userService;
-    private final RoleService roleService;
+    private final RoleMenuService roleMenuService;
     private final MenuService menuService;
     private final ActionService actionService;
     private final PermissionService permissionService;
@@ -53,7 +53,7 @@ public class AuthenticationController {
             var user = userService.findByUsername(userDetails.getUsername());
             var roles = userService.getActiveRoles(user.getId());
             List<List<RoleMenu>> roleMenus = new ArrayList<>();
-            roles.forEach(userRole -> roleMenus.add(roleService.getActiveMenus(userRole.getRole().getId())));
+            roles.forEach(userRole -> roleMenus.add(roleMenuService.getActiveMenus(userRole.getRole().getId())));
             return ResponseEntity.ok(roleMenus.stream()
                     .flatMap(List::stream).map(roleMenu -> menuService.toDTO(roleMenu.getMenu()))
                     .collect(Collectors.toList()));

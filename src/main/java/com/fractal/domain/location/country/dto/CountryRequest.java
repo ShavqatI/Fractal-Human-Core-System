@@ -17,8 +17,7 @@ public record CountryRequest(
         @Pattern(regexp = "^[A-Z]{3}$", message = "Code must be in Latin uppercase letters")
         String iso3Code,
         @NotBlank
-        @NotNull
         String phonePrefix,
         @NotNull
-        int numericCode
+        String numericCode
 ) { }

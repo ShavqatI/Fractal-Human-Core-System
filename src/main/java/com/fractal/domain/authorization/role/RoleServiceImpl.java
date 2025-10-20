@@ -4,7 +4,9 @@ import com.fractal.domain.authorization.role.dto.RoleCompactResponse;
 import com.fractal.domain.authorization.role.dto.RoleRequest;
 import com.fractal.domain.authorization.role.dto.RoleResponse;
 import com.fractal.domain.authorization.role.menu.RoleMenu;
+import com.fractal.domain.authorization.role.menu.RoleMenuService;
 import com.fractal.domain.authorization.role.menu.mapper.RoleMenuMapperService;
+import com.fractal.domain.navigation.menu.Menu;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;
@@ -23,6 +26,7 @@ public class RoleServiceImpl implements RoleService {
 
     private final RoleRepository roleRepository;
     private final RoleMenuMapperService roleMenuMapperService;
+    //private final RoleMenuService roleMenuService;
 
     @Override
     public Role create(RoleRequest dto) {
@@ -93,14 +97,10 @@ public class RoleServiceImpl implements RoleService {
     @Override
     @Transactional(readOnly = true)
     public List<RoleMenu> getActiveMenus(Long id) {
-        return findById(id).getRoleMenus()
-                .stream()
-                .filter(roleMenu -> roleMenu.getStatus().getCode().equals("ACTIVE"))
+        return findById(id).getRoleMenus().stream()
+                .filter(roleMenu -> "ACTIVE".equals(roleMenu.getStatus().getCode()))
                 .collect(Collectors.toList());
-
     }
-
-
     private Role findById(Long id) {
         return roleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Role with id: " + id + " not found"));
     }

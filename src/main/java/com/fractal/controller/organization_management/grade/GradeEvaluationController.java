@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/organization-management/grade/{gradeId}/evaluation")
+@RequestMapping("/api/v1/organization-management/grade-management/grade/{gradeId}/evaluation")
 @RequiredArgsConstructor
 public class GradeEvaluationController {
 
