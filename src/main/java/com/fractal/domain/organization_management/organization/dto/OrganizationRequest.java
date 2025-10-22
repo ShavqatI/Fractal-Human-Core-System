@@ -30,8 +30,6 @@ public record OrganizationRequest(
         String openReason,
         LocalDate closeDate,
         String closeReason,
-        @NotBlank
-        String levelMap,
         @NotNull
         Long organizationUnitId,
         List<OrganizationAddressRequest> addresses,
