@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/organization-management/grading/hay/factor/type/{factorTypeId}/child")
+@RequestMapping("/api/v1/organization-management/grade-management/hay/factor/type/{factorTypeId}/child")
 @RequiredArgsConstructor
 public class HayFactorTypeChildController {
 

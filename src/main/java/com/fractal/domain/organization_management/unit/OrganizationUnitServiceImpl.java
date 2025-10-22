@@ -45,6 +45,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
             organizationUnit.setCode(dto.code());
             organizationUnit.setName(dto.name());
             organizationUnit.setDescription(dto.description());
+            organizationUnit.setLevel(dto.level());
             return save(organizationUnit);
         }
         catch (DataAccessException e) {
@@ -62,6 +63,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
                 organizationUnit.getCode(),
                 organizationUnit.getName(),
                 organizationUnit.getDescription(),
+                organizationUnit.getLevel(),
                 organizationUnit.getCreatedDate()
         );
     }

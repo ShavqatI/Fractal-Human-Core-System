@@ -19,4 +19,7 @@ public class OrganizationUnit extends Dictionary {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "level")
+    private Integer level;
 }

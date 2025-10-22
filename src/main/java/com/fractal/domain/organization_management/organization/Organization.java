@@ -1,6 +1,7 @@
 package com.fractal.domain.organization_management.organization;
 
 import com.fractal.domain.abstraction.Lifecycle;
+import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.organization.address.OrganizationAddress;
 import com.fractal.domain.organization_management.organization.contact.OrganizationContact;
 import com.fractal.domain.organization_management.organization.work_schedule.OrganizationWorkSchedule;
@@ -32,9 +33,6 @@ public class Organization extends Lifecycle {
     @Column(name = "tin_number")
     private String tinNumber;
 
-    @Column(name = "level")
-    private Integer level;
-
     @Column(name = "level_map")
     private String levelMap;
 
@@ -45,6 +43,10 @@ public class Organization extends Lifecycle {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Organization parent;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id",referencedColumnName = "id")
+    private Status status;
 
 
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)

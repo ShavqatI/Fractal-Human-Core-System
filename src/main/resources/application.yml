@@ -4,9 +4,10 @@ spring:
   profiles:
     active: dev
   jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: update
-    show-sql: 'true'
+    #show-sql: 'true'
     properties:
       hibernate:
         format_sql: 'true'
@@ -21,15 +22,15 @@ server:
 jwt:
   secret: "fractalJwtSecretKey@2025strong&safe!"
   expiration: 36000000 # 10 hours
-logging:
-  level:
-    org:
-      hibernate:
-        SQL: DEBUG
-        type:
-          descriptor:
-            sql:
-              BasicBinder: TRACE
+#logging:
+  #level:
+    #org:
+      #hibernate:
+        #SQL: DEBUG
+        #type:
+         # descriptor:
+            #sql:
+             # BasicBinder: TRACE
 minio:
   url: http://localhost:9000
   access-key: admin

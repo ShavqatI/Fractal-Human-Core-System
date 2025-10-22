@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.organization.mapper;
 
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.organization.address.mapper.OrganizationAddressMapperService;
 import com.fractal.domain.organization_management.organization.contact.mapper.OrganizationContactMapperService;
@@ -24,6 +25,7 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
     private final OrganizationAddressMapperService addressMapperService;
     private final OrganizationContactMapperService contactMapperService;
     private final OrganizationWorkScheduleMapperService workScheduleMapperService;
+    private final StatusService statusService;
     @Override
     public OrganizationResponse toDTO(Organization organization) {
         return new OrganizationResponse(
@@ -36,7 +38,6 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
                 organization.getOpenReason(),
                 organization.getCloseDate(),
                 organization.getCloseReason(),
-                organization.getLevel(),
                 organization.getLevelMap(),
                 organizationUnitService.toDTO(organization.getOrganizationUnit()),
                 Optional.ofNullable(organization.getParent())
@@ -62,6 +63,7 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
                         .stream()
                         .map(this::toDTO)
                         .collect(Collectors.toList()),
+                statusService.toCompactDTO(organization.getStatus()),
                 organization.getCreatedDate()
         );
     }
@@ -94,9 +96,7 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
         organization.setOpenReason(dto.openReason());
         organization.setCloseDate(dto.closeDate());
         organization.setCloseReason(dto.closeReason());
-        organization.setLevel(dto.level());
-        organization.setLevelMap(dto.levelMap());
-        organization.setLevelMap(dto.levelMap());
+        organization.setStatus(statusService.getById(dto.statusId()));
         organization.setOrganizationUnit(organizationUnitService.getById(dto.organizationUnitId()));
         dto.addresses().forEach(address -> organization.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact -> organization.addContact(contactMapperService.toEntity(contact)));

@@ -30,8 +30,6 @@ public record OrganizationRequest(
         String openReason,
         LocalDate closeDate,
         String closeReason,
-        @NotNull
-        Integer level,
         @NotBlank
         String levelMap,
         @NotNull
@@ -39,6 +37,7 @@ public record OrganizationRequest(
         List<OrganizationAddressRequest> addresses,
         List<ContactRequest> contacts,
         List<WorkScheduleRequest> workSchedules,
+        Long statusId,
         List<OrganizationRequest> children
 
 ) {

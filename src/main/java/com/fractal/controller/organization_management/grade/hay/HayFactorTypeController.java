@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/organization-management/grading/hay/factor/type")
+@RequestMapping("/api/v1/organization-management/grade-management/hay/factor/type")
 @RequiredArgsConstructor
 public class HayFactorTypeController {
 

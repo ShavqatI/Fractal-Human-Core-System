@@ -27,7 +27,6 @@ class DepartmentMapperServiceImpl implements DepartmentMapperService {
                 department.getId(),
                 department.getCode(),
                 department.getName(),
-                department.getLevel(),
                 department.getLevelMap(),
                 Optional.ofNullable(department.getParent())
                         .map(Department::getName)
@@ -68,8 +67,6 @@ class DepartmentMapperServiceImpl implements DepartmentMapperService {
     private Department mapToEntity(Department department, DepartmentRequest dto) {
         department.setCode(dto.code());
         department.setName(dto.name());
-        department.setLevel(dto.level());
-        department.setLevelMap(dto.levelMap());
         department.setOrganizationUnit(organizationUnitService.getById(dto.organizationUnitId()));
         department.setOpenDate(dto.openDate());
         department.setOpenReason(dto.openReason());
@@ -78,8 +75,9 @@ class DepartmentMapperServiceImpl implements DepartmentMapperService {
         department.setStatus(statusService.getById(dto.statusId()));
         dto.children().forEach(child->department.addChild(toEntity(child)));
         return department;
-
     }
+
+
 
 
 }

@@ -11,7 +11,6 @@ public record DepartmentResponse(
         Long id,
         String code,
         String name,
-        int level,
         String levelMap,
         String parent,
         List<DepartmentResponse> children,

@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.organization;
 
+import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.organization_management.organization.dto.OrganizationCompactResponse;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
@@ -10,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -22,7 +24,9 @@ class OrganizationServiceImpl implements OrganizationService {
     @Override
     @Transactional
     public Organization create(OrganizationRequest dto) {
-        return save(mapperService.toEntity(dto));
+        Organization organization = mapperService.toEntity(dto);
+        organization.setLevelMap(getLevelMap(organization));
+        return save(organization);
     }
 
     @Override
@@ -75,6 +79,7 @@ class OrganizationServiceImpl implements OrganizationService {
     public Organization addChild(Long id, OrganizationRequest dto) {
         var organization = findById(id);
         var child = mapperService.toEntity(dto);
+        child.setLevelMap(getLevelMap(organization));
         if (organization.getOrganizationUnit().equals(child.getOrganizationUnit())) {
             throw new RuntimeException("Child can not have same organization unit as parent ");
         }
@@ -112,4 +117,21 @@ class OrganizationServiceImpl implements OrganizationService {
     private Organization findById(Long id) {
         return organizationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Organization with id: " + id + " not found"));
     }
-}
+
+    private String getLevelMap(Organization organization) {
+       var lastChild = organization.getChildren().stream().sorted(Comparator.comparing(AbstractEntity::getId).reversed()).findFirst();
+       String levelMap = null;
+       if(lastChild.isPresent()) {
+            String[] parts = levelMap.split("-");
+            int lastIndex = parts.length - 1;
+            int lastNumber = Integer.parseInt(parts[lastIndex]);
+            lastNumber++;
+            int digits = parts[lastIndex].length();
+            parts[lastIndex] = String.format("%0" + digits + "d", lastNumber);
+            levelMap = String.join("-", parts);
+        }
+       else if (organization.getLevelMap() != null) {levelMap = organization.getLevelMap() + "-001"; }
+       else {levelMap =  "001"; }
+       return  levelMap;
+    }
+ }

@@ -7,6 +7,7 @@ public record OrganizationUnitResponse(
     String code,
     String name,
     String description,
+    Integer level,
     LocalDateTime createdDate
  )
 {}

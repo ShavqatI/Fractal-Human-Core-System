@@ -25,9 +25,6 @@ public class Department extends Lifecycle  {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "level")
-    private Integer level;
-
     @Column(name = "level_map")
     private String levelMap;
 

@@ -38,9 +38,8 @@ public class OrganizationController {
         return ResponseEntity.ok(organizationService.getAll().stream().map(organizationService::toCompactDTO).collect(Collectors.toList()));
     }
     @GetMapping("/compact/{id}")
-    public ResponseEntity<List<OrganizationCompactResponse>> getByIdCompact(@PathVariable Long id) {
-        return ResponseEntity.ok(organizationService.getAll().stream().map(organizationService::toCompactDTO).collect(Collectors.toList()));
-    }
+    public ResponseEntity<OrganizationCompactResponse> getByIdCompact(@PathVariable Long id) {
+        return ResponseEntity.ok(organizationService.toCompactDTO(organizationService.getById(id)));}
 
 
     @GetMapping("/code/{code}")
