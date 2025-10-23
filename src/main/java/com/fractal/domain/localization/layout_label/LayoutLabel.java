@@ -23,7 +23,7 @@ public class LayoutLabel extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "layoutLabel",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "layoutLabel",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<LayoutLabelDetail> layoutLabelDetails = new ArrayList<>();
 
     @Transactional

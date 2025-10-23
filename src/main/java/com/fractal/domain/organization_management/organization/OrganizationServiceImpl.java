@@ -13,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +28,7 @@ class OrganizationServiceImpl implements OrganizationService {
     public Organization create(OrganizationRequest dto) {
         Organization organization = mapperService.toEntity(dto);
         organization.setLevelMap(getLevelMap(organization));
+        organization.setCode(generateCode(organization));
         return save(organization);
     }
 
@@ -80,6 +83,7 @@ class OrganizationServiceImpl implements OrganizationService {
         var organization = findById(id);
         var child = mapperService.toEntity(dto);
         child.setLevelMap(getLevelMap(organization));
+        child.setCode(generateCode(child));
         if (organization.getOrganizationUnit().equals(child.getOrganizationUnit())) {
             throw new RuntimeException("Child can not have same organization unit as parent ");
         }
@@ -133,5 +137,9 @@ class OrganizationServiceImpl implements OrganizationService {
        else if (organization.getLevelMap() != null) {levelMap = organization.getLevelMap() + "-001"; }
        else {levelMap =  "001"; }
        return  levelMap;
+    }
+
+    private String generateCode(Organization organization) {
+        return organization.getOrganizationUnit().getCode() + "_" + organization.getLevelMap().replace("-","_");
     }
  }
