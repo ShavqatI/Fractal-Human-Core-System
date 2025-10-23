@@ -88,7 +88,6 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
     }
 
     private Organization mapToEntity(Organization organization,OrganizationRequest dto) {
-        organization.setCode(dto.code());
         organization.setName(dto.name());
         organization.setFullName(dto.fullName());
         organization.setTinNumber(dto.tinNumber());
