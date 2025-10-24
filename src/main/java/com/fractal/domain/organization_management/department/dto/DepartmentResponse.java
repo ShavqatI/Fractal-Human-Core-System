@@ -9,7 +9,6 @@ import java.util.List;
 
 public record DepartmentResponse(
         Long id,
-        String code,
         String name,
         String levelMap,
         String parent,

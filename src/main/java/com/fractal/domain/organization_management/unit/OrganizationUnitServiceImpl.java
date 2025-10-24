@@ -72,6 +72,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
                 .code(dto.code())
                 .name(dto.name())
                 .description(dto.description())
+                .level(dto.level())
                 .build();
     }
 

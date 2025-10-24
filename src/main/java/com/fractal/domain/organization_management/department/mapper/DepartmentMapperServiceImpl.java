@@ -25,7 +25,6 @@ class DepartmentMapperServiceImpl implements DepartmentMapperService {
     public DepartmentResponse toDTO(Department department) {
         return new DepartmentResponse(
                 department.getId(),
-                department.getCode(),
                 department.getName(),
                 department.getLevelMap(),
                 Optional.ofNullable(department.getParent())
@@ -65,7 +64,6 @@ class DepartmentMapperServiceImpl implements DepartmentMapperService {
     }
 
     private Department mapToEntity(Department department, DepartmentRequest dto) {
-        department.setCode(dto.code());
         department.setName(dto.name());
         department.setOrganizationUnit(organizationUnitService.getById(dto.organizationUnitId()));
         department.setOpenDate(dto.openDate());

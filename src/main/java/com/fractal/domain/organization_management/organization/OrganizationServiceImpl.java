@@ -1,6 +1,7 @@
 package com.fractal.domain.organization_management.organization;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.organization.dto.OrganizationCompactResponse;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
@@ -123,9 +124,10 @@ class OrganizationServiceImpl implements OrganizationService {
     }
 
     private String getLevelMap(Organization organization) {
-       var lastChild = organization.getChildren().stream().sorted(Comparator.comparing(AbstractEntity::getId).reversed()).findFirst();
-       String levelMap = null;
-       if(lastChild.isPresent()) {
+        var lastChild = organization.getChildren().stream().sorted(Comparator.comparing(AbstractEntity::getId).reversed()).findFirst();
+        String levelMap;
+        if(lastChild.isPresent()) {
+            levelMap = lastChild.get().getLevelMap();
             String[] parts = levelMap.split("-");
             int lastIndex = parts.length - 1;
             int lastNumber = Integer.parseInt(parts[lastIndex]);
@@ -134,9 +136,14 @@ class OrganizationServiceImpl implements OrganizationService {
             parts[lastIndex] = String.format("%0" + digits + "d", lastNumber);
             levelMap = String.join("-", parts);
         }
-       else if (organization.getLevelMap() != null) {levelMap = organization.getLevelMap() + "-001"; }
-       else {levelMap =  "001"; }
-       return  levelMap;
+        else if (organization.getLevelMap() != null) {levelMap = organization.getLevelMap() + "-001"; }
+        else {
+            levelMap = "001";
+            var lastOrganization = organizationRepository.findFirstByOrderByIdDesc();
+            if (lastOrganization.isPresent())
+                levelMap =  String.format("%0" + 3 + "d", Integer.parseInt( lastOrganization.get().getLevelMap().substring(0,3)) + 1 );
+        }
+        return  levelMap;
     }
 
     private String generateCode(Organization organization) {

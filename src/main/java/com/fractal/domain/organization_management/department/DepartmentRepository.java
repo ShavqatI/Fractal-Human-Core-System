@@ -10,7 +10,7 @@ import java.util.Optional;
 interface DepartmentRepository extends JpaRepository<Department,Long> {
 
     Department save(Department department);
-    List<Department> findAll();
+    Optional<Department> findFirstByOrderByIdDesc();
     Optional<Department> findByCode(String code);
     Optional<Department> findById(Long id);
 

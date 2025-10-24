@@ -12,7 +12,6 @@ import java.util.List;
 
 public record OrganizationResponse (
         Long id,
-        String code,
         String name,
         String fullName,
         String tinNumber,

@@ -3,6 +3,7 @@ package com.fractal.domain.organization_management.position;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.organization_management.department.DepartmentService;
 import com.fractal.domain.organization_management.grade.GradeService;
+import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.position.dto.PositionCompactResponse;
 import com.fractal.domain.organization_management.position.dto.PositionRequest;
 import com.fractal.domain.organization_management.position.dto.PositionResponse;
@@ -25,7 +26,9 @@ class PositionServiceImpl implements PositionService {
 
     @Override
     public Position create(PositionRequest dto) {
-        return save(toEntity(dto));
+        var position = toEntity(dto);
+        position.setCode(generateCode());
+        return save(position);
     }
 
     @Override
@@ -47,12 +50,15 @@ class PositionServiceImpl implements PositionService {
     public Position update(Long id, PositionRequest dto) {
         try {
             Position position = findById(id);
-            position.setCode(dto.code());
             position.setName(dto.name());
             position.setDescription(dto.description());
             position.setDepartment(departmentService.getById(dto.departmentId()));
             position.setStatus(statusService.getById(dto.statusId()));
             position.setGrade(gradeService.getById(dto.gradeId()));
+            position.setOpenDate(dto.openDate());
+            position.setOpenReason(dto.openReason());
+            position.setCloseDate(dto.closeDate());
+            position.setCloseReason(dto.closeReason());
             return save(position);
         }
         catch (DataAccessException e) {
@@ -69,7 +75,6 @@ class PositionServiceImpl implements PositionService {
     public PositionResponse toDTO(Position position) {
         return new PositionResponse(
                 position.getId(),
-                position.getCode(),
                 position.getName(),
                 position.getDescription(),
                 departmentService.toCompactDTO(position.getDepartment()),
@@ -96,7 +101,6 @@ class PositionServiceImpl implements PositionService {
 
     private Position toEntity(PositionRequest dto) {
         return Position.builder()
-                .code(dto.code())
                 .name(dto.name())
                 .description(dto.description())
                 .department(Optional.of(departmentService.getById(dto.departmentId())).orElse(null))
@@ -124,5 +128,13 @@ class PositionServiceImpl implements PositionService {
     }
     private Position findByCode(String code) {
         return positionRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Position with code : " + code + " not found"));
+    }
+
+    private String generateCode() {
+        var position = positionRepository.findFirstByOrderByIdDesc();
+        if(position.isPresent())
+         return "POSITION_" + (position.get().getId() + 1);
+        else return "POSITION_" + 1;
+
     }
 }

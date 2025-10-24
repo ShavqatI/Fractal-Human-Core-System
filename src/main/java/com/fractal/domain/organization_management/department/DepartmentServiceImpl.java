@@ -5,6 +5,7 @@ import com.fractal.domain.organization_management.department.dto.DepartmentCompa
 import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
 import com.fractal.domain.organization_management.department.mapper.DepartmentMapperService;
+import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +25,7 @@ class DepartmentServiceImpl implements DepartmentService {
     public Department create(DepartmentRequest dto) {
         Department department = mapperService.toEntity(dto);
         department.setLevelMap(getLevelMap(department));
+        department.setCode(generateCode(department));
         return save(department);
     }
 
@@ -71,6 +74,7 @@ class DepartmentServiceImpl implements DepartmentService {
         var department = findById(id);
         var child = mapperService.toEntity(dto);
         child.setLevelMap(getLevelMap(department));
+        child.setCode(generateCode(child));
         if (department.getOrganizationUnit().equals(child.getOrganizationUnit())) {
             throw new RuntimeException("Child can not have same organization unit as parent ");
         }
@@ -109,8 +113,9 @@ class DepartmentServiceImpl implements DepartmentService {
 
     private String getLevelMap(Department department) {
         var lastChild = department.getChildren().stream().sorted(Comparator.comparing(AbstractEntity::getId).reversed()).findFirst();
-        String levelMap = null;
+        String levelMap;
         if(lastChild.isPresent()) {
+            levelMap = lastChild.get().getLevelMap();
             String[] parts = levelMap.split("-");
             int lastIndex = parts.length - 1;
             int lastNumber = Integer.parseInt(parts[lastIndex]);
@@ -120,8 +125,17 @@ class DepartmentServiceImpl implements DepartmentService {
             levelMap = String.join("-", parts);
         }
         else if (department.getLevelMap() != null) {levelMap = department.getLevelMap() + "-001"; }
-        else {levelMap =  "001"; }
+        else {
+            levelMap = "001";
+            var lastDepartment = departmentRepository.findFirstByOrderByIdDesc();
+            if (lastDepartment.isPresent())
+            levelMap =  String.format("%0" + 3 + "d", Integer.parseInt( lastDepartment.get().getLevelMap().substring(0,3)) + 1 );
+        }
         return  levelMap;
+    }
+
+    private String generateCode(Department department) {
+        return department.getOrganizationUnit().getCode() + "_" + department.getLevelMap().replace("-","_");
     }
 
 }

@@ -30,7 +30,6 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
     public OrganizationResponse toDTO(Organization organization) {
         return new OrganizationResponse(
                 organization.getId(),
-                organization.getCode(),
                 organization.getName(),
                 organization.getFullName(),
                 organization.getTinNumber(),

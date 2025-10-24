@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 public record PositionResponse(
         Long id,
-        String code,
         String name,
         String description,
         DepartmentCompactResponse department,

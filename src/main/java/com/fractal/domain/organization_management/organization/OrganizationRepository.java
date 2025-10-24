@@ -14,4 +14,5 @@ interface OrganizationRepository extends JpaRepository<Organization,Long> {
     Optional<Organization> findByCode(String code);
     Optional<Organization> findById(Long id);
 
+    Optional<Organization> findFirstByOrderByIdDesc();
 }
