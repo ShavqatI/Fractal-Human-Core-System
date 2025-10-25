@@ -9,6 +9,7 @@ import java.util.List;
 public interface MenuService {
     Menu create(MenuRequest dto);
     List<Menu> getAll();
+    List<Menu> getAllTopLevel();
     Menu getByUrl(String url);
     Menu getById(Long id);
     Menu update(Long id, MenuRequest dto);

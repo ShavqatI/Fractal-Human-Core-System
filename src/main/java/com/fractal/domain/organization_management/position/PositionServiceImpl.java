@@ -54,7 +54,7 @@ class PositionServiceImpl implements PositionService {
             position.setDescription(dto.description());
             position.setDepartment(departmentService.getById(dto.departmentId()));
             position.setStatus(statusService.getById(dto.statusId()));
-            position.setGrade(gradeService.getById(dto.gradeId()));
+            position.setGrade(dto.gradeId() != null ? Optional.of(gradeService.getById(dto.gradeId())).orElse(null) : null);
             position.setOpenDate(dto.openDate());
             position.setOpenReason(dto.openReason());
             position.setCloseDate(dto.closeDate());
@@ -104,7 +104,7 @@ class PositionServiceImpl implements PositionService {
                 .name(dto.name())
                 .description(dto.description())
                 .department(Optional.of(departmentService.getById(dto.departmentId())).orElse(null))
-                .grade(Optional.of(gradeService.getById(dto.gradeId())).orElse(null))
+                .grade(dto.gradeId() != null ? Optional.of(gradeService.getById(dto.gradeId())).orElse(null) : null)
                 .openDate(dto.openDate())
                 .openReason(dto.openReason())
                 .closeDate(dto.closeDate())

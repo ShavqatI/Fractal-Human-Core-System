@@ -16,6 +16,7 @@ import java.util.List;
 
 public record InternalEmploymentResponse(
         Long id,
+        String employmentKind,
         LocalDate startDate,
         LocalDate endDate,
         OrganizationCompactResponse organization,

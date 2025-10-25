@@ -15,6 +15,7 @@ import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employee.resource.mapper.EmployeeResourceMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentMapperService;
 import com.fractal.domain.employee_management.identification_document.mapper.EmployeeIdentificationDocumentMapperService;
+import com.fractal.domain.employee_management.language_skill.mapper.EmployeeLanguageSkillMapperService;
 import com.fractal.domain.employee_management.military_service.mapper.EmployeeMilitaryServiceMapperService;
 import com.fractal.domain.employee_management.relative.mapper.RelativeMapperService;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
     private final EmployeeAddressMapperService addressMapperService;
     private final EmployeeContactMapperService contactMapperService;
     private final EmployeeEducationMapperService employeeEducationMapperService;
+    private final EmployeeLanguageSkillMapperService employeeLanguageSkillMapperService;
     private final RelativeMapperService relativeMapperService;
     private final EmployeeMilitaryServiceMapperService militaryServiceMapperService;
     private final EmployeeResourceMapperService employeeResourceMapperService;
@@ -80,6 +82,11 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                         .orElse(emptyList())
                         .stream()
                         .map(employeeEducationMapperService::toDTO)
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(employee.getLanguageSkills())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(employeeLanguageSkillMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(employee.getRelatives())
                         .orElse(emptyList())
@@ -150,6 +157,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
         dto.addresses().forEach(address->employee.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact->employee.addContact(contactMapperService.toEntity(contact)));
         dto.educations().forEach(education->employee.addEducation(employeeEducationMapperService.toEntity(education)));
+        dto.languageSkills().forEach(languageSkill-> employee.addLanguageSkill(employeeLanguageSkillMapperService.toEntity(languageSkill)));
         dto.relatives().forEach(relative->employee.addRelative(relativeMapperService.toEntity(relative)));
         dto.militaryServices().forEach(militaryService->employee.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
         dto.employments().forEach(employment->employee.addEmployment(employmentMapperService.toEntity(employment)));

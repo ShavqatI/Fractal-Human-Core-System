@@ -3,6 +3,7 @@ package com.fractal.domain.employee_management.employee.dto;
 import com.fractal.domain.citizenship.dto.CitizenshipRequest;
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.education.dto.EducationRequest;
+import com.fractal.domain.education.language_skill.dto.LanguageSkillRequest;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressRequest;
 import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceRequest;
 import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
@@ -28,6 +29,7 @@ public record EmployeeRequest(
         List<EmployeeAddressRequest> addresses,
         List<ContactRequest> contacts,
         List<EducationRequest> educations,
+        List<LanguageSkillRequest> languageSkills,
         List<RelativeRequest> relatives,
         List<MilitaryServiceRequest> militaryServices,
         List<EmploymentRequest> employments,

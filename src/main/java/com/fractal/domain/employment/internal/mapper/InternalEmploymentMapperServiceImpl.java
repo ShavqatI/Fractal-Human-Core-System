@@ -6,6 +6,8 @@ import com.fractal.domain.employment.internal.agreement.mapper.InternalEmploymen
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.employment.internal.order.mapper.InternalEmploymentOrderMapperService;
+import com.fractal.domain.employment.kind.EmploymentKind;
+import com.fractal.domain.employment.kind.EmploymentKindService;
 import com.fractal.domain.employment.separation_reason.mapper.SeparationReasonMapperService;
 import com.fractal.domain.employment.type.EmploymentTypeService;
 import com.fractal.domain.organization_management.department.DepartmentService;
@@ -31,11 +33,13 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
     private final StatusService statusService;
     private final InternalEmploymentOrderMapperService orderMapperService;
     private final SeparationReasonMapperService separationReasonMapperService;
+    private final EmploymentKindService employmentKindService;
 
     @Override
     public InternalEmploymentResponse toDTO(InternalEmployment employment) {
         return new InternalEmploymentResponse(
                 employment.getId(),
+                employmentKindService.getByCode("INTERNAL").getCode(),
                 employment.getStartDate(),
                 employment.getEndDate(),
                 organizationService.toCompactDTO(employment.getOrganization()),

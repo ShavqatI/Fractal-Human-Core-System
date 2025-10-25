@@ -31,6 +31,11 @@ class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    public List<Menu> getAllTopLevel() {
+        return menuRepository.findAllByLevel(1);
+    }
+
+    @Override
     public Menu getByUrl(String url) {
         return menuRepository.findByUrl(url).orElseThrow(()-> new ResourceNotFoundException("Menu with url: " + url + " not found"));
     }

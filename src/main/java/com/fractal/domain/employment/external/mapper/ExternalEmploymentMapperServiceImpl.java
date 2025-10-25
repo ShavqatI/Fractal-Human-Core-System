@@ -4,6 +4,7 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employment.external.ExternalEmployment;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentRequest;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentResponse;
+import com.fractal.domain.employment.kind.EmploymentKindService;
 import com.fractal.domain.employment.separation_reason.mapper.SeparationReasonMapperService;
 import com.fractal.domain.employment.type.EmploymentTypeService;
 import com.fractal.domain.location.country.CountryService;
@@ -23,10 +24,12 @@ class ExternalEmploymentMapperServiceImpl implements ExternalEmploymentMapperSer
     private final StatusService statusService;
     private final EmploymentTypeService employmentTypeService;
     private final SeparationReasonMapperService separationReasonMapperService;
+    private final EmploymentKindService employmentKindService;
     @Override
     public ExternalEmploymentResponse toDTO(ExternalEmployment employment) {
         return new ExternalEmploymentResponse(
                 employment.getId(),
+                employmentKindService.getByCode("EXTERNAL").getCode(),
                 countryService.toCompactDTO(employment.getCountry()),
                 employment.getLocation(),
                 employmentTypeService.toCompactDTO(employment.getEmploymentType()),

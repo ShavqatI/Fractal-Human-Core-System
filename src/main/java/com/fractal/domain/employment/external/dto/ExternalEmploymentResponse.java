@@ -12,6 +12,7 @@ import java.util.List;
 
 public record ExternalEmploymentResponse(
         Long id,
+        String employmentKind,
         CountryCompactResponse country,
         String location,
         EmploymentTypeCompactResponse employmentType,

@@ -29,6 +29,10 @@ public class MenuController {
     public ResponseEntity<List<MenuResponse>> getAll() {
         return ResponseEntity.ok(menuService.getAll().stream().map(menuService::toDTO).collect(Collectors.toList()));
     }
+    @GetMapping("/top-level")
+    public ResponseEntity<List<MenuResponse>> getAllTopLevel() {
+        return ResponseEntity.ok(menuService.getAllTopLevel().stream().map(menuService::toDTO).collect(Collectors.toList()));
+    }
     @GetMapping("/compact")
     public ResponseEntity<List<MenuCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(menuService.getAll().stream().map(menuService::toCompactDTO).collect(Collectors.toList()));
