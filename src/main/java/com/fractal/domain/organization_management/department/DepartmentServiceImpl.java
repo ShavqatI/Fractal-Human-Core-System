@@ -109,26 +109,31 @@ class DepartmentServiceImpl implements DepartmentService {
     }
 
     public Department assignLevelMap(Department department) {
-        // Root department (no parent)
         if (department.getId() == null) {
-            String levelMap = "001";
-
-            var lastDepartment = departmentRepository.findFirstByOrderByIdDesc();
-            if (lastDepartment.isPresent()) {
-                String lastLevel = lastDepartment.get().getLevelMap().substring(0, 3);
-                int nextNumber = Integer.parseInt(lastLevel) + 1;
-                levelMap = String.format("%03d", nextNumber);
+           if(department.getLevelMap() == null) {
+               String levelMap =  department.getLevelMap() != null ? department.getLevelMap() : "001";
+               if (department.getOrganizationUnit().getLevel() == 1) {
+                   var lastDepartment =   departmentRepository.findFirstByOrderByIdDesc();
+                   if (lastDepartment.isPresent()) {
+                       String lastLevel = lastDepartment.get().getLevelMap().substring(0, 3);
+                       int nextNumber = Integer.parseInt(lastLevel) + 1;
+                       levelMap = String.format("%03d", nextNumber);
+                   }
+               }
+               department.setLevelMap(levelMap);
             }
+         }
 
-            department.setLevelMap(levelMap);
+        if (department.getChildren() != null ) {
+            for (int i = 0; i < department.getChildren().size(); i++) {
+                if (department.getChildren().get(i).getLevelMap() == null) {
+                    String childLevel = department.getLevelMap() + "-" + String.format("%03d", i + 1);
+                    department.getChildren().get(i).setLevelMap(childLevel);
+                }
+               assignLevelMap(department.getChildren().get(i));
+            }
         }
-        // Recursively assign for children
-       for (int i = 0; i < department.getChildren().size(); i++) {
-            String childLevel = department.getLevelMap() + String.format("%03d", i + 1);
-            department.getChildren().get(i).setLevelMap(childLevel);
-            assignLevelMap(department.getChildren().get(i)); // 🔁 recursion
-        }
-       return department;
+        return department;
     }
 
     /*private String getLevelMap(Department department) {

@@ -39,6 +39,11 @@ class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    public List<Organization> getAllToplevel() {
+        return organizationRepository.findAllByOrganizationUnitCodeIn(List.of("HEADOFFICE","BRANCH"))  ;
+    }
+
+    @Override
     public Organization getByCode(String code) {
         return organizationRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Organization with code: " + code + " not found"));
 

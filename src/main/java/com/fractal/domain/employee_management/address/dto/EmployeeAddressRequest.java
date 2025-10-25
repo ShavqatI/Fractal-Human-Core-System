@@ -6,7 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public record EmployeeAddressRequest(
-        @NotBlank
         @NotNull
         Long addressTypeId,
         @NotNull
@@ -18,7 +17,6 @@ public record EmployeeAddressRequest(
         @NotNull
         Long districtId,
         @NotBlank
-        @NotNull
         String street,
         String house,
         String apartment,

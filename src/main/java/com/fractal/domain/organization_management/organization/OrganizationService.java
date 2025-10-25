@@ -9,6 +9,7 @@ import java.util.List;
 public interface OrganizationService {
     Organization create(OrganizationRequest dto);
     List<Organization> getAll();
+    List<Organization> getAllToplevel();
     Organization getByCode(String code);
     Organization getById(Long id);
     Organization update(Long id, OrganizationRequest dto);
