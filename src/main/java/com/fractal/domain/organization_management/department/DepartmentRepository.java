@@ -9,9 +9,9 @@ import java.util.Optional;
 @Repository
 interface DepartmentRepository extends JpaRepository<Department,Long> {
 
-    Department save(Department department);
     Optional<Department> findFirstByOrderByIdDesc();
     Optional<Department> findByCode(String code);
-    Optional<Department> findById(Long id);
+
+    List<Department> findAllByOrganizationUnitCode(String code);
 
 }

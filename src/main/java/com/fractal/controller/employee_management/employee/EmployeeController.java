@@ -2,6 +2,7 @@ package com.fractal.controller.employee_management.employee;
 
 
 import com.fractal.domain.employee_management.employee.EmployeeService;
+import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import jakarta.validation.Valid;
@@ -26,6 +27,10 @@ public class EmployeeController {
     @GetMapping
     public ResponseEntity<List<EmployeeResponse>> getAll() {
         return ResponseEntity.ok(employeeService.getAll().stream().map(employeeService::toDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("/compact")
+    public ResponseEntity<List<EmployeeCompactResponse>> getAllCompact() {
+        return ResponseEntity.ok(employeeService.getAll().stream().map(employeeService::toCompactDTO).collect(Collectors.toList()));
     }
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeResponse> getById(@PathVariable Long id) {

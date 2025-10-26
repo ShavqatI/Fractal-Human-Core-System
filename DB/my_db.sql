@@ -1617,10 +1617,10 @@ CREATE TABLE employee_schema.military_service_resource (
 ALTER TABLE employee_schema.military_service_resource OWNER TO fractal;
 
 --
--- Name: order; Type: TABLE; Schema: employee_schema; Owner: fractal
+-- Name: agreement; Type: TABLE; Schema: employee_schema; Owner: fractal
 --
 
-CREATE TABLE employee_schema."order" (
+CREATE TABLE employee_schema."agreement" (
     id bigint NOT NULL,
     created_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_date timestamp(6) without time zone,
@@ -1635,7 +1635,7 @@ CREATE TABLE employee_schema."order" (
 );
 
 
-ALTER TABLE employee_schema."order" OWNER TO fractal;
+ALTER TABLE employee_schema."agreement" OWNER TO fractal;
 
 --
 -- Name: order_resource; Type: TABLE; Schema: employee_schema; Owner: fractal
@@ -5022,10 +5022,10 @@ COPY employee_schema.military_service_resource (id, military_service_id) FROM st
 
 
 --
--- Data for Name: order; Type: TABLE DATA; Schema: employee_schema; Owner: fractal
+-- Data for Name: agreement; Type: TABLE DATA; Schema: employee_schema; Owner: fractal
 --
 
-COPY employee_schema."order" (id, created_date, updated_date, approved_date, reviewed_date, date, created_user_id, updated_user_id, approved_user_id, reviewed_user_id, order_type_id) FROM stdin;
+COPY employee_schema."agreement" (id, created_date, updated_date, approved_date, reviewed_date, date, created_user_id, updated_user_id, approved_user_id, reviewed_user_id, order_type_id) FROM stdin;
 \.
 
 
@@ -7443,10 +7443,10 @@ ALTER TABLE ONLY employee_schema.military_service_resource
 
 
 --
--- Name: order oder_pkey; Type: CONSTRAINT; Schema: employee_schema; Owner: fractal
+-- Name: agreement oder_pkey; Type: CONSTRAINT; Schema: employee_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY employee_schema."order"
+ALTER TABLE ONLY employee_schema."agreement"
     ADD CONSTRAINT oder_pkey PRIMARY KEY (id);
 
 
@@ -9083,10 +9083,10 @@ ALTER TABLE ONLY employee_schema.employee_contact
 
 
 --
--- Name: order fk642l9mxkwhc8pltov3k06y5au; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
+-- Name: agreement fk642l9mxkwhc8pltov3k06y5au; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY employee_schema."order"
+ALTER TABLE ONLY employee_schema."agreement"
     ADD CONSTRAINT fk642l9mxkwhc8pltov3k06y5au FOREIGN KEY (updated_user_id) REFERENCES authorization_schema."user"(id);
 
 
@@ -9299,10 +9299,10 @@ ALTER TABLE ONLY employee_schema.identification_document
 
 
 --
--- Name: order fka4uqahqcjwjxsk4ucxcn9oy99; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
+-- Name: agreement fka4uqahqcjwjxsk4ucxcn9oy99; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY employee_schema."order"
+ALTER TABLE ONLY employee_schema."agreement"
     ADD CONSTRAINT fka4uqahqcjwjxsk4ucxcn9oy99 FOREIGN KEY (created_user_id) REFERENCES authorization_schema."user"(id);
 
 
@@ -9371,10 +9371,10 @@ ALTER TABLE ONLY employee_schema.business_trip_type
 
 
 --
--- Name: order fkbjsajhuskpaln1n6mneqkqdu6; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
+-- Name: agreement fkbjsajhuskpaln1n6mneqkqdu6; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY employee_schema."order"
+ALTER TABLE ONLY employee_schema."agreement"
     ADD CONSTRAINT fkbjsajhuskpaln1n6mneqkqdu6 FOREIGN KEY (approved_user_id) REFERENCES authorization_schema."user"(id);
 
 
@@ -9467,10 +9467,10 @@ ALTER TABLE ONLY employee_schema.absence
 
 
 --
--- Name: order fkdm67dvre5lusgwkfemvmdmrr5; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
+-- Name: agreement fkdm67dvre5lusgwkfemvmdmrr5; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY employee_schema."order"
+ALTER TABLE ONLY employee_schema."agreement"
     ADD CONSTRAINT fkdm67dvre5lusgwkfemvmdmrr5 FOREIGN KEY (order_type_id) REFERENCES employee_schema.order_type(id);
 
 
@@ -9543,7 +9543,7 @@ ALTER TABLE ONLY employee_schema.employee
 --
 
 ALTER TABLE ONLY employee_schema.order_resource
-    ADD CONSTRAINT fkfdlsao7pbf7x7302bi7tyni5c FOREIGN KEY (order_id) REFERENCES employee_schema."order"(id);
+    ADD CONSTRAINT fkfdlsao7pbf7x7302bi7tyni5c FOREIGN KEY (order_id) REFERENCES employee_schema."agreement"(id);
 
 
 --
@@ -9631,7 +9631,7 @@ ALTER TABLE ONLY employee_schema.attendance
 --
 
 ALTER TABLE ONLY employee_schema.employment_history_order
-    ADD CONSTRAINT fki2pddq135usjdi5uoql51wa5l FOREIGN KEY (id) REFERENCES employee_schema."order"(id);
+    ADD CONSTRAINT fki2pddq135usjdi5uoql51wa5l FOREIGN KEY (id) REFERENCES employee_schema."agreement"(id);
 
 
 --
@@ -9799,7 +9799,7 @@ ALTER TABLE ONLY employee_schema.employee
 --
 
 ALTER TABLE ONLY employee_schema.business_trip_order
-    ADD CONSTRAINT fkli0rm77kwgrwtntmrcano18ac FOREIGN KEY (id) REFERENCES employee_schema."order"(id);
+    ADD CONSTRAINT fkli0rm77kwgrwtntmrcano18ac FOREIGN KEY (id) REFERENCES employee_schema."agreement"(id);
 
 
 --
@@ -9995,10 +9995,10 @@ ALTER TABLE ONLY employee_schema.employee_address
 
 
 --
--- Name: order fkr5f1ndp5f1p4uhf3auwtg8661; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
+-- Name: agreement fkr5f1ndp5f1p4uhf3auwtg8661; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY employee_schema."order"
+ALTER TABLE ONLY employee_schema."agreement"
     ADD CONSTRAINT fkr5f1ndp5f1p4uhf3auwtg8661 FOREIGN KEY (reviewed_user_id) REFERENCES authorization_schema."user"(id);
 
 

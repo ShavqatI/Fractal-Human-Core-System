@@ -1,5 +1,6 @@
 package com.fractal.domain.employee_management.business_trip.order.mapper;
 
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.business_trip.order.BusinessTripOrder;
 import com.fractal.domain.employee_management.business_trip.order.dto.BusinessTripOrderRequest;
 import com.fractal.domain.employee_management.business_trip.order.dto.BusinessTripOrderResponse;
@@ -19,13 +20,16 @@ class BusinessTripOrderMapperServiceImpl implements BusinessTripOrderMapperServi
 
     private final OrderTypeService orderTypeService;
     private final OrderResourceMapperService resourceMapperService;
+    private final StatusService statusService;
 
     @Override
     public BusinessTripOrderResponse toDTO(BusinessTripOrder order) {
         return new BusinessTripOrderResponse(
                    order.getId(),
-                   order.getNumber(),
                    orderTypeService.toDTO(order.getOrderType()),
+                   order.getNumber(),
+                   order.getDate(),
+                   statusService.toCompactDTO(order.getStatus()),
                    Optional.ofNullable(order.getResources())
                         .orElse(emptyList())
                         .stream()
@@ -48,6 +52,9 @@ class BusinessTripOrderMapperServiceImpl implements BusinessTripOrderMapperServi
 
     private BusinessTripOrder mapToEntity(BusinessTripOrder order, BusinessTripOrderRequest dto) {
         order.setOrderType(orderTypeService.getById(dto.orderTypeId()));
+        order.setNumber(dto.number());
+        order.setDate(dto.date());
+        order.setStatus(statusService.getById(dto.statusId()));
         dto.files().forEach(file-> order.addResource(resourceMapperService.toEntity(file,null)));
         return order;
     }

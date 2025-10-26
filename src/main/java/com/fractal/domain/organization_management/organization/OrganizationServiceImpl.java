@@ -1,7 +1,5 @@
 package com.fractal.domain.organization_management.organization;
 
-import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.organization.dto.OrganizationCompactResponse;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
@@ -12,10 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -28,8 +23,8 @@ class OrganizationServiceImpl implements OrganizationService {
     @Transactional
     public Organization create(OrganizationRequest dto) {
         Organization organization = mapperService.toEntity(dto);
-        organization.setLevelMap(getLevelMap(organization));
-        organization.setCode(generateCode(organization));
+        organization = generateLevelMap(organization);
+        organization = generateCode(organization);
         return save(organization);
     }
 
@@ -39,7 +34,7 @@ class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
-    public List<Organization> getAllToplevel() {
+    public List<Organization> getAllTopLevel() {
         return organizationRepository.findAllByOrganizationUnitCodeIn(List.of("HEADOFFICE","BRANCH"))  ;
     }
 
@@ -88,12 +83,12 @@ class OrganizationServiceImpl implements OrganizationService {
     public Organization addChild(Long id, OrganizationRequest dto) {
         var organization = findById(id);
         var child = mapperService.toEntity(dto);
-        child.setLevelMap(getLevelMap(organization));
-        child.setCode(generateCode(child));
         if (organization.getOrganizationUnit().equals(child.getOrganizationUnit())) {
             throw new RuntimeException("Child can not have same organization unit as parent ");
         }
         organization.addChild(child);
+        organization = generateLevelMap(organization);
+        organization = generateCode(organization);
         return save(organization);
     }
 
@@ -128,30 +123,49 @@ class OrganizationServiceImpl implements OrganizationService {
         return organizationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Organization with id: " + id + " not found"));
     }
 
-    private String getLevelMap(Organization organization) {
-        var lastChild = organization.getChildren().stream().sorted(Comparator.comparing(AbstractEntity::getId).reversed()).findFirst();
-        String levelMap;
-        if(lastChild.isPresent()) {
-            levelMap = lastChild.get().getLevelMap();
-            String[] parts = levelMap.split("-");
-            int lastIndex = parts.length - 1;
-            int lastNumber = Integer.parseInt(parts[lastIndex]);
-            lastNumber++;
-            int digits = parts[lastIndex].length();
-            parts[lastIndex] = String.format("%0" + digits + "d", lastNumber);
-            levelMap = String.join("-", parts);
+    public Organization generateLevelMap(Organization organization) {
+        if (organization.getId() == null) {
+            if(organization.getLevelMap() == null) {
+                String levelMap =  organization.getLevelMap() != null ? organization.getLevelMap() : "001";
+                if (organization.getOrganizationUnit().getLevel() == 1) {
+                    var lastDepartment =   organizationRepository.findFirstByOrderByIdDesc();
+                    if (lastDepartment.isPresent()) {
+                        String lastLevel = lastDepartment.get().getLevelMap().substring(0, 3);
+                        int nextNumber = Integer.parseInt(lastLevel) + 1;
+                        levelMap = String.format("%03d", nextNumber);
+                    }
+                }
+                organization.setLevelMap(levelMap);
+            }
         }
-        else if (organization.getLevelMap() != null) {levelMap = organization.getLevelMap() + "-001"; }
-        else {
-            levelMap = "001";
-            var lastOrganization = organizationRepository.findFirstByOrderByIdDesc();
-            if (lastOrganization.isPresent())
-                levelMap =  String.format("%0" + 3 + "d", Integer.parseInt( lastOrganization.get().getLevelMap().substring(0,3)) + 1 );
+
+        if (organization.getChildren() != null ) {
+            for (int i = 0; i < organization.getChildren().size(); i++) {
+                if (organization.getChildren().get(i).getLevelMap() == null) {
+                    String childLevel = organization.getLevelMap() + "-" + String.format("%03d", i + 1);
+                    organization.getChildren().get(i).setLevelMap(childLevel);
+                }
+                generateLevelMap(organization.getChildren().get(i));
+            }
         }
-        return  levelMap;
+        return organization;
     }
 
-    private String generateCode(Organization organization) {
-        return organization.getOrganizationUnit().getCode() + "_" + organization.getLevelMap().replace("-","_");
+    private Organization generateCode(Organization organization) {
+        if(organization.getCode() == null) {
+            String code = organization.getOrganizationUnit().getCode() + "_" + organization.getLevelMap().replace("-","_");
+            organization.setCode(code);
+        }
+        if (organization.getChildren() != null ) {
+            for (int i = 0; i < organization.getChildren().size(); i++) {
+                if (organization.getChildren().get(i).getCode() == null) {
+                    String code = organization.getOrganizationUnit().getCode() + "_" + organization.getLevelMap().replace("-","_");
+                    organization.setCode(code);
+                }
+                generateCode(organization.getChildren().get(i));
+            }
+        }
+        return organization;
     }
- }
+
+}

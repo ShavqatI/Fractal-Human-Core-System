@@ -65,10 +65,10 @@ class DepartmentMapperServiceImpl implements DepartmentMapperService {
     private Department mapToEntity(Department department, DepartmentRequest dto) {
         department.setName(dto.name());
         department.setOrganizationUnit(organizationUnitService.getById(dto.organizationUnitId()));
-        /*department.setOpenDate(dto.openDate());
+        department.setOpenDate(dto.openDate());
         department.setOpenReason(dto.openReason());
         department.setCloseDate(dto.closeDate());
-        department.setCloseReason(dto.closeReason());*/
+        department.setCloseReason(dto.closeReason());
         department.setStatus(statusService.getById(dto.statusId()));
         dto.children().forEach(child->department.addChild(toEntity(child)));
         return department;

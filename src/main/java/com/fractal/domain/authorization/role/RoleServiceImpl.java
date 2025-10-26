@@ -4,9 +4,7 @@ import com.fractal.domain.authorization.role.dto.RoleCompactResponse;
 import com.fractal.domain.authorization.role.dto.RoleRequest;
 import com.fractal.domain.authorization.role.dto.RoleResponse;
 import com.fractal.domain.authorization.role.menu.RoleMenu;
-import com.fractal.domain.authorization.role.menu.RoleMenuService;
 import com.fractal.domain.authorization.role.menu.mapper.RoleMenuMapperService;
-import com.fractal.domain.navigation.menu.Menu;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -15,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import static java.util.Collections.emptyList;

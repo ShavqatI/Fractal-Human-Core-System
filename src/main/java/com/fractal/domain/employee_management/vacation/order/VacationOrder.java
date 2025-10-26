@@ -14,11 +14,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class VacationOrder extends Order {
 
-
-    @Column(name = "number")
-    @Setter(AccessLevel.NONE)
-    private Long number;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vacation_id", referencedColumnName = "id")
     private Vacation vacation;

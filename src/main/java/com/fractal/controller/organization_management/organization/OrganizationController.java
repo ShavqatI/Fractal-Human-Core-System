@@ -32,7 +32,7 @@ public class OrganizationController {
 
     @GetMapping("top-level")
     public ResponseEntity<List<OrganizationResponse>> getAllToplevel() {
-        return ResponseEntity.ok(organizationService.getAllToplevel().stream().map(organizationService::toDTO).collect(Collectors.toList()));
+        return ResponseEntity.ok(organizationService.getAllTopLevel().stream().map(organizationService::toDTO).collect(Collectors.toList()));
     }
     @GetMapping("/{id}")
     public ResponseEntity<OrganizationResponse> getById(@PathVariable Long id) {

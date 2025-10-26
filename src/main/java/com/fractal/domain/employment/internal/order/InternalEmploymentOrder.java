@@ -16,9 +16,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class InternalEmploymentOrder extends Order {
 
-    @Column(name = "number")
-    private String number;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "internal_employment_id", referencedColumnName = "id")
     private InternalEmployment internalEmployment;

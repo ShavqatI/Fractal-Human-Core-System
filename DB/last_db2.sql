@@ -541,7 +541,7 @@ ALTER TABLE IF EXISTS ONLY employee_schema.vacation DROP CONSTRAINT IF EXISTS fk
 ALTER TABLE IF EXISTS ONLY employee_schema.business_trip DROP CONSTRAINT IF EXISTS fkrkc8arf37fve513pswgx90fbs;
 ALTER TABLE IF EXISTS ONLY employee_schema.relative_contact DROP CONSTRAINT IF EXISTS fkraf65bt5n4pfvl8m0tl93yybp;
 ALTER TABLE IF EXISTS ONLY employee_schema.attendance DROP CONSTRAINT IF EXISTS fkr7q0h8jfngkyybll6o9r3h9ua;
-ALTER TABLE IF EXISTS ONLY employee_schema."order" DROP CONSTRAINT IF EXISTS fkr5f1ndp5f1p4uhf3auwtg8661;
+ALTER TABLE IF EXISTS ONLY employee_schema."agreement" DROP CONSTRAINT IF EXISTS fkr5f1ndp5f1p4uhf3auwtg8661;
 ALTER TABLE IF EXISTS ONLY employee_schema.employee_address DROP CONSTRAINT IF EXISTS fkr4kbfcxh6balyjk6rldqg6nxc;
 ALTER TABLE IF EXISTS ONLY employee_schema.performance_goal DROP CONSTRAINT IF EXISTS fkr221pp58hhukybw4vpu1ptqey;
 ALTER TABLE IF EXISTS ONLY employee_schema.employee DROP CONSTRAINT IF EXISTS fkqypxqtmngvkus1we3l8ae42ua;
@@ -617,7 +617,7 @@ ALTER TABLE IF EXISTS ONLY employee_schema.employment_history DROP CONSTRAINT IF
 ALTER TABLE IF EXISTS ONLY employee_schema.employee_work_experience DROP CONSTRAINT IF EXISTS fke6lnhnup1ian68ra9lwmmvhsb;
 ALTER TABLE IF EXISTS ONLY employee_schema.employee DROP CONSTRAINT IF EXISTS fke0w26qjedr99vwno4pqauw9i9;
 ALTER TABLE IF EXISTS ONLY employee_schema.subordinate DROP CONSTRAINT IF EXISTS fke0hy3yc89oagsd6rb1m586luc;
-ALTER TABLE IF EXISTS ONLY employee_schema."order" DROP CONSTRAINT IF EXISTS fkdm67dvre5lusgwkfemvmdmrr5;
+ALTER TABLE IF EXISTS ONLY employee_schema."agreement" DROP CONSTRAINT IF EXISTS fkdm67dvre5lusgwkfemvmdmrr5;
 ALTER TABLE IF EXISTS ONLY employee_schema.absence DROP CONSTRAINT IF EXISTS fkddc6udkd4p67vplctc4qu37aa;
 ALTER TABLE IF EXISTS ONLY employee_schema.employee_employment DROP CONSTRAINT IF EXISTS fkdamjjxku82hfptdxv9mwf0u4s;
 ALTER TABLE IF EXISTS ONLY employee_schema.employee DROP CONSTRAINT IF EXISTS fkd4dvhrigl3oiod8nxp7hcdn3e;
@@ -631,7 +631,7 @@ ALTER TABLE IF EXISTS ONLY employee_schema.business_trip_expense DROP CONSTRAINT
 ALTER TABLE IF EXISTS ONLY employee_schema.performance DROP CONSTRAINT IF EXISTS fkbxpydkcbdllta1uuowe3nq5iq;
 ALTER TABLE IF EXISTS ONLY employee_schema.military_data DROP CONSTRAINT IF EXISTS fkbwt7r1y7wo8w0pp6bxdoroqly;
 ALTER TABLE IF EXISTS ONLY employee_schema.absence DROP CONSTRAINT IF EXISTS fkbwpnky3s663rcljdui5aanx9n;
-ALTER TABLE IF EXISTS ONLY employee_schema."order" DROP CONSTRAINT IF EXISTS fkbjsajhuskpaln1n6mneqkqdu6;
+ALTER TABLE IF EXISTS ONLY employee_schema."agreement" DROP CONSTRAINT IF EXISTS fkbjsajhuskpaln1n6mneqkqdu6;
 ALTER TABLE IF EXISTS ONLY employee_schema.business_trip_type DROP CONSTRAINT IF EXISTS fkbf5an2bf8o2vk0f15n478ldep;
 ALTER TABLE IF EXISTS ONLY employee_schema.subordinate_type DROP CONSTRAINT IF EXISTS fkbdiwayhfo3i0jrm9mdw2i08nf;
 ALTER TABLE IF EXISTS ONLY employee_schema.business_trip_expense DROP CONSTRAINT IF EXISTS fkba8yntg481t8em8co8ui2o6bo;
@@ -640,7 +640,7 @@ ALTER TABLE IF EXISTS ONLY employee_schema.absence_type DROP CONSTRAINT IF EXIST
 ALTER TABLE IF EXISTS ONLY employee_schema.citizenship DROP CONSTRAINT IF EXISTS fkalap3rkkecpos5jlroxa9jdc5;
 ALTER TABLE IF EXISTS ONLY employee_schema.employee_resource DROP CONSTRAINT IF EXISTS fkaht6n9u5gar7haopj06i6flcv;
 ALTER TABLE IF EXISTS ONLY employee_schema.performance_type DROP CONSTRAINT IF EXISTS fka5u1m88nu9yn6ma9siht9q2nk;
-ALTER TABLE IF EXISTS ONLY employee_schema."order" DROP CONSTRAINT IF EXISTS fka4uqahqcjwjxsk4ucxcn9oy99;
+ALTER TABLE IF EXISTS ONLY employee_schema."agreement" DROP CONSTRAINT IF EXISTS fka4uqahqcjwjxsk4ucxcn9oy99;
 ALTER TABLE IF EXISTS ONLY employee_schema.employment_history DROP CONSTRAINT IF EXISTS fk9yde3w9jegikaprc73mlxcp8b;
 ALTER TABLE IF EXISTS ONLY employee_schema.subordinate DROP CONSTRAINT IF EXISTS fk9v5235xa0ydb8qu46775ajgw1;
 ALTER TABLE IF EXISTS ONLY employee_schema.employment_history DROP CONSTRAINT IF EXISTS fk9t1s402yqjh2akjoyaeppj4cn;
@@ -670,7 +670,7 @@ ALTER TABLE IF EXISTS ONLY employee_schema.performance DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS ONLY employee_schema.attendance DROP CONSTRAINT IF EXISTS fk6l2b048vktg11ycytv7qyfpby;
 ALTER TABLE IF EXISTS ONLY employee_schema.vacation_type DROP CONSTRAINT IF EXISTS fk6h4avme6cpaqypjrpfxobl24y;
 ALTER TABLE IF EXISTS ONLY employee_schema.business_trip_location DROP CONSTRAINT IF EXISTS fk64oke0ci3w3mns3hmd3bv6g8s;
-ALTER TABLE IF EXISTS ONLY employee_schema."order" DROP CONSTRAINT IF EXISTS fk642l9mxkwhc8pltov3k06y5au;
+ALTER TABLE IF EXISTS ONLY employee_schema."agreement" DROP CONSTRAINT IF EXISTS fk642l9mxkwhc8pltov3k06y5au;
 ALTER TABLE IF EXISTS ONLY employee_schema.employee_contact DROP CONSTRAINT IF EXISTS fk5vnwbjaww7r4qftg55t0pnfa5;
 ALTER TABLE IF EXISTS ONLY employee_schema.business_trip_location DROP CONSTRAINT IF EXISTS fk5hv3iiivmburl89lttagd2d6b;
 ALTER TABLE IF EXISTS ONLY employee_schema.performance DROP CONSTRAINT IF EXISTS fk5at4q39xcv7b6tev61o9kcyut;
@@ -1006,7 +1006,7 @@ ALTER TABLE IF EXISTS ONLY employee_schema.performance DROP CONSTRAINT IF EXISTS
 ALTER TABLE IF EXISTS ONLY employee_schema.performance_goal DROP CONSTRAINT IF EXISTS performance_goal_pkey;
 ALTER TABLE IF EXISTS ONLY employee_schema.order_type DROP CONSTRAINT IF EXISTS order_type_pkey;
 ALTER TABLE IF EXISTS ONLY employee_schema.order_resource DROP CONSTRAINT IF EXISTS order_resource_pkey;
-ALTER TABLE IF EXISTS ONLY employee_schema."order" DROP CONSTRAINT IF EXISTS oder_pkey;
+ALTER TABLE IF EXISTS ONLY employee_schema."agreement" DROP CONSTRAINT IF EXISTS oder_pkey;
 ALTER TABLE IF EXISTS ONLY employee_schema.military_service_resource DROP CONSTRAINT IF EXISTS military_service_resource_pkey;
 ALTER TABLE IF EXISTS ONLY employee_schema.military_data DROP CONSTRAINT IF EXISTS military_data_pkey;
 ALTER TABLE IF EXISTS ONLY employee_schema.insurance DROP CONSTRAINT IF EXISTS insurance_pkey;
@@ -1266,7 +1266,7 @@ DROP TABLE IF EXISTS employee_schema.performance_goal;
 DROP TABLE IF EXISTS employee_schema.performance;
 DROP TABLE IF EXISTS employee_schema.order_type;
 DROP TABLE IF EXISTS employee_schema.order_resource;
-DROP TABLE IF EXISTS employee_schema."order";
+DROP TABLE IF EXISTS employee_schema."agreement";
 DROP TABLE IF EXISTS employee_schema.military_service_resource;
 DROP TABLE IF EXISTS employee_schema.military_data;
 DROP TABLE IF EXISTS employee_schema.insurance_coverage;
@@ -3438,10 +3438,10 @@ CREATE TABLE employee_schema.military_service_resource (
 ALTER TABLE employee_schema.military_service_resource OWNER TO fractal;
 
 --
--- Name: order; Type: TABLE; Schema: employee_schema; Owner: fractal
+-- Name: agreement; Type: TABLE; Schema: employee_schema; Owner: fractal
 --
 
-CREATE TABLE employee_schema."order" (
+CREATE TABLE employee_schema."agreement" (
     id bigint NOT NULL,
     created_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_date timestamp(6) without time zone,
@@ -3456,7 +3456,7 @@ CREATE TABLE employee_schema."order" (
 );
 
 
-ALTER TABLE employee_schema."order" OWNER TO fractal;
+ALTER TABLE employee_schema."agreement" OWNER TO fractal;
 
 --
 -- Name: order_resource; Type: TABLE; Schema: employee_schema; Owner: fractal
@@ -9110,10 +9110,10 @@ COPY employee_schema.military_service_resource (id, military_service_id) FROM st
 
 
 --
--- Data for Name: order; Type: TABLE DATA; Schema: employee_schema; Owner: fractal
+-- Data for Name: agreement; Type: TABLE DATA; Schema: employee_schema; Owner: fractal
 --
 
-COPY employee_schema."order" (id, created_date, updated_date, approved_date, reviewed_date, date, created_user_id, updated_user_id, approved_user_id, reviewed_user_id, order_type_id) FROM stdin;
+COPY employee_schema."agreement" (id, created_date, updated_date, approved_date, reviewed_date, date, created_user_id, updated_user_id, approved_user_id, reviewed_user_id, order_type_id) FROM stdin;
 \.
 
 
@@ -10234,7 +10234,7 @@ COPY navigation_schema.menu (id, created_date, updated_date, class_name, icon, l
 68	2025-08-16 13:33:25.702617	\N	\N	TYPE	2	Performance Type	3	performance-type	\N	\N	61	53
 69	2025-08-16 16:05:56.526005	\N	\N	GROUP	2	Vacation Type	4	vacation-type	\N	\N	62	53
 70	2025-08-16 17:02:03.172279	\N	\N	RELATIVE	3	Relative type	5	relative-type	\N	\N	63	53
-71	2025-08-16 17:41:47.910634	\N	\N	ORDER	3	Order type	6	order-type	\N	\N	64	53
+71	2025-08-16 17:41:47.910634	\N	\N	ORDER	3	Order type	6	agreement-type	\N	\N	64	53
 73	2025-08-17 13:54:43.767032	\N	\N	TYPE	2	Employment Type	8	employment-type	\N	\N	66	1
 74	2025-08-17 14:51:53.841349	2025-08-17 14:52:18.195041	\N	EDUCATION	1	Education	8	education	\N	\N	67	\N
 75	2025-08-17 14:52:49.185249	\N	\N	TYPE	2	Education Type	1	education-type	\N	\N	68	74
@@ -13867,10 +13867,10 @@ ALTER TABLE ONLY employee_schema.military_service_resource
 
 
 --
--- Name: order oder_pkey; Type: CONSTRAINT; Schema: employee_schema; Owner: fractal
+-- Name: agreement oder_pkey; Type: CONSTRAINT; Schema: employee_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY employee_schema."order"
+ALTER TABLE ONLY employee_schema."agreement"
     ADD CONSTRAINT oder_pkey PRIMARY KEY (id);
 
 
@@ -16555,10 +16555,10 @@ ALTER TABLE ONLY employee_schema.employee_contact
 
 
 --
--- Name: order fk642l9mxkwhc8pltov3k06y5au; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
+-- Name: agreement fk642l9mxkwhc8pltov3k06y5au; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY employee_schema."order"
+ALTER TABLE ONLY employee_schema."agreement"
     ADD CONSTRAINT fk642l9mxkwhc8pltov3k06y5au FOREIGN KEY (updated_user_id) REFERENCES authorization_schema."user"(id);
 
 
@@ -16795,10 +16795,10 @@ ALTER TABLE ONLY employee_schema.employment_history
 
 
 --
--- Name: order fka4uqahqcjwjxsk4ucxcn9oy99; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
+-- Name: agreement fka4uqahqcjwjxsk4ucxcn9oy99; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY employee_schema."order"
+ALTER TABLE ONLY employee_schema."agreement"
     ADD CONSTRAINT fka4uqahqcjwjxsk4ucxcn9oy99 FOREIGN KEY (created_user_id) REFERENCES authorization_schema."user"(id);
 
 
@@ -16867,10 +16867,10 @@ ALTER TABLE ONLY employee_schema.business_trip_type
 
 
 --
--- Name: order fkbjsajhuskpaln1n6mneqkqdu6; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
+-- Name: agreement fkbjsajhuskpaln1n6mneqkqdu6; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY employee_schema."order"
+ALTER TABLE ONLY employee_schema."agreement"
     ADD CONSTRAINT fkbjsajhuskpaln1n6mneqkqdu6 FOREIGN KEY (approved_user_id) REFERENCES authorization_schema."user"(id);
 
 
@@ -16979,10 +16979,10 @@ ALTER TABLE ONLY employee_schema.absence
 
 
 --
--- Name: order fkdm67dvre5lusgwkfemvmdmrr5; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
+-- Name: agreement fkdm67dvre5lusgwkfemvmdmrr5; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY employee_schema."order"
+ALTER TABLE ONLY employee_schema."agreement"
     ADD CONSTRAINT fkdm67dvre5lusgwkfemvmdmrr5 FOREIGN KEY (order_type_id) REFERENCES employee_schema.order_type(id);
 
 
@@ -17063,7 +17063,7 @@ ALTER TABLE ONLY employee_schema.insurance
 --
 
 ALTER TABLE ONLY employee_schema.order_resource
-    ADD CONSTRAINT fkfdlsao7pbf7x7302bi7tyni5c FOREIGN KEY (order_id) REFERENCES employee_schema."order"(id);
+    ADD CONSTRAINT fkfdlsao7pbf7x7302bi7tyni5c FOREIGN KEY (order_id) REFERENCES employee_schema."agreement"(id);
 
 
 --
@@ -17175,7 +17175,7 @@ ALTER TABLE ONLY employee_schema.attendance
 --
 
 ALTER TABLE ONLY employee_schema.employment_history_order
-    ADD CONSTRAINT fki2pddq135usjdi5uoql51wa5l FOREIGN KEY (id) REFERENCES employee_schema."order"(id);
+    ADD CONSTRAINT fki2pddq135usjdi5uoql51wa5l FOREIGN KEY (id) REFERENCES employee_schema."agreement"(id);
 
 
 --
@@ -17343,7 +17343,7 @@ ALTER TABLE ONLY employee_schema.employee
 --
 
 ALTER TABLE ONLY employee_schema.business_trip_order
-    ADD CONSTRAINT fkli0rm77kwgrwtntmrcano18ac FOREIGN KEY (id) REFERENCES employee_schema."order"(id);
+    ADD CONSTRAINT fkli0rm77kwgrwtntmrcano18ac FOREIGN KEY (id) REFERENCES employee_schema."agreement"(id);
 
 
 --
@@ -17479,7 +17479,7 @@ ALTER TABLE ONLY employee_schema.business_trip_resource
 --
 
 ALTER TABLE ONLY employee_schema.vacation_order
-    ADD CONSTRAINT fkpf09l8n5feqf7fdejdpypkpto FOREIGN KEY (id) REFERENCES employee_schema."order"(id);
+    ADD CONSTRAINT fkpf09l8n5feqf7fdejdpypkpto FOREIGN KEY (id) REFERENCES employee_schema."agreement"(id);
 
 
 --
@@ -17587,10 +17587,10 @@ ALTER TABLE ONLY employee_schema.employee_address
 
 
 --
--- Name: order fkr5f1ndp5f1p4uhf3auwtg8661; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
+-- Name: agreement fkr5f1ndp5f1p4uhf3auwtg8661; Type: FK CONSTRAINT; Schema: employee_schema; Owner: fractal
 --
 
-ALTER TABLE ONLY employee_schema."order"
+ALTER TABLE ONLY employee_schema."agreement"
     ADD CONSTRAINT fkr5f1ndp5f1p4uhf3auwtg8661 FOREIGN KEY (reviewed_user_id) REFERENCES authorization_schema."user"(id);
 
 
@@ -17815,7 +17815,7 @@ ALTER TABLE ONLY employment_schema.separation_reason
 --
 
 ALTER TABLE ONLY employment_schema.internal_employment_order
-    ADD CONSTRAINT fkccbvsrg4ivtjtn20mjo14ix6h FOREIGN KEY (id) REFERENCES employee_schema."order"(id);
+    ADD CONSTRAINT fkccbvsrg4ivtjtn20mjo14ix6h FOREIGN KEY (id) REFERENCES employee_schema."agreement"(id);
 
 
 --

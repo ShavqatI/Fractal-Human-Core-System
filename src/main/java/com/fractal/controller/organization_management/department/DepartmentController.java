@@ -4,6 +4,7 @@ import com.fractal.domain.organization_management.department.DepartmentService;
 import com.fractal.domain.organization_management.department.dto.DepartmentCompactResponse;
 import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
+import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,11 @@ public class DepartmentController {
     @GetMapping
     public ResponseEntity<List<DepartmentResponse>> getAll() {
         return ResponseEntity.ok(departmentService.getAll().stream().map(departmentService::toDTO).collect(Collectors.toList()));
+    }
+
+    @GetMapping("top-level")
+    public ResponseEntity<List<DepartmentResponse>> getAllToplevel() {
+        return ResponseEntity.ok(departmentService.getAllTopLevel().stream().map(departmentService::toDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")

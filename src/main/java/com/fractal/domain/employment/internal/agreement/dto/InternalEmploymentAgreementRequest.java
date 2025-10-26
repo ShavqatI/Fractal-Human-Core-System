@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record InternalEmploymentAgreementRequest(
+        Long agreementTypeId,
         String number,
         LocalDate startDate,
         LocalDate endDate,

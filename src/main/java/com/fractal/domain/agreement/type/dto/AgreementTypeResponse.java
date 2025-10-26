@@ -1,8 +1,8 @@
-package com.fractal.domain.order.type.dto;
+package com.fractal.domain.agreement.type.dto;
 
 import java.time.LocalDateTime;
 
-public record OrderTypeResponse(
+public record AgreementTypeResponse(
         Long id,
         String code,
         String name,

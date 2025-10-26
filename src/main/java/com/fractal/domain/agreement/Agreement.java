@@ -1,10 +1,10 @@
-package com.fractal.domain.order;
+package com.fractal.domain.agreement;
 
 
 import com.fractal.domain.abstraction.ApprovalWorkflow;
+import com.fractal.domain.agreement.resource.AgreementResource;
+import com.fractal.domain.agreement.type.AgreementType;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.order.resource.OrderResource;
-import com.fractal.domain.order.type.OrderType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -17,41 +17,44 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "order", schema = "employee_schema", catalog = "fractal")
+@Table(name = "agreement", schema = "employee_schema", catalog = "fractal")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class Order extends ApprovalWorkflow {
+public class Agreement extends ApprovalWorkflow {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Setter(AccessLevel.NONE)
     protected Long id;
 
-    @Column(name = "number")
-    protected String number;
-
-    @Column(name = "date")
-    protected LocalDate date;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_type_id")
-    protected OrderType orderType;
+    @JoinColumn(name = "agreement_type_id")
+    protected AgreementType agreementType;
+
+    @Column(name = "number")
+    private String number;
+
+    @Column(name = "start_date")
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,orphanRemoval = true)
-    private List<OrderResource> resources = new ArrayList<>();
+    @OneToMany(mappedBy = "agreement",cascade = CascadeType.ALL,orphanRemoval = true)
+    private List<AgreementResource> resources = new ArrayList<>();
 
-    public void addResource(OrderResource resource) {
+    public void addResource(AgreementResource resource) {
         if (resources == null) resources = new ArrayList<>();
-        resource.setOrder(this);
+        resource.setAgreement(this);
         resources.add(resource);
     }
-    public void removeResource(OrderResource resource) {
+    public void removeResource(AgreementResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);
     }

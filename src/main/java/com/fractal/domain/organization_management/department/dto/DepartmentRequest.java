@@ -15,11 +15,10 @@ public record DepartmentRequest(
     @Pattern(regexp = "^\\p{L}[\\p{L}\\p{M}\\p{S}\\p{P}\\p{N}\\s]*$",message = "Only Unicode letters, symbols, punctuation, numbers and spaces are allowed")
     String name,
 
-    //LocalDate openDate,
-    //String openReason,
-    //LocalDate closeDate,
-    //String closeReason,
-
+    LocalDate openDate,
+    String openReason,
+    LocalDate closeDate,
+    String closeReason,
     List<DepartmentRequest> children,
     @NotNull
     Long organizationUnitId,

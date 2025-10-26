@@ -3,7 +3,6 @@ package com.fractal.domain.organization_management.position;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.organization_management.department.DepartmentService;
 import com.fractal.domain.organization_management.grade.GradeService;
-import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.position.dto.PositionCompactResponse;
 import com.fractal.domain.organization_management.position.dto.PositionRequest;
 import com.fractal.domain.organization_management.position.dto.PositionResponse;

@@ -6,7 +6,6 @@ import com.fractal.domain.employment.internal.agreement.mapper.InternalEmploymen
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.employment.internal.order.mapper.InternalEmploymentOrderMapperService;
-import com.fractal.domain.employment.kind.EmploymentKind;
 import com.fractal.domain.employment.kind.EmploymentKindService;
 import com.fractal.domain.employment.separation_reason.mapper.SeparationReasonMapperService;
 import com.fractal.domain.employment.type.EmploymentTypeService;

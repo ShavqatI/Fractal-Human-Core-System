@@ -1,12 +1,10 @@
 package com.fractal.domain.employee_management.relative.address.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
 public record RelativeAddressRequest(
-        @NotBlank
         @NotNull
         Long addressTypeId,
         @NotNull

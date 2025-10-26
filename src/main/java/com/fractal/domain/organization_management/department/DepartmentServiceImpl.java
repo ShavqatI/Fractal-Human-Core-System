@@ -22,13 +22,19 @@ class DepartmentServiceImpl implements DepartmentService {
     @Transactional
     public Department create(DepartmentRequest dto) {
         Department department = mapperService.toEntity(dto);
-        department= assignLevelMap(department);
+        department= generateLevelMap(department);
+        department = generateCode(department);
         return save(department);
     }
 
     @Override
     public List<Department> getAll() {
         return departmentRepository.findAll();
+    }
+
+    @Override
+    public List<Department> getAllTopLevel() {
+        return departmentRepository.findAllByOrganizationUnitCode("DEPARTMENT");
     }
 
     @Override
@@ -70,12 +76,12 @@ class DepartmentServiceImpl implements DepartmentService {
     public Department addChild(Long id, DepartmentRequest dto) {
         var department = findById(id);
         var child = mapperService.toEntity(dto);
-        //child.setLevelMap(getLevelMap(department));
-        child.setCode(generateCode(child));
         if (department.getOrganizationUnit().equals(child.getOrganizationUnit())) {
             throw new RuntimeException("Child can not have same organization unit as parent ");
         }
         department.addChild(child);
+        department= generateLevelMap(department);
+        department = generateCode(department);
         return save(department);
     }
 
@@ -108,7 +114,7 @@ class DepartmentServiceImpl implements DepartmentService {
         return departmentRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Department with id: " + id + " not found"));
     }
 
-    public Department assignLevelMap(Department department) {
+    public Department generateLevelMap(Department department) {
         if (department.getId() == null) {
            if(department.getLevelMap() == null) {
                String levelMap =  department.getLevelMap() != null ? department.getLevelMap() : "001";
@@ -130,57 +136,27 @@ class DepartmentServiceImpl implements DepartmentService {
                     String childLevel = department.getLevelMap() + "-" + String.format("%03d", i + 1);
                     department.getChildren().get(i).setLevelMap(childLevel);
                 }
-               assignLevelMap(department.getChildren().get(i));
+               generateLevelMap(department.getChildren().get(i));
             }
         }
         return department;
     }
 
-    /*private String getLevelMap(Department department) {
-        String levelMap;
-        if(department.getId() == null) {
-            levelMap = "001";
-            var lastDepartment = departmentRepository.findFirstByOrderByIdDesc();
-            if (lastDepartment.isPresent())
-                levelMap =  String.format("%0" + 3 + "d", Integer.parseInt( lastDepartment.get().getLevelMap().substring(0,3)) + 1 );
-            department.setLevelMap(levelMap);
-            List<Department> children = department.getChildren();
-            IntStream.range(0, children.size())
-                    .forEach(i -> {
-                        Department child = children.get(i);
-                        child.setLevelMap(department.getLevelMap() + String.format("%0" + 3 + "d", i));
-                      });
-                   }
-
-
-        var lastChild = department.getChildren().stream().sorted(Comparator.comparing(AbstractEntity::getId).reversed()).filter(department1 -> department1.getLevelMap() != null).findFirst();
-        String levelMap;
-        if(lastChild.isPresent()) {
-            levelMap = lastChild.get().getLevelMap();
-            String[] parts = levelMap.split("-");
-            int lastIndex = parts.length - 1;
-            int lastNumber = Integer.parseInt(parts[lastIndex]);
-            lastNumber++;
-            int digits = parts[lastIndex].length();
-            parts[lastIndex] = String.format("%0" + digits + "d", lastNumber);
-            levelMap = String.join("-", parts);
+    private Department generateCode(Department department) {
+        if(department.getCode() == null) {
+            String code = department.getOrganizationUnit().getCode() + "_" + department.getLevelMap().replace("-","_");
+            department.setCode(code);
         }
-        else if (department.getLevelMap() != null) {
-            levelMap = department.getLevelMap() + "-001";
+        if (department.getChildren() != null ) {
+            for (int i = 0; i < department.getChildren().size(); i++) {
+                if (department.getChildren().get(i).getCode() == null) {
+                    String code = department.getOrganizationUnit().getCode() + "_" + department.getLevelMap().replace("-","_");
+                    department.setCode(code);
+                }
+                generateCode(department.getChildren().get(i));
+            }
         }
-        else {
-            levelMap = "001";
-            var lastDepartment = departmentRepository.findFirstByOrderByIdDesc();
-            if (lastDepartment.isPresent())
-            levelMap =  String.format("%0" + 3 + "d", Integer.parseInt( lastDepartment.get().getLevelMap().substring(0,3)) + 1 );
-        }
-        return  levelMap;
-    }
-
-     */
-
-    private String generateCode(Department department) {
-        return department.getOrganizationUnit().getCode() + "_" + department.getLevelMap().replace("-","_");
+       return department;
     }
 
 }

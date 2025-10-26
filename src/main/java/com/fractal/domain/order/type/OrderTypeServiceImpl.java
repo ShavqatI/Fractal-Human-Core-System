@@ -43,6 +43,9 @@ public class OrderTypeServiceImpl implements OrderTypeService {
             orderType.setCode(dto.code());
             orderType.setName(dto.name());
             orderType.setDescription(dto.description());
+            orderType.setSeries(dto.series());
+            orderType.setTemplateFileUrl(dto.templateFileUrl());
+            orderType.setTemplateFileFormat(dto.templateFileFormat());
             return save(orderType);
         }
         catch (DataAccessException e) {
@@ -62,6 +65,9 @@ public class OrderTypeServiceImpl implements OrderTypeService {
                 orderType.getCode(),
                 orderType.getName(),
                 orderType.getDescription(),
+                orderType.getSeries(),
+                orderType.getTemplateFileUrl(),
+                orderType.getTemplateFileFormat(),
                 orderType.getCreatedDate()
         );
     }
@@ -71,6 +77,9 @@ public class OrderTypeServiceImpl implements OrderTypeService {
                 .code(dto.code())
                 .name(dto.name())
                 .description(dto.description())
+                .series(dto.series())
+                .templateFileUrl(dto.templateFileUrl())
+                .templateFileFormat(dto.templateFileFormat())
                 .build();
     }
 

@@ -1,10 +1,10 @@
-package com.fractal.domain.order.type.dto;
+package com.fractal.domain.agreement.type.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-public record OrderTypeRequest(
+public record AgreementTypeRequest(
 
     @NotBlank
     @Pattern(regexp = "^[A-Z]{3,20}$", message = "Code must be in Latin uppercase letters")
@@ -14,7 +14,7 @@ public record OrderTypeRequest(
     @Pattern(regexp = "^\\p{L}[\\p{L}\\p{M}\\p{S}\\p{P}\\p{N}\\s]*$",message = "Only Unicode letters, symbols, punctuation, numbers and spaces are allowed")
     String name,
     String description,
-     String series,
+    String series,
     String templateFileUrl,
     String templateFileFormat
 )

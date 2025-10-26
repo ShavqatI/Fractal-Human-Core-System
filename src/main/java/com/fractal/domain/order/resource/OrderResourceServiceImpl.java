@@ -39,25 +39,25 @@ public class OrderResourceServiceImpl implements OrderResourceService {
 
     @Override
     public OrderResource update(Long educationId, Long id, MultipartFile file) {
-        var education = orderService.getById(educationId);
-        var resource = education.getResources()
+        var order = orderService.getById(educationId);
+        var resource = order.getResources()
                 .stream()
                 .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
         resource = resourceMapperService.toEntity(resource,resourceMapperService.fileToRequest(file,null));
         resourceRepository.save(resource);
-        orderService.save(education);
+        orderService.save(order);
         return resource;
     }
 
     @Override
     public void delete(Long educationId, Long id) {
-        var education = orderService.getById(educationId);
-        var resource = education.getResources()
+        var order = orderService.getById(educationId);
+        var resource = order.getResources()
                 .stream()
                 .filter(r -> r.getId().equals(educationId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
-        education.removeResource(resource);
+        order.removeResource(resource);
         resourceRepository.delete(resource);
-        orderService.save(education);
+        orderService.save(order);
     }
 
     @Override

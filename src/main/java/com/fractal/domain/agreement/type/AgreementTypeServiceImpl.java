@@ -1,0 +1,99 @@
+package com.fractal.domain.agreement.type;
+
+import com.fractal.domain.agreement.type.dto.AgreementTypeRequest;
+import com.fractal.domain.agreement.type.dto.AgreementTypeResponse;
+import com.fractal.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class AgreementTypeServiceImpl implements AgreementTypeService {
+
+    private final AgreementTypeRepository agreementTypeRepository;
+
+    @Override
+    public AgreementType create(AgreementTypeRequest dto) {
+        return save(toEntity(dto));
+    }
+
+    @Override
+    public List<AgreementType> getAll() {
+        return agreementTypeRepository.findAll();
+    }
+
+    @Override
+    public AgreementType getByCode(String code) {
+        return agreementTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Vacation Type with code: " + code + " not found"));
+
+    }
+
+    @Override
+    public AgreementType getById(Long id) {
+        return findById(id);
+    }
+
+    @Override
+    public AgreementType update(Long id, AgreementTypeRequest dto) {
+        try {
+            AgreementType agreementType = findById(id);
+            agreementType.setCode(dto.code());
+            agreementType.setName(dto.name());
+            agreementType.setDescription(dto.description());
+            agreementType.setSeries(dto.series());
+            agreementType.setTemplateFileUrl(dto.templateFileUrl());
+            agreementType.setTemplateFileFormat(dto.templateFileFormat());
+            return save(agreementType);
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
+    }
+
+    @Override
+    public void deleteById(Long id) {
+       agreementTypeRepository.delete(findById(id));
+    }
+
+    @Override
+    public AgreementTypeResponse toDTO(AgreementType agreementType) {
+        return new AgreementTypeResponse(
+                agreementType.getId(),
+                agreementType.getCode(),
+                agreementType.getName(),
+                agreementType.getDescription(),
+                agreementType.getSeries(),
+                agreementType.getTemplateFileUrl(),
+                agreementType.getTemplateFileFormat(),
+                agreementType.getCreatedDate()
+        );
+    }
+
+    private AgreementType toEntity(AgreementTypeRequest dto) {
+        return AgreementType.builder()
+                .code(dto.code())
+                .name(dto.name())
+                .description(dto.description())
+                .series(dto.series())
+                .templateFileUrl(dto.templateFileUrl())
+                .templateFileFormat(dto.templateFileFormat())
+                .build();
+    }
+
+    private AgreementType save(AgreementType agreementType) {
+        try {
+            return agreementTypeRepository.save(agreementType);
+        }
+        catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
+    }
+
+    private AgreementType findById(Long id) {
+        return agreementTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Vacation Type with id: " + id + " not found"));
+    }
+
+}

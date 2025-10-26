@@ -1,7 +1,7 @@
 package com.fractal.controller.employee_management.employee.employment;
 
 
-import com.fractal.domain.employment.internal.agreement.resource.InternalEmploymentAgreementResourceService;
+import com.fractal.domain.agreement.resource.AgreementResourceService;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EmploymentAgreementResourceController {
 
-    private final InternalEmploymentAgreementResourceService resourceService;
+    private final AgreementResourceService resourceService;
 
     @PostMapping()
     public ResponseEntity<ResourceResponse> create(@PathVariable Long agreementId, @RequestBody @Valid MultipartFile file) {

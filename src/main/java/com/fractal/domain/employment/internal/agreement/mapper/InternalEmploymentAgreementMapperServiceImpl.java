@@ -1,10 +1,11 @@
 package com.fractal.domain.employment.internal.agreement.mapper;
 
+import com.fractal.domain.agreement.resource.mapper.AgreementResourceMapperService;
+import com.fractal.domain.agreement.type.AgreementTypeService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employment.internal.agreement.InternalEmploymentAgreement;
 import com.fractal.domain.employment.internal.agreement.dto.InternalEmploymentAgreementRequest;
 import com.fractal.domain.employment.internal.agreement.dto.InternalEmploymentAgreementResponse;
-import com.fractal.domain.employment.internal.agreement.resource.mapper.InternalEmploymentAgreementResourceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +17,18 @@ import static java.util.Collections.emptyList;
 @Service
 @RequiredArgsConstructor
 class InternalEmploymentAgreementMapperServiceImpl implements InternalEmploymentAgreementMapperService {
-
-    private final InternalEmploymentAgreementResourceMapperService resourceMapperService;
+    private final AgreementTypeService agreementTypeService;
+    private final AgreementResourceMapperService resourceMapperService;
     private final StatusService statusService;
     @Override
     public InternalEmploymentAgreementResponse toDTO(InternalEmploymentAgreement agreement) {
         return new InternalEmploymentAgreementResponse(
                 agreement.getId(),
+                agreementTypeService.toDTO(agreement.getAgreementType()),
                 agreement.getNumber(),
                 agreement.getStartDate(),
                 agreement.getEndDate(),
-                agreement.getStatus().getName(),
+                statusService.toCompactDTO(agreement.getStatus()),
                 Optional.ofNullable(agreement.getResources())
                         .orElse(emptyList())
                         .stream()
@@ -47,13 +49,14 @@ class InternalEmploymentAgreementMapperServiceImpl implements InternalEmployment
        return mapToEntity(agreement,dto);
     }
 
-    private InternalEmploymentAgreement mapToEntity(InternalEmploymentAgreement internalEmploymentAgreement, InternalEmploymentAgreementRequest dto) {
-        internalEmploymentAgreement.setNumber(dto.number());
-        internalEmploymentAgreement.setStartDate(dto.startDate());
-        internalEmploymentAgreement.setEndDate(dto.endDate());
-        internalEmploymentAgreement.setStatus(statusService.getById(dto.statusId()));
-        dto.files().forEach(file-> internalEmploymentAgreement.addResource(resourceMapperService.toEntity(file,null)));
-        return internalEmploymentAgreement;
+    private InternalEmploymentAgreement mapToEntity(InternalEmploymentAgreement agreement, InternalEmploymentAgreementRequest dto) {
+        agreementTypeService.getById(dto.agreementTypeId());
+        agreement.setNumber(dto.number());
+        agreement.setStartDate(dto.startDate());
+        agreement.setEndDate(dto.endDate());
+        agreement.setStatus(statusService.getById(dto.statusId()));
+        dto.files().forEach(file-> agreement.addResource(resourceMapperService.toEntity(file,null)));
+        return agreement;
     }
 
 }
