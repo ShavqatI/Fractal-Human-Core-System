@@ -59,12 +59,11 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                 genderService.toDTO(employee.getGender()),
                 maritalStatusService.toDTO(employee.getMaritalStatus()),
                 nationalityService.toDTO(employee.getNationality()),
-                /*Optional.ofNullable(employee.getIdentificationDocuments())
+                Optional.ofNullable(employee.getIdentificationDocuments())
                         .orElse(emptyList())
                         .stream()
                         .map(identificationDocumentMapperService::toDTO)
                         .collect(Collectors.toList()),
-
                 Optional.ofNullable(employee.getCitizenships())
                         .orElse(emptyList())
                         .stream()
@@ -110,17 +109,6 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                         .stream()
                         .map(employeeResourceMapperService::toDTO)
                         .collect(Collectors.toList()),
-                */
-                List.of(),
-                List.of(),
-                List.of(),
-                List.of(),
-                List.of(),
-                List.of(),
-                List.of(),
-                List.of(),
-                List.of(),
-                List.of(),
                 statusService.toCompactDTO(employee.getStatus()),
                 employee.getCreatedDate()
 
