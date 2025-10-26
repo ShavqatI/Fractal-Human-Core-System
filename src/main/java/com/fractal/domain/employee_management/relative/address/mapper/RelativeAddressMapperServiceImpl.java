@@ -29,9 +29,15 @@ class RelativeAddressMapperServiceImpl implements RelativeAddressMapperService {
                 address.getId(),
                 addressTypeService.toDTO(address.getAddressType()),
                 countryService.toCompactDTO(address.getCountry()),
-                regionService.toCompactDTO(address.getRegion()),
-                cityService.toCompactDTO(address.getCity()),
-                districtService.toCompactDTO(address.getDistrict()),
+                Optional.ofNullable(address.getRegion())
+                        .map(regionService::toCompactDTO)
+                        .orElse(null),
+                Optional.ofNullable(address.getCity())
+                        .map(cityService::toCompactDTO)
+                        .orElse(null),
+                Optional.ofNullable(address.getDistrict())
+                        .map(districtService::toCompactDTO)
+                        .orElse(null),
                 address.getStreet(),
                 address.getHouse(),
                 address.getApartment(),
@@ -60,9 +66,9 @@ class RelativeAddressMapperServiceImpl implements RelativeAddressMapperService {
     private RelativeAddress mapToEntity(RelativeAddress address, RelativeAddressRequest dto) {
         address.setAddressType(addressTypeService.getById(dto.addressTypeId()));
         address.setCountry(countryService.getById(dto.countryId()));
-        address.setRegion(Optional.of(regionService.getById(dto.regionId())).orElse(null));
-        address.setCity(Optional.of(cityService.getById(dto.cityId())).orElse(null));
-        address.setDistrict(Optional.of(districtService.getById(dto.districtId())).orElse(null));
+        address.setRegion(dto.regionId() != null ? Optional.of(regionService.getById(dto.regionId())).orElse(null) : null);
+        address.setCity(dto.cityId() != null ? Optional.of(cityService.getById(dto.cityId())).orElse(null) : null);
+        address.setDistrict(dto.districtId() != null ? Optional.of(districtService.getById(dto.districtId())).orElse(null) : null);
         address.setStreet(dto.street());
         address.setHouse(dto.house());
         address.setApartment(dto.apartment());

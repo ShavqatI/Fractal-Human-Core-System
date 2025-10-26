@@ -1,5 +1,6 @@
 package com.fractal.domain.employment.internal.order.dto;
 
+import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.order.type.dto.OrderTypeResponse;
 import com.fractal.domain.resource.dto.ResourceResponse;
 
@@ -9,9 +10,10 @@ import java.util.List;
 
 public record InternalEmploymentOrderResponse(
         Long id,
-        LocalDate date,
-        String number,
         OrderTypeResponse orderType,
+        String number,
+        LocalDate date,
+        StatusCompactResponse status,
         List<ResourceResponse> resources,
         LocalDateTime createdDate
 

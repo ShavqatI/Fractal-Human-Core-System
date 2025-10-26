@@ -7,8 +7,9 @@ import java.util.List;
 
 public record InternalEmploymentOrderRequest(
         Long orderTypeId,
-        LocalDate date,
         String number,
+        LocalDate date,
+        Long statusId,
         List<MultipartFile> files
 
 ) {
