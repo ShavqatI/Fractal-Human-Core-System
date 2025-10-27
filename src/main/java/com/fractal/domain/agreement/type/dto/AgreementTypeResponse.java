@@ -1,5 +1,7 @@
 package com.fractal.domain.agreement.type.dto;
 
+import com.fractal.domain.dictionary.docuemnt_template_manager.dto.DocumentTemplateManagerResponse;
+
 import java.time.LocalDateTime;
 
 public record AgreementTypeResponse(
@@ -8,8 +10,7 @@ public record AgreementTypeResponse(
         String name,
         String description,
         String series,
-        String templateFileUrl,
-        String templateFileFormat,
+        DocumentTemplateManagerResponse documentTemplateManager,
         LocalDateTime createdDate
 ) {
 }

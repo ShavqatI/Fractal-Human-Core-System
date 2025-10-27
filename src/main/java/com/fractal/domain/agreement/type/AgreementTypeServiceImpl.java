@@ -2,6 +2,8 @@ package com.fractal.domain.agreement.type;
 
 import com.fractal.domain.agreement.type.dto.AgreementTypeRequest;
 import com.fractal.domain.agreement.type.dto.AgreementTypeResponse;
+import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManager;
+import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManagerService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -14,6 +16,7 @@ import java.util.List;
 public class AgreementTypeServiceImpl implements AgreementTypeService {
 
     private final AgreementTypeRepository agreementTypeRepository;
+    private final DocumentTemplateManagerService documentTemplateManagerService;
 
     @Override
     public AgreementType create(AgreementTypeRequest dto) {
@@ -44,8 +47,7 @@ public class AgreementTypeServiceImpl implements AgreementTypeService {
             agreementType.setName(dto.name());
             agreementType.setDescription(dto.description());
             agreementType.setSeries(dto.series());
-            agreementType.setTemplateFileUrl(dto.templateFileUrl());
-            agreementType.setTemplateFileFormat(dto.templateFileFormat());
+            documentTemplateManagerService.getById(dto.documentTemplateManagerId());
             return save(agreementType);
         }
         catch (DataAccessException e) {
@@ -66,8 +68,7 @@ public class AgreementTypeServiceImpl implements AgreementTypeService {
                 agreementType.getName(),
                 agreementType.getDescription(),
                 agreementType.getSeries(),
-                agreementType.getTemplateFileUrl(),
-                agreementType.getTemplateFileFormat(),
+                documentTemplateManagerService.toDTO(agreementType.getDocumentTemplateManager()),
                 agreementType.getCreatedDate()
         );
     }
@@ -78,8 +79,7 @@ public class AgreementTypeServiceImpl implements AgreementTypeService {
                 .name(dto.name())
                 .description(dto.description())
                 .series(dto.series())
-                .templateFileUrl(dto.templateFileUrl())
-                .templateFileFormat(dto.templateFileFormat())
+                .documentTemplateManager(documentTemplateManagerService.getById(dto.documentTemplateManagerId()))
                 .build();
     }
 

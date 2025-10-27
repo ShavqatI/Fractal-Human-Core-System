@@ -15,7 +15,6 @@ public record AgreementTypeRequest(
     String name,
     String description,
     String series,
-    String templateFileUrl,
-    String templateFileFormat
+    Long documentTemplateManagerId
 )
 {}

@@ -11,6 +11,4 @@ public record VacationOrderRequest(
         LocalDate date,
         Long statusId,
         List<MultipartFile> files
-
-) {
-}
+) {}

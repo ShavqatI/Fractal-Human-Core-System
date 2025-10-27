@@ -1,5 +1,6 @@
 package com.fractal.domain.order.type;
 
+import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManagerService;
 import com.fractal.domain.order.type.dto.OrderTypeRequest;
 import com.fractal.domain.order.type.dto.OrderTypeResponse;
 import com.fractal.exception.ResourceNotFoundException;
@@ -14,6 +15,7 @@ import java.util.List;
 public class OrderTypeServiceImpl implements OrderTypeService {
 
     private final OrderTypeRepository orderTypeRepository;
+    private final DocumentTemplateManagerService documentTemplateManagerService;
 
     @Override
     public OrderType create(OrderTypeRequest dto) {
@@ -44,8 +46,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
             orderType.setName(dto.name());
             orderType.setDescription(dto.description());
             orderType.setSeries(dto.series());
-            orderType.setTemplateFileUrl(dto.templateFileUrl());
-            orderType.setTemplateFileFormat(dto.templateFileFormat());
+            orderType.setDocumentTemplateManager(documentTemplateManagerService.getById(dto.documentTemplateManagerId()));
             return save(orderType);
         }
         catch (DataAccessException e) {
@@ -66,8 +67,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
                 orderType.getName(),
                 orderType.getDescription(),
                 orderType.getSeries(),
-                orderType.getTemplateFileUrl(),
-                orderType.getTemplateFileFormat(),
+                documentTemplateManagerService.toDTO(orderType.getDocumentTemplateManager())
                 orderType.getCreatedDate()
         );
     }
@@ -78,8 +78,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
                 .name(dto.name())
                 .description(dto.description())
                 .series(dto.series())
-                .templateFileUrl(dto.templateFileUrl())
-                .templateFileFormat(dto.templateFileFormat())
+                .documentTemplateManager(documentTemplateManagerService.getById(dto.documentTemplateManagerId()))
                 .build();
     }
 

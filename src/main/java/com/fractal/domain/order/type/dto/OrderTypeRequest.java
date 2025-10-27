@@ -15,7 +15,6 @@ public record OrderTypeRequest(
     String name,
     String description,
      String series,
-    String templateFileUrl,
-    String templateFileFormat
+    Long documentTemplateManagerId
 )
 {}

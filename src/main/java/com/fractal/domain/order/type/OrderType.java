@@ -1,8 +1,8 @@
 package com.fractal.domain.order.type;
 
 import com.fractal.domain.abstraction.Dictionary;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManager;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -15,6 +15,8 @@ import lombok.experimental.SuperBuilder;
 public class OrderType extends Dictionary {
     private String description;
     private String series;
-    private String templateFileUrl;
-    private String templateFileFormat;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "document_template_manager_id")
+    protected DocumentTemplateManager documentTemplateManager;
 }
