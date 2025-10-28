@@ -67,7 +67,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
                 orderType.getName(),
                 orderType.getDescription(),
                 orderType.getSeries(),
-                documentTemplateManagerService.toDTO(orderType.getDocumentTemplateManager())
+                documentTemplateManagerService.toDTO(orderType.getDocumentTemplateManager()),
                 orderType.getCreatedDate()
         );
     }

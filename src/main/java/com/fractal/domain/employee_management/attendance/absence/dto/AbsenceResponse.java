@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 public record AbsenceResponse(
         Long id,
         EmployeeCompactResponse employee,
-        AbsenceTypeResponse absenceTypeId,
+        AbsenceTypeResponse absenceType,
         StatusCompactResponse status,
         LocalDate startDate,
         LocalDate endDate,

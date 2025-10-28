@@ -16,7 +16,6 @@ public record BusinessTripRequest(
         String description,
         LocalDate startDate,
         LocalDate endDate,
-        Integer days,
         List<BusinessTripOrderRequest> orders,
         List<BusinessTripExpenseRequest> expenses,
         List<BusinessTripLocationRequest> locations,
