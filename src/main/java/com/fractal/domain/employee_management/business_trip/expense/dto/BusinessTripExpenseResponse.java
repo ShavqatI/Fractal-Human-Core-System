@@ -18,7 +18,7 @@ public record BusinessTripExpenseResponse(
         String description,
         LocalDate date,
         List<ResourceResponse> resources,
-        StatusCompactResponse statusCompactResponse,
+        StatusCompactResponse status,
         LocalDateTime createdDate
 
 ) {

@@ -11,7 +11,7 @@ public record OrderTypeResponse(
         String name,
         String description,
         String series,
-        DocumentTemplateManagerResponse documentTemplateManagerResponse,
+        DocumentTemplateManagerResponse documentTemplateManager,
         LocalDateTime createdDate
 ) {
 }
