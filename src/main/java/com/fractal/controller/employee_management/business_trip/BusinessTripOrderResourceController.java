@@ -20,7 +20,7 @@ public class BusinessTripOrderResourceController {
 
     private final OrderResourceService resourceService;
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<ResourceResponse> create(@PathVariable Long orderId, @RequestBody @Valid MultipartFile file) {
         return new ResponseEntity<>(resourceService.toDTO(resourceService.create(orderId,file)), HttpStatus.CREATED);
     }
