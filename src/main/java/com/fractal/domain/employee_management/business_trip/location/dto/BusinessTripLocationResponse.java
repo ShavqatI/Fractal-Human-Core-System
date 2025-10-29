@@ -9,7 +9,7 @@ import java.util.List;
 
 public record BusinessTripLocationResponse(
         Long id,
-        BusinessTripLocationTypeResponse locationTypeResponse,
+        BusinessTripLocationTypeResponse locationType,
         LocalDateTime startTime,
         LocalDateTime endTime,
         List<BusinessTripLocationAddressResponse> addresses,
