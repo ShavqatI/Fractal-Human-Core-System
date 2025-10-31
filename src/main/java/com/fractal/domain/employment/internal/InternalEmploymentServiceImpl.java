@@ -15,7 +15,6 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-@Primary
 class InternalEmploymentServiceImpl implements InternalEmploymentService {
 
     private final InternalEmploymentRepository employmentRepository;
@@ -36,14 +35,6 @@ class InternalEmploymentServiceImpl implements InternalEmploymentService {
     public InternalEmployment getById(Long id) {
         return findById(id);
     }
-
-
-    @Override
-    @Transactional
-    public Employment save(Employment employment) {
-        return save(employment);
-    }
-
 
     @Override
     @Transactional

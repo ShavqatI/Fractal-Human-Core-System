@@ -5,6 +5,7 @@ import com.fractal.domain.education.language_skill.dto.LanguageSkillResponse;
 import com.fractal.domain.recruitment.candidate.CandidateService;
 import com.fractal.domain.recruitment.candidate.language_skill.mapper.CandidateLanguageSkillMapperService;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ class CandidateLanguageSkillServiceImpl implements CandidateLanguageSkillService
 
     @Override
     public CandidateLanguageSkill getById(Long candidateId, Long id) {
-        return languageSkillRepository.findByCandidateIdAndId(candidateId,id).orElseThrow(()-> new ResourceNotFoundException("Military Service with id: " + id + " not found"));
+        return languageSkillRepository.findByCandidateIdAndId(candidateId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 
     @Override
@@ -46,7 +47,7 @@ class CandidateLanguageSkillServiceImpl implements CandidateLanguageSkillService
         var candidate = candidateService.getById(candidateId);
         var languageSkill = candidate.getLanguageSkills()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Language Skill with id: " + id + " not found"));
+                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
         languageSkill = mapperService.toEntity(languageSkill,dto);
         languageSkillRepository.save(languageSkill);
         candidateService.save(candidate);
@@ -59,7 +60,7 @@ class CandidateLanguageSkillServiceImpl implements CandidateLanguageSkillService
         var candidate = candidateService.getById(candidateId);
         var languageSkill = candidate.getLanguageSkills()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Language Skill with id: " + id + " not found"));
+                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
         candidate.removeLanguageSkill(languageSkill);
         candidateService.save(candidate);
     }
@@ -85,6 +86,6 @@ class CandidateLanguageSkillServiceImpl implements CandidateLanguageSkillService
         }
     }
     private CandidateLanguageSkill findById(Long id) {
-        return languageSkillRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Language Skill  with id: " + id + " not found"));
+        return languageSkillRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 }

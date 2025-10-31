@@ -6,7 +6,7 @@ import com.fractal.domain.employment.external.dto.ExternalEmploymentResponse;
 
 import java.util.List;
 
-public interface ExternalEmploymentService extends EmploymentService {
+public interface ExternalEmploymentService {
     ExternalEmployment create(ExternalEmploymentRequest dto);
     List<ExternalEmployment> getAll();
     ExternalEmployment getById(Long id);

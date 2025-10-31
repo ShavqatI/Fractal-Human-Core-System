@@ -11,6 +11,7 @@ import com.fractal.domain.recruitment.candidate.employment.CandidateEmployment;
 import com.fractal.domain.recruitment.candidate.identification_document.CandidateIdentificationDocument;
 import com.fractal.domain.recruitment.candidate.language_skill.CandidateLanguageSkill;
 import com.fractal.domain.recruitment.candidate.military_service.CandidateMilitaryService;
+import com.fractal.domain.recruitment.candidate.professional_experience.CandidateProfessionalExperience;
 import com.fractal.domain.recruitment.candidate.resource.CandidateResource;
 import com.fractal.domain.recruitment.vacncy.Vacancy;
 import jakarta.persistence.*;
@@ -64,6 +65,9 @@ public class Candidate extends Person {
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private  List<CandidateEmployment> employments  = new ArrayList<>();
+
+    @OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private  List<CandidateProfessionalExperience> professionalExperiences  = new ArrayList<>();
 
 
 
@@ -167,6 +171,16 @@ public class Candidate extends Person {
     public void removeEmployment(CandidateEmployment employment) {
         if (employments != null && !employments.isEmpty())
             employments.remove(employment);
+    }
+
+    public void addProfessionalExperience(CandidateProfessionalExperience professionalExperience) {
+        if (professionalExperiences == null) professionalExperiences = new ArrayList<>();
+        professionalExperience.setCandidate(this);
+        professionalExperiences.add(professionalExperience);
+    }
+    public void removeProfessionalExperience(CandidateProfessionalExperience professionalExperience) {
+        if (professionalExperiences != null && !professionalExperiences.isEmpty())
+            professionalExperiences.remove(professionalExperience);
     }
 
 

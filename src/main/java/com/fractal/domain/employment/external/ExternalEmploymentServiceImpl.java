@@ -35,14 +35,6 @@ class ExternalEmploymentServiceImpl implements ExternalEmploymentService {
         return findById(id);
     }
 
-
-    @Override
-    @Transactional
-    public Employment save(Employment employment) {
-        return save(employment);
-    }
-
-
     @Override
     @Transactional
     public ExternalEmployment update(Long id, ExternalEmploymentRequest dto) {

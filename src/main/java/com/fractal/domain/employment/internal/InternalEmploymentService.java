@@ -6,7 +6,7 @@ import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 
 import java.util.List;
 
-public interface InternalEmploymentService extends EmploymentService {
+public interface InternalEmploymentService {
     InternalEmployment create(InternalEmploymentRequest dto);
     List<InternalEmployment> getAll();
     InternalEmployment getById(Long id);
