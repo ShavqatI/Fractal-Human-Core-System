@@ -9,5 +9,5 @@ import java.util.Optional;
 @Repository
 interface EmployeeEmploymentRepository extends JpaRepository<EmployeeEmployment, Long> {
     List<EmployeeEmployment> findAllByEmployeeId(Long employeeId);
-    Optional<EmployeeEmployment> findByEmployeeIdAndId(Long employeeId, Long id);
+    Optional<EmployeeEmployment> findByEmployeeIdAndEmploymentId(Long employeeId, Long id);
 }

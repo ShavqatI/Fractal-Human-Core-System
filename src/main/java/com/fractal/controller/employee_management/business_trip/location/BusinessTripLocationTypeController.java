@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management.business_trip;
+package com.fractal.controller.employee_management.business_trip.location;
 
 
 import com.fractal.domain.employee_management.business_trip.location.type.BusinessTripLocationTypeService;
