@@ -53,8 +53,7 @@ class BusinessTripLocationAddressMapperServiceImpl implements BusinessTripLocati
     @Override
     public BusinessTripLocationAddress toEntity(InternalBusinessTripLocationAddressRequest dto) {
         var organizationAddress = organizationService.getById(dto.organizationId()).getAddresses().stream().filter(address -> address.getEndDate() == null).findFirst().orElseThrow(()-> new ResourceNotFoundException("The organization with id : + " + dto.organizationId() +" does not have active  address"));
-        var address = (OrganizationAddress) Hibernate.unproxy(organizationAddress);
-        var offlineLearningLocationAddress = convert(new BusinessTripLocationAddress(),address);
+        var offlineLearningLocationAddress = convert(new BusinessTripLocationAddress(),(OrganizationAddress) Hibernate.unproxy(organizationAddress));
         return offlineLearningLocationAddress;
     }
 

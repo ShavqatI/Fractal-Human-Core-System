@@ -23,10 +23,10 @@ public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrd
     @Override
     @Transactional
     public InternalEmploymentOrder create(Long employmentId, InternalEmploymentOrderRequest dto) {
-        var employmentHistory = employmentService.getById(employmentId);
+        var employment = employmentService.getById(employmentId);
         var order = orderMapperService.toEntity(dto);
-        employmentHistory.addOrder(order);
-        employmentService.save(employmentHistory);
+        employment.addOrder(order);
+        employmentService.save(employment);
         return order;
     }
 
@@ -43,25 +43,24 @@ public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrd
     @Override
     @Transactional
     public InternalEmploymentOrder update(Long employmentId, Long id, InternalEmploymentOrderRequest dto) {
-        var employmentHistory = employmentService.getById(employmentId);
-        var order = employmentHistory.getOrders()
+        var employment = employmentService.getById(employmentId);
+        var order = employment.getOrders()
                 .stream()
                 .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
         order = orderRepository.save(orderMapperService.toEntity(order,dto));
-        employmentService.save(employmentHistory);
+        employmentService.save(employment);
         return order;
     }
 
     @Override
     @Transactional
     public void delete(Long employmentId, Long id) {
-        var employmentHistory = employmentService.getById(employmentId);
-        var order = employmentHistory.getOrders()
+        var employment = employmentService.getById(employmentId);
+        var order = employment.getOrders()
                 .stream()
                 .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
-        employmentHistory.removeOrder(order);
-        orderRepository.delete(order);
-        employmentService.save(employmentHistory);
+        employment.removeOrder(order);
+        employmentService.save(employment);
     }
 
     @Override

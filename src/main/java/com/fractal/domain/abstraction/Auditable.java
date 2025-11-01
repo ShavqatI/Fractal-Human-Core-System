@@ -4,6 +4,7 @@ import com.fractal.domain.authorization.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
@@ -52,6 +53,10 @@ public abstract class Auditable {
 
     public User getUpdatedUser() {
         return updatedUser;
+    }
+
+    public void setCreatedUser(User createdUser) {
+        this.createdUser = createdUser;
     }
 }
 
