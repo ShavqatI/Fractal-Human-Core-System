@@ -9,13 +9,9 @@ public record ExternalBusinessTripLocationAddressRequest(
         Long addressTypeId,
         @NotNull
         Long countryId,
-        @NotNull
         Long regionId,
-        @NotNull
         Long cityId,
-        @NotNull
         Long districtId,
         @NotBlank
-        @NotNull
         String street
 ) implements BusinessTripLocationAddressRequest { }

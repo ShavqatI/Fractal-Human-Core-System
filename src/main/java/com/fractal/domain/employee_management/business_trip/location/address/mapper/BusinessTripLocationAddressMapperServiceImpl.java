@@ -12,8 +12,10 @@ import com.fractal.domain.location.country.CountryService;
 import com.fractal.domain.location.district.DistrictService;
 import com.fractal.domain.location.region.RegionService;
 import com.fractal.domain.organization_management.organization.OrganizationService;
+import com.fractal.domain.organization_management.organization.address.OrganizationAddress;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -51,8 +53,8 @@ class BusinessTripLocationAddressMapperServiceImpl implements BusinessTripLocati
     @Override
     public BusinessTripLocationAddress toEntity(InternalBusinessTripLocationAddressRequest dto) {
         var organizationAddress = organizationService.getById(dto.organizationId()).getAddresses().stream().filter(address -> address.getEndDate() == null).findFirst().orElseThrow(()-> new ResourceNotFoundException("The organization with id : + " + dto.organizationId() +" does not have active  address"));
-        var address = (Address) organizationAddress;
-        var offlineLearningLocationAddress = (BusinessTripLocationAddress) address;
+        var address = (OrganizationAddress) Hibernate.unproxy(organizationAddress);
+        var offlineLearningLocationAddress = convert(new BusinessTripLocationAddress(),address);
         return offlineLearningLocationAddress;
     }
 
@@ -78,9 +80,9 @@ class BusinessTripLocationAddressMapperServiceImpl implements BusinessTripLocati
     private BusinessTripLocationAddress mapToEntity(BusinessTripLocationAddress address, ExternalBusinessTripLocationAddressRequest dto) {
         address.setAddressType(addressTypeService.getById(dto.addressTypeId()));
         address.setCountry(countryService.getById(dto.countryId()));
-        address.setRegion(regionService.getById(dto.regionId()));
-        address.setCity(cityService.getById(dto.cityId()));
-        address.setDistrict(districtService.getById(dto.districtId()));
+        address.setRegion(dto.regionId() != null ? regionService.getById(dto.regionId()) : null);
+        address.setCity(dto.cityId() != null ? cityService.getById(dto.cityId()) : null);
+        address.setDistrict(dto.districtId() != null ? districtService.getById(dto.districtId()) : null);
         address.setStreet(dto.street());
         return address;
     }
@@ -90,5 +92,25 @@ class BusinessTripLocationAddressMapperServiceImpl implements BusinessTripLocati
         var offlineLearningLocationAddress = (BusinessTripLocationAddress) address2;
         return offlineLearningLocationAddress;
     }
+
+    private BusinessTripLocationAddress convert(BusinessTripLocationAddress address,OrganizationAddress organizationAddress) {
+        address.setAddressType(organizationAddress.getAddressType());
+        address.setCountry(organizationAddress.getCountry());
+        address.setRegion(organizationAddress.getRegion());
+        address.setCity(organizationAddress.getCity());
+        address.setDistrict(organizationAddress.getDistrict());
+        address.setStreet(organizationAddress.getStreet());
+        address.setHouse(organizationAddress.getHouse());
+        address.setApartment(organizationAddress.getApartment());
+        address.setPostalCode(organizationAddress.getPostalCode());
+        address.setBuildingNumber(organizationAddress.getBuildingNumber());
+        address.setFloorNumber(organizationAddress.getFloorNumber());
+        address.setLatitude(organizationAddress.getLatitude());
+        address.setLongitude(organizationAddress.getLongitude());
+        address.setStartDate(organizationAddress.getStartDate());
+        address.setEndDate(organizationAddress.getEndDate());
+        return address;
+    }
+
 
 }
