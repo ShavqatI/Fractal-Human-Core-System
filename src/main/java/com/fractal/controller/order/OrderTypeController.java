@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management;
+package com.fractal.controller.order;
 
 
 import com.fractal.domain.order.type.OrderTypeService;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/order-type")
+@RequestMapping("/api/v1/order/type")
 @RequiredArgsConstructor
 public class OrderTypeController {
 

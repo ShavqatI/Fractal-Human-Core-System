@@ -4,6 +4,8 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employment.separation_reason_type.dto.SeparationReasonTypeCompactResponse;
 import com.fractal.domain.employment.separation_reason_type.dto.SeparationReasonTypeRequest;
 import com.fractal.domain.employment.separation_reason_type.dto.SeparationReasonTypeResponse;
+import com.fractal.domain.organization_management.department.Department;
+import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -114,4 +116,28 @@ class SeparationReasonTypeServiceImpl implements SeparationReasonTypeService {
     private SeparationReasonType findById(Long id) {
         return separationReasonTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Separation Reason with id: " + id + " not found"));
     }
+
+    @Override
+    public SeparationReasonType addChild(Long id, SeparationReasonTypeRequest dto) {
+        var separationReasonType = findById(id);
+        separationReasonType.addChild(toEntity(dto));
+       return save(separationReasonType);
+    }
+
+    @Override
+    public SeparationReasonType updateChild(Long id, Long childId, SeparationReasonTypeRequest dto) {
+        var separationReasonType = findById(id);
+        var child = separationReasonType.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        update(child.getId(),dto);
+        return save(separationReasonType);
+    }
+
+    @Override
+    public SeparationReasonType deleteChild(Long id, Long childId) {
+        var separationReasonType = findById(id);
+        var child = separationReasonType.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        separationReasonType.removeChild(child);
+        return save(separationReasonType);
+    }
+
 }

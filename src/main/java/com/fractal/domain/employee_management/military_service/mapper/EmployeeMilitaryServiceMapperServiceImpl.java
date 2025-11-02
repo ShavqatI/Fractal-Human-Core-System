@@ -29,7 +29,8 @@ class EmployeeMilitaryServiceMapperServiceImpl implements EmployeeMilitaryServic
         return convert(militaryService,mapperService.toEntity(militaryService,dto));
     }
 
-    private EmployeeMilitaryService convert(EmployeeMilitaryService employeeMilitaryService, MilitaryService militaryService) {
+    @Override
+    public EmployeeMilitaryService convert(EmployeeMilitaryService employeeMilitaryService, MilitaryService militaryService) {
         employeeMilitaryService.setAccountNumber(militaryService.getAccountNumber());
         employeeMilitaryService.setTitle(militaryService.getTitle());
         employeeMilitaryService.setCategoryFund(militaryService.getCategoryFund());

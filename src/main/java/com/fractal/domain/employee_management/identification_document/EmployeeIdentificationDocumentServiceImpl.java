@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class EmployeeIdentificationDocumentServiceImpl implements EmployeeIdentificationDocumentService {
+class EmployeeIdentificationDocumentServiceImpl implements EmployeeIdentificationDocumentService {
 
     private final EmployeeService employeeService;
     private final EmployeeIdentificationDocumentRepository employeeIdentificationDocumentRepository;

@@ -27,7 +27,7 @@ public class BusinessTripLocation extends Auditable {
     protected Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "learning_location_type_id",referencedColumnName = "id")
+    @JoinColumn(name = "business_trip_location_type_id",referencedColumnName = "id")
     protected BusinessTripLocationType businessTripLocationType;
 
     @ManyToOne(fetch = FetchType.LAZY)

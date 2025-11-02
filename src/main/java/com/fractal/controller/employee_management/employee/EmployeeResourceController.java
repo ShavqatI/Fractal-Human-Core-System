@@ -7,8 +7,10 @@ import com.fractal.domain.employee_management.employee.resource.dto.EmployeeReso
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,8 +22,9 @@ public class EmployeeResourceController {
 
     private final EmployeeResourceService resourceService;
 
-    @PostMapping()
-    public ResponseEntity<EmployeeResourceResponse> create(@PathVariable Long employeeId, @RequestBody @Valid EmployeeResourceRequest dto) {
+
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<EmployeeResourceResponse> create(@PathVariable Long employeeId,@ModelAttribute @Valid EmployeeResourceRequest dto) {
         return new ResponseEntity<>(resourceService.toDTO(resourceService.create(employeeId,dto)), HttpStatus.CREATED);
     }
     @GetMapping

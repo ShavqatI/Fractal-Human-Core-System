@@ -5,6 +5,7 @@ import com.fractal.domain.recruitment.candidate.CandidateService;
 import com.fractal.domain.recruitment.candidate.dto.CandidateCompactResponse;
 import com.fractal.domain.recruitment.candidate.dto.CandidateRequest;
 import com.fractal.domain.recruitment.candidate.dto.CandidateResponse;
+import com.fractal.domain.recruitment.candidate.usecase.CandidateUseCaseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 public class CandidateController {
 
     private final CandidateService candidateService;
+    private final CandidateUseCaseService candidateUseCaseService;
     @PostMapping
     public ResponseEntity<CandidateResponse> create(@RequestBody @Valid CandidateRequest dto) {
         return new ResponseEntity<>(candidateService.toDTO(candidateService.create(dto)), HttpStatus.CREATED);
@@ -51,4 +53,12 @@ public class CandidateController {
         return ResponseEntity.noContent().build();
 
     }
+
+    @PutMapping("/hire/{id}")
+    public ResponseEntity<Void> hire(@PathVariable Long id) {
+        candidateUseCaseService.hire(id);
+        return ResponseEntity.noContent().build();
+
+    }
+
 }

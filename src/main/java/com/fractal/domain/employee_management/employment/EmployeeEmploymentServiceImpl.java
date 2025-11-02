@@ -18,7 +18,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
+class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
 
     private final EmployeeEmploymentRepository employmentRepository;
     private final EmployeeService employeeService;

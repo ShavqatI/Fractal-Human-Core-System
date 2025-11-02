@@ -28,7 +28,8 @@ class EmployeeEducationMapperServiceImpl implements EmployeeEducationMapperServi
         return convert(education,educationMapperService.toEntity(education,dto));
     }
 
-    private EmployeeEducation convert(EmployeeEducation employeeEducation, Education education) {
+    @Override
+    public EmployeeEducation convert(EmployeeEducation employeeEducation, Education education) {
         employeeEducation.setEducationType(education.getEducationType());
         employeeEducation.setEducationDocumentType(education.getEducationDocumentType());
         employeeEducation.setBeginDate(education.getBeginDate());

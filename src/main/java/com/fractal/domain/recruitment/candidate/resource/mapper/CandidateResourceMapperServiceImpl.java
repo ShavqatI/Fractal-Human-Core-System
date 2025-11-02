@@ -29,29 +29,17 @@ class CandidateResourceMapperServiceImpl implements CandidateResourceMapperServi
     public CandidateResource toEntity(CandidateResourceRequest dto,String url) {
         return mapToEntity(new CandidateResource(),dto,url);
     }
-
-    /*@Override
-    public CandidateResource toEntity(Long resourceTypeId,MultipartFile file,String url) {
-        return toEntity(new CandidateResource(),fileToRequest(resourceTypeId,file,url));
-    }*/
-
     @Override
     public CandidateResource toEntity(CandidateResource resource, CandidateResourceRequest dto,String url) {
         return mapToEntity(resource,dto,url);
     }
-
-    /* @Override
-    public CandidateResourceRequest fileToRequest(Long resourceTypeId,MultipartFile file, String url) {
-        return new CandidateResourceRequest(resourceTypeId,url,file.getOriginalFilename(),file.getContentType(),file.getSize());
-    }*/
-
-
     private CandidateResource mapToEntity(CandidateResource resource, CandidateResourceRequest dto,String url) {
         resource.setCandidateResourceType(resource.getCandidateResourceType());
         resource.setUrl(url);
         resource.setFileName(dto.file().getOriginalFilename());
         resource.setContentType(dto.file().getContentType());
         resource.setSizeInBytes(dto.file().getSize());
+
         return resource;
     }
 

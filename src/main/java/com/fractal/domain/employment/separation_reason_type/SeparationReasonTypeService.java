@@ -3,6 +3,8 @@ package com.fractal.domain.employment.separation_reason_type;
 import com.fractal.domain.employment.separation_reason_type.dto.SeparationReasonTypeCompactResponse;
 import com.fractal.domain.employment.separation_reason_type.dto.SeparationReasonTypeRequest;
 import com.fractal.domain.employment.separation_reason_type.dto.SeparationReasonTypeResponse;
+import com.fractal.domain.organization_management.department.Department;
+import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 
 import java.util.List;
 
@@ -16,4 +18,8 @@ public interface SeparationReasonTypeService {
     void deleteById(Long id);
     SeparationReasonTypeResponse toDTO(SeparationReasonType separationReasonType);
     SeparationReasonTypeCompactResponse toCompactDTO(SeparationReasonType separationReasonType);
+
+    SeparationReasonType addChild(Long id, SeparationReasonTypeRequest dto);
+    SeparationReasonType updateChild(Long id,Long childId,SeparationReasonTypeRequest dto);
+    SeparationReasonType deleteChild(Long id,Long childId);
 }

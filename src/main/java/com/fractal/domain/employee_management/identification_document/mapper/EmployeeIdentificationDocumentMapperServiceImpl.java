@@ -29,7 +29,8 @@ class EmployeeIdentificationDocumentMapperServiceImpl implements EmployeeIdentif
         return convert(identificationDocument,mapperService.toEntity(identificationDocument,dto));
     }
 
-    private EmployeeIdentificationDocument convert(EmployeeIdentificationDocument employeeIdentificationDocument, IdentificationDocument identificationDocument) {
+    @Override
+    public EmployeeIdentificationDocument convert(EmployeeIdentificationDocument employeeIdentificationDocument, IdentificationDocument identificationDocument) {
         employeeIdentificationDocument.setIdentificationDocumentType(identificationDocument.getIdentificationDocumentType());
         employeeIdentificationDocument.setSeries(identificationDocument.getSeries());
         employeeIdentificationDocument.setNumber(identificationDocument.getNumber());

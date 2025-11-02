@@ -87,8 +87,7 @@ class BusinessTripLocationAddressMapperServiceImpl implements BusinessTripLocati
     }
     private BusinessTripLocationAddress mapToEntity(BusinessTripLocationAddress address, InternalBusinessTripLocationAddressRequest dto) {
         var organizationAddress = organizationService.getById(dto.organizationId()).getAddresses().stream().filter(address1 -> address1.getEndDate() == null).findFirst().orElseThrow(()-> new ResourceNotFoundException("The organization with id : + " + dto.organizationId() +" does not have active  address"));
-        var address2 = (Address) organizationAddress;
-        var offlineLearningLocationAddress = (BusinessTripLocationAddress) address2;
+        var offlineLearningLocationAddress = convert(address,(OrganizationAddress) Hibernate.unproxy(organizationAddress));
         return offlineLearningLocationAddress;
     }
 

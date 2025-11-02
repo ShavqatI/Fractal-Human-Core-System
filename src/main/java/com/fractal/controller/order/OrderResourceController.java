@@ -1,4 +1,4 @@
-package com.fractal.controller.employee_management.employee.employment;
+package com.fractal.controller.order;
 
 
 import com.fractal.domain.order.resource.OrderResourceService;
@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/employee/employment/order/{orderId}/resource")
+@RequestMapping("/api/v1/order/{orderId}/resource")
 @RequiredArgsConstructor
-public class EmploymentOrderResourceController {
+public class OrderResourceController {
 
     private final OrderResourceService resourceService;
 
