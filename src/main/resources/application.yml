@@ -35,3 +35,14 @@ minio:
   access-key: admin
   secret-key: strongpassword
   bucket: app-files
+
+#resource-storage:
+#  root-path: "C:\My Data\fractal\2025\Fractal-Human-Core-System\src\main\resources\static\"
+#  employee:
+#  candidate:
+#  identification-docuemnt:
+#  education:
+#  military-service:
+#  learning:
+#
+

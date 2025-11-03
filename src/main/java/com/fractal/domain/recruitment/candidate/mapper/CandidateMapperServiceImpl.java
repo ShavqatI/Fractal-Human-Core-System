@@ -14,7 +14,9 @@ import com.fractal.domain.recruitment.candidate.dto.CandidateResponse;
 import com.fractal.domain.recruitment.candidate.education.mapper.CandidateEducationMapperService;
 import com.fractal.domain.recruitment.candidate.employment.mapper.CandidateEmploymentMapperService;
 import com.fractal.domain.recruitment.candidate.identification_document.mapper.CandidateIdentificationDocumentMapperService;
+import com.fractal.domain.recruitment.candidate.language_skill.mapper.CandidateLanguageSkillMapperService;
 import com.fractal.domain.recruitment.candidate.military_service.mapper.CandidateMilitaryServiceMapperService;
+import com.fractal.domain.recruitment.candidate.professional_experience.mapper.CandidateProfessionalExperienceMapperService;
 import com.fractal.domain.recruitment.candidate.resource.mapper.CandidateResourceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -37,7 +39,9 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     private final CandidateAddressMapperService addressMapperService;
     private final CandidateContactMapperService contactMapperService;
     private final CandidateEducationMapperService educationMapperService;
+    private final CandidateLanguageSkillMapperService languageSkillMapperService;
     private final CandidateEmploymentMapperService employmentMapperService;
+    private final CandidateProfessionalExperienceMapperService professionalExperienceMapperService;
     private final CandidateResourceMapperService resourceMapperService;
     private final CandidateMilitaryServiceMapperService militaryServiceMapperService;
 
@@ -80,10 +84,20 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
                         .stream()
                         .map(educationMapperService::toDTO)
                         .collect(Collectors.toList()),
+                Optional.ofNullable(candidate.getLanguageSkills())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(languageSkillMapperService::toDTO)
+                        .collect(Collectors.toList()),
                 Optional.ofNullable(candidate.getEmployments())
                         .orElse(emptyList())
                         .stream()
                         .map(employmentMapperService::toDTO)
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(candidate.getProfessionalExperiences())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(professionalExperienceMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(candidate.getMilitaryServices())
                         .orElse(emptyList())
@@ -144,7 +158,9 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
         dto.addresses().forEach(address->candidate.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact->candidate.addContact(contactMapperService.toEntity(contact)));
         dto.educations().forEach(education->candidate.addEducation(educationMapperService.toEntity(education)));
+        dto.languageSkills().forEach(languageSkill -> candidate.addLanguageSkill(languageSkillMapperService.toEntity(languageSkill)));
         dto.employments().forEach(employment->candidate.addEmployment(employmentMapperService.toEntity(employment)));
+        dto.professionalExperiences().forEach(professionalExperience-> candidate.addProfessionalExperience(professionalExperienceMapperService.toEntity(professionalExperience)));
         dto.militaryServices().forEach(militaryService->candidate.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
         dto.resources().forEach(file-> candidate.addResource(resourceMapperService.toEntity(file,null)));
         return candidate;

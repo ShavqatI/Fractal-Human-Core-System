@@ -21,5 +21,5 @@ public interface SeparationReasonTypeService {
 
     SeparationReasonType addChild(Long id, SeparationReasonTypeRequest dto);
     SeparationReasonType updateChild(Long id,Long childId,SeparationReasonTypeRequest dto);
-    SeparationReasonType deleteChild(Long id,Long childId);
+    void deleteChild(Long id,Long childId);
 }

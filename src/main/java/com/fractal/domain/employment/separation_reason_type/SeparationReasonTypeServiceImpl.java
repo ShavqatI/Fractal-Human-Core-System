@@ -133,11 +133,11 @@ class SeparationReasonTypeServiceImpl implements SeparationReasonTypeService {
     }
 
     @Override
-    public SeparationReasonType deleteChild(Long id, Long childId) {
+    public void deleteChild(Long id, Long childId) {
         var separationReasonType = findById(id);
         var child = separationReasonType.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
         separationReasonType.removeChild(child);
-        return save(separationReasonType);
+        save(separationReasonType);
     }
 
 }
