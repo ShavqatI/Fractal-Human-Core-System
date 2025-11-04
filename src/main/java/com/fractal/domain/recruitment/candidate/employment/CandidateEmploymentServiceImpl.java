@@ -64,7 +64,7 @@ public class CandidateEmploymentServiceImpl implements CandidateEmploymentServic
         var candidate = candidateService.getById(candidateId);
         var candidateEmployment = candidate.getEmployments()
                 .stream()
-                .filter(eh-> eh.getEmployment().getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(employment-> employment.getEmployment().getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
         candidate.removeEmployment(candidateEmployment);
         candidateService.save(candidate);
     }
