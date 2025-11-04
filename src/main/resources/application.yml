@@ -36,13 +36,13 @@ minio:
   secret-key: strongpassword
   bucket: app-files
 
-#resource-storage:
-#  root-path: "C:\My Data\fractal\2025\Fractal-Human-Core-System\src\main\resources\static\"
-#  employee:
+resource-storage:
+  root-path: "./FILE-STORAGE"
+  employee: "${resource-storage.root-path}/employee/"
 #  candidate:
 #  identification-docuemnt:
 #  education:
 #  military-service:
 #  learning:
-#
+
 

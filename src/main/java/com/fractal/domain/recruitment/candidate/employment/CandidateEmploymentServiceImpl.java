@@ -48,13 +48,13 @@ public class CandidateEmploymentServiceImpl implements CandidateEmploymentServic
     @Override
     public CandidateEmployment update(Long candidateId, Long id, ExternalEmploymentRequest dto) {
         var candidate = candidateService.getById(candidateId);
-        var employeeEmployment = candidate.getEmployments()
+        var candidateEmployment = candidate.getEmployments()
                 .stream()
-                .filter(eh-> eh.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        externalEmploymentService.update(employeeEmployment.getEmployment().getId(),dto);
-        employmentRepository.save(employeeEmployment);
+                .filter(eh-> eh.getEmployment().getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        externalEmploymentService.update(candidateEmployment.getEmployment().getId(),dto);
+        employmentRepository.save(candidateEmployment);
         candidateService.save(candidate);
-        return employeeEmployment;
+        return candidateEmployment;
     }
 
 
@@ -62,10 +62,10 @@ public class CandidateEmploymentServiceImpl implements CandidateEmploymentServic
     @Transactional
     public void delete(Long candidateId, Long id) {
         var candidate = candidateService.getById(candidateId);
-        var employeeEmployment = candidate.getEmployments()
+        var candidateEmployment = candidate.getEmployments()
                 .stream()
-                .filter(eh-> eh.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        candidate.removeEmployment(employeeEmployment);
+                .filter(eh-> eh.getEmployment().getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        candidate.removeEmployment(candidateEmployment);
         candidateService.save(candidate);
     }
 

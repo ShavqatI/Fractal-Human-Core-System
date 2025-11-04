@@ -6,6 +6,7 @@ import com.fractal.domain.employment.external.dto.ExternalEmploymentResponse;
 import com.fractal.domain.employment.external.mapper.ExternalEmploymentMapperService;
 import com.fractal.domain.recruitment.candidate.employment.CandidateEmployment;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,7 @@ class CandidateEmploymentMapperServiceImpl implements CandidateEmploymentMapperS
 
     @Override
     public ExternalEmploymentResponse toDTO(CandidateEmployment employment) {
-        return employmentMapperService.toDTO((ExternalEmployment) employment.getEmployment());
+        return employmentMapperService.toDTO((ExternalEmployment) Hibernate.unproxy(employment.getEmployment()));
     }
 
     @Override

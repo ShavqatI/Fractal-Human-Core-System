@@ -4,6 +4,7 @@ import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceRequest;
 import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceResponse;
 import com.fractal.domain.employee_management.employee.resource.mapper.EmployeeResourceMapperService;
+import com.fractal.domain.resource.FileService;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class EmployeeResourceServiceImpl implements EmployeeResourceService {
     private final EmployeeResourceRepository resourceRepository;
     private final EmployeeResourceMapperService resourceMapperService;
     private final EmployeeService employeeService;
+    private final FileService fileService;
 
     @Override
     public EmployeeResource create(Long employeeId, EmployeeResourceRequest dto) {
@@ -55,6 +57,7 @@ public class EmployeeResourceServiceImpl implements EmployeeResourceService {
         var resource = employee.getResources()
                 .stream()
                 .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        fileService.delete(resource.getUrl());
         employee.removeResource(resource);
         employeeService.save(employee);
     }

@@ -6,12 +6,17 @@ import com.fractal.domain.employee_management.employee.resource.dto.EmployeeReso
 import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.MalformedURLException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,14 +40,33 @@ public class EmployeeResourceController {
     public ResponseEntity<EmployeeResourceResponse> getById(@PathVariable Long employeeId,@PathVariable Long id) {
         return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(employeeId,id)));
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<EmployeeResourceResponse> update(@PathVariable Long employeeId, @PathVariable Long id, @RequestBody @Valid EmployeeResourceRequest dto) {
+    @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<EmployeeResourceResponse> update(@PathVariable Long employeeId, @PathVariable Long id, @ModelAttribute @Valid EmployeeResourceRequest dto) {
         return ResponseEntity.ok(resourceService.toDTO(resourceService.update(employeeId,id, dto)));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long employeeId, @PathVariable Long id) {
         resourceService.delete(employeeId,id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/download/{id}")
+    public ResponseEntity<Resource> download(@PathVariable Long employeeId,@PathVariable Long id) {
+        var employeeResource = resourceService.getById(employeeId,id);
+        try {
+            Path filePath = Path.of(employeeResource.getUrl()).toAbsolutePath();
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (!resource.exists()) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .body(resource);
+
+        } catch (MalformedURLException e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 

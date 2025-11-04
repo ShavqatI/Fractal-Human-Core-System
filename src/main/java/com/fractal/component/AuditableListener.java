@@ -1,4 +1,4 @@
-package com.fractal.config;
+package com.fractal.component;
 
 import com.fractal.domain.abstraction.Auditable;
 import com.fractal.domain.authorization.user.User;
@@ -16,6 +16,7 @@ public class AuditableListener {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null && authentication.isAuthenticated()) {
             Object principal = authentication.getPrincipal();
+            System.out.println(principal.getClass());
             if (principal instanceof User user) {
                 entity.setCreatedUser(user);
             }
