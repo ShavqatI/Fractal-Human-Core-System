@@ -1,5 +1,6 @@
 package com.fractal.domain.resource.mapper;
 
+import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.resource.Resource;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;
@@ -9,8 +10,10 @@ public interface ResourceMapperService {
 
     ResourceResponse toDTO(Resource resource);
     Resource toEntity(ResourceRequest dto);
-    Resource toEntity(MultipartFile file,String url);
+    Resource toEntity(MultipartFile file,String resourceStoragePath);
+    Resource toEntity(Resource resource, MultipartFile file, String resourceStoragePath);
     Resource toEntity(Resource resource, ResourceRequest dto);
     ResourceRequest fileToRequest(MultipartFile file,String url);
+
 
 }

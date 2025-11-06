@@ -8,6 +8,7 @@ import com.fractal.domain.employee_management.relative.contact.RelativeContact;
 import com.fractal.domain.employee_management.relative.type.RelationType;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -19,6 +20,7 @@ import java.util.List;
 @Data
 @SuperBuilder
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Relative extends Person {
 
     @ManyToOne(fetch = FetchType.LAZY)

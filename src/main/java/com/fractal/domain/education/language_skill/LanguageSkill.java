@@ -5,6 +5,7 @@ import com.fractal.domain.education.language_skill.proficiency.LanguageProficien
 import com.fractal.domain.localization.language.Language;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -14,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+@EqualsAndHashCode(callSuper = true)
 public class LanguageSkill extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

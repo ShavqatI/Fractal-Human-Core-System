@@ -96,7 +96,7 @@ class LearningCategoryServiceImpl implements LearningCategoryService {
 
     @Override
     public LearningCategory updateChild(Long learningCategoryId, Long id, LearningCategoryRequest dto) {
-        var category = findById(id);
+        var category = findById(learningCategoryId);
         var child = category.getChildren().stream().filter(ch-> ch.getId().equals(id)).findFirst().orElseThrow(()->new ResourceWithIdNotFoundException(this,id));
         update(child.getId(),dto);
         return save(category);
@@ -104,9 +104,10 @@ class LearningCategoryServiceImpl implements LearningCategoryService {
 
     @Override
     public void deleteChild(Long learningCategoryId, Long id) {
-        var category = findById(id);
+        var category = findById(learningCategoryId);
         var child = category.getChildren().stream().filter(ch-> ch.getId().equals(id)).findFirst().orElseThrow(()->new ResourceWithIdNotFoundException(this,id));
         category.removeChild(child);
+        save(category);
     }
 
     private LearningCategory toEntity(LearningCategoryRequest dto) {

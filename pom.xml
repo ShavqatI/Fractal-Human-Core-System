@@ -102,6 +102,11 @@
 			<artifactId>minio</artifactId>
 			<version>8.5.12</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>5.4.1</version>
+		</dependency>
 
 	</dependencies>
 

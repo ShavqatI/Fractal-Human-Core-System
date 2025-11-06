@@ -6,6 +6,7 @@ import com.fractal.domain.military_service.MilitaryService;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -16,6 +17,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class EmployeeMilitaryService extends MilitaryService {
 
     @ManyToOne(fetch = FetchType.LAZY)

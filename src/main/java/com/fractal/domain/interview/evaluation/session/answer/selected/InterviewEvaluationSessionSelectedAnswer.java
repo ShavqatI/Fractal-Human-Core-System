@@ -33,11 +33,11 @@ public class InterviewEvaluationSessionSelectedAnswer extends ApprovalWorkflow {
 
     private LocalDateTime selectedDate;
 
-    @Override
+    /*@Override
     protected void onCreate() {
         super.onCreate();
         this.selectedDate = LocalDateTime.now();
 
-    }
+    }*/
 
 }

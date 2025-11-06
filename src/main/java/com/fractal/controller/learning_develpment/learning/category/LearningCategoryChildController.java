@@ -10,24 +10,24 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/v1/learning-development/learning/category{categoryId}/child")
+@RequestMapping("/api/v1/learning-development/learning/category/{categoryId}/child")
 @RequiredArgsConstructor
 public class LearningCategoryChildController {
 
-    private final LearningCategoryService departmentService;
+    private final LearningCategoryService categoryService;
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<LearningCategoryResponse> create(@PathVariable Long categoryId, @RequestBody @Valid LearningCategoryRequest dto) {
-        return new ResponseEntity<>(departmentService.toDTO(departmentService.addChild(categoryId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(categoryService.toDTO(categoryService.addChild(categoryId,dto)), HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
     public ResponseEntity<LearningCategoryResponse> update(@PathVariable Long categoryId, @PathVariable Long id, @RequestBody @Valid LearningCategoryRequest dto) {
-        return ResponseEntity.ok(departmentService.toDTO(departmentService.updateChild(categoryId,id, dto)));
+        return ResponseEntity.ok(categoryService.toDTO(categoryService.updateChild(categoryId,id, dto)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long categoryId, @PathVariable Long id) {
-        departmentService.deleteChild(categoryId,id);
+        categoryService.deleteChild(categoryId,id);
         return ResponseEntity.noContent().build();
     }
 }

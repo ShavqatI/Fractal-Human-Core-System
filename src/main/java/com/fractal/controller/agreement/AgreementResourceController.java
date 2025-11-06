@@ -6,11 +6,16 @@ import com.fractal.domain.order.resource.OrderResourceService;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,8 +26,8 @@ public class AgreementResourceController {
 
     private final AgreementResourceService resourceService;
 
-    @PostMapping()
-    public ResponseEntity<ResourceResponse> create(@PathVariable Long agreementId, @RequestBody @Valid MultipartFile file) {
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ResourceResponse> create(@PathVariable Long agreementId, @RequestParam("file") MultipartFile file) {
         return new ResponseEntity<>(resourceService.toDTO(resourceService.create(agreementId,file)), HttpStatus.CREATED);
     }
     @GetMapping
@@ -33,14 +38,33 @@ public class AgreementResourceController {
     public ResponseEntity<ResourceResponse> getById(@PathVariable Long agreementId, @PathVariable Long id) {
         return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(agreementId,id)));
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<ResourceResponse> update(@PathVariable Long agreementId, @PathVariable Long id, @RequestBody @Valid MultipartFile file) {
+    @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ResourceResponse> update(@PathVariable Long agreementId, @PathVariable Long id, @RequestParam("file") MultipartFile file) {
         return ResponseEntity.ok(resourceService.toDTO(resourceService.update(agreementId,id, file)));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long agreementId, @PathVariable Long id) {
         resourceService.delete(agreementId,id);
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/download/{id}")
+    public ResponseEntity<Resource> download(@PathVariable Long agreementId, @PathVariable Long id) {
+        var orderResource = resourceService.getById(agreementId, id);
+        try {
+            Path filePath = Path.of(orderResource.getUrl()).toAbsolutePath();
+            Resource resource = new FileSystemResource(filePath);
+            if (!resource.exists()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .body(resource);
+
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 

@@ -11,6 +11,7 @@ import com.fractal.domain.education.resource.EducationResource;
 import com.fractal.domain.education.type.EducationType;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -25,6 +26,7 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+@EqualsAndHashCode(callSuper = true)
 public class Education extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

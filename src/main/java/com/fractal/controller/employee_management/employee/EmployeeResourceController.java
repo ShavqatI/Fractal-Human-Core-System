@@ -6,16 +6,14 @@ import com.fractal.domain.employee_management.employee.resource.dto.EmployeeReso
 import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,17 +52,17 @@ public class EmployeeResourceController {
         var employeeResource = resourceService.getById(employeeId,id);
         try {
             Path filePath = Path.of(employeeResource.getUrl()).toAbsolutePath();
-            Resource resource = new UrlResource(filePath.toUri());
-
+            Resource resource = new FileSystemResource(filePath);
             if (!resource.exists()) {
-                return ResponseEntity.notFound().build();
+                return ResponseEntity.noContent().build();
             }
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
                     .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
                     .body(resource);
 
-        } catch (MalformedURLException e) {
+
+        } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }

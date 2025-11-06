@@ -8,7 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 public interface IdentificationDocumentResourceMapperService {
     ResourceResponse toDTO(IdentificationDocumentResource resource);
     IdentificationDocumentResource toEntity(ResourceRequest dto);
-    IdentificationDocumentResource toEntity(MultipartFile file, String url);
+    IdentificationDocumentResource toEntity(MultipartFile file, String resourceStoragePath);
+    IdentificationDocumentResource toEntity(IdentificationDocumentResource resource, MultipartFile file, String resourceStoragePath);
     IdentificationDocumentResource toEntity(IdentificationDocumentResource resource, ResourceRequest dto);
     ResourceRequest fileToRequest(MultipartFile file,String url);
 }

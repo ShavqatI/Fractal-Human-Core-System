@@ -176,7 +176,9 @@ public class Employee extends Person {
         resources.add(resource);
     }
     public void removeResource(EmployeeResource resource) {
-        if (resources != null && !resources.isEmpty())
+        if (resources != null && !resources.isEmpty()) {
             resources.remove(resource);
+        }
+
     }
 }

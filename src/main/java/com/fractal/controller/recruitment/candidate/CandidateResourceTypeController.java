@@ -45,6 +45,6 @@ public class CandidateResourceTypeController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         resourceTypeService.deleteById(id);
         return ResponseEntity.noContent().build();
-
     }
+
 }

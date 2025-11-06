@@ -2,9 +2,11 @@ package com.fractal.domain.order.resource;
 
 import com.fractal.domain.order.OrderService;
 import com.fractal.domain.order.resource.mapper.OrderResourceMapperService;
+import com.fractal.domain.resource.FileService;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,11 +19,15 @@ public class OrderResourceServiceImpl implements OrderResourceService {
     private final OrderResourceRepository resourceRepository;
     private final OrderResourceMapperService resourceMapperService;
     private final OrderService orderService;
+    private final FileService fileService;
+
+    @Value("${resource-storage.order}")
+    private String resourceStoragePath;
 
     @Override
     public OrderResource create(Long orderId, MultipartFile file) {
         var order = orderService.getById(orderId);
-        var resource =  resourceMapperService.toEntity(file,null);
+        var resource =  resourceMapperService.toEntity(file,resourceStoragePath);
         order.addResource(resource);
         orderService.save(order);
         return resource;
@@ -43,7 +49,7 @@ public class OrderResourceServiceImpl implements OrderResourceService {
         var resource = order.getResources()
                 .stream()
                 .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
-        resource = resourceMapperService.toEntity(resource,resourceMapperService.fileToRequest(file,null));
+        resource = resourceMapperService.toEntity(resource,file,resourceStoragePath);
         resourceRepository.save(resource);
         orderService.save(order);
         return resource;
@@ -55,8 +61,8 @@ public class OrderResourceServiceImpl implements OrderResourceService {
         var resource = order.getResources()
                 .stream()
                 .filter(r -> r.getId().equals(educationId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
+        fileService.delete(resource.getUrl());
         order.removeResource(resource);
-        resourceRepository.delete(resource);
         orderService.save(order);
     }
 

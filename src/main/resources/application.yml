@@ -39,10 +39,12 @@ minio:
 resource-storage:
   root-path: "./FILE-STORAGE"
   employee: "${resource-storage.root-path}/employee/"
-#  candidate:
-#  identification-docuemnt:
-#  education:
-#  military-service:
+  candidate: "${resource-storage.root-path}/candidate/"
+  identification-document: "${resource-storage.root-path}/identification-document/"
+  education: "${resource-storage.root-path}/education/"
+  military-service: "${resource-storage.root-path}/military-service/"
+  order: "${resource-storage.root-path}/order/"
+  agreement: "${resource-storage.root-path}/agreement/"
 #  learning:
 
 

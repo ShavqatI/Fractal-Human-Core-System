@@ -2,9 +2,11 @@ package com.fractal.domain.identification_document.resource;
 
 import com.fractal.domain.identification_document.IdentificationDocumentService;
 import com.fractal.domain.identification_document.resource.mapper.IdentificationDocumentResourceMapperService;
+import com.fractal.domain.resource.FileService;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,12 +20,16 @@ public class IdentificationDocumentResourceServiceImpl implements Identification
     private final IdentificationDocumentResourceRepository resourceRepository;
     private final IdentificationDocumentResourceMapperService resourceMapperService;
     private final IdentificationDocumentService identificationDocumentService;
+    private final FileService fileService;
+
+    @Value("${resource-storage.identification-document}")
+    private String resourceStoragePath;
 
     @Override
     @Transactional
     public IdentificationDocumentResource create(Long identificationDocumentId, MultipartFile file) {
         var identificationDocument = identificationDocumentService.getById(identificationDocumentId);
-        var resource = (IdentificationDocumentResource) resourceMapperService.toEntity(file,null);
+        var resource = resourceMapperService.toEntity(file,resourceStoragePath);
         identificationDocument.addResource(resource);
         identificationDocumentService.save(identificationDocument);
         return resource;
@@ -47,7 +53,7 @@ public class IdentificationDocumentResourceServiceImpl implements Identification
             var resource = identificationDocument.getResources()
                     .stream()
                     .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification Document Resource  with id: " + id + " not found"));
-            resource = (IdentificationDocumentResource) resourceMapperService.toEntity(resource,resourceMapperService.fileToRequest(file,null));
+            resource = resourceMapperService.toEntity(resource,file,resourceStoragePath);
             resource = resourceRepository.save(resource);
             identificationDocumentService.save(identificationDocument);
             return resource;
@@ -65,8 +71,8 @@ public class IdentificationDocumentResourceServiceImpl implements Identification
         var resource = identificationDocument.getResources()
                 .stream()
                 .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification Document Resource  with id: " + id + " not found"));
+        fileService.delete(resource.getUrl());
         identificationDocument.removeResource(resource);
-        resourceRepository.delete(resource);
         identificationDocumentService.save(identificationDocument);
     }
 
