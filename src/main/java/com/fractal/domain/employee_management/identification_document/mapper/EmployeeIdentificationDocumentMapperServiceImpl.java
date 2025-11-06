@@ -8,6 +8,8 @@ import com.fractal.domain.identification_document.mapper.IdentificationDocumentM
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 @RequiredArgsConstructor
 class EmployeeIdentificationDocumentMapperServiceImpl implements EmployeeIdentificationDocumentMapperService {
@@ -40,7 +42,8 @@ class EmployeeIdentificationDocumentMapperServiceImpl implements EmployeeIdentif
         employeeIdentificationDocument.setIssueOrganization(identificationDocument.getIssueOrganization());
         employeeIdentificationDocument.setIssueOrganizationAddress(identificationDocument.getIssueOrganizationAddress());
         employeeIdentificationDocument.setStatus(identificationDocument.getStatus());
-        employeeIdentificationDocument.setResources(identificationDocument.getResources());
+        employeeIdentificationDocument.setResources(new ArrayList<>(identificationDocument.getResources()));
+
         return employeeIdentificationDocument;
     }
 }

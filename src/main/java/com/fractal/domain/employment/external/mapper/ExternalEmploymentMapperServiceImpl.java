@@ -1,6 +1,7 @@
 package com.fractal.domain.employment.external.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.external.ExternalEmployment;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentRequest;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentResponse;
@@ -58,6 +59,25 @@ class ExternalEmploymentMapperServiceImpl implements ExternalEmploymentMapperSer
     @Override
     public ExternalEmployment toEntity(ExternalEmployment employment, ExternalEmploymentRequest dto) {
         return mapToEntity(employment, dto);
+    }
+
+    @Override
+    public Employment copy(ExternalEmployment employment) {
+        var externalEmployment = ExternalEmployment.builder().build();
+        externalEmployment.setCountry(employment.getCountry());
+        externalEmployment.setLocation(employment.getLocation());
+        externalEmployment.setEmploymentType(employment.getEmploymentType());
+        externalEmployment.setStartDate(employment.getStartDate());
+        externalEmployment.setEndDate(employment.getEndDate());
+        externalEmployment.setOrganization(employment.getOrganization());
+        externalEmployment.setDepartment(employment.getDepartment());
+        externalEmployment.setDivision(employment.getDivision());
+        externalEmployment.setPosition(employment.getPosition());
+        externalEmployment.setResponsibilities(employment.getResponsibilities());
+        externalEmployment.setAchievements(employment.getAchievements());
+        externalEmployment.setStatus(employment.getStatus());
+        externalEmployment.getSeparationReasons().forEach(separationReason -> externalEmployment.addSeparationReason(separationReason));
+        return externalEmployment;
     }
 
     private ExternalEmployment mapToEntity(ExternalEmployment employment, ExternalEmploymentRequest dto) {

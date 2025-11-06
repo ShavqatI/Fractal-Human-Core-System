@@ -46,5 +46,6 @@ resource-storage:
   order: "${resource-storage.root-path}/order/"
   agreement: "${resource-storage.root-path}/agreement/"
   learning: "${resource-storage.root-path}/learning/"
+  document-template-manager: "${resource-storage.root-path}/document-template-manager/"
 
 

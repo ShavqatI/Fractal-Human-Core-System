@@ -1,6 +1,7 @@
 package com.fractal.domain.employee_management.employment.mapper;
 
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
+import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.employment.external.ExternalEmployment;
@@ -27,6 +28,13 @@ class EmployeeEmploymentMapperServiceImpl implements EmployeeEmploymentMapperSer
     @Override
     public EmployeeEmployment toEntity(EmployeeEmployment employment, EmploymentRequest dto) {
         return mapToEntity(employment,dto);
+    }
+
+    @Override
+    public EmployeeEmployment copy(Employment employment) {
+        var employeeEmployment = EmployeeEmployment.builder().build();
+        employeeEmployment.setEmployment(employmentMapperService.copy(employment));
+        return employeeEmployment;
     }
 
     private EmployeeEmployment mapToEntity(EmployeeEmployment employment, EmploymentRequest dto) {

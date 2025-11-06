@@ -10,7 +10,7 @@ public record AgreementTypeResponse(
         String name,
         String description,
         String series,
-        DocumentTemplateManagerResponse documentTemplateManager,
+       // DocumentTemplateManagerResponse documentTemplateManager,
         LocalDateTime createdDate
 ) {
 }

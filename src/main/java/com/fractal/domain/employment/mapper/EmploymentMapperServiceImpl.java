@@ -34,4 +34,13 @@ class EmploymentMapperServiceImpl implements EmploymentMapperService {
             return internalEmploymentMapperService.toEntity((InternalEmploymentRequest) dto);
         else return externalEmploymentMapperService.toEntity((ExternalEmploymentRequest) dto);
     }
+
+    @Override
+    public Employment copy(Employment employment) {
+        if (employment instanceof ExternalEmployment) {
+            return externalEmploymentMapperService.copy((ExternalEmployment) employment);
+        }
+        return null;
+
+    }
 }

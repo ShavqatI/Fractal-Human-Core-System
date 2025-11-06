@@ -2,8 +2,10 @@ package com.fractal.domain.dictionary.docuemnt_template_manager;
 
 import com.fractal.domain.dictionary.docuemnt_template_manager.dto.DocumentTemplateManagerRequest;
 import com.fractal.domain.dictionary.docuemnt_template_manager.dto.DocumentTemplateManagerResponse;
+import com.fractal.domain.resource.FileService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,10 @@ import java.util.List;
 class DocumentTemplateManagerServiceImpl implements DocumentTemplateManagerService {
 
     private final DocumentTemplateManagerRepository documentTemplateManagerRepository;
+    private final FileService fileService;
+
+    @Value("${resource-storage.document-template-manager}")
+    private String resourceStoragePath;
 
     @Override
     public DocumentTemplateManager create(DocumentTemplateManagerRequest dto) {
@@ -40,10 +46,10 @@ class DocumentTemplateManagerServiceImpl implements DocumentTemplateManagerServi
     public DocumentTemplateManager update(Long id, DocumentTemplateManagerRequest dto) {
         try {
             DocumentTemplateManager documentTemplateManager = findById(id);
+            fileService.delete(documentTemplateManager.getFilePath());
             documentTemplateManager.setCode(dto.code());
             documentTemplateManager.setName(dto.name());
-            documentTemplateManager.setFilePath(dto.filePath());
-            documentTemplateManager.setFileFormat(dto.fileFormat());
+            documentTemplateManager.setFilePath(fileService.save(dto.file(),resourceStoragePath));
             return save(documentTemplateManager);
         }
         catch (DataAccessException e) {
@@ -72,8 +78,7 @@ class DocumentTemplateManagerServiceImpl implements DocumentTemplateManagerServi
         return DocumentTemplateManager.builder()
                 .code(dto.code())
                 .name(dto.name())
-                .filePath(dto.filePath())
-                .fileFormat(dto.fileFormat())
+                .filePath(fileService.save(dto.file(), resourceStoragePath))
                 .build();
     }
 

@@ -3,6 +3,7 @@ package com.fractal.domain.dictionary.docuemnt_template_manager.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 public record DocumentTemplateManagerRequest(
         @NotBlank
@@ -12,8 +13,7 @@ public record DocumentTemplateManagerRequest(
         @Size(min = 3,max = 100,message = "The name length should be in (3 to 20 symbols)")
         @Pattern(regexp = "^\\p{L}[\\p{L}\\p{M}\\p{S}\\p{P}\\p{N}\\s]*$",message = "Only Unicode letters, symbols, punctuation, numbers and spaces are allowed")
         String name,
-        String filePath,
-        String fileFormat
+        MultipartFile file
 ) {
 
 }
