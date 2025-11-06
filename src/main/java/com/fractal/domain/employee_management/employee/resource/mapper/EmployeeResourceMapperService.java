@@ -6,8 +6,8 @@ import com.fractal.domain.employee_management.employee.resource.dto.EmployeeReso
 
 public interface EmployeeResourceMapperService {
     EmployeeResourceResponse toDTO(EmployeeResource resource);
-    EmployeeResource toEntity(EmployeeResourceRequest dto, String url);
-    EmployeeResource toEntity(EmployeeResource resource, EmployeeResourceRequest dto,String url);
+    EmployeeResource toEntity(EmployeeResourceRequest dto, String resourceStoragePath);
+    EmployeeResource toEntity(EmployeeResource resource, EmployeeResourceRequest dto,String resourceStoragePath);
 
 }
 

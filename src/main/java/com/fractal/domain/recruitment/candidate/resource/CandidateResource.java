@@ -6,6 +6,7 @@ import com.fractal.domain.recruitment.candidate.resource.type.CandidateResourceT
 import com.fractal.domain.resource.Resource;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -14,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class CandidateResource extends Resource {
 
     @ManyToOne(fetch = FetchType.LAZY)

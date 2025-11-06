@@ -60,7 +60,7 @@ public class AgreementResourceServiceImpl implements AgreementResourceService {
         var agreement = agreementService.getById(agreementId);
         var resource = agreement.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(agreementId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
         fileService.delete(resource.getUrl());
         agreement.removeResource(resource);
         agreementService.save(agreement);

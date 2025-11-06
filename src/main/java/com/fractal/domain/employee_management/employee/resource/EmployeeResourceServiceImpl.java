@@ -7,6 +7,7 @@ import com.fractal.domain.employee_management.employee.resource.mapper.EmployeeR
 import com.fractal.domain.resource.FileService;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,10 +21,13 @@ public class EmployeeResourceServiceImpl implements EmployeeResourceService {
     private final EmployeeService employeeService;
     private final FileService fileService;
 
+    @Value("${resource-storage.employee}")
+    private String resourceStoragePath;
+
     @Override
     public EmployeeResource create(Long employeeId, EmployeeResourceRequest dto) {
         var employee = employeeService.getById(employeeId);
-        var resource =  resourceMapperService.toEntity(dto,null);
+        var resource =  resourceMapperService.toEntity(dto,resourceStoragePath);
         employee.addResource(resource);
         employeeService.save(employee);
         return resource;
@@ -45,7 +49,7 @@ public class EmployeeResourceServiceImpl implements EmployeeResourceService {
         var resource = employee.getResources()
                 .stream()
                 .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        resource = resourceMapperService.toEntity(resource,dto,null);
+        resource = resourceMapperService.toEntity(resource,dto,resourceStoragePath);
         resourceRepository.save(resource);
         employeeService.save(employee);
         return resource;

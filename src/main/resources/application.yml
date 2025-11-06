@@ -45,6 +45,6 @@ resource-storage:
   military-service: "${resource-storage.root-path}/military-service/"
   order: "${resource-storage.root-path}/order/"
   agreement: "${resource-storage.root-path}/agreement/"
-#  learning:
+  learning: "${resource-storage.root-path}/learning/"
 
 

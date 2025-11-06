@@ -4,7 +4,9 @@ import com.fractal.domain.learning_develpment.learning.session.resource.Learning
 import com.fractal.domain.learning_develpment.learning.session.resource.dto.LearningSessionResourceRequest;
 import com.fractal.domain.learning_develpment.learning.session.resource.dto.LearningSessionResourceResponse;
 import com.fractal.domain.learning_develpment.learning.session.resource.type.LearningSessionResourceTypeService;
+import com.fractal.domain.resource.FileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +14,8 @@ import org.springframework.stereotype.Service;
 class LearningSessionResourceMapperServiceImpl implements LearningSessionResourceMapperService {
 
     private final LearningSessionResourceTypeService resourceTypeService;
+    private final FileService fileService;
+
     @Override
     public LearningSessionResourceResponse toDTO(LearningSessionResource resource) {
         return new LearningSessionResourceResponse(
@@ -26,25 +30,26 @@ class LearningSessionResourceMapperServiceImpl implements LearningSessionResourc
     }
 
     @Override
-    public LearningSessionResource toEntity(LearningSessionResourceRequest dto, String url) {
-        return mapToEntity(new LearningSessionResource(),dto,url);
+    public LearningSessionResource toEntity(LearningSessionResourceRequest dto, String resourceStoragePath) {
+        return mapToEntity(new LearningSessionResource(),dto,resourceStoragePath);
     }
 
 
 
     @Override
-    public LearningSessionResource toEntity(LearningSessionResource resource, LearningSessionResourceRequest dto, String url) {
-        return mapToEntity(resource,dto,url);
+    public LearningSessionResource toEntity(LearningSessionResource resource, LearningSessionResourceRequest dto, String resourceStoragePath) {
+        return mapToEntity(resource,dto,resourceStoragePath);
     }
 
 
 
-    private LearningSessionResource mapToEntity(LearningSessionResource resource, LearningSessionResourceRequest dto, String url) {
-        resource.setLearningSessionResourceType(resource.getLearningSessionResourceType());
-        resource.setUrl(url);
+    private LearningSessionResource mapToEntity(LearningSessionResource resource, LearningSessionResourceRequest dto, String resourceStoragePath) {
+        fileService.delete(resource.getUrl());
+        resource.setLearningSessionResourceType(resourceTypeService.getById(dto.resourceTypeId()));
         resource.setFileName(dto.file().getOriginalFilename());
         resource.setContentType(dto.file().getContentType());
         resource.setSizeInBytes(dto.file().getSize());
+        resource.setUrl(fileService.save(dto.file(), resourceStoragePath));
         return resource;
     }
 

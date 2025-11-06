@@ -5,6 +5,7 @@ import com.fractal.domain.employment.internal.order.dto.InternalEmploymentOrderR
 import com.fractal.domain.employment.internal.order.dto.InternalEmploymentOrderResponse;
 import com.fractal.domain.employment.internal.order.mapper.InternalEmploymentOrderMapperService;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +38,7 @@ public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrd
 
     @Override
     public InternalEmploymentOrder getById(Long employmentId, Long id) {
-        return orderRepository.findByInternalEmploymentIdAndId(employmentId,id).orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        return orderRepository.findByInternalEmploymentIdAndId(employmentId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 
     @Override
@@ -46,7 +47,7 @@ public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrd
         var employment = employmentService.getById(employmentId);
         var order = employment.getOrders()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
         order = orderRepository.save(orderMapperService.toEntity(order,dto));
         employmentService.save(employment);
         return order;
@@ -58,7 +59,7 @@ public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrd
         var employment = employmentService.getById(employmentId);
         var order = employment.getOrders()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
         employment.removeOrder(order);
         employmentService.save(employment);
     }

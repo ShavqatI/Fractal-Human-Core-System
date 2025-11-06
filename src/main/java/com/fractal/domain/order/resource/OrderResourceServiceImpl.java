@@ -5,6 +5,7 @@ import com.fractal.domain.order.resource.mapper.OrderResourceMapperService;
 import com.fractal.domain.resource.FileService;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class OrderResourceServiceImpl implements OrderResourceService {
 
     @Override
     public OrderResource getById(Long orderId, Long id) {
-        return resourceRepository.findByOrderIdAndId(orderId,id).orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
+        return resourceRepository.findByOrderIdAndId(orderId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 
     @Override
@@ -48,7 +49,7 @@ public class OrderResourceServiceImpl implements OrderResourceService {
         var order = orderService.getById(educationId);
         var resource = order.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
         resource = resourceMapperService.toEntity(resource,file,resourceStoragePath);
         resourceRepository.save(resource);
         orderService.save(order);
@@ -56,11 +57,11 @@ public class OrderResourceServiceImpl implements OrderResourceService {
     }
 
     @Override
-    public void delete(Long educationId, Long id) {
-        var order = orderService.getById(educationId);
+    public void delete(Long orderId, Long id) {
+        var order = orderService.getById(orderId);
         var resource = order.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(educationId)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
         fileService.delete(resource.getUrl());
         order.removeResource(resource);
         orderService.save(order);

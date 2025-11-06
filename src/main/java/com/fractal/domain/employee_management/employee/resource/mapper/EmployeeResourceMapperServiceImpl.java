@@ -16,8 +16,7 @@ class EmployeeResourceMapperServiceImpl implements EmployeeResourceMapperService
 
     private final EmployeeResourceTypeService resourceTypeService;
     private final FileService fileService;
-    @Value("${resource-storage.employee}")
-    private String resourceStoragePath;
+
     @Override
     public EmployeeResourceResponse toDTO(EmployeeResource resource) {
         return new EmployeeResourceResponse(
@@ -32,19 +31,18 @@ class EmployeeResourceMapperServiceImpl implements EmployeeResourceMapperService
     }
 
     @Override
-    public EmployeeResource toEntity(EmployeeResourceRequest dto, String url) {
-        return mapToEntity(new EmployeeResource(),dto,url);
+    public EmployeeResource toEntity(EmployeeResourceRequest dto, String resourceStoragePath) {
+        return mapToEntity(new EmployeeResource(),dto, resourceStoragePath);
     }
 
     @Override
-    public EmployeeResource toEntity(EmployeeResource resource, EmployeeResourceRequest dto,String url) {
-        return mapToEntity(resource,dto,url);
+    public EmployeeResource toEntity(EmployeeResource resource, EmployeeResourceRequest dto,String resourceStoragePath) {
+        return mapToEntity(resource,dto, resourceStoragePath);
     }
 
-    private EmployeeResource mapToEntity(EmployeeResource resource, EmployeeResourceRequest dto,String url) {
+    private EmployeeResource mapToEntity(EmployeeResource resource, EmployeeResourceRequest dto,String resourceStoragePath) {
         fileService.delete(resource.getUrl());
         resource.setEmployeeResourceType(resourceTypeService.getById(dto.employeeResourceTypeId()));
-        resource.setUrl(url);
         resource.setFileName(dto.file().getOriginalFilename());
         resource.setContentType(dto.file().getContentType());
         resource.setSizeInBytes(dto.file().getSize());

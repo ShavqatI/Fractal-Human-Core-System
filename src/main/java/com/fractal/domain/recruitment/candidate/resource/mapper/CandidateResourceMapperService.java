@@ -6,8 +6,8 @@ import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceRe
 
 public interface CandidateResourceMapperService {
     CandidateResourceResponse toDTO(CandidateResource resource);
-    CandidateResource toEntity(CandidateResourceRequest dto,String url);
-    CandidateResource toEntity(CandidateResource resource, CandidateResourceRequest dto,String url);
+    CandidateResource toEntity(CandidateResourceRequest dto,String resourceStoragePath);
+    CandidateResource toEntity(CandidateResource resource, CandidateResourceRequest dto,String resourceStoragePath);
 }
 
 

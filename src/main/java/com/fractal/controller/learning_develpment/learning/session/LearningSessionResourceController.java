@@ -5,10 +5,15 @@ import com.fractal.domain.learning_develpment.learning.session.resource.dto.Lear
 import com.fractal.domain.learning_develpment.learning.session.resource.dto.LearningSessionResourceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,8 +24,8 @@ public class LearningSessionResourceController {
 
     private final LearningSessionResourceService resourceService;
 
-    @PostMapping()
-    public ResponseEntity<LearningSessionResourceResponse> create(@PathVariable Long sessionId, @RequestBody @Valid LearningSessionResourceRequest dto) {
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<LearningSessionResourceResponse> create(@PathVariable Long sessionId, @ModelAttribute @Valid LearningSessionResourceRequest dto) {
         return new ResponseEntity<>(resourceService.toDTO(resourceService.create(sessionId,dto)), HttpStatus.CREATED);
     }
     @GetMapping
@@ -31,14 +36,34 @@ public class LearningSessionResourceController {
     public ResponseEntity<LearningSessionResourceResponse> getById(@PathVariable Long sessionId, @PathVariable Long id) {
         return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(sessionId,id)));
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<LearningSessionResourceResponse> update(@PathVariable Long sessionId, @PathVariable Long id, @RequestBody @Valid LearningSessionResourceRequest dto) {
+    @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<LearningSessionResourceResponse> update(@PathVariable Long sessionId, @PathVariable Long id, @ModelAttribute @Valid LearningSessionResourceRequest dto) {
         return ResponseEntity.ok(resourceService.toDTO(resourceService.update(sessionId,id, dto)));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long sessionId, @PathVariable Long id) {
         resourceService.delete(sessionId,id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/download/{id}")
+    public ResponseEntity<Resource> download(@PathVariable Long sessionId, @PathVariable Long id) {
+        var sessionResource = resourceService.getById(sessionId,id);
+        try {
+            Path filePath = Path.of(sessionResource.getUrl()).toAbsolutePath();
+            Resource resource = new FileSystemResource(filePath);
+            if (!resource.exists()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .body(resource);
+
+
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 
