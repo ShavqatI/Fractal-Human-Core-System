@@ -11,6 +11,7 @@ public interface EmployeeEducationMapperService {
     EmployeeEducation toEntity(EducationRequest dto);
     EmployeeEducation toEntity(EmployeeEducation education, EducationRequest dto);
     EmployeeEducation convert(EmployeeEducation employeeEducation, Education education);
+    EmployeeEducation copy(Education education);
 }
 
 

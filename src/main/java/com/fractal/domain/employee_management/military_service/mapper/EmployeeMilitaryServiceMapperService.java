@@ -10,6 +10,7 @@ public interface EmployeeMilitaryServiceMapperService {
     EmployeeMilitaryService toEntity(MilitaryServiceRequest dto);
     EmployeeMilitaryService toEntity(EmployeeMilitaryService militaryService, MilitaryServiceRequest dto);
     EmployeeMilitaryService convert(EmployeeMilitaryService employeeMilitaryService, MilitaryService militaryService);
+    EmployeeMilitaryService copy(MilitaryService militaryService);
 }
 
 

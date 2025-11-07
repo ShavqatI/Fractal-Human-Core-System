@@ -14,6 +14,7 @@ public interface ResourceMapperService {
     Resource toEntity(Resource resource, MultipartFile file, String resourceStoragePath);
     Resource toEntity(Resource resource, ResourceRequest dto);
     ResourceRequest fileToRequest(MultipartFile file,String url);
+    Resource copy(Resource resource);
 
 
 }

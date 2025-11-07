@@ -11,6 +11,7 @@ public interface EmployeeIdentificationDocumentMapperService {
     EmployeeIdentificationDocument toEntity(IdentificationDocumentRequest dto);
     EmployeeIdentificationDocument toEntity(EmployeeIdentificationDocument identificationDocument, IdentificationDocumentRequest dto);
     EmployeeIdentificationDocument convert(EmployeeIdentificationDocument employeeIdentificationDocument, IdentificationDocument identificationDocument);
+    EmployeeIdentificationDocument copy(IdentificationDocument identificationDocument);
 }
 
 

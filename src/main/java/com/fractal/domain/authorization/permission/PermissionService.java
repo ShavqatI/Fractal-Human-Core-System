@@ -2,6 +2,7 @@ package com.fractal.domain.authorization.permission;
 
 import com.fractal.domain.authorization.permission.dto.PermissionRequest;
 import com.fractal.domain.authorization.permission.dto.PermissionResponse;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
@@ -16,4 +17,5 @@ public interface PermissionService {
     void delete(Long id);
     PermissionResponse toDTO(Permission permission);
 
+    List<Permission> getActivePermissions(Authentication authentication);
 }

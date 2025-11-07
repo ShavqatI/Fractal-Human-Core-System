@@ -37,6 +37,7 @@ class EmploymentMapperServiceImpl implements EmploymentMapperService {
 
     @Override
     public Employment copy(Employment employment) {
+        employment = (Employment) Hibernate.unproxy(employment);
         if (employment instanceof ExternalEmployment) {
             return externalEmploymentMapperService.copy((ExternalEmployment) employment);
         }

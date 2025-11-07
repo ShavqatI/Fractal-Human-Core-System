@@ -5,10 +5,13 @@ import com.fractal.domain.identification_document.IdentificationDocument;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
 import com.fractal.domain.identification_document.mapper.IdentificationDocumentMapperService;
+import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
+import com.fractal.domain.resource.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -42,8 +45,17 @@ class EmployeeIdentificationDocumentMapperServiceImpl implements EmployeeIdentif
         employeeIdentificationDocument.setIssueOrganization(identificationDocument.getIssueOrganization());
         employeeIdentificationDocument.setIssueOrganizationAddress(identificationDocument.getIssueOrganizationAddress());
         employeeIdentificationDocument.setStatus(identificationDocument.getStatus());
-        employeeIdentificationDocument.setResources(new ArrayList<>(identificationDocument.getResources()));
+        employeeIdentificationDocument.setResources(identificationDocument.getResources());
 
         return employeeIdentificationDocument;
+    }
+
+    @Override
+    public EmployeeIdentificationDocument copy(IdentificationDocument identificationDocument) {
+        var employeeIdentificationDocument = convert(new EmployeeIdentificationDocument(),mapperService.copy(identificationDocument));
+        List<IdentificationDocumentResource> resources = new ArrayList<>(employeeIdentificationDocument.getResources());
+        employeeIdentificationDocument.setResources(new ArrayList<>());
+        resources.forEach(identificationDocumentResource -> employeeIdentificationDocument.addResource(identificationDocumentResource));
+       return employeeIdentificationDocument;
     }
 }

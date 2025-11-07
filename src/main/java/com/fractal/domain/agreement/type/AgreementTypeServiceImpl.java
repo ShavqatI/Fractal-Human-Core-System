@@ -68,7 +68,7 @@ public class AgreementTypeServiceImpl implements AgreementTypeService {
                 agreementType.getName(),
                 agreementType.getDescription(),
                 agreementType.getSeries(),
-                //documentTemplateManagerService.toDTO(agreementType.getDocumentTemplateManager()),
+                documentTemplateManagerService.toDTO(agreementType.getDocumentTemplateManager()),
                 agreementType.getCreatedDate()
         );
     }
@@ -79,7 +79,7 @@ public class AgreementTypeServiceImpl implements AgreementTypeService {
                 .name(dto.name())
                 .description(dto.description())
                 .series(dto.series())
-                //.documentTemplateManager(documentTemplateManagerService.getById(dto.documentTemplateManagerId()))
+                .documentTemplateManager(documentTemplateManagerService.getById(dto.documentTemplateManagerId()))
                 .build();
     }
 

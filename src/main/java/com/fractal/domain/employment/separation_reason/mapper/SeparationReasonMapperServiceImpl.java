@@ -21,6 +21,12 @@ class SeparationReasonMapperServiceImpl implements SeparationReasonMapperService
                 separationReason.getCreatedDate()
         );
     }
+
+    @Override
+    public SeparationReason copy(SeparationReason separationReason) {
+        return SeparationReason.builder().separationReasonType(separationReason.getSeparationReasonType()).build();
+    }
+
     @Override
     public SeparationReason toEntity(SeparationReasonRequest dto) {
         return mapToEntity(new SeparationReason(),dto);

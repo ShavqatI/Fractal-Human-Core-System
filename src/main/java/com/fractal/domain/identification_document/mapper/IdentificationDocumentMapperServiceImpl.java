@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -54,6 +56,23 @@ class IdentificationDocumentMapperServiceImpl implements IdentificationDocumentM
     @Override
     public IdentificationDocument toEntity(IdentificationDocument identificationDocument, IdentificationDocumentRequest dto) {
        return mapToEntity(identificationDocument,dto);
+    }
+
+    @Override
+    public IdentificationDocument copy(IdentificationDocument identificationDocument) {
+        var copy = IdentificationDocument.builder().build();
+        copy.setIdentificationDocumentType(identificationDocument.getIdentificationDocumentType());
+        copy.setSeries(identificationDocument.getSeries());
+        copy.setNumber(identificationDocument.getNumber());
+        copy.setIssueDate(identificationDocument.getIssueDate());
+        copy.setExpiryDate(identificationDocument.getExpiryDate());
+        copy.setTermInYears(identificationDocument.getTermInYears());
+        copy.setIssueOrganization(identificationDocument.getIssueOrganization());
+        copy.setIssueOrganizationAddress(identificationDocument.getIssueOrganizationAddress());
+        copy.setStatus(identificationDocument.getStatus());
+        var resourceCopy = identificationDocument.getResources().stream().map(resourceMapperService::copy).collect(Collectors.toCollection(ArrayList::new));
+        copy.setResources(resourceCopy);
+        return copy;
     }
 
     private IdentificationDocument mapToEntity(IdentificationDocument identificationDocument, IdentificationDocumentRequest dto) {

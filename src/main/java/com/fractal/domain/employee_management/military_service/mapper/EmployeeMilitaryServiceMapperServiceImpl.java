@@ -1,12 +1,16 @@
 package com.fractal.domain.employee_management.military_service.mapper;
 
+import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
 import com.fractal.domain.employee_management.military_service.EmployeeMilitaryService;
+import com.fractal.domain.identification_document.IdentificationDocument;
 import com.fractal.domain.military_service.MilitaryService;
 import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
 import com.fractal.domain.military_service.mapper.MilitaryServiceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
@@ -38,6 +42,15 @@ class EmployeeMilitaryServiceMapperServiceImpl implements EmployeeMilitaryServic
         employeeMilitaryService.setBeginDate(militaryService.getBeginDate());
         employeeMilitaryService.setEndDate(militaryService.getEndDate());
         employeeMilitaryService.setResources(militaryService.getResources());
+        return employeeMilitaryService;
+    }
+
+    @Override
+    public EmployeeMilitaryService copy(MilitaryService militaryService) {
+        var employeeMilitaryService = convert(new EmployeeMilitaryService(),mapperService.copy(militaryService));
+        var militaryServiceResources = new ArrayList<>(employeeMilitaryService.getResources());
+        employeeMilitaryService.setResources(new ArrayList<>());
+        militaryServiceResources.forEach(militaryServiceResource -> employeeMilitaryService.addResource(militaryServiceResource));
         return employeeMilitaryService;
     }
 

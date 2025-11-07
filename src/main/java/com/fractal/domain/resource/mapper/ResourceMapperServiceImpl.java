@@ -68,5 +68,15 @@ public class ResourceMapperServiceImpl implements ResourceMapperService {
         return resource;
     }
 
+    @Override
+    public Resource copy(Resource resource) {
+        Resource copy = Resource.builder().build();
+        copy.setFileName(resource.getFileName());
+        copy.setContentType(resource.getContentType());
+        copy.setSizeInBytes(resource.getSizeInBytes());
+        copy.setUrl(fileService.copy(resource.getUrl()));
+        return copy;
+    }
+
 
 }

@@ -54,4 +54,10 @@ class EducationResourceMapperServiceImpl implements EducationResourceMapperServi
         educationResource.setUrl(resource.getUrl());
         return educationResource;
     }
+
+    @Override
+    public EducationResource copy(EducationResource educationResource) {
+        Resource resource = resourceMapperService.copy(educationResource);
+        return convert(new EducationResource(),resource);
+    }
 }

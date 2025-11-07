@@ -29,6 +29,12 @@ class IdentificationDocumentResourceMapperServiceImpl implements IdentificationD
     }
 
     @Override
+    public IdentificationDocumentResource copy(IdentificationDocumentResource identificationDocumentResource) {
+        Resource resource = resourceMapperService.copy(identificationDocumentResource);
+        return convert(new IdentificationDocumentResource(),resource);
+    }
+
+    @Override
     public IdentificationDocumentResource toEntity(ResourceRequest dto) {
         return (IdentificationDocumentResource) resourceMapperService.toEntity(dto);
     }

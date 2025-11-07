@@ -11,9 +11,14 @@ import com.fractal.domain.education.grade_point_average.GradePointAverageService
 import com.fractal.domain.education.resource.EducationResource;
 import com.fractal.domain.education.resource.mapper.EducationResourceMapperService;
 import com.fractal.domain.education.type.EducationTypeService;
+import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
+import com.fractal.domain.identification_document.IdentificationDocument;
+import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -67,6 +72,28 @@ class EducationMapperServiceImpl implements EducationMapperService {
     @Override
     public Education toEntity(Education education, EducationRequest dto) {
        return mapToEntity(education,dto);
+    }
+
+    @Override
+    public Education copy(Education education) {
+        var copy = Education.builder().build();
+        copy.setEducationType(education.getEducationType());
+        copy.setEducationDocumentType(education.getEducationDocumentType());
+        copy.setBeginDate(education.getBeginDate());
+        copy.setEndDate(education.getEndDate());
+        copy.setInstitutionName(education.getInstitutionName());
+        copy.setInstitutionAddress(education.getInstitutionAddress());
+        copy.setIsForeignInstitution(education.getIsForeignInstitution());
+        copy.setSpecialization(education.getSpecialization());
+        copy.setDegreeType(education.getDegreeType());
+        copy.setGradePointAverage(education.getGradePointAverage());
+        copy.setAccreditationStatus(education.getAccreditationStatus());
+        copy.setDocumentVerified(education.getDocumentVerified());
+        copy.setVerificationNotes(education.getVerificationNotes());
+        copy.setStatus(education.getStatus());
+        var resourceCopy = education.getResources().stream().map(resourceMapperService::copy).collect(Collectors.toCollection(ArrayList::new));
+        copy.setResources(resourceCopy);
+        return copy;
     }
 
     private Education mapToEntity(Education education, EducationRequest dto) {

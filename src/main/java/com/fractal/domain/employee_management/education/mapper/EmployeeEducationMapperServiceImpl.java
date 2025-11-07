@@ -5,8 +5,12 @@ import com.fractal.domain.education.dto.EducationRequest;
 import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.education.mapper.EducationMapperService;
 import com.fractal.domain.employee_management.education.EmployeeEducation;
+import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
+import com.fractal.domain.identification_document.IdentificationDocument;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 @RequiredArgsConstructor
@@ -45,6 +49,15 @@ class EmployeeEducationMapperServiceImpl implements EmployeeEducationMapperServi
         employeeEducation.setVerificationNotes(education.getVerificationNotes());
         employeeEducation.setStatus(education.getStatus());
         employeeEducation.setResources(education.getResources());
+        return employeeEducation;
+    }
+
+    @Override
+    public EmployeeEducation copy(Education education) {
+        var employeeEducation = convert(new EmployeeEducation(),educationMapperService.copy(education));
+        var educationResources = new ArrayList<>(employeeEducation.getResources());
+        employeeEducation.setResources(new ArrayList<>());
+        educationResources.forEach(educationResource -> employeeEducation.addResource(educationResource));
         return employeeEducation;
     }
 

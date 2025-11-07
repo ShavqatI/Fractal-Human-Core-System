@@ -13,6 +13,7 @@ public interface EducationResourceMapperService {
     EducationResource toEntity(EducationResource resource, MultipartFile file, String resourceStoragePath);
     EducationResource toEntity(EducationResource resource, ResourceRequest dto);
     ResourceRequest fileToRequest(MultipartFile file,String url);
+    EducationResource copy(EducationResource educationResource);
 }
 
 

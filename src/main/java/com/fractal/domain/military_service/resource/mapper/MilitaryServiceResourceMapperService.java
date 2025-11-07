@@ -13,6 +13,8 @@ public interface MilitaryServiceResourceMapperService {
     ResourceRequest fileToRequest(MultipartFile file,String url);
     MilitaryServiceResource toEntity(MilitaryServiceResource resource, MultipartFile file, String resourceStoragePath);
     MilitaryServiceResource toEntity(MilitaryServiceResource resource, ResourceRequest dto);
+
+    MilitaryServiceResource copy(MilitaryServiceResource resource);
 }
 
 

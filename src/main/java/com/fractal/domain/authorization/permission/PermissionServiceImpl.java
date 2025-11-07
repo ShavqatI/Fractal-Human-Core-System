@@ -3,12 +3,22 @@ package com.fractal.domain.authorization.permission;
 import com.fractal.domain.authorization.permission.dto.PermissionRequest;
 import com.fractal.domain.authorization.permission.dto.PermissionResponse;
 import com.fractal.domain.authorization.permission.mapper.PermissionMapperService;
+import com.fractal.domain.authorization.role.RoleService;
+import com.fractal.domain.authorization.role.menu.RoleMenu;
+import com.fractal.domain.authorization.user.UserService;
+import com.fractal.domain.authorization.user.role.UserRole;
+import com.fractal.domain.authorization.user.role.UserRoleService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +26,8 @@ public class PermissionServiceImpl implements PermissionService {
 
     private final PermissionRepository permissionRepository;
     private final PermissionMapperService mapperService;
+    private final UserService userService;
+    private final UserRoleService userRoleService;
 
     @Override
     public Permission create(PermissionRequest dto) {
@@ -65,6 +77,20 @@ public class PermissionServiceImpl implements PermissionService {
     @Override
     public PermissionResponse toDTO(Permission permission) {
         return mapperService.toDTO(permission);
+    }
+
+    @Override
+    public List<Permission> getActivePermissions(Authentication authentication) {
+        if(authentication.getPrincipal() instanceof UserDetails) {
+            var userDetails = (UserDetails) authentication.getPrincipal();
+            var user = userService.findByUsername(userDetails.getUsername());
+            var roles = userService.getActiveRoles(user.getId());
+            List<Permission> permissions = roles.stream()
+                    .flatMap(role -> getAllByRoleId(role.getRole().getId()).stream())
+                    .toList();
+            return permissions;
+        }
+        return List.of();
     }
 
     private Permission save(Permission permission) {

@@ -1,12 +1,16 @@
 package com.fractal.domain.military_service.mapper;
 
+import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.military_service.MilitaryService;
 import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
+import com.fractal.domain.military_service.resource.MilitaryServiceResource;
 import com.fractal.domain.military_service.resource.mapper.MilitaryServiceResourceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -45,6 +49,20 @@ class MilitaryServiceMapperServiceImpl implements MilitaryServiceMapperService {
     @Override
     public MilitaryService toEntity(MilitaryService militaryService, MilitaryServiceRequest dto) {
        return mapToEntity(militaryService,dto);
+    }
+
+    @Override
+    public MilitaryService copy(MilitaryService militaryService) {
+        var copy = MilitaryService.builder().build();
+        copy.setAccountNumber(militaryService.getAccountNumber());
+        copy.setTitle(militaryService.getTitle());
+        copy.setCategoryFund(militaryService.getCategoryFund());
+        copy.setAddress(militaryService.getAddress());
+        copy.setBeginDate(militaryService.getBeginDate());
+        copy.setEndDate(militaryService.getEndDate());
+        var resourceCopy = militaryService.getResources().stream().map(resourceMapperService::copy).collect(Collectors.toCollection(ArrayList::new));
+        copy.setResources(resourceCopy);
+        return copy;
     }
 
     private MilitaryService mapToEntity(MilitaryService militaryService, MilitaryServiceRequest dto) {

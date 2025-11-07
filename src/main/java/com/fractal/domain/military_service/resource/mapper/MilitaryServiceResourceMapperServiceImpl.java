@@ -1,6 +1,7 @@
 package com.fractal.domain.military_service.resource.mapper;
 
 import com.fractal.domain.education.resource.EducationResource;
+import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.military_service.resource.MilitaryServiceResource;
 import com.fractal.domain.resource.Resource;
 import com.fractal.domain.resource.dto.ResourceRequest;
@@ -38,6 +39,13 @@ class MilitaryServiceResourceMapperServiceImpl implements MilitaryServiceResourc
     public MilitaryServiceResource toEntity(MilitaryServiceResource resource, ResourceRequest dto) {
         return (MilitaryServiceResource) resourceMapperService.toEntity(resource,dto);
     }
+
+    @Override
+    public MilitaryServiceResource copy(MilitaryServiceResource militaryServiceResource) {
+        Resource resource = resourceMapperService.copy(militaryServiceResource);
+        return convert(new MilitaryServiceResource(),resource);
+    }
+
 
     @Override
     public ResourceRequest fileToRequest(MultipartFile file, String resourceStoragePath) {

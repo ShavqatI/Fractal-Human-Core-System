@@ -12,6 +12,7 @@ import com.fractal.domain.location.country.CountryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -63,21 +64,22 @@ class ExternalEmploymentMapperServiceImpl implements ExternalEmploymentMapperSer
 
     @Override
     public Employment copy(ExternalEmployment employment) {
-        var externalEmployment = ExternalEmployment.builder().build();
-        externalEmployment.setCountry(employment.getCountry());
-        externalEmployment.setLocation(employment.getLocation());
-        externalEmployment.setEmploymentType(employment.getEmploymentType());
-        externalEmployment.setStartDate(employment.getStartDate());
-        externalEmployment.setEndDate(employment.getEndDate());
-        externalEmployment.setOrganization(employment.getOrganization());
-        externalEmployment.setDepartment(employment.getDepartment());
-        externalEmployment.setDivision(employment.getDivision());
-        externalEmployment.setPosition(employment.getPosition());
-        externalEmployment.setResponsibilities(employment.getResponsibilities());
-        externalEmployment.setAchievements(employment.getAchievements());
-        externalEmployment.setStatus(employment.getStatus());
-        externalEmployment.getSeparationReasons().forEach(separationReason -> externalEmployment.addSeparationReason(separationReason));
-        return externalEmployment;
+        var copy = ExternalEmployment.builder().build();
+        copy.setCountry(employment.getCountry());
+        copy.setLocation(employment.getLocation());
+        copy.setEmploymentType(employment.getEmploymentType());
+        copy.setStartDate(employment.getStartDate());
+        copy.setEndDate(employment.getEndDate());
+        copy.setOrganization(employment.getOrganization());
+        copy.setDepartment(employment.getDepartment());
+        copy.setDivision(employment.getDivision());
+        copy.setPosition(employment.getPosition());
+        copy.setResponsibilities(employment.getResponsibilities());
+        copy.setAchievements(employment.getAchievements());
+        copy.setStatus(employment.getStatus());
+        var separationReasons = employment.getSeparationReasons().stream().map(separationReasonMapperService::copy).collect(Collectors.toCollection(ArrayList::new));
+        separationReasons.forEach(separationReason -> copy.addSeparationReason(separationReason));
+        return copy;
     }
 
     private ExternalEmployment mapToEntity(ExternalEmployment employment, ExternalEmploymentRequest dto) {

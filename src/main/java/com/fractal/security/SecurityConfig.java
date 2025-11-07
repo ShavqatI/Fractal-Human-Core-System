@@ -58,17 +58,17 @@ public class SecurityConfig {
         return authProvider;
     }
 
-/*    private AuthorizationDecision authorizationDecision(Authentication authentication, RequestAuthorizationContext request) {
+   private AuthorizationDecision authorizationDecision(Authentication authentication, RequestAuthorizationContext request) {
         if (authentication.isAuthenticated()) {
             if (authentication instanceof AnonymousAuthenticationToken) {
                 return new AuthorizationDecision(false); // Deny access for anonymous users
             }
 
-            List<Permission> permissions = permissionService.(authentication);
+            List<Permission> permissions = permissionService.getActivePermissions(authentication);
             String requestUrl = request.getRequest().getRequestURI();
             for (var permission : permissions) {
                 String role  = "ROLE_" + permission.getRole().getCode();
-                String urlPattern = permission.getResource().getUrl();
+                String urlPattern = permission.getMenuAction().getAction().getUrl();
                 if (requestUrl.matches(urlPattern.replace("**", ".*"))) {
                     boolean hasRole = authentication.getAuthorities().stream()
                             .anyMatch(authority -> authority.getAuthority().equals(role));
@@ -78,7 +78,7 @@ public class SecurityConfig {
             }
         }
         return new AuthorizationDecision(false);
-    }*/
+    }
 
 
 }
