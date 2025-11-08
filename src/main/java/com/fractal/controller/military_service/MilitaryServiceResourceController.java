@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -52,12 +54,13 @@ public class MilitaryServiceResourceController {
         try {
             Path filePath = Path.of(militaryServiceResource.getUrl()).toAbsolutePath();
             Resource resource = new FileSystemResource(filePath);
+            String encodedFilename = URLEncoder.encode(resource.getFilename(), StandardCharsets.UTF_8);
             if (!resource.exists()) {
                 return ResponseEntity.noContent().build();
             }
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFilename + "\"")
                     .body(resource);
 
 

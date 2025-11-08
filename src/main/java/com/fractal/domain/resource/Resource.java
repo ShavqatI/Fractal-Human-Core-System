@@ -19,7 +19,7 @@ public class Resource extends Auditable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected Long id;
 
-    @Column(name = "url")
+    @Column(name = "url",length = 1000)
     private  String url;
 
     @Column(name = "file_name")

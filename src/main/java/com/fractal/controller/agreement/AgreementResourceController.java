@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,16 +51,17 @@ public class AgreementResourceController {
     }
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> download(@PathVariable Long agreementId, @PathVariable Long id) {
-        var orderResource = resourceService.getById(agreementId, id);
+        var agreementResource = resourceService.getById(agreementId, id);
         try {
-            Path filePath = Path.of(orderResource.getUrl()).toAbsolutePath();
+            Path filePath = Path.of(agreementResource.getUrl()).toAbsolutePath();
             Resource resource = new FileSystemResource(filePath);
+            String encodedFilename = URLEncoder.encode(resource.getFilename(), StandardCharsets.UTF_8);
             if (!resource.exists()) {
                 return ResponseEntity.noContent().build();
             }
             return ResponseEntity.ok()
                     .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFilename + "\"")
                     .body(resource);
 
 

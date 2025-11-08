@@ -2,9 +2,11 @@ package com.fractal.domain.employee_management.business_trip.resource;
 
 import com.fractal.domain.employee_management.business_trip.BusinessTripService;
 import com.fractal.domain.employee_management.business_trip.resource.mapper.BusinessTripResourceMapperService;
+import com.fractal.domain.resource.FileService;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -17,11 +19,15 @@ public class BusinessTripResourceServiceImpl implements BusinessTripResourceServ
     private final BusinessTripResourceRepository resourceRepository;
     private final BusinessTripResourceMapperService resourceMapperService;
     private final BusinessTripService businessTripService;
+    private final FileService fileService;
+
+    @Value("${resource-storage.agreement}")
+    private String resourceStoragePath;
 
     @Override
     public BusinessTripResource create(Long employeeId, MultipartFile file) {
         var businessTrip = businessTripService.getById(employeeId);
-        var resource = resourceMapperService.toEntity(file,null);
+        var resource = resourceMapperService.toEntity(file,resourceStoragePath);
         businessTrip.addResource(resource);
         businessTripService.save(businessTrip);
         return resource;
@@ -43,7 +49,7 @@ public class BusinessTripResourceServiceImpl implements BusinessTripResourceServ
         var resource = businessTrip.getResources()
                 .stream()
                 .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Business Trip Resource  with id: " + id + " not found"));
-        resource = resourceMapperService.toEntity(resource,resourceMapperService.fileToRequest(file,null));
+        resource = resourceMapperService.toEntity(resource,file,resourceStoragePath);
         resourceRepository.save(resource);
         businessTripService.save(businessTrip);
         return resource;
@@ -55,7 +61,8 @@ public class BusinessTripResourceServiceImpl implements BusinessTripResourceServ
         var resource = businessTrip.getResources()
                 .stream()
                 .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Business Trip Resource  with id: " + id + " not found"));
-        resourceRepository.delete(resource);
+        fileService.delete(resource.getUrl());
+        businessTrip.removeResource(resource);
         businessTripService.save(businessTrip);
     }
 

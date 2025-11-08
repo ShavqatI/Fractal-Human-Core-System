@@ -47,5 +47,4 @@ resource-storage:
   agreement: "${resource-storage.root-path}/agreement/"
   learning: "${resource-storage.root-path}/learning/"
   document-template-manager: "${resource-storage.root-path}/document-template-manager/"
-
-
+  business-trip: "${resource-storage.root-path}/business-trip/"

@@ -34,7 +34,7 @@ public class Authentication   {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User userId;
+    private User user;
 
     @Column(name = "language")
     private String language;
@@ -43,68 +43,6 @@ public class Authentication   {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-
-
-
-    public Timestamp getSignInDate() {
-        return signInDate;
-    }
-
-    public void setSignInDate(Timestamp signInDate) {
-        this.signInDate = signInDate;
-    }
-
-    public Timestamp getSignOutDate() {
-        return signOutDate;
-    }
-
-    public void setSignOutDate(Timestamp signOutDate) {
-        this.signOutDate = signOutDate;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public User getUserId() {
-        return userId;
-    }
-
-    public void setUserId(User userId) {
-        this.userId = userId;
-    }
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    @PrePersist
-    protected void onCreate() {
-        Date date = new Date();
-        this.signInDate = new Timestamp(date.getTime());
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        Date date = new Date();
-        this.signOutDate = new Timestamp(date.getTime());
-    }
 
 
 }

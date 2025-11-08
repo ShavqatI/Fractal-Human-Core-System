@@ -47,4 +47,5 @@ public class LearningSessionResourceTypeController {
         return ResponseEntity.noContent().build();
 
     }
+
 }
