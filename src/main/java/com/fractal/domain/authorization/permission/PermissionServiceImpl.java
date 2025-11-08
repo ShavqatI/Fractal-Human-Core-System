@@ -3,22 +3,16 @@ package com.fractal.domain.authorization.permission;
 import com.fractal.domain.authorization.permission.dto.PermissionRequest;
 import com.fractal.domain.authorization.permission.dto.PermissionResponse;
 import com.fractal.domain.authorization.permission.mapper.PermissionMapperService;
-import com.fractal.domain.authorization.role.RoleService;
-import com.fractal.domain.authorization.role.menu.RoleMenu;
 import com.fractal.domain.authorization.user.UserService;
-import com.fractal.domain.authorization.user.role.UserRole;
 import com.fractal.domain.authorization.user.role.UserRoleService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

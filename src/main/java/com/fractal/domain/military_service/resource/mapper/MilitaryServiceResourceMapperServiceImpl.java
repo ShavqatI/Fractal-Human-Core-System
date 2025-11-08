@@ -1,14 +1,11 @@
 package com.fractal.domain.military_service.resource.mapper;
 
-import com.fractal.domain.education.resource.EducationResource;
-import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.military_service.resource.MilitaryServiceResource;
 import com.fractal.domain.resource.Resource;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import com.fractal.domain.resource.mapper.ResourceMapperService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

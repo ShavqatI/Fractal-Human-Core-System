@@ -6,7 +6,6 @@ import com.fractal.domain.employee_management.employee.resource.dto.EmployeeReso
 import com.fractal.domain.employee_management.employee.resource.type.EmployeeResourceTypeService;
 import com.fractal.domain.resource.FileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service

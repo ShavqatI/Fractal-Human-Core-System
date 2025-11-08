@@ -2,7 +2,6 @@ package com.fractal.controller.military_service;
 
 import com.fractal.domain.military_service.resource.MilitaryServiceResourceService;
 import com.fractal.domain.resource.dto.ResourceResponse;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;

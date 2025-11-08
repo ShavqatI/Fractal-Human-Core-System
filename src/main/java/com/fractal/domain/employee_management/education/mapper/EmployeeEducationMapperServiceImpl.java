@@ -5,8 +5,6 @@ import com.fractal.domain.education.dto.EducationRequest;
 import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.education.mapper.EducationMapperService;
 import com.fractal.domain.employee_management.education.EmployeeEducation;
-import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
-import com.fractal.domain.identification_document.IdentificationDocument;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

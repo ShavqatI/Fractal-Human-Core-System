@@ -5,7 +5,6 @@ import com.fractal.domain.dictionary.status.Status;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 
 @Entity

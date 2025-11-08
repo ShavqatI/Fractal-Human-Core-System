@@ -1,6 +1,5 @@
 package com.fractal.domain.employment.internal;
 
-import com.fractal.domain.employment.EmploymentService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 

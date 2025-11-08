@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.business_trip.order.dto;
 
-import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.order.type.dto.OrderTypeResponse;
 import com.fractal.domain.resource.dto.ResourceResponse;

@@ -4,7 +4,6 @@ import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
-import com.fractal.domain.employment.external.ExternalEmployment;
 import com.fractal.domain.employment.mapper.EmploymentMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

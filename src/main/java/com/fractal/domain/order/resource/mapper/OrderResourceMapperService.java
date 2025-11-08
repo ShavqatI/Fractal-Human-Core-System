@@ -1,6 +1,5 @@
 package com.fractal.domain.order.resource.mapper;
 
-import com.fractal.domain.education.resource.EducationResource;
 import com.fractal.domain.order.resource.OrderResource;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;

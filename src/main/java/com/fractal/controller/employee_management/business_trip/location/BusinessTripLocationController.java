@@ -4,13 +4,11 @@ package com.fractal.controller.employee_management.business_trip.location;
 import com.fractal.domain.employee_management.business_trip.location.BusinessTripLocationService;
 import com.fractal.domain.employee_management.business_trip.location.dto.BusinessTripLocationRequest;
 import com.fractal.domain.employee_management.business_trip.location.dto.BusinessTripLocationResponse;
-import com.fractal.domain.resource.dto.ResourceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.stream.Collectors;

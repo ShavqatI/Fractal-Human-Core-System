@@ -4,7 +4,6 @@ import com.fractal.domain.agreement.Agreement;
 import com.fractal.domain.employment.internal.InternalEmployment;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

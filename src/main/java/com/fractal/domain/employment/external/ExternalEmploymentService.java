@@ -1,6 +1,5 @@
 package com.fractal.domain.employment.external;
 
-import com.fractal.domain.employment.EmploymentService;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentRequest;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentResponse;
 

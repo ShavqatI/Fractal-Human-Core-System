@@ -1,8 +1,6 @@
 package com.fractal.controller.dictionary;
 
 
-import com.fractal.domain.dictionary.gender.dto.GenderRequest;
-import com.fractal.domain.dictionary.gender.dto.GenderResponse;
 import com.fractal.domain.dictionary.industry.IndustryService;
 import com.fractal.domain.dictionary.industry.dto.IndustryRequest;
 import com.fractal.domain.dictionary.industry.dto.IndustryResponse;

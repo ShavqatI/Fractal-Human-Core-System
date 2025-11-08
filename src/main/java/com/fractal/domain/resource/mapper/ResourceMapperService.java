@@ -1,6 +1,5 @@
 package com.fractal.domain.resource.mapper;
 
-import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.resource.Resource;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;

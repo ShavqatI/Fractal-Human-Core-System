@@ -3,7 +3,6 @@ package com.fractal.controller.identification_document;
 
 import com.fractal.domain.identification_document.resource.IdentificationDocumentResourceService;
 import com.fractal.domain.resource.dto.ResourceResponse;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;

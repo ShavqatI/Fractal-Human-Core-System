@@ -1,8 +1,6 @@
 package com.fractal.domain.employee_management.military_service.mapper;
 
-import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
 import com.fractal.domain.employee_management.military_service.EmployeeMilitaryService;
-import com.fractal.domain.identification_document.IdentificationDocument;
 import com.fractal.domain.military_service.MilitaryService;
 import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.military_service.dto.MilitaryServiceResponse;

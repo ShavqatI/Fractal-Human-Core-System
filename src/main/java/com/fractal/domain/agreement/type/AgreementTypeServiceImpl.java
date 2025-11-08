@@ -2,7 +2,6 @@ package com.fractal.domain.agreement.type;
 
 import com.fractal.domain.agreement.type.dto.AgreementTypeRequest;
 import com.fractal.domain.agreement.type.dto.AgreementTypeResponse;
-import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManager;
 import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManagerService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;

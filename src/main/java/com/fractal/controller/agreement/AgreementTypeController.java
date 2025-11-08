@@ -4,8 +4,6 @@ package com.fractal.controller.agreement;
 import com.fractal.domain.agreement.type.AgreementTypeService;
 import com.fractal.domain.agreement.type.dto.AgreementTypeRequest;
 import com.fractal.domain.agreement.type.dto.AgreementTypeResponse;
-import com.fractal.domain.order.type.dto.OrderTypeRequest;
-import com.fractal.domain.order.type.dto.OrderTypeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -1,6 +1,5 @@
 package com.fractal.domain.employee_management.business_trip.resource.mapper;
 
-import com.fractal.domain.agreement.resource.AgreementResource;
 import com.fractal.domain.employee_management.business_trip.resource.BusinessTripResource;
 import com.fractal.domain.resource.Resource;
 import com.fractal.domain.resource.dto.ResourceRequest;

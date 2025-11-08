@@ -4,8 +4,6 @@ package com.fractal.controller.dictionary;
 import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManagerService;
 import com.fractal.domain.dictionary.docuemnt_template_manager.dto.DocumentTemplateManagerRequest;
 import com.fractal.domain.dictionary.docuemnt_template_manager.dto.DocumentTemplateManagerResponse;
-import com.fractal.domain.dictionary.gender.dto.GenderRequest;
-import com.fractal.domain.dictionary.gender.dto.GenderResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.FileSystemResource;

@@ -7,7 +7,6 @@ import com.fractal.domain.dictionary.marital_status.dto.MaritalStatusResponse;
 import com.fractal.domain.dictionary.nationality.dto.NationalityResponse;
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.education.dto.EducationResponse;
-import com.fractal.domain.education.language_skill.dto.LanguageSkillRequest;
 import com.fractal.domain.education.language_skill.dto.LanguageSkillResponse;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentResponse;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;

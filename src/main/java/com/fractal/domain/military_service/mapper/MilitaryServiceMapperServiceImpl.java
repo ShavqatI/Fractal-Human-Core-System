@@ -1,16 +1,13 @@
 package com.fractal.domain.military_service.mapper;
 
-import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.military_service.MilitaryService;
 import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
-import com.fractal.domain.military_service.resource.MilitaryServiceResource;
 import com.fractal.domain.military_service.resource.mapper.MilitaryServiceResourceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 

@@ -3,8 +3,6 @@ package com.fractal.domain.employment.separation_reason_type;
 import com.fractal.domain.employment.separation_reason_type.dto.SeparationReasonTypeCompactResponse;
 import com.fractal.domain.employment.separation_reason_type.dto.SeparationReasonTypeRequest;
 import com.fractal.domain.employment.separation_reason_type.dto.SeparationReasonTypeResponse;
-import com.fractal.domain.organization_management.department.Department;
-import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 
 import java.util.List;
 

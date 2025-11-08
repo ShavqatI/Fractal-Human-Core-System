@@ -6,7 +6,6 @@ import com.fractal.domain.learning_develpment.learning.session.resource.dto.Lear
 import com.fractal.domain.learning_develpment.learning.session.resource.type.LearningSessionResourceTypeService;
 import com.fractal.domain.resource.FileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service

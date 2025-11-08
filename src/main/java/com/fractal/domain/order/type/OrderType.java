@@ -3,7 +3,9 @@ package com.fractal.domain.order.type;
 import com.fractal.domain.abstraction.Dictionary;
 import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManager;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity

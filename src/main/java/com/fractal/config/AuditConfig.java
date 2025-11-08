@@ -1,5 +1,6 @@
 package com.fractal.config;
 
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.authorization.user.UserService;
 import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
@@ -8,7 +9,6 @@ import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import com.fractal.domain.authorization.user.User;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;

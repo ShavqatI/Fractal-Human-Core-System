@@ -4,7 +4,6 @@ import com.fractal.domain.employment.internal.InternalEmploymentService;
 import com.fractal.domain.employment.internal.order.dto.InternalEmploymentOrderRequest;
 import com.fractal.domain.employment.internal.order.dto.InternalEmploymentOrderResponse;
 import com.fractal.domain.employment.internal.order.mapper.InternalEmploymentOrderMapperService;
-import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

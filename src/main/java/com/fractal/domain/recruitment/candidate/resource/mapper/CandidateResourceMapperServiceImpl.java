@@ -6,7 +6,6 @@ import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceRe
 import com.fractal.domain.recruitment.candidate.resource.type.CandidateResourceTypeService;
 import com.fractal.domain.resource.FileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service

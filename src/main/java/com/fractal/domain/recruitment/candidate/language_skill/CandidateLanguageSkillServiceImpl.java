@@ -4,7 +4,6 @@ import com.fractal.domain.education.language_skill.dto.LanguageSkillRequest;
 import com.fractal.domain.education.language_skill.dto.LanguageSkillResponse;
 import com.fractal.domain.recruitment.candidate.CandidateService;
 import com.fractal.domain.recruitment.candidate.language_skill.mapper.CandidateLanguageSkillMapperService;
-import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;

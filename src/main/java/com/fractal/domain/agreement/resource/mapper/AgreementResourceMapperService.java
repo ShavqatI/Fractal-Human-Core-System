@@ -1,7 +1,6 @@
 package com.fractal.domain.agreement.resource.mapper;
 
 import com.fractal.domain.agreement.resource.AgreementResource;
-import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import org.springframework.web.multipart.MultipartFile;

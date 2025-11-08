@@ -3,7 +3,9 @@ package com.fractal.domain.employee_management.vacation.order;
 import com.fractal.domain.employee_management.vacation.Vacation;
 import com.fractal.domain.order.Order;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity

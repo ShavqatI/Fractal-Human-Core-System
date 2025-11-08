@@ -1,6 +1,5 @@
 package com.fractal.domain.military_service.resource.mapper;
 
-import com.fractal.domain.education.resource.EducationResource;
 import com.fractal.domain.military_service.resource.MilitaryServiceResource;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;

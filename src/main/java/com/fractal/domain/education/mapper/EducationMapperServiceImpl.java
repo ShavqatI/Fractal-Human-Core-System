@@ -11,14 +11,10 @@ import com.fractal.domain.education.grade_point_average.GradePointAverageService
 import com.fractal.domain.education.resource.EducationResource;
 import com.fractal.domain.education.resource.mapper.EducationResourceMapperService;
 import com.fractal.domain.education.type.EducationTypeService;
-import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
-import com.fractal.domain.identification_document.IdentificationDocument;
-import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 

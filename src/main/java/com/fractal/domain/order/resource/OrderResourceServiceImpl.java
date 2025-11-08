@@ -4,7 +4,6 @@ import com.fractal.domain.order.OrderService;
 import com.fractal.domain.order.resource.mapper.OrderResourceMapperService;
 import com.fractal.domain.resource.FileService;
 import com.fractal.domain.resource.dto.ResourceResponse;
-import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

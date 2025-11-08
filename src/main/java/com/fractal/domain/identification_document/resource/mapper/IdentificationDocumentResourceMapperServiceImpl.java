@@ -1,12 +1,6 @@
 package com.fractal.domain.identification_document.resource.mapper;
 
-import com.fractal.domain.education.Education;
-import com.fractal.domain.employee_management.education.EmployeeEducation;
-import com.fractal.domain.identification_document.IdentificationDocument;
-import com.fractal.domain.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
-import com.fractal.domain.military_service.MilitaryService;
-import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.resource.Resource;
 import com.fractal.domain.resource.dto.ResourceRequest;
 import com.fractal.domain.resource.dto.ResourceResponse;
@@ -14,8 +8,6 @@ import com.fractal.domain.resource.mapper.ResourceMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.time.temporal.ChronoUnit;
 
 @Service
 @RequiredArgsConstructor

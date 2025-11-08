@@ -1,6 +1,5 @@
 package com.fractal.domain.employment.internal.mapper;
 
-import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;

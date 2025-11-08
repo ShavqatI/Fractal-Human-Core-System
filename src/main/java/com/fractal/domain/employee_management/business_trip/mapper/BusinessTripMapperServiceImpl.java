@@ -5,7 +5,6 @@ import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.employee_management.business_trip.expense.mapper.BusinessTripExpenseMapperService;
-import com.fractal.domain.employee_management.business_trip.location.BusinessTripLocation;
 import com.fractal.domain.employee_management.business_trip.location.mapper.BusinessTripLocationMapperService;
 import com.fractal.domain.employee_management.business_trip.order.mapper.BusinessTripOrderMapperService;
 import com.fractal.domain.employee_management.business_trip.resource.mapper.BusinessTripResourceMapperService;

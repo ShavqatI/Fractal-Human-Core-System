@@ -1,8 +1,8 @@
 package com.fractal.domain.authorization.user_employee_mapping;
 
+import com.fractal.domain.authorization.user.UserService;
 import com.fractal.domain.authorization.user_employee_mapping.dto.UserEmployeeMappingRequest;
 import com.fractal.domain.authorization.user_employee_mapping.dto.UserEmployeeMappingResponse;
-import com.fractal.domain.authorization.user.UserService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.exception.ResourceNotFoundException;
@@ -86,6 +86,6 @@ class UserEmployeeMappingServiceImpl implements UserEmployeeMappingService {
     }
 
     private UserEmployeeMapping findById(Long id) {
-        return userEmployeeMappingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Gender with id: " + id + " not found"));
+        return userEmployeeMappingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("UserEmployeeMapping  with id: " + id + " not found"));
     }
 }

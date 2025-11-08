@@ -6,7 +6,6 @@ import com.fractal.domain.identification_document.dto.IdentificationDocumentRequ
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
 import com.fractal.domain.identification_document.mapper.IdentificationDocumentMapperService;
 import com.fractal.domain.identification_document.resource.IdentificationDocumentResource;
-import com.fractal.domain.resource.Resource;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
