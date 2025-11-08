@@ -30,7 +30,7 @@ class InsuranceMapperServiceImpl implements InsuranceMapperService {
     public InsuranceResponse toDTO(Insurance insurance) {
         return new InsuranceResponse(
                    insurance.getId(),
-                   null,
+                   employeeService.toCompactDTO(insurance.getEmployee()),
                    insuranceTypeService.toDTO(insurance.getInsuranceType()),
                    insuranceProviderService.toCompactDTO(insurance.getInsuranceProvider()),
                    insurance.getPolicyNumber(),
