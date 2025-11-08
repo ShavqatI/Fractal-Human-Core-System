@@ -26,8 +26,8 @@ public class AuditConfig {
                 if (principal instanceof UserDetails) {
                     var userDetails = (UserDetails) principal;
                     User user = userService.findByUsername(userDetails.getUsername());
-                    return Optional.of(entityManager.getReference(User.class, user.getId()));
-                    //return Optional.of(entityManager.contains(user) ? user : entityManager.merge(user));
+                    //return Optional.of(entityManager.getReference(User.class, user.getId()));
+                    return Optional.of(entityManager.contains(user) ? user : entityManager.merge(user));
                 }
             }
             return Optional.empty();

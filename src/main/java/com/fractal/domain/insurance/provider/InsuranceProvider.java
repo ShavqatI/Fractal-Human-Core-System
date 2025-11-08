@@ -41,14 +41,12 @@ public class InsuranceProvider extends AbstractEntity {
     @OneToMany(mappedBy = "insuranceProvider", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
     private List<InsuranceProviderAddress> addresses = new ArrayList<>();
 
-
-    @Transactional
     public void addContact(InsuranceProviderContact contact) {
         if (contacts == null) contacts = new ArrayList<>();
         contact.setInsuranceProvider(this);
         contacts.add(contact);
     }
-    @Transactional
+
     public void removeContact(InsuranceProviderContact contact) {
         if (contacts != null && !contacts.isEmpty())
             contacts.remove(contact);
