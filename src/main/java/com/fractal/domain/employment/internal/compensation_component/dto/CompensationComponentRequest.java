@@ -1,4 +1,4 @@
-package com.fractal.domain.employment.internal.compensation.dto;
+package com.fractal.domain.employment.internal.compensation_component.dto;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

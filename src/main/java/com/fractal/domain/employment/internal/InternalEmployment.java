@@ -2,7 +2,7 @@ package com.fractal.domain.employment.internal;
 
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.internal.agreement.InternalEmploymentAgreement;
-import com.fractal.domain.employment.internal.compensation.CompensationComponent;
+import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.employment.internal.order.InternalEmploymentOrder;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.organization.Organization;

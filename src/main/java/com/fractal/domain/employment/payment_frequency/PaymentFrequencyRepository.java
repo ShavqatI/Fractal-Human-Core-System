@@ -1,4 +1,4 @@
-package com.fractal.domain.employment.docuemnt_template_manager;
+package com.fractal.domain.employment.payment_frequency;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

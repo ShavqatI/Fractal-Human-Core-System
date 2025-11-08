@@ -1,8 +1,8 @@
-package com.fractal.domain.employment.internal.compensation;
+package com.fractal.domain.employment.internal.compensation_component;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.employment.docuemnt_template_manager.PaymentFrequency;
+import com.fractal.domain.employment.payment_frequency.PaymentFrequency;
 import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.salary_classification.SalaryClassification;
 import com.fractal.domain.finance.currency.Currency;

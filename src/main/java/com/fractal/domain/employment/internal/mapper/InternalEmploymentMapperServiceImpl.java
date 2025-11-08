@@ -3,7 +3,7 @@ package com.fractal.domain.employment.internal.mapper;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.agreement.mapper.InternalEmploymentAgreementMapperService;
-import com.fractal.domain.employment.internal.compensation.mapper.CompensationComponentMapperService;
+import com.fractal.domain.employment.internal.compensation_component.mapper.CompensationComponentMapperService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.employment.internal.order.mapper.InternalEmploymentOrderMapperService;

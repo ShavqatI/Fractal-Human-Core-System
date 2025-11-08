@@ -1,4 +1,4 @@
-package com.fractal.domain.employment.docuemnt_template_manager;
+package com.fractal.domain.employment.payment_frequency;
 
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;

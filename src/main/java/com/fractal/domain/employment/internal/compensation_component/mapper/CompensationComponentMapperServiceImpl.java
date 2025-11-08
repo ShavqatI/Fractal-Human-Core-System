@@ -1,10 +1,10 @@
-package com.fractal.domain.employment.internal.compensation.mapper;
+package com.fractal.domain.employment.internal.compensation_component.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employment.docuemnt_template_manager.PaymentFrequencyService;
-import com.fractal.domain.employment.internal.compensation.CompensationComponent;
-import com.fractal.domain.employment.internal.compensation.dto.CompensationComponentRequest;
-import com.fractal.domain.employment.internal.compensation.dto.CompensationComponentResponse;
+import com.fractal.domain.employment.payment_frequency.PaymentFrequencyService;
+import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
+import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
+import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
 import com.fractal.domain.employment.salary_classification.SalaryClassificationService;
 import com.fractal.domain.finance.currency.CurrencyService;
 import lombok.RequiredArgsConstructor;

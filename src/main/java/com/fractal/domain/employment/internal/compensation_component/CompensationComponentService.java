@@ -1,7 +1,7 @@
-package com.fractal.domain.employment.internal.compensation;
+package com.fractal.domain.employment.internal.compensation_component;
 
-import com.fractal.domain.employment.internal.compensation.dto.CompensationComponentRequest;
-import com.fractal.domain.employment.internal.compensation.dto.CompensationComponentResponse;
+import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
+import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
 
 import java.util.List;
 

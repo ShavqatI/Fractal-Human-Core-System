@@ -1,8 +1,8 @@
 package com.fractal.controller.employee_management.employee.employment;
 
-import com.fractal.domain.employment.internal.compensation.CompensationComponentService;
-import com.fractal.domain.employment.internal.compensation.dto.CompensationComponentRequest;
-import com.fractal.domain.employment.internal.compensation.dto.CompensationComponentResponse;
+import com.fractal.domain.employment.internal.compensation_component.CompensationComponentService;
+import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
+import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

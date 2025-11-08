@@ -1,9 +1,9 @@
-package com.fractal.domain.employment.internal.compensation;
+package com.fractal.domain.employment.internal.compensation_component;
 
 import com.fractal.domain.employment.internal.InternalEmploymentService;
-import com.fractal.domain.employment.internal.compensation.dto.CompensationComponentRequest;
-import com.fractal.domain.employment.internal.compensation.dto.CompensationComponentResponse;
-import com.fractal.domain.employment.internal.compensation.mapper.CompensationComponentMapperService;
+import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
+import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
+import com.fractal.domain.employment.internal.compensation_component.mapper.CompensationComponentMapperService;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;

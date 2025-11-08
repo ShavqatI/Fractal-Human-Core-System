@@ -1,7 +1,7 @@
-package com.fractal.domain.employment.docuemnt_template_manager;
+package com.fractal.domain.employment.payment_frequency;
 
-import com.fractal.domain.employment.docuemnt_template_manager.dto.PaymentFrequencyRequest;
-import com.fractal.domain.employment.docuemnt_template_manager.dto.PaymentFrequencyResponse;
+import com.fractal.domain.employment.payment_frequency.dto.PaymentFrequencyRequest;
+import com.fractal.domain.employment.payment_frequency.dto.PaymentFrequencyResponse;
 import com.fractal.exception.ResourceWithCodeNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;

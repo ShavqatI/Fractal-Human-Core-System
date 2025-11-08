@@ -1,7 +1,7 @@
-package com.fractal.domain.employment.internal.compensation.dto;
+package com.fractal.domain.employment.internal.compensation_component.dto;
 
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
-import com.fractal.domain.employment.docuemnt_template_manager.dto.PaymentFrequencyResponse;
+import com.fractal.domain.employment.payment_frequency.dto.PaymentFrequencyResponse;
 import com.fractal.domain.employment.salary_classification.dto.SalaryClassificationCompactResponse;
 import com.fractal.domain.finance.currency.dto.CurrencyResponse;
 

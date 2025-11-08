@@ -1,4 +1,4 @@
-package com.fractal.domain.employment.docuemnt_template_manager.dto;
+package com.fractal.domain.employment.payment_frequency.dto;
 
 import java.time.LocalDateTime;
 
