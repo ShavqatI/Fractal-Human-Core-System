@@ -48,3 +48,7 @@ resource-storage:
   learning: "${resource-storage.root-path}/learning/"
   document-template-manager: "${resource-storage.root-path}/document-template-manager/"
   business-trip: "${resource-storage.root-path}/business-trip/"
+
+encryption:
+  password: K2VP1tcbCwzcqWl5btvqEg==
+  salt: VIL4e9OUmquU1BnDVpAGoA==

@@ -50,7 +50,7 @@ class InternalEmploymentAgreementMapperServiceImpl implements InternalEmployment
     }
 
     private InternalEmploymentAgreement mapToEntity(InternalEmploymentAgreement agreement, InternalEmploymentAgreementRequest dto) {
-        agreementTypeService.getById(dto.agreementTypeId());
+        agreement.setAgreementType(agreementTypeService.getById(dto.agreementTypeId()));
         agreement.setNumber(dto.number());
         agreement.setStartDate(dto.startDate());
         agreement.setEndDate(dto.endDate());

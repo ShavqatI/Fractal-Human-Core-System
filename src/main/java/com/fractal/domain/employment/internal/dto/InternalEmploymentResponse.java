@@ -3,6 +3,7 @@ package com.fractal.domain.employment.internal.dto;
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.employment.internal.agreement.dto.InternalEmploymentAgreementResponse;
+import com.fractal.domain.employment.internal.compensation.dto.CompensationComponentResponse;
 import com.fractal.domain.employment.internal.order.dto.InternalEmploymentOrderResponse;
 import com.fractal.domain.employment.separation_reason.dto.SeparationReasonResponse;
 import com.fractal.domain.employment.type.dto.EmploymentTypeCompactResponse;
@@ -26,6 +27,7 @@ public record InternalEmploymentResponse(
         List<InternalEmploymentAgreementResponse> agreements,
         List<InternalEmploymentOrderResponse> orders,
         List<SeparationReasonResponse> separationReasons,
+        List<CompensationComponentResponse> compensationComponents,
         StatusCompactResponse status,
         LocalDateTime createdDate,
         LocalDateTime updatedDate

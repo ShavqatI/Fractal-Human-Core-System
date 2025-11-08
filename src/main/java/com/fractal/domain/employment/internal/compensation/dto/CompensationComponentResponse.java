@@ -1,23 +1,28 @@
 package com.fractal.domain.employment.internal.compensation.dto;
 
-import com.fractal.domain.agreement.type.dto.AgreementTypeResponse;
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
-import com.fractal.domain.resource.dto.ResourceResponse;
+import com.fractal.domain.employment.docuemnt_template_manager.dto.PaymentFrequencyResponse;
+import com.fractal.domain.employment.salary_classification.dto.SalaryClassificationCompactResponse;
+import com.fractal.domain.finance.currency.dto.CurrencyResponse;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public record CompensationComponentResponse(
         Long id,
-        AgreementTypeResponse agreementType,
-        String number,
+        SalaryClassificationCompactResponse salaryClassification,
+        PaymentFrequencyResponse paymentFrequency,
         LocalDate startDate,
         LocalDate endDate,
+        CurrencyResponse currency,
+        BigDecimal grossAmount,
+        BigDecimal netAmount,
+        BigDecimal taxAmount,
+        BigDecimal deductionAmount,
+        Boolean taxable,
         StatusCompactResponse status,
-        List<ResourceResponse> resources,
-        LocalDateTime createdDate,
-        LocalDateTime updatedDate
+        LocalDateTime createdDate
 
 ) {
 }

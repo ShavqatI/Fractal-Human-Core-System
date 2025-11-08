@@ -5,9 +5,9 @@ import com.fractal.domain.employment.internal.compensation.dto.CompensationCompo
 import com.fractal.domain.employment.internal.compensation.dto.CompensationComponentResponse;
 
 public interface CompensationComponentMapperService {
-    CompensationComponentResponse toDTO(CompensationComponent agreement);
+    CompensationComponentResponse toDTO(CompensationComponent compensationComponent);
     CompensationComponent toEntity(CompensationComponentRequest dto);
-    CompensationComponent toEntity(CompensationComponent agreement, CompensationComponentRequest dto);
+    CompensationComponent toEntity(CompensationComponent compensationComponent, CompensationComponentRequest dto);
 }
 
 

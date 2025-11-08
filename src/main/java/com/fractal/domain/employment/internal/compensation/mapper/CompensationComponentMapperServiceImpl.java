@@ -1,41 +1,41 @@
 package com.fractal.domain.employment.internal.compensation.mapper;
 
-import com.fractal.domain.agreement.resource.mapper.AgreementResourceMapperService;
-import com.fractal.domain.agreement.type.AgreementTypeService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employment.docuemnt_template_manager.PaymentFrequencyService;
 import com.fractal.domain.employment.internal.compensation.CompensationComponent;
 import com.fractal.domain.employment.internal.compensation.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.internal.compensation.dto.CompensationComponentResponse;
+import com.fractal.domain.employment.salary_classification.SalaryClassificationService;
+import com.fractal.domain.finance.currency.CurrencyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import static java.util.Collections.emptyList;
+import java.math.BigDecimal;
 
 @Service
 @RequiredArgsConstructor
 class CompensationComponentMapperServiceImpl implements CompensationComponentMapperService {
-    private final AgreementTypeService agreementTypeService;
-    private final AgreementResourceMapperService resourceMapperService;
+
+    private final SalaryClassificationService salaryClassificationService;
+    private final PaymentFrequencyService paymentFrequencyService;
+    private final CurrencyService currencyService;
     private final StatusService statusService;
     @Override
-    public CompensationComponentResponse toDTO(CompensationComponent agreement) {
+    public CompensationComponentResponse toDTO(CompensationComponent compensationComponent) {
         return new CompensationComponentResponse(
-                agreement.getId(),
-                agreementTypeService.toDTO(agreement.getAgreementType()),
-                agreement.getNumber(),
-                agreement.getStartDate(),
-                agreement.getEndDate(),
-                statusService.toCompactDTO(agreement.getStatus()),
-                Optional.ofNullable(agreement.getResources())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(resourceMapperService::toDTO)
-                        .collect(Collectors.toList()),
-                agreement.getCreatedDate(),
-                agreement.getUpdatedDate()
+                compensationComponent.getId(),
+                salaryClassificationService.toCompactDTO(compensationComponent.getSalaryClassification()),
+                paymentFrequencyService.toDTO(compensationComponent.getPaymentFrequency()),
+                compensationComponent.getStartDate(),
+                compensationComponent.getEndDate(),
+                currencyService.toDTO(compensationComponent.getCurrency()),
+                compensationComponent.getGrossAmount(),
+                compensationComponent.getNetAmount(),
+                compensationComponent.getTaxAmount(),
+                compensationComponent.getDeductionAmount(),
+                compensationComponent.getTaxable(),
+                statusService.toCompactDTO(compensationComponent.getStatus()),
+                compensationComponent.getCreatedDate()
         );
     }
 
@@ -45,18 +45,27 @@ class CompensationComponentMapperServiceImpl implements CompensationComponentMap
     }
 
     @Override
-    public CompensationComponent toEntity(CompensationComponent agreement, CompensationComponentRequest dto) {
-       return mapToEntity(agreement,dto);
+    public CompensationComponent toEntity(CompensationComponent compensationComponent, CompensationComponentRequest dto) {
+       return mapToEntity(compensationComponent,dto);
     }
 
-    private CompensationComponent mapToEntity(CompensationComponent agreement, CompensationComponentRequest dto) {
-        agreementTypeService.getById(dto.agreementTypeId());
-        agreement.setNumber(dto.number());
-        agreement.setStartDate(dto.startDate());
-        agreement.setEndDate(dto.endDate());
-        agreement.setStatus(statusService.getById(dto.statusId()));
-        dto.files().forEach(file-> agreement.addResource(resourceMapperService.toEntity(file,null)));
-        return agreement;
+    private CompensationComponent mapToEntity(CompensationComponent compensationComponent, CompensationComponentRequest dto) {
+        compensationComponent.setSalaryClassification(salaryClassificationService.getById(dto.salaryClassificationId()));
+        compensationComponent.setPaymentFrequency(paymentFrequencyService.getById(dto.paymentFrequencyId()));
+        compensationComponent.setStartDate(dto.startDate());
+        compensationComponent.setEndDate(dto.endDate());
+        compensationComponent.setCurrency(currencyService.getById(dto.currencyId()));
+        compensationComponent.setGrossAmount(dto.grossAmount());
+        compensationComponent.setNetAmount(dto.netAmount());
+        compensationComponent.setTaxAmount(dto.taxAmount());
+        compensationComponent.setDeductionAmount(dto.deductionAmount());
+        compensationComponent.setTaxable(dto.taxable());
+        compensationComponent.setStatus(statusService.getById(dto.statusId()));
+        return compensationComponent;
+    }
+
+    private BigDecimal toBigDecimal(String string) {
+        return BigDecimal.valueOf(Double.valueOf(string));
     }
 
 }

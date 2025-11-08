@@ -24,10 +24,10 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
     @Transactional
     public CompensationComponent create(Long employmentId, CompensationComponentRequest dto) {
         var employment = employmentService.getById(employmentId);
-        var agreement = compensationComponentMapperService.toEntity(dto);
-        employment.addAgreement(agreement);
+        var compensationComponent = compensationComponentMapperService.toEntity(dto);
+        employment.addCompensationComponent(compensationComponent);
         employmentService.save(employment);
-        return agreement;
+        return compensationComponent;
     }
 
     @Override
@@ -44,23 +44,23 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
     @Transactional
     public CompensationComponent update(Long employmentId, Long id, CompensationComponentRequest dto) {
         var employment = employmentService.getById(employmentId);
-        var agreement = employment.getAgreements()
+        var compensationComponent = employment.getCompensationComponents()
                 .stream()
                 .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        agreement = compensationComponentMapperService.toEntity(agreement,dto);
-        compensationComponentRepository.save(agreement);
+        compensationComponent = compensationComponentMapperService.toEntity(compensationComponent,dto);
+        compensationComponentRepository.save(compensationComponent);
         employmentService.save(employment);
-        return agreement;
+        return compensationComponent;
     }
 
     @Override
     @Transactional
     public void delete(Long employmentId, Long id) {
         var employment = employmentService.getById(employmentId);
-        var agreement = employment.getAgreements()
+        var compensationComponent = employment.getCompensationComponents()
                 .stream()
                 .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        employment.removeAgreement(agreement);
+        employment.removeCompensationComponent(compensationComponent);
         employmentService.save(employment);
     }
 

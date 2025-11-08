@@ -2,12 +2,9 @@ package com.fractal.domain.employment.docuemnt_template_manager;
 
 import com.fractal.domain.employment.docuemnt_template_manager.dto.PaymentFrequencyRequest;
 import com.fractal.domain.employment.docuemnt_template_manager.dto.PaymentFrequencyResponse;
-import com.fractal.domain.resource.FileService;
-import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithCodeNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
