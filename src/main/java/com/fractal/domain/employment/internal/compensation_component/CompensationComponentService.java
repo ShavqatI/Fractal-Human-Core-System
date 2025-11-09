@@ -3,6 +3,7 @@ package com.fractal.domain.employment.internal.compensation_component;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface CompensationComponentService {
@@ -14,5 +15,6 @@ public interface CompensationComponentService {
     CompensationComponentResponse toDTO(CompensationComponent agreement);
     CompensationComponent save(CompensationComponent agreement);
     CompensationComponent getById(Long id);
+
 
 }
