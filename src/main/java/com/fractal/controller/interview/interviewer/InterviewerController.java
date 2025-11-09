@@ -1,4 +1,4 @@
-package com.fractal.controller.recruitment.interview.interviewer;
+package com.fractal.controller.interview.interviewer;
 
 
 import com.fractal.domain.interview.interviewer.InterviewerService;

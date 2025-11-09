@@ -1,5 +1,6 @@
 package com.fractal.domain.interview;
 
+import com.fractal.domain.interview.dto.InterviewCompactResponse;
 import com.fractal.domain.interview.dto.InterviewRequest;
 import com.fractal.domain.interview.dto.InterviewResponse;
 import com.fractal.domain.interview.mapper.InterviewMapperService;
@@ -63,6 +64,11 @@ class InterviewServiceImpl implements InterviewService {
     @Override
     public InterviewResponse toDTO(Interview interview) {
         return mapperService.toDTO(interview);
+    }
+
+    @Override
+    public InterviewCompactResponse toCompactDTO(Interview interview) {
+        return mapperService.toCompactDTO(interview);
     }
 
     private Interview findById(Long id) {

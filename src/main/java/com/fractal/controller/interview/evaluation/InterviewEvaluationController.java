@@ -1,4 +1,4 @@
-package com.fractal.controller.recruitment.interview.evaluation;
+package com.fractal.controller.interview.evaluation;
 
 
 import com.fractal.domain.interview.evaluation.InterviewEvaluationService;

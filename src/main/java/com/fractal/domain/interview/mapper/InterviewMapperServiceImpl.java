@@ -2,6 +2,7 @@ package com.fractal.domain.interview.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.interview.Interview;
+import com.fractal.domain.interview.dto.InterviewCompactResponse;
 import com.fractal.domain.interview.dto.InterviewRequest;
 import com.fractal.domain.interview.dto.InterviewResponse;
 import com.fractal.domain.interview.interviewee.mapper.IntervieweeMapperService;
@@ -48,6 +49,21 @@ class InterviewMapperServiceImpl implements InterviewMapperService {
                 interview.getCreatedDate()
         );
     }
+
+    @Override
+    public InterviewCompactResponse toCompactDTO(Interview interview) {
+        return new InterviewCompactResponse(
+                interview.getId(),
+                interviewTypeService.toDTO(interview.getInterviewType()),
+                interview.getScheduledTime(),
+                interview.getDurationMinutes(),
+                interview.getDescription(),
+                interview.getNotes(),
+                interview.getDetails(),
+                interview.getCreatedDate()
+        );
+    }
+
     @Override
     public Interview toEntity(InterviewRequest dto) {
         return mapToEntity(new Interview(),dto);

@@ -1,5 +1,6 @@
 package com.fractal.domain.interview;
 
+import com.fractal.domain.interview.dto.InterviewCompactResponse;
 import com.fractal.domain.interview.dto.InterviewRequest;
 import com.fractal.domain.interview.dto.InterviewResponse;
 
@@ -14,5 +15,6 @@ public interface InterviewService {
     void deleteById(Long id);
     Interview save(Interview interview);
     InterviewResponse toDTO(Interview interview);
+    InterviewCompactResponse toCompactDTO(Interview interview);
 
 }
