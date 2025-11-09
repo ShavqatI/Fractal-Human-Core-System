@@ -1,9 +1,8 @@
 package com.fractal.domain.integration.mapping.employee;
 
-import com.fractal.domain.abstraction.Dictionary;
 import com.fractal.domain.abstraction.Integration;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fractal.domain.employee_management.employee.Employee;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -16,5 +15,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 public class EmployeeMapping extends Integration {
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id",updatable = false,referencedColumnName = "id")
+    protected Employee employee;
 
 }

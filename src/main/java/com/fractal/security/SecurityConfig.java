@@ -2,6 +2,7 @@ package com.fractal.security;
 
 import com.fractal.domain.authorization.permission.Permission;
 import com.fractal.domain.authorization.permission.PermissionService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +33,7 @@ public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
     private final PermissionService permissionService;
+    private final JwtLogoutHandler logoutHandler;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -42,6 +44,12 @@ public class SecurityConfig {
                         .anyRequest().access((authentication, request) -> authorizationDecision(authentication.get(),request))
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .logout(logout -> logout
+                        .logoutUrl("/api/v1/authorization/authentication/logout")
+                        .addLogoutHandler(logoutHandler)
+                        .logoutSuccessHandler((request, response, authentication) ->
+                                response.setStatus(HttpServletResponse.SC_OK))
+                )
                 .build();
     }
 

@@ -1,8 +1,8 @@
 package com.fractal.domain.integration.mapping.department;
 
 import com.fractal.domain.abstraction.Integration;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.fractal.domain.organization_management.department.Department;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -15,6 +15,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 public class DepartmentMapping extends Integration {
-    private String filePath;
-    private String fileFormat;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "department_id",updatable = false,referencedColumnName = "id")
+    protected Department department;
+
 }
