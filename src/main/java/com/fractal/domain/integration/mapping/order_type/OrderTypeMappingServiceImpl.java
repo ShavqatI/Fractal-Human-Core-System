@@ -5,6 +5,7 @@ import com.fractal.domain.integration.mapping.order_type.dto.OrderTypeMappingReq
 import com.fractal.domain.integration.mapping.order_type.dto.OrderTypeMappingResponse;
 import com.fractal.domain.order.type.OrderTypeService;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -85,6 +86,6 @@ class OrderTypeMappingServiceImpl implements OrderTypeMappingService {
     }
 
     private OrderTypeMapping findById(Long id) {
-        return orderTypeMappingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Gender with id: " + id + " not found"));
+        return orderTypeMappingRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 }

@@ -1,4 +1,4 @@
-package com.fractal.controller.interview.evaluation;
+package com.fractal.controller.interview_management.evaluation;
 
 
 import com.fractal.domain.interview.evaluation.section.question.InterviewEvaluationQuestionService;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/recruitment/interview/evaluation/section/{sectionId}/question")
+@RequestMapping("/api/v1/interview-management/interview-evaluation/section/{sectionId}/question")
 @RequiredArgsConstructor
 public class InterviewEvaluationQuestionController {
 

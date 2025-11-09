@@ -2,6 +2,8 @@ package com.fractal.security;
 
 import com.fractal.domain.authorization.permission.Permission;
 import com.fractal.domain.authorization.permission.PermissionService;
+import com.fractal.domain.navigation.menu.Menu;
+import com.fractal.domain.navigation.menu.action.MenuAction;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -23,6 +25,7 @@ import org.springframework.security.web.access.intercept.RequestAuthorizationCon
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.List;
+import java.util.Optional;
 
 @Configuration
 @EnableMethodSecurity
@@ -87,6 +90,9 @@ public class SecurityConfig {
         }
         return new AuthorizationDecision(false);
     }
+
+
+
 
 
 }

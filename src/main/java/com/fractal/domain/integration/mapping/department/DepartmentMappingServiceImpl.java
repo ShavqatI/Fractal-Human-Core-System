@@ -5,6 +5,7 @@ import com.fractal.domain.integration.mapping.department.dto.DepartmentMappingRe
 import com.fractal.domain.integration.mapping.department.dto.DepartmentMappingResponse;
 import com.fractal.domain.organization_management.department.DepartmentService;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -86,6 +87,6 @@ class DepartmentMappingServiceImpl implements DepartmentMappingService {
     }
 
     private DepartmentMapping findById(Long id) {
-        return departmentMappingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Gender with id: " + id + " not found"));
+        return departmentMappingRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 }

@@ -5,6 +5,7 @@ import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.integration.mapping.employee.dto.EmployeeMappingRequest;
 import com.fractal.domain.integration.mapping.employee.dto.EmployeeMappingResponse;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -85,6 +86,6 @@ class EmployeeMappingServiceImpl implements EmployeeMappingService {
     }
 
     private EmployeeMapping findById(Long id) {
-        return employeeMappingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Gender with id: " + id + " not found"));
+        return employeeMappingRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 }

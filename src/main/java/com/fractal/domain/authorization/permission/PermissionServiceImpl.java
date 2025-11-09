@@ -21,7 +21,7 @@ public class PermissionServiceImpl implements PermissionService {
     private final PermissionRepository permissionRepository;
     private final PermissionMapperService mapperService;
     private final UserService userService;
-    private final UserRoleService userRoleService;
+
 
     @Override
     public Permission create(PermissionRequest dto) {

@@ -5,6 +5,7 @@ import com.fractal.domain.integration.mapping.organization.dto.OrganizationMappi
 import com.fractal.domain.integration.mapping.organization.dto.OrganizationMappingResponse;
 import com.fractal.domain.organization_management.organization.OrganizationService;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -85,6 +86,6 @@ class OrganizationMappingServiceImpl implements OrganizationMappingService {
     }
 
     private OrganizationMapping findById(Long id) {
-        return organizationMappingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Gender with id: " + id + " not found"));
+        return organizationMappingRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 }
