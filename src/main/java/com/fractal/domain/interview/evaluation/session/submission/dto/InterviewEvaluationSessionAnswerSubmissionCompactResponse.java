@@ -1,16 +1,16 @@
-package com.fractal.domain.interview.evaluation.session.answer.dto;
+package com.fractal.domain.interview.evaluation.session.submission.dto;
 
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.interview.evaluation.section.question.dto.InterviewEvaluationQuestionResponse;
-import com.fractal.domain.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerResponse;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.dto.InterviewEvaluationSessionSelectedAnswerResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record InterviewEvaluationSessionAnswerSubmissionResponse(
+public record InterviewEvaluationSessionAnswerSubmissionCompactResponse(
         Long id,
         InterviewEvaluationQuestionResponse question,
-        List<InterviewEvaluationSessionSelectedAnswerResponse> selectedAnswers,
+        List<InterviewEvaluationSessionSelectedAnswerResponse> answers,
         StatusCompactResponse status,
         LocalDateTime createdDate
 

@@ -3,7 +3,7 @@ package com.fractal.domain.interview.evaluation.session.mapper;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.interview.evaluation.section.question.InterviewEvaluationQuestionService;
 import com.fractal.domain.interview.evaluation.session.InterviewEvaluationSession;
-import com.fractal.domain.interview.evaluation.session.answer.mapper.InterviewEvaluationSessionAnswerSubmissionMapperService;
+import com.fractal.domain.interview.evaluation.session.submission.mapper.InterviewEvaluationSessionAnswerSubmissionMapperService;
 import com.fractal.domain.interview.evaluation.session.dto.InterviewEvaluationSessionRequest;
 import com.fractal.domain.interview.evaluation.session.dto.InterviewEvaluationSessionResponse;
 import lombok.RequiredArgsConstructor;

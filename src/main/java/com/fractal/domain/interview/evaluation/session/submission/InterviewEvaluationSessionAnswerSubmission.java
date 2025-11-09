@@ -1,10 +1,10 @@
-package com.fractal.domain.interview.evaluation.session.answer;
+package com.fractal.domain.interview.evaluation.session.submission;
 
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.interview.evaluation.section.question.InterviewEvaluationQuestion;
 import com.fractal.domain.interview.evaluation.session.InterviewEvaluationSession;
-import com.fractal.domain.interview.evaluation.session.answer.selected.InterviewEvaluationSessionSelectedAnswer;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.InterviewEvaluationSessionSelectedAnswer;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,6 +1,6 @@
-package com.fractal.domain.interview.evaluation.session.answer.dto;
+package com.fractal.domain.interview.evaluation.session.submission.dto;
 
-import com.fractal.domain.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerRequest;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.dto.InterviewEvaluationSessionSelectedAnswerRequest;
 
 import java.util.List;
 

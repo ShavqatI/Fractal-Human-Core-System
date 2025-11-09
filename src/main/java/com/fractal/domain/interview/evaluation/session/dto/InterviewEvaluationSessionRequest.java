@@ -1,6 +1,6 @@
 package com.fractal.domain.interview.evaluation.session.dto;
 
-import com.fractal.domain.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionRequest;
+import com.fractal.domain.interview.evaluation.session.submission.dto.InterviewEvaluationSessionAnswerSubmissionRequest;
 
 import java.time.LocalDateTime;
 import java.util.List;

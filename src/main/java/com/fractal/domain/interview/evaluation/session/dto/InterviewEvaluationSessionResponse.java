@@ -1,7 +1,7 @@
 package com.fractal.domain.interview.evaluation.session.dto;
 
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
-import com.fractal.domain.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionResponse;
+import com.fractal.domain.interview.evaluation.session.submission.dto.InterviewEvaluationSessionAnswerSubmissionResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;

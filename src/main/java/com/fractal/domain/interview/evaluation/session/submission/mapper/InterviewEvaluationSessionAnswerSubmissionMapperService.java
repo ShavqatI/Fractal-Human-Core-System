@@ -1,9 +1,9 @@
-package com.fractal.domain.interview.evaluation.session.answer.mapper;
+package com.fractal.domain.interview.evaluation.session.submission.mapper;
 
-import com.fractal.domain.interview.evaluation.session.answer.InterviewEvaluationSessionAnswerSubmission;
-import com.fractal.domain.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionCompactResponse;
-import com.fractal.domain.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionRequest;
-import com.fractal.domain.interview.evaluation.session.answer.dto.InterviewEvaluationSessionAnswerSubmissionResponse;
+import com.fractal.domain.interview.evaluation.session.submission.InterviewEvaluationSessionAnswerSubmission;
+import com.fractal.domain.interview.evaluation.session.submission.dto.InterviewEvaluationSessionAnswerSubmissionCompactResponse;
+import com.fractal.domain.interview.evaluation.session.submission.dto.InterviewEvaluationSessionAnswerSubmissionRequest;
+import com.fractal.domain.interview.evaluation.session.submission.dto.InterviewEvaluationSessionAnswerSubmissionResponse;
 
 public interface InterviewEvaluationSessionAnswerSubmissionMapperService {
     InterviewEvaluationSessionAnswerSubmissionResponse toDTO(InterviewEvaluationSessionAnswerSubmission answerSubmission);

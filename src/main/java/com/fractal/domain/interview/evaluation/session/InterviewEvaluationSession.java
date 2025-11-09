@@ -5,7 +5,7 @@ import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.interview.evaluation.InterviewEvaluation;
-import com.fractal.domain.interview.evaluation.session.answer.InterviewEvaluationSessionAnswerSubmission;
+import com.fractal.domain.interview.evaluation.session.submission.InterviewEvaluationSessionAnswerSubmission;
 import com.fractal.domain.interview.interviewer.Interviewer;
 import jakarta.persistence.*;
 import lombok.Data;

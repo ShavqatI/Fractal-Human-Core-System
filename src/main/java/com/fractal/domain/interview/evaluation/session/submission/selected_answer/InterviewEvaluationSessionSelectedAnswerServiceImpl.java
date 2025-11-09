@@ -1,10 +1,10 @@
-package com.fractal.domain.interview.evaluation.session.answer.selected;
+package com.fractal.domain.interview.evaluation.session.submission.selected_answer;
 
-import com.fractal.domain.interview.evaluation.session.answer.InterviewEvaluationSessionAnswerSubmissionService;
-import com.fractal.domain.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerCompactResponse;
-import com.fractal.domain.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerRequest;
-import com.fractal.domain.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerResponse;
-import com.fractal.domain.interview.evaluation.session.answer.selected.mapper.InterviewEvaluationSessionSelectedAnswerMapperService;
+import com.fractal.domain.interview.evaluation.session.submission.InterviewEvaluationSessionAnswerSubmissionService;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.dto.InterviewEvaluationSessionSelectedAnswerCompactResponse;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.dto.InterviewEvaluationSessionSelectedAnswerRequest;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.dto.InterviewEvaluationSessionSelectedAnswerResponse;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.mapper.InterviewEvaluationSessionSelectedAnswerMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

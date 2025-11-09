@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/insurance{insuranceId}/coverage")
+@RequestMapping("/api/v1/employee-management/insurance/{insuranceId}/coverage")
 @RequiredArgsConstructor
 public class InsuranceCoverageController {
 

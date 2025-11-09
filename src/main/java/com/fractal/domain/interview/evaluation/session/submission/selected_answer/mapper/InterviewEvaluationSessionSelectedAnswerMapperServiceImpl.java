@@ -1,11 +1,11 @@
-package com.fractal.domain.interview.evaluation.session.answer.selected.mapper;
+package com.fractal.domain.interview.evaluation.session.submission.selected_answer.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.interview.evaluation.section.question.answer.mapper.InterviewEvaluationAnswerMapperService;
-import com.fractal.domain.interview.evaluation.session.answer.selected.InterviewEvaluationSessionSelectedAnswer;
-import com.fractal.domain.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerCompactResponse;
-import com.fractal.domain.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerRequest;
-import com.fractal.domain.interview.evaluation.session.answer.selected.dto.InterviewEvaluationSessionSelectedAnswerResponse;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.InterviewEvaluationSessionSelectedAnswer;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.dto.InterviewEvaluationSessionSelectedAnswerCompactResponse;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.dto.InterviewEvaluationSessionSelectedAnswerRequest;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.dto.InterviewEvaluationSessionSelectedAnswerResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

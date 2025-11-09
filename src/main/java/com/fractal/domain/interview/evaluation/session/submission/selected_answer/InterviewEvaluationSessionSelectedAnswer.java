@@ -1,8 +1,8 @@
-package com.fractal.domain.interview.evaluation.session.answer.selected;
+package com.fractal.domain.interview.evaluation.session.submission.selected_answer;
 
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.interview.evaluation.section.question.answer.InterviewEvaluationAnswer;
-import com.fractal.domain.interview.evaluation.session.answer.InterviewEvaluationSessionAnswerSubmission;
+import com.fractal.domain.interview.evaluation.session.submission.InterviewEvaluationSessionAnswerSubmission;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

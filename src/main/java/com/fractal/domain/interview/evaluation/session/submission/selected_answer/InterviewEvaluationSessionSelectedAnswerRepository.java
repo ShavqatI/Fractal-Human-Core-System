@@ -1,4 +1,4 @@
-package com.fractal.domain.interview.evaluation.session.answer.selected;
+package com.fractal.domain.interview.evaluation.session.submission.selected_answer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

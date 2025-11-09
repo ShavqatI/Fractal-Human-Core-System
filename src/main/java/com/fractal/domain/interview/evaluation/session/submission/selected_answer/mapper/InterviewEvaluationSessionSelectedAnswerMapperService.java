@@ -1,0 +1,15 @@
+package com.fractal.domain.interview.evaluation.session.submission.selected_answer.mapper;
+
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.InterviewEvaluationSessionSelectedAnswer;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.dto.InterviewEvaluationSessionSelectedAnswerCompactResponse;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.dto.InterviewEvaluationSessionSelectedAnswerRequest;
+import com.fractal.domain.interview.evaluation.session.submission.selected_answer.dto.InterviewEvaluationSessionSelectedAnswerResponse;
+
+public interface InterviewEvaluationSessionSelectedAnswerMapperService {
+    InterviewEvaluationSessionSelectedAnswerResponse toDTO(InterviewEvaluationSessionSelectedAnswer selectedAnswer);
+    InterviewEvaluationSessionSelectedAnswerCompactResponse toCompactDTO(InterviewEvaluationSessionSelectedAnswer selectedAnswer);
+    InterviewEvaluationSessionSelectedAnswer toEntity(InterviewEvaluationSessionSelectedAnswerRequest dto);
+    InterviewEvaluationSessionSelectedAnswer toEntity(InterviewEvaluationSessionSelectedAnswer selectedAnswer, InterviewEvaluationSessionSelectedAnswerRequest dto);
+}
+
+

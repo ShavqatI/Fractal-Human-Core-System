@@ -1,4 +1,4 @@
-package com.fractal.domain.interview.evaluation.session.answer.selected.dto;
+package com.fractal.domain.interview.evaluation.session.submission.selected_answer.dto;
 
 import java.time.LocalDateTime;
 

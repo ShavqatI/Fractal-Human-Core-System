@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 @RequiredArgsConstructor
-class EducationTypeTypeServiceImpl implements InterviewTypeService {
+class InterviewTypeServiceImpl implements InterviewTypeService {
 
     private final InterviewTypeRepository interviewTypeRepository;
 
