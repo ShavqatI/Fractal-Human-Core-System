@@ -41,8 +41,7 @@ public record EmployeeResponse(
         List<EmploymentResponse> employments,
         List<EmployeeResourceResponse> resources,
         StatusCompactResponse status,
+        String profilePhoto,
         LocalDateTime createdDate
 
-){
-
-}
+){ }

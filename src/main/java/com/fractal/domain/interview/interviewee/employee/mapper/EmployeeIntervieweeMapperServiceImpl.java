@@ -23,7 +23,6 @@ import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
-@Primary
 class EmployeeIntervieweeMapperServiceImpl implements EmployeeIntervieweeMapperService {
 
     private final GenderService genderService;
@@ -34,8 +33,7 @@ class EmployeeIntervieweeMapperServiceImpl implements EmployeeIntervieweeMapperS
     private final EmployeeService employeeService;
 
     @Override
-    public IntervieweeResponse toDTO(Interviewee interviewee) {
-        var employeeInterviewee = (EmployeeInterviewee) interviewee;
+    public IntervieweeResponse toDTO(EmployeeInterviewee employeeInterviewee) {
         return new IntervieweeResponse(
                 employeeInterviewee.getId(),
                 employeeInterviewee.getEmployee().getLastName(),
@@ -57,12 +55,6 @@ class EmployeeIntervieweeMapperServiceImpl implements EmployeeIntervieweeMapperS
 
         );
     }
-
-    @Override
-    public Interviewee toEntity(IntervieweeRequest dto) {
-        return toEntity((EmployeeIntervieweeRequest) dto);
-    }
-
     @Override
     public IntervieweeCompactResponse toCompactDTO(EmployeeInterviewee interviewee) {
         return new IntervieweeCompactResponse(

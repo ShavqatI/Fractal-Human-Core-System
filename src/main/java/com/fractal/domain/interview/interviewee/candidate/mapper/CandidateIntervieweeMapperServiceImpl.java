@@ -32,36 +32,28 @@ class CandidateIntervieweeMapperServiceImpl implements CandidateIntervieweeMappe
     private final CandidateService candidateService;
 
     @Override
-    public IntervieweeResponse toDTO(Interviewee interviewee) {
-        var candidateInterviewee = (CandidateInterviewee) interviewee;
+    public IntervieweeResponse toDTO(CandidateInterviewee interviewee) {
         return new IntervieweeResponse(
-                candidateInterviewee.getId(),
-                candidateInterviewee.getCandidate().getLastName(),
-                candidateInterviewee.getCandidate().getFirstName(),
-                candidateInterviewee.getCandidate().getPatronymicName(),
-                candidateInterviewee.getCandidate().getBirthDate(),
-                candidateInterviewee.getCandidate().getTin(),
-                candidateInterviewee.getCandidate().getSsn(),
-                genderService.toDTO(candidateInterviewee.getCandidate().getGender()),
-                maritalStatusService.toDTO(candidateInterviewee.getCandidate().getMaritalStatus()),
-                nationalityService.toDTO(candidateInterviewee.getCandidate().getNationality()),
-                Optional.ofNullable(candidateInterviewee.getCandidate().getContacts())
+                interviewee.getId(),
+                interviewee.getCandidate().getLastName(),
+                interviewee.getCandidate().getFirstName(),
+                interviewee.getCandidate().getPatronymicName(),
+                interviewee.getCandidate().getBirthDate(),
+                interviewee.getCandidate().getTin(),
+                interviewee.getCandidate().getSsn(),
+                genderService.toDTO(interviewee.getCandidate().getGender()),
+                maritalStatusService.toDTO(interviewee.getCandidate().getMaritalStatus()),
+                nationalityService.toDTO(interviewee.getCandidate().getNationality()),
+                Optional.ofNullable(interviewee.getCandidate().getContacts())
                         .orElse(emptyList())
                         .stream()
                         .map(contactMapperService::toDTO)
                         .collect(Collectors.toList()),
-                statusService.toCompactDTO(candidateInterviewee.getStatus()),
-                candidateInterviewee.getCreatedDate()
+                statusService.toCompactDTO(interviewee.getStatus()),
+                interviewee.getCreatedDate()
 
         );
     }
-
-    @Override
-    public Interviewee toEntity(IntervieweeRequest dto) {
-        return toEntity((CandidateIntervieweeRequest) dto);
-    }
-
-
     @Override
     public IntervieweeCompactResponse toCompactDTO(CandidateInterviewee interviewee) {
         return new IntervieweeCompactResponse(

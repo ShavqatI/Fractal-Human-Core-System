@@ -12,6 +12,7 @@ import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
+import com.fractal.domain.employee_management.employee.resource.EmployeeResource;
 import com.fractal.domain.employee_management.employee.resource.mapper.EmployeeResourceMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentMapperService;
 import com.fractal.domain.employee_management.identification_document.mapper.EmployeeIdentificationDocumentMapperService;
@@ -21,6 +22,11 @@ import com.fractal.domain.employee_management.relative.mapper.RelativeMapperServ
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Base64;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -109,6 +115,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                         .map(employeeResourceMapperService::toDTO)
                         .collect(Collectors.toList()),
                 statusService.toCompactDTO(employee.getStatus()),
+                getProfilePhoto(employee),
                 employee.getCreatedDate()
 
         );
@@ -163,6 +170,27 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
         dto.employments().forEach(employment->employee.addEmployment(employmentMapperService.toEntity(employment)));
         dto.resources().forEach(resource-> employee.addResource(employeeResourceMapperService.toEntity(resource,null)));
        return employee;
+    }
+
+    private String getProfilePhoto(Employee employee) {
+        EmployeeResource resource = employee.getResources()
+                .stream()
+                .filter(res -> "PROFILE_PHOTO".equals(res.getEmployeeResourceType().getCode()))
+                .sorted(Comparator.comparing(EmployeeResource::getId).reversed())
+                .findFirst()
+                .orElse(null);
+        if (resource != null) {
+            try {
+                Path path = Path.of(resource.getUrl());
+                byte[] fileBytes = Files.readAllBytes(path);
+                return Base64.getEncoder().encodeToString(fileBytes);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return null;
     }
 
 }

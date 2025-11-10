@@ -16,16 +16,16 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-class EmployeeIntervieweeServiceImpl implements IntervieweeService {
+class EmployeeIntervieweeServiceImpl implements EmployeeIntervieweeService {
 
     private final EmployeeIntervieweeRepository intervieweeRepository;
     private final EmployeeIntervieweeMapperService mapperService;
     private final InterviewService interviewService;
 
     @Override
-    public EmployeeInterviewee create(Long interviewId, IntervieweeRequest dto) {
+    public EmployeeInterviewee create(Long interviewId, EmployeeIntervieweeRequest dto) {
         var interview = interviewService.getById(interviewId);
-        var interviewee = mapperService.toEntity((EmployeeIntervieweeRequest) dto);
+        var interviewee = mapperService.toEntity(dto);
         interview.addInterviewee(interviewee);
         interviewService.save(interview);
         return interviewee;
@@ -44,12 +44,12 @@ class EmployeeIntervieweeServiceImpl implements IntervieweeService {
 
 
     @Override
-    public EmployeeInterviewee update(Long interviewId, Long id, IntervieweeRequest dto) {
+    public EmployeeInterviewee update(Long interviewId, Long id, EmployeeIntervieweeRequest dto) {
         var interview = interviewService.getById(interviewId);
         var interviewee = (EmployeeInterviewee) interview.getInterviewees()
                 .stream()
                 .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        interviewee = intervieweeRepository.save(mapperService.toEntity(interviewee,(EmployeeIntervieweeRequest) dto));
+        interviewee = intervieweeRepository.save(mapperService.toEntity(interviewee,dto));
         interviewService.save(interview);
         return interviewee;
     }
@@ -64,13 +64,13 @@ class EmployeeIntervieweeServiceImpl implements IntervieweeService {
         interviewService.save(interview);
     }
     @Override
-    public IntervieweeResponse toDTO(Interviewee interviewee) {
+    public IntervieweeResponse toDTO(EmployeeInterviewee interviewee) {
         return mapperService.toDTO(interviewee);
     }
 
     @Override
-    public IntervieweeCompactResponse toCompactDTO(Interviewee interviewee) {
-        return mapperService.toCompactDTO((EmployeeInterviewee) interviewee);
+    public IntervieweeCompactResponse toCompactDTO(EmployeeInterviewee interviewee) {
+        return mapperService.toCompactDTO(interviewee);
     }
 
 }

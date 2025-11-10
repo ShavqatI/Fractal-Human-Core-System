@@ -4,12 +4,18 @@ import com.fractal.domain.employee_management.employee.dto.EmployeeCompactRespon
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employee.mapper.EmployeeMapperService;
+import com.fractal.domain.employee_management.employee.resource.EmployeeResource;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Base64;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -43,19 +49,19 @@ class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public Employee update(Long id, EmployeeRequest dto) {
-        var employee = employeeMapperService.toEntity(findById(id),dto);
+        var employee = employeeMapperService.toEntity(findById(id), dto);
         return employee;
     }
 
     @Override
     @Transactional
     public void deleteById(Long id) {
-      employeeRepository.delete(findById(id));
+        employeeRepository.delete(findById(id));
     }
 
     @Override
     public EmployeeResponse toDTO(Employee employee) {
-       return employeeMapperService.toDTO(employee);
+        return employeeMapperService.toDTO(employee);
     }
 
     @Override
@@ -76,4 +82,6 @@ class EmployeeServiceImpl implements EmployeeService {
     private Employee findById(Long id) {
         return employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee with id: " + id + " not found"));
     }
+
+
 }

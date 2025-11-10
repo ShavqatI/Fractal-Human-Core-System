@@ -7,8 +7,8 @@ import com.fractal.domain.interview.interviewee.employee.EmployeeInterviewee;
 import com.fractal.domain.interview.interviewee.employee.dto.EmployeeIntervieweeRequest;
 import com.fractal.domain.interview.interviewee.mapper.IntervieweeMapperService;
 
-public interface EmployeeIntervieweeMapperService extends IntervieweeMapperService {
-    IntervieweeResponse toDTO(Interviewee interviewee);
+public interface EmployeeIntervieweeMapperService {
+    IntervieweeResponse toDTO(EmployeeInterviewee interviewee);
     IntervieweeCompactResponse toCompactDTO(EmployeeInterviewee interviewee);
     EmployeeInterviewee toEntity(EmployeeIntervieweeRequest dto);
     EmployeeInterviewee toEntity(EmployeeInterviewee interviewee, EmployeeIntervieweeRequest dto);
