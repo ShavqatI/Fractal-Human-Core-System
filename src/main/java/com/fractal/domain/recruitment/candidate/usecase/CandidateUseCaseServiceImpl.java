@@ -10,6 +10,8 @@ import com.fractal.domain.employee_management.contact.mapper.EmployeeContactMapp
 import com.fractal.domain.employee_management.education.mapper.EmployeeEducationMapperService;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.EmployeeService;
+import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceRequest;
+import com.fractal.domain.employee_management.employee.resource.mapper.EmployeeResourceMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentMapperService;
 import com.fractal.domain.employee_management.identification_document.mapper.EmployeeIdentificationDocumentMapperService;
 import com.fractal.domain.employee_management.language_skill.mapper.EmployeeLanguageSkillMapperService;
@@ -33,6 +35,8 @@ public class CandidateUseCaseServiceImpl implements CandidateUseCaseService {
     private final EmployeeLanguageSkillMapperService employeeLanguageSkillMapperService;
     private final EmployeeMilitaryServiceMapperService employeeMilitaryServiceMapperService;
     private final EmployeeEmploymentMapperService employeeEmploymentMapperService;
+    private final EmployeeResourceMapperService employeeResourceMapperService;
+
 
     @Override
     public void hire(Long id) {
@@ -57,6 +61,7 @@ public class CandidateUseCaseServiceImpl implements CandidateUseCaseService {
        candidate.getLanguageSkills().forEach(languageSkill -> employee.addLanguageSkill(employeeLanguageSkillMapperService.toEntity(new LanguageSkillRequest(languageSkill.getLanguage().getId(),languageSkill.getLanguageProficiency().getId()))));
        candidate.getMilitaryServices().forEach(militaryService -> employee.addMilitaryService(employeeMilitaryServiceMapperService.copy(militaryService)));
        candidate.getEmployments().forEach(employment -> employee.addEmployment(employeeEmploymentMapperService.copy(employment.getEmployment())));
+       candidate.getResources().forEach(resource -> employee.addResource(employeeResourceMapperService.copy(resource)));
       employeeService.save(employee);
     }
 }

@@ -49,4 +49,19 @@ class FileServiceImpl implements FileService {
         }
         return target.toString();
     }
+
+    @Override
+    public String copy(String from, String to) {
+        Path fromPath = Path.of(from);
+        Path toPath = Path.of(to);
+        String fileName = fromPath.getFileName().toString();
+        String newFileName = UUID.randomUUID() + "_" + fileName;
+        Path target = toPath.resolveSibling(newFileName);
+        try {
+            Files.copy(fromPath, target, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return target.toString();
+    }
 }

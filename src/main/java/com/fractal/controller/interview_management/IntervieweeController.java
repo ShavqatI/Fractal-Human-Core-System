@@ -28,10 +28,10 @@ public class IntervieweeController {
     public ResponseEntity<List<IntervieweeResponse>> getAll(@PathVariable Long interviewId) {
         return ResponseEntity.ok(intervieweeService.getAllByInterviewId(interviewId).stream().map(intervieweeService::toDTO).collect(Collectors.toList()));
     }
-    @GetMapping("/{id}")
+   /* @GetMapping("/{id}")
     public ResponseEntity<IntervieweeResponse> getById(@PathVariable Long interviewId, @PathVariable Long id) {
         return ResponseEntity.ok(intervieweeService.toDTO(intervieweeService.getById(interviewId,id)));
-    }
+    }*/
 
     @PutMapping("/{id}")
     public ResponseEntity<IntervieweeResponse> update(@PathVariable Long interviewId, @PathVariable Long id, @RequestBody @Valid IntervieweeRequest dto) {

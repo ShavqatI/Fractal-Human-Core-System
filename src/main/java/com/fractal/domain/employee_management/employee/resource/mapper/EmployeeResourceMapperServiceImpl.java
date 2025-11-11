@@ -4,8 +4,10 @@ import com.fractal.domain.employee_management.employee.resource.EmployeeResource
 import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceRequest;
 import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceResponse;
 import com.fractal.domain.employee_management.employee.resource.type.EmployeeResourceTypeService;
+import com.fractal.domain.recruitment.candidate.resource.CandidateResource;
 import com.fractal.domain.resource.FileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,6 +17,8 @@ class EmployeeResourceMapperServiceImpl implements EmployeeResourceMapperService
 
     private final EmployeeResourceTypeService resourceTypeService;
     private final FileService fileService;
+    @Value("${resource-storage.employee}")
+    private String resourceStoragePath;
 
     @Override
     public EmployeeResourceResponse toDTO(EmployeeResource resource) {
@@ -27,6 +31,18 @@ class EmployeeResourceMapperServiceImpl implements EmployeeResourceMapperService
                 resource.getSizeInBytes(),
                 resource.getCreatedDate()
         );
+    }
+
+    @Override
+    public EmployeeResource copy(CandidateResource resource) {
+        EmployeeResource employeeResource = EmployeeResource.builder().build();
+        fileService.delete(resource.getUrl());
+        employeeResource.setEmployeeResourceType(resourceTypeService.getByCode(resource.getCandidateResourceType().getCode()));
+        employeeResource.setFileName(resource.getFileName());
+        employeeResource.setContentType(resource.getContentType());
+        employeeResource.setSizeInBytes(resource.getSizeInBytes());
+        employeeResource.setUrl(fileService.copy(resource.getUrl(), resourceStoragePath + resource.getFileName()));
+        return employeeResource;
     }
 
     @Override

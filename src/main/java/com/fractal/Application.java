@@ -6,11 +6,13 @@ import com.fractal.domain.navigation.menu.Menu;
 import com.fractal.domain.navigation.menu.MenuService;
 import com.fractal.domain.navigation.menu.action.MenuAction;
 import com.fractal.domain.navigation.menu.action.MenuActionService;
+import com.fractal.domain.poi.processor.word.WordTemplateProcessorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.util.Map;
 import java.util.Optional;
 
 @SpringBootApplication(scanBasePackages = "com.fractal")
@@ -20,6 +22,7 @@ public class Application implements CommandLineRunner {
 	private final MenuActionService menuActionService;
 	private final ActionService actionService;
 	private final MenuService menuService;
+	private final WordTemplateProcessorService wordTemplateProcessorService;
     public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
@@ -27,8 +30,17 @@ public class Application implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		//var menu = menuActionService.getById(100L);
-		//System.out.println(buildUrl(menu));
+		Map<String, String> values = Map.of(
+				"${docDate}", "2025-01-01",
+				"${branchName}", "DMB",
+				"${fullBankName}", "CJSC ICB",
+				"${employeeName}", "Test test",
+				"${employeePosition}", "Officer",
+				"${punishmentType}", "Blblalal",
+				"${sourceDocument}", "#12354788",
+				"${hrHead}", "Jigarakt"
+		);
+		wordTemplateProcessorService.processTemplate("C:\\My Data\\fractal\\2025\\backend\\FILE-STORAGE\\document-template-manager\\0af7c45b-dda8-4293-824f-88415484eda8_37_Фармон - Танбех.docx","C:\\My Data\\fractal\\2025\\backend\\FILE-STORAGE\\test_temp2.DOCX",values);
 	}
 
 	private String buildUrl(MenuAction menuAction) {

@@ -7,4 +7,5 @@ public interface FileService {
     void delete(String path);
 
     String copy(String url);
+    String copy(String from,String to);
 }
