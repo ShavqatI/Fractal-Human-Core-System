@@ -49,11 +49,6 @@ class IntervieweeServiceImpl implements IntervieweeService {
     }
 
     @Override
-    public Interviewee getById(Long interviewId, Long id) {
-        return null;
-    }
-
-    @Override
     public void delete(Long interviewId, Long id) {
        intervieweeRepository.delete(intervieweeRepository.findByInterviewIdAndId(interviewId,id));
     }
@@ -65,6 +60,6 @@ class IntervieweeServiceImpl implements IntervieweeService {
 
     @Override
     public IntervieweeCompactResponse toCompactDTO(Interviewee interviewee) {
-        return null;
+        return mapperService.toCompactDTO(interviewee);
     }
 }

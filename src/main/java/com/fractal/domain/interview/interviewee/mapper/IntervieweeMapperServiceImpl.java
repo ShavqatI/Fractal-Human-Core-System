@@ -4,6 +4,7 @@ import com.fractal.domain.interview.interviewee.Interviewee;
 import com.fractal.domain.interview.interviewee.candidate.CandidateInterviewee;
 import com.fractal.domain.interview.interviewee.candidate.dto.CandidateIntervieweeRequest;
 import com.fractal.domain.interview.interviewee.candidate.mapper.CandidateIntervieweeMapperService;
+import com.fractal.domain.interview.interviewee.dto.IntervieweeCompactResponse;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeRequest;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeResponse;
 import com.fractal.domain.interview.interviewee.employee.EmployeeInterviewee;
@@ -24,6 +25,16 @@ class IntervieweeMapperServiceImpl implements IntervieweeMapperService {
             candidateIntervieweeMapperService.toDTO(candidateInterviewee);
         } else if (interviewee instanceof EmployeeInterviewee employeeInterviewee) {
             employeeIntervieweeMapperService.toDTO(employeeInterviewee);
+        }
+        return null;
+    }
+
+    @Override
+    public IntervieweeCompactResponse toCompactDTO(Interviewee interviewee) {
+        if (interviewee instanceof CandidateInterviewee candidateInterviewee) {
+            candidateIntervieweeMapperService.toCompactDTO(candidateInterviewee);
+        } else if (interviewee instanceof EmployeeInterviewee employeeInterviewee) {
+            employeeIntervieweeMapperService.toCompactDTO(employeeInterviewee);
         }
         return null;
     }
