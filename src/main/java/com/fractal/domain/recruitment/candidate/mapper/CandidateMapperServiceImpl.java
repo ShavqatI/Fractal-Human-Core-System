@@ -18,6 +18,7 @@ import com.fractal.domain.recruitment.candidate.language_skill.mapper.CandidateL
 import com.fractal.domain.recruitment.candidate.military_service.mapper.CandidateMilitaryServiceMapperService;
 import com.fractal.domain.recruitment.candidate.professional_experience.mapper.CandidateProfessionalExperienceMapperService;
 import com.fractal.domain.recruitment.candidate.resource.mapper.CandidateResourceMapperService;
+import com.fractal.domain.recruitment.candidate.usecase.account.dto.CandidateAccountRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -134,6 +135,19 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     @Override
     public Candidate toEntity(CandidateRequest dto) {
         return mapToEntity(new Candidate(), dto);
+    }
+
+    @Override
+    public Candidate toEntity(CandidateAccountRequest dto) {
+        var candidate = Candidate.builder()
+                .lastName(dto.lastName())
+                .firstName(dto.firstName())
+                .patronymicName(dto.patronymicName())
+                .birthDate(dto.birthDate())
+                .gender(genderService.getById(dto.genderId()))
+                .build();
+        dto.contacts().forEach(contact->candidate.addContact(contactMapperService.toEntity(contact)));
+        return candidate;
     }
 
     @Override

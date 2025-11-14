@@ -1,9 +1,10 @@
-package com.fractal.domain.authorization.user_employee_mapping;
+package com.fractal.domain.authorization.mapping.user_candidate;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.recruitment.candidate.Candidate;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,20 +12,20 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "user_employee_mapping", schema = "authorization_schema", catalog = "fractal")
+@Table(name = "user_candidate_mapping", schema = "authorization_schema", catalog = "fractal")
 @EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class UserEmployeeMapping extends AbstractEntity {
+public class UserCandidateMapping extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id")
-    private Employee employee;
+    @JoinColumn(name = "candidate_id")
+    private Candidate candidate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id")

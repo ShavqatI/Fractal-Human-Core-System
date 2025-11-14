@@ -1,9 +1,9 @@
 package com.fractal.controller.authorization.user;
 
 
-import com.fractal.domain.authorization.user_employee_mapping.UserEmployeeMappingService;
-import com.fractal.domain.authorization.user_employee_mapping.dto.UserEmployeeMappingRequest;
-import com.fractal.domain.authorization.user_employee_mapping.dto.UserEmployeeMappingResponse;
+import com.fractal.domain.authorization.mapping.user_employee.UserEmployeeMappingService;
+import com.fractal.domain.authorization.mapping.user_employee.dto.UserEmployeeMappingRequest;
+import com.fractal.domain.authorization.mapping.user_employee.dto.UserEmployeeMappingResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

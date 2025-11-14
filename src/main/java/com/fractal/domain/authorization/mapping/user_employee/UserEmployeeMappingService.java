@@ -1,7 +1,7 @@
-package com.fractal.domain.authorization.user_employee_mapping;
+package com.fractal.domain.authorization.mapping.user_employee;
 
-import com.fractal.domain.authorization.user_employee_mapping.dto.UserEmployeeMappingRequest;
-import com.fractal.domain.authorization.user_employee_mapping.dto.UserEmployeeMappingResponse;
+import com.fractal.domain.authorization.mapping.user_employee.dto.UserEmployeeMappingRequest;
+import com.fractal.domain.authorization.mapping.user_employee.dto.UserEmployeeMappingResponse;
 
 import java.util.List;
 

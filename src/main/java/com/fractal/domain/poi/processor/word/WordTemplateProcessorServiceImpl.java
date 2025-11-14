@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -43,6 +45,7 @@ class WordTemplateProcessorServiceImpl implements WordTemplateProcessorService {
     }
 
     private  void replaceInParagraph(XWPFParagraph paragraph, Map<String, String> values) {
+        List<XWPFRun> runs = new ArrayList<>();
         String fullText = paragraph.getText();
 
         // Only process if something matches

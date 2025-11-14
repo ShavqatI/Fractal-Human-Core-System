@@ -1,8 +1,8 @@
-package com.fractal.domain.authorization.user_employee_mapping;
+package com.fractal.domain.authorization.mapping.user_employee;
 
+import com.fractal.domain.authorization.mapping.user_employee.dto.UserEmployeeMappingRequest;
+import com.fractal.domain.authorization.mapping.user_employee.dto.UserEmployeeMappingResponse;
 import com.fractal.domain.authorization.user.UserService;
-import com.fractal.domain.authorization.user_employee_mapping.dto.UserEmployeeMappingRequest;
-import com.fractal.domain.authorization.user_employee_mapping.dto.UserEmployeeMappingResponse;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.exception.ResourceNotFoundException;

@@ -1,4 +1,4 @@
-package com.fractal.domain.authorization.user_employee_mapping.dto;
+package com.fractal.domain.authorization.mapping.user_employee.dto;
 
 import jakarta.validation.constraints.NotNull;
 
