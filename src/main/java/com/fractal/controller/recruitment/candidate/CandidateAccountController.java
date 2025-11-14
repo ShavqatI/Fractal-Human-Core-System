@@ -7,6 +7,7 @@ import com.fractal.domain.recruitment.candidate.dto.CandidateRequest;
 import com.fractal.domain.recruitment.candidate.dto.CandidateResponse;
 import com.fractal.domain.recruitment.candidate.usecase.account.CandidateAccountService;
 import com.fractal.domain.recruitment.candidate.usecase.account.dto.CandidateAccountRequest;
+import com.fractal.domain.recruitment.candidate.usecase.account.dto.CandidateAccountResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,9 +23,8 @@ import java.util.stream.Collectors;
 public class CandidateAccountController {
 
     private final CandidateAccountService candidateAccountService;
-    private final CandidateService candidateService;
     @PostMapping
-    public ResponseEntity<CandidateResponse> create(@RequestBody @Valid CandidateAccountRequest dto) {
-        return new ResponseEntity<>(candidateService.toDTO(candidateAccountService.create(dto)), HttpStatus.CREATED);
+    public ResponseEntity<CandidateAccountResponse> create(@RequestBody @Valid CandidateAccountRequest dto) {
+        return new ResponseEntity<>(candidateAccountService.toDTO(candidateAccountService.create(dto)), HttpStatus.CREATED);
     }
 }

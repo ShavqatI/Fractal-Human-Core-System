@@ -25,6 +25,7 @@ import com.fractal.domain.recruitment.candidate.CandidateService;
 import com.fractal.domain.recruitment.candidate.dto.CandidateRequest;
 import com.fractal.domain.recruitment.candidate.mapper.CandidateMapperService;
 import com.fractal.domain.recruitment.candidate.usecase.account.dto.CandidateAccountRequest;
+import com.fractal.domain.recruitment.candidate.usecase.account.dto.CandidateAccountResponse;
 import com.fractal.security.PasswordGeneratorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,10 @@ public class CandidateAccountServiceImpl implements CandidateAccountService {
         var user = userService.create(new UserRequest(candidateContact.getValue().toLowerCase(),password,List.of()));
         userCandidateMappingService.create(new UserCandidateMappingRequest(user.getId(),candidate.getId(),statusService.getByCode("ACTIVE").getId()));
         return candidate;
+    }
+
+    @Override
+    public CandidateAccountResponse toDTO(Candidate candidate) {
+        return candidateMapperService.toAccountDTO(candidate);
     }
 }

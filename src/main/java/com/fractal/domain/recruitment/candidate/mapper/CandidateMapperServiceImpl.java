@@ -19,6 +19,7 @@ import com.fractal.domain.recruitment.candidate.military_service.mapper.Candidat
 import com.fractal.domain.recruitment.candidate.professional_experience.mapper.CandidateProfessionalExperienceMapperService;
 import com.fractal.domain.recruitment.candidate.resource.mapper.CandidateResourceMapperService;
 import com.fractal.domain.recruitment.candidate.usecase.account.dto.CandidateAccountRequest;
+import com.fractal.domain.recruitment.candidate.usecase.account.dto.CandidateAccountResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -133,6 +134,26 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     }
 
     @Override
+    public CandidateAccountResponse toAccountDTO(Candidate candidate) {
+        return new CandidateAccountResponse(
+                candidate.getId(),
+                candidate.getLastName(),
+                candidate.getFirstName(),
+                candidate.getPatronymicName(),
+                candidate.getBirthDate(),
+                genderService.toDTO(candidate.getGender()),
+                Optional.ofNullable(candidate.getContacts())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(contactMapperService::toDTO)
+                        .collect(Collectors.toList()),
+                statusService.toCompactDTO(candidate.getStatus()),
+                candidate.getCreatedDate()
+
+        );
+    }
+
+    @Override
     public Candidate toEntity(CandidateRequest dto) {
         return mapToEntity(new Candidate(), dto);
     }
@@ -145,6 +166,7 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
                 .patronymicName(dto.patronymicName())
                 .birthDate(dto.birthDate())
                 .gender(genderService.getById(dto.genderId()))
+                .status(statusService.getByCode("ACTIVE"))
                 .build();
         dto.contacts().forEach(contact->candidate.addContact(contactMapperService.toEntity(contact)));
         return candidate;

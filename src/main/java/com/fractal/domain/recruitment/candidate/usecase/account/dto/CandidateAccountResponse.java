@@ -19,27 +19,14 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record CandidateResponse(
+public record CandidateAccountResponse(
         Long id,
         String lastName,
         String firstName,
         String patronymicName,
         LocalDate birthDate,
-        String tin,
-        String ssn,
         GenderResponse gender,
-        MaritalStatusResponse maritalStatus,
-        NationalityResponse nationality,
-        List<IdentificationDocumentResponse> identificationDocuments,
-        List<CitizenshipResponse> citizenships,
-        List<CandidateAddressResponse> addresses,
         List<ContactResponse> contacts,
-        List<EducationResponse> educations,
-        List<LanguageSkillResponse> languageSkills,
-        List<ExternalEmploymentResponse> employments,
-        List<CandidateProfessionalExperienceResponse> professionalExperiences,
-        List<MilitaryServiceResponse> militaryServices,
-        List<CandidateResourceResponse> resources,
         StatusCompactResponse status,
         LocalDateTime createdDate
 )
