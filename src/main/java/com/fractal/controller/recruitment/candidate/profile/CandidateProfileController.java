@@ -1,9 +1,9 @@
 package com.fractal.controller.recruitment.candidate.profile;
 
 
-import com.fractal.domain.recruitment.candidate.usecase.account.CandidateAccountService;
-import com.fractal.domain.recruitment.candidate.usecase.account.dto.CandidateAccountRequest;
-import com.fractal.domain.recruitment.candidate.usecase.account.dto.CandidateAccountResponse;
+import com.fractal.domain.recruitment.candidate.usecase.profile.CandidateProfileService;
+import com.fractal.domain.recruitment.candidate.usecase.profile.dto.CandidateProfileRequest;
+import com.fractal.domain.recruitment.candidate.usecase.profile.dto.CandidateProfileResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,12 +15,10 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CandidateProfileController {
 
-    private final CandidateAccountService candidateAccountService;
+    private final CandidateProfileService candidateProfileService;
 
     @PostMapping
-    public ResponseEntity<CandidateAccountResponse> create(@RequestBody @Valid CandidateAccountRequest dto) {
-        return new ResponseEntity<>(candidateAccountService.toDTO(candidateAccountService.create(dto)), HttpStatus.CREATED);
+    public ResponseEntity<CandidateProfileResponse> create(@RequestBody @Valid CandidateProfileRequest dto) {
+        return new ResponseEntity<>(candidateProfileService.toDTO(candidateProfileService.create(dto)), HttpStatus.CREATED);
     }
-
-
 }

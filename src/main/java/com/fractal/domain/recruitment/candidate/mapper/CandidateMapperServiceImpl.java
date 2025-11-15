@@ -18,8 +18,8 @@ import com.fractal.domain.recruitment.candidate.language_skill.mapper.CandidateL
 import com.fractal.domain.recruitment.candidate.military_service.mapper.CandidateMilitaryServiceMapperService;
 import com.fractal.domain.recruitment.candidate.professional_experience.mapper.CandidateProfessionalExperienceMapperService;
 import com.fractal.domain.recruitment.candidate.resource.mapper.CandidateResourceMapperService;
-import com.fractal.domain.recruitment.candidate.usecase.account.dto.CandidateAccountRequest;
-import com.fractal.domain.recruitment.candidate.usecase.account.dto.CandidateAccountResponse;
+import com.fractal.domain.recruitment.candidate.usecase.profile.dto.CandidateProfileRequest;
+import com.fractal.domain.recruitment.candidate.usecase.profile.dto.CandidateProfileResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -134,8 +134,8 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     }
 
     @Override
-    public CandidateAccountResponse toAccountDTO(Candidate candidate) {
-        return new CandidateAccountResponse(
+    public CandidateProfileResponse toAccountDTO(Candidate candidate) {
+        return new CandidateProfileResponse(
                 candidate.getId(),
                 candidate.getLastName(),
                 candidate.getFirstName(),
@@ -159,7 +159,7 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     }
 
     @Override
-    public Candidate toEntity(CandidateAccountRequest dto) {
+    public Candidate toEntity(CandidateProfileRequest dto) {
         var candidate = Candidate.builder()
                 .lastName(dto.lastName())
                 .firstName(dto.firstName())
