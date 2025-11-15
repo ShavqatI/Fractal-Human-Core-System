@@ -6,6 +6,7 @@ import com.fractal.domain.authorization.role.dto.RoleResponse;
 import com.fractal.domain.authorization.role.menu.RoleMenu;
 import com.fractal.domain.authorization.role.menu.mapper.RoleMenuMapperService;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceWithCodeNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,11 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role getById(Long id) {
         return findById(id);
+    }
+
+    @Override
+    public Role getByCode(String code) {
+        return roleRepository.findByCode(code).orElseThrow(ResourceWithCodeNotFoundException::new);
     }
 
     @Override

@@ -11,6 +11,7 @@ import com.fractal.domain.recruitment.candidate.address.dto.CandidateAddressRequ
 import com.fractal.domain.recruitment.candidate.professional_experience.dto.CandidateProfessionalExperienceRequest;
 import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceRequest;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
@@ -26,5 +27,6 @@ public record CandidateAccountRequest(
         LocalDate birthDate,
         @NotNull
         Long genderId,
+        @NotEmpty
         List<ContactRequest> contacts
 ) { }

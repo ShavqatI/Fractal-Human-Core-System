@@ -2,8 +2,10 @@ package com.fractal.domain.recruitment.candidate.usecase.account;
 
 import com.fractal.domain.authorization.mapping.user_candidate.UserCandidateMappingService;
 import com.fractal.domain.authorization.mapping.user_candidate.dto.UserCandidateMappingRequest;
+import com.fractal.domain.authorization.role.RoleService;
 import com.fractal.domain.authorization.user.UserService;
 import com.fractal.domain.authorization.user.dto.UserRequest;
+import com.fractal.domain.authorization.user.role.dto.UserRoleRequest;
 import com.fractal.domain.citizenship.dto.CitizenshipRequest;
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.dictionary.status.StatusService;
@@ -29,6 +31,7 @@ import com.fractal.domain.recruitment.candidate.usecase.account.dto.CandidateAcc
 import com.fractal.security.PasswordGeneratorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -41,15 +44,18 @@ public class CandidateAccountServiceImpl implements CandidateAccountService {
     private final StatusService statusService;
     private final CandidateMapperService candidateMapperService;
     private final UserCandidateMappingService userCandidateMappingService;
+    private final RoleService roleService;
 
 
     @Override
+    @Transactional
     public Candidate create(CandidateAccountRequest dto) {
         var candidate = candidateService.save(candidateMapperService.toEntity(dto));
         var candidateContact = candidate.getContacts().stream().filter(contact -> contact.getContactType().getCode().equals("EMAIL")).findFirst().get();
         var password = PasswordGeneratorService.generate(8);
-        var user = userService.create(new UserRequest(candidateContact.getValue().toLowerCase(),password,List.of()));
-        userCandidateMappingService.create(new UserCandidateMappingRequest(user.getId(),candidate.getId(),statusService.getByCode("ACTIVE").getId()));
+        var status = statusService.getByCode("ACTIVE");
+        var user = userService.create(new UserRequest(candidateContact.getValue().toLowerCase(),password,List.of(new UserRoleRequest(roleService.getByCode("CANDIDATE").getId(),status.getId()))));
+        userCandidateMappingService.create(new UserCandidateMappingRequest(user.getId(),candidate.getId(),status.getId()));
         return candidate;
     }
 
