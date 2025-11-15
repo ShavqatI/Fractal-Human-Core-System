@@ -1,3 +1,4 @@
+
 package com.fractal.config;
 
 import com.fractal.domain.authorization.user.User;
@@ -26,9 +27,16 @@ public class AuditConfig {
                 if (principal instanceof UserDetails) {
                     var userDetails = (UserDetails) principal;
                     User user = userService.findByUsername(userDetails.getUsername());
+                    System.out.println(user.getUsername());
                     //return Optional.of(entityManager.getReference(User.class, user.getId()));
                     return Optional.of(entityManager.contains(user) ? user : entityManager.merge(user));
                 }
+                else {
+                    System.out.println(principal.getClass());
+                }
+            }
+            else {
+                System.out.println("Not auth");
             }
             return Optional.empty();
         };

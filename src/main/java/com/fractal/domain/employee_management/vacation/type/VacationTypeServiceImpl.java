@@ -43,6 +43,7 @@ public class VacationTypeServiceImpl implements VacationTypeService {
             vacationType.setCode(dto.code());
             vacationType.setName(dto.name());
             vacationType.setDescription(dto.description());
+            vacationType.setDays(dto.days());
             return save(vacationType);
         }
         catch (DataAccessException e) {
@@ -62,6 +63,7 @@ public class VacationTypeServiceImpl implements VacationTypeService {
                 vacationType.getCode(),
                 vacationType.getName(),
                 vacationType.getDescription(),
+                vacationType.getDays(),
                 vacationType.getCreatedDate()
         );
     }
@@ -71,6 +73,7 @@ public class VacationTypeServiceImpl implements VacationTypeService {
                 .code(dto.code())
                 .name(dto.name())
                 .description(dto.description())
+                .days(dto.days())
                 .build();
     }
 

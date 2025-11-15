@@ -7,6 +7,7 @@ public record VacationTypeResponse(
         String code,
         String name,
         String description,
+        Integer days,
         LocalDateTime createdDate
 ) {
 }

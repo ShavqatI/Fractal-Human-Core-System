@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -33,8 +34,8 @@ public abstract class Auditable {
     protected User createdUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "updated_user_id",insertable = false,referencedColumnName = "id")
-    //@LastModifiedBy
+    @JoinColumn(name = "updated_user_id",updatable = true,referencedColumnName = "id")
+    @LastModifiedBy
     protected User updatedUser;
 
     public LocalDateTime getCreatedDate() {
