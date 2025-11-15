@@ -1,0 +1,72 @@
+package com.fractal.domain.vacation_management.order;
+
+import com.fractal.domain.vacation_management.VacationService;
+import com.fractal.domain.vacation_management.order.dto.VacationOrderRequest;
+import com.fractal.domain.vacation_management.order.dto.VacationOrderResponse;
+import com.fractal.domain.vacation_management.order.mapper.VacationOrderMapperService;
+import com.fractal.exception.ResourceNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+@RequiredArgsConstructor
+public class VacationOrderServiceImpl implements VacationOrderService {
+
+    private final VacationOrderRepository orderRepository;
+    private final VacationOrderMapperService orderMapperService;
+    private final VacationService vacationService;
+
+
+    @Override
+    @Transactional
+    public VacationOrder create(Long vacationId, VacationOrderRequest dto) {
+        var vacation = vacationService.getById(vacationId);
+        var order = orderMapperService.toEntity(dto);
+        vacation.addOrder(order);
+        vacationService.save(vacation);
+        return order;
+    }
+
+    @Override
+    public List<VacationOrder> getAllByVacationId(Long vacationId) {
+        return orderRepository.findAllByVacationId(vacationId);
+    }
+
+    @Override
+    public VacationOrder getById(Long vacationId, Long id) {
+        return orderRepository.findByVacationIdAndId(vacationId,id).orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+    }
+
+    @Override
+    @Transactional
+    public VacationOrder update(Long vacationId, Long id, VacationOrderRequest dto) {
+        var vacation = vacationService.getById(vacationId);
+        var order = vacation.getOrders()
+                .stream()
+                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        order = orderRepository.save(orderMapperService.toEntity(order,dto));
+        vacationService.save(vacation);
+        return order;
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long vacationId, Long id) {
+        var vacation = vacationService.getById(vacationId);
+        var order = vacation.getOrders()
+                .stream()
+                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        vacation.removeOrder(order);
+        vacationService.save(vacation);
+    }
+
+    @Override
+    public VacationOrderResponse toDTO(VacationOrder order) {
+        return orderMapperService.toDTO(order);
+    }
+
+
+}
