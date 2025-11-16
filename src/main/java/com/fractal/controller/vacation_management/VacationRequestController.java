@@ -35,6 +35,14 @@ public class VacationRequestController {
     public ResponseEntity<VacationRequestResponse> update(@PathVariable Long id, @RequestBody @Valid VacationRequestRequest dto) {
       return  ResponseEntity.ok(vacationRequestService.toDTO(vacationRequestService.update(id, dto)));
     }
+    @PutMapping("review/{id}")
+    public ResponseEntity<VacationRequestResponse> review(@PathVariable Long id) {
+      return  ResponseEntity.ok(vacationRequestService.toDTO(vacationRequestService.review(id)));
+    }
+    @PutMapping("approve/{id}")
+    public ResponseEntity<VacationRequestResponse> approve(@PathVariable Long id) {
+      return  ResponseEntity.ok(vacationRequestService.toDTO(vacationRequestService.approve(id)));
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         vacationRequestService.deleteById(id);
