@@ -37,7 +37,7 @@ public class EmployeeContactServiceImpl implements EmployeeContactService {
 
     @Override
     public EmployeeContact getById(Long employeeId, Long id) {
-        return contactRepository.findByEmployeeIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        return contactRepository.findByEmployeeIdAndId(employeeId, id).orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
     }
 
     @Override
@@ -46,8 +46,8 @@ public class EmployeeContactServiceImpl implements EmployeeContactService {
         var employee = employeeService.getById(employeeId);
         var contact = employee.getContacts()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
-        contact = contactMapperService.toEntity(contact,dto);
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        contact = contactMapperService.toEntity(contact, dto);
         contactRepository.save(contact);
         employeeService.save(employee);
         return contact;
@@ -59,7 +59,7 @@ public class EmployeeContactServiceImpl implements EmployeeContactService {
         var employee = employeeService.getById(employeeId);
         var contact = employee.getContacts()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
         employee.removeContact(contact);
         employeeService.save(employee);
     }

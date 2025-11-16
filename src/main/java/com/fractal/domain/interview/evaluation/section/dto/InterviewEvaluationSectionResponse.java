@@ -14,4 +14,5 @@ public record InterviewEvaluationSectionResponse(
         List<InterviewEvaluationSectionResponse> children,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) {}
+) {
+}

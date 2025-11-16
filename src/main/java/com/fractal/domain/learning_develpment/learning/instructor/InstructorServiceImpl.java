@@ -12,11 +12,13 @@ public class InstructorServiceImpl implements InstructorService {
 
     private final InstructorRepository instructorRepository;
     private final InstructorMapperService mapperService;
+
     @Override
     public Instructor getById(Long id) {
-        return instructorRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return instructorRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
 
     }
+
     @Override
     public InstructorCompactResponse toCompactDTO(Instructor instructor) {
         return mapperService.toCompactDTO(instructor);

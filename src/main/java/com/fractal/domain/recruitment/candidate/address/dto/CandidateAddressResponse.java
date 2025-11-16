@@ -21,4 +21,5 @@ public record CandidateAddressResponse(
 
         LocalDateTime createdDate,
         LocalDateTime updatedDate
-) { }
+) {
+}

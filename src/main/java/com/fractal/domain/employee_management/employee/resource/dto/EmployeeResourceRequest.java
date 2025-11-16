@@ -6,4 +6,5 @@ public record EmployeeResourceRequest(
         Long employeeResourceTypeId,
         MultipartFile file
 
-) { }
+) {
+}

@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface AnswerRepository extends JpaRepository<Answer,Long> {
+interface AnswerRepository extends JpaRepository<Answer, Long> {
 
     List<Answer> findAllByQuestionId(Long questionId);
+
     Optional<Answer> findByQuestionIdAndId(Long questionId, Long id);
 }

@@ -21,7 +21,7 @@ public class UserRoleServiceImpl implements UserRoleService {
     private final UserRoleMapperService mapperService;
 
     @Override
-    public UserRole create(Long userId,UserRoleRequest dto) {
+    public UserRole create(Long userId, UserRoleRequest dto) {
         var user = userService.getById(userId);
         var userRole = mapperService.toEntity(dto);
         user.addRole(userRole);
@@ -30,11 +30,11 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    public UserRole getById(Long userId,Long id) {
+    public UserRole getById(Long userId, Long id) {
         var user = userService.getById(userId);
         return user.getUserRoles()
                 .stream()
-                .filter(i -> i.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("User role with id: " + id + " not found"));
+                .filter(i -> i.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("User role with id: " + id + " not found"));
     }
 
     @Override
@@ -44,29 +44,29 @@ public class UserRoleServiceImpl implements UserRoleService {
     }
 
     @Override
-    public UserRole update(Long userId,Long id, UserRoleRequest dto) {
+    public UserRole update(Long userId, Long id, UserRoleRequest dto) {
         var user = userService.getById(userId);
         var userRole = user.getUserRoles()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("User role with id: " + id + " not found"));
-        userRole = save(mapperService.toEntity(userRole,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("User role with id: " + id + " not found"));
+        userRole = save(mapperService.toEntity(userRole, dto));
         userService.save(user);
         return userRole;
     }
 
     @Override
-    public void delete(Long userId,Long id) {
+    public void delete(Long userId, Long id) {
         var user = userService.getById(userId);
         var userRole = user.getUserRoles()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("User role with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("User role with id: " + id + " not found"));
         user.removeRole(userRole);
         userService.save(user);
     }
 
     @Override
     public UserRoleResponse toDTO(UserRole userRole) {
-       return mapperService.toDTO(userRole);
+        return mapperService.toDTO(userRole);
     }
 
     private UserRole save(UserRole userRole) {

@@ -22,26 +22,29 @@ public class EmployeeRelativeAddressController {
 
     @PostMapping()
     public ResponseEntity<RelativeAddressResponse> create(@PathVariable Long relativeId, @RequestBody @Valid RelativeAddressRequest dto) {
-        return new ResponseEntity<>(addressService.toDTO(addressService.create(relativeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(addressService.toDTO(addressService.create(relativeId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<RelativeAddressResponse>> getAll(@PathVariable Long relativeId) {
         return ResponseEntity.ok(addressService.getAllByRelativeId(relativeId).stream().map(addressService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<RelativeAddressResponse> getById(@PathVariable Long relativeId,@PathVariable Long id) {
-        return ResponseEntity.ok(addressService.toDTO(addressService.getById(relativeId,id)));
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<RelativeAddressResponse> update(@PathVariable Long relativeId, @PathVariable Long id, @RequestBody @Valid RelativeAddressRequest dto) {
-        return ResponseEntity.ok(addressService.toDTO(addressService.update(relativeId,id, dto)));
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long relativeId, @PathVariable Long id) {
-        addressService.delete(relativeId,id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<RelativeAddressResponse> getById(@PathVariable Long relativeId, @PathVariable Long id) {
+        return ResponseEntity.ok(addressService.toDTO(addressService.getById(relativeId, id)));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<RelativeAddressResponse> update(@PathVariable Long relativeId, @PathVariable Long id, @RequestBody @Valid RelativeAddressRequest dto) {
+        return ResponseEntity.ok(addressService.toDTO(addressService.update(relativeId, id, dto)));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long relativeId, @PathVariable Long id) {
+        addressService.delete(relativeId, id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

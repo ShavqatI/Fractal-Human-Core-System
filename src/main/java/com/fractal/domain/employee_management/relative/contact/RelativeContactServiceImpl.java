@@ -34,7 +34,7 @@ public class RelativeContactServiceImpl implements RelativeContactService {
 
     @Override
     public RelativeContact getById(Long relativeId, Long id) {
-        return contactRepository.findByRelativeIdAndId(relativeId,id).orElseThrow(()-> new ResourceNotFoundException("Relative contact with id: " + id + " not found"));
+        return contactRepository.findByRelativeIdAndId(relativeId, id).orElseThrow(() -> new ResourceNotFoundException("Relative contact with id: " + id + " not found"));
     }
 
     @Override
@@ -42,8 +42,8 @@ public class RelativeContactServiceImpl implements RelativeContactService {
         var relative = relativeService.getById(relativeId);
         var contact = relative.getContacts()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Relative contact with id: " + id + " not found"));
-        contact = contactRepository.save(contactMapperService.toEntity(contact,dto));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Relative contact with id: " + id + " not found"));
+        contact = contactRepository.save(contactMapperService.toEntity(contact, dto));
         relativeService.save(relative);
         return contact;
     }
@@ -53,7 +53,7 @@ public class RelativeContactServiceImpl implements RelativeContactService {
         var relative = relativeService.getById(relativeId);
         var contact = relative.getContacts()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Relative contact with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Relative contact with id: " + id + " not found"));
         relative.removeContact(contact);
         contactRepository.delete(contact);
         relativeService.save(relative);

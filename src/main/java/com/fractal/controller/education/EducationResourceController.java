@@ -27,24 +27,28 @@ public class EducationResourceController {
     private final EducationResourceService resourceService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ResourceResponse> create(@PathVariable Long educationId,  @RequestParam("file") MultipartFile file) {
-        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(educationId,file)), HttpStatus.CREATED);
+    public ResponseEntity<ResourceResponse> create(@PathVariable Long educationId, @RequestParam("file") MultipartFile file) {
+        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(educationId, file)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<ResourceResponse>> getAll(@PathVariable Long educationId) {
         return ResponseEntity.ok(resourceService.getAllByEducationId(educationId).stream().map(resourceService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ResourceResponse> getById(@PathVariable Long educationId,@PathVariable Long id) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(educationId,id)));
+    public ResponseEntity<ResourceResponse> getById(@PathVariable Long educationId, @PathVariable Long id) {
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(educationId, id)));
     }
-    @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ResourceResponse> update(@PathVariable Long educationId, @PathVariable Long id, @RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(educationId,id, file)));
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(educationId, id, file)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long educationId, @PathVariable Long id) {
-        resourceService.delete(educationId,id);
+        resourceService.delete(educationId, id);
         return ResponseEntity.noContent().build();
     }
 

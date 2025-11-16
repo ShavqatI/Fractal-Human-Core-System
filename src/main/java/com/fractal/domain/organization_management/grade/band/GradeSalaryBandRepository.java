@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 interface GradeSalaryBandRepository extends JpaRepository<GradeSalaryBand, Long> {
     List<GradeSalaryBand> findAllByGradeId(Long gradeId);
+
     Optional<GradeSalaryBand> findByGradeIdAndId(Long gradeId, Long id);
 }

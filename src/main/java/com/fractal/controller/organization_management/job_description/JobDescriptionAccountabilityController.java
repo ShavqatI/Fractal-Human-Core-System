@@ -21,24 +21,26 @@ public class JobDescriptionAccountabilityController {
 
     @PostMapping()
     public ResponseEntity<AccountabilityResponse> create(@PathVariable Long jobDescriptionId, @RequestBody @Valid AccountabilityRequest dto) {
-        return new ResponseEntity<>(accountabilityService.toDTO(accountabilityService.create(jobDescriptionId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(accountabilityService.toDTO(accountabilityService.create(jobDescriptionId, dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<AccountabilityResponse>> getAll(@PathVariable Long jobDescriptionId) {
         return ResponseEntity.ok(accountabilityService.getAllByJobDescriptionId(jobDescriptionId).stream().map(accountabilityService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<AccountabilityResponse> getById(@PathVariable Long jobDescriptionId,@PathVariable Long id) {
-        return ResponseEntity.ok(accountabilityService.toDTO(accountabilityService.getById(jobDescriptionId,id)));
+    public ResponseEntity<AccountabilityResponse> getById(@PathVariable Long jobDescriptionId, @PathVariable Long id) {
+        return ResponseEntity.ok(accountabilityService.toDTO(accountabilityService.getById(jobDescriptionId, id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<AccountabilityResponse> update(@PathVariable Long jobDescriptionId, @PathVariable Long id, @RequestBody @Valid AccountabilityRequest dto) {
-        return ResponseEntity.ok(accountabilityService.toDTO(accountabilityService.update(jobDescriptionId,id, dto)));
+        return ResponseEntity.ok(accountabilityService.toDTO(accountabilityService.update(jobDescriptionId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long jobDescriptionId,@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long jobDescriptionId, @PathVariable Long id) {
         accountabilityService.delete(jobDescriptionId, id);
         return ResponseEntity.noContent().build();
     }

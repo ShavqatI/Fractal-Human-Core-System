@@ -18,16 +18,17 @@ public class SalaryClassificationChildController {
 
     @PostMapping()
     public ResponseEntity<SalaryClassificationResponse> create(@PathVariable Long salaryClassificationId, @RequestBody @Valid SalaryClassificationRequest dto) {
-        return new ResponseEntity<>(salaryClassificationService.toDTO(salaryClassificationService.addChild(salaryClassificationId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(salaryClassificationService.toDTO(salaryClassificationService.addChild(salaryClassificationId, dto)), HttpStatus.CREATED);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<SalaryClassificationResponse> update(@PathVariable Long salaryClassificationId, @PathVariable Long id, @RequestBody @Valid SalaryClassificationRequest dto) {
-        return ResponseEntity.ok(salaryClassificationService.toDTO(salaryClassificationService.updateChild(salaryClassificationId,id, dto)));
+        return ResponseEntity.ok(salaryClassificationService.toDTO(salaryClassificationService.updateChild(salaryClassificationId, id, dto)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long salaryClassificationId, @PathVariable Long id) {
-        salaryClassificationService.deleteChild(salaryClassificationId,id);
+        salaryClassificationService.deleteChild(salaryClassificationId, id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class GradePointAverageServiceImpl implements GradePointAverageService {
@@ -25,7 +26,6 @@ class GradePointAverageServiceImpl implements GradePointAverageService {
     }
 
 
-
     @Override
     public GradePointAverage getById(Long id) {
         return findById(id);
@@ -38,15 +38,14 @@ class GradePointAverageServiceImpl implements GradePointAverageService {
             gradePointAverage.setValue(dto.value());
             gradePointAverage.setScale(dto.scale());
             return save(gradePointAverage);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      gradePointAverageRepository.delete(findById(id));
+        gradePointAverageRepository.delete(findById(id));
     }
 
     @Override
@@ -69,14 +68,13 @@ class GradePointAverageServiceImpl implements GradePointAverageService {
     private GradePointAverage save(GradePointAverage gradePointAverage) {
         try {
             return gradePointAverageRepository.save(gradePointAverage);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private GradePointAverage findById(Long id) {
-        return gradePointAverageRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Grade Point Average with id: " + id + " not found"));
+        return gradePointAverageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Grade Point Average with id: " + id + " not found"));
     }
 
 }

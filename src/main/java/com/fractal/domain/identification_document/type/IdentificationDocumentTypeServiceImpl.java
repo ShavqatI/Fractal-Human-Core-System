@@ -28,7 +28,7 @@ class IdentificationDocumentTypeServiceImpl implements IdentificationDocumentTyp
 
     @Override
     public IdentificationDocumentType getByCode(String code) {
-        return identificationDocumentTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Identification Document Type with code: " + code + " not found"));
+        return identificationDocumentTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Identification Document Type with code: " + code + " not found"));
     }
 
     @Override
@@ -43,15 +43,14 @@ class IdentificationDocumentTypeServiceImpl implements IdentificationDocumentTyp
             identificationDocumentType.setCode(dto.code());
             identificationDocumentType.setName(dto.name());
             return save(identificationDocumentType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      identificationDocumentTypeRepository.delete(findById(id));
+        identificationDocumentTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -74,14 +73,13 @@ class IdentificationDocumentTypeServiceImpl implements IdentificationDocumentTyp
     private IdentificationDocumentType save(IdentificationDocumentType identificationDocumentType) {
         try {
             return identificationDocumentTypeRepository.save(identificationDocumentType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private IdentificationDocumentType findById(Long id) {
-        return identificationDocumentTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Identification Document Type with id: " + id + " not found"));
+        return identificationDocumentTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Identification Document Type with id: " + id + " not found"));
     }
 
 }

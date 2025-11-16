@@ -18,4 +18,5 @@ public record BusinessTripLocationAddressResponse(
         String street,
         LocalDateTime createdDate,
         LocalDateTime updatedDate
-) { }
+) {
+}

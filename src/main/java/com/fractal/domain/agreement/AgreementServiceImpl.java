@@ -13,15 +13,14 @@ public class AgreementServiceImpl implements AgreementService {
 
     @Override
     public Agreement getById(Long id) {
-        return agreementRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Order with id: " + id + " not found"));
+        return agreementRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Order with id: " + id + " not found"));
     }
 
     @Override
     public void save(Agreement agreement) {
         try {
             agreementRepository.save(agreement);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }

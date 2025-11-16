@@ -13,5 +13,5 @@ public record WorkScheduleResponse(
         LocalTime endTime,
         StatusCompactResponse status,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

@@ -25,12 +25,12 @@ public class SeparationReasonType extends Dictionary {
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private SeparationReasonType parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<SeparationReasonType> children = new ArrayList<>();
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id",referencedColumnName = "id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
     @Transactional

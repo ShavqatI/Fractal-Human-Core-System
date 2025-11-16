@@ -36,13 +36,13 @@ public class InternalEmployment extends Employment {
     @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position position;
 
-    @OneToMany(mappedBy = "internalEmployment", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<InternalEmploymentAgreement> agreements   = new ArrayList<>();
+    @OneToMany(mappedBy = "internalEmployment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<InternalEmploymentAgreement> agreements = new ArrayList<>();
 
-    @OneToMany(mappedBy = "internalEmployment", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "internalEmployment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<InternalEmploymentOrder> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "internalEmployment", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "internalEmployment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<CompensationComponent> compensationComponents = new ArrayList<>();
 
     public void addAgreement(InternalEmploymentAgreement agreement) {
@@ -50,6 +50,7 @@ public class InternalEmployment extends Employment {
         agreement.setInternalEmployment(this);
         agreements.add(agreement);
     }
+
     public void removeAgreement(InternalEmploymentAgreement agreement) {
         if (agreements != null && !agreements.isEmpty())
             agreements.remove(agreement);
@@ -60,6 +61,7 @@ public class InternalEmployment extends Employment {
         order.setInternalEmployment(this);
         orders.add(order);
     }
+
     public void removeOrder(InternalEmploymentOrder order) {
         if (orders != null && !orders.isEmpty())
             orders.remove(order);
@@ -70,6 +72,7 @@ public class InternalEmployment extends Employment {
         compensationComponent.setInternalEmployment(this);
         compensationComponents.add(compensationComponent);
     }
+
     public void removeCompensationComponent(CompensationComponent compensationComponent) {
         if (compensationComponents != null && !compensationComponents.isEmpty())
             compensationComponents.remove(compensationComponent);

@@ -17,9 +17,9 @@ import java.util.List;
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class Department extends Lifecycle  {
+public class Department extends Lifecycle {
 
-    @Column(name = "code",unique = true)
+    @Column(name = "code", unique = true)
     private String code;
 
     @Column(name = "name")
@@ -32,7 +32,7 @@ public class Department extends Lifecycle  {
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Department parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Department> children = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -40,7 +40,7 @@ public class Department extends Lifecycle  {
     private OrganizationUnit organizationUnit;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id",referencedColumnName = "id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
     @Transactional

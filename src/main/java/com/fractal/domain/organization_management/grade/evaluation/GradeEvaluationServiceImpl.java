@@ -39,7 +39,7 @@ public class GradeEvaluationServiceImpl implements GradeEvaluationService {
 
     @Override
     public GradeEvaluation getById(Long gradeId, Long id) {
-        return gradeEvaluationRepository.findByGradeIdAndId(gradeId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return gradeEvaluationRepository.findByGradeIdAndId(gradeId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -53,9 +53,9 @@ public class GradeEvaluationServiceImpl implements GradeEvaluationService {
         var grade = gradeService.getById(gradeId);
         var gradeEvaluation = grade.getEvaluations()
                 .stream()
-                .filter(eh-> eh.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(eh -> eh.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         if (dto instanceof HayEvaluationRequest) {
-            hayEvaluationService.update(gradeEvaluation.getEvaluation().getId(),(HayEvaluationRequest) dto);
+            hayEvaluationService.update(gradeEvaluation.getEvaluation().getId(), (HayEvaluationRequest) dto);
         }
         gradeEvaluationRepository.save(gradeEvaluation);
         gradeService.save(grade);
@@ -69,7 +69,7 @@ public class GradeEvaluationServiceImpl implements GradeEvaluationService {
         var grade = gradeService.getById(gradeId);
         var gradeEvaluation = grade.getEvaluations()
                 .stream()
-                .filter(eh-> eh.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(eh -> eh.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         grade.removeEvaluation(gradeEvaluation);
         gradeService.save(grade);
     }

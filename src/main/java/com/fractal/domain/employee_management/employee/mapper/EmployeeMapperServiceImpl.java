@@ -130,12 +130,12 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
 
     @Override
     public Employee toEntity(EmployeeRequest dto) {
-        return mapToEntity(new Employee(),dto);
+        return mapToEntity(new Employee(), dto);
     }
 
     @Override
     public Employee toEntity(Employee employee, EmployeeRequest dto) {
-       return mapToEntity(employee,dto);
+        return mapToEntity(employee, dto);
     }
 
     @Override
@@ -166,18 +166,18 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
         employee.setNationality(nationalityService.getById(dto.nationalityId()));
         employee.setStatus(statusService.getById(dto.statusId()));
 
-        dto.identificationDocuments().forEach(identificationDocument->employee.addIdentificationDocument(identificationDocumentMapperService.toEntity(identificationDocument)));
-        dto.citizenships().forEach(citizenship-> employee.addCitizenship(employeeCitizenshipMapperService.toEntity(citizenship)));
-        dto.addresses().forEach(address->employee.addAddress(addressMapperService.toEntity(address)));
-        dto.contacts().forEach(contact->employee.addContact(contactMapperService.toEntity(contact)));
-        dto.educations().forEach(education->employee.addEducation(employeeEducationMapperService.toEntity(education)));
-        dto.languageSkills().forEach(languageSkill-> employee.addLanguageSkill(employeeLanguageSkillMapperService.toEntity(languageSkill)));
-        dto.relatives().forEach(relative->employee.addRelative(relativeMapperService.toEntity(relative)));
-        dto.militaryServices().forEach(militaryService->employee.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
-        dto.employments().forEach(employment->employee.addEmployment(employmentMapperService.toEntity(employment)));
-        dto.professionalExperiences().forEach(professionalExperience-> employee.addProfessionalExperience(professionalExperienceMapperService.toEntity(professionalExperience)));
-        dto.resources().forEach(resource-> employee.addResource(employeeResourceMapperService.toEntity(resource,null)));
-       return employee;
+        dto.identificationDocuments().forEach(identificationDocument -> employee.addIdentificationDocument(identificationDocumentMapperService.toEntity(identificationDocument)));
+        dto.citizenships().forEach(citizenship -> employee.addCitizenship(employeeCitizenshipMapperService.toEntity(citizenship)));
+        dto.addresses().forEach(address -> employee.addAddress(addressMapperService.toEntity(address)));
+        dto.contacts().forEach(contact -> employee.addContact(contactMapperService.toEntity(contact)));
+        dto.educations().forEach(education -> employee.addEducation(employeeEducationMapperService.toEntity(education)));
+        dto.languageSkills().forEach(languageSkill -> employee.addLanguageSkill(employeeLanguageSkillMapperService.toEntity(languageSkill)));
+        dto.relatives().forEach(relative -> employee.addRelative(relativeMapperService.toEntity(relative)));
+        dto.militaryServices().forEach(militaryService -> employee.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
+        dto.employments().forEach(employment -> employee.addEmployment(employmentMapperService.toEntity(employment)));
+        dto.professionalExperiences().forEach(professionalExperience -> employee.addProfessionalExperience(professionalExperienceMapperService.toEntity(professionalExperience)));
+        dto.resources().forEach(resource -> employee.addResource(employeeResourceMapperService.toEntity(resource, null)));
+        return employee;
     }
 
     private String getProfilePhoto(Employee employee) {

@@ -21,12 +21,12 @@ class VacationRequestResponsibilityMapperServiceImpl implements VacationRequestR
 
     @Override
     public VacationRequestResponsibility toEntity(VacationRequestResponsibilityRequest dto) {
-        return mapToEntity(new VacationRequestResponsibility(),dto);
+        return mapToEntity(new VacationRequestResponsibility(), dto);
     }
 
     @Override
     public VacationRequestResponsibility toEntity(VacationRequestResponsibility responsibility, VacationRequestResponsibilityRequest dto) {
-        return mapToEntity(responsibility,dto);
+        return mapToEntity(responsibility, dto);
     }
 
     private VacationRequestResponsibility mapToEntity(VacationRequestResponsibility responsibility, VacationRequestResponsibilityRequest dto) {

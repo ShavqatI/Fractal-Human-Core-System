@@ -25,5 +25,5 @@ public record ExternalLearnerResponse(
         StatusCompactResponse status,
         LocalDateTime createdDate
 
-)
-{ }
+) {
+}

@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class ActionCategoryController {
 
     private final ActionCategoryService actionCategoryService;
+
     @PostMapping
     public ResponseEntity<ActionCategoryResponse> create(@RequestBody @Valid ActionCategoryRequest dto) {
         return new ResponseEntity<>(actionCategoryService.toDTO(actionCategoryService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<ActionCategoryResponse>> getAll() {
         return ResponseEntity.ok(actionCategoryService.getAll().stream().map(actionCategoryService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ActionCategoryResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(actionCategoryService.toDTO(actionCategoryService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<ActionCategoryResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(actionCategoryService.toDTO(actionCategoryService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<ActionCategoryResponse> update(@PathVariable Long id, @RequestBody @Valid ActionCategoryRequest dto) {
-      return  ResponseEntity.ok(actionCategoryService.toDTO(actionCategoryService.update(id, dto)));
+        return ResponseEntity.ok(actionCategoryService.toDTO(actionCategoryService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         actionCategoryService.deleteById(id);

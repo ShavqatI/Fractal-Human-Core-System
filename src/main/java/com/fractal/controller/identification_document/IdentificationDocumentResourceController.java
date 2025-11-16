@@ -28,23 +28,27 @@ public class IdentificationDocumentResourceController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ResourceResponse> create(@PathVariable Long identificationDocumentId, @RequestParam("file") MultipartFile file) {
-        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(identificationDocumentId,file)), HttpStatus.CREATED);
+        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(identificationDocumentId, file)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<ResourceResponse>> getAll(@PathVariable Long identificationDocumentId) {
         return ResponseEntity.ok(resourceService.getAllByIdentificationDocumentId(identificationDocumentId).stream().map(resourceService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ResourceResponse> getById(@PathVariable Long identificationDocumentId,@PathVariable Long id) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(identificationDocumentId,id)));
+    public ResponseEntity<ResourceResponse> getById(@PathVariable Long identificationDocumentId, @PathVariable Long id) {
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(identificationDocumentId, id)));
     }
-    @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ResourceResponse> update(@PathVariable Long identificationDocumentId, @PathVariable Long id, @RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(identificationDocumentId,id, file)));
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(identificationDocumentId, id, file)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long identificationDocumentId, @PathVariable Long id) {
-        resourceService.delete(identificationDocumentId,id);
+        resourceService.delete(identificationDocumentId, id);
         return ResponseEntity.noContent().build();
     }
 

@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "user_role",schema = "authorization_schema",catalog = "fractal")
+@Table(name = "user_role", schema = "authorization_schema", catalog = "fractal")
 public class UserRole extends AbstractEntity {
 
     @ManyToOne

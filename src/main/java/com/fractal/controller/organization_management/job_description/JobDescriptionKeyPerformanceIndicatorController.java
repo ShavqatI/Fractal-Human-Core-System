@@ -21,24 +21,26 @@ public class JobDescriptionKeyPerformanceIndicatorController {
 
     @PostMapping()
     public ResponseEntity<KeyPerformanceIndicatorResponse> create(@PathVariable Long jobDescriptionId, @RequestBody @Valid KeyPerformanceIndicatorRequest dto) {
-        return new ResponseEntity<>(keyPerformanceIndicatorService.toDTO(keyPerformanceIndicatorService.create(jobDescriptionId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(keyPerformanceIndicatorService.toDTO(keyPerformanceIndicatorService.create(jobDescriptionId, dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<KeyPerformanceIndicatorResponse>> getAll(@PathVariable Long jobDescriptionId) {
         return ResponseEntity.ok(keyPerformanceIndicatorService.getAllByJobDescriptionId(jobDescriptionId).stream().map(keyPerformanceIndicatorService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<KeyPerformanceIndicatorResponse> getById(@PathVariable Long jobDescriptionId,@PathVariable Long id) {
-        return ResponseEntity.ok(keyPerformanceIndicatorService.toDTO(keyPerformanceIndicatorService.getById(jobDescriptionId,id)));
+    public ResponseEntity<KeyPerformanceIndicatorResponse> getById(@PathVariable Long jobDescriptionId, @PathVariable Long id) {
+        return ResponseEntity.ok(keyPerformanceIndicatorService.toDTO(keyPerformanceIndicatorService.getById(jobDescriptionId, id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<KeyPerformanceIndicatorResponse> update(@PathVariable Long jobDescriptionId, @PathVariable Long id, @RequestBody @Valid KeyPerformanceIndicatorRequest dto) {
-        return ResponseEntity.ok(keyPerformanceIndicatorService.toDTO(keyPerformanceIndicatorService.update(jobDescriptionId,id, dto)));
+        return ResponseEntity.ok(keyPerformanceIndicatorService.toDTO(keyPerformanceIndicatorService.update(jobDescriptionId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long jobDescriptionId,@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long jobDescriptionId, @PathVariable Long id) {
         keyPerformanceIndicatorService.delete(jobDescriptionId, id);
         return ResponseEntity.noContent().build();
     }

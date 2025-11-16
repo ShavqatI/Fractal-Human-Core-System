@@ -27,7 +27,7 @@ public class EmployeeResourceServiceImpl implements EmployeeResourceService {
     @Override
     public EmployeeResource create(Long employeeId, EmployeeResourceRequest dto) {
         var employee = employeeService.getById(employeeId);
-        var resource =  resourceMapperService.toEntity(dto,resourceStoragePath);
+        var resource = resourceMapperService.toEntity(dto, resourceStoragePath);
         employee.addResource(resource);
         employeeService.save(employee);
         return resource;
@@ -40,16 +40,16 @@ public class EmployeeResourceServiceImpl implements EmployeeResourceService {
 
     @Override
     public EmployeeResource getById(Long employeeId, Long id) {
-        return resourceRepository.findByEmployeeIdAndId(employeeId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return resourceRepository.findByEmployeeIdAndId(employeeId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
-    public EmployeeResource update(Long employeeId,Long id,EmployeeResourceRequest dto) {
+    public EmployeeResource update(Long employeeId, Long id, EmployeeResourceRequest dto) {
         var employee = employeeService.getById(employeeId);
         var resource = employee.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        resource = resourceMapperService.toEntity(resource,dto,resourceStoragePath);
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        resource = resourceMapperService.toEntity(resource, dto, resourceStoragePath);
         resourceRepository.save(resource);
         employeeService.save(employee);
         return resource;
@@ -60,7 +60,7 @@ public class EmployeeResourceServiceImpl implements EmployeeResourceService {
         var employee = employeeService.getById(employeeId);
         var resource = employee.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         fileService.delete(resource.getUrl());
         employee.removeResource(resource);
         employeeService.save(employee);

@@ -38,10 +38,9 @@ class ExternalEmploymentServiceImpl implements ExternalEmploymentService {
     @Transactional
     public ExternalEmployment update(Long id, ExternalEmploymentRequest dto) {
         try {
-            ExternalEmployment employment = mapperService.toEntity(findById(id),dto);
+            ExternalEmployment employment = mapperService.toEntity(findById(id), dto);
             return save(employment);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -50,7 +49,7 @@ class ExternalEmploymentServiceImpl implements ExternalEmploymentService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      employmentRepository.delete(findById(id));
+        employmentRepository.delete(findById(id));
     }
 
     @Override
@@ -63,13 +62,12 @@ class ExternalEmploymentServiceImpl implements ExternalEmploymentService {
     public ExternalEmployment save(ExternalEmployment employment) {
         try {
             return employmentRepository.save(employment);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private ExternalEmployment findById(Long id) {
-        return employmentRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return employmentRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

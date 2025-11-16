@@ -41,9 +41,8 @@ class BusinessTripServiceImpl implements BusinessTripService {
     @Override
     public BusinessTrip update(Long id, BusinessTripRequest dto) {
         try {
-           return save(mapperService.toEntity(findById(id),dto));
-       }
-        catch (DataAccessException e) {
+            return save(mapperService.toEntity(findById(id), dto));
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -61,14 +60,13 @@ class BusinessTripServiceImpl implements BusinessTripService {
     public BusinessTrip save(BusinessTrip businessTrip) {
         try {
             return businessTripRepository.save(businessTrip);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private BusinessTrip findById(Long id) {
-        return businessTripRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("BusinessTrip with id: " + id + " not found"));
+        return businessTripRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("BusinessTrip with id: " + id + " not found"));
     }
 
 }

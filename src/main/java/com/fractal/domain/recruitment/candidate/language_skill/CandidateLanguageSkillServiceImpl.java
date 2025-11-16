@@ -27,7 +27,7 @@ class CandidateLanguageSkillServiceImpl implements CandidateLanguageSkillService
         var languageSkill = mapperService.toEntity(dto);
         candidate.addLanguageSkill(languageSkill);
         candidateService.save(candidate);
-       return languageSkill;
+        return languageSkill;
     }
 
     @Override
@@ -37,7 +37,7 @@ class CandidateLanguageSkillServiceImpl implements CandidateLanguageSkillService
 
     @Override
     public CandidateLanguageSkill getById(Long candidateId, Long id) {
-        return languageSkillRepository.findByCandidateIdAndId(candidateId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return languageSkillRepository.findByCandidateIdAndId(candidateId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -46,11 +46,11 @@ class CandidateLanguageSkillServiceImpl implements CandidateLanguageSkillService
         var candidate = candidateService.getById(candidateId);
         var languageSkill = candidate.getLanguageSkills()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        languageSkill = mapperService.toEntity(languageSkill,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        languageSkill = mapperService.toEntity(languageSkill, dto);
         languageSkillRepository.save(languageSkill);
         candidateService.save(candidate);
-       return languageSkill;
+        return languageSkill;
     }
 
     @Override
@@ -59,7 +59,7 @@ class CandidateLanguageSkillServiceImpl implements CandidateLanguageSkillService
         var candidate = candidateService.getById(candidateId);
         var languageSkill = candidate.getLanguageSkills()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         candidate.removeLanguageSkill(languageSkill);
         candidateService.save(candidate);
     }
@@ -79,12 +79,12 @@ class CandidateLanguageSkillServiceImpl implements CandidateLanguageSkillService
     public CandidateLanguageSkill save(CandidateLanguageSkill candidateLanguageSkill) {
         try {
             return languageSkillRepository.save(candidateLanguageSkill);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
+
     private CandidateLanguageSkill findById(Long id) {
-        return languageSkillRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return languageSkillRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

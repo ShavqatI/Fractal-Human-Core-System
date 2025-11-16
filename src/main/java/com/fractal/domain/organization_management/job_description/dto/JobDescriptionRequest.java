@@ -24,4 +24,5 @@ public record JobDescriptionRequest(
         List<KeyPerformanceIndicatorRequest> keyPerformanceIndicators,
         List<AuthorityRequest> authorities,
         List<AccountabilityRequest> accountabilities
-) {}
+) {
+}

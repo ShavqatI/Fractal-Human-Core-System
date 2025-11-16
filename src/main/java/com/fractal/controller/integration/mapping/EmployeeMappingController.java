@@ -1,8 +1,5 @@
 package com.fractal.controller.integration.mapping;
 
-import com.fractal.domain.finance.currency.dto.CurrencyCompactResponse;
-import com.fractal.domain.finance.currency.dto.CurrencyRequest;
-import com.fractal.domain.finance.currency.dto.CurrencyResponse;
 import com.fractal.domain.integration.mapping.employee.EmployeeMappingService;
 import com.fractal.domain.integration.mapping.employee.dto.EmployeeMappingRequest;
 import com.fractal.domain.integration.mapping.employee.dto.EmployeeMappingResponse;
@@ -27,10 +24,12 @@ public class EmployeeMappingController {
     public ResponseEntity<EmployeeMappingResponse> create(@RequestBody @Valid EmployeeMappingRequest dto) {
         return new ResponseEntity<>(employeeMappingService.toDTO(employeeMappingService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<EmployeeMappingResponse>> getAll() {
         return ResponseEntity.ok(employeeMappingService.getAll().stream().map(employeeMappingService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<EmployeeMappingResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(employeeMappingService.toDTO(employeeMappingService.getById(id)));
@@ -38,10 +37,11 @@ public class EmployeeMappingController {
 
     @PutMapping("/{id}")
     public ResponseEntity<EmployeeMappingResponse> update(@PathVariable Long id, @RequestBody @Valid EmployeeMappingRequest dto) {
-      return  ResponseEntity.ok(employeeMappingService.toDTO(employeeMappingService.update(id, dto)));
+        return ResponseEntity.ok(employeeMappingService.toDTO(employeeMappingService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         employeeMappingService.deleteById(id);

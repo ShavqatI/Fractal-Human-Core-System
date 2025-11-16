@@ -6,7 +6,9 @@ import com.fractal.domain.learning_develpment.learning.session.location.online.d
 
 public interface OnlineLearningLocationMapperService {
     OnlineLearningLocationResponse toDTO(OnlineLearningLocation location);
+
     OnlineLearningLocation toEntity(OnlineLearningLocationRequest dto);
+
     OnlineLearningLocation toEntity(OnlineLearningLocation location, OnlineLearningLocationRequest dto);
 }
 

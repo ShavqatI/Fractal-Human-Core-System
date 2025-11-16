@@ -24,10 +24,10 @@ class IntervieweeServiceImpl implements IntervieweeService {
     @Override
     public Interviewee create(Long interviewId, IntervieweeRequest dto) {
         Interviewee interviewee = null;
-        if(dto instanceof CandidateIntervieweeRequest candidateIntervieweeRequest) {
-            interviewee = candidateIntervieweeService.create(interviewId,candidateIntervieweeRequest);
+        if (dto instanceof CandidateIntervieweeRequest candidateIntervieweeRequest) {
+            interviewee = candidateIntervieweeService.create(interviewId, candidateIntervieweeRequest);
         } else if (dto instanceof EmployeeIntervieweeRequest employeeIntervieweeRequest) {
-            interviewee = employeeIntervieweeService.create(interviewId,employeeIntervieweeRequest);
+            interviewee = employeeIntervieweeService.create(interviewId, employeeIntervieweeRequest);
         }
         return interviewee;
     }
@@ -35,10 +35,10 @@ class IntervieweeServiceImpl implements IntervieweeService {
     @Override
     public Interviewee update(Long interviewId, Long id, IntervieweeRequest dto) {
         Interviewee interviewee = null;
-        if(dto instanceof CandidateIntervieweeRequest candidateIntervieweeRequest) {
-            interviewee = candidateIntervieweeService.update(interviewId,id,candidateIntervieweeRequest);
+        if (dto instanceof CandidateIntervieweeRequest candidateIntervieweeRequest) {
+            interviewee = candidateIntervieweeService.update(interviewId, id, candidateIntervieweeRequest);
         } else if (dto instanceof EmployeeIntervieweeRequest employeeIntervieweeRequest) {
-            interviewee = employeeIntervieweeService.update(interviewId,id,employeeIntervieweeRequest);
+            interviewee = employeeIntervieweeService.update(interviewId, id, employeeIntervieweeRequest);
         }
         return interviewee;
     }
@@ -50,7 +50,7 @@ class IntervieweeServiceImpl implements IntervieweeService {
 
     @Override
     public void delete(Long interviewId, Long id) {
-       intervieweeRepository.delete(intervieweeRepository.findByInterviewIdAndId(interviewId,id));
+        intervieweeRepository.delete(intervieweeRepository.findByInterviewIdAndId(interviewId, id));
     }
 
     @Override

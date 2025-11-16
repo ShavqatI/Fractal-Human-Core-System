@@ -62,12 +62,12 @@ class EducationMapperServiceImpl implements EducationMapperService {
 
     @Override
     public Education toEntity(EducationRequest dto) {
-        return mapToEntity(new Education(),dto);
+        return mapToEntity(new Education(), dto);
     }
 
     @Override
     public Education toEntity(Education education, EducationRequest dto) {
-       return mapToEntity(education,dto);
+        return mapToEntity(education, dto);
     }
 
     @Override
@@ -107,7 +107,7 @@ class EducationMapperServiceImpl implements EducationMapperService {
         education.setDocumentVerified(dto.documentVerified());
         education.setVerificationNotes(dto.verificationNotes());
         education.setStatus(statusService.getById(dto.statusId()));
-        dto.files().forEach(file-> education.addResource((EducationResource) resourceMapperService.toEntity(file,null)));
+        dto.files().forEach(file -> education.addResource((EducationResource) resourceMapperService.toEntity(file, null)));
         return education;
     }
 

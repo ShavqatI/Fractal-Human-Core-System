@@ -9,13 +9,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface DistrictRepository extends JpaRepository<District,Long> {
+interface DistrictRepository extends JpaRepository<District, Long> {
 
     District save(District district);
+
     List<District> findAll();
+
     List<District> findByRegion(Region region);
+
     List<District> findByCity(City region);
+
     Optional<District> findByCode(String code);
+
     Optional<District> findById(Long id);
 
 }

@@ -6,7 +6,9 @@ import com.fractal.domain.employee_management.contact.EmployeeContact;
 
 public interface EmployeeContactMapperService {
     ContactResponse toDTO(EmployeeContact contact);
+
     EmployeeContact toEntity(ContactRequest dto);
+
     EmployeeContact toEntity(EmployeeContact contact, ContactRequest dto);
 }
 

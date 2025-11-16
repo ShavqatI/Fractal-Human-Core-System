@@ -94,12 +94,12 @@ class GradeMapperServiceImpl implements GradeMapperService {
 
     @Override
     public Grade toEntity(GradeRequest dto) {
-        return mapToEntity(new Grade(),dto);
+        return mapToEntity(new Grade(), dto);
     }
 
     @Override
     public Grade toEntity(Grade grade, GradeRequest dto) {
-        return mapToEntity(grade,dto);
+        return mapToEntity(grade, dto);
     }
 
     private Grade mapToEntity(Grade grade, GradeRequest dto) {
@@ -113,12 +113,12 @@ class GradeMapperServiceImpl implements GradeMapperService {
         grade.setEndDate(dto.endDate());
         grade.setStatus(statusService.getById(dto.statusId()));
         grade.setNotes(dto.notes());
-        dto.steps().forEach(step-> grade.addStep(stepMapperService.toEntity(step)));
-        dto.benchmarking().forEach(benchmarking-> grade.addBenchmarking(benchmarkingMapperService.toEntity(benchmarking)));
-        dto.matrices().forEach(matrix->grade.addMatrix(matrixMapperService.toEntity(matrix)));
+        dto.steps().forEach(step -> grade.addStep(stepMapperService.toEntity(step)));
+        dto.benchmarking().forEach(benchmarking -> grade.addBenchmarking(benchmarkingMapperService.toEntity(benchmarking)));
+        dto.matrices().forEach(matrix -> grade.addMatrix(matrixMapperService.toEntity(matrix)));
         dto.salaryBands().forEach(salaryBand -> grade.addSalaryBand(salaryBandMapperService.toEntity(salaryBand)));
-        dto.evaluations().forEach(evaluation-> grade.addEvaluation(evaluationMapperService.toEntity(evaluation)));
-        dto.children().forEach(child->grade.addChild(toEntity(child)));
+        dto.evaluations().forEach(evaluation -> grade.addEvaluation(evaluationMapperService.toEntity(evaluation)));
+        dto.children().forEach(child -> grade.addChild(toEntity(child)));
         return grade;
     }
 

@@ -3,7 +3,6 @@ package com.fractal.domain.vacation_management.accrual.period.record;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriod;
-import com.fractal.domain.vacation_management.category.VacationCategory;
 import com.fractal.domain.vacation_management.type.VacationType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -29,4 +29,5 @@ public record EmployeeAddressResponse(
         LocalDateTime createdDate,
         LocalDateTime updatedDate
 
-) { }
+) {
+}

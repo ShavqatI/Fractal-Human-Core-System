@@ -22,14 +22,17 @@ public class CandidateController {
 
     private final CandidateService candidateService;
     private final CandidateUseCaseService candidateUseCaseService;
+
     @PostMapping
     public ResponseEntity<CandidateResponse> create(@RequestBody @Valid CandidateRequest dto) {
         return new ResponseEntity<>(candidateService.toDTO(candidateService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<CandidateResponse>> getAll() {
         return ResponseEntity.ok(candidateService.getAll().stream().map(candidateService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<CandidateResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(candidateService.toDTO(candidateService.getById(id)));
@@ -39,14 +42,17 @@ public class CandidateController {
     public ResponseEntity<List<CandidateCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(candidateService.getAll().stream().map(candidateService::toCompactDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/compact/{id}")
     public ResponseEntity<CandidateCompactResponse> getByIdCompact(@PathVariable Long id) {
         return ResponseEntity.ok(candidateService.toCompactDTO(candidateService.getById(id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<CandidateResponse> update(@PathVariable Long id, @RequestBody @Valid CandidateRequest dto) {
-      return  ResponseEntity.ok(candidateService.toDTO(candidateService.update(id, dto)));
+        return ResponseEntity.ok(candidateService.toDTO(candidateService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         candidateService.deleteById(id);

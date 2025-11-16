@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface CandidateCitizenshipRepository extends JpaRepository<CandidateCitizenship,Long> {
+interface CandidateCitizenshipRepository extends JpaRepository<CandidateCitizenship, Long> {
 
     List<CandidateCitizenship> findAllByCandidateId(Long candidateId);
+
     Optional<CandidateCitizenship> findByCandidateIdAndId(Long candidateId, Long id);
 }

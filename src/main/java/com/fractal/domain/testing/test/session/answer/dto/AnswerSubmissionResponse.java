@@ -13,4 +13,5 @@ public record AnswerSubmissionResponse(
         List<SelectedAnswerResponse> answers,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) { }
+) {
+}

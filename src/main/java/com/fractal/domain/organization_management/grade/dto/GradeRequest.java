@@ -16,7 +16,7 @@ public record GradeRequest(
         Long currencyId,
         Long levelId,
         BigDecimal minSalary,
-        BigDecimal  maxSalary,
+        BigDecimal maxSalary,
         LocalDate startDate,
         LocalDate endDate,
         Long statusId,

@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 class ExperienceServiceImpl implements ExperienceService {
-     private final ExperienceRepository experienceRepository;
+    private final ExperienceRepository experienceRepository;
+
     @Override
     public ExperienceResponse toDTO(Experience experience) {
         return new ExperienceResponse(
@@ -38,7 +39,7 @@ class ExperienceServiceImpl implements ExperienceService {
 
     @Override
     public Experience findById(Long id) {
-        return experienceRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("RequiredExperience with id: " + id + " not found"));
+        return experienceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("RequiredExperience with id: " + id + " not found"));
     }
 
     @Override
@@ -50,7 +51,7 @@ class ExperienceServiceImpl implements ExperienceService {
         experience.setLevel(dto.level());
         experience.setMandatory(dto.mandatory());
         experience.setNotes(dto.notes());
-       return experienceRepository.save(experience);
+        return experienceRepository.save(experience);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class Authority extends AbstractEntity {
     private String scope;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_description_id",referencedColumnName = "id")
+    @JoinColumn(name = "job_description_id", referencedColumnName = "id")
     private JobDescription jobDescription;
 }
 

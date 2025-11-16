@@ -6,8 +6,11 @@ import com.fractal.domain.education.dto.EducationResponse;
 
 public interface EducationMapperService {
     EducationResponse toDTO(Education education);
+
     Education toEntity(EducationRequest dto);
+
     Education toEntity(Education education, EducationRequest dto);
+
     Education copy(Education education);
 }
 

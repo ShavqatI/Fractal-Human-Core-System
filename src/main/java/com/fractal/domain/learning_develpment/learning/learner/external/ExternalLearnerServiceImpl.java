@@ -36,15 +36,13 @@ class ExternalLearnerServiceImpl implements ExternalLearnerService {
     }
 
 
-
     @Override
     @Transactional
     public ExternalLearner update(Long id, ExternalLearnerRequest dto) {
         try {
-            ExternalLearner participant = mapperService.toEntity(findById(id),dto);
+            ExternalLearner participant = mapperService.toEntity(findById(id), dto);
             return save(participant);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -53,7 +51,7 @@ class ExternalLearnerServiceImpl implements ExternalLearnerService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      participantRepository.delete(findById(id));
+        participantRepository.delete(findById(id));
     }
 
     @Override
@@ -65,18 +63,18 @@ class ExternalLearnerServiceImpl implements ExternalLearnerService {
     public ExternalLearnerCompactResponse toCompactDTO(ExternalLearner learner) {
         return mapperService.toCompactDTO(learner);
     }
+
     @Override
     @Transactional
     public ExternalLearner save(ExternalLearner learner) {
         try {
             return participantRepository.save(learner);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private ExternalLearner findById(Long id) {
-        return participantRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("External Learner with id: " + id + " not found"));
+        return participantRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("External Learner with id: " + id + " not found"));
     }
 }

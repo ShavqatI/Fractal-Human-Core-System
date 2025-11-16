@@ -10,7 +10,9 @@ public interface IdentificationDocumentService {
     List<IdentificationDocument> getAllByEmployeeId(Long employeeId);
     IdentificationDocument getById(Long employeeId , Long id);*/
     IdentificationDocument getById(Long id);
+
     IdentificationDocument save(IdentificationDocument identificationDocument);
+
     IdentificationDocumentResponse toDTO(IdentificationDocument identificationDocument);
 
 

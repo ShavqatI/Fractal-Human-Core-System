@@ -29,12 +29,12 @@ class SeparationReasonMapperServiceImpl implements SeparationReasonMapperService
 
     @Override
     public SeparationReason toEntity(SeparationReasonRequest dto) {
-        return mapToEntity(new SeparationReason(),dto);
+        return mapToEntity(new SeparationReason(), dto);
     }
 
     @Override
     public SeparationReason toEntity(SeparationReason separationReason, SeparationReasonRequest dto) {
-       return mapToEntity(separationReason,dto);
+        return mapToEntity(separationReason, dto);
     }
 
     private SeparationReason mapToEntity(SeparationReason separationReason, SeparationReasonRequest dto) {

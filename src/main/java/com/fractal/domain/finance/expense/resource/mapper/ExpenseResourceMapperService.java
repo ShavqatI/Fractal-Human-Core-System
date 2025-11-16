@@ -7,10 +7,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ExpenseResourceMapperService {
     ResourceResponse toDTO(ExpenseResource resource);
+
     ExpenseResource toEntity(ResourceRequest dto);
+
     ExpenseResource toEntity(MultipartFile file, String url);
+
     ExpenseResource toEntity(ExpenseResource resource, ResourceRequest dto);
-    ResourceRequest fileToRequest(MultipartFile file,String url);
+
+    ResourceRequest fileToRequest(MultipartFile file, String url);
 }
 
 

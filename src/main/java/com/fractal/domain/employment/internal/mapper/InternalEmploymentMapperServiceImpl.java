@@ -72,6 +72,7 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
                 employment.getUpdatedDate()
         );
     }
+
     @Override
     public InternalEmployment toEntity(InternalEmploymentRequest dto) {
         return mapToEntity(new InternalEmployment(), dto);
@@ -92,8 +93,8 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
         employment.setStatus(statusService.getById(dto.statusId()));
         dto.agreements().forEach(agreementRequest -> employment.addAgreement(agreementMapperService.toEntity(agreementRequest)));
         dto.orders().forEach(orderRequest -> employment.addOrder(orderMapperService.toEntity(orderRequest)));
-        dto.separationReasons().forEach(separationReason-> employment.addSeparationReason(separationReasonMapperService.toEntity(separationReason)));
-        dto.compensationComponents().forEach(compensationComponent-> employment.addCompensationComponent(compensationComponentMapperService.toEntity(compensationComponent)));
+        dto.separationReasons().forEach(separationReason -> employment.addSeparationReason(separationReasonMapperService.toEntity(separationReason)));
+        dto.compensationComponents().forEach(compensationComponent -> employment.addCompensationComponent(compensationComponentMapperService.toEntity(compensationComponent)));
         return employment;
     }
 }

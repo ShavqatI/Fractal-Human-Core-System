@@ -26,11 +26,11 @@ import java.util.List;
 public class Interviewer extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "interview_id",referencedColumnName = "id")
+    @JoinColumn(name = "interview_id", referencedColumnName = "id")
     private Interview interview;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id",referencedColumnName = "id")
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
     @Column(name = "scheduled_time", nullable = false)
@@ -43,7 +43,7 @@ public class Interviewer extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "interviewer",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "interviewer", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<InterviewEvaluationSession> evaluationSessions = new ArrayList<>();
 
     @Transactional

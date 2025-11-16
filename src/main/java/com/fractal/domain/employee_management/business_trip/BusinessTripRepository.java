@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-interface BusinessTripRepository extends JpaRepository<BusinessTrip,Long> {
+interface BusinessTripRepository extends JpaRepository<BusinessTrip, Long> {
 
     List<BusinessTrip> findAllByEmployeeId(Long employeeId);
 

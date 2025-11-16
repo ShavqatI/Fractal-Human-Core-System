@@ -7,9 +7,14 @@ import java.util.List;
 
 public interface SeparationReasonService {
     SeparationReason create(Long employmentId, SeparationReasonRequest dto);
+
     List<SeparationReason> getAllByEmploymentId(Long employmentId);
-    SeparationReason getById(Long employmentId , Long id);
+
+    SeparationReason getById(Long employmentId, Long id);
+
     SeparationReason update(Long employmentId, Long id, SeparationReasonRequest dto);
+
     void delete(Long employmentId, Long id);
+
     SeparationReasonResponse toDTO(SeparationReason separationReason);
 }

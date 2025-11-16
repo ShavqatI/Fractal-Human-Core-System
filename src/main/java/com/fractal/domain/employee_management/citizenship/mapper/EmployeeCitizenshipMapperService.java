@@ -6,7 +6,9 @@ import com.fractal.domain.employee_management.citizenship.EmployeeCitizenship;
 
 public interface EmployeeCitizenshipMapperService {
     CitizenshipResponse toDTO(EmployeeCitizenship citizenship);
+
     EmployeeCitizenship toEntity(CitizenshipRequest dto);
+
     EmployeeCitizenship toEntity(EmployeeCitizenship citizenship, CitizenshipRequest dto);
 }
 

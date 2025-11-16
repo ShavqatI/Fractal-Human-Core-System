@@ -29,7 +29,7 @@ public class AgreementTypeServiceImpl implements AgreementTypeService {
 
     @Override
     public AgreementType getByCode(String code) {
-        return agreementTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Vacation Type with code: " + code + " not found"));
+        return agreementTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Vacation Type with code: " + code + " not found"));
 
     }
 
@@ -48,15 +48,14 @@ public class AgreementTypeServiceImpl implements AgreementTypeService {
             agreementType.setSeries(dto.series());
             documentTemplateManagerService.getById(dto.documentTemplateManagerId());
             return save(agreementType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       agreementTypeRepository.delete(findById(id));
+        agreementTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -85,14 +84,13 @@ public class AgreementTypeServiceImpl implements AgreementTypeService {
     private AgreementType save(AgreementType agreementType) {
         try {
             return agreementTypeRepository.save(agreementType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private AgreementType findById(Long id) {
-        return agreementTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Vacation Type with id: " + id + " not found"));
+        return agreementTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Vacation Type with id: " + id + " not found"));
     }
 
 }

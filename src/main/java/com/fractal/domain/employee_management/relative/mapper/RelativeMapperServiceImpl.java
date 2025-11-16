@@ -58,12 +58,12 @@ class RelativeMapperServiceImpl implements RelativeMapperService {
 
     @Override
     public Relative toEntity(RelativeRequest dto) {
-        return mapToEntity(new Relative(),dto);
+        return mapToEntity(new Relative(), dto);
     }
 
     @Override
     public Relative toEntity(Relative relative, RelativeRequest dto) {
-        return mapToEntity(relative,dto);
+        return mapToEntity(relative, dto);
     }
 
     private Relative mapToEntity(Relative relative, RelativeRequest dto) {
@@ -77,8 +77,8 @@ class RelativeMapperServiceImpl implements RelativeMapperService {
         relative.setMaritalStatus(maritalStatusService.getById(dto.maritalStatusId()));
         relative.setNationality(nationalityService.getById(dto.nationalityId()));
         relative.setRelationType(relationTypeService.getById(dto.relationTypeId()));
-        dto.addresses().forEach(address->relative.addAddress(addressMapperService.toEntity(address)));
-        dto.contacts().forEach(contact->relative.addContact(contactMapperService.toEntity(contact)));
+        dto.addresses().forEach(address -> relative.addAddress(addressMapperService.toEntity(address)));
+        dto.contacts().forEach(contact -> relative.addContact(contactMapperService.toEntity(contact)));
         return relative;
     }
 }

@@ -7,12 +7,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface BusinessTripResourceMapperService {
     ResourceResponse toDTO(BusinessTripResource resource);
+
     BusinessTripResource toEntity(ResourceRequest dto);
+
     BusinessTripResource toEntity(MultipartFile file, String resourceStoragePath);
+
     BusinessTripResource toEntity(BusinessTripResource resource, MultipartFile file, String resourceStoragePath);
 
     BusinessTripResource toEntity(BusinessTripResource resource, ResourceRequest dto);
-    ResourceRequest fileToRequest(MultipartFile file,String url);
+
+    ResourceRequest fileToRequest(MultipartFile file, String url);
 }
 
 

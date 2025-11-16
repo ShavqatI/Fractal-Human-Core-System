@@ -6,7 +6,9 @@ import com.fractal.domain.authorization.role.menu.dto.RoleMenuResponse;
 
 public interface RoleMenuMapperService {
     RoleMenuResponse toDTO(RoleMenu roleMenu);
+
     RoleMenu toEntity(RoleMenuRequest dto);
+
     RoleMenu toEntity(RoleMenu roleMenu, RoleMenuRequest dto);
 }
 

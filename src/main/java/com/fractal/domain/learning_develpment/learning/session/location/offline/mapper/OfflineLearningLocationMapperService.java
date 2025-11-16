@@ -6,7 +6,9 @@ import com.fractal.domain.learning_develpment.learning.session.location.offline.
 
 public interface OfflineLearningLocationMapperService {
     OfflineLearningLocationResponse toDTO(OfflineLearningLocation location);
+
     OfflineLearningLocation toEntity(OfflineLearningLocationRequest dto);
+
     OfflineLearningLocation toEntity(OfflineLearningLocation location, OfflineLearningLocationRequest dto);
 }
 

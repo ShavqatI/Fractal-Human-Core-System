@@ -69,21 +69,22 @@ public class IdentificationDocumentServiceImpl implements IdentificationDocument
     public IdentificationDocument getById(Long id) {
         return findById(id);
     }
+
     @Override
     public IdentificationDocumentResponse toDTO(IdentificationDocument identificationDocument) {
         return mapperService.toDTO(identificationDocument);
     }
+
     @Override
     public IdentificationDocument save(IdentificationDocument identificationDocument) {
         try {
             return identificationDocumentRepository.save(identificationDocument);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private IdentificationDocument findById(Long id) {
-        return identificationDocumentRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Identification Document with id: " + id + " not found"));
+        return identificationDocumentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Identification Document with id: " + id + " not found"));
     }
 }

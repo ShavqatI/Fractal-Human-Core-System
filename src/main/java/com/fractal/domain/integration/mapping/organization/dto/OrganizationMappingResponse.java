@@ -13,4 +13,5 @@ public record OrganizationMappingResponse(
         StatusCompactResponse status,
         LocalDateTime createdDate
 
-) { }
+) {
+}

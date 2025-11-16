@@ -9,5 +9,5 @@ public record SelectedAnswerResponse(
         AnswerResponse answer,
         LocalDateTime selectedDate,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

@@ -9,12 +9,17 @@ import java.util.List;
 
 public interface InterviewEvaluationSessionSelectedAnswerService {
     InterviewEvaluationSessionSelectedAnswer create(Long answerSubmissionId, InterviewEvaluationSessionSelectedAnswerRequest dto);
-    List<InterviewEvaluationSessionSelectedAnswer> getAllByInterviewEvaluationSessionAnswerSubmissionId(Long answerSubmissionId);
-    InterviewEvaluationSessionSelectedAnswer getById(Long answerSubmissionId , Long id);
 
-    InterviewEvaluationSessionSelectedAnswer update(Long answerSubmissionId, Long id,InterviewEvaluationSessionSelectedAnswerRequest dto);
+    List<InterviewEvaluationSessionSelectedAnswer> getAllByInterviewEvaluationSessionAnswerSubmissionId(Long answerSubmissionId);
+
+    InterviewEvaluationSessionSelectedAnswer getById(Long answerSubmissionId, Long id);
+
+    InterviewEvaluationSessionSelectedAnswer update(Long answerSubmissionId, Long id, InterviewEvaluationSessionSelectedAnswerRequest dto);
+
     void delete(Long answerSubmissionId, Long id);
+
     InterviewEvaluationSessionSelectedAnswerResponse toDTO(InterviewEvaluationSessionSelectedAnswer selectedAnswer);
+
     InterviewEvaluationSessionSelectedAnswerCompactResponse toCompactDTO(InterviewEvaluationSessionSelectedAnswer selectedAnswer);
 
 

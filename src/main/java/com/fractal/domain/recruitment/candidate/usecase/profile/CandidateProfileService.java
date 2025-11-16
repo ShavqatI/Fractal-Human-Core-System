@@ -5,6 +5,7 @@ import com.fractal.domain.recruitment.candidate.usecase.profile.dto.CandidatePro
 import com.fractal.domain.recruitment.candidate.usecase.profile.dto.CandidateProfileResponse;
 
 public interface CandidateProfileService {
-  Candidate create(CandidateProfileRequest dto);
-  CandidateProfileResponse toDTO(Candidate candidate);
+    Candidate create(CandidateProfileRequest dto);
+
+    CandidateProfileResponse toDTO(Candidate candidate);
 }

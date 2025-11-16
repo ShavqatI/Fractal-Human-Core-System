@@ -34,6 +34,7 @@ public class InternalLearnerController {
     public ResponseEntity<InternalLearnerResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(learnerService.toDTO(learnerService.getById(id)));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<InternalLearnerCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(learnerService.getAll().stream().map(learnerService::toCompactDTO).collect(Collectors.toList()));

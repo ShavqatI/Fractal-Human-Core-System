@@ -22,26 +22,29 @@ public class CandidateIdentificationDocumentController {
 
     @PostMapping()
     public ResponseEntity<IdentificationDocumentResponse> create(@PathVariable Long candidateId, @RequestBody @Valid IdentificationDocumentRequest dto) {
-        return new ResponseEntity<>(identificationDocumentService.toDTO(identificationDocumentService.create(candidateId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(identificationDocumentService.toDTO(identificationDocumentService.create(candidateId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<IdentificationDocumentResponse>> getAll(@PathVariable Long candidateId) {
         return ResponseEntity.ok(identificationDocumentService.getAllByCandidateId(candidateId).stream().map(identificationDocumentService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<IdentificationDocumentResponse> getById(@PathVariable Long candidateId,@PathVariable Long id) {
-        return ResponseEntity.ok(identificationDocumentService.toDTO(identificationDocumentService.getById(candidateId,id)));
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<IdentificationDocumentResponse> update(@PathVariable Long candidateId, @PathVariable Long id, @RequestBody @Valid IdentificationDocumentRequest dto) {
-        return ResponseEntity.ok(identificationDocumentService.toDTO(identificationDocumentService.update(candidateId,id, dto)));
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long candidateId, @PathVariable Long id) {
-        identificationDocumentService.delete(candidateId,id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<IdentificationDocumentResponse> getById(@PathVariable Long candidateId, @PathVariable Long id) {
+        return ResponseEntity.ok(identificationDocumentService.toDTO(identificationDocumentService.getById(candidateId, id)));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<IdentificationDocumentResponse> update(@PathVariable Long candidateId, @PathVariable Long id, @RequestBody @Valid IdentificationDocumentRequest dto) {
+        return ResponseEntity.ok(identificationDocumentService.toDTO(identificationDocumentService.update(candidateId, id, dto)));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long candidateId, @PathVariable Long id) {
+        identificationDocumentService.delete(candidateId, id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

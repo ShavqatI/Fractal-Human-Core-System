@@ -29,7 +29,7 @@ public class IdentificationDocumentResourceServiceImpl implements Identification
     @Transactional
     public IdentificationDocumentResource create(Long identificationDocumentId, MultipartFile file) {
         var identificationDocument = identificationDocumentService.getById(identificationDocumentId);
-        var resource = resourceMapperService.toEntity(file,resourceStoragePath);
+        var resource = resourceMapperService.toEntity(file, resourceStoragePath);
         identificationDocument.addResource(resource);
         identificationDocumentService.save(identificationDocument);
         return resource;
@@ -42,7 +42,7 @@ public class IdentificationDocumentResourceServiceImpl implements Identification
 
     @Override
     public IdentificationDocumentResource getById(Long identificationDocumentId, Long id) {
-        return resourceRepository.findByIdentificationDocumentIdAndId(identificationDocumentId,id).orElseThrow(()-> new ResourceNotFoundException("Identification Document Resource  with id: " + id + " not found"));
+        return resourceRepository.findByIdentificationDocumentIdAndId(identificationDocumentId, id).orElseThrow(() -> new ResourceNotFoundException("Identification Document Resource  with id: " + id + " not found"));
     }
 
     @Override
@@ -52,13 +52,12 @@ public class IdentificationDocumentResourceServiceImpl implements Identification
             var identificationDocument = identificationDocumentService.getById(identificationDocumentId);
             var resource = identificationDocument.getResources()
                     .stream()
-                    .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification Document Resource  with id: " + id + " not found"));
-            resource = resourceMapperService.toEntity(resource,file,resourceStoragePath);
+                    .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Identification Document Resource  with id: " + id + " not found"));
+            resource = resourceMapperService.toEntity(resource, file, resourceStoragePath);
             resource = resourceRepository.save(resource);
             identificationDocumentService.save(identificationDocument);
             return resource;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
 
@@ -70,7 +69,7 @@ public class IdentificationDocumentResourceServiceImpl implements Identification
         var identificationDocument = identificationDocumentService.getById(identificationDocumentId);
         var resource = identificationDocument.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification Document Resource  with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Identification Document Resource  with id: " + id + " not found"));
         fileService.delete(resource.getUrl());
         identificationDocument.removeResource(resource);
         identificationDocumentService.save(identificationDocument);

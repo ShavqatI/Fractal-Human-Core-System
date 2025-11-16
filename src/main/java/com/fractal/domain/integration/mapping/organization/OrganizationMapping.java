@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 public class OrganizationMapping extends Integration {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organization_id",updatable = false,referencedColumnName = "id")
+    @JoinColumn(name = "organization_id", updatable = false, referencedColumnName = "id")
     protected Organization organization;
 
 }

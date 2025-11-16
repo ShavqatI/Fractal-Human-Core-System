@@ -21,6 +21,7 @@ class TestSessionMapperServiceImpl implements TestSessionMapperService {
     private final AnswerSubmissionMapperService submissionMapperService;
     private final TestService testService;
     private final StatusService statusService;
+
     @Override
     public TestSessionResponse toDTO(TestSession testSession) {
         return new TestSessionResponse(
@@ -57,7 +58,7 @@ class TestSessionMapperServiceImpl implements TestSessionMapperService {
         testSession.setStartDate(dto.startDate());
         testSession.setEndDate(dto.endDate());
         testSession.setStatus(statusService.getById(dto.statusId()));
-        dto.submissions().forEach(submission-> testSession.addAnswerSubmission(submissionMapperService.toEntity(submission)));
+        dto.submissions().forEach(submission -> testSession.addAnswerSubmission(submissionMapperService.toEntity(submission)));
         return testSession;
     }
 }

@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface InstructorAssignmentRepository extends JpaRepository<InstructorAssignment,Long> {
+interface InstructorAssignmentRepository extends JpaRepository<InstructorAssignment, Long> {
 
     List<InstructorAssignment> findAllByLearningSessionId(Long sessionId);
+
     Optional<InstructorAssignment> findByLearningSessionIdAndId(Long sessionId, Long id);
 }

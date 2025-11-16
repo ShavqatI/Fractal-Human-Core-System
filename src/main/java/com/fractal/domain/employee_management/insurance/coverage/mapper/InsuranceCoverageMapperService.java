@@ -6,7 +6,9 @@ import com.fractal.domain.employee_management.insurance.coverage.dto.InsuranceCo
 
 public interface InsuranceCoverageMapperService {
     InsuranceCoverageResponse toDTO(InsuranceCoverage coverage);
+
     InsuranceCoverage toEntity(InsuranceCoverageRequest dto);
+
     InsuranceCoverage toEntity(InsuranceCoverage coverage, InsuranceCoverageRequest dto);
 }
 

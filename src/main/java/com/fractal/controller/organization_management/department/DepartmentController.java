@@ -39,6 +39,7 @@ public class DepartmentController {
     public ResponseEntity<DepartmentResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(departmentService.toDTO(departmentService.getById(id)));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<DepartmentCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(departmentService.getAll().stream().map(departmentService::toCompactDTO).collect(Collectors.toList()));

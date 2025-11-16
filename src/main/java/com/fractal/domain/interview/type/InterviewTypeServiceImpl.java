@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class InterviewTypeServiceImpl implements InterviewTypeService {
@@ -26,7 +27,7 @@ class InterviewTypeServiceImpl implements InterviewTypeService {
 
     @Override
     public InterviewType getByCode(String code) {
-        return interviewTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Interview Type with code: " + code + " not found"));
+        return interviewTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Interview Type with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class InterviewTypeServiceImpl implements InterviewTypeService {
             interviewType.setCode(dto.code());
             interviewType.setName(dto.name());
             return save(interviewType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      interviewTypeRepository.delete(findById(id));
+        interviewTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class InterviewTypeServiceImpl implements InterviewTypeService {
     private InterviewType save(InterviewType interviewType) {
         try {
             return interviewTypeRepository.save(interviewType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private InterviewType findById(Long id) {
-        return interviewTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Interview Type with id: " + id + " not found"));
+        return interviewTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Interview Type with id: " + id + " not found"));
     }
 
 }

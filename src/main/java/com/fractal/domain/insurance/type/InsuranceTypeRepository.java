@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface InsuranceTypeRepository extends JpaRepository<InsuranceType,Long> {
+interface InsuranceTypeRepository extends JpaRepository<InsuranceType, Long> {
     Optional<InsuranceType> findById(Long id);
+
     Optional<InsuranceType> findByCode(String code);
+
     List<InsuranceType> findAll();
 }

@@ -27,7 +27,7 @@ public class LearningSessionResourceServiceImpl implements LearningSessionResour
     @Override
     public LearningSessionResource create(Long sessionId, LearningSessionResourceRequest dto) {
         var session = sessionService.getById(sessionId);
-        var resource =  resourceMapperService.toEntity(dto,resourceStoragePath);
+        var resource = resourceMapperService.toEntity(dto, resourceStoragePath);
         session.addResource(resource);
         sessionService.save(session);
         return resource;
@@ -40,7 +40,7 @@ public class LearningSessionResourceServiceImpl implements LearningSessionResour
 
     @Override
     public LearningSessionResource getById(Long sessionId, Long id) {
-        return resourceRepository.findByLearningSessionIdAndId(sessionId,id).orElseThrow(()-> new ResourceNotFoundException("Learning Session Resource with id: " + id + " not found"));
+        return resourceRepository.findByLearningSessionIdAndId(sessionId, id).orElseThrow(() -> new ResourceNotFoundException("Learning Session Resource with id: " + id + " not found"));
     }
 
     @Override
@@ -48,8 +48,8 @@ public class LearningSessionResourceServiceImpl implements LearningSessionResour
         var session = sessionService.getById(sessionId);
         var resource = session.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Learning Session Resource with id: " + id + " not found"));
-        resource = resourceMapperService.toEntity(resource,dto,resourceStoragePath);
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Learning Session Resource with id: " + id + " not found"));
+        resource = resourceMapperService.toEntity(resource, dto, resourceStoragePath);
         resourceRepository.save(resource);
         sessionService.save(session);
         return resource;
@@ -60,7 +60,7 @@ public class LearningSessionResourceServiceImpl implements LearningSessionResour
         var session = sessionService.getById(sessionId);
         var resource = session.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Learning Session Resource with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Learning Session Resource with id: " + id + " not found"));
         fileService.delete(resource.getUrl());
         session.removeResource(resource);
         sessionService.save(session);

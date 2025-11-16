@@ -22,24 +22,27 @@ public class AnswerController {
 
     @PostMapping()
     public ResponseEntity<AnswerResponse> create(@PathVariable Long questionId, @RequestBody @Valid AnswerRequest dto) {
-        return new ResponseEntity<>(answerService.toDTO(answerService.create(questionId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(answerService.toDTO(answerService.create(questionId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<AnswerResponse>> getAll(@PathVariable Long questionId) {
         return ResponseEntity.ok(answerService.getAllByQuestionId(questionId).stream().map(answerService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<AnswerResponse> getById(@PathVariable Long questionId, @PathVariable Long id) {
-        return ResponseEntity.ok(answerService.toDTO(answerService.getById(questionId,id)));
+        return ResponseEntity.ok(answerService.toDTO(answerService.getById(questionId, id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<AnswerResponse> update(@PathVariable Long questionId, @PathVariable Long id, @RequestBody @Valid AnswerRequest dto) {
-        return ResponseEntity.ok(answerService.toDTO(answerService.update(questionId,id, dto)));
+        return ResponseEntity.ok(answerService.toDTO(answerService.update(questionId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long questionId, @PathVariable Long id) {
-        answerService.delete(questionId,id);
+        answerService.delete(questionId, id);
         return ResponseEntity.noContent().build();
     }
 

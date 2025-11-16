@@ -29,12 +29,12 @@ class GradeStepMapperServiceImpl implements GradeStepMapperService {
 
     @Override
     public GradeStep toEntity(GradeStepRequest dto) {
-        return mapToEntity(new GradeStep(),dto);
+        return mapToEntity(new GradeStep(), dto);
     }
 
     @Override
     public GradeStep toEntity(GradeStep step, GradeStepRequest dto) {
-       return mapToEntity(step,dto);
+        return mapToEntity(step, dto);
     }
 
     private GradeStep mapToEntity(GradeStep step, GradeStepRequest dto) {

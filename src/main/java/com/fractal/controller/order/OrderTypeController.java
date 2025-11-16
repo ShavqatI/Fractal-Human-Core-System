@@ -19,26 +19,32 @@ import java.util.stream.Collectors;
 public class OrderTypeController {
 
     private final OrderTypeService orderTypeService;
+
     @PostMapping
     public ResponseEntity<OrderTypeResponse> create(@RequestBody @Valid OrderTypeRequest dto) {
         return new ResponseEntity<>(orderTypeService.toDTO(orderTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<OrderTypeResponse>> getAll() {
         return ResponseEntity.ok(orderTypeService.getAll().stream().map(orderTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<OrderTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(orderTypeService.toDTO(orderTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<OrderTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(orderTypeService.toDTO(orderTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<OrderTypeResponse> update(@PathVariable Long id, @RequestBody @Valid OrderTypeRequest dto) {
-      return  ResponseEntity.ok(orderTypeService.toDTO(orderTypeService.update(id, dto)));
+        return ResponseEntity.ok(orderTypeService.toDTO(orderTypeService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         orderTypeService.deleteById(id);

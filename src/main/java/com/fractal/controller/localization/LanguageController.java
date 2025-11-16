@@ -19,10 +19,12 @@ import java.util.stream.Collectors;
 public class LanguageController {
 
     private final LanguageService languageService;
+
     @PostMapping
     public ResponseEntity<LanguageResponse> create(@RequestBody @Valid LanguageRequest dto) {
         return new ResponseEntity<>(languageService.toDTO(languageService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<LanguageResponse>> getAll() {
         return ResponseEntity.ok(languageService.getAll().stream().map(languageService::toDTO).collect(Collectors.toList()));
@@ -32,14 +34,17 @@ public class LanguageController {
     public ResponseEntity<LanguageResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(languageService.toDTO(languageService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<LanguageResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(languageService.toDTO(languageService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<LanguageResponse> update(@PathVariable Long id, @RequestBody @Valid LanguageRequest dto) {
-      return  ResponseEntity.ok(languageService.toDTO(languageService.update(id, dto)));
+        return ResponseEntity.ok(languageService.toDTO(languageService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         languageService.deleteById(id);

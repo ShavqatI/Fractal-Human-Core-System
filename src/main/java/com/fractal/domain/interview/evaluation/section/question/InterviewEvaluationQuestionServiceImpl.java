@@ -29,7 +29,7 @@ class InterviewEvaluationQuestionServiceImpl implements InterviewEvaluationQuest
         var question = mapperService.toEntity(dto);
         section.addQuestion(question);
         sectionService.save(section);
-       return question;
+        return question;
     }
 
     @Override
@@ -39,12 +39,12 @@ class InterviewEvaluationQuestionServiceImpl implements InterviewEvaluationQuest
 
     @Override
     public InterviewEvaluationQuestion getById(Long employeeId, Long id) {
-        return questionRepository.findByInterviewEvaluationSectionIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Question with id: " + id + " not found"));
+        return questionRepository.findByInterviewEvaluationSectionIdAndId(employeeId, id).orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation Question with id: " + id + " not found"));
     }
 
     @Override
     public InterviewEvaluationQuestion getById(Long id) {
-        return questionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Question with id: " + id + " not found"));
+        return questionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation Question with id: " + id + " not found"));
     }
 
     @Override
@@ -53,8 +53,8 @@ class InterviewEvaluationQuestionServiceImpl implements InterviewEvaluationQuest
         var section = sectionService.getById(sectionId);
         var question = section.getQuestions()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Question with id: " + id + " not found"));
-        question = questionRepository.save(mapperService.toEntity(question,dto));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation Question with id: " + id + " not found"));
+        question = questionRepository.save(mapperService.toEntity(question, dto));
         sectionService.save(section);
         return question;
     }
@@ -65,7 +65,7 @@ class InterviewEvaluationQuestionServiceImpl implements InterviewEvaluationQuest
         var section = sectionService.getById(sectionId);
         var question = section.getQuestions()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Question with id: " + id + " not found"));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation Question with id: " + id + " not found"));
         section.removeQuestion(question);
         sectionService.save(section);
     }
@@ -85,8 +85,7 @@ class InterviewEvaluationQuestionServiceImpl implements InterviewEvaluationQuest
     public InterviewEvaluationQuestion save(InterviewEvaluationQuestion question) {
         try {
             return questionRepository.save(question);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }

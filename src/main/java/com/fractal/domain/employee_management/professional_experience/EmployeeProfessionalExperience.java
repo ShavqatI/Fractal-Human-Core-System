@@ -4,13 +4,12 @@ package com.fractal.domain.employee_management.professional_experience;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.industry.Industry;
 import com.fractal.domain.employee_management.employee.Employee;
-import com.fractal.domain.recruitment.candidate.Candidate;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "employee_professional_experience",schema = "employee_schema", catalog = "fractal")
+@Table(name = "employee_professional_experience", schema = "employee_schema", catalog = "fractal")
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,7 +28,6 @@ public class EmployeeProfessionalExperience extends AbstractEntity {
     private Employee employee;
 
     private Integer years;
-
 
 
 }

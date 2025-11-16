@@ -6,7 +6,9 @@ import com.fractal.domain.work_schedule.dto.WorkScheduleResponse;
 
 public interface OrganizationWorkScheduleMapperService {
     WorkScheduleResponse toDTO(OrganizationWorkSchedule workSchedule);
+
     OrganizationWorkSchedule toEntity(WorkScheduleRequest dto);
+
     OrganizationWorkSchedule toEntity(OrganizationWorkSchedule contact, WorkScheduleRequest dto);
 }
 

@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class QuestionTypeController {
 
     private final QuestionTypeService questionTypeService;
+
     @PostMapping
     public ResponseEntity<QuestionTypeResponse> create(@RequestBody @Valid QuestionTypeRequest dto) {
         return new ResponseEntity<>(questionTypeService.toDTO(questionTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<QuestionTypeResponse>> getAll() {
         return ResponseEntity.ok(questionTypeService.getAll().stream().map(questionTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<QuestionTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(questionTypeService.toDTO(questionTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<QuestionTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(questionTypeService.toDTO(questionTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<QuestionTypeResponse> update(@PathVariable Long id, @RequestBody @Valid QuestionTypeRequest dto) {
-      return  ResponseEntity.ok(questionTypeService.toDTO(questionTypeService.update(id, dto)));
+        return ResponseEntity.ok(questionTypeService.toDTO(questionTypeService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         questionTypeService.deleteById(id);

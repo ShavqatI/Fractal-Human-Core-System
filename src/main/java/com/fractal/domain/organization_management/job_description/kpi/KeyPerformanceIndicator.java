@@ -14,22 +14,22 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 public class KeyPerformanceIndicator extends AbstractEntity {
 
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 
     @Column(name = "description", columnDefinition = "TEXT", nullable = false)
     private String description;
 
-    @Column(name="measure_unit")
+    @Column(name = "measure_unit")
     private String measureUnit;
 
-    @Column(name="target_value")
+    @Column(name = "target_value")
     private double targetValue;
 
-    @Column(name="frequency")
+    @Column(name = "frequency")
     private String frequency;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_description_id",referencedColumnName = "id")
+    @JoinColumn(name = "job_description_id", referencedColumnName = "id")
     private JobDescription jobDescription;
 }

@@ -27,7 +27,7 @@ public class CandidateResourceServiceImpl implements CandidateResourceService {
     @Override
     public CandidateResource create(Long candidateId, CandidateResourceRequest dto) {
         var candidate = candidateService.getById(candidateId);
-        var resource =  resourceMapperService.toEntity(dto,resourceStoragePath);
+        var resource = resourceMapperService.toEntity(dto, resourceStoragePath);
         candidate.addResource(resource);
         candidateService.save(candidate);
         return resource;
@@ -40,16 +40,16 @@ public class CandidateResourceServiceImpl implements CandidateResourceService {
 
     @Override
     public CandidateResource getById(Long candidateId, Long id) {
-        return resourceRepository.findByCandidateIdAndId(candidateId,id).orElseThrow(()-> new ResourceNotFoundException("Candidate Resource  with id: " + id + " not found"));
+        return resourceRepository.findByCandidateIdAndId(candidateId, id).orElseThrow(() -> new ResourceNotFoundException("Candidate Resource  with id: " + id + " not found"));
     }
 
     @Override
-    public CandidateResource update(Long candidateId,Long id,CandidateResourceRequest dto) {
+    public CandidateResource update(Long candidateId, Long id, CandidateResourceRequest dto) {
         var candidate = candidateService.getById(candidateId);
         var resource = candidate.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate Resource  with id: " + id + " not found"));
-        resource = resourceMapperService.toEntity(resource,dto,resourceStoragePath);
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Candidate Resource  with id: " + id + " not found"));
+        resource = resourceMapperService.toEntity(resource, dto, resourceStoragePath);
         resourceRepository.save(resource);
         candidateService.save(candidate);
         return resource;
@@ -60,7 +60,7 @@ public class CandidateResourceServiceImpl implements CandidateResourceService {
         var candidate = candidateService.getById(candidateId);
         var resource = candidate.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate Resource  with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Candidate Resource  with id: " + id + " not found"));
         fileService.delete(resource.getUrl());
         candidate.removeResource(resource);
         candidateService.save(candidate);

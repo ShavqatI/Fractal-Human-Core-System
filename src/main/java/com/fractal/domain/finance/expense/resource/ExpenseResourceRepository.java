@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ExpenseResourceRepository extends JpaRepository<ExpenseResource,Long> {
+public interface ExpenseResourceRepository extends JpaRepository<ExpenseResource, Long> {
 
     List<ExpenseResource> findAllByExpenseId(Long expenseId);
+
     Optional<ExpenseResource> findByExpenseIdAndId(Long expenseId, Long id);
 
 }

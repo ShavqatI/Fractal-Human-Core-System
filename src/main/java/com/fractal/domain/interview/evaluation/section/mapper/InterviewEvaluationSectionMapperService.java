@@ -7,8 +7,11 @@ import com.fractal.domain.interview.evaluation.section.dto.InterviewEvaluationSe
 
 public interface InterviewEvaluationSectionMapperService {
     InterviewEvaluationSectionResponse toDTO(InterviewEvaluationSection section);
+
     InterviewEvaluationSectionCompactResponse toCompactDTO(InterviewEvaluationSection section);
+
     InterviewEvaluationSection toEntity(InterviewEvaluationSectionRequest dto);
+
     InterviewEvaluationSection toEntity(InterviewEvaluationSection section, InterviewEvaluationSectionRequest dto);
 
 

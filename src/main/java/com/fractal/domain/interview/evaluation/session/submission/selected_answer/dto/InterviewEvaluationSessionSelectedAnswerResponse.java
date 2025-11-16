@@ -10,4 +10,5 @@ public record InterviewEvaluationSessionSelectedAnswerResponse(
         LocalDateTime selectedDate,
         LocalDateTime createdDate
 
-) {}
+) {
+}

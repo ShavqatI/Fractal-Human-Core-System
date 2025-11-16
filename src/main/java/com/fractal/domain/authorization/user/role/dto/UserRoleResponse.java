@@ -12,4 +12,5 @@ public record UserRoleResponse(
         LocalDateTime createdDate,
         LocalDateTime updatedDate
 
-) { }
+) {
+}

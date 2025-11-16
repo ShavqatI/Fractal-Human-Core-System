@@ -22,24 +22,27 @@ public class ExternalInstructorContactController {
 
     @PostMapping()
     public ResponseEntity<ContactResponse> create(@PathVariable Long instructorId, @RequestBody @Valid ContactRequest dto) {
-        return new ResponseEntity<>(contactService.toDTO(contactService.create(instructorId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(contactService.toDTO(contactService.create(instructorId, dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<ContactResponse>> getAll(@PathVariable Long instructorId) {
         return ResponseEntity.ok(contactService.getAllByExternalInstructorId(instructorId).stream().map(contactService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ContactResponse> getById(@PathVariable Long instructorId, @PathVariable Long id) {
-        return ResponseEntity.ok(contactService.toDTO(contactService.getById(instructorId,id)));
+        return ResponseEntity.ok(contactService.toDTO(contactService.getById(instructorId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<ContactResponse> update(@PathVariable Long instructorId, @PathVariable Long id, @RequestBody @Valid ContactRequest dto) {
-        return ResponseEntity.ok(contactService.toDTO(contactService.update(instructorId,id, dto)));
+        return ResponseEntity.ok(contactService.toDTO(contactService.update(instructorId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long instructorId, @PathVariable Long id) {
-        contactService.delete(instructorId,id);
+        contactService.delete(instructorId, id);
         return ResponseEntity.noContent().build();
     }
 

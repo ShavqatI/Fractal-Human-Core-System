@@ -18,16 +18,17 @@ public class LearningCategoryChildController {
 
     @PostMapping
     public ResponseEntity<LearningCategoryResponse> create(@PathVariable Long categoryId, @RequestBody @Valid LearningCategoryRequest dto) {
-        return new ResponseEntity<>(categoryService.toDTO(categoryService.addChild(categoryId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(categoryService.toDTO(categoryService.addChild(categoryId, dto)), HttpStatus.CREATED);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<LearningCategoryResponse> update(@PathVariable Long categoryId, @PathVariable Long id, @RequestBody @Valid LearningCategoryRequest dto) {
-        return ResponseEntity.ok(categoryService.toDTO(categoryService.updateChild(categoryId,id, dto)));
+        return ResponseEntity.ok(categoryService.toDTO(categoryService.updateChild(categoryId, id, dto)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long categoryId, @PathVariable Long id) {
-        categoryService.deleteChild(categoryId,id);
+        categoryService.deleteChild(categoryId, id);
         return ResponseEntity.noContent().build();
     }
 }

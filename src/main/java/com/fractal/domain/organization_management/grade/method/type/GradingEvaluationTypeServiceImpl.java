@@ -10,6 +10,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class GradingEvaluationTypeServiceImpl implements GradingEvaluationTypeService {
@@ -28,7 +29,7 @@ class GradingEvaluationTypeServiceImpl implements GradingEvaluationTypeService {
 
     @Override
     public GradingEvaluationType getByCode(String code) {
-        return gradingEvaluationTypeRepository.findByCode(code).orElseThrow(()-> new ResourceWithCodeNotFoundException(this,code));
+        return gradingEvaluationTypeRepository.findByCode(code).orElseThrow(() -> new ResourceWithCodeNotFoundException(this, code));
     }
 
     @Override
@@ -43,15 +44,14 @@ class GradingEvaluationTypeServiceImpl implements GradingEvaluationTypeService {
             gradingEvaluationType.setCode(dto.code());
             gradingEvaluationType.setName(dto.name());
             return save(gradingEvaluationType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      gradingEvaluationTypeRepository.delete(findById(id));
+        gradingEvaluationTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -83,14 +83,13 @@ class GradingEvaluationTypeServiceImpl implements GradingEvaluationTypeService {
     private GradingEvaluationType save(GradingEvaluationType gradingEvaluationType) {
         try {
             return gradingEvaluationTypeRepository.save(gradingEvaluationType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private GradingEvaluationType findById(Long id) {
-        return gradingEvaluationTypeRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return gradingEvaluationTypeRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
 }

@@ -10,7 +10,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class SkillServiceImpl implements SkillService {
 
-      private final SkillRepository skillRepository;
+    private final SkillRepository skillRepository;
+
     @Override
     public SkillResponse toDTO(Skill skill) {
         return new SkillResponse(
@@ -27,7 +28,7 @@ class SkillServiceImpl implements SkillService {
 
     @Override
     public Skill findById(Long id) {
-        return skillRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Qualification with id: " + id + " not found"));
+        return skillRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Qualification with id: " + id + " not found"));
 
     }
 

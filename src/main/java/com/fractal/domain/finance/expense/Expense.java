@@ -46,7 +46,7 @@ public class Expense extends ApprovalWorkflow {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     protected Status status;
 
-    @OneToMany(mappedBy = "expense",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "expense", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     protected List<ExpenseResource> resources = new ArrayList<>();
 
     public void addResource(ExpenseResource resource) {
@@ -54,6 +54,7 @@ public class Expense extends ApprovalWorkflow {
         resource.setExpense(this);
         resources.add(resource);
     }
+
     public void removeResource(ExpenseResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);

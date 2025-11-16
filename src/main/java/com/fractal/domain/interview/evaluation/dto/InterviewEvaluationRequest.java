@@ -9,6 +9,5 @@ public record InterviewEvaluationRequest(
         String name,
         List<InterviewEvaluationSectionRequest> sections,
         Long statusId
-    )
-
-{}
+) {
+}

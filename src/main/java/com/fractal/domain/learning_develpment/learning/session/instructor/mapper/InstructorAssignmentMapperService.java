@@ -6,7 +6,9 @@ import com.fractal.domain.learning_develpment.learning.session.instructor.dto.In
 
 public interface InstructorAssignmentMapperService {
     InstructorAssignmentResponse toDTO(InstructorAssignment instructorAssignment);
+
     InstructorAssignment toEntity(InstructorAssignmentRequest dto);
+
     InstructorAssignment toEntity(InstructorAssignment instructorAssignment, InstructorAssignmentRequest dto);
 }
 

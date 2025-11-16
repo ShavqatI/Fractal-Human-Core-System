@@ -1,13 +1,14 @@
 package com.fractal.domain.abstraction;
 
 
-import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
-import jakarta.persistence.*;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import org.springframework.data.annotation.CreatedBy;
 
 @MappedSuperclass
 @Data
@@ -15,10 +16,10 @@ import org.springframework.data.annotation.CreatedBy;
 @NoArgsConstructor
 public abstract class Integration extends AbstractEntity {
 
-     private String referenceType;
-     private String reference;
+    private String referenceType;
+    private String reference;
 
-     @ManyToOne(fetch = FetchType.LAZY)
-     @JoinColumn(name = "status_id",updatable = false,referencedColumnName = "id")
-     protected Status status;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "status_id", updatable = false, referencedColumnName = "id")
+    protected Status status;
 }

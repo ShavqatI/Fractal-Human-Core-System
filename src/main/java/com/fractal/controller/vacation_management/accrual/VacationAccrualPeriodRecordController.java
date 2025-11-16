@@ -1,9 +1,6 @@
 package com.fractal.controller.vacation_management.accrual;
 
 
-import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriodService;
-import com.fractal.domain.vacation_management.accrual.period.dto.VacationAccrualPeriodRequest;
-import com.fractal.domain.vacation_management.accrual.period.dto.VacationAccrualPeriodResponse;
 import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecordService;
 import com.fractal.domain.vacation_management.accrual.period.record.dto.VacationAccrualPeriodRecordRequest;
 import com.fractal.domain.vacation_management.accrual.period.record.dto.VacationAccrualPeriodRecordResponse;
@@ -25,26 +22,29 @@ public class VacationAccrualPeriodRecordController {
 
     @PostMapping()
     public ResponseEntity<VacationAccrualPeriodRecordResponse> create(@PathVariable Long periodId, @RequestBody @Valid VacationAccrualPeriodRecordRequest dto) {
-        return new ResponseEntity<>(periodService.toDTO(periodService.create(periodId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(periodService.toDTO(periodService.create(periodId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<VacationAccrualPeriodRecordResponse>> getAll(@PathVariable Long periodId) {
         return ResponseEntity.ok(periodService.getAllByVacationAccrualPeriodId(periodId).stream().map(periodService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<VacationAccrualPeriodRecordResponse> getById(@PathVariable Long periodId, @PathVariable Long id) {
-        return ResponseEntity.ok(periodService.toDTO(periodService.getById(periodId,id)));
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<VacationAccrualPeriodRecordResponse> update(@PathVariable Long periodId, @PathVariable Long id, @RequestBody @Valid VacationAccrualPeriodRecordRequest dto) {
-        return ResponseEntity.ok(periodService.toDTO(periodService.update(periodId,id, dto)));
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long periodId, @PathVariable Long id) {
-        periodService.delete(periodId,id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(periodService.toDTO(periodService.getById(periodId, id)));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<VacationAccrualPeriodRecordResponse> update(@PathVariable Long periodId, @PathVariable Long id, @RequestBody @Valid VacationAccrualPeriodRecordRequest dto) {
+        return ResponseEntity.ok(periodService.toDTO(periodService.update(periodId, id, dto)));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long periodId, @PathVariable Long id) {
+        periodService.delete(periodId, id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

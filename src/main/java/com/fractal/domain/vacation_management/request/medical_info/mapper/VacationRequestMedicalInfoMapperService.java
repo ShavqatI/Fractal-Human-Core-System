@@ -6,7 +6,9 @@ import com.fractal.domain.vacation_management.request.medical_info.dto.VacationR
 
 public interface VacationRequestMedicalInfoMapperService {
     VacationRequestMedicalInfoResponse toDTO(VacationRequestMedicalInfo medicalInfo);
+
     VacationRequestMedicalInfo toEntity(VacationRequestMedicalInfoRequest dto);
+
     VacationRequestMedicalInfo toEntity(VacationRequestMedicalInfo medicalInfo, VacationRequestMedicalInfoRequest dto);
 }
 

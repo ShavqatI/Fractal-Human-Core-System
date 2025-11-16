@@ -18,10 +18,10 @@ import lombok.experimental.SuperBuilder;
 public class CandidateEmployment extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="candidate_id", referencedColumnName = "id")
+    @JoinColumn(name = "candidate_id", referencedColumnName = "id")
     private Candidate candidate;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name ="employment_id", referencedColumnName = "id")
+    @JoinColumn(name = "employment_id", referencedColumnName = "id")
     private Employment employment;
 }

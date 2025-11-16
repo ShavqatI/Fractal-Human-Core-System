@@ -6,6 +6,7 @@ import com.fractal.domain.organization_management.grade.method.dto.GradingEvalua
 
 public interface GradingEvaluationMapperService {
     GradingEvaluationResponse toDTO(GradingEvaluation gradingEvaluation);
+
     GradingEvaluation toEntity(GradingEvaluationRequest dto);
 }
 

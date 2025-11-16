@@ -20,14 +20,17 @@ import java.util.stream.Collectors;
 public class InsuranceProviderController {
 
     private final InsuranceProviderService insuranceProviderService;
+
     @PostMapping
     public ResponseEntity<InsuranceProviderResponse> create(@RequestBody @Valid InsuranceProviderRequest dto) {
         return new ResponseEntity<>(insuranceProviderService.toDTO(insuranceProviderService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<InsuranceProviderResponse>> getAll() {
         return ResponseEntity.ok(insuranceProviderService.getAll().stream().map(insuranceProviderService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<InsuranceProviderResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(insuranceProviderService.toDTO(insuranceProviderService.getById(id)));
@@ -37,12 +40,14 @@ public class InsuranceProviderController {
     public ResponseEntity<List<InsuranceProviderCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(insuranceProviderService.getAll().stream().map(insuranceProviderService::toCompactDTO).collect(Collectors.toList()));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<InsuranceProviderResponse> update(@PathVariable Long id, @RequestBody @Valid InsuranceProviderRequest dto) {
-      return  ResponseEntity.ok(insuranceProviderService.toDTO(insuranceProviderService.update(id, dto)));
+        return ResponseEntity.ok(insuranceProviderService.toDTO(insuranceProviderService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         insuranceProviderService.deleteById(id);

@@ -21,25 +21,27 @@ public class OrganizationWorkScheduleController {
 
     @PostMapping()
     public ResponseEntity<WorkScheduleResponse> create(@PathVariable Long organizationId, @RequestBody @Valid WorkScheduleRequest dto) {
-        return new ResponseEntity<>(workScheduleService.toDTO(workScheduleService.create(organizationId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(workScheduleService.toDTO(workScheduleService.create(organizationId, dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<WorkScheduleResponse>> getAll(@PathVariable Long organizationId) {
         return ResponseEntity.ok(workScheduleService.getAllByOrganizationId(organizationId).stream().map(workScheduleService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<WorkScheduleResponse> getById(@PathVariable Long organizationId,@PathVariable Long id) {
-        return ResponseEntity.ok(workScheduleService.toDTO(workScheduleService.getById(organizationId,id)));
+    public ResponseEntity<WorkScheduleResponse> getById(@PathVariable Long organizationId, @PathVariable Long id) {
+        return ResponseEntity.ok(workScheduleService.toDTO(workScheduleService.getById(organizationId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<WorkScheduleResponse> update(@PathVariable Long organizationId, @PathVariable Long id, @RequestBody @Valid WorkScheduleRequest dto) {
-        return ResponseEntity.ok(workScheduleService.toDTO(workScheduleService.update(organizationId,id, dto)));
+        return ResponseEntity.ok(workScheduleService.toDTO(workScheduleService.update(organizationId, id, dto)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long organizationId, @PathVariable Long id) {
-        workScheduleService.delete(organizationId,id);
+        workScheduleService.delete(organizationId, id);
         return ResponseEntity.noContent().build();
     }
 

@@ -26,7 +26,7 @@ public class Benchmarking extends AbstractEntity {
     private BigDecimal averageSalary;
 
     @Column(name = "max_salary")
-    private BigDecimal  maxSalary;
+    private BigDecimal maxSalary;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "benchmarking_type_id", referencedColumnName = "id")

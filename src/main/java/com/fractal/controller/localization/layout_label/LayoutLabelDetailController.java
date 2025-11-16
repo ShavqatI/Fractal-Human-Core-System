@@ -22,23 +22,27 @@ public class LayoutLabelDetailController {
 
     @PostMapping()
     public ResponseEntity<LayoutLabelDetailResponse> create(@PathVariable Long layoutLabelId, @RequestBody @Valid LayoutLabelDetailRequest dto) {
-        return new ResponseEntity<>(layoutLabelDetailService.toDTO(layoutLabelDetailService.create(layoutLabelId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(layoutLabelDetailService.toDTO(layoutLabelDetailService.create(layoutLabelId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<LayoutLabelDetailResponse>> getAll(@PathVariable Long layoutLabelId) {
         return ResponseEntity.ok(layoutLabelDetailService.getAllByLayoutLabelId(layoutLabelId).stream().map(layoutLabelDetailService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<LayoutLabelDetailResponse> getById(@PathVariable Long layoutLabelId,@PathVariable Long id) {
-        return ResponseEntity.ok(layoutLabelDetailService.toDTO(layoutLabelDetailService.getById(layoutLabelId,id)));
+    public ResponseEntity<LayoutLabelDetailResponse> getById(@PathVariable Long layoutLabelId, @PathVariable Long id) {
+        return ResponseEntity.ok(layoutLabelDetailService.toDTO(layoutLabelDetailService.getById(layoutLabelId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<LayoutLabelDetailResponse> update(@PathVariable Long layoutLabelId, @PathVariable Long id, @RequestBody @Valid LayoutLabelDetailRequest dto) {
-        return ResponseEntity.ok(layoutLabelDetailService.toDTO(layoutLabelDetailService.update(layoutLabelId,id, dto)));
+        return ResponseEntity.ok(layoutLabelDetailService.toDTO(layoutLabelDetailService.update(layoutLabelId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long layoutLabelId, @PathVariable Long id) {
-        layoutLabelDetailService.delete(layoutLabelId,id);
+        layoutLabelDetailService.delete(layoutLabelId, id);
         return ResponseEntity.noContent().build();
     }
 

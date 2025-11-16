@@ -16,4 +16,5 @@ public record SubordinateResponse(
         LocalDate startDate,
         LocalDate endDate,
         LocalDateTime createdDate
-) {}
+) {
+}

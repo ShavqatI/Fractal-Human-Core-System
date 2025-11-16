@@ -12,5 +12,5 @@ public record InstructorAssignmentResponse(
         LocalDateTime endTime,
         StatusCompactResponse status,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

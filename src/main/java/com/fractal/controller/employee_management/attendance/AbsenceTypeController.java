@@ -19,26 +19,32 @@ import java.util.stream.Collectors;
 public class AbsenceTypeController {
 
     private final AbsenceTypeService absenceTypeService;
+
     @PostMapping
     public ResponseEntity<AbsenceTypeResponse> create(@RequestBody @Valid AbsenceTypeRequest dto) {
         return new ResponseEntity<>(absenceTypeService.toDTO(absenceTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<AbsenceTypeResponse>> getAll() {
         return ResponseEntity.ok(absenceTypeService.getAll().stream().map(absenceTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<AbsenceTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(absenceTypeService.toDTO(absenceTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<AbsenceTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(absenceTypeService.toDTO(absenceTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<AbsenceTypeResponse> update(@PathVariable Long id, @RequestBody @Valid AbsenceTypeRequest dto) {
-      return  ResponseEntity.ok(absenceTypeService.toDTO(absenceTypeService.update(id, dto)));
+        return ResponseEntity.ok(absenceTypeService.toDTO(absenceTypeService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         absenceTypeService.deleteById(id);

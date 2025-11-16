@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface SeparationReasonRepository extends JpaRepository<SeparationReason,Long> {
+interface SeparationReasonRepository extends JpaRepository<SeparationReason, Long> {
     List<SeparationReason> findAllByEmploymentId(Long employmentId);
+
     Optional<SeparationReason> findByEmploymentIdAndId(Long employmentId, Long id);
 
 

@@ -7,9 +7,13 @@ import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
 
 public interface EmployeeMilitaryServiceMapperService {
     MilitaryServiceResponse toDTO(EmployeeMilitaryService militaryService);
+
     EmployeeMilitaryService toEntity(MilitaryServiceRequest dto);
+
     EmployeeMilitaryService toEntity(EmployeeMilitaryService militaryService, MilitaryServiceRequest dto);
+
     EmployeeMilitaryService convert(EmployeeMilitaryService employeeMilitaryService, MilitaryService militaryService);
+
     EmployeeMilitaryService copy(MilitaryService militaryService);
 }
 

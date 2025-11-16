@@ -15,9 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 class KeyPerformanceIndicatorServiceImpl implements KeyPerformanceIndicatorService {
 
-      private final KeyPerformanceIndicatorRepository keyPerformanceIndicatorRepository;
-      private final KeyPerformanceIndicatorMapperService mapperService;
-      private final JobDescriptionService jobDescriptionService;
+    private final KeyPerformanceIndicatorRepository keyPerformanceIndicatorRepository;
+    private final KeyPerformanceIndicatorMapperService mapperService;
+    private final JobDescriptionService jobDescriptionService;
 
     @Override
     @Transactional
@@ -36,7 +36,7 @@ class KeyPerformanceIndicatorServiceImpl implements KeyPerformanceIndicatorServi
 
     @Override
     public KeyPerformanceIndicator getById(Long jobDescriptionId, Long id) {
-        return keyPerformanceIndicatorRepository.findByJobDescriptionIdAndId(jobDescriptionId,id).orElseThrow(()-> new ResourceNotFoundException("Key Performance Indicator with id: " + id + " not found"));
+        return keyPerformanceIndicatorRepository.findByJobDescriptionIdAndId(jobDescriptionId, id).orElseThrow(() -> new ResourceNotFoundException("Key Performance Indicator with id: " + id + " not found"));
     }
 
     @Override
@@ -45,8 +45,8 @@ class KeyPerformanceIndicatorServiceImpl implements KeyPerformanceIndicatorServi
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         var keyPerformanceIndicator = jobDescription.getKeyPerformanceIndicators().stream()
                 .filter(q -> q.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Key Performance Indicator with id: " + id + " not found"));
-        keyPerformanceIndicator = keyPerformanceIndicatorRepository.save(mapperService.toEntity(keyPerformanceIndicator,dto));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Key Performance Indicator with id: " + id + " not found"));
+        keyPerformanceIndicator = keyPerformanceIndicatorRepository.save(mapperService.toEntity(keyPerformanceIndicator, dto));
         jobDescriptionService.save(jobDescription);
         return keyPerformanceIndicator;
     }
@@ -57,7 +57,7 @@ class KeyPerformanceIndicatorServiceImpl implements KeyPerformanceIndicatorServi
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         var keyPerformanceIndicator = jobDescription.getKeyPerformanceIndicators().stream()
                 .filter(q -> q.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Key Performance Indicator with id: " + id + " not found"));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Key Performance Indicator with id: " + id + " not found"));
         jobDescription.removeKeyPerformanceIndicator(keyPerformanceIndicator);
         jobDescriptionService.save(jobDescription);
     }

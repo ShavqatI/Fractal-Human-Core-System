@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-class ResponsibilityServiceImpl implements ResponsibilityService  {
+class ResponsibilityServiceImpl implements ResponsibilityService {
 
     private final ResponsibilityRepository responsibilityRepository;
     private final ResponsibilityMapperService mapperService;
@@ -36,7 +36,7 @@ class ResponsibilityServiceImpl implements ResponsibilityService  {
 
     @Override
     public Responsibility getById(Long jobDescriptionId, Long id) {
-        return responsibilityRepository.findByJobDescriptionIdAndId(jobDescriptionId,id).orElseThrow(()-> new ResourceNotFoundException("Responsibility with id: " + id + " not found"));
+        return responsibilityRepository.findByJobDescriptionIdAndId(jobDescriptionId, id).orElseThrow(() -> new ResourceNotFoundException("Responsibility with id: " + id + " not found"));
     }
 
     @Override
@@ -45,8 +45,8 @@ class ResponsibilityServiceImpl implements ResponsibilityService  {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         Responsibility responsibility = jobDescription.getResponsibilities().stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Responsibility with id: " + id + " not found"));
-        responsibility = responsibilityRepository.save(mapperService.toEntity(responsibility,dto));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Responsibility with id: " + id + " not found"));
+        responsibility = responsibilityRepository.save(mapperService.toEntity(responsibility, dto));
         jobDescriptionService.save(jobDescription);
         return responsibility;
     }
@@ -57,7 +57,7 @@ class ResponsibilityServiceImpl implements ResponsibilityService  {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         Responsibility responsibility = jobDescription.getResponsibilities().stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Responsibility with id: " + id + " not found"));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Responsibility with id: " + id + " not found"));
         jobDescription.removeResponsibility(responsibility);
         jobDescriptionService.save(jobDescription);
 

@@ -6,7 +6,9 @@ import com.fractal.domain.localization.layout_label.detail.dto.LayoutLabelDetail
 
 public interface LayoutLabelDetailMapperService {
     LayoutLabelDetailResponse toDTO(LayoutLabelDetail layoutLabelDetail);
+
     LayoutLabelDetail toEntity(LayoutLabelDetailRequest dto);
+
     LayoutLabelDetail toEntity(LayoutLabelDetail layoutLabelDetail, LayoutLabelDetailRequest dto);
 }
 

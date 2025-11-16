@@ -11,5 +11,5 @@ public record RequiredExperienceRequest(
         LocalDate endDate,
         Boolean mandatory,
         String notes
-)
-{}
+) {
+}

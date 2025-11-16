@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class LearningSessionResourceTypeController {
 
     private final LearningSessionResourceTypeService resourceTypeService;
+
     @PostMapping
     public ResponseEntity<LearningSessionResourceTypeResponse> create(@RequestBody @Valid LearningSessionResourceTypeRequest dto) {
         return new ResponseEntity<>(resourceTypeService.toDTO(resourceTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<LearningSessionResourceTypeResponse>> getAll() {
         return ResponseEntity.ok(resourceTypeService.getAll().stream().map(resourceTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<LearningSessionResourceTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(resourceTypeService.toDTO(resourceTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<LearningSessionResourceTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(resourceTypeService.toDTO(resourceTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<LearningSessionResourceTypeResponse> update(@PathVariable Long id, @RequestBody @Valid LearningSessionResourceTypeRequest dto) {
-      return  ResponseEntity.ok(resourceTypeService.toDTO(resourceTypeService.update(id, dto)));
+        return ResponseEntity.ok(resourceTypeService.toDTO(resourceTypeService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         resourceTypeService.deleteById(id);

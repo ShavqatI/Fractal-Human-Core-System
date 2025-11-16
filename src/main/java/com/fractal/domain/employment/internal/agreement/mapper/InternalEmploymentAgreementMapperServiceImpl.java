@@ -20,6 +20,7 @@ class InternalEmploymentAgreementMapperServiceImpl implements InternalEmployment
     private final AgreementTypeService agreementTypeService;
     private final AgreementResourceMapperService resourceMapperService;
     private final StatusService statusService;
+
     @Override
     public InternalEmploymentAgreementResponse toDTO(InternalEmploymentAgreement agreement) {
         return new InternalEmploymentAgreementResponse(
@@ -41,12 +42,12 @@ class InternalEmploymentAgreementMapperServiceImpl implements InternalEmployment
 
     @Override
     public InternalEmploymentAgreement toEntity(InternalEmploymentAgreementRequest dto) {
-        return mapToEntity(new InternalEmploymentAgreement(),dto);
+        return mapToEntity(new InternalEmploymentAgreement(), dto);
     }
 
     @Override
     public InternalEmploymentAgreement toEntity(InternalEmploymentAgreement agreement, InternalEmploymentAgreementRequest dto) {
-       return mapToEntity(agreement,dto);
+        return mapToEntity(agreement, dto);
     }
 
     private InternalEmploymentAgreement mapToEntity(InternalEmploymentAgreement agreement, InternalEmploymentAgreementRequest dto) {
@@ -55,7 +56,7 @@ class InternalEmploymentAgreementMapperServiceImpl implements InternalEmployment
         agreement.setStartDate(dto.startDate());
         agreement.setEndDate(dto.endDate());
         agreement.setStatus(statusService.getById(dto.statusId()));
-        dto.files().forEach(file-> agreement.addResource(resourceMapperService.toEntity(file,null)));
+        dto.files().forEach(file -> agreement.addResource(resourceMapperService.toEntity(file, null)));
         return agreement;
     }
 

@@ -37,7 +37,7 @@ public class InterviewEvaluationSessionAnswerSubmission extends ApprovalWorkflow
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "interviewEvaluationSessionAnswerSubmission", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "interviewEvaluationSessionAnswerSubmission", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<InterviewEvaluationSessionSelectedAnswer> selectedAnswers = new ArrayList<>();
 
     @Transactional

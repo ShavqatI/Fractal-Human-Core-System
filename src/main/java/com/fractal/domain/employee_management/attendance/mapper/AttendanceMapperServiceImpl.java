@@ -16,6 +16,7 @@ class AttendanceMapperServiceImpl implements AttendanceMapperService {
 
     private final StatusService statusService;
     private final EmployeeService employeeService;
+
     @Override
     public AttendanceResponse toDTO(Attendance attendance) {
         return new AttendanceResponse(
@@ -49,8 +50,8 @@ class AttendanceMapperServiceImpl implements AttendanceMapperService {
         attendance.setStatus(statusService.getById(dto.statusId()));
         attendance.setStartTime(dto.startTime());
         attendance.setEndTime(dto.endTime());
-        attendance.setHoursWorked(Duration.between(dto.startTime(),dto.endTime()).toMinutes());
-        attendance.setOvertimeHours(Duration.between(dto.startTime(),dto.endTime()).toMinutes());
+        attendance.setHoursWorked(Duration.between(dto.startTime(), dto.endTime()).toMinutes());
+        attendance.setOvertimeHours(Duration.between(dto.startTime(), dto.endTime()).toMinutes());
         attendance.setRemarks(dto.remarks());
         return attendance;
     }

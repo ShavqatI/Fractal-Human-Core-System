@@ -7,7 +7,9 @@ import com.fractal.domain.recruitment.candidate.identification_document.Candidat
 
 public interface CandidateIdentificationDocumentMapperService {
     IdentificationDocumentResponse toDTO(CandidateIdentificationDocument identificationDocument);
+
     CandidateIdentificationDocument toEntity(IdentificationDocumentRequest dto);
+
     CandidateIdentificationDocument toEntity(CandidateIdentificationDocument identificationDocument, IdentificationDocumentRequest dto);
 }
 

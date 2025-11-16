@@ -6,7 +6,9 @@ import com.fractal.domain.interview.evaluation.section.question.answer.dto.Inter
 
 public interface InterviewEvaluationAnswerMapperService {
     InterviewEvaluationAnswerResponse toDTO(InterviewEvaluationAnswer answer);
+
     InterviewEvaluationAnswer toEntity(InterviewEvaluationAnswerRequest dto);
+
     InterviewEvaluationAnswer toEntity(InterviewEvaluationAnswer answer, InterviewEvaluationAnswerRequest dto);
 }
 

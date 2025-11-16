@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class ContactTypeController {
 
     private final ContactTypeService contactTypeService;
+
     @PostMapping
     public ResponseEntity<ContactTypeResponse> create(@RequestBody @Valid ContactTypeRequest dto) {
         return new ResponseEntity<>(contactTypeService.toDTO(contactTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<ContactTypeResponse>> getAll() {
         return ResponseEntity.ok(contactTypeService.getAll().stream().map(contactTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ContactTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(contactTypeService.toDTO(contactTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<ContactTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(contactTypeService.toDTO(contactTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<ContactTypeResponse> update(@PathVariable Long id, @RequestBody @Valid ContactTypeRequest dto) {
-      return  ResponseEntity.ok(contactTypeService.toDTO(contactTypeService.update(id, dto)));
+        return ResponseEntity.ok(contactTypeService.toDTO(contactTypeService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         contactTypeService.deleteById(id);

@@ -18,6 +18,7 @@ class AbsenceMapperServiceImpl implements AbsenceMapperService {
     private final StatusService statusService;
     private final AbsenceTypeService absenceTypeService;
     private final EmployeeService employeeService;
+
     @Override
     public AbsenceResponse toDTO(Absence absence) {
         return new AbsenceResponse(

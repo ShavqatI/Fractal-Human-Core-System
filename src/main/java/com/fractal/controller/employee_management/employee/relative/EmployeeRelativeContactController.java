@@ -22,24 +22,27 @@ public class EmployeeRelativeContactController {
 
     @PostMapping()
     public ResponseEntity<ContactResponse> create(@PathVariable Long relativeId, @RequestBody @Valid ContactRequest dto) {
-        return new ResponseEntity<>(contactService.toDTO(contactService.create(relativeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(contactService.toDTO(contactService.create(relativeId, dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<ContactResponse>> getAll(@PathVariable Long relativeId) {
         return ResponseEntity.ok(contactService.getAllByRelativeId(relativeId).stream().map(contactService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ContactResponse> getById(@PathVariable Long relativeId,@PathVariable Long id) {
-        return ResponseEntity.ok(contactService.toDTO(contactService.getById(relativeId,id)));
+    public ResponseEntity<ContactResponse> getById(@PathVariable Long relativeId, @PathVariable Long id) {
+        return ResponseEntity.ok(contactService.toDTO(contactService.getById(relativeId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<ContactResponse> update(@PathVariable Long relativeId, @PathVariable Long id, @RequestBody @Valid ContactRequest dto) {
-        return ResponseEntity.ok(contactService.toDTO(contactService.update(relativeId,id, dto)));
+        return ResponseEntity.ok(contactService.toDTO(contactService.update(relativeId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long relativeId, @PathVariable Long id) {
-        contactService.delete(relativeId,id);
+        contactService.delete(relativeId, id);
         return ResponseEntity.noContent().build();
     }
 

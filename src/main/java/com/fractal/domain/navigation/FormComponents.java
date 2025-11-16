@@ -11,8 +11,6 @@ import jakarta.persistence.*;
 public class FormComponents extends AbstractEntity {
 
 
-
-
     @ManyToOne
     @JoinColumn(name = "layout_label_id", referencedColumnName = "id")
     private LayoutLabel layoutLabel;

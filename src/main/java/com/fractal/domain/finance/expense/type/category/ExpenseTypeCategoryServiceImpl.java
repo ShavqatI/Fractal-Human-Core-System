@@ -15,6 +15,7 @@ import java.util.List;
 class ExpenseTypeCategoryServiceImpl implements ExpenseTypeCategoryService {
 
     private final ExpenseTypeCategoryRepository expenseTypeCategoryRepository;
+
     @Override
     public ExpenseTypeCategory create(ExpenseTypeCategoryRequest dto) {
         return save(toEntity(dto));
@@ -27,7 +28,7 @@ class ExpenseTypeCategoryServiceImpl implements ExpenseTypeCategoryService {
 
     @Override
     public ExpenseTypeCategory getByCode(String code) {
-        return expenseTypeCategoryRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Status Category with code: " + code + " not found"));
+        return expenseTypeCategoryRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Status Category with code: " + code + " not found"));
 
     }
 
@@ -43,8 +44,7 @@ class ExpenseTypeCategoryServiceImpl implements ExpenseTypeCategoryService {
             expenseTypeCategory.setCode(dto.code());
             expenseTypeCategory.setName(dto.name());
             return save(expenseTypeCategory);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -75,14 +75,13 @@ class ExpenseTypeCategoryServiceImpl implements ExpenseTypeCategoryService {
     private ExpenseTypeCategory save(ExpenseTypeCategory expenseTypeCategory) {
         try {
             return expenseTypeCategoryRepository.save(expenseTypeCategory);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private ExpenseTypeCategory findById(Long id) {
-        return expenseTypeCategoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Status Category with id: " + id + " not found"));
+        return expenseTypeCategoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Status Category with id: " + id + " not found"));
     }
 
 }

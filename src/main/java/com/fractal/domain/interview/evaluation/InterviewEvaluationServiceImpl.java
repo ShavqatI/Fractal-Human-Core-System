@@ -29,33 +29,30 @@ class InterviewEvaluationServiceImpl implements InterviewEvaluationService {
     }
 
 
-
     @Override
     public InterviewEvaluation getById(Long id) {
-     return findById(id);
+        return findById(id);
     }
 
     @Override
     public InterviewEvaluation update(Long id, InterviewEvaluationRequest dto) {
         try {
-            return save(mapperService.toEntity(findById(id),dto));
-        }
-        catch (DataAccessException e) {
+            return save(mapperService.toEntity(findById(id), dto));
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       interviewEvaluationRepository.delete(findById(id));
+        interviewEvaluationRepository.delete(findById(id));
     }
 
     @Override
     public InterviewEvaluation save(InterviewEvaluation interviewEvaluation) {
         try {
             return interviewEvaluationRepository.save(interviewEvaluation);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -66,7 +63,7 @@ class InterviewEvaluationServiceImpl implements InterviewEvaluationService {
     }
 
     private InterviewEvaluation findById(Long id) {
-        return interviewEvaluationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation with id: " + id + " not found"));
+        return interviewEvaluationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation with id: " + id + " not found"));
 
     }
 }

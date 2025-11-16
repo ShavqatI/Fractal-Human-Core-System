@@ -26,23 +26,23 @@ public class Address extends Auditable {
     protected Long id;
 
     @ManyToOne
-    @JoinColumn(name ="address_type_id", referencedColumnName = "id")
+    @JoinColumn(name = "address_type_id", referencedColumnName = "id")
     protected AddressType addressType;
 
     @ManyToOne
-    @JoinColumn(name ="country_id", referencedColumnName = "id")
+    @JoinColumn(name = "country_id", referencedColumnName = "id")
     protected Country country;
 
     @ManyToOne
-    @JoinColumn(name ="region_id", referencedColumnName = "id")
+    @JoinColumn(name = "region_id", referencedColumnName = "id")
     protected Region region;
 
     @ManyToOne
-    @JoinColumn(name ="city_id", referencedColumnName = "id")
+    @JoinColumn(name = "city_id", referencedColumnName = "id")
     protected City city;
 
     @ManyToOne
-    @JoinColumn(name ="district_id", referencedColumnName = "id")
+    @JoinColumn(name = "district_id", referencedColumnName = "id")
     protected District district;
 
     @Column(name = "street")

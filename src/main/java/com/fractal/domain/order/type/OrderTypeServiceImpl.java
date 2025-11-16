@@ -29,7 +29,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
 
     @Override
     public OrderType getByCode(String code) {
-        return orderTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Vacation Type with code: " + code + " not found"));
+        return orderTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Vacation Type with code: " + code + " not found"));
 
     }
 
@@ -48,15 +48,14 @@ public class OrderTypeServiceImpl implements OrderTypeService {
             orderType.setSeries(dto.series());
             orderType.setDocumentTemplateManager(documentTemplateManagerService.getById(dto.documentTemplateManagerId()));
             return save(orderType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       orderTypeRepository.delete(findById(id));
+        orderTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -85,14 +84,13 @@ public class OrderTypeServiceImpl implements OrderTypeService {
     private OrderType save(OrderType orderType) {
         try {
             return orderTypeRepository.save(orderType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private OrderType findById(Long id) {
-        return orderTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Vacation Type with id: " + id + " not found"));
+        return orderTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Vacation Type with id: " + id + " not found"));
     }
 
 }

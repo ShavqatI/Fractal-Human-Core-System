@@ -8,10 +8,15 @@ import java.util.List;
 public interface RelativeAddressService {
 
     RelativeAddress create(Long relativeId, RelativeAddressRequest dto);
-    RelativeAddress getById(Long relativeId,Long id);
+
+    RelativeAddress getById(Long relativeId, Long id);
+
     List<RelativeAddress> getAllByRelativeId(Long relativeId);
-    RelativeAddress update(Long relativeId,Long id, RelativeAddressRequest dto);
+
+    RelativeAddress update(Long relativeId, Long id, RelativeAddressRequest dto);
+
     void delete(Long relativeId, Long id);
+
     RelativeAddressResponse toDTO(RelativeAddress address);
 
 }

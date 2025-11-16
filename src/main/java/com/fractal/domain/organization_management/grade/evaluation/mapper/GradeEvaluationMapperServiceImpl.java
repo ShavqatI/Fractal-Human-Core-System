@@ -20,12 +20,12 @@ class GradeEvaluationMapperServiceImpl implements GradeEvaluationMapperService {
 
     @Override
     public GradeEvaluation toEntity(GradingEvaluationRequest dto) {
-        return mapToEntity(new GradeEvaluation(),dto);
+        return mapToEntity(new GradeEvaluation(), dto);
     }
 
     @Override
     public GradeEvaluation toEntity(GradeEvaluation evaluation, GradingEvaluationRequest dto) {
-        return mapToEntity(evaluation,dto);
+        return mapToEntity(evaluation, dto);
     }
 
     private GradeEvaluation mapToEntity(GradeEvaluation evaluation, GradingEvaluationRequest dto) {

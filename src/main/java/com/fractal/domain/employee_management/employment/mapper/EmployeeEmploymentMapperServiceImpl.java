@@ -21,12 +21,12 @@ class EmployeeEmploymentMapperServiceImpl implements EmployeeEmploymentMapperSer
 
     @Override
     public EmployeeEmployment toEntity(EmploymentRequest dto) {
-        return mapToEntity(new EmployeeEmployment(),dto);
+        return mapToEntity(new EmployeeEmployment(), dto);
     }
 
     @Override
     public EmployeeEmployment toEntity(EmployeeEmployment employment, EmploymentRequest dto) {
-        return mapToEntity(employment,dto);
+        return mapToEntity(employment, dto);
     }
 
     @Override
@@ -40,7 +40,6 @@ class EmployeeEmploymentMapperServiceImpl implements EmployeeEmploymentMapperSer
         employment.setEmployment(employmentMapperService.toEntity(dto));
         return employment;
     }
-
 
 
 }

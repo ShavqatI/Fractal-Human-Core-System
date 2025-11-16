@@ -7,8 +7,11 @@ import com.fractal.domain.learning_develpment.learning.instructor.external.dto.E
 
 public interface ExternalInstructorMapperService {
     ExternalInstructorResponse toDTO(ExternalInstructor instructor);
+
     ExternalInstructorCompactResponse toCompactDTO(ExternalInstructor instructor);
+
     ExternalInstructor toEntity(ExternalInstructorRequest dto);
+
     ExternalInstructor toEntity(ExternalInstructor instructor, ExternalInstructorRequest dto);
 }
 

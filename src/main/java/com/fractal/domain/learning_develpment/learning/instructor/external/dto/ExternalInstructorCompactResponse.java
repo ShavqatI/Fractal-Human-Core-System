@@ -7,4 +7,5 @@ public record ExternalInstructorCompactResponse(
         String lastName,
         String firstName,
         String patronymicName
-) implements InstructorCompactResponse { }
+) implements InstructorCompactResponse {
+}

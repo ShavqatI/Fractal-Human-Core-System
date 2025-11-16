@@ -34,11 +34,12 @@ class EmployeeAddressServiceImpl implements EmployeeAddressService {
     public List<EmployeeAddress> getAllByEmployeeId(Long employeeId) {
         return employeeAddressRepository.findAllByEmployeeId(employeeId);
     }
+
     @Override
-    public EmployeeAddress getById(Long employeeId,Long id) {
+    public EmployeeAddress getById(Long employeeId, Long id) {
         var employee = employeeService.getById(employeeId);
         return employee.getAddresses().stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee address with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee address with id: " + id + " not found"));
     }
 
     @Override
@@ -47,8 +48,8 @@ class EmployeeAddressServiceImpl implements EmployeeAddressService {
         var employee = employeeService.getById(employeeId);
         var address = employee.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee address with id: " + id + " not found"));
-        address = addressMapperService.toEntity(address,dto);
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee address with id: " + id + " not found"));
+        address = addressMapperService.toEntity(address, dto);
         employeeAddressRepository.save(address);
         employeeService.save(employee);
         return address;
@@ -60,7 +61,7 @@ class EmployeeAddressServiceImpl implements EmployeeAddressService {
         var employee = employeeService.getById(employeeId);
         var address = employee.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee address with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee address with id: " + id + " not found"));
         employee.removeAddress(address);
         employeeAddressRepository.delete(address);
     }

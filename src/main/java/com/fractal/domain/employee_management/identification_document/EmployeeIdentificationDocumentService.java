@@ -8,11 +8,17 @@ import java.util.List;
 public interface EmployeeIdentificationDocumentService {
 
     EmployeeIdentificationDocument create(Long employeeId, IdentificationDocumentRequest dto);
+
     EmployeeIdentificationDocument update(Long employeeId, Long id, IdentificationDocumentRequest dto);
-    void delete(Long employeeId,Long id);
+
+    void delete(Long employeeId, Long id);
+
     List<EmployeeIdentificationDocument> getAllByEmployeeId(Long employeeId);
-    EmployeeIdentificationDocument getById(Long employeeId , Long id);
+
+    EmployeeIdentificationDocument getById(Long employeeId, Long id);
+
     EmployeeIdentificationDocument getById(Long id);
+
     IdentificationDocumentResponse toDTO(EmployeeIdentificationDocument employeeIdentificationDocument);
 
 

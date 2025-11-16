@@ -14,22 +14,22 @@ class InsuranceCoverageMapperServiceImpl implements InsuranceCoverageMapperServi
     @Override
     public InsuranceCoverageResponse toDTO(InsuranceCoverage coverage) {
         return new InsuranceCoverageResponse(
-                   coverage.getId(),
-                   coverage.getDescription(),
-                   coverage.getAmount(),
-                   coverage.getCreatedDate()
+                coverage.getId(),
+                coverage.getDescription(),
+                coverage.getAmount(),
+                coverage.getCreatedDate()
 
         );
     }
 
     @Override
     public InsuranceCoverage toEntity(InsuranceCoverageRequest dto) {
-        return mapToEntity(new InsuranceCoverage(),dto);
+        return mapToEntity(new InsuranceCoverage(), dto);
     }
 
     @Override
     public InsuranceCoverage toEntity(InsuranceCoverage coverage, InsuranceCoverageRequest dto) {
-        return mapToEntity(coverage,dto);
+        return mapToEntity(coverage, dto);
     }
 
     private InsuranceCoverage mapToEntity(InsuranceCoverage coverage, InsuranceCoverageRequest dto) {

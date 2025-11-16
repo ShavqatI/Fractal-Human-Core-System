@@ -26,13 +26,13 @@ class WordTemplateProcessorServiceImpl implements WordTemplateProcessorService {
         }
     }
 
-    private  void replaceInParagraphs(XWPFDocument document, Map<String, String> values) {
+    private void replaceInParagraphs(XWPFDocument document, Map<String, String> values) {
         for (XWPFParagraph paragraph : document.getParagraphs()) {
             replaceInParagraph(paragraph, values);
         }
     }
 
-    private  void replaceInTables(XWPFDocument document, Map<String, String> values) {
+    private void replaceInTables(XWPFDocument document, Map<String, String> values) {
         for (XWPFTable table : document.getTables()) {
             for (XWPFTableRow row : table.getRows()) {
                 for (XWPFTableCell cell : row.getTableCells()) {
@@ -44,7 +44,7 @@ class WordTemplateProcessorServiceImpl implements WordTemplateProcessorService {
         }
     }
 
-    private  void replaceInParagraph(XWPFParagraph paragraph, Map<String, String> values) {
+    private void replaceInParagraph(XWPFParagraph paragraph, Map<String, String> values) {
         List<XWPFRun> runs = new ArrayList<>();
         String fullText = paragraph.getText();
 
@@ -66,7 +66,7 @@ class WordTemplateProcessorServiceImpl implements WordTemplateProcessorService {
         run.setText(fullText);
     }
 
-    private  boolean containsPlaceholder(String text, Map<String, String> values) {
+    private boolean containsPlaceholder(String text, Map<String, String> values) {
         for (String key : values.keySet()) {
             if (text.contains(key)) return true;
         }

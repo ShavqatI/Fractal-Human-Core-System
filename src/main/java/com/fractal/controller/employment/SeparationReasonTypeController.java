@@ -25,14 +25,17 @@ public class SeparationReasonTypeController {
     public ResponseEntity<SeparationReasonTypeResponse> create(@RequestBody @Valid SeparationReasonTypeRequest dto) {
         return new ResponseEntity<>(separationReasonTypeService.toDTO(separationReasonTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<SeparationReasonTypeResponse>> getAll() {
         return ResponseEntity.ok(separationReasonTypeService.getAll().stream().map(separationReasonTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<SeparationReasonTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(separationReasonTypeService.toDTO(separationReasonTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<SeparationReasonTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(separationReasonTypeService.toDTO(separationReasonTypeService.getByCode(code)));
@@ -42,12 +45,14 @@ public class SeparationReasonTypeController {
     public ResponseEntity<List<SeparationReasonTypeCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(separationReasonTypeService.getAll().stream().map(separationReasonTypeService::toCompactDTO).collect(Collectors.toList()));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<SeparationReasonTypeResponse> update(@PathVariable Long id, @RequestBody @Valid SeparationReasonTypeRequest dto) {
-      return  ResponseEntity.ok(separationReasonTypeService.toDTO(separationReasonTypeService.update(id, dto)));
+        return ResponseEntity.ok(separationReasonTypeService.toDTO(separationReasonTypeService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         separationReasonTypeService.deleteById(id);

@@ -17,7 +17,9 @@ import java.time.LocalDateTime;
         @JsonSubTypes.Type(value = EmployeeIntervieweeRequest.class, name = "EMPLOYEE")
 })
 public interface IntervieweeRequest {
-        LocalDateTime scheduledTime();
-        Integer durationMinutes();
-        Long statusId();
+    LocalDateTime scheduledTime();
+
+    Integer durationMinutes();
+
+    Long statusId();
 }

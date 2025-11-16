@@ -21,12 +21,12 @@ class CandidateLanguageSkillMapperServiceImpl implements CandidateLanguageSkillM
 
     @Override
     public CandidateLanguageSkill toEntity(LanguageSkillRequest dto) {
-        return convert(new CandidateLanguageSkill(),mapperService.toEntity(dto));
+        return convert(new CandidateLanguageSkill(), mapperService.toEntity(dto));
     }
 
     @Override
     public CandidateLanguageSkill toEntity(CandidateLanguageSkill languageSkill, LanguageSkillRequest dto) {
-        return convert(languageSkill,mapperService.toEntity(languageSkill,dto));
+        return convert(languageSkill, mapperService.toEntity(languageSkill, dto));
     }
 
     private CandidateLanguageSkill convert(CandidateLanguageSkill candidateLanguageSkill, LanguageSkill languageSkill) {

@@ -44,6 +44,7 @@ public class AnswerSubmission extends ApprovalWorkflow {
         selectedAnswer.setAnswerSubmission(this);
         selectedAnswers.add(selectedAnswer);
     }
+
     public void removeAnswer(SelectedAnswer answer) {
         if (selectedAnswers != null && !selectedAnswers.isEmpty())
             selectedAnswers.remove(answer);

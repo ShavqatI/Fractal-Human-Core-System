@@ -29,4 +29,5 @@ public record OrganizationAddressRequest(
         Double longitude,
         LocalDate startDate,
         LocalDate endDate
-) { }
+) {
+}

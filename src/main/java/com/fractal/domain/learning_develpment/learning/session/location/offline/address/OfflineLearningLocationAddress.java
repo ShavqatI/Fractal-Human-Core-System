@@ -20,7 +20,7 @@ public class OfflineLearningLocationAddress extends Address {
     private String roomNumber;
 
     @ManyToOne
-    @JoinColumn(name ="offline_learning_location_id", referencedColumnName = "id")
+    @JoinColumn(name = "offline_learning_location_id", referencedColumnName = "id")
     private OfflineLearningLocation offlineLearningLocation;
 
 

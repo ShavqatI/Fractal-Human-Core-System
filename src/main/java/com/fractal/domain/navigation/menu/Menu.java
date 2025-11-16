@@ -34,7 +34,7 @@ public class Menu extends Navigation {
     @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Menu> children = new ArrayList<>();
 
-    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "menu", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MenuAction> menuActions = new ArrayList<>();
 
     @Transactional
@@ -43,11 +43,13 @@ public class Menu extends Navigation {
         menu.setParent(this);
         children.add(menu);
     }
+
     @Transactional
     public void removeChild(Menu menu) {
         if (children != null && !children.isEmpty())
             children.remove(menu);
     }
+
     @Transactional
     public void addAction(MenuAction menuAction) {
         if (menuActions == null) menuActions = new ArrayList<>();
@@ -59,9 +61,8 @@ public class Menu extends Navigation {
     @Transactional
     public void removeAction(MenuAction menuAction) {
         if (menuActions != null && !menuActions.isEmpty())
-         menuActions.remove(menuAction);
+            menuActions.remove(menuAction);
     }
-
 
 
 }

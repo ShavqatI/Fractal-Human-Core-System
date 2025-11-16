@@ -12,4 +12,5 @@ public record CityResponse(
         RegionResponse region,
         AreaTypeResponse areaType,
         LocalDateTime createdDate
-) { }
+) {
+}

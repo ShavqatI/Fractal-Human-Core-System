@@ -53,7 +53,7 @@ public class ExternalInstructor extends Instructor {
     @JoinColumn(name = "nationality_id", referencedColumnName = "id")
     private Nationality nationality;
 
-    @OneToMany(mappedBy = "externalInstructor", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "externalInstructor", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ExternalInstructorContact> contacts = new ArrayList<>();
 
     public void addContact(ExternalInstructorContact contact) {

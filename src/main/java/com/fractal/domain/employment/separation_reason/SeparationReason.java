@@ -24,5 +24,4 @@ public class SeparationReason extends AbstractEntity {
     private Employment employment;
 
 
-
 }

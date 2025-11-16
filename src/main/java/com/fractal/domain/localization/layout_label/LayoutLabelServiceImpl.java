@@ -41,7 +41,7 @@ class LayoutLabelServiceImpl implements LayoutLabelService {
 
     @Override
     public LayoutLabel getByName(String name) {
-        return layoutLabelRepository.findByName(name).orElseThrow(()-> new ResourceNotFoundException("LayoutLabel with name: " + name + " not found"));
+        return layoutLabelRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException("LayoutLabel with name: " + name + " not found"));
     }
 
     @Override
@@ -53,9 +53,8 @@ class LayoutLabelServiceImpl implements LayoutLabelService {
     @Transactional
     public LayoutLabel update(Long id, LayoutLabelRequest dto) {
         try {
-            return save(mapperService.toEntity(findById(id),dto));
-        }
-        catch (DataAccessException e) {
+            return save(mapperService.toEntity(findById(id), dto));
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -73,18 +72,16 @@ class LayoutLabelServiceImpl implements LayoutLabelService {
     }
 
 
-
     @Override
     public LayoutLabel save(LayoutLabel layoutLabel) {
         try {
             return layoutLabelRepository.save(layoutLabel);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private LayoutLabel findById(Long id) {
-        return layoutLabelRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("LayoutLabel with id: " + id + " not found"));
+        return layoutLabelRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("LayoutLabel with id: " + id + " not found"));
     }
 }

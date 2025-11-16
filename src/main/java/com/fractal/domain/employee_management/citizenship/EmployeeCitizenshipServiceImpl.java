@@ -28,7 +28,7 @@ class EmployeeCitizenshipServiceImpl implements EmployeeCitizenshipService {
         var citizenship = mapperService.toEntity(dto);
         employee.addCitizenship(citizenship);
         employeeService.save(employee);
-       return citizenship;
+        return citizenship;
     }
 
     @Override
@@ -38,7 +38,7 @@ class EmployeeCitizenshipServiceImpl implements EmployeeCitizenshipService {
 
     @Override
     public EmployeeCitizenship getById(Long employeeId, Long id) {
-        return employeeCitizenshipRepository.findByEmployeeIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
+        return employeeCitizenshipRepository.findByEmployeeIdAndId(employeeId, id).orElseThrow(() -> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
     }
 
     @Override
@@ -47,10 +47,10 @@ class EmployeeCitizenshipServiceImpl implements EmployeeCitizenshipService {
         var employee = employeeService.getById(employeeId);
         var citizenship = employee.getCitizenships()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
-        citizenship = employeeCitizenshipRepository.save(mapperService.toEntity(citizenship,dto));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
+        citizenship = employeeCitizenshipRepository.save(mapperService.toEntity(citizenship, dto));
         employeeService.save(employee);
-       return citizenship;
+        return citizenship;
     }
 
     @Override
@@ -59,7 +59,7 @@ class EmployeeCitizenshipServiceImpl implements EmployeeCitizenshipService {
         var employee = employeeService.getById(employeeId);
         var citizenship = employee.getCitizenships()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
         employee.removeCitizenship(citizenship);
         employeeService.save(employee);
     }

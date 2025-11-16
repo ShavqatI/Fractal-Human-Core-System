@@ -32,16 +32,17 @@ public class Relative extends Person {
     private RelationType relationType;
 
     @OneToMany(mappedBy = "relative", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RelativeAddress> addresses   = new ArrayList<>();
+    private List<RelativeAddress> addresses = new ArrayList<>();
 
     @OneToMany(mappedBy = "relative", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RelativeContact> contacts   = new ArrayList<>();
+    private List<RelativeContact> contacts = new ArrayList<>();
 
     public void addAddress(RelativeAddress address) {
         if (addresses == null) addresses = new ArrayList<>();
         address.setRelative(this);
         addresses.add(address);
     }
+
     public void removeAddress(RelativeAddress address) {
         if (addresses != null && !addresses.isEmpty())
             addresses.remove(address);
@@ -52,6 +53,7 @@ public class Relative extends Person {
         contact.setRelative(this);
         contacts.add(contact);
     }
+
     public void removeContact(RelativeContact contact) {
         if (contacts != null && !contacts.isEmpty())
             contacts.remove(contact);

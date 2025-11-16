@@ -14,9 +14,10 @@ import java.util.List;
 class CandidateResourceTypeServiceImpl implements CandidateResourceTypeService {
 
     private final CandidateResourceTypeRepository candidateResourceTypeRepository;
+
     @Override
     public CandidateResourceType create(CandidateResourceTypeRequest dto) {
-       return save(toEntity(dto));
+        return save(toEntity(dto));
     }
 
     @Override
@@ -26,8 +27,7 @@ class CandidateResourceTypeServiceImpl implements CandidateResourceTypeService {
             candidateResourceType.setCode(dto.code());
             candidateResourceType.setName(dto.name());
             return save(candidateResourceType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -40,7 +40,7 @@ class CandidateResourceTypeServiceImpl implements CandidateResourceTypeService {
 
     @Override
     public CandidateResourceType getByCode(String code) {
-        return candidateResourceTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
+        return candidateResourceTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
     }
 
     @Override
@@ -50,7 +50,7 @@ class CandidateResourceTypeServiceImpl implements CandidateResourceTypeService {
 
     @Override
     public void deleteById(Long id) {
-       candidateResourceTypeRepository.delete(findById(id));
+        candidateResourceTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -62,6 +62,7 @@ class CandidateResourceTypeServiceImpl implements CandidateResourceTypeService {
                 candidateResourceType.getCreatedDate()
         );
     }
+
     private CandidateResourceType toEntity(CandidateResourceTypeRequest dto) {
         return CandidateResourceType.builder()
                 .code(dto.code())
@@ -72,14 +73,13 @@ class CandidateResourceTypeServiceImpl implements CandidateResourceTypeService {
     private CandidateResourceType save(CandidateResourceType candidateResourceType) {
         try {
             return candidateResourceTypeRepository.save(candidateResourceType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private CandidateResourceType findById(Long id) {
-        return candidateResourceTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
+        return candidateResourceTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
     }
 
 }

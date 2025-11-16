@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class BenchmarkingTypeServiceImpl implements BenchmarkingTypeService {
@@ -26,7 +27,7 @@ class BenchmarkingTypeServiceImpl implements BenchmarkingTypeService {
 
     @Override
     public BenchmarkingType getByCode(String code) {
-        return benchmarkingTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Insurance Type with code: " + code + " not found"));
+        return benchmarkingTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Insurance Type with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class BenchmarkingTypeServiceImpl implements BenchmarkingTypeService {
             benchmarkingType.setCode(dto.code());
             benchmarkingType.setName(dto.name());
             return save(benchmarkingType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      benchmarkingTypeRepository.delete(findById(id));
+        benchmarkingTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class BenchmarkingTypeServiceImpl implements BenchmarkingTypeService {
     private BenchmarkingType save(BenchmarkingType benchmarkingType) {
         try {
             return benchmarkingTypeRepository.save(benchmarkingType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private BenchmarkingType findById(Long id) {
-        return benchmarkingTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Insurance Type with id: " + id + " not found"));
+        return benchmarkingTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Insurance Type with id: " + id + " not found"));
     }
 
 }

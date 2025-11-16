@@ -14,9 +14,10 @@ import java.util.List;
 class EmploymentKindServiceImpl implements EmploymentKindService {
 
     private final EmploymentKindRepository employmentKindRepository;
+
     @Override
     public EmploymentKind create(EmploymentKindRequest dto) {
-       return save(toEntity(dto));
+        return save(toEntity(dto));
     }
 
     @Override
@@ -26,8 +27,7 @@ class EmploymentKindServiceImpl implements EmploymentKindService {
             employmentKind.setCode(dto.code());
             employmentKind.setName(dto.name());
             return save(employmentKind);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -40,7 +40,7 @@ class EmploymentKindServiceImpl implements EmploymentKindService {
 
     @Override
     public EmploymentKind getByCode(String code) {
-        return employmentKindRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
+        return employmentKindRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
     }
 
     @Override
@@ -50,7 +50,7 @@ class EmploymentKindServiceImpl implements EmploymentKindService {
 
     @Override
     public void deleteById(Long id) {
-       employmentKindRepository.delete(findById(id));
+        employmentKindRepository.delete(findById(id));
     }
 
     @Override
@@ -62,6 +62,7 @@ class EmploymentKindServiceImpl implements EmploymentKindService {
                 employmentKind.getCreatedDate()
         );
     }
+
     private EmploymentKind toEntity(EmploymentKindRequest dto) {
         return EmploymentKind.builder()
                 .code(dto.code())
@@ -72,14 +73,13 @@ class EmploymentKindServiceImpl implements EmploymentKindService {
     private EmploymentKind save(EmploymentKind employmentKind) {
         try {
             return employmentKindRepository.save(employmentKind);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private EmploymentKind findById(Long id) {
-        return employmentKindRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
+        return employmentKindRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
     }
 
 }

@@ -11,8 +11,8 @@ public record CityRequest(
         String code,
         @NotBlank
         @NotNull
-        @Size(min = 3,max = 100,message = "The name length should be in (3 to 20 symbols)")
-        @Pattern(regexp = "^\\p{L}[\\p{L}\\p{M}\\p{S}\\p{P}\\p{N}\\s]*$",message = "Only Unicode letters, symbols, punctuation, numbers and spaces are allowed")
+        @Size(min = 3, max = 100, message = "The name length should be in (3 to 20 symbols)")
+        @Pattern(regexp = "^\\p{L}[\\p{L}\\p{M}\\p{S}\\p{P}\\p{N}\\s]*$", message = "Only Unicode letters, symbols, punctuation, numbers and spaces are allowed")
         String name,
         @NotNull
         Long regionId,
@@ -21,4 +21,5 @@ public record CityRequest(
         Long areaTypeId
 
 
-) { }
+) {
+}

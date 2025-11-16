@@ -37,12 +37,12 @@ class InterviewEvaluationSessionSelectedAnswerMapperServiceImpl implements Inter
 
     @Override
     public InterviewEvaluationSessionSelectedAnswer toEntity(InterviewEvaluationSessionSelectedAnswerRequest dto) {
-        return mapToEntity(new InterviewEvaluationSessionSelectedAnswer(),dto);
+        return mapToEntity(new InterviewEvaluationSessionSelectedAnswer(), dto);
     }
 
     @Override
     public InterviewEvaluationSessionSelectedAnswer toEntity(InterviewEvaluationSessionSelectedAnswer selectedAnswer, InterviewEvaluationSessionSelectedAnswerRequest dto) {
-       return mapToEntity(selectedAnswer,dto);
+        return mapToEntity(selectedAnswer, dto);
     }
 
     private InterviewEvaluationSessionSelectedAnswer mapToEntity(InterviewEvaluationSessionSelectedAnswer selectedAnswer, InterviewEvaluationSessionSelectedAnswerRequest dto) {

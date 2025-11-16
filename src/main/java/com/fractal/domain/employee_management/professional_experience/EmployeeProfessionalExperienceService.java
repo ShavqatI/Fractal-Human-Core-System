@@ -8,9 +8,14 @@ import java.util.List;
 public interface EmployeeProfessionalExperienceService {
 
     EmployeeProfessionalExperience create(Long candidateId, EmployeeProfessionalExperienceRequest dto);
+
     List<EmployeeProfessionalExperience> getAllByCandidateId(Long candidateId);
-    EmployeeProfessionalExperience getById(Long candidateId , Long id);
+
+    EmployeeProfessionalExperience getById(Long candidateId, Long id);
+
     EmployeeProfessionalExperienceResponse toDTO(EmployeeProfessionalExperience professionalExperience);
+
     EmployeeProfessionalExperience update(Long candidateId, Long id, EmployeeProfessionalExperienceRequest dto);
-    void delete(Long candidateId,Long id);
+
+    void delete(Long candidateId, Long id);
 }

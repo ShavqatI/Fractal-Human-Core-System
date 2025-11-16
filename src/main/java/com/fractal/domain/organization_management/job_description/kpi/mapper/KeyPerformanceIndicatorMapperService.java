@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.job_description.kpi.dto.KeyPer
 
 public interface KeyPerformanceIndicatorMapperService {
     KeyPerformanceIndicatorResponse toDTO(KeyPerformanceIndicator keyPerformanceIndicator);
+
     KeyPerformanceIndicator toEntity(KeyPerformanceIndicatorRequest dto);
+
     KeyPerformanceIndicator toEntity(KeyPerformanceIndicator keyPerformanceIndicator, KeyPerformanceIndicatorRequest dto);
 }
 

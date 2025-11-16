@@ -18,16 +18,17 @@ public class SeparationReasonTypeChildController {
 
     @PostMapping()
     public ResponseEntity<SeparationReasonTypeResponse> create(@PathVariable Long separationReasonTypeId, @RequestBody @Valid SeparationReasonTypeRequest dto) {
-        return new ResponseEntity<>(separationReasonTypeService.toDTO(separationReasonTypeService.addChild(separationReasonTypeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(separationReasonTypeService.toDTO(separationReasonTypeService.addChild(separationReasonTypeId, dto)), HttpStatus.CREATED);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<SeparationReasonTypeResponse> update(@PathVariable Long separationReasonTypeId, @PathVariable Long id, @RequestBody @Valid SeparationReasonTypeRequest dto) {
-        return ResponseEntity.ok(separationReasonTypeService.toDTO(separationReasonTypeService.updateChild(separationReasonTypeId,id, dto)));
+        return ResponseEntity.ok(separationReasonTypeService.toDTO(separationReasonTypeService.updateChild(separationReasonTypeId, id, dto)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long separationReasonTypeId, @PathVariable Long id) {
-        separationReasonTypeService.deleteChild(separationReasonTypeId,id);
+        separationReasonTypeService.deleteChild(separationReasonTypeId, id);
         return ResponseEntity.noContent().build();
     }
 }

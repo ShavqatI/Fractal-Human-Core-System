@@ -29,29 +29,34 @@ public class EmployeeResourceController {
 
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<EmployeeResourceResponse> create(@PathVariable Long employeeId,@ModelAttribute @Valid EmployeeResourceRequest dto) {
-        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(employeeId,dto)), HttpStatus.CREATED);
+    public ResponseEntity<EmployeeResourceResponse> create(@PathVariable Long employeeId, @ModelAttribute @Valid EmployeeResourceRequest dto) {
+        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(employeeId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<EmployeeResourceResponse>> getAll(@PathVariable Long employeeId) {
         return ResponseEntity.ok(resourceService.getAllByEmployeeId(employeeId).stream().map(resourceService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeResourceResponse> getById(@PathVariable Long employeeId,@PathVariable Long id) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(employeeId,id)));
+    public ResponseEntity<EmployeeResourceResponse> getById(@PathVariable Long employeeId, @PathVariable Long id) {
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(employeeId, id)));
     }
-    @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<EmployeeResourceResponse> update(@PathVariable Long employeeId, @PathVariable Long id, @ModelAttribute @Valid EmployeeResourceRequest dto) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(employeeId,id, dto)));
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(employeeId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long employeeId, @PathVariable Long id) {
-        resourceService.delete(employeeId,id);
+        resourceService.delete(employeeId, id);
         return ResponseEntity.noContent().build();
     }
+
     @GetMapping("/download/{id}")
-    public ResponseEntity<Resource> download(@PathVariable Long employeeId,@PathVariable Long id) {
-        var employeeResource = resourceService.getById(employeeId,id);
+    public ResponseEntity<Resource> download(@PathVariable Long employeeId, @PathVariable Long id) {
+        var employeeResource = resourceService.getById(employeeId, id);
         try {
             Path filePath = Path.of(employeeResource.getUrl()).toAbsolutePath();
             Resource resource = new FileSystemResource(filePath);
@@ -69,7 +74,6 @@ public class EmployeeResourceController {
             return ResponseEntity.badRequest().build();
         }
     }
-
 
 
 }

@@ -18,6 +18,5 @@ public record InterviewRequest(
         List<IntervieweeRequest> interviewees,
         List<InterviewEvaluationSessionRequest> evaluationSessions,
         Long statusId
-    )
-
-{}
+) {
+}

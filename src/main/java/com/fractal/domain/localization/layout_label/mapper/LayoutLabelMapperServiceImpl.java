@@ -17,6 +17,7 @@ import static java.util.Collections.emptyList;
 class LayoutLabelMapperServiceImpl implements LayoutLabelMapperService {
 
     private final LayoutLabelDetailMapperService detailMapperService;
+
     @Override
     public LayoutLabelResponse toDTO(LayoutLabel layoutLabel) {
         return new LayoutLabelResponse(
@@ -33,17 +34,17 @@ class LayoutLabelMapperServiceImpl implements LayoutLabelMapperService {
 
     @Override
     public LayoutLabel toEntity(LayoutLabelRequest dto) {
-        return mapToEntity(new LayoutLabel(),dto);
+        return mapToEntity(new LayoutLabel(), dto);
     }
 
     @Override
     public LayoutLabel toEntity(LayoutLabel layoutLabel, LayoutLabelRequest dto) {
-        return mapToEntity(layoutLabel,dto);
+        return mapToEntity(layoutLabel, dto);
     }
 
     private LayoutLabel mapToEntity(LayoutLabel layoutLabel, LayoutLabelRequest dto) {
         layoutLabel.setName(dto.name());
-        dto.details().forEach(detail->layoutLabel.addDetail(detailMapperService.toEntity(detail)));
+        dto.details().forEach(detail -> layoutLabel.addDetail(detailMapperService.toEntity(detail)));
         return layoutLabel;
     }
 }

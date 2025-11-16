@@ -20,4 +20,5 @@ public record LearningRequest(
         List<LearningSessionRequest> sessions,
         Long statusId
 
-) { }
+) {
+}

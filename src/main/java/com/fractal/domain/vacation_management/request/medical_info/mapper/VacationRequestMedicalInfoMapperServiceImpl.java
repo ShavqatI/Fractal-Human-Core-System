@@ -28,12 +28,12 @@ class VacationRequestMedicalInfoMapperServiceImpl implements VacationRequestMedi
 
     @Override
     public VacationRequestMedicalInfo toEntity(VacationRequestMedicalInfoRequest dto) {
-        return mapToEntity(new VacationRequestMedicalInfo(),dto);
+        return mapToEntity(new VacationRequestMedicalInfo(), dto);
     }
 
     @Override
     public VacationRequestMedicalInfo toEntity(VacationRequestMedicalInfo medicalInfo, VacationRequestMedicalInfoRequest dto) {
-        return mapToEntity(medicalInfo,dto);
+        return mapToEntity(medicalInfo, dto);
     }
 
     private VacationRequestMedicalInfo mapToEntity(VacationRequestMedicalInfo medicalInfo, VacationRequestMedicalInfoRequest dto) {

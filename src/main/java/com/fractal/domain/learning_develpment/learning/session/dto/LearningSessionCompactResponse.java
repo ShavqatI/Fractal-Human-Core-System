@@ -11,5 +11,5 @@ public record LearningSessionCompactResponse(
         LocalDateTime startTime,
         LocalDateTime endTime,
         StatusCompactResponse status
-)
-{ }
+) {
+}

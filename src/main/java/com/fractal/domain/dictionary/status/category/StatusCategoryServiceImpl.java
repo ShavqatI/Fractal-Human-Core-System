@@ -15,6 +15,7 @@ import java.util.List;
 class StatusCategoryServiceImpl implements StatusCategoryService {
 
     private final StatusCategoryRepository statusCategoryRepository;
+
     @Override
     public StatusCategory create(StatusCategoryRequest dto) {
         return save(toEntity(dto));
@@ -27,7 +28,7 @@ class StatusCategoryServiceImpl implements StatusCategoryService {
 
     @Override
     public StatusCategory getByCode(String code) {
-        return statusCategoryRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Status Category with code: " + code + " not found"));
+        return statusCategoryRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Status Category with code: " + code + " not found"));
 
     }
 
@@ -43,8 +44,7 @@ class StatusCategoryServiceImpl implements StatusCategoryService {
             statusCategory.setCode(dto.code());
             statusCategory.setName(dto.name());
             return save(statusCategory);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -75,14 +75,13 @@ class StatusCategoryServiceImpl implements StatusCategoryService {
     private StatusCategory save(StatusCategory statusCategory) {
         try {
             return statusCategoryRepository.save(statusCategory);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private StatusCategory findById(Long id) {
-        return statusCategoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Status Category with id: " + id + " not found"));
+        return statusCategoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Status Category with id: " + id + " not found"));
     }
 
 }

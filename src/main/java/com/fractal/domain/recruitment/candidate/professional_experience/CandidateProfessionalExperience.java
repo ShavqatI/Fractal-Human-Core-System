@@ -9,7 +9,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "candidate_professional_experience",schema = "recruitment_schema", catalog = "fractal")
+@Table(name = "candidate_professional_experience", schema = "recruitment_schema", catalog = "fractal")
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,7 +28,6 @@ public class CandidateProfessionalExperience extends AbstractEntity {
     private Candidate candidate;
 
     private Integer years;
-
 
 
 }

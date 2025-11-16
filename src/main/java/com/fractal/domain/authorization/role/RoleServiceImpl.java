@@ -28,7 +28,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role create(RoleRequest dto) {
-       return save(toEntity(dto));
+        return save(toEntity(dto));
     }
 
     @Override
@@ -60,22 +60,22 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public void delete(Long id) {
-       roleRepository.delete(findById(id));
+        roleRepository.delete(findById(id));
     }
 
     @Override
     public RoleResponse toDTO(Role role) {
         return new RoleResponse(
-              role.getId(),
-              role.getCode(),
-              role.getName(),
+                role.getId(),
+                role.getCode(),
+                role.getName(),
                 Optional.ofNullable(role.getRoleMenus())
                         .orElse(emptyList())
                         .stream()
                         .map(roleMenuMapperService::toDTO)
                         .collect(Collectors.toList()),
-              role.getCreatedDate(),
-              role.getUpdatedDate()
+                role.getCreatedDate(),
+                role.getUpdatedDate()
         );
     }
 
@@ -104,17 +104,18 @@ public class RoleServiceImpl implements RoleService {
                 .filter(roleMenu -> "ACTIVE".equals(roleMenu.getStatus().getCode()))
                 .collect(Collectors.toList());
     }
+
     private Role findById(Long id) {
         return roleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Role with id: " + id + " not found"));
     }
 
     private Role toEntity(RoleRequest dto) {
-       var role = Role.builder()
+        var role = Role.builder()
                 .code(dto.code())
                 .name(dto.name())
                 .build();
-       dto.menus().forEach(menu-> role.addMenu(roleMenuMapperService.toEntity(menu)));
-       return role;
+        dto.menus().forEach(menu -> role.addMenu(roleMenuMapperService.toEntity(menu)));
+        return role;
     }
 }
 

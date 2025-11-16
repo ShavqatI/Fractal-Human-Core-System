@@ -8,10 +8,15 @@ import java.util.List;
 public interface EmployeeResourceService {
 
     EmployeeResource create(Long employeeId, EmployeeResourceRequest dto);
+
     List<EmployeeResource> getAllByEmployeeId(Long employeeId);
-    EmployeeResource getById(Long employeeId ,Long id);
-    EmployeeResource update(Long employeeId,Long id, EmployeeResourceRequest dto);
-    void delete(Long employeeId,Long id);
+
+    EmployeeResource getById(Long employeeId, Long id);
+
+    EmployeeResource update(Long employeeId, Long id, EmployeeResourceRequest dto);
+
+    void delete(Long employeeId, Long id);
+
     EmployeeResourceResponse toDTO(EmployeeResource resource);
 
 }

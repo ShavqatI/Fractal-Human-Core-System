@@ -47,10 +47,9 @@ class HayEvaluationServiceImpl implements HayEvaluationService {
     @Transactional
     public HayEvaluation update(Long id, HayEvaluationRequest dto) {
         try {
-            HayEvaluation hayEvaluation = mapperService.toEntity(findById(id),dto);
+            HayEvaluation hayEvaluation = mapperService.toEntity(findById(id), dto);
             return save(hayEvaluation);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -59,7 +58,7 @@ class HayEvaluationServiceImpl implements HayEvaluationService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      hayEvaluationRepository.delete(findById(id));
+        hayEvaluationRepository.delete(findById(id));
     }
 
     @Override
@@ -72,13 +71,12 @@ class HayEvaluationServiceImpl implements HayEvaluationService {
     public HayEvaluation save(HayEvaluation hayEvaluation) {
         try {
             return hayEvaluationRepository.save(hayEvaluation);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private HayEvaluation findById(Long id) {
-        return hayEvaluationRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return hayEvaluationRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

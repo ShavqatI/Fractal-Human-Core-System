@@ -58,7 +58,7 @@ class OfflineLearningLocationMapperServiceImpl implements OfflineLearningLocatio
         location.setEndTime(dto.endTime());
         location.setCapacity(dto.capacity());
         location.setStatus(statusService.getById(dto.statusId()));
-        dto.addresses().forEach(address->location.addAddress(addressMapperService.toEntity(address)));
+        dto.addresses().forEach(address -> location.addAddress(addressMapperService.toEntity(address)));
         return location;
     }
 }

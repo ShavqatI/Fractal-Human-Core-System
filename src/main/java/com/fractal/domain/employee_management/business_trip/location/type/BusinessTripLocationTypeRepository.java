@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-interface BusinessTripLocationTypeRepository extends JpaRepository<BusinessTripLocationType,Long> {
+interface BusinessTripLocationTypeRepository extends JpaRepository<BusinessTripLocationType, Long> {
     Optional<BusinessTripLocationType> findByCode(String code);
 
 }

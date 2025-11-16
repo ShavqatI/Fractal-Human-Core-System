@@ -27,7 +27,7 @@ class AnswerSubmissionServiceImpl implements AnswerSubmissionService {
         var submission = mapperService.toEntity(dto);
         testSession.addAnswerSubmission(submission);
         testService.save(testSession);
-       return submission;
+        return submission;
     }
 
     @Override
@@ -37,7 +37,7 @@ class AnswerSubmissionServiceImpl implements AnswerSubmissionService {
 
     @Override
     public AnswerSubmission getById(Long testSessionId, Long id) {
-        return submissionRepository.findByTestSessionIdAndId(testSessionId,id).orElseThrow(()-> new ResourceNotFoundException("Answer Submission  with id: " + id + " not found"));
+        return submissionRepository.findByTestSessionIdAndId(testSessionId, id).orElseThrow(() -> new ResourceNotFoundException("Answer Submission  with id: " + id + " not found"));
     }
 
     @Override
@@ -51,11 +51,11 @@ class AnswerSubmissionServiceImpl implements AnswerSubmissionService {
         var testSession = testService.getById(testSessionId);
         var submission = testSession.getSubmissions()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Answer Submission  with id: " + id + " not found"));
-        submission = mapperService.toEntity(submission,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Answer Submission  with id: " + id + " not found"));
+        submission = mapperService.toEntity(submission, dto);
         submissionRepository.save(submission);
         testService.save(testSession);
-       return submission;
+        return submission;
     }
 
     @Override
@@ -64,7 +64,7 @@ class AnswerSubmissionServiceImpl implements AnswerSubmissionService {
         var testSession = testService.getById(testId);
         var submission = testSession.getSubmissions()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Answer Submission  with id: " + id + " not found"));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Answer Submission  with id: " + id + " not found"));
         testSession.removeAnswerSubmission(submission);
         testService.save(testSession);
     }
@@ -73,16 +73,17 @@ class AnswerSubmissionServiceImpl implements AnswerSubmissionService {
     public AnswerSubmissionResponse toDTO(AnswerSubmission submission) {
         return mapperService.toDTO(submission);
     }
+
     @Override
     public AnswerSubmission save(AnswerSubmission submission) {
         try {
             return submissionRepository.save(submission);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
+
     private AnswerSubmission findById(Long id) {
-        return submissionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Answer Submission with id: " + id + " not found"));
+        return submissionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Answer Submission with id: " + id + " not found"));
     }
 }

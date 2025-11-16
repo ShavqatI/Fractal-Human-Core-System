@@ -9,7 +9,8 @@ public record GradeMatrixResponse(
         Long id,
         BigDecimal minSalary,
         BigDecimal averageSalary,
-        BigDecimal  maxSalary,
+        BigDecimal maxSalary,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) { }
+) {
+}

@@ -8,12 +8,19 @@ import java.util.List;
 
 public interface InsuranceProviderService {
     InsuranceProvider create(InsuranceProviderRequest dto);
+
     List<InsuranceProvider> getAll();
+
     InsuranceProvider getById(Long id);
+
     InsuranceProvider update(Long id, InsuranceProviderRequest dto);
+
     void deleteById(Long id);
+
     InsuranceProviderResponse toDTO(InsuranceProvider insuranceProvider);
+
     InsuranceProviderCompactResponse toCompactDTO(InsuranceProvider insuranceProvider);
+
     InsuranceProvider save(InsuranceProvider insuranceProvider);
 
 

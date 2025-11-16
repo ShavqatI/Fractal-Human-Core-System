@@ -28,6 +28,7 @@ class InternalLearnerMapperServiceImpl implements InternalLearnerMapperService {
     private final StatusService statusService;
     private final EmployeeContactMapperService contactMapperService;
     private final EmployeeService employeeService;
+
     @Override
     public InternalLearnerResponse toDTO(InternalLearner learner) {
         return new InternalLearnerResponse(

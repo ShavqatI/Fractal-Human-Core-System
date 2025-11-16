@@ -4,7 +4,6 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.integration.mapping.position.dto.PositionMappingRequest;
 import com.fractal.domain.integration.mapping.position.dto.PositionMappingResponse;
 import com.fractal.domain.organization_management.position.PositionService;
-import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -45,8 +44,7 @@ class PositionMappingServiceImpl implements PositionMappingService {
             positionMapping.setReference(dto.reference());
             positionMapping.setStatus(statusService.getById(dto.statusId()));
             return save(positionMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -80,13 +78,12 @@ class PositionMappingServiceImpl implements PositionMappingService {
     private PositionMapping save(PositionMapping positionMapping) {
         try {
             return positionMappingRepository.save(positionMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private PositionMapping findById(Long id) {
-        return positionMappingRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return positionMappingRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

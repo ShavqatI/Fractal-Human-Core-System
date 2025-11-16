@@ -27,7 +27,7 @@ public class AgreementResourceServiceImpl implements AgreementResourceService {
     @Override
     public AgreementResource create(Long agreementId, MultipartFile file) {
         var agreement = agreementService.getById(agreementId);
-        var resource =  resourceMapperService.toEntity(file,resourceStoragePath);
+        var resource = resourceMapperService.toEntity(file, resourceStoragePath);
         agreement.addResource(resource);
         agreementService.save(agreement);
         return resource;
@@ -40,7 +40,7 @@ public class AgreementResourceServiceImpl implements AgreementResourceService {
 
     @Override
     public AgreementResource getById(Long agreementId, Long id) {
-        return resourceRepository.findByAgreementIdAndId(agreementId,id).orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
+        return resourceRepository.findByAgreementIdAndId(agreementId, id).orElseThrow(() -> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
     }
 
     @Override
@@ -48,8 +48,8 @@ public class AgreementResourceServiceImpl implements AgreementResourceService {
         var agreement = agreementService.getById(agreementId);
         var resource = agreement.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
-        resource = resourceMapperService.toEntity(resource,file,resourceStoragePath);
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
+        resource = resourceMapperService.toEntity(resource, file, resourceStoragePath);
         resourceRepository.save(resource);
         agreementService.save(agreement);
         return resource;
@@ -60,7 +60,7 @@ public class AgreementResourceServiceImpl implements AgreementResourceService {
         var agreement = agreementService.getById(agreementId);
         var resource = agreement.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
         fileService.delete(resource.getUrl());
         agreement.removeResource(resource);
         agreementService.save(agreement);

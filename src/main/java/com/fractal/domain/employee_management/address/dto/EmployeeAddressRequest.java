@@ -27,4 +27,5 @@ public record EmployeeAddressRequest(
         Double longitude,
         LocalDate startDate,
         LocalDate endDate
-) { }
+) {
+}

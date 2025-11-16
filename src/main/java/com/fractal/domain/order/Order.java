@@ -7,7 +7,7 @@ import com.fractal.domain.order.resource.OrderResource;
 import com.fractal.domain.order.type.OrderType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
@@ -19,7 +19,8 @@ import java.util.List;
 @Entity
 @Table(name = "order", schema = "employee_schema", catalog = "fractal")
 @Inheritance(strategy = InheritanceType.JOINED)
-@Data
+@Setter
+@Getter
 @SuperBuilder
 @NoArgsConstructor
 public class Order extends ApprovalWorkflow {
@@ -35,6 +36,12 @@ public class Order extends ApprovalWorkflow {
     @Column(name = "date")
     protected LocalDate date;
 
+    @Column(name = "justification")
+    protected String justification;
+
+    @Column(name = "source_document")
+    protected String sourceDocument;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_type_id")
     protected OrderType orderType;
@@ -43,7 +50,7 @@ public class Order extends ApprovalWorkflow {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "order",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderResource> resources = new ArrayList<>();
 
     public void addResource(OrderResource resource) {
@@ -51,6 +58,7 @@ public class Order extends ApprovalWorkflow {
         resource.setOrder(this);
         resources.add(resource);
     }
+
     public void removeResource(OrderResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);

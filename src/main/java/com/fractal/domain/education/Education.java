@@ -77,7 +77,7 @@ public class Education extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "education",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "education", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<EducationResource> resources = new ArrayList<>();
 
     public void addResource(EducationResource resource) {
@@ -85,6 +85,7 @@ public class Education extends AbstractEntity {
         resource.setEducation(this);
         resources.add(resource);
     }
+
     public void removeResource(EducationResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);

@@ -14,4 +14,5 @@ public record InterviewEvaluationSessionAnswerSubmissionResponse(
         StatusCompactResponse status,
         LocalDateTime createdDate
 
-) {}
+) {
+}

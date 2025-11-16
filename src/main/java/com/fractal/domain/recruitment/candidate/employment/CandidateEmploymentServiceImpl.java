@@ -36,7 +36,7 @@ public class CandidateEmploymentServiceImpl implements CandidateEmploymentServic
 
     @Override
     public CandidateEmployment getById(Long candidateId, Long id) {
-        return employmentRepository.findByCandidateIdAndId(candidateId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return employmentRepository.findByCandidateIdAndId(candidateId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -50,8 +50,8 @@ public class CandidateEmploymentServiceImpl implements CandidateEmploymentServic
         var candidate = candidateService.getById(candidateId);
         var candidateEmployment = candidate.getEmployments()
                 .stream()
-                .filter(eh-> eh.getEmployment().getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        externalEmploymentService.update(candidateEmployment.getEmployment().getId(),dto);
+                .filter(eh -> eh.getEmployment().getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        externalEmploymentService.update(candidateEmployment.getEmployment().getId(), dto);
         employmentRepository.save(candidateEmployment);
         candidateService.save(candidate);
         return candidateEmployment;
@@ -64,7 +64,7 @@ public class CandidateEmploymentServiceImpl implements CandidateEmploymentServic
         var candidate = candidateService.getById(candidateId);
         var candidateEmployment = candidate.getEmployments()
                 .stream()
-                .filter(employment-> employment.getEmployment().getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(employment -> employment.getEmployment().getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         candidate.removeEmployment(candidateEmployment);
         candidateService.save(candidate);
     }

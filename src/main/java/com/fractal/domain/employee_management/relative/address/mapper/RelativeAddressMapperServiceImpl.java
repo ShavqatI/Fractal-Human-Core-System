@@ -55,12 +55,12 @@ class RelativeAddressMapperServiceImpl implements RelativeAddressMapperService {
 
     @Override
     public RelativeAddress toEntity(RelativeAddressRequest dto) {
-        return mapToEntity(new RelativeAddress(),dto);
+        return mapToEntity(new RelativeAddress(), dto);
     }
 
     @Override
     public RelativeAddress toEntity(RelativeAddress address, RelativeAddressRequest dto) {
-       return mapToEntity(address,dto);
+        return mapToEntity(address, dto);
     }
 
     private RelativeAddress mapToEntity(RelativeAddress address, RelativeAddressRequest dto) {

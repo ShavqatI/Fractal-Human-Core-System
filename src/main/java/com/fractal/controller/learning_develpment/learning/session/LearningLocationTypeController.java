@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class LearningLocationTypeController {
 
     private final LearningLocationTypeService locationTypeService;
+
     @PostMapping
     public ResponseEntity<LearningLocationTypeResponse> create(@RequestBody @Valid LearningLocationTypeRequest dto) {
         return new ResponseEntity<>(locationTypeService.toDTO(locationTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<LearningLocationTypeResponse>> getAll() {
         return ResponseEntity.ok(locationTypeService.getAll().stream().map(locationTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<LearningLocationTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(locationTypeService.toDTO(locationTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<LearningLocationTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(locationTypeService.toDTO(locationTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<LearningLocationTypeResponse> update(@PathVariable Long id, @RequestBody @Valid LearningLocationTypeRequest dto) {
-      return  ResponseEntity.ok(locationTypeService.toDTO(locationTypeService.update(id, dto)));
+        return ResponseEntity.ok(locationTypeService.toDTO(locationTypeService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         locationTypeService.deleteById(id);

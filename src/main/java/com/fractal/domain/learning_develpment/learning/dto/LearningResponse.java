@@ -26,5 +26,5 @@ public record LearningResponse(
         List<LearningSessionResponse> sessions,
         StatusCompactResponse status,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

@@ -23,5 +23,5 @@ public record LearningSessionResponse(
         List<LearningSessionExpenseResponse> expenses,
         List<LearningLocationResponse> locations,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

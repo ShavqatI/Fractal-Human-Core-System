@@ -1,9 +1,9 @@
 package com.fractal.controller.vacation_management;
 
 
-import com.fractal.domain.vacation_management.order.VacationOrderService;
-import com.fractal.domain.vacation_management.order.dto.VacationOrderRequest;
-import com.fractal.domain.vacation_management.order.dto.VacationOrderResponse;
+import com.fractal.domain.vacation_management.vacation.order.VacationOrderService;
+import com.fractal.domain.vacation_management.vacation.order.dto.VacationOrderRequest;
+import com.fractal.domain.vacation_management.vacation.order.dto.VacationOrderResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,26 +22,29 @@ public class VacationOrderController {
 
     @PostMapping()
     public ResponseEntity<VacationOrderResponse> create(@PathVariable Long vacationId, @RequestBody @Valid VacationOrderRequest dto) {
-        return new ResponseEntity<>(orderService.toDTO(orderService.create(vacationId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(orderService.toDTO(orderService.create(vacationId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<VacationOrderResponse>> getAll(@PathVariable Long vacationId) {
         return ResponseEntity.ok(orderService.getAllByVacationId(vacationId).stream().map(orderService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<VacationOrderResponse> getById(@PathVariable Long vacationId, @PathVariable Long id) {
-        return ResponseEntity.ok(orderService.toDTO(orderService.getById(vacationId,id)));
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<VacationOrderResponse> update(@PathVariable Long vacationId, @PathVariable Long id, @RequestBody @Valid VacationOrderRequest dto) {
-        return ResponseEntity.ok(orderService.toDTO(orderService.update(vacationId,id, dto)));
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long vacationId, @PathVariable Long id) {
-        orderService.delete(vacationId,id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(orderService.toDTO(orderService.getById(vacationId, id)));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<VacationOrderResponse> update(@PathVariable Long vacationId, @PathVariable Long id, @RequestBody @Valid VacationOrderRequest dto) {
+        return ResponseEntity.ok(orderService.toDTO(orderService.update(vacationId, id, dto)));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long vacationId, @PathVariable Long id) {
+        orderService.delete(vacationId, id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

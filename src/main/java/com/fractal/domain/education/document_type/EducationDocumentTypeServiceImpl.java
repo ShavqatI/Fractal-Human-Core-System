@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class EducationDocumentTypeServiceImpl implements EducationDocumentTypeService {
@@ -26,7 +27,7 @@ class EducationDocumentTypeServiceImpl implements EducationDocumentTypeService {
 
     @Override
     public EducationDocumentType getByCode(String code) {
-        return educationDocumentTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
+        return educationDocumentTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class EducationDocumentTypeServiceImpl implements EducationDocumentTypeService {
             educationDocumentType.setCode(dto.code());
             educationDocumentType.setName(dto.name());
             return save(educationDocumentType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      educationDocumentTypeRepository.delete(findById(id));
+        educationDocumentTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class EducationDocumentTypeServiceImpl implements EducationDocumentTypeService {
     private EducationDocumentType save(EducationDocumentType educationDocumentType) {
         try {
             return educationDocumentTypeRepository.save(educationDocumentType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private EducationDocumentType findById(Long id) {
-        return educationDocumentTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Education Type with id: " + id + " not found"));
+        return educationDocumentTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Education Type with id: " + id + " not found"));
     }
 
 }

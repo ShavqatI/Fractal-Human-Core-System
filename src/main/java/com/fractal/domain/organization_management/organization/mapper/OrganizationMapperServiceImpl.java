@@ -26,6 +26,7 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
     private final OrganizationContactMapperService contactMapperService;
     private final OrganizationWorkScheduleMapperService workScheduleMapperService;
     private final StatusService statusService;
+
     @Override
     public OrganizationResponse toDTO(Organization organization) {
         return new OrganizationResponse(
@@ -86,7 +87,7 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
         return mapToEntity(organization, dto);
     }
 
-    private Organization mapToEntity(Organization organization,OrganizationRequest dto) {
+    private Organization mapToEntity(Organization organization, OrganizationRequest dto) {
         organization.setName(dto.name());
         organization.setFullName(dto.fullName());
         organization.setTinNumber(dto.tinNumber());
@@ -99,7 +100,7 @@ class OrganizationMapperServiceImpl implements OrganizationMapperService {
         dto.addresses().forEach(address -> organization.addAddress(addressMapperService.toEntity(address)));
         dto.contacts().forEach(contact -> organization.addContact(contactMapperService.toEntity(contact)));
         dto.workSchedules().forEach(workSchedule -> organization.addWorkSchedule(workScheduleMapperService.toEntity(workSchedule)));
-        dto.children().forEach(child->organization.addChild(toEntity(child)));
+        dto.children().forEach(child -> organization.addChild(toEntity(child)));
         return organization;
     }
 }

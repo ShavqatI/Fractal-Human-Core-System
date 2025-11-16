@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface CompensationComponentRepository extends JpaRepository<CompensationComponent,Long> {
+interface CompensationComponentRepository extends JpaRepository<CompensationComponent, Long> {
 
     List<CompensationComponent> findAllByInternalEmploymentId(Long employmentId);
+
     Optional<CompensationComponent> findByInternalEmploymentIdAndId(Long employmentId, Long id);
 }

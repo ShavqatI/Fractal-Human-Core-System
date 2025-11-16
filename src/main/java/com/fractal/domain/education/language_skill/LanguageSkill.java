@@ -19,10 +19,10 @@ import lombok.experimental.SuperBuilder;
 public class LanguageSkill extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="language_id", referencedColumnName = "id")
+    @JoinColumn(name = "language_id", referencedColumnName = "id")
     protected Language language;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="language_proficiency_id", referencedColumnName = "id")
+    @JoinColumn(name = "language_proficiency_id", referencedColumnName = "id")
     protected LanguageProficiency languageProficiency;
 }

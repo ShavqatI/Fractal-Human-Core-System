@@ -37,7 +37,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
 
     @Override
     public BusinessTripOrder getById(Long businessTripId, Long id) {
-        return orderRepository.findByBusinessTripIdAndId(businessTripId,id).orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        return orderRepository.findByBusinessTripIdAndId(businessTripId, id).orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
     }
 
     @Override
@@ -46,8 +46,8 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
         var businessTrip = businessTripService.getById(businessTripId);
         var order = businessTrip.getOrders()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
-        order = orderRepository.save(orderMapperService.toEntity(order,dto));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        order = orderRepository.save(orderMapperService.toEntity(order, dto));
         businessTripService.save(businessTrip);
         return order;
     }
@@ -58,7 +58,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
         var businessTrip = businessTripService.getById(businessTripId);
         var order = businessTrip.getOrders()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
         businessTrip.removeOrder(order);
         businessTripService.save(businessTrip);
     }

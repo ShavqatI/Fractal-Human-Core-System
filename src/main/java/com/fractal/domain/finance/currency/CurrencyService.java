@@ -9,11 +9,18 @@ import java.util.List;
 public interface CurrencyService {
 
     Currency create(CurrencyRequest dto);
+
     List<Currency> getAll();
+
     Currency getByCode(String code);
+
     Currency getById(Long id);
+
     Currency update(Long id, CurrencyRequest dto);
+
     void deleteById(Long id);
+
     CurrencyResponse toDTO(Currency currency);
+
     CurrencyCompactResponse toCompactDTO(Currency currency);
 }

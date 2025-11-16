@@ -7,9 +7,14 @@ import java.util.List;
 
 public interface MilitaryServiceResourceService {
     MilitaryServiceResource create(Long militaryServiceId, MultipartFile file);
+
     List<MilitaryServiceResource> getAllByMilitaryServiceId(Long militaryServiceId);
-    MilitaryServiceResource getById(Long militaryServiceId , Long id);
+
+    MilitaryServiceResource getById(Long militaryServiceId, Long id);
+
     MilitaryServiceResource update(Long militaryServiceId, Long id, MultipartFile file);
-    void delete(Long militaryServiceId,Long id);
+
+    void delete(Long militaryServiceId, Long id);
+
     ResourceResponse toDTO(MilitaryServiceResource resource);
 }

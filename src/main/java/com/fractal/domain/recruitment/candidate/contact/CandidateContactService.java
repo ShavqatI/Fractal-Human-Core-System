@@ -8,10 +8,15 @@ import java.util.List;
 public interface CandidateContactService {
 
     CandidateContact create(Long candidateId, ContactRequest dto);
+
     List<CandidateContact> getAllByCandidateId(Long candidateId);
-    CandidateContact getById(Long candidateId , Long id);
+
+    CandidateContact getById(Long candidateId, Long id);
+
     CandidateContact update(Long candidateId, Long id, ContactRequest dto);
-    void delete(Long candidateId,Long id);
+
+    void delete(Long candidateId, Long id);
+
     ContactResponse toDTO(CandidateContact contact);
 
 }

@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface DocumentTemplateManagerRepository extends JpaRepository<DocumentTemplateManager,Long> {
+interface DocumentTemplateManagerRepository extends JpaRepository<DocumentTemplateManager, Long> {
     Optional<DocumentTemplateManager> findById(Long id);
+
     Optional<DocumentTemplateManager> findByCode(String code);
+
     List<DocumentTemplateManager> findAll();
 }

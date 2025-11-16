@@ -27,7 +27,7 @@ public class OrderResourceServiceImpl implements OrderResourceService {
     @Override
     public OrderResource create(Long orderId, MultipartFile file) {
         var order = orderService.getById(orderId);
-        var resource =  resourceMapperService.toEntity(file,resourceStoragePath);
+        var resource = resourceMapperService.toEntity(file, resourceStoragePath);
         order.addResource(resource);
         orderService.save(order);
         return resource;
@@ -40,7 +40,7 @@ public class OrderResourceServiceImpl implements OrderResourceService {
 
     @Override
     public OrderResource getById(Long orderId, Long id) {
-        return resourceRepository.findByOrderIdAndId(orderId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return resourceRepository.findByOrderIdAndId(orderId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -48,8 +48,8 @@ public class OrderResourceServiceImpl implements OrderResourceService {
         var order = orderService.getById(educationId);
         var resource = order.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        resource = resourceMapperService.toEntity(resource,file,resourceStoragePath);
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        resource = resourceMapperService.toEntity(resource, file, resourceStoragePath);
         resourceRepository.save(resource);
         orderService.save(order);
         return resource;
@@ -60,7 +60,7 @@ public class OrderResourceServiceImpl implements OrderResourceService {
         var order = orderService.getById(orderId);
         var resource = order.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         fileService.delete(resource.getUrl());
         order.removeResource(resource);
         orderService.save(order);

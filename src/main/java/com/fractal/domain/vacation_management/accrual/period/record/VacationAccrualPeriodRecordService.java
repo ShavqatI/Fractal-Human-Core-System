@@ -8,10 +8,15 @@ import java.util.List;
 public interface VacationAccrualPeriodRecordService {
 
     VacationAccrualPeriodRecord create(Long periodId, VacationAccrualPeriodRecordRequest dto);
+
     List<VacationAccrualPeriodRecord> getAllByVacationAccrualPeriodId(Long periodId);
-    VacationAccrualPeriodRecord getById(Long periodId , Long id);
+
+    VacationAccrualPeriodRecord getById(Long periodId, Long id);
+
     VacationAccrualPeriodRecord update(Long periodId, Long id, VacationAccrualPeriodRecordRequest dto);
-    void delete(Long periodId,Long id);
+
+    void delete(Long periodId, Long id);
+
     VacationAccrualPeriodRecordResponse toDTO(VacationAccrualPeriodRecord record);
 
 }

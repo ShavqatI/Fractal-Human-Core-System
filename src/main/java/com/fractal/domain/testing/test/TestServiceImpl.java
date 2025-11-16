@@ -39,10 +39,9 @@ class TestServiceImpl implements TestService {
     @Transactional
     public Test update(Long id, TestRequest dto) {
         try {
-            Test test = mapperService.toEntity(findById(id),dto);
+            Test test = mapperService.toEntity(findById(id), dto);
             return save(test);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -51,7 +50,7 @@ class TestServiceImpl implements TestService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      testRepository.delete(findById(id));
+        testRepository.delete(findById(id));
     }
 
     @Override
@@ -70,13 +69,12 @@ class TestServiceImpl implements TestService {
     public Test save(Test test) {
         try {
             return testRepository.save(test);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Test findById(Long id) {
-        return testRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Test with id: " + id + " not found"));
+        return testRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Test with id: " + id + " not found"));
     }
 }

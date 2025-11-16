@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 public record GradeMatrixRequest(
         BigDecimal minSalary,
         BigDecimal averageSalary,
-        BigDecimal  maxSalary,
+        BigDecimal maxSalary,
         Long statusId
-) { }
+) {
+}

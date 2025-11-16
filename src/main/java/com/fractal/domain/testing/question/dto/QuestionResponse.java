@@ -15,5 +15,5 @@ public record QuestionResponse(
         Integer maxSelectableOptions,
         StatusCompactResponse status,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

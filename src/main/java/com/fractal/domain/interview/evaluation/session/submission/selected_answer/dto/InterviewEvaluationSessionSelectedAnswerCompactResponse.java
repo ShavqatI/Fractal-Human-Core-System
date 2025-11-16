@@ -7,4 +7,5 @@ public record InterviewEvaluationSessionSelectedAnswerCompactResponse(
         LocalDateTime selectedDate,
         LocalDateTime createdDate
 
-) {}
+) {
+}

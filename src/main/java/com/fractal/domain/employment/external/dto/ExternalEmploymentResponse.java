@@ -28,4 +28,5 @@ public record ExternalEmploymentResponse(
         StatusCompactResponse status,
         LocalDateTime createdDate
 
-) implements EmploymentResponse { }
+) implements EmploymentResponse {
+}

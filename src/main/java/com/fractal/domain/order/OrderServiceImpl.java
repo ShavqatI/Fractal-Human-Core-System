@@ -13,15 +13,14 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public Order getById(Long id) {
-        return orderRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Order with id: " + id + " not found"));
+        return orderRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Order with id: " + id + " not found"));
     }
 
     @Override
     public void save(Order order) {
         try {
             orderRepository.save(order);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }

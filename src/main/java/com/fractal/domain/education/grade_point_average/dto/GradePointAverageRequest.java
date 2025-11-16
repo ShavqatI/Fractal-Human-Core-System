@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 public record GradePointAverageRequest(
-         @NotBlank
-         @NotNull
-         @Pattern(regexp = "^[A-Z]{1}$", message = "Value must be in Latin uppercase letters")
-         String value,
-         @NotNull
-         Double scale
+        @NotBlank
+        @NotNull
+        @Pattern(regexp = "^[A-Z]{1}$", message = "Value must be in Latin uppercase letters")
+        String value,
+        @NotNull
+        Double scale
 ) {
 }

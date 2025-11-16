@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.job_description.responsibility
 
 public interface ResponsibilityMapperService {
     ResponsibilityResponse toDTO(Responsibility responsibility);
+
     Responsibility toEntity(ResponsibilityRequest dto);
+
     Responsibility toEntity(Responsibility responsibility, ResponsibilityRequest dto);
 }
 

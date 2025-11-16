@@ -19,26 +19,32 @@ import java.util.stream.Collectors;
 public class AccreditationStatusController {
 
     private final AccreditationStatusService accreditationStatusService;
+
     @PostMapping
     public ResponseEntity<AccreditationStatusResponse> create(@RequestBody @Valid AccreditationStatusRequest dto) {
         return new ResponseEntity<>(accreditationStatusService.toDTO(accreditationStatusService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<AccreditationStatusResponse>> getAll() {
         return ResponseEntity.ok(accreditationStatusService.getAll().stream().map(accreditationStatusService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<AccreditationStatusResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(accreditationStatusService.toDTO(accreditationStatusService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<AccreditationStatusResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(accreditationStatusService.toDTO(accreditationStatusService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<AccreditationStatusResponse> update(@PathVariable Long id, @RequestBody @Valid AccreditationStatusRequest dto) {
-      return  ResponseEntity.ok(accreditationStatusService.toDTO(accreditationStatusService.update(id, dto)));
+        return ResponseEntity.ok(accreditationStatusService.toDTO(accreditationStatusService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         accreditationStatusService.deleteById(id);

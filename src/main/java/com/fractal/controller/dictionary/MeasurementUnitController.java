@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class MeasurementUnitController {
 
     private final MeasurementUnitService measurementUnitService;
+
     @PostMapping
     public ResponseEntity<MeasurementUnitResponse> create(@RequestBody @Valid MeasurementUnitRequest dto) {
         return new ResponseEntity<>(measurementUnitService.toDTO(measurementUnitService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<MeasurementUnitResponse>> getAll() {
         return ResponseEntity.ok(measurementUnitService.getAll().stream().map(measurementUnitService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<MeasurementUnitResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(measurementUnitService.toDTO(measurementUnitService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<MeasurementUnitResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(measurementUnitService.toDTO(measurementUnitService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<MeasurementUnitResponse> update(@PathVariable Long id, @RequestBody @Valid MeasurementUnitRequest dto) {
-      return  ResponseEntity.ok(measurementUnitService.toDTO(measurementUnitService.update(id, dto)));
+        return ResponseEntity.ok(measurementUnitService.toDTO(measurementUnitService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         measurementUnitService.deleteById(id);

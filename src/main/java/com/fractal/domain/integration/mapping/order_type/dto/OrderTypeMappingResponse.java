@@ -13,4 +13,5 @@ public record OrderTypeMappingResponse(
         StatusCompactResponse status,
         LocalDateTime createdDate
 
-) { }
+) {
+}

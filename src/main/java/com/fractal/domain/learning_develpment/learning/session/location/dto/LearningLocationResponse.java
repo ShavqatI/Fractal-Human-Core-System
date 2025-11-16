@@ -8,11 +8,17 @@ import java.time.LocalDateTime;
 
 
 public interface LearningLocationResponse {
-     Long id();
-     LearningLocationTypeResponse locationTypeResponse();
-     Integer capacity();
-     LocalDateTime startTime();
-     LocalDateTime endTime();
-     StatusCompactResponse status();
-     LocalDateTime createdDate();
+    Long id();
+
+    LearningLocationTypeResponse locationTypeResponse();
+
+    Integer capacity();
+
+    LocalDateTime startTime();
+
+    LocalDateTime endTime();
+
+    StatusCompactResponse status();
+
+    LocalDateTime createdDate();
 }

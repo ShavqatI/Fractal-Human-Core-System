@@ -16,6 +16,7 @@ class ReportingLineMapperServiceImpl implements ReportingLineMapperService {
     private final ReportingLineTypeService typeService;
     private final PositionService positionService;
     private final StatusService statusService;
+
     @Override
     public ReportingLineResponse toDTO(ReportingLine reportingLine) {
         return new ReportingLineResponse(
@@ -29,12 +30,12 @@ class ReportingLineMapperServiceImpl implements ReportingLineMapperService {
 
     @Override
     public ReportingLine toEntity(ReportingLineRequest dto) {
-        return mapToEntity( new ReportingLine(),dto);
+        return mapToEntity(new ReportingLine(), dto);
     }
 
     @Override
     public ReportingLine toEntity(ReportingLine reportingLine, ReportingLineRequest dto) {
-        return mapToEntity( reportingLine,dto);
+        return mapToEntity(reportingLine, dto);
     }
 
     private ReportingLine mapToEntity(ReportingLine reportingLine, ReportingLineRequest dto) {

@@ -42,7 +42,7 @@ public class InterviewEvaluationQuestion extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "interviewEvaluationQuestion", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "interviewEvaluationQuestion", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<InterviewEvaluationAnswer> answers = new ArrayList<>();
 
     @Transactional

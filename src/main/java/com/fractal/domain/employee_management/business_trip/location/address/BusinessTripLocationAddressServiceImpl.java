@@ -31,7 +31,6 @@ public class BusinessTripLocationAddressServiceImpl implements BusinessTripLocat
     }
 
 
-
     @Override
     public List<BusinessTripLocationAddress> getAllByBusinessTripLocationId(Long locationId) {
         return businessTripLocationAddressRepository.findAllByBusinessTripLocationId(locationId);
@@ -39,7 +38,7 @@ public class BusinessTripLocationAddressServiceImpl implements BusinessTripLocat
 
     @Override
     public BusinessTripLocationAddress getById(Long locationId, Long id) {
-        return businessTripLocationAddressRepository.findByBusinessTripLocationIdAndId(locationId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return businessTripLocationAddressRepository.findByBusinessTripLocationIdAndId(locationId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -48,8 +47,8 @@ public class BusinessTripLocationAddressServiceImpl implements BusinessTripLocat
         var location = locationService.getById(locationId);
         var address = location.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        address = businessTripLocationAddressRepository.save(addressMapperService.toEntity(address,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        address = businessTripLocationAddressRepository.save(addressMapperService.toEntity(address, dto));
         locationService.save(location);
         return address;
     }
@@ -59,7 +58,7 @@ public class BusinessTripLocationAddressServiceImpl implements BusinessTripLocat
         var location = locationService.getById(externalTrainingLocationId);
         var address = location.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         location.removeAddress(address);
         locationService.save(location);
     }

@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface LearningSessionExpenseRepository extends JpaRepository<LearningSessionExpense,Long> {
+interface LearningSessionExpenseRepository extends JpaRepository<LearningSessionExpense, Long> {
 
-  List<LearningSessionExpense> findAllByLearningSessionId(Long sessionId);
-  Optional<LearningSessionExpense> findByLearningSessionIdAndId(Long sessionId, Long id);
+    List<LearningSessionExpense> findAllByLearningSessionId(Long sessionId);
+
+    Optional<LearningSessionExpense> findByLearningSessionIdAndId(Long sessionId, Long id);
 
 }

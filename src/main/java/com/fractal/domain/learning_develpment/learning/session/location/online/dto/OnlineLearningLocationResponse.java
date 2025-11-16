@@ -20,4 +20,5 @@ public record OnlineLearningLocationResponse(
         StatusCompactResponse status,
         LocalDateTime createdDate
 
-) implements LearningLocationResponse { }
+) implements LearningLocationResponse {
+}

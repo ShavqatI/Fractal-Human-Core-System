@@ -44,7 +44,7 @@ class DistrictServiceImpl implements DistrictService {
 
     @Override
     public District getByCode(String code) {
-        return districtRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("District with code: " + code + " not found"));
+        return districtRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("District with code: " + code + " not found"));
     }
 
     @Override
@@ -62,15 +62,14 @@ class DistrictServiceImpl implements DistrictService {
             district.setRegion(regionService.getById(dto.regionId()));
             district.setAreaType(areaTypeService.getById(dto.areaTypeId()));
             return save(district);
-        }
-        catch (DataAccessException e){
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      districtRepository.delete(findById(id));
+        districtRepository.delete(findById(id));
     }
 
     @Override
@@ -110,13 +109,12 @@ class DistrictServiceImpl implements DistrictService {
     private District save(District district) {
         try {
             return districtRepository.save(district);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private District findById(Long id) {
-        return districtRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("District with id: " + id + " not found"));
+        return districtRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("District with id: " + id + " not found"));
     }
 }

@@ -40,12 +40,12 @@ class MilitaryServiceMapperServiceImpl implements MilitaryServiceMapperService {
 
     @Override
     public MilitaryService toEntity(MilitaryServiceRequest dto) {
-        return mapToEntity(new MilitaryService(),dto);
+        return mapToEntity(new MilitaryService(), dto);
     }
 
     @Override
     public MilitaryService toEntity(MilitaryService militaryService, MilitaryServiceRequest dto) {
-       return mapToEntity(militaryService,dto);
+        return mapToEntity(militaryService, dto);
     }
 
     @Override
@@ -69,7 +69,7 @@ class MilitaryServiceMapperServiceImpl implements MilitaryServiceMapperService {
         militaryService.setAddress(dto.address());
         militaryService.setBeginDate(dto.beginDate());
         militaryService.setEndDate(dto.endDate());
-        dto.files().forEach(file-> militaryService.addResource(resourceMapperService.toEntity(file,null)));
+        dto.files().forEach(file -> militaryService.addResource(resourceMapperService.toEntity(file, null)));
         return militaryService;
     }
 

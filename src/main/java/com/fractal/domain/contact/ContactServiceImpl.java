@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ContactServiceImpl implements ContactService {
     private final ContactMapperService mapperService;
+
     @Override
     public ContactResponse toDTO(Contact contact) {
         return mapperService.toDTO(contact);

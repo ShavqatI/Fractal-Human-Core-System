@@ -8,10 +8,15 @@ import java.util.List;
 public interface VacationRequestMedicalInfoService {
 
     VacationRequestMedicalInfo create(Long vacationRequestId, VacationRequestMedicalInfoRequest dto);
+
     List<VacationRequestMedicalInfo> getAllByVacationRequestId(Long vacationRequestId);
-    VacationRequestMedicalInfo getById(Long vacationRequestId , Long id);
+
+    VacationRequestMedicalInfo getById(Long vacationRequestId, Long id);
+
     VacationRequestMedicalInfo update(Long vacationRequestId, Long id, VacationRequestMedicalInfoRequest dto);
-    void delete(Long vacationRequestId,Long id);
+
+    void delete(Long vacationRequestId, Long id);
+
     VacationRequestMedicalInfoResponse toDTO(VacationRequestMedicalInfo vacationRequestMedicalInfo);
 
 }

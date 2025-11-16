@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-interface ActionCategoryRepository extends JpaRepository<ActionCategory,Long> {
+interface ActionCategoryRepository extends JpaRepository<ActionCategory, Long> {
     Optional<ActionCategory> findByCode(String code);
 
 }

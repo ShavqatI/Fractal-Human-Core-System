@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 class CandidateCitizenshipMapperServiceImpl implements CandidateCitizenshipMapperService {
 
     private final CitizenshipMapperService citizenshipMapperService;
+
     @Override
     public CitizenshipResponse toDTO(CandidateCitizenship citizenship) {
         return citizenshipMapperService.toDTO(citizenship);
@@ -27,7 +28,7 @@ class CandidateCitizenshipMapperServiceImpl implements CandidateCitizenshipMappe
 
     @Override
     public CandidateCitizenship toEntity(CandidateCitizenship candidateCitizenship, CitizenshipRequest dto) {
-        var citizenship = citizenshipMapperService.toEntity(candidateCitizenship,dto);
+        var citizenship = citizenshipMapperService.toEntity(candidateCitizenship, dto);
         candidateCitizenship.setCountry(citizenship.getCountry());
         return candidateCitizenship;
     }

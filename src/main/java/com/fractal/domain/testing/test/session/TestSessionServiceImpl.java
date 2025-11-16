@@ -38,10 +38,9 @@ class TestSessionServiceImpl implements TestSessionService {
     @Transactional
     public TestSession update(Long id, TestSessionRequest dto) {
         try {
-            TestSession testSession = mapperService.toEntity(findById(id),dto);
+            TestSession testSession = mapperService.toEntity(findById(id), dto);
             return save(testSession);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -50,7 +49,7 @@ class TestSessionServiceImpl implements TestSessionService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      testSessionRepository.delete(findById(id));
+        testSessionRepository.delete(findById(id));
     }
 
     @Override
@@ -64,13 +63,12 @@ class TestSessionServiceImpl implements TestSessionService {
     public TestSession save(TestSession testSession) {
         try {
             return testSessionRepository.save(testSession);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private TestSession findById(Long id) {
-        return testSessionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Test Session with id: " + id + " not found"));
+        return testSessionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Test Session with id: " + id + " not found"));
     }
 }

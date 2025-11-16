@@ -6,6 +6,7 @@ public record BenchmarkingRequest(
         Long benchmarkingTypeId,
         BigDecimal minSalary,
         BigDecimal averageSalary,
-        BigDecimal  maxSalary,
+        BigDecimal maxSalary,
         Long statusId
-) { }
+) {
+}

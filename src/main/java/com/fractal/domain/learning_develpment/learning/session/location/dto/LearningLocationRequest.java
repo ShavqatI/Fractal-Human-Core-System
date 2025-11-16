@@ -18,8 +18,11 @@ import java.time.LocalDateTime;
         @JsonSubTypes.Type(value = OnlineLearningLocationRequest.class, name = "online")
 })
 public interface LearningLocationRequest {
-     Integer capacity();
-     LocalDateTime startTime();
-     LocalDateTime endTime();
-     Long statusId();
+    Integer capacity();
+
+    LocalDateTime startTime();
+
+    LocalDateTime endTime();
+
+    Long statusId();
 }

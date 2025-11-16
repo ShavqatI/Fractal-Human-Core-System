@@ -72,8 +72,8 @@ class InsuranceProviderMapperServiceImpl implements InsuranceProviderMapperServi
         insuranceProvider.setFullName(dto.fullName());
         insuranceProvider.setTinNumber(dto.tinNumber());
         insuranceProvider.setStatus(statusService.getById(dto.statusId()));
-        dto.addresses().forEach(address->insuranceProvider.addAddress(addressMapperService.toEntity(address)));
-        dto.contacts().forEach(contact->insuranceProvider.addContact(contactMapperService.toEntity(contact)));
+        dto.addresses().forEach(address -> insuranceProvider.addAddress(addressMapperService.toEntity(address)));
+        dto.contacts().forEach(contact -> insuranceProvider.addContact(contactMapperService.toEntity(contact)));
         return insuranceProvider;
     }
 }

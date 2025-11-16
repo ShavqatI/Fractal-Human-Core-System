@@ -13,4 +13,5 @@ public record SalaryClassificationResponse(
         List<SalaryClassificationResponse> children,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) {}
+) {
+}

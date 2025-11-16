@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ExternalLearnerContactRepository extends JpaRepository<ExternalLearnerContact,Long> {
+public interface ExternalLearnerContactRepository extends JpaRepository<ExternalLearnerContact, Long> {
 
     List<ExternalLearnerContact> findAllByExternalLearnerId(Long learnerId);
+
     Optional<ExternalLearnerContact> findByExternalLearnerIdAndId(Long learnerId, Long id);
 }

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-interface GradeLevelRepository extends JpaRepository<GradeLevel,Long> {
+interface GradeLevelRepository extends JpaRepository<GradeLevel, Long> {
     Optional<GradeLevel> findByCode(String code);
 
 }

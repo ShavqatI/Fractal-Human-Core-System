@@ -28,7 +28,7 @@ class LanguageProficiencyServiceImpl implements LanguageProficiencyService {
 
     @Override
     public LanguageProficiency getByCode(String code) {
-        return languageProficiencyRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Week Day with code: " + code + " not found"));
+        return languageProficiencyRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Week Day with code: " + code + " not found"));
     }
 
     @Override
@@ -43,15 +43,14 @@ class LanguageProficiencyServiceImpl implements LanguageProficiencyService {
             languageProficiency.setCode(dto.code());
             languageProficiency.setName(dto.name());
             return save(languageProficiency);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      languageProficiencyRepository.delete(findById(id));
+        languageProficiencyRepository.delete(findById(id));
     }
 
     @Override
@@ -74,13 +73,12 @@ class LanguageProficiencyServiceImpl implements LanguageProficiencyService {
     private LanguageProficiency save(LanguageProficiency languageProficiency) {
         try {
             return languageProficiencyRepository.save(languageProficiency);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private LanguageProficiency findById(Long id) {
-        return languageProficiencyRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Language Proficiency with id: " + id + " not found"));
+        return languageProficiencyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Language Proficiency with id: " + id + " not found"));
     }
 }

@@ -33,12 +33,12 @@ class BenchmarkingMapperServiceImpl implements BenchmarkingMapperService {
 
     @Override
     public Benchmarking toEntity(BenchmarkingRequest dto) {
-        return mapToEntity(new Benchmarking(),dto);
+        return mapToEntity(new Benchmarking(), dto);
     }
 
     @Override
     public Benchmarking toEntity(Benchmarking benchmarking, BenchmarkingRequest dto) {
-       return mapToEntity(benchmarking,dto);
+        return mapToEntity(benchmarking, dto);
     }
 
     private Benchmarking mapToEntity(Benchmarking benchmarking, BenchmarkingRequest dto) {

@@ -7,5 +7,5 @@ public record AnswerResponse(
         String text,
         Boolean correct,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

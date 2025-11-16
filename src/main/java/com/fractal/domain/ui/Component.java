@@ -11,7 +11,7 @@ public class Component extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "code",unique = true)
+    @Column(name = "code", unique = true)
     private String code;
 
     public String getName() {

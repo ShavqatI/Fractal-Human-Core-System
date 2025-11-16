@@ -26,7 +26,7 @@ class InstructorAssignmentServiceImpl implements InstructorAssignmentService {
         var trainerAssignment = mapperService.toEntity(dto);
         session.addInstructorAssignment(trainerAssignment);
         sessionService.save(session);
-       return trainerAssignment;
+        return trainerAssignment;
     }
 
     @Override
@@ -36,7 +36,7 @@ class InstructorAssignmentServiceImpl implements InstructorAssignmentService {
 
     @Override
     public InstructorAssignment getById(Long sessionId, Long id) {
-        return instructorAssignmentRepository.findByLearningSessionIdAndId(sessionId,id).orElseThrow(()-> new ResourceNotFoundException("Instructor Assignment  with id: " + id + " not found"));
+        return instructorAssignmentRepository.findByLearningSessionIdAndId(sessionId, id).orElseThrow(() -> new ResourceNotFoundException("Instructor Assignment  with id: " + id + " not found"));
     }
 
     @Override
@@ -45,11 +45,11 @@ class InstructorAssignmentServiceImpl implements InstructorAssignmentService {
         var session = sessionService.getById(sessionId);
         var instructorAssignment = session.getInstructorAssignments()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Instructor Assignment  with id: " + id + " not found"));
-        instructorAssignment = mapperService.toEntity(instructorAssignment,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Instructor Assignment  with id: " + id + " not found"));
+        instructorAssignment = mapperService.toEntity(instructorAssignment, dto);
         instructorAssignmentRepository.save(instructorAssignment);
         sessionService.save(session);
-       return instructorAssignment;
+        return instructorAssignment;
     }
 
     @Override
@@ -58,7 +58,7 @@ class InstructorAssignmentServiceImpl implements InstructorAssignmentService {
         var session = sessionService.getById(sessionId);
         var instructorAssignment = session.getInstructorAssignments()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Instructor Assignment  with id: " + id + " not found"));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Instructor Assignment  with id: " + id + " not found"));
         session.removeInstructorAssignment(instructorAssignment);
         sessionService.save(session);
     }
@@ -67,7 +67,6 @@ class InstructorAssignmentServiceImpl implements InstructorAssignmentService {
     public InstructorAssignmentResponse toDTO(InstructorAssignment instructorAssignment) {
         return mapperService.toDTO(instructorAssignment);
     }
-
 
 
 }

@@ -59,15 +59,14 @@ class PositionServiceImpl implements PositionService {
             position.setCloseDate(dto.closeDate());
             position.setCloseReason(dto.closeReason());
             return save(position);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      positionRepository.delete(findById(id));
+        positionRepository.delete(findById(id));
     }
 
     @Override
@@ -115,24 +114,24 @@ class PositionServiceImpl implements PositionService {
     private Position save(Position position) {
         try {
             return positionRepository.save(position);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
 
     private Position findById(Long id) {
-        return positionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Position with id: " + id + " not found"));
+        return positionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Position with id: " + id + " not found"));
     }
+
     private Position findByCode(String code) {
-        return positionRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Position with code : " + code + " not found"));
+        return positionRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Position with code : " + code + " not found"));
     }
 
     private String generateCode() {
         var position = positionRepository.findFirstByOrderByIdDesc();
-        if(position.isPresent())
-         return "POSITION_" + (position.get().getId() + 1);
+        if (position.isPresent())
+            return "POSITION_" + (position.get().getId() + 1);
         else return "POSITION_" + 1;
 
     }

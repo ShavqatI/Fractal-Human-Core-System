@@ -48,12 +48,12 @@ class EmployeeAddressMapperServiceImpl implements EmployeeAddressMapperService {
 
     @Override
     public EmployeeAddress toEntity(EmployeeAddressRequest dto) {
-        return mapToEntity(new EmployeeAddress(),dto);
+        return mapToEntity(new EmployeeAddress(), dto);
     }
 
     @Override
     public EmployeeAddress toEntity(EmployeeAddress address, EmployeeAddressRequest dto) {
-       return mapToEntity(address,dto);
+        return mapToEntity(address, dto);
     }
 
     @Override

@@ -41,12 +41,12 @@ class InsuranceProviderAddressMapperServiceImpl implements InsuranceProviderAddr
 
     @Override
     public InsuranceProviderAddress toEntity(InsuranceProviderAddressRequest dto) {
-        return mapToEntity(new InsuranceProviderAddress(),dto);
+        return mapToEntity(new InsuranceProviderAddress(), dto);
     }
 
     @Override
     public InsuranceProviderAddress toEntity(InsuranceProviderAddress address, InsuranceProviderAddressRequest dto) {
-       return mapToEntity(address,dto);
+        return mapToEntity(address, dto);
     }
 
     private InsuranceProviderAddress mapToEntity(InsuranceProviderAddress address, InsuranceProviderAddressRequest dto) {

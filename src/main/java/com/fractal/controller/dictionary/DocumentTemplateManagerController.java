@@ -26,28 +26,34 @@ import java.util.stream.Collectors;
 public class DocumentTemplateManagerController {
 
     private final DocumentTemplateManagerService documentTemplateManagerService;
+
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<DocumentTemplateManagerResponse> create(@ModelAttribute @Valid DocumentTemplateManagerRequest dto) {
         return new ResponseEntity<>(documentTemplateManagerService.toDTO(documentTemplateManagerService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<DocumentTemplateManagerResponse>> getAll() {
         return ResponseEntity.ok(documentTemplateManagerService.getAll().stream().map(documentTemplateManagerService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<DocumentTemplateManagerResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(documentTemplateManagerService.toDTO(documentTemplateManagerService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<DocumentTemplateManagerResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(documentTemplateManagerService.toDTO(documentTemplateManagerService.getByCode(code)));
     }
-    @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<DocumentTemplateManagerResponse> update(@PathVariable Long id, @ModelAttribute @Valid DocumentTemplateManagerRequest dto) {
-      return  ResponseEntity.ok(documentTemplateManagerService.toDTO(documentTemplateManagerService.update(id, dto)));
+        return ResponseEntity.ok(documentTemplateManagerService.toDTO(documentTemplateManagerService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         documentTemplateManagerService.deleteById(id);

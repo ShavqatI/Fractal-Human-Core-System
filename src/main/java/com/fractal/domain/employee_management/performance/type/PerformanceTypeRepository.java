@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface PerformanceTypeRepository extends JpaRepository<PerformanceType,Long> {
+interface PerformanceTypeRepository extends JpaRepository<PerformanceType, Long> {
     Optional<PerformanceType> findById(Long id);
+
     Optional<PerformanceType> findByCode(String code);
+
     List<PerformanceType> findAll();
 }

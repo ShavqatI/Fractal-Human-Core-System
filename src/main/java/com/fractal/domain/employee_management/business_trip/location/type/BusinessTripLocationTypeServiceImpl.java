@@ -14,9 +14,10 @@ import java.util.List;
 class BusinessTripLocationTypeServiceImpl implements BusinessTripLocationTypeService {
 
     private final BusinessTripLocationTypeRepository businessTripLocationTypeRepository;
+
     @Override
     public BusinessTripLocationType create(BusinessTripLocationTypeRequest dto) {
-       return save(toEntity(dto));
+        return save(toEntity(dto));
     }
 
     @Override
@@ -26,8 +27,7 @@ class BusinessTripLocationTypeServiceImpl implements BusinessTripLocationTypeSer
             businessTripLocationType.setCode(dto.code());
             businessTripLocationType.setName(dto.name());
             return save(businessTripLocationType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -40,7 +40,7 @@ class BusinessTripLocationTypeServiceImpl implements BusinessTripLocationTypeSer
 
     @Override
     public BusinessTripLocationType getByCode(String code) {
-        return businessTripLocationTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
+        return businessTripLocationTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
     }
 
     @Override
@@ -50,7 +50,7 @@ class BusinessTripLocationTypeServiceImpl implements BusinessTripLocationTypeSer
 
     @Override
     public void deleteById(Long id) {
-       businessTripLocationTypeRepository.delete(findById(id));
+        businessTripLocationTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -62,6 +62,7 @@ class BusinessTripLocationTypeServiceImpl implements BusinessTripLocationTypeSer
                 businessTripLocationType.getCreatedDate()
         );
     }
+
     private BusinessTripLocationType toEntity(BusinessTripLocationTypeRequest dto) {
         return BusinessTripLocationType.builder()
                 .code(dto.code())
@@ -72,14 +73,13 @@ class BusinessTripLocationTypeServiceImpl implements BusinessTripLocationTypeSer
     private BusinessTripLocationType save(BusinessTripLocationType businessTripLocationType) {
         try {
             return businessTripLocationTypeRepository.save(businessTripLocationType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private BusinessTripLocationType findById(Long id) {
-        return businessTripLocationTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
+        return businessTripLocationTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
     }
 
 }

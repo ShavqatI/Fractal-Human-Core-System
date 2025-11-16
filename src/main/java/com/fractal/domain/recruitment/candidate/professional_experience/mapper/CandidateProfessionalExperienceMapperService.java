@@ -6,7 +6,9 @@ import com.fractal.domain.recruitment.candidate.professional_experience.dto.Cand
 
 public interface CandidateProfessionalExperienceMapperService {
     CandidateProfessionalExperienceResponse toDTO(CandidateProfessionalExperience professionalExperience);
+
     CandidateProfessionalExperience toEntity(CandidateProfessionalExperienceRequest dto);
+
     CandidateProfessionalExperience toEntity(CandidateProfessionalExperience professionalExperience, CandidateProfessionalExperienceRequest dto);
 }
 

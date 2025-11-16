@@ -34,7 +34,7 @@ class DocumentTemplateManagerServiceImpl implements DocumentTemplateManagerServi
 
     @Override
     public DocumentTemplateManager getByCode(String code) {
-        return documentTemplateManagerRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Gender with code: " + code + " not found"));
+        return documentTemplateManagerRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Gender with code: " + code + " not found"));
     }
 
     @Override
@@ -49,10 +49,9 @@ class DocumentTemplateManagerServiceImpl implements DocumentTemplateManagerServi
             fileService.delete(documentTemplateManager.getFilePath());
             documentTemplateManager.setCode(dto.code());
             documentTemplateManager.setName(dto.name());
-            documentTemplateManager.setFilePath(fileService.save(dto.file(),resourceStoragePath));
+            documentTemplateManager.setFilePath(fileService.save(dto.file(), resourceStoragePath));
             return save(documentTemplateManager);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -85,13 +84,12 @@ class DocumentTemplateManagerServiceImpl implements DocumentTemplateManagerServi
     private DocumentTemplateManager save(DocumentTemplateManager documentTemplateManager) {
         try {
             return documentTemplateManagerRepository.save(documentTemplateManager);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private DocumentTemplateManager findById(Long id) {
-        return documentTemplateManagerRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Gender with id: " + id + " not found"));
+        return documentTemplateManagerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Gender with id: " + id + " not found"));
     }
 }

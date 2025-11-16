@@ -1,7 +1,6 @@
 package com.fractal.domain.integration.mapping.position;
 
 import com.fractal.domain.abstraction.Integration;
-import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.position.Position;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -18,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 public class PositionMapping extends Integration {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "position_id",updatable = false,referencedColumnName = "id")
+    @JoinColumn(name = "position_id", updatable = false, referencedColumnName = "id")
     protected Position position;
 
 }

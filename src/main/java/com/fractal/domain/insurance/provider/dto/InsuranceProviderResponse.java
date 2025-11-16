@@ -17,5 +17,5 @@ public record InsuranceProviderResponse(
         List<InsuranceProviderAddressResponse> addresses,
         LocalDateTime createdDate
 
-        ) {
+) {
 }

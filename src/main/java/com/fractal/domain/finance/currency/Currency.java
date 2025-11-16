@@ -14,7 +14,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public class Currency extends Dictionary {
 
-    @Column(name ="numeric_code",length = 5)
+    @Column(name = "numeric_code", length = 5)
     private Integer numericCode;
 
     @ManyToOne(fetch = FetchType.LAZY)

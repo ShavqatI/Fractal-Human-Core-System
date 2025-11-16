@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface LayoutLabelRepository extends JpaRepository<LayoutLabel,Long> {
+interface LayoutLabelRepository extends JpaRepository<LayoutLabel, Long> {
     Optional<LayoutLabel> findByName(String name);
 
     List<LayoutLabel> findAllByNameIn(List<String> list);

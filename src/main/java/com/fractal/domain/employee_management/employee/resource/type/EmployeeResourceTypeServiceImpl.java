@@ -14,9 +14,10 @@ import java.util.List;
 class EmployeeResourceTypeServiceImpl implements EmployeeResourceTypeService {
 
     private final EmployeeResourceTypeRepository employeeResourceTypeRepository;
+
     @Override
     public EmployeeResourceType create(EmployeeResourceTypeRequest dto) {
-       return save(toEntity(dto));
+        return save(toEntity(dto));
     }
 
     @Override
@@ -26,8 +27,7 @@ class EmployeeResourceTypeServiceImpl implements EmployeeResourceTypeService {
             employeeResourceType.setCode(dto.code());
             employeeResourceType.setName(dto.name());
             return save(employeeResourceType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -40,7 +40,7 @@ class EmployeeResourceTypeServiceImpl implements EmployeeResourceTypeService {
 
     @Override
     public EmployeeResourceType getByCode(String code) {
-        return employeeResourceTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
+        return employeeResourceTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
     }
 
     @Override
@@ -50,7 +50,7 @@ class EmployeeResourceTypeServiceImpl implements EmployeeResourceTypeService {
 
     @Override
     public void deleteById(Long id) {
-       employeeResourceTypeRepository.delete(findById(id));
+        employeeResourceTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -62,6 +62,7 @@ class EmployeeResourceTypeServiceImpl implements EmployeeResourceTypeService {
                 employeeResourceType.getCreatedDate()
         );
     }
+
     private EmployeeResourceType toEntity(EmployeeResourceTypeRequest dto) {
         return EmployeeResourceType.builder()
                 .code(dto.code())
@@ -72,14 +73,13 @@ class EmployeeResourceTypeServiceImpl implements EmployeeResourceTypeService {
     private EmployeeResourceType save(EmployeeResourceType employeeResourceType) {
         try {
             return employeeResourceTypeRepository.save(employeeResourceType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private EmployeeResourceType findById(Long id) {
-        return employeeResourceTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
+        return employeeResourceTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
     }
 
 }

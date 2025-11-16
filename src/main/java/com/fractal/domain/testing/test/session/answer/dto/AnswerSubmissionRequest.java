@@ -9,4 +9,5 @@ public record AnswerSubmissionRequest(
         List<SelectedAnswerRequest> answers,
         Long statusId
 
-) { }
+) {
+}

@@ -8,4 +8,5 @@ public record InstructorAssignmentRequest(
         LocalDateTime endTime,
         Long statusId
 
-) { }
+) {
+}

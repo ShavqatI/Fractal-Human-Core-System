@@ -22,23 +22,27 @@ public class OfflineLearningLocationAddressController {
 
     @PostMapping
     public ResponseEntity<OfflineLearningLocationAddressResponse> create(@PathVariable Long locationId, @RequestBody @Valid OfflineLearningLocationAddressRequest dto) {
-        return new ResponseEntity<>(addressService.toDTO(addressService.create(locationId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(addressService.toDTO(addressService.create(locationId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<OfflineLearningLocationAddressResponse>> getAll(@PathVariable Long locationId) {
         return ResponseEntity.ok(addressService.getAllByOfflineLearningLocationId(locationId).stream().map(addressService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<OfflineLearningLocationAddressResponse> getById(@PathVariable Long locationId, @PathVariable Long id) {
-        return ResponseEntity.ok(addressService.toDTO(addressService.getById(locationId,id)));
+        return ResponseEntity.ok(addressService.toDTO(addressService.getById(locationId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<OfflineLearningLocationAddressResponse> update(@PathVariable Long locationId, @PathVariable Long id, @RequestBody @Valid OfflineLearningLocationAddressRequest dto) {
-        return ResponseEntity.ok(addressService.toDTO(addressService.update(locationId,id, dto)));
+        return ResponseEntity.ok(addressService.toDTO(addressService.update(locationId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long locationId, @PathVariable Long id) {
-        addressService.delete(locationId,id);
+        addressService.delete(locationId, id);
         return ResponseEntity.noContent().build();
     }
 

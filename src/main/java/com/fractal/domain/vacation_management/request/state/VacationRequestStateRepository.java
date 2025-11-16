@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-interface VacationRequestStateRepository extends JpaRepository<VacationRequestState,Long> {
+interface VacationRequestStateRepository extends JpaRepository<VacationRequestState, Long> {
 
     List<VacationRequestState> findAllByVacationRequestId(Long vacationRequestId);
 

@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 public class InternalEmploymentAgreement extends Agreement {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "internal_employment_id",referencedColumnName = "id")
+    @JoinColumn(name = "internal_employment_id", referencedColumnName = "id")
     private InternalEmployment internalEmployment;
 
 }

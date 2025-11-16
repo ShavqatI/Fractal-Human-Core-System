@@ -45,7 +45,7 @@ public class TestSession extends ApprovalWorkflow {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "testSession", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "testSession", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<AnswerSubmission> submissions = new ArrayList<>();
 
     public void addAnswerSubmission(AnswerSubmission submission) {
@@ -57,6 +57,6 @@ public class TestSession extends ApprovalWorkflow {
     public void removeAnswerSubmission(AnswerSubmission submission) {
         if (submissions != null && !submissions.isEmpty())
             submissions.remove(submission);
-            submission.setTestSession(null);
+        submission.setTestSession(null);
     }
 }

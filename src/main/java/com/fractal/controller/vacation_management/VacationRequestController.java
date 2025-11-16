@@ -19,30 +19,37 @@ import java.util.stream.Collectors;
 public class VacationRequestController {
 
     private final VacationRequestService vacationRequestService;
+
     @PostMapping
     public ResponseEntity<VacationRequestResponse> create(@RequestBody @Valid VacationRequestRequest dto) {
         return new ResponseEntity<>(vacationRequestService.toDTO(vacationRequestService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<VacationRequestResponse>> getAll() {
         return ResponseEntity.ok(vacationRequestService.getAll().stream().map(vacationRequestService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<VacationRequestResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(vacationRequestService.toDTO(vacationRequestService.getById(id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<VacationRequestResponse> update(@PathVariable Long id, @RequestBody @Valid VacationRequestRequest dto) {
-      return  ResponseEntity.ok(vacationRequestService.toDTO(vacationRequestService.update(id, dto)));
+        return ResponseEntity.ok(vacationRequestService.toDTO(vacationRequestService.update(id, dto)));
     }
+
     @PutMapping("review/{id}")
     public ResponseEntity<VacationRequestResponse> review(@PathVariable Long id) {
-      return  ResponseEntity.ok(vacationRequestService.toDTO(vacationRequestService.review(id)));
+        return ResponseEntity.ok(vacationRequestService.toDTO(vacationRequestService.review(id)));
     }
+
     @PutMapping("approve/{id}")
     public ResponseEntity<VacationRequestResponse> approve(@PathVariable Long id) {
-      return  ResponseEntity.ok(vacationRequestService.toDTO(vacationRequestService.approve(id)));
+        return ResponseEntity.ok(vacationRequestService.toDTO(vacationRequestService.approve(id)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         vacationRequestService.deleteById(id);

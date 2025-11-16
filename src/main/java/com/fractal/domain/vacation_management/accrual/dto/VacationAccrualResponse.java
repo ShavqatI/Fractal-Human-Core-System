@@ -13,4 +13,5 @@ public record VacationAccrualResponse(
         List<VacationAccrualPeriodResponse> periods,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) {}
+) {
+}

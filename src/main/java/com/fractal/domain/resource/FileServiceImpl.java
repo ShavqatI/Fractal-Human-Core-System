@@ -29,8 +29,8 @@ class FileServiceImpl implements FileService {
     @Override
     public void delete(String path) {
         try {
-            if(path != null)
-            Files.deleteIfExists(Path.of(path));
+            if (path != null)
+                Files.deleteIfExists(Path.of(path));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

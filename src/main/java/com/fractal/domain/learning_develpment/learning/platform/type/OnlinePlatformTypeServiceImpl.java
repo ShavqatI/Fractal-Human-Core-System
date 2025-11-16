@@ -14,9 +14,10 @@ import java.util.List;
 class OnlinePlatformTypeServiceImpl implements OnlinePlatformTypeService {
 
     private final OnlinePlatformTypeRepository onlinePlatformTypeRepository;
+
     @Override
     public OnlinePlatformType create(OnlinePlatformTypeRequest dto) {
-       return save(toEntity(dto));
+        return save(toEntity(dto));
     }
 
     @Override
@@ -26,8 +27,7 @@ class OnlinePlatformTypeServiceImpl implements OnlinePlatformTypeService {
             onlinePlatformType.setCode(dto.code());
             onlinePlatformType.setName(dto.name());
             return save(onlinePlatformType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -40,7 +40,7 @@ class OnlinePlatformTypeServiceImpl implements OnlinePlatformTypeService {
 
     @Override
     public OnlinePlatformType getByCode(String code) {
-        return onlinePlatformTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
+        return onlinePlatformTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
     }
 
     @Override
@@ -50,7 +50,7 @@ class OnlinePlatformTypeServiceImpl implements OnlinePlatformTypeService {
 
     @Override
     public void deleteById(Long id) {
-       onlinePlatformTypeRepository.delete(findById(id));
+        onlinePlatformTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -62,6 +62,7 @@ class OnlinePlatformTypeServiceImpl implements OnlinePlatformTypeService {
                 onlinePlatformType.getCreatedDate()
         );
     }
+
     private OnlinePlatformType toEntity(OnlinePlatformTypeRequest dto) {
         return OnlinePlatformType.builder()
                 .code(dto.code())
@@ -72,14 +73,13 @@ class OnlinePlatformTypeServiceImpl implements OnlinePlatformTypeService {
     private OnlinePlatformType save(OnlinePlatformType onlinePlatformType) {
         try {
             return onlinePlatformTypeRepository.save(onlinePlatformType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private OnlinePlatformType findById(Long id) {
-        return onlinePlatformTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
+        return onlinePlatformTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
     }
 
 }

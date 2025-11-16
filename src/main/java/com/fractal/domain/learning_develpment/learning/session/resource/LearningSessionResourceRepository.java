@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface LearningSessionResourceRepository extends JpaRepository<LearningSessionResource,Long> {
+public interface LearningSessionResourceRepository extends JpaRepository<LearningSessionResource, Long> {
     List<LearningSessionResource> findAllByLearningSessionId(Long learningSessionId);
+
     Optional<LearningSessionResource> findByLearningSessionIdAndId(Long learningSessionId, Long id);
 }

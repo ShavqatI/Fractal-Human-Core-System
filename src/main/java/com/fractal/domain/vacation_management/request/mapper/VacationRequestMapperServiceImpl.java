@@ -2,12 +2,9 @@ package com.fractal.domain.vacation_management.request.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
-import com.fractal.domain.vacation_management.category.VacationCategoryService;
-import com.fractal.domain.vacation_management.dto.VacationResponse;
 import com.fractal.domain.vacation_management.request.VacationRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
-import com.fractal.domain.vacation_management.request.medical_info.dto.VacationRequestMedicalInfoRequest;
 import com.fractal.domain.vacation_management.request.medical_info.mapper.VacationRequestMedicalInfoMapperService;
 import com.fractal.domain.vacation_management.request.responsibility.mapper.VacationRequestResponsibilityMapperService;
 import com.fractal.domain.vacation_management.request.state.VacationRequestStateService;
@@ -15,7 +12,6 @@ import com.fractal.domain.vacation_management.type.VacationTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -66,12 +62,12 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
 
     @Override
     public VacationRequest toEntity(VacationRequestRequest dto) {
-        return mapToEntity(new VacationRequest(),dto);
+        return mapToEntity(new VacationRequest(), dto);
     }
 
     @Override
     public VacationRequest toEntity(VacationRequest vacationRequest, VacationRequestRequest dto) {
-        return mapToEntity(vacationRequest,dto);
+        return mapToEntity(vacationRequest, dto);
     }
 
     private VacationRequest mapToEntity(VacationRequest vacationRequest, VacationRequestRequest dto) {

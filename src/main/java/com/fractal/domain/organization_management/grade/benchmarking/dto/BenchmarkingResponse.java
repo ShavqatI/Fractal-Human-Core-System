@@ -11,7 +11,8 @@ public record BenchmarkingResponse(
         BenchmarkingTypeResponse benchmarkingType,
         BigDecimal minSalary,
         BigDecimal averageSalary,
-        BigDecimal  maxSalary,
+        BigDecimal maxSalary,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) { }
+) {
+}

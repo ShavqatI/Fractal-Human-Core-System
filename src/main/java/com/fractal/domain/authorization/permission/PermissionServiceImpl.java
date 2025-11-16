@@ -4,7 +4,6 @@ import com.fractal.domain.authorization.permission.dto.PermissionRequest;
 import com.fractal.domain.authorization.permission.dto.PermissionResponse;
 import com.fractal.domain.authorization.permission.mapper.PermissionMapperService;
 import com.fractal.domain.authorization.user.UserService;
-import com.fractal.domain.authorization.user.role.UserRoleService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -49,15 +48,15 @@ public class PermissionServiceImpl implements PermissionService {
     }
 
     @Override
-    public List<Permission> getAllByRoleIdMenuId(Long roleId,Long menuId) {
-        return permissionRepository.findAllByRoleIdAndMenuActionMenuId(roleId,menuId);
+    public List<Permission> getAllByRoleIdMenuId(Long roleId, Long menuId) {
+        return permissionRepository.findAllByRoleIdAndMenuActionMenuId(roleId, menuId);
     }
 
     @Override
     public Permission update(Long id, PermissionRequest dto) {
         try {
             var permission = findById(id);
-            return save(mapperService.toEntity(permission,dto));
+            return save(mapperService.toEntity(permission, dto));
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
@@ -65,7 +64,7 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public void delete(Long id) {
-      permissionRepository.delete(findById(id));
+        permissionRepository.delete(findById(id));
     }
 
     @Override
@@ -75,7 +74,7 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public List<Permission> getActivePermissions(Authentication authentication) {
-        if(authentication.getPrincipal() instanceof UserDetails) {
+        if (authentication.getPrincipal() instanceof UserDetails) {
             var userDetails = (UserDetails) authentication.getPrincipal();
             var user = userService.findByUsername(userDetails.getUsername());
             var roles = userService.getActiveRoles(user.getId());

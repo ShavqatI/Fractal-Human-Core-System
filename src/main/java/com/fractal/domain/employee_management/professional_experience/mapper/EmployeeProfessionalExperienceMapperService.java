@@ -6,7 +6,9 @@ import com.fractal.domain.employee_management.professional_experience.dto.Employ
 
 public interface EmployeeProfessionalExperienceMapperService {
     EmployeeProfessionalExperienceResponse toDTO(EmployeeProfessionalExperience professionalExperience);
+
     EmployeeProfessionalExperience toEntity(EmployeeProfessionalExperienceRequest dto);
+
     EmployeeProfessionalExperience toEntity(EmployeeProfessionalExperience professionalExperience, EmployeeProfessionalExperienceRequest dto);
 }
 

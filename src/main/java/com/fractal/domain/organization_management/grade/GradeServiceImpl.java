@@ -31,7 +31,7 @@ class GradeServiceImpl implements GradeService {
 
     @Override
     public Grade getByCode(String code) {
-        return gradeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Grade with code: " + code + " not found"));
+        return gradeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Grade with code: " + code + " not found"));
     }
 
     @Override
@@ -42,16 +42,15 @@ class GradeServiceImpl implements GradeService {
     @Override
     public Grade update(Long id, GradeRequest dto) {
         try {
-            return save(mapperService.toEntity(findById(id),dto));
-        }
-        catch (DataAccessException e) {
+            return save(mapperService.toEntity(findById(id), dto));
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       gradeRepository.delete(findById(id));
+        gradeRepository.delete(findById(id));
     }
 
     @Override
@@ -78,8 +77,8 @@ class GradeServiceImpl implements GradeService {
     @Transactional
     public Grade updateChild(Long id, Long childId, GradeRequest dto) {
         var grade = findById(id);
-        var child = grade.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
-        update(child.getId(),dto);
+        var child = grade.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        update(child.getId(), dto);
         return save(grade);
     }
 
@@ -87,7 +86,7 @@ class GradeServiceImpl implements GradeService {
     @Transactional
     public Grade deleteChild(Long id, Long childId) {
         var grade = findById(id);
-        var child = grade.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        var child = grade.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
         grade.removeChild(child);
         return save(grade);
     }
@@ -96,13 +95,12 @@ class GradeServiceImpl implements GradeService {
     public Grade save(Grade grade) {
         try {
             return gradeRepository.save(grade);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Grade findById(Long id) {
-        return gradeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Grade with id: " + id + " not found"));
+        return gradeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Grade with id: " + id + " not found"));
     }
 }

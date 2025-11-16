@@ -14,9 +14,10 @@ import java.util.List;
 class AddressTypeServiceImpl implements AddressTypeService {
 
     private final AddressTypeRepository addressTypeRepository;
+
     @Override
     public AddressType create(AddressTypeRequest dto) {
-       return save(toEntity(dto));
+        return save(toEntity(dto));
     }
 
     @Override
@@ -26,8 +27,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
             addressType.setCode(dto.code());
             addressType.setName(dto.name());
             return save(addressType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -40,7 +40,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
 
     @Override
     public AddressType getByCode(String code) {
-        return addressTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
+        return addressTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
     }
 
     @Override
@@ -50,7 +50,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
 
     @Override
     public void deleteById(Long id) {
-       addressTypeRepository.delete(findById(id));
+        addressTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -62,6 +62,7 @@ class AddressTypeServiceImpl implements AddressTypeService {
                 addressType.getCreatedDate()
         );
     }
+
     private AddressType toEntity(AddressTypeRequest dto) {
         return AddressType.builder()
                 .code(dto.code())
@@ -72,14 +73,13 @@ class AddressTypeServiceImpl implements AddressTypeService {
     private AddressType save(AddressType addressType) {
         try {
             return addressTypeRepository.save(addressType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private AddressType findById(Long id) {
-        return addressTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
+        return addressTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
     }
 
 }

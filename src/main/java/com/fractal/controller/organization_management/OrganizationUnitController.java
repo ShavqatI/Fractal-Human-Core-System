@@ -42,7 +42,7 @@ public class OrganizationUnitController {
 
     @PutMapping("/{id}")
     public ResponseEntity<OrganizationUnitResponse> update(@PathVariable Long id, @RequestBody @Valid OrganizationUnitRequest dto) {
-        return ResponseEntity.ok(organizationUnitService.toDTO(organizationUnitService.update(id,dto)));
+        return ResponseEntity.ok(organizationUnitService.toDTO(organizationUnitService.update(id, dto)));
     }
 
     @DeleteMapping("/{id}")

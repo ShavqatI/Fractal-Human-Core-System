@@ -7,5 +7,5 @@ public record ExperienceRequest(
         String level,
         Boolean mandatory,
         String notes
-)
-{}
+) {
+}

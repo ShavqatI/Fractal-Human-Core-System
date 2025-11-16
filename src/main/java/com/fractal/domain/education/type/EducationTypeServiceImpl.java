@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class EducationTypeServiceImpl implements EducationTypeService {
@@ -26,7 +27,7 @@ class EducationTypeServiceImpl implements EducationTypeService {
 
     @Override
     public EducationType getByCode(String code) {
-        return educationTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
+        return educationTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class EducationTypeServiceImpl implements EducationTypeService {
             educationType.setCode(dto.code());
             educationType.setName(dto.name());
             return save(educationType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      educationTypeRepository.delete(findById(id));
+        educationTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class EducationTypeServiceImpl implements EducationTypeService {
     private EducationType save(EducationType educationType) {
         try {
             return educationTypeRepository.save(educationType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private EducationType findById(Long id) {
-        return educationTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Education Type with id: " + id + " not found"));
+        return educationTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Education Type with id: " + id + " not found"));
     }
 
 }

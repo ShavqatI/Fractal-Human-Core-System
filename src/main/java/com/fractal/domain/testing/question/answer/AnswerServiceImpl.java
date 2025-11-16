@@ -26,7 +26,7 @@ class AnswerServiceImpl implements AnswerService {
         var answer = mapperService.toEntity(dto);
         question.addAnswer(answer);
         questionService.save(question);
-       return answer;
+        return answer;
     }
 
     @Override
@@ -36,12 +36,12 @@ class AnswerServiceImpl implements AnswerService {
 
     @Override
     public Answer getById(Long questionId, Long id) {
-        return answerRepository.findByQuestionIdAndId(questionId,id).orElseThrow(()-> new ResourceNotFoundException("Answer  with id: " + id + " not found"));
+        return answerRepository.findByQuestionIdAndId(questionId, id).orElseThrow(() -> new ResourceNotFoundException("Answer  with id: " + id + " not found"));
     }
 
     @Override
     public Answer getById(Long id) {
-        return answerRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Answer  with id: " + id + " not found"));
+        return answerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Answer  with id: " + id + " not found"));
     }
 
     @Override
@@ -50,11 +50,11 @@ class AnswerServiceImpl implements AnswerService {
         var question = questionService.getById(questionId);
         var answer = question.getAnswers()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Answer  with id: " + id + " not found"));
-        answer = mapperService.toEntity(answer,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Answer  with id: " + id + " not found"));
+        answer = mapperService.toEntity(answer, dto);
         answerRepository.save(answer);
         questionService.save(question);
-       return answer;
+        return answer;
     }
 
     @Override
@@ -63,7 +63,7 @@ class AnswerServiceImpl implements AnswerService {
         var question = questionService.getById(questionId);
         var answer = question.getAnswers()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Answer  with id: " + id + " not found"));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Answer  with id: " + id + " not found"));
         question.removeAnswer(answer);
         questionService.save(question);
     }

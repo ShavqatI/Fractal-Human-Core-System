@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface EmploymentTypeRepository extends JpaRepository<EmploymentType,Long> {
+interface EmploymentTypeRepository extends JpaRepository<EmploymentType, Long> {
     Optional<EmploymentType> findById(Long id);
+
     Optional<EmploymentType> findByCode(String code);
+
     List<EmploymentType> findAll();
 }

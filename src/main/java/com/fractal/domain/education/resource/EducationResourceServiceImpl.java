@@ -27,7 +27,7 @@ public class EducationResourceServiceImpl implements EducationResourceService {
     @Override
     public EducationResource create(Long educationId, MultipartFile file) {
         var education = educationService.getById(educationId);
-        var resource =  resourceMapperService.toEntity(file,resourceStoragePath);
+        var resource = resourceMapperService.toEntity(file, resourceStoragePath);
         education.addResource(resource);
         educationService.save(education);
         return resource;
@@ -40,7 +40,7 @@ public class EducationResourceServiceImpl implements EducationResourceService {
 
     @Override
     public EducationResource getById(Long educationId, Long id) {
-        return resourceRepository.findByEducationIdAndId(educationId,id).orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
+        return resourceRepository.findByEducationIdAndId(educationId, id).orElseThrow(() -> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
     }
 
     @Override
@@ -48,8 +48,8 @@ public class EducationResourceServiceImpl implements EducationResourceService {
         var education = educationService.getById(educationId);
         var resource = education.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
-        resource = resourceMapperService.toEntity(resource,file,resourceStoragePath);
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
+        resource = resourceMapperService.toEntity(resource, file, resourceStoragePath);
         resourceRepository.save(resource);
         educationService.save(education);
         return resource;
@@ -60,7 +60,7 @@ public class EducationResourceServiceImpl implements EducationResourceService {
         var education = educationService.getById(educationId);
         var resource = education.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Education Resource  with id: " + id + " not found"));
         fileService.delete(resource.getUrl());
         education.removeResource(resource);
         educationService.save(education);

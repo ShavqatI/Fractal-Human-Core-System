@@ -18,16 +18,17 @@ public class GradeChildController {
 
     @PostMapping()
     public ResponseEntity<GradeResponse> create(@PathVariable Long gradeId, @RequestBody @Valid GradeRequest dto) {
-        return new ResponseEntity<>(gradeService.toDTO(gradeService.addChild(gradeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(gradeService.toDTO(gradeService.addChild(gradeId, dto)), HttpStatus.CREATED);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<GradeResponse> update(@PathVariable Long gradeId, @PathVariable Long id, @RequestBody @Valid GradeRequest dto) {
-        return ResponseEntity.ok(gradeService.toDTO(gradeService.updateChild(gradeId,id, dto)));
+        return ResponseEntity.ok(gradeService.toDTO(gradeService.updateChild(gradeId, id, dto)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long gradeId, @PathVariable Long id) {
-        gradeService.deleteChild(gradeId,id);
+        gradeService.deleteChild(gradeId, id);
         return ResponseEntity.noContent().build();
     }
 }

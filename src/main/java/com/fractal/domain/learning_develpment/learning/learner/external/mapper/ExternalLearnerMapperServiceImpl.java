@@ -26,6 +26,7 @@ class ExternalLearnerMapperServiceImpl implements ExternalLearnerMapperService {
     private final NationalityService nationalityService;
     private final StatusService statusService;
     private final ExternalParticipantContactMapperService contactMapperService;
+
     @Override
     public ExternalLearnerResponse toDTO(ExternalLearner learner) {
         return new ExternalLearnerResponse(
@@ -81,7 +82,7 @@ class ExternalLearnerMapperServiceImpl implements ExternalLearnerMapperService {
         trainer.setMaritalStatus(maritalStatusService.getById(dto.maritalStatusId()));
         trainer.setNationality(nationalityService.getById(dto.nationalityId()));
         trainer.setStatus(statusService.getById(dto.statusId()));
-        dto.contacts().forEach(contact->trainer.addContact(contactMapperService.toEntity(contact)));
+        dto.contacts().forEach(contact -> trainer.addContact(contactMapperService.toEntity(contact)));
         return trainer;
     }
 }

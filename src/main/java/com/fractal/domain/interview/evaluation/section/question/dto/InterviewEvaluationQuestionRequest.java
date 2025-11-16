@@ -10,6 +10,5 @@ public record InterviewEvaluationQuestionRequest(
         List<InterviewEvaluationAnswerRequest> answers,
         Integer maxSelectableOptions,
         Long statusId
-    )
-
-{}
+) {
+}

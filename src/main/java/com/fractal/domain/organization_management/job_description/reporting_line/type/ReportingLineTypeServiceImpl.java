@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class ReportingLineTypeServiceImpl implements ReportingLineTypeService {
@@ -26,7 +27,7 @@ class ReportingLineTypeServiceImpl implements ReportingLineTypeService {
 
     @Override
     public ReportingLineType getByCode(String code) {
-        return reportingLineTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Reporting Line Type with code: " + code + " not found"));
+        return reportingLineTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Reporting Line Type with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class ReportingLineTypeServiceImpl implements ReportingLineTypeService {
             reportingLineType.setCode(dto.code());
             reportingLineType.setName(dto.name());
             return save(reportingLineType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      reportingLineTypeRepository.delete(findById(id));
+        reportingLineTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class ReportingLineTypeServiceImpl implements ReportingLineTypeService {
     private ReportingLineType save(ReportingLineType reportingLineType) {
         try {
             return reportingLineTypeRepository.save(reportingLineType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private ReportingLineType findById(Long id) {
-        return reportingLineTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Reporting Line Type with id: " + id + " not found"));
+        return reportingLineTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Reporting Line Type with id: " + id + " not found"));
     }
 
 }

@@ -37,12 +37,12 @@ class InsuranceCoverageServiceImpl implements InsuranceCoverageService {
 
     @Override
     public InsuranceCoverage getById(Long insuranceId, Long id) {
-        return coverageRepository.findByInsuranceIdAndId(insuranceId,id).orElseThrow(()-> new ResourceNotFoundException("Business Trip Expense with id:" + id + " not found"));
+        return coverageRepository.findByInsuranceIdAndId(insuranceId, id).orElseThrow(() -> new ResourceNotFoundException("Business Trip Expense with id:" + id + " not found"));
     }
 
     @Override
     public InsuranceCoverage getById(Long id) {
-        return coverageRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("EBusiness Trip Expense with id:" + id + " not found"));
+        return coverageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("EBusiness Trip Expense with id:" + id + " not found"));
     }
 
     @Override
@@ -51,8 +51,8 @@ class InsuranceCoverageServiceImpl implements InsuranceCoverageService {
         var insurance = insuranceService.getById(insuranceId);
         var coverage = insurance.getCoverages()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Business Trip Expense with id: " + id + " not found"));
-        coverage = mapperService.toEntity(coverage,dto);
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Business Trip Expense with id: " + id + " not found"));
+        coverage = mapperService.toEntity(coverage, dto);
         insuranceService.save(insurance);
         return coverage;
     }
@@ -63,7 +63,7 @@ class InsuranceCoverageServiceImpl implements InsuranceCoverageService {
         var insurance = insuranceService.getById(insuranceId);
         var coverage = insurance.getCoverages()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("EBusiness Trip Expense with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("EBusiness Trip Expense with id: " + id + " not found"));
         insurance.removeCoverage(coverage);
         insuranceService.save(insurance);
     }

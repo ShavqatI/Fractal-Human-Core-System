@@ -18,4 +18,5 @@ public record VacationRequestMedicalInfoRequest(
         String diagnosis,
 
         String notes
-) {}
+) {
+}

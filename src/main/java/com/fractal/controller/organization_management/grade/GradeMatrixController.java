@@ -21,23 +21,27 @@ public class GradeMatrixController {
 
     @PostMapping()
     public ResponseEntity<GradeMatrixResponse> create(@PathVariable Long gradeId, @RequestBody @Valid GradeMatrixRequest dto) {
-        return new ResponseEntity<>(matrixService.toDTO(matrixService.create(gradeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(matrixService.toDTO(matrixService.create(gradeId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<GradeMatrixResponse>> getAll(@PathVariable Long gradeId) {
         return ResponseEntity.ok(matrixService.getAllByGradeId(gradeId).stream().map(matrixService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<GradeMatrixResponse> getById(@PathVariable Long gradeId, @PathVariable Long id) {
-        return ResponseEntity.ok(matrixService.toDTO(matrixService.getById(gradeId,id)));
+        return ResponseEntity.ok(matrixService.toDTO(matrixService.getById(gradeId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<GradeMatrixResponse> update(@PathVariable Long gradeId, @PathVariable Long id, @RequestBody @Valid GradeMatrixRequest dto) {
-        return ResponseEntity.ok(matrixService.toDTO(matrixService.update(gradeId,id, dto)));
+        return ResponseEntity.ok(matrixService.toDTO(matrixService.update(gradeId, id, dto)));
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Long gradeId, @PathVariable Long id) {
-        matrixService.delete(gradeId,id);
+        matrixService.delete(gradeId, id);
         return ResponseEntity.noContent().build();
     }
 

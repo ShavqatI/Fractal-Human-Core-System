@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 class OrganizationWorkScheduleMapperServiceImpl implements OrganizationWorkScheduleMapperService {
 
     private final WorkScheduleMapperService mapperService;
+
     @Override
     public WorkScheduleResponse toDTO(OrganizationWorkSchedule workSchedule) {
         return mapperService.toDTO(workSchedule);
@@ -20,12 +21,12 @@ class OrganizationWorkScheduleMapperServiceImpl implements OrganizationWorkSched
 
     @Override
     public OrganizationWorkSchedule toEntity(WorkScheduleRequest dto) {
-        return convert(new OrganizationWorkSchedule(),mapperService.toEntity(dto));
+        return convert(new OrganizationWorkSchedule(), mapperService.toEntity(dto));
     }
 
     @Override
     public OrganizationWorkSchedule toEntity(OrganizationWorkSchedule workSchedule, WorkScheduleRequest dto) {
-        return convert(workSchedule,mapperService.toEntity(workSchedule,dto));
+        return convert(workSchedule, mapperService.toEntity(workSchedule, dto));
     }
 
 

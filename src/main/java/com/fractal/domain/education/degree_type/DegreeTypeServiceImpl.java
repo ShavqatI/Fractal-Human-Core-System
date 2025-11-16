@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class DegreeTypeServiceImpl implements DegreeTypeService {
@@ -26,7 +27,7 @@ class DegreeTypeServiceImpl implements DegreeTypeService {
 
     @Override
     public DegreeType getByCode(String code) {
-        return degreeTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
+        return degreeTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class DegreeTypeServiceImpl implements DegreeTypeService {
             educationDocumentType.setCode(dto.code());
             educationDocumentType.setName(dto.name());
             return save(educationDocumentType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      degreeTypeRepository.delete(findById(id));
+        degreeTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class DegreeTypeServiceImpl implements DegreeTypeService {
     private DegreeType save(DegreeType degreeType) {
         try {
             return degreeTypeRepository.save(degreeType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private DegreeType findById(Long id) {
-        return degreeTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Degree Type with id: " + id + " not found"));
+        return degreeTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Degree Type with id: " + id + " not found"));
     }
 
 }

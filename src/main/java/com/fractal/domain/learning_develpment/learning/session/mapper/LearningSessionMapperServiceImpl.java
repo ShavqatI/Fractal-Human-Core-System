@@ -32,6 +32,7 @@ class LearningSessionMapperServiceImpl implements LearningSessionMapperService {
     private final LearningLocationMapperService locationMapperService;
 
     private final StatusService statusService;
+
     @Override
     public LearningSessionResponse toDTO(LearningSession session) {
         return new LearningSessionResponse(
@@ -96,11 +97,11 @@ class LearningSessionMapperServiceImpl implements LearningSessionMapperService {
         session.setStartTime(dto.startTime());
         session.setEndTime(dto.endTime());
         session.setStatus(statusService.getById(dto.statusId()));
-        dto.instructorAssignments().forEach(instructorAssignment-> session.addInstructorAssignment(instructorAssignmentMapperService.toEntity(instructorAssignment)));
-        dto.enrollments().forEach(enrollment-> session.addEnrollment(enrollmentMapperService.toEntity(enrollment)));
-        dto.resources().forEach(resource-> session.addResource(resourceMapperService.toEntity(resource,null)));
-        dto.expenses().forEach(expense-> session.addExpense(expenseMapperService.toEntity(expense)));
-        dto.locations().forEach(location-> session.addLocation(locationMapperService.toEntity(location)));
+        dto.instructorAssignments().forEach(instructorAssignment -> session.addInstructorAssignment(instructorAssignmentMapperService.toEntity(instructorAssignment)));
+        dto.enrollments().forEach(enrollment -> session.addEnrollment(enrollmentMapperService.toEntity(enrollment)));
+        dto.resources().forEach(resource -> session.addResource(resourceMapperService.toEntity(resource, null)));
+        dto.expenses().forEach(expense -> session.addExpense(expenseMapperService.toEntity(expense)));
+        dto.locations().forEach(location -> session.addLocation(locationMapperService.toEntity(location)));
         return session;
     }
 }

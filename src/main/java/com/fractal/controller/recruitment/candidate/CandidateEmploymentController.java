@@ -22,23 +22,27 @@ public class CandidateEmploymentController {
 
     @PostMapping()
     public ResponseEntity<EmploymentResponse> create(@PathVariable Long candidateId, @RequestBody @Valid ExternalEmploymentRequest dto) {
-        return new ResponseEntity<>(employmentService.toDTO(employmentService.create(candidateId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(employmentService.toDTO(employmentService.create(candidateId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<EmploymentResponse>> getAll(@PathVariable Long candidateId) {
         return ResponseEntity.ok(employmentService.getAllByCandidateId(candidateId).stream().map(employmentService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<EmploymentResponse> getById(@PathVariable Long candidateId, @PathVariable Long id) {
-        return ResponseEntity.ok(employmentService.toDTO(employmentService.getById(candidateId,id)));
+        return ResponseEntity.ok(employmentService.toDTO(employmentService.getById(candidateId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<EmploymentResponse> update(@PathVariable Long candidateId, @PathVariable Long id, @RequestBody @Valid ExternalEmploymentRequest dto) {
-        return ResponseEntity.ok(employmentService.toDTO(employmentService.update(candidateId,id, dto)));
+        return ResponseEntity.ok(employmentService.toDTO(employmentService.update(candidateId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long candidateId, @PathVariable Long id) {
-        employmentService.delete(candidateId,id);
+        employmentService.delete(candidateId, id);
         return ResponseEntity.noContent().build();
     }
 

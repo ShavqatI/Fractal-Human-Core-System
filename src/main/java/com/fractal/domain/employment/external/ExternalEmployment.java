@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 public class ExternalEmployment extends Employment {
 
     @ManyToOne
-    @JoinColumn(name ="country_id", referencedColumnName = "id")
+    @JoinColumn(name = "country_id", referencedColumnName = "id")
     protected Country country;
 
     @Column(name = "location")

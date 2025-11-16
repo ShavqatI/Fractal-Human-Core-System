@@ -6,7 +6,9 @@ import com.fractal.domain.vacation_management.request.responsibility.dto.Vacatio
 
 public interface VacationRequestResponsibilityMapperService {
     VacationRequestResponsibilityResponse toDTO(VacationRequestResponsibility responsibility);
+
     VacationRequestResponsibility toEntity(VacationRequestResponsibilityRequest dto);
+
     VacationRequestResponsibility toEntity(VacationRequestResponsibility responsibility, VacationRequestResponsibilityRequest dto);
 }
 

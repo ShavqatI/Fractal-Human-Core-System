@@ -23,31 +23,37 @@ public class LearningSessionController {
 
     @PostMapping()
     public ResponseEntity<LearningSessionResponse> create(@PathVariable Long learningId, @RequestBody @Valid LearningSessionRequest dto) {
-        return new ResponseEntity<>(sessionService.toDTO(sessionService.create(learningId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(sessionService.toDTO(sessionService.create(learningId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<LearningSessionResponse>> getAll(@PathVariable Long learningId) {
         return ResponseEntity.ok(sessionService.getAllByLearningId(learningId).stream().map(sessionService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<LearningSessionResponse> getById(@PathVariable Long learningId, @PathVariable Long id) {
-        return ResponseEntity.ok(sessionService.toDTO(sessionService.getById(learningId,id)));
+        return ResponseEntity.ok(sessionService.toDTO(sessionService.getById(learningId, id)));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<LearningSessionCompactResponse>> getAllCompact(@PathVariable Long learningId) {
         return ResponseEntity.ok(sessionService.getAllByLearningId(learningId).stream().map(sessionService::toCompactDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/compact/{id}")
     public ResponseEntity<LearningSessionCompactResponse> getByIdCompact(@PathVariable Long learningId, @PathVariable Long id) {
-        return ResponseEntity.ok(sessionService.toCompactDTO(sessionService.getById(learningId,id)));
+        return ResponseEntity.ok(sessionService.toCompactDTO(sessionService.getById(learningId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<LearningSessionResponse> update(@PathVariable Long learningId, @PathVariable Long id, @RequestBody @Valid LearningSessionRequest dto) {
-        return ResponseEntity.ok(sessionService.toDTO(sessionService.update(learningId,id, dto)));
+        return ResponseEntity.ok(sessionService.toDTO(sessionService.update(learningId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long learningId, @PathVariable Long id) {
-        sessionService.delete(learningId,id);
+        sessionService.delete(learningId, id);
         return ResponseEntity.noContent().build();
     }
 

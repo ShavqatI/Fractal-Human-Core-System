@@ -22,5 +22,5 @@ public record LearningSessionExpenseResponse(
         StatusCompactResponse status,
         LocalDateTime createdDate
 
-)
-{ }
+) {
+}

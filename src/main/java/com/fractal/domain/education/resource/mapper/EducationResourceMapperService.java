@@ -7,11 +7,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface EducationResourceMapperService {
     ResourceResponse toDTO(EducationResource resource);
+
     EducationResource toEntity(ResourceRequest dto);
+
     EducationResource toEntity(MultipartFile file, String resourceStoragePath);
+
     EducationResource toEntity(EducationResource resource, MultipartFile file, String resourceStoragePath);
+
     EducationResource toEntity(EducationResource resource, ResourceRequest dto);
-    ResourceRequest fileToRequest(MultipartFile file,String url);
+
+    ResourceRequest fileToRequest(MultipartFile file, String url);
+
     EducationResource copy(EducationResource educationResource);
 }
 

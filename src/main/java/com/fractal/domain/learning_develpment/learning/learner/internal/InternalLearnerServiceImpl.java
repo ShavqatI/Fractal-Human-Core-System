@@ -38,10 +38,9 @@ class InternalLearnerServiceImpl implements InternalLearnerService {
     @Override
     public InternalLearner update(Long id, InternalLearnerRequest dto) {
         try {
-            InternalLearner participant = mapperService.toEntity(findById(id),dto);
+            InternalLearner participant = mapperService.toEntity(findById(id), dto);
             return save(participant);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -50,7 +49,7 @@ class InternalLearnerServiceImpl implements InternalLearnerService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      learnerRepository.delete(findById(id));
+        learnerRepository.delete(findById(id));
     }
 
     @Override
@@ -67,13 +66,12 @@ class InternalLearnerServiceImpl implements InternalLearnerService {
     private InternalLearner save(InternalLearner trainer) {
         try {
             return learnerRepository.save(trainer);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private InternalLearner findById(Long id) {
-        return learnerRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Internal Learner with id: " + id + " not found"));
+        return learnerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Internal Learner with id: " + id + " not found"));
     }
 }

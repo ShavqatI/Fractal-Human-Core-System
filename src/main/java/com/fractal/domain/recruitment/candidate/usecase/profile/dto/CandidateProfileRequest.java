@@ -20,4 +20,5 @@ public record CandidateProfileRequest(
         Long genderId,
         @NotEmpty
         List<ContactRequest> contacts
-) { }
+) {
+}

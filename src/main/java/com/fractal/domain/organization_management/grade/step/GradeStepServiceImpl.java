@@ -31,7 +31,6 @@ public class GradeStepServiceImpl implements GradeStepService {
     }
 
 
-
     @Override
     public List<GradeStep> getAllByGradeId(Long gradeId) {
         return gradeStepRepository.findAllByGradeId(gradeId);
@@ -39,7 +38,7 @@ public class GradeStepServiceImpl implements GradeStepService {
 
     @Override
     public GradeStep getById(Long gradeId, Long id) {
-        return gradeStepRepository.findByGradeIdAndId(gradeId,id).orElseThrow(()-> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
+        return gradeStepRepository.findByGradeIdAndId(gradeId, id).orElseThrow(() -> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
     }
 
     @Override
@@ -48,8 +47,8 @@ public class GradeStepServiceImpl implements GradeStepService {
         var grade = gradeService.getById(gradeId);
         var step = grade.getSteps()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
-        step = gradeStepRepository.save(mapperService.toEntity(step,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
+        step = gradeStepRepository.save(mapperService.toEntity(step, dto));
         gradeService.save(grade);
         return step;
     }
@@ -59,7 +58,7 @@ public class GradeStepServiceImpl implements GradeStepService {
         var grade = gradeService.getById(gradeId);
         var step = grade.getSteps()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
         grade.removeStep(step);
         gradeService.save(grade);
     }

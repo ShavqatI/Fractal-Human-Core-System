@@ -17,6 +17,7 @@ class ActionMapperServiceImpl implements ActionMapperService {
     private final ActionCategoryService actionCategoryService;
     private final ActionTypeService actionTypeService;
     private final LayoutLabelService layoutLabelService;
+
     @Override
     public ActionResponse toDTO(Action action) {
         return new ActionResponse(
@@ -42,12 +43,12 @@ class ActionMapperServiceImpl implements ActionMapperService {
 
     @Override
     public Action toEntity(ActionRequest dto) {
-        return mapToEntity( new Action(),dto);
+        return mapToEntity(new Action(), dto);
     }
 
     @Override
     public Action toEntity(Action action, ActionRequest dto) {
-        return mapToEntity(action,dto);
+        return mapToEntity(action, dto);
     }
 
     private Action mapToEntity(Action action, ActionRequest dto) {

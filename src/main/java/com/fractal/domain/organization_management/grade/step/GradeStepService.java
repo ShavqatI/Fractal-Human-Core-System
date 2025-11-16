@@ -8,9 +8,14 @@ import java.util.List;
 public interface GradeStepService {
 
     GradeStep create(Long organizationId, GradeStepRequest dto);
-    GradeStep getById(Long organizationId,Long id);
+
+    GradeStep getById(Long organizationId, Long id);
+
     List<GradeStep> getAllByGradeId(Long gradeId);
-    GradeStep update(Long gradeId,Long id, GradeStepRequest dto);
+
+    GradeStep update(Long gradeId, Long id, GradeStepRequest dto);
+
     void delete(Long organizationId, Long id);
+
     GradeStepResponse toDTO(GradeStep step);
 }

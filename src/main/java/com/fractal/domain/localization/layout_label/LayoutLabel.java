@@ -23,7 +23,7 @@ public class LayoutLabel extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "layoutLabel",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "layoutLabel", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<LayoutLabelDetail> layoutLabelDetails = new ArrayList<>();
 
     @Transactional
@@ -32,6 +32,7 @@ public class LayoutLabel extends AbstractEntity {
         detail.setLayoutLabel(this);
         layoutLabelDetails.add(detail);
     }
+
     @Transactional
     public void removeDetail(LayoutLabelDetail detail) {
         if (layoutLabelDetails != null && !layoutLabelDetails.isEmpty())

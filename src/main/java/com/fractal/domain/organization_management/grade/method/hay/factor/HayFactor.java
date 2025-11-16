@@ -23,11 +23,11 @@ public class HayFactor extends Auditable {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hay_factor_type_id",referencedColumnName = "id")
+    @JoinColumn(name = "hay_factor_type_id", referencedColumnName = "id")
     private HayFactorType hayFactorType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "measurement_unit_id",referencedColumnName = "id")
+    @JoinColumn(name = "measurement_unit_id", referencedColumnName = "id")
     private MeasurementUnit measurementUnit;
 
     private String code;
@@ -41,9 +41,6 @@ public class HayFactor extends Auditable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
-
-
-
 
 
 }

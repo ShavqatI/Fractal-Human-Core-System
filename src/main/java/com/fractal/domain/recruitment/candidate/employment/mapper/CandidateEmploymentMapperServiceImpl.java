@@ -22,12 +22,12 @@ class CandidateEmploymentMapperServiceImpl implements CandidateEmploymentMapperS
 
     @Override
     public CandidateEmployment toEntity(ExternalEmploymentRequest dto) {
-        return mapToEntity(new CandidateEmployment(),dto);
+        return mapToEntity(new CandidateEmployment(), dto);
     }
 
     @Override
     public CandidateEmployment toEntity(CandidateEmployment employment, ExternalEmploymentRequest dto) {
-        return mapToEntity(employment,dto);
+        return mapToEntity(employment, dto);
     }
 
     private CandidateEmployment mapToEntity(CandidateEmployment employment, ExternalEmploymentRequest dto) {

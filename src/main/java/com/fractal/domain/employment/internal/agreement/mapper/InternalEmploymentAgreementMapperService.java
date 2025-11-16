@@ -6,7 +6,9 @@ import com.fractal.domain.employment.internal.agreement.dto.InternalEmploymentAg
 
 public interface InternalEmploymentAgreementMapperService {
     InternalEmploymentAgreementResponse toDTO(InternalEmploymentAgreement agreement);
+
     InternalEmploymentAgreement toEntity(InternalEmploymentAgreementRequest dto);
+
     InternalEmploymentAgreement toEntity(InternalEmploymentAgreement agreement, InternalEmploymentAgreementRequest dto);
 }
 

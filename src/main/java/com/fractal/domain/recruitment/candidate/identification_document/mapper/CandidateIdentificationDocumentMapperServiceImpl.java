@@ -21,12 +21,12 @@ class CandidateIdentificationDocumentMapperServiceImpl implements CandidateIdent
 
     @Override
     public CandidateIdentificationDocument toEntity(IdentificationDocumentRequest dto) {
-        return convert(new CandidateIdentificationDocument(),mapperService.toEntity(dto));
+        return convert(new CandidateIdentificationDocument(), mapperService.toEntity(dto));
     }
 
     @Override
     public CandidateIdentificationDocument toEntity(CandidateIdentificationDocument identificationDocument, IdentificationDocumentRequest dto) {
-        return convert(identificationDocument,mapperService.toEntity(identificationDocument,dto));
+        return convert(identificationDocument, mapperService.toEntity(identificationDocument, dto));
     }
 
     private CandidateIdentificationDocument convert(CandidateIdentificationDocument candidateIdentificationDocument, IdentificationDocument identificationDocument) {

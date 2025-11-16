@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface LearningTypeRepository extends JpaRepository<LearningType,Long> {
+interface LearningTypeRepository extends JpaRepository<LearningType, Long> {
     Optional<LearningType> findById(Long id);
+
     Optional<LearningType> findByCode(String code);
+
     List<LearningType> findAll();
 }

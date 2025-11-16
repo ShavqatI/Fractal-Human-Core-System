@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class GradeLevelController {
 
     private final GradeLevelService gradeLevelService;
+
     @PostMapping
     public ResponseEntity<GradeLevelResponse> create(@RequestBody @Valid GradeLevelRequest dto) {
         return new ResponseEntity<>(gradeLevelService.toDTO(gradeLevelService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<GradeLevelResponse>> getAll() {
         return ResponseEntity.ok(gradeLevelService.getAll().stream().map(gradeLevelService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<GradeLevelResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(gradeLevelService.toDTO(gradeLevelService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<GradeLevelResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(gradeLevelService.toDTO(gradeLevelService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<GradeLevelResponse> update(@PathVariable Long id, @RequestBody @Valid GradeLevelRequest dto) {
-      return  ResponseEntity.ok(gradeLevelService.toDTO(gradeLevelService.update(id, dto)));
+        return ResponseEntity.ok(gradeLevelService.toDTO(gradeLevelService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         gradeLevelService.deleteById(id);

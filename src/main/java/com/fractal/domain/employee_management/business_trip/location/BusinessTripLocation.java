@@ -27,7 +27,7 @@ public class BusinessTripLocation extends Auditable {
     protected Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "business_trip_location_type_id",referencedColumnName = "id")
+    @JoinColumn(name = "business_trip_location_type_id", referencedColumnName = "id")
     protected BusinessTripLocationType businessTripLocationType;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -39,10 +39,10 @@ public class BusinessTripLocation extends Auditable {
     protected LocalDateTime endTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id",referencedColumnName = "id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     protected Status status;
 
-    @OneToMany(mappedBy = "businessTripLocation", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "businessTripLocation", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BusinessTripLocationAddress> addresses = new ArrayList<>();
 
     public void addAddress(BusinessTripLocationAddress address) {
@@ -50,6 +50,7 @@ public class BusinessTripLocation extends Auditable {
         address.setBusinessTripLocation(this);
         addresses.add(address);
     }
+
     public void removeAddress(BusinessTripLocationAddress address) {
         if (addresses != null && !addresses.isEmpty()) {
             addresses.remove(address);

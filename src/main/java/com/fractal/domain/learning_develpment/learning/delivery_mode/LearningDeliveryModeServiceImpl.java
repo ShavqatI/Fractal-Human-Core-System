@@ -29,7 +29,7 @@ class LearningDeliveryModeServiceImpl implements LearningDeliveryModeService {
 
     @Override
     public LearningDeliveryMode getByCode(String code) {
-        return learningDeliveryModeRepository.findByCode(code).orElseThrow(()-> new ResourceWithCodeNotFoundException(this,code));
+        return learningDeliveryModeRepository.findByCode(code).orElseThrow(() -> new ResourceWithCodeNotFoundException(this, code));
     }
 
     @Override
@@ -44,8 +44,7 @@ class LearningDeliveryModeServiceImpl implements LearningDeliveryModeService {
             learningDeliveryMode.setCode(dto.code());
             learningDeliveryMode.setName(dto.name());
             return save(learningDeliveryMode);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -75,13 +74,12 @@ class LearningDeliveryModeServiceImpl implements LearningDeliveryModeService {
     private LearningDeliveryMode save(LearningDeliveryMode learningDeliveryMode) {
         try {
             return learningDeliveryModeRepository.save(learningDeliveryMode);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private LearningDeliveryMode findById(Long id) {
-        return learningDeliveryModeRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return learningDeliveryModeRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

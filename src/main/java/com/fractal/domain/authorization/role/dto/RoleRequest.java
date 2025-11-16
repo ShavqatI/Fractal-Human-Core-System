@@ -8,4 +8,5 @@ public record RoleRequest(
         String code,
         String name,
         List<RoleMenuRequest> menus
-) { }
+) {
+}

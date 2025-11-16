@@ -19,26 +19,32 @@ import java.util.stream.Collectors;
 public class PerformanceTypeController {
 
     private final PerformanceTypeService performanceTypeService;
+
     @PostMapping
     public ResponseEntity<PerformanceTypeResponse> create(@RequestBody @Valid PerformanceTypeRequest dto) {
         return new ResponseEntity<>(performanceTypeService.toDTO(performanceTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<PerformanceTypeResponse>> getAll() {
         return ResponseEntity.ok(performanceTypeService.getAll().stream().map(performanceTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<PerformanceTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(performanceTypeService.toDTO(performanceTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<PerformanceTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(performanceTypeService.toDTO(performanceTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<PerformanceTypeResponse> update(@PathVariable Long id, @RequestBody @Valid PerformanceTypeRequest dto) {
-      return  ResponseEntity.ok(performanceTypeService.toDTO(performanceTypeService.update(id, dto)));
+        return ResponseEntity.ok(performanceTypeService.toDTO(performanceTypeService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         performanceTypeService.deleteById(id);

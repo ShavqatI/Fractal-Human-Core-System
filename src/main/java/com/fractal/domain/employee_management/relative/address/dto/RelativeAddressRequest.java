@@ -23,4 +23,5 @@ public record RelativeAddressRequest(
         Double longitude,
         LocalDate startDate,
         LocalDate endDate
-) { }
+) {
+}

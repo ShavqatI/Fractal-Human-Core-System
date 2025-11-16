@@ -1,8 +1,5 @@
 package com.fractal.controller.integration.mapping;
 
-import com.fractal.domain.finance.currency.dto.CurrencyCompactResponse;
-import com.fractal.domain.finance.currency.dto.CurrencyRequest;
-import com.fractal.domain.finance.currency.dto.CurrencyResponse;
 import com.fractal.domain.integration.mapping.department.DepartmentMappingService;
 import com.fractal.domain.integration.mapping.department.dto.DepartmentMappingRequest;
 import com.fractal.domain.integration.mapping.department.dto.DepartmentMappingResponse;
@@ -27,20 +24,24 @@ public class DepartmentMappingController {
     public ResponseEntity<DepartmentMappingResponse> create(@RequestBody @Valid DepartmentMappingRequest dto) {
         return new ResponseEntity<>(departmentMappingService.toDTO(departmentMappingService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<DepartmentMappingResponse>> getAll() {
         return ResponseEntity.ok(departmentMappingService.getAll().stream().map(departmentMappingService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<DepartmentMappingResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(departmentMappingService.toDTO(departmentMappingService.getById(id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<DepartmentMappingResponse> update(@PathVariable Long id, @RequestBody @Valid DepartmentMappingRequest dto) {
-      return  ResponseEntity.ok(departmentMappingService.toDTO(departmentMappingService.update(id, dto)));
+        return ResponseEntity.ok(departmentMappingService.toDTO(departmentMappingService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         departmentMappingService.deleteById(id);

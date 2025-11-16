@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface IdentificationDocumentResourceRepository extends JpaRepository<IdentificationDocumentResource,Long> {
+public interface IdentificationDocumentResourceRepository extends JpaRepository<IdentificationDocumentResource, Long> {
 
     List<IdentificationDocumentResource> findAllByIdentificationDocumentId(Long identificationDocumentId);
+
     Optional<IdentificationDocumentResource> findByIdentificationDocumentIdAndId(Long identificationDocumentId, Long id);
 }

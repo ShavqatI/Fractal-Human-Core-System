@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface EmployeeLanguageSkillRepository extends JpaRepository<EmployeeLanguageSkill,Long> {
+interface EmployeeLanguageSkillRepository extends JpaRepository<EmployeeLanguageSkill, Long> {
 
     List<EmployeeLanguageSkill> findAllByEmployeeId(Long employeeId);
+
     Optional<EmployeeLanguageSkill> findByEmployeeIdAndId(Long employeeId, Long id);
 }

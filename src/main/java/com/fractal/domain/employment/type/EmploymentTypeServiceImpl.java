@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class EmploymentTypeServiceImpl implements EmploymentTypeService {
@@ -27,7 +28,7 @@ class EmploymentTypeServiceImpl implements EmploymentTypeService {
 
     @Override
     public EmploymentType getByCode(String code) {
-        return employmentTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
+        return employmentTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
     }
 
     @Override
@@ -42,15 +43,14 @@ class EmploymentTypeServiceImpl implements EmploymentTypeService {
             employmentType.setCode(dto.code());
             employmentType.setName(dto.name());
             return save(employmentType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      employmentTypeRepository.delete(findById(id));
+        employmentTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -82,14 +82,13 @@ class EmploymentTypeServiceImpl implements EmploymentTypeService {
     private EmploymentType save(EmploymentType employmentType) {
         try {
             return employmentTypeRepository.save(employmentType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private EmploymentType findById(Long id) {
-        return employmentTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Employment Type with id: " + id + " not found"));
+        return employmentTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employment Type with id: " + id + " not found"));
     }
 
 }

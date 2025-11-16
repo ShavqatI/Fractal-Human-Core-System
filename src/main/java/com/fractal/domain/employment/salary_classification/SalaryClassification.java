@@ -25,12 +25,12 @@ public class SalaryClassification extends Dictionary {
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private SalaryClassification parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<SalaryClassification> children = new ArrayList<>();
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id",referencedColumnName = "id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
     @Transactional

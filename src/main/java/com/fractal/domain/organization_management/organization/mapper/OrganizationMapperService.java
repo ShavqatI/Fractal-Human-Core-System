@@ -7,8 +7,11 @@ import com.fractal.domain.organization_management.organization.dto.OrganizationR
 
 public interface OrganizationMapperService {
     OrganizationResponse toDTO(Organization organization);
+
     OrganizationCompactResponse toCompactDTO(Organization organization);
+
     Organization toEntity(OrganizationRequest dto);
+
     Organization toEntity(Organization organization, OrganizationRequest dto);
 }
 

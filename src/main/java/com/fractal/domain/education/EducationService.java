@@ -11,6 +11,8 @@ public interface EducationService {
     Education update(Long id, Long educationId, EducationRequest dto);
     void delete(Long employeeId, Long id);*/
     Education getById(Long id);
+
     EducationResponse toDTO(Education education);
+
     Education save(Education education);
 }

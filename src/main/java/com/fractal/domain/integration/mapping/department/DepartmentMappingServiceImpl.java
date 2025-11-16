@@ -4,7 +4,6 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.integration.mapping.department.dto.DepartmentMappingRequest;
 import com.fractal.domain.integration.mapping.department.dto.DepartmentMappingResponse;
 import com.fractal.domain.organization_management.department.DepartmentService;
-import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -45,8 +44,7 @@ class DepartmentMappingServiceImpl implements DepartmentMappingService {
             departmentMapping.setReference(dto.reference());
             departmentMapping.setStatus(statusService.getById(dto.statusId()));
             return save(departmentMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -80,13 +78,12 @@ class DepartmentMappingServiceImpl implements DepartmentMappingService {
     private DepartmentMapping save(DepartmentMapping departmentMapping) {
         try {
             return departmentMappingRepository.save(departmentMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private DepartmentMapping findById(Long id) {
-        return departmentMappingRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return departmentMappingRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

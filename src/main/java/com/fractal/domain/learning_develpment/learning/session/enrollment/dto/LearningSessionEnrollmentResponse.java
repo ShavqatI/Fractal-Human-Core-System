@@ -12,4 +12,5 @@ public record LearningSessionEnrollmentResponse(
         LocalDateTime endTime,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) { }
+) {
+}

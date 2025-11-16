@@ -27,6 +27,7 @@ class ExternalEmploymentMapperServiceImpl implements ExternalEmploymentMapperSer
     private final EmploymentTypeService employmentTypeService;
     private final SeparationReasonMapperService separationReasonMapperService;
     private final EmploymentKindService employmentKindService;
+
     @Override
     public ExternalEmploymentResponse toDTO(ExternalEmployment employment) {
         return new ExternalEmploymentResponse(
@@ -52,6 +53,7 @@ class ExternalEmploymentMapperServiceImpl implements ExternalEmploymentMapperSer
                 employment.getCreatedDate()
         );
     }
+
     @Override
     public ExternalEmployment toEntity(ExternalEmploymentRequest dto) {
         return mapToEntity(new ExternalEmployment(), dto);
@@ -95,7 +97,7 @@ class ExternalEmploymentMapperServiceImpl implements ExternalEmploymentMapperSer
         employment.setResponsibilities(dto.responsibilities());
         employment.setAchievements(dto.achievements());
         employment.setStatus(statusService.getById(dto.statusId()));
-        dto.separationReasons().forEach(separationReason-> employment.addSeparationReason(separationReasonMapperService.toEntity(separationReason)));
+        dto.separationReasons().forEach(separationReason -> employment.addSeparationReason(separationReasonMapperService.toEntity(separationReason)));
         return employment;
     }
 }

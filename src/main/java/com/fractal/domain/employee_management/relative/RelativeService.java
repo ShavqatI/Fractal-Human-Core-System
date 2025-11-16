@@ -7,16 +7,21 @@ import java.util.List;
 
 
 public interface RelativeService {
-    Relative create(Long employeeId,RelativeRequest dto);
+    Relative create(Long employeeId, RelativeRequest dto);
+
     Relative getById(Long id);
+
     List<Relative> getAllByEmployeeId(Long employeeId);
-    Relative getById(Long employeeId ,Long id);
-    Relative update(Long employeeId,Long id, RelativeRequest dto);
-    void delete(Long employeeId,Long id);
+
+    Relative getById(Long employeeId, Long id);
+
+    Relative update(Long employeeId, Long id, RelativeRequest dto);
+
+    void delete(Long employeeId, Long id);
+
     RelativeResponse toDTO(Relative relative);
+
     Relative save(Relative relative);
-
-
 
 
 }

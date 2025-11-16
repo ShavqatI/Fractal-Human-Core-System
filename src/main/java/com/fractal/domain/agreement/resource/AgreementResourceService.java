@@ -8,9 +8,14 @@ import java.util.List;
 public interface AgreementResourceService {
 
     AgreementResource create(Long agreementId, MultipartFile file);
+
     List<AgreementResource> getAllByAgreementId(Long agreementId);
-    AgreementResource getById(Long agreementId , Long id);
+
+    AgreementResource getById(Long agreementId, Long id);
+
     AgreementResource update(Long agreementId, Long id, MultipartFile file);
-    void delete(Long agreementId,Long id);
+
+    void delete(Long agreementId, Long id);
+
     ResourceResponse toDTO(AgreementResource resource);
 }

@@ -6,7 +6,9 @@ import com.fractal.domain.testing.test.session.dto.TestSessionResponse;
 
 public interface TestSessionMapperService {
     TestSessionResponse toDTO(TestSession testSession);
+
     TestSession toEntity(TestSessionRequest dto);
+
     TestSession toEntity(TestSession testSession, TestSessionRequest dto);
 }
 

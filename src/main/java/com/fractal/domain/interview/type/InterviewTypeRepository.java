@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface InterviewTypeRepository extends JpaRepository<InterviewType,Long> {
+interface InterviewTypeRepository extends JpaRepository<InterviewType, Long> {
     Optional<InterviewType> findById(Long id);
+
     Optional<InterviewType> findByCode(String code);
+
     List<InterviewType> findAll();
 }

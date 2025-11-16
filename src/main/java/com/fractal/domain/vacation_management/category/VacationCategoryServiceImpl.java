@@ -27,7 +27,7 @@ public class VacationCategoryServiceImpl implements VacationCategoryService {
 
     @Override
     public VacationCategory getByCode(String code) {
-        return vacationCategoryRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Vacation Category with code: " + code + " not found"));
+        return vacationCategoryRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Vacation Category with code: " + code + " not found"));
 
     }
 
@@ -44,15 +44,14 @@ public class VacationCategoryServiceImpl implements VacationCategoryService {
             vacationCategory.setName(dto.name());
             vacationCategory.setDescription(dto.description());
             return save(vacationCategory);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       vacationCategoryRepository.delete(findById(id));
+        vacationCategoryRepository.delete(findById(id));
     }
 
     @Override
@@ -77,14 +76,13 @@ public class VacationCategoryServiceImpl implements VacationCategoryService {
     private VacationCategory save(VacationCategory vacationCategory) {
         try {
             return vacationCategoryRepository.save(vacationCategory);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private VacationCategory findById(Long id) {
-        return vacationCategoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Vacation Category with id: " + id + " not found"));
+        return vacationCategoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Vacation Category with id: " + id + " not found"));
     }
 
 }

@@ -43,10 +43,9 @@ class AbsenceServiceImpl implements AbsenceService {
     @Transactional
     public Absence update(Long id, AbsenceRequest dto) {
         try {
-            Absence absence = mapperService.toEntity(findById(id),dto);
+            Absence absence = mapperService.toEntity(findById(id), dto);
             return save(absence);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -55,7 +54,7 @@ class AbsenceServiceImpl implements AbsenceService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      absenceRepository.delete(findById(id));
+        absenceRepository.delete(findById(id));
     }
 
     @Override
@@ -66,13 +65,12 @@ class AbsenceServiceImpl implements AbsenceService {
     private Absence save(Absence absence) {
         try {
             return absenceRepository.save(absence);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Absence findById(Long id) {
-        return absenceRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Absence with id: " + id + " not found"));
+        return absenceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Absence with id: " + id + " not found"));
     }
 }

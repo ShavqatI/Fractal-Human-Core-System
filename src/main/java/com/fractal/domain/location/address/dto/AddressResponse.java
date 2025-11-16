@@ -22,4 +22,5 @@ public record AddressResponse(
         LocalDate endDate,
         LocalDateTime createdDate,
         LocalDateTime updatedDate
-) { }
+) {
+}

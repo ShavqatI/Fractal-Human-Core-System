@@ -75,12 +75,12 @@ class MilitaryServiceServiceImpl implements MilitaryServiceService {
     public MilitaryService save(MilitaryService militaryService) {
         try {
             return militaryServiceRepository.save(militaryService);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
+
     private MilitaryService findById(Long id) {
-        return militaryServiceRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Military service  with id: " + id + " not found"));
+        return militaryServiceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Military service  with id: " + id + " not found"));
     }
 }

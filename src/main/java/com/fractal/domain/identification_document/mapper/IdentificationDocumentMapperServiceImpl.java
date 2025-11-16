@@ -49,12 +49,12 @@ class IdentificationDocumentMapperServiceImpl implements IdentificationDocumentM
 
     @Override
     public IdentificationDocument toEntity(IdentificationDocumentRequest dto) {
-        return mapToEntity(new IdentificationDocument(),dto);
+        return mapToEntity(new IdentificationDocument(), dto);
     }
 
     @Override
     public IdentificationDocument toEntity(IdentificationDocument identificationDocument, IdentificationDocumentRequest dto) {
-       return mapToEntity(identificationDocument,dto);
+        return mapToEntity(identificationDocument, dto);
     }
 
     @Override
@@ -84,7 +84,7 @@ class IdentificationDocumentMapperServiceImpl implements IdentificationDocumentM
         identificationDocument.setIssueOrganization(dto.issueOrganization());
         identificationDocument.setIssueOrganizationAddress(dto.issueOrganizationAddress());
         identificationDocument.setStatus(statusService.getById(dto.statusId()));
-        dto.files().forEach(file-> identificationDocument.addResource((IdentificationDocumentResource) resourceMapperService.toEntity(file,null)));
+        dto.files().forEach(file -> identificationDocument.addResource((IdentificationDocumentResource) resourceMapperService.toEntity(file, null)));
         return identificationDocument;
     }
 

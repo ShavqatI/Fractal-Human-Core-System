@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class RelationTypeServiceImpl implements RelationTypeService {
@@ -26,7 +27,7 @@ class RelationTypeServiceImpl implements RelationTypeService {
 
     @Override
     public RelationType getByCode(String code) {
-        return relationTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
+        return relationTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class RelationTypeServiceImpl implements RelationTypeService {
             relationType.setCode(dto.code());
             relationType.setName(dto.name());
             return save(relationType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      relationTypeRepository.delete(findById(id));
+        relationTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class RelationTypeServiceImpl implements RelationTypeService {
     private RelationType save(RelationType relationType) {
         try {
             return relationTypeRepository.save(relationType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private RelationType findById(Long id) {
-        return relationTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Relation Type with id: " + id + " not found"));
+        return relationTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Relation Type with id: " + id + " not found"));
     }
 
 }

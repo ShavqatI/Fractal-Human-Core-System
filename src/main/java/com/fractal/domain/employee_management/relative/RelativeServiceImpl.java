@@ -22,12 +22,12 @@ class RelativeServiceImpl implements RelativeService {
 
     @Override
     @Transactional
-    public Relative create(Long employeeId,RelativeRequest dto) {
+    public Relative create(Long employeeId, RelativeRequest dto) {
         var employee = employeeService.getById(employeeId);
         var relative = relativeMapperService.toEntity(dto);
         employee.addRelative(relative);
         employeeService.save(employee);
-       return relative;
+        return relative;
     }
 
     @Override
@@ -42,27 +42,28 @@ class RelativeServiceImpl implements RelativeService {
 
     @Override
     public Relative getById(Long employeeId, Long id) {
-        return relativeRepository.findByEmployeeIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Relative with id: " + id + " not found"));
+        return relativeRepository.findByEmployeeIdAndId(employeeId, id).orElseThrow(() -> new ResourceNotFoundException("Relative with id: " + id + " not found"));
     }
 
     @Override
     @Transactional
-    public Relative update(Long employeeId,Long id, RelativeRequest dto) {
+    public Relative update(Long employeeId, Long id, RelativeRequest dto) {
         var employee = employeeService.getById(employeeId);
         var relative = employee.getRelatives()
                 .stream()
-                .filter(r-> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Relative with id: " + id + " not found"));
-        relative = relativeRepository.save(relativeMapperService.toEntity(relative,dto));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Relative with id: " + id + " not found"));
+        relative = relativeRepository.save(relativeMapperService.toEntity(relative, dto));
         employeeService.save(employee);
-       return relative;
+        return relative;
     }
+
     @Override
     @Transactional
-    public void delete(Long employeeId,Long id) {
+    public void delete(Long employeeId, Long id) {
         var employee = employeeService.getById(employeeId);
         var relative = employee.getRelatives()
                 .stream()
-                .filter(r-> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Relative with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Relative with id: " + id + " not found"));
         employee.removeRelative(relative);
         relativeRepository.delete(relative);
         employeeService.save(employee);
@@ -77,15 +78,14 @@ class RelativeServiceImpl implements RelativeService {
     public Relative save(Relative relative) {
         try {
             return relativeRepository.save(relative);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
 
     private Relative findById(Long id) {
-        return relativeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Relative with id: " + id + " not found"));
+        return relativeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Relative with id: " + id + " not found"));
     }
 
 }

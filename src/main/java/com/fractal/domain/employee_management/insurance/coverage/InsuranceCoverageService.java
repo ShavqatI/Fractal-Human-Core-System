@@ -8,11 +8,17 @@ import java.util.List;
 public interface InsuranceCoverageService {
 
     InsuranceCoverage create(Long insuranceId, InsuranceCoverageRequest dto);
+
     List<InsuranceCoverage> getAllByInsuranceId(Long insuranceId);
-    InsuranceCoverage getById(Long insuranceId , Long id);
+
+    InsuranceCoverage getById(Long insuranceId, Long id);
+
     InsuranceCoverage getById(Long id);
+
     InsuranceCoverage update(Long insuranceId, Long id, InsuranceCoverageRequest dto);
-    void delete(Long insuranceId,Long id);
+
+    void delete(Long insuranceId, Long id);
+
     InsuranceCoverageResponse toDTO(InsuranceCoverage coverage);
 
 }

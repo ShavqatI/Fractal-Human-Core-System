@@ -14,9 +14,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 class RequiredExperienceServiceImpl implements RequiredExperienceService {
-     private final RequiredExperienceRepository requiredExperienceRepository;
-     private final RequiredExperienceMapperService mapperService;
-     private final JobDescriptionService jobDescriptionService;
+    private final RequiredExperienceRepository requiredExperienceRepository;
+    private final RequiredExperienceMapperService mapperService;
+    private final JobDescriptionService jobDescriptionService;
 
     @Override
     @Transactional
@@ -35,7 +35,7 @@ class RequiredExperienceServiceImpl implements RequiredExperienceService {
 
     @Override
     public RequiredExperience getById(Long jobDescriptionId, Long id) {
-        return requiredExperienceRepository.findByJobDescriptionIdAndId(jobDescriptionId,id).orElseThrow(()-> new ResourceNotFoundException("Required Experience with id: " + id + " not found"));
+        return requiredExperienceRepository.findByJobDescriptionIdAndId(jobDescriptionId, id).orElseThrow(() -> new ResourceNotFoundException("Required Experience with id: " + id + " not found"));
     }
 
     @Override
@@ -44,8 +44,8 @@ class RequiredExperienceServiceImpl implements RequiredExperienceService {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         var requiredExperience = jobDescription.getRequiredExperiences().stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Required Experience with id: " + id + " not found"));
-        requiredExperience = requiredExperienceRepository.save(mapperService.toEntity(requiredExperience,dto));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Required Experience with id: " + id + " not found"));
+        requiredExperience = requiredExperienceRepository.save(mapperService.toEntity(requiredExperience, dto));
         jobDescriptionService.save(jobDescription);
         return requiredExperience;
     }
@@ -56,7 +56,7 @@ class RequiredExperienceServiceImpl implements RequiredExperienceService {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         var requiredExperience = jobDescription.getRequiredExperiences().stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Required Experience with id: " + id + " not found"));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Required Experience with id: " + id + " not found"));
         jobDescription.removeRequiredExperience(requiredExperience);
         jobDescriptionService.save(jobDescription);
     }

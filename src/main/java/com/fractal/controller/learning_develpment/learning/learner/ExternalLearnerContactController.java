@@ -22,24 +22,27 @@ public class ExternalLearnerContactController {
 
     @PostMapping()
     public ResponseEntity<ContactResponse> create(@PathVariable Long learnerId, @RequestBody @Valid ContactRequest dto) {
-        return new ResponseEntity<>(contactService.toDTO(contactService.create(learnerId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(contactService.toDTO(contactService.create(learnerId, dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<ContactResponse>> getAll(@PathVariable Long learnerId) {
         return ResponseEntity.ok(contactService.getAllByExternalLearnerId(learnerId).stream().map(contactService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ContactResponse> getById(@PathVariable Long learnerId, @PathVariable Long id) {
-        return ResponseEntity.ok(contactService.toDTO(contactService.getById(learnerId,id)));
+        return ResponseEntity.ok(contactService.toDTO(contactService.getById(learnerId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<ContactResponse> update(@PathVariable Long learnerId, @PathVariable Long id, @RequestBody @Valid ContactRequest dto) {
-        return ResponseEntity.ok(contactService.toDTO(contactService.update(learnerId,id, dto)));
+        return ResponseEntity.ok(contactService.toDTO(contactService.update(learnerId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long learnerId, @PathVariable Long id) {
-        contactService.delete(learnerId,id);
+        contactService.delete(learnerId, id);
         return ResponseEntity.noContent().build();
     }
 

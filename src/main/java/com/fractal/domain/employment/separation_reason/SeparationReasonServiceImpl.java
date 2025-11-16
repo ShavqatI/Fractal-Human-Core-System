@@ -36,7 +36,7 @@ class SeparationReasonServiceImpl implements SeparationReasonService {
 
     @Override
     public SeparationReason getById(Long employmentId, Long id) {
-        return separationReasonRepository.findByEmploymentIdAndId(employmentId,id).orElseThrow(()-> new ResourceNotFoundException("Separation Reason with id: " + id + " not found"));
+        return separationReasonRepository.findByEmploymentIdAndId(employmentId, id).orElseThrow(() -> new ResourceNotFoundException("Separation Reason with id: " + id + " not found"));
     }
 
     @Override
@@ -44,8 +44,8 @@ class SeparationReasonServiceImpl implements SeparationReasonService {
         var workExperience = employmentService.getById(employmentId);
         var separationReason = workExperience.getSeparationReasons()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Separation Reason  with id: " + id + " not found"));
-        separationReason = separationReasonRepository.save(mapperService.toEntity(separationReason,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Separation Reason  with id: " + id + " not found"));
+        separationReason = separationReasonRepository.save(mapperService.toEntity(separationReason, dto));
         employmentService.save(workExperience);
         return separationReason;
 
@@ -56,7 +56,7 @@ class SeparationReasonServiceImpl implements SeparationReasonService {
         var workExperience = employmentService.getById(employmentId);
         var separationReason = workExperience.getSeparationReasons()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Separation Reason  with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Separation Reason  with id: " + id + " not found"));
         workExperience.removeSeparationReason(separationReason);
         employmentService.save(workExperience);
     }

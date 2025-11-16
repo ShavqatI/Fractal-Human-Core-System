@@ -9,4 +9,5 @@ public record VacationAccrualPeriodRecordRequest(
         Integer utilizedDays,
         Integer remainingDays,
         Long statusId
-) {}
+) {
+}

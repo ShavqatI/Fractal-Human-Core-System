@@ -31,7 +31,6 @@ public class CandidateAddressServiceImpl implements CandidateAddressService {
     }
 
 
-
     @Override
     public List<CandidateAddress> getAllByCandidateId(Long candidateId) {
         return candidateAddressRepository.findAllByCandidateId(candidateId);
@@ -39,7 +38,7 @@ public class CandidateAddressServiceImpl implements CandidateAddressService {
 
     @Override
     public CandidateAddress getById(Long candidateId, Long id) {
-        return candidateAddressRepository.findByCandidateIdAndId(candidateId,id).orElseThrow(()-> new ResourceNotFoundException("Candidate address with id: " + id + " not found"));
+        return candidateAddressRepository.findByCandidateIdAndId(candidateId, id).orElseThrow(() -> new ResourceNotFoundException("Candidate address with id: " + id + " not found"));
     }
 
     @Override
@@ -48,8 +47,8 @@ public class CandidateAddressServiceImpl implements CandidateAddressService {
         var candidate = candidateService.getById(organizationId);
         var address = candidate.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate address with id: " + id + " not found"));
-        address = candidateAddressRepository.save(addressMapperService.toEntity(address,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Candidate address with id: " + id + " not found"));
+        address = candidateAddressRepository.save(addressMapperService.toEntity(address, dto));
         candidateService.save(candidate);
         return address;
     }
@@ -59,7 +58,7 @@ public class CandidateAddressServiceImpl implements CandidateAddressService {
         var candidate = candidateService.getById(candidateId);
         var address = candidate.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate address with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Candidate address with id: " + id + " not found"));
         candidate.removeAddress(address);
         candidateService.save(candidate);
     }

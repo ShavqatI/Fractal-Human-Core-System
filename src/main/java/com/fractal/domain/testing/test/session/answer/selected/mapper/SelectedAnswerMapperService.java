@@ -6,7 +6,9 @@ import com.fractal.domain.testing.test.session.answer.selected.dto.SelectedAnswe
 
 public interface SelectedAnswerMapperService {
     SelectedAnswerResponse toDTO(SelectedAnswer selectedAnswer);
+
     SelectedAnswer toEntity(SelectedAnswerRequest dto);
+
     SelectedAnswer toEntity(SelectedAnswer selectedAnswer, SelectedAnswerRequest dto);
 }
 

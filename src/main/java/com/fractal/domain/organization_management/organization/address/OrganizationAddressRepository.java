@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 interface OrganizationAddressRepository extends JpaRepository<OrganizationAddress, Long> {
     List<OrganizationAddress> findAllByOrganizationId(Long organizationId);
+
     Optional<OrganizationAddress> findByOrganizationIdAndId(Long organizationId, Long id);
 }

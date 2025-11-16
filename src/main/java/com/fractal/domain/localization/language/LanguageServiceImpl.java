@@ -29,7 +29,7 @@ class LanguageServiceImpl implements LanguageService {
 
     @Override
     public Language getByCode(String code) {
-        return languageRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Language with code: " + code + " not found"));
+        return languageRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Language with code: " + code + " not found"));
     }
 
     @Override
@@ -44,8 +44,7 @@ class LanguageServiceImpl implements LanguageService {
             language.setCode(dto.code());
             language.setName(dto.name());
             return save(language);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -76,13 +75,12 @@ class LanguageServiceImpl implements LanguageService {
     private Language save(Language language) {
         try {
             return languageRepository.save(language);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Language findById(Long id) {
-        return languageRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Language with id: " + id + " not found"));
+        return languageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Language with id: " + id + " not found"));
     }
 }

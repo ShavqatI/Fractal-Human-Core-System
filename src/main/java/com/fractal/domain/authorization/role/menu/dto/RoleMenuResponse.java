@@ -12,4 +12,5 @@ public record RoleMenuResponse(
         LocalDateTime createdDate,
         LocalDateTime updatedDate
 
-) { }
+) {
+}

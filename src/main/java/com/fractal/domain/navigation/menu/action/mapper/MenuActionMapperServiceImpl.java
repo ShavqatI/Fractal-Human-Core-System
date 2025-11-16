@@ -20,7 +20,7 @@ class MenuActionMapperServiceImpl implements MenuActionMapperService {
     public MenuActionResponse toDTO(MenuAction menuAction) {
         return new MenuActionResponse(
                 menuAction.getId(),
-                new MenuActionResponse.Menu(menuAction.getMenu().getId(),menuAction.getMenu().getName()),
+                new MenuActionResponse.Menu(menuAction.getMenu().getId(), menuAction.getMenu().getName()),
                 actionService.toCompactDTO(menuAction.getAction()),
                 statusService.toCompactDTO(menuAction.getStatus()),
                 menuAction.getCreatedDate()
@@ -30,12 +30,12 @@ class MenuActionMapperServiceImpl implements MenuActionMapperService {
 
     @Override
     public MenuAction toEntity(MenuActionRequest dto) {
-        return mapToEntity(new MenuAction(),dto);
+        return mapToEntity(new MenuAction(), dto);
     }
 
     @Override
     public MenuAction toEntity(MenuAction menuAction, MenuActionRequest dto) {
-        return mapToEntity(menuAction,dto);
+        return mapToEntity(menuAction, dto);
     }
 
     private MenuAction mapToEntity(MenuAction menuAction, MenuActionRequest dto) {

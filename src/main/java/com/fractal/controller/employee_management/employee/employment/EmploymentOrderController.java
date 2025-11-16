@@ -22,26 +22,29 @@ public class EmploymentOrderController {
 
     @PostMapping()
     public ResponseEntity<InternalEmploymentOrderResponse> create(@PathVariable Long employmentId, @RequestBody @Valid InternalEmploymentOrderRequest dto) {
-        return new ResponseEntity<>(orderService.toDTO(orderService.create(employmentId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(orderService.toDTO(orderService.create(employmentId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<InternalEmploymentOrderResponse>> getAll(@PathVariable Long employmentId) {
         return ResponseEntity.ok(orderService.getAllByInternalEmploymentId(employmentId).stream().map(orderService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<InternalEmploymentOrderResponse> getById(@PathVariable Long employmentId, @PathVariable Long id) {
-        return ResponseEntity.ok(orderService.toDTO(orderService.getById(employmentId,id)));
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<InternalEmploymentOrderResponse> update(@PathVariable Long employmentId, @PathVariable Long id, @RequestBody @Valid InternalEmploymentOrderRequest dto) {
-        return ResponseEntity.ok(orderService.toDTO(orderService.update(employmentId,id, dto)));
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long employmentId, @PathVariable Long id) {
-        orderService.delete(employmentId,id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(orderService.toDTO(orderService.getById(employmentId, id)));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<InternalEmploymentOrderResponse> update(@PathVariable Long employmentId, @PathVariable Long id, @RequestBody @Valid InternalEmploymentOrderRequest dto) {
+        return ResponseEntity.ok(orderService.toDTO(orderService.update(employmentId, id, dto)));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long employmentId, @PathVariable Long id) {
+        orderService.delete(employmentId, id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

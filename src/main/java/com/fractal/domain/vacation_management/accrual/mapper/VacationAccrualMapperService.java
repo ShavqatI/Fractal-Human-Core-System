@@ -6,7 +6,9 @@ import com.fractal.domain.vacation_management.accrual.dto.VacationAccrualRespons
 
 public interface VacationAccrualMapperService {
     VacationAccrualResponse toDTO(VacationAccrual accrual);
+
     VacationAccrual toEntity(VacationAccrualRequest dto);
+
     VacationAccrual toEntity(VacationAccrual accrual, VacationAccrualRequest dto);
 }
 

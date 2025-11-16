@@ -37,7 +37,7 @@ public class InsuranceProviderContactServiceImpl implements InsuranceProviderCon
 
     @Override
     public InsuranceProviderContact getById(Long insuranceProviderId, Long id) {
-        return contactRepository.findByInsuranceProviderIdAndId(insuranceProviderId,id).orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        return contactRepository.findByInsuranceProviderIdAndId(insuranceProviderId, id).orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
     }
 
     @Override
@@ -46,8 +46,8 @@ public class InsuranceProviderContactServiceImpl implements InsuranceProviderCon
         var insuranceProvider = insuranceProviderContactService.getById(insuranceProviderId);
         var contact = insuranceProvider.getContacts()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate contact with id: " + id + " not found"));
-        contact = contactMapperService.toEntity(contact,dto);
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Candidate contact with id: " + id + " not found"));
+        contact = contactMapperService.toEntity(contact, dto);
         contactRepository.save(contact);
         insuranceProviderContactService.save(insuranceProvider);
         return contact;
@@ -59,7 +59,7 @@ public class InsuranceProviderContactServiceImpl implements InsuranceProviderCon
         var insuranceProvider = insuranceProviderContactService.getById(insuranceProviderId);
         var contact = insuranceProvider.getContacts()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate contact with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Candidate contact with id: " + id + " not found"));
         insuranceProvider.removeContact(contact);
         insuranceProviderContactService.save(insuranceProvider);
     }

@@ -8,4 +8,5 @@ public record LearningSessionEnrollmentRequest(
         LocalDateTime endTime,
         Long statusId
 
-) { }
+) {
+}

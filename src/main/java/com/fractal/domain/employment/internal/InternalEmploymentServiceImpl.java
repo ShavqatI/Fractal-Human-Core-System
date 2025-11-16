@@ -38,10 +38,9 @@ class InternalEmploymentServiceImpl implements InternalEmploymentService {
     @Transactional
     public InternalEmployment update(Long id, InternalEmploymentRequest dto) {
         try {
-            InternalEmployment employment = mapperService.toEntity(findById(id),dto);
+            InternalEmployment employment = mapperService.toEntity(findById(id), dto);
             return save(employment);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -50,7 +49,7 @@ class InternalEmploymentServiceImpl implements InternalEmploymentService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      employmentRepository.delete(findById(id));
+        employmentRepository.delete(findById(id));
     }
 
     @Override
@@ -63,13 +62,12 @@ class InternalEmploymentServiceImpl implements InternalEmploymentService {
     public InternalEmployment save(InternalEmployment employment) {
         try {
             return employmentRepository.save(employment);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private InternalEmployment findById(Long id) {
-        return employmentRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return employmentRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

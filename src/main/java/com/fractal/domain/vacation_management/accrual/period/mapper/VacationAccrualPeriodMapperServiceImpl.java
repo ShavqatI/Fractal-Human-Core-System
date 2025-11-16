@@ -1,11 +1,9 @@
 package com.fractal.domain.vacation_management.accrual.period.mapper;
 
-import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriod;
 import com.fractal.domain.vacation_management.accrual.period.dto.VacationAccrualPeriodRequest;
 import com.fractal.domain.vacation_management.accrual.period.dto.VacationAccrualPeriodResponse;
-import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecord;
 import com.fractal.domain.vacation_management.accrual.period.record.mapper.VacationAccrualPeriodRecordMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +18,7 @@ import static java.util.Collections.emptyList;
 class VacationAccrualPeriodMapperServiceImpl implements VacationAccrualPeriodMapperService {
     private final StatusService statusService;
     private final VacationAccrualPeriodRecordMapperService recordMapperService;
+
     @Override
     public VacationAccrualPeriodResponse toDTO(VacationAccrualPeriod period) {
         return new VacationAccrualPeriodResponse(
@@ -38,19 +37,19 @@ class VacationAccrualPeriodMapperServiceImpl implements VacationAccrualPeriodMap
 
     @Override
     public VacationAccrualPeriod toEntity(VacationAccrualPeriodRequest dto) {
-        return mapToEntity(new VacationAccrualPeriod(),dto);
+        return mapToEntity(new VacationAccrualPeriod(), dto);
     }
 
     @Override
     public VacationAccrualPeriod toEntity(VacationAccrualPeriod period, VacationAccrualPeriodRequest dto) {
-        return mapToEntity(period,dto);
+        return mapToEntity(period, dto);
     }
 
     private VacationAccrualPeriod mapToEntity(VacationAccrualPeriod period, VacationAccrualPeriodRequest dto) {
         period.setStartDate(dto.startDate());
         period.setEndDate(dto.endDate());
         period.setStatus(statusService.getByCode("ACTIVE"));
-        dto.records().forEach(record-> period.addRecord(recordMapperService.toEntity(record)));
+        dto.records().forEach(record -> period.addRecord(recordMapperService.toEntity(record)));
         return period;
     }
 

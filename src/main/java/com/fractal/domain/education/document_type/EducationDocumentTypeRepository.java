@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface EducationDocumentTypeRepository extends JpaRepository<EducationDocumentType,Long> {
+interface EducationDocumentTypeRepository extends JpaRepository<EducationDocumentType, Long> {
     Optional<EducationDocumentType> findById(Long id);
+
     Optional<EducationDocumentType> findByCode(String code);
+
     List<EducationDocumentType> findAll();
 }

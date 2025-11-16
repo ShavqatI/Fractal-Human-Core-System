@@ -28,7 +28,7 @@ class GradeLevelServiceImpl implements GradeLevelService {
 
     @Override
     public GradeLevel getByCode(String code) {
-        return gradeLevelRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Gender with code: " + code + " not found"));
+        return gradeLevelRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Gender with code: " + code + " not found"));
     }
 
     @Override
@@ -43,8 +43,7 @@ class GradeLevelServiceImpl implements GradeLevelService {
             gradeLevel.setCode(dto.code());
             gradeLevel.setName(dto.name());
             return save(gradeLevel);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -74,13 +73,12 @@ class GradeLevelServiceImpl implements GradeLevelService {
     private GradeLevel save(GradeLevel gradeLevel) {
         try {
             return gradeLevelRepository.save(gradeLevel);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private GradeLevel findById(Long id) {
-        return gradeLevelRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Grade Level with id: " + id + " not found"));
+        return gradeLevelRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Grade Level with id: " + id + " not found"));
     }
 }

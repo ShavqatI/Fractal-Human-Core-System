@@ -21,4 +21,5 @@ public record InsuranceProviderAddressRequest(
         String house,
         String apartment
 
-) { }
+) {
+}

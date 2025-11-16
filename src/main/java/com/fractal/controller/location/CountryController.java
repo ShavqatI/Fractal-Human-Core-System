@@ -34,10 +34,12 @@ public class CountryController {
     public ResponseEntity<CountryResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(countryService.toDTO(countryService.getById(id)));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<CountryCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(countryService.getAll().stream().map(countryService::toCompactDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("compact/{id}")
     public ResponseEntity<CountryCompactResponse> getByIdCompact(@PathVariable Long id) {
         return ResponseEntity.ok(countryService.toCompactDTO(countryService.getById(id)));

@@ -36,7 +36,7 @@ class SalaryClassificationServiceImpl implements SalaryClassificationService {
 
     @Override
     public SalaryClassification getByCode(String code) {
-        return salaryClassificationRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Salary Classification with code: " + code + " not found"));
+        return salaryClassificationRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Salary Classification with code: " + code + " not found"));
     }
 
     @Override
@@ -53,15 +53,14 @@ class SalaryClassificationServiceImpl implements SalaryClassificationService {
             salaryClassification.setStatus(statusService.getById(dto.statusId()));
             dto.children().forEach(salaryClassificationRequest -> salaryClassification.addChild(toEntity(salaryClassificationRequest)));
             return save(salaryClassification);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      salaryClassificationRepository.delete(findById(id));
+        salaryClassificationRepository.delete(findById(id));
     }
 
     @Override
@@ -78,12 +77,12 @@ class SalaryClassificationServiceImpl implements SalaryClassificationService {
                         .stream()
                         .map(this::toDTO)
                         .collect(Collectors.toList()),
-                 statusService.toCompactDTO(salaryClassification.getStatus()),
+                statusService.toCompactDTO(salaryClassification.getStatus()),
                 salaryClassification.getCreatedDate()
         );
     }
 
-   @Override
+    @Override
     public SalaryClassificationCompactResponse toCompactDTO(SalaryClassification salaryClassification) {
         return new SalaryClassificationCompactResponse(
                 salaryClassification.getId(),
@@ -99,41 +98,40 @@ class SalaryClassificationServiceImpl implements SalaryClassificationService {
                 .status(statusService.getById(dto.statusId()))
                 .build();
         dto.children().forEach(salaryClassificationRequest -> separationReason.addChild(toEntity(salaryClassificationRequest)));
-    return separationReason;
+        return separationReason;
     }
 
     private SalaryClassification save(SalaryClassification salaryClassification) {
         try {
             return salaryClassificationRepository.save(salaryClassification);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private SalaryClassification findById(Long id) {
-        return salaryClassificationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Salary Classification with id: " + id + " not found"));
+        return salaryClassificationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Salary Classification with id: " + id + " not found"));
     }
 
     @Override
     public SalaryClassification addChild(Long id, SalaryClassificationRequest dto) {
         var separationReasonType = findById(id);
         separationReasonType.addChild(toEntity(dto));
-       return save(separationReasonType);
+        return save(separationReasonType);
     }
 
     @Override
     public SalaryClassification updateChild(Long id, Long childId, SalaryClassificationRequest dto) {
         var separationReasonType = findById(id);
-        var child = separationReasonType.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
-        update(child.getId(),dto);
+        var child = separationReasonType.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        update(child.getId(), dto);
         return save(separationReasonType);
     }
 
     @Override
     public void deleteChild(Long id, Long childId) {
         var separationReasonType = findById(id);
-        var child = separationReasonType.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        var child = separationReasonType.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
         separationReasonType.removeChild(child);
         save(separationReasonType);
     }

@@ -34,7 +34,7 @@ class LearningCategoryServiceImpl implements LearningCategoryService {
 
     @Override
     public LearningCategory getByCode(String code) {
-        return learningCategoryRepository.findByCode(code).orElseThrow(()-> new ResourceWithCodeNotFoundException(this,code));
+        return learningCategoryRepository.findByCode(code).orElseThrow(() -> new ResourceWithCodeNotFoundException(this, code));
     }
 
     @Override
@@ -50,8 +50,7 @@ class LearningCategoryServiceImpl implements LearningCategoryService {
             learningCategory.setName(dto.name());
             learningCategory.setDescription(dto.description());
             return save(learningCategory);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -97,15 +96,15 @@ class LearningCategoryServiceImpl implements LearningCategoryService {
     @Override
     public LearningCategory updateChild(Long learningCategoryId, Long id, LearningCategoryRequest dto) {
         var category = findById(learningCategoryId);
-        var child = category.getChildren().stream().filter(ch-> ch.getId().equals(id)).findFirst().orElseThrow(()->new ResourceWithIdNotFoundException(this,id));
-        update(child.getId(),dto);
+        var child = category.getChildren().stream().filter(ch -> ch.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        update(child.getId(), dto);
         return save(category);
     }
 
     @Override
     public void deleteChild(Long learningCategoryId, Long id) {
         var category = findById(learningCategoryId);
-        var child = category.getChildren().stream().filter(ch-> ch.getId().equals(id)).findFirst().orElseThrow(()->new ResourceWithIdNotFoundException(this,id));
+        var child = category.getChildren().stream().filter(ch -> ch.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         category.removeChild(child);
         save(category);
     }
@@ -116,20 +115,19 @@ class LearningCategoryServiceImpl implements LearningCategoryService {
                 .name(dto.name())
                 .description(dto.description())
                 .build();
-        dto.children().forEach(child->learningCategory.addChild(toEntity(child)));
-       return learningCategory;
+        dto.children().forEach(child -> learningCategory.addChild(toEntity(child)));
+        return learningCategory;
     }
 
     private LearningCategory save(LearningCategory learningCategory) {
         try {
             return learningCategoryRepository.save(learningCategory);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private LearningCategory findById(Long id) {
-        return learningCategoryRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return learningCategoryRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

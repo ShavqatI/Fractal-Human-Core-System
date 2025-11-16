@@ -6,6 +6,7 @@ import com.fractal.domain.contact.dto.ContactResponse;
 public interface ContactService {
 
     ContactResponse toDTO(Contact contact);
+
     Contact toEntity(ContactRequest dto);
 
 }

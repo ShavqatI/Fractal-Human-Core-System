@@ -55,6 +55,7 @@ public class Insurance extends AbstractEntity {
         coverage.setInsurance(this);
         coverages.add(coverage);
     }
+
     @Transactional
     public void removeCoverage(InsuranceCoverage coverage) {
         if (coverages != null && !coverages.isEmpty())

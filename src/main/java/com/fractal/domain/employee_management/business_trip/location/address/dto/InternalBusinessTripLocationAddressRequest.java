@@ -6,4 +6,5 @@ public record InternalBusinessTripLocationAddressRequest(
         @NotNull
         Long organizationId
 
-) implements BusinessTripLocationAddressRequest { }
+) implements BusinessTripLocationAddressRequest {
+}

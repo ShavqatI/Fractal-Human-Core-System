@@ -13,4 +13,5 @@ public record EmployeeMappingResponse(
         StatusCompactResponse status,
         LocalDateTime createdDate
 
-) { }
+) {
+}

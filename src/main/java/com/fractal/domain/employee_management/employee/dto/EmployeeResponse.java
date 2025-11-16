@@ -10,7 +10,6 @@ import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.education.language_skill.dto.LanguageSkillResponse;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
 import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceResponse;
-import com.fractal.domain.employee_management.professional_experience.dto.EmployeeProfessionalExperienceRequest;
 import com.fractal.domain.employee_management.professional_experience.dto.EmployeeProfessionalExperienceResponse;
 import com.fractal.domain.employee_management.relative.dto.RelativeResponse;
 import com.fractal.domain.employment.dto.EmploymentResponse;
@@ -47,4 +46,5 @@ public record EmployeeResponse(
         String profilePhoto,
         LocalDateTime createdDate
 
-){ }
+) {
+}

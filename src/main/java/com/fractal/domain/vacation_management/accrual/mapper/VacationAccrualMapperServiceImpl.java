@@ -39,18 +39,18 @@ class VacationAccrualMapperServiceImpl implements VacationAccrualMapperService {
 
     @Override
     public VacationAccrual toEntity(VacationAccrualRequest dto) {
-        return mapToEntity(new VacationAccrual(),dto);
+        return mapToEntity(new VacationAccrual(), dto);
     }
 
     @Override
     public VacationAccrual toEntity(VacationAccrual accrual, VacationAccrualRequest dto) {
-        return mapToEntity(accrual,dto);
+        return mapToEntity(accrual, dto);
     }
 
     private VacationAccrual mapToEntity(VacationAccrual accrual, VacationAccrualRequest dto) {
         accrual.setEmployee(employeeService.getById(dto.employeeId()));
         accrual.setStatus(statusService.getById(dto.statusId()));
-        dto.periods().forEach(period-> accrual.addPeriod(periodMapperService.toEntity(period)));
+        dto.periods().forEach(period -> accrual.addPeriod(periodMapperService.toEntity(period)));
         return accrual;
     }
 }

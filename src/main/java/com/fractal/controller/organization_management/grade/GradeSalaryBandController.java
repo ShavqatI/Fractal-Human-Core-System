@@ -21,23 +21,27 @@ public class GradeSalaryBandController {
 
     @PostMapping()
     public ResponseEntity<GradeSalaryBandResponse> create(@PathVariable Long gradeId, @RequestBody @Valid GradeSalaryBandRequest dto) {
-        return new ResponseEntity<>(salaryBandService.toDTO(salaryBandService.create(gradeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(salaryBandService.toDTO(salaryBandService.create(gradeId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<GradeSalaryBandResponse>> getAll(@PathVariable Long gradeId) {
         return ResponseEntity.ok(salaryBandService.getAllByGradeId(gradeId).stream().map(salaryBandService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<GradeSalaryBandResponse> getById(@PathVariable Long gradeId, @PathVariable Long id) {
-        return ResponseEntity.ok(salaryBandService.toDTO(salaryBandService.getById(gradeId,id)));
+        return ResponseEntity.ok(salaryBandService.toDTO(salaryBandService.getById(gradeId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<GradeSalaryBandResponse> update(@PathVariable Long gradeId, @PathVariable Long id, @RequestBody @Valid GradeSalaryBandRequest dto) {
-        return ResponseEntity.ok(salaryBandService.toDTO(salaryBandService.update(gradeId,id, dto)));
+        return ResponseEntity.ok(salaryBandService.toDTO(salaryBandService.update(gradeId, id, dto)));
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Long gradeId, @PathVariable Long id) {
-        salaryBandService.delete(gradeId,id);
+        salaryBandService.delete(gradeId, id);
         return ResponseEntity.noContent().build();
     }
 

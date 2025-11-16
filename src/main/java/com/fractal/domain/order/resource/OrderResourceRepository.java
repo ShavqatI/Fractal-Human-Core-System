@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface OrderResourceRepository extends JpaRepository<OrderResource,Long> {
+public interface OrderResourceRepository extends JpaRepository<OrderResource, Long> {
     List<OrderResource> findAllByOrderId(Long educationId);
+
     Optional<OrderResource> findByOrderIdAndId(Long educationId, Long id);
 }

@@ -4,4 +4,5 @@ public record RoleCompactResponse(
         Long id,
         String code,
         String name
-) { }
+) {
+}

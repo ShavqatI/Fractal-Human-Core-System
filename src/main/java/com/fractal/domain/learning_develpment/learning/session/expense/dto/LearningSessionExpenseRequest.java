@@ -17,4 +17,5 @@ public record LearningSessionExpenseRequest(
         String invoiceNumber,
         List<MultipartFile> files,
         Long statusId
-) { }
+) {
+}

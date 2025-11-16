@@ -27,7 +27,7 @@ public class VacationTypeServiceImpl implements VacationTypeService {
 
     @Override
     public VacationType getByCode(String code) {
-        return vacationTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Vacation Type with code: " + code + " not found"));
+        return vacationTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Vacation Type with code: " + code + " not found"));
 
     }
 
@@ -45,15 +45,14 @@ public class VacationTypeServiceImpl implements VacationTypeService {
             vacationType.setDescription(dto.description());
             vacationType.setDays(dto.days());
             return save(vacationType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       vacationTypeRepository.delete(findById(id));
+        vacationTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -80,14 +79,13 @@ public class VacationTypeServiceImpl implements VacationTypeService {
     private VacationType save(VacationType vacationType) {
         try {
             return vacationTypeRepository.save(vacationType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private VacationType findById(Long id) {
-        return vacationTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Vacation Type with id: " + id + " not found"));
+        return vacationTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Vacation Type with id: " + id + " not found"));
     }
 
 }

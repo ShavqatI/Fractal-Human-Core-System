@@ -11,7 +11,6 @@ import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
 import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
-import com.fractal.domain.recruitment.candidate.professional_experience.dto.CandidateProfessionalExperienceRequest;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -38,6 +37,6 @@ public record EmployeeRequest(
         List<EmployeeProfessionalExperienceRequest> professionalExperiences,
         List<EmployeeResourceRequest> resources,
         Long statusId
-){
+) {
 
 }

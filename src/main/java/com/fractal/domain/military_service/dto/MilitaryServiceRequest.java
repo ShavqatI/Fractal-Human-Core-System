@@ -6,12 +6,12 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record MilitaryServiceRequest(
-         String accountNumber,
-         String title,
-         String categoryFund,
-         String address,
-         LocalDate beginDate,
-         LocalDate endDate,
-         List<MultipartFile> files
+        String accountNumber,
+        String title,
+        String categoryFund,
+        String address,
+        LocalDate beginDate,
+        LocalDate endDate,
+        List<MultipartFile> files
 ) {
 }

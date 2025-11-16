@@ -17,6 +17,6 @@ import lombok.experimental.SuperBuilder;
 public class OnlinePlatform extends Dictionary {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="online_platform_type_id",referencedColumnName = "id")
+    @JoinColumn(name = "online_platform_type_id", referencedColumnName = "id")
     private OnlinePlatformType onlinePlatformType;
 }

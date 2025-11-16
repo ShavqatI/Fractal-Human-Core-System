@@ -7,4 +7,5 @@ public record InternalLearnerCompactResponse(
         String lastName,
         String firstName,
         String patronymicName
-) implements LearnerCompactResponse { }
+) implements LearnerCompactResponse {
+}

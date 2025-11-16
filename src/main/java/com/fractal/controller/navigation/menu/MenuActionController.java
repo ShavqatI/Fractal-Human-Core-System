@@ -18,19 +18,22 @@ public class MenuActionController {
 
     @PostMapping("")
     public ResponseEntity<MenuActionResponse> create(@PathVariable Long menuId, @RequestBody @Valid MenuActionRequest dto) {
-        return new ResponseEntity<>(menuActionService.toDTO(menuActionService.create(menuId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(menuActionService.toDTO(menuActionService.create(menuId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<MenuActionResponse> getById(@PathVariable Long menuId, @PathVariable Long id) {
-        return ResponseEntity.ok(menuActionService.toDTO(menuActionService.getById(menuId,id)));
+        return ResponseEntity.ok(menuActionService.toDTO(menuActionService.getById(menuId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<MenuActionResponse> update(@PathVariable Long menuId, @PathVariable Long id, @RequestBody @Valid MenuActionRequest dto) {
-        return ResponseEntity.ok(menuActionService.toDTO(menuActionService.update(menuId,id, dto)));
+        return ResponseEntity.ok(menuActionService.toDTO(menuActionService.update(menuId, id, dto)));
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Long menuId, @PathVariable Long id) {
-        menuActionService.delete(menuId,id);
+        menuActionService.delete(menuId, id);
         return ResponseEntity.noContent().build();
     }
 

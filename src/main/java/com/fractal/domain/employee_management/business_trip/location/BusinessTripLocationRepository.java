@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface BusinessTripLocationRepository extends JpaRepository<BusinessTripLocation,Long> {
+interface BusinessTripLocationRepository extends JpaRepository<BusinessTripLocation, Long> {
 
-  List<BusinessTripLocation> findAllByBusinessTripId(Long businessTripId);
-  Optional<BusinessTripLocation> findByBusinessTripIdAndId(Long businessTripId, Long id);
+    List<BusinessTripLocation> findAllByBusinessTripId(Long businessTripId);
+
+    Optional<BusinessTripLocation> findByBusinessTripIdAndId(Long businessTripId, Long id);
 
 }

@@ -6,8 +6,11 @@ import com.fractal.domain.employment.separation_reason.dto.SeparationReasonRespo
 
 public interface SeparationReasonMapperService {
     SeparationReasonResponse toDTO(SeparationReason separationReason);
+
     SeparationReason copy(SeparationReason separationReason);
+
     SeparationReason toEntity(SeparationReasonRequest dto);
+
     SeparationReason toEntity(SeparationReason separationReason, SeparationReasonRequest dto);
 }
 

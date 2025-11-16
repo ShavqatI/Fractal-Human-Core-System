@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-interface AbsenceRepository extends JpaRepository<Absence,Long> {
+interface AbsenceRepository extends JpaRepository<Absence, Long> {
     List<Absence> findAllByEmployeeId(Long employeeId);
 
 }

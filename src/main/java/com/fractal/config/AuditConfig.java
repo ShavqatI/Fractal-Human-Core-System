@@ -1,4 +1,3 @@
-
 package com.fractal.config;
 
 import com.fractal.domain.authorization.user.User;
@@ -30,12 +29,10 @@ public class AuditConfig {
                     System.out.println(user.getUsername());
                     //return Optional.of(entityManager.getReference(User.class, user.getId()));
                     return Optional.of(entityManager.contains(user) ? user : entityManager.merge(user));
-                }
-                else {
+                } else {
                     System.out.println(principal.getClass());
                 }
-            }
-            else {
+            } else {
                 System.out.println("Not auth");
             }
             return Optional.empty();

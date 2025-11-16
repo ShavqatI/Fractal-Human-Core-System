@@ -23,12 +23,12 @@ class CitizenshipMapperServiceImpl implements CitizenshipMapperService {
 
     @Override
     public Citizenship toEntity(CitizenshipRequest dto) {
-        return mapToEntity(new Citizenship(),dto);
+        return mapToEntity(new Citizenship(), dto);
     }
 
     @Override
     public Citizenship toEntity(Citizenship citizenship, CitizenshipRequest dto) {
-        return mapToEntity(citizenship,dto);
+        return mapToEntity(citizenship, dto);
     }
 
     private Citizenship mapToEntity(Citizenship citizenship, CitizenshipRequest dto) {

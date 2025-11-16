@@ -39,10 +39,9 @@ class InsuranceProviderServiceImpl implements InsuranceProviderService {
     @Transactional
     public InsuranceProvider update(Long id, InsuranceProviderRequest dto) {
         try {
-            InsuranceProvider insuranceProvider = mapperService.toEntity(findById(id),dto);
+            InsuranceProvider insuranceProvider = mapperService.toEntity(findById(id), dto);
             return save(insuranceProvider);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -51,7 +50,7 @@ class InsuranceProviderServiceImpl implements InsuranceProviderService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      insuranceProviderRepository.delete(findById(id));
+        insuranceProviderRepository.delete(findById(id));
     }
 
     @Override
@@ -63,18 +62,18 @@ class InsuranceProviderServiceImpl implements InsuranceProviderService {
     public InsuranceProviderCompactResponse toCompactDTO(InsuranceProvider insuranceProvider) {
         return mapperService.toCompactDTO(insuranceProvider);
     }
+
     @Override
     @Transactional
     public InsuranceProvider save(InsuranceProvider insuranceProvider) {
         try {
             return insuranceProviderRepository.save(insuranceProvider);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private InsuranceProvider findById(Long id) {
-        return insuranceProviderRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Insurance Provider with id: " + id + " not found"));
+        return insuranceProviderRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Insurance Provider with id: " + id + " not found"));
     }
 }

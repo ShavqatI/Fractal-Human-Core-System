@@ -1,4 +1,5 @@
 package com.fractal.security;
+
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -50,7 +51,8 @@ public class JwtService {
                 .build()
                 .parseClaimsJws(token);
     }
-    private Key getKey(){
+
+    private Key getKey() {
         return Keys.hmacShaKeyFor(SECRET.getBytes());
     }
 }

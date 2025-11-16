@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface MenuActionRepository extends JpaRepository<MenuAction,Long> {
-    Optional<MenuAction> findByMenuIdAndId(Long menuId,Long id);
+interface MenuActionRepository extends JpaRepository<MenuAction, Long> {
+    Optional<MenuAction> findByMenuIdAndId(Long menuId, Long id);
+
     List<MenuAction> findAllByMenuId(Long menuId);
 }

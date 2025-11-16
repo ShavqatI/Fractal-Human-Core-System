@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface AccreditationStatusRepository extends JpaRepository<AccreditationStatus,Long> {
+interface AccreditationStatusRepository extends JpaRepository<AccreditationStatus, Long> {
     Optional<AccreditationStatus> findById(Long id);
+
     Optional<AccreditationStatus> findByCode(String code);
+
     List<AccreditationStatus> findAll();
 }

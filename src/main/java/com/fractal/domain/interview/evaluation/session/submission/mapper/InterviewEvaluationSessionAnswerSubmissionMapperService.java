@@ -7,8 +7,11 @@ import com.fractal.domain.interview.evaluation.session.submission.dto.InterviewE
 
 public interface InterviewEvaluationSessionAnswerSubmissionMapperService {
     InterviewEvaluationSessionAnswerSubmissionResponse toDTO(InterviewEvaluationSessionAnswerSubmission answerSubmission);
+
     InterviewEvaluationSessionAnswerSubmissionCompactResponse toCompactDTO(InterviewEvaluationSessionAnswerSubmission answerSubmission);
+
     InterviewEvaluationSessionAnswerSubmission toEntity(InterviewEvaluationSessionAnswerSubmissionRequest dto);
+
     InterviewEvaluationSessionAnswerSubmission toEntity(InterviewEvaluationSessionAnswerSubmission submission, InterviewEvaluationSessionAnswerSubmissionRequest dto);
 }
 

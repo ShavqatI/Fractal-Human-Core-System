@@ -30,12 +30,12 @@ class GradeSalaryBandMapperServiceImpl implements GradeSalaryBandMapperService {
 
     @Override
     public GradeSalaryBand toEntity(GradeSalaryBandRequest dto) {
-        return mapToEntity(new GradeSalaryBand(),dto);
+        return mapToEntity(new GradeSalaryBand(), dto);
     }
 
     @Override
     public GradeSalaryBand toEntity(GradeSalaryBand salaryBand, GradeSalaryBandRequest dto) {
-       return mapToEntity(salaryBand,dto);
+        return mapToEntity(salaryBand, dto);
     }
 
     private GradeSalaryBand mapToEntity(GradeSalaryBand salaryBand, GradeSalaryBandRequest dto) {

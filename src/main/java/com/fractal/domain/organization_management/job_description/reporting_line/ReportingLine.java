@@ -20,19 +20,19 @@ import lombok.experimental.SuperBuilder;
 public class ReportingLine extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_description_id",referencedColumnName = "id")
+    @JoinColumn(name = "job_description_id", referencedColumnName = "id")
     private JobDescription jobDescription;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reporting_line_type_id",referencedColumnName = "id")
+    @JoinColumn(name = "reporting_line_type_id", referencedColumnName = "id")
     private ReportingLineType reportingLineType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "position_id",referencedColumnName = "id")
+    @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position position;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id",referencedColumnName = "id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 }

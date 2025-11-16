@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 class DutyServiceImpl implements DutyService {
 
     private final DutyRepository dutyRepository;
+
     @Override
     public DutyResponse toDTO(Duty duty) {
         return new DutyResponse(
@@ -27,14 +28,14 @@ class DutyServiceImpl implements DutyService {
 
     @Override
     public Duty findById(Long id) {
-        return dutyRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Responsibility with id: " + id + " not found"));
+        return dutyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Responsibility with id: " + id + " not found"));
     }
 
     @Override
     public Duty update(Long id, DutyRequest dto) {
         Duty duty = findById(id);
         duty.setDescription(dto.description());
-       return dutyRepository.save(duty);
+        return dutyRepository.save(duty);
     }
 
     @Override

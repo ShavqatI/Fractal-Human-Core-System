@@ -34,7 +34,7 @@ public class User extends AbstractEntity {
 
     private boolean enabled;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<UserRole> userRoles = new ArrayList<>();
 
     @Transactional
@@ -50,4 +50,4 @@ public class User extends AbstractEntity {
         userRoles.remove(userRole);
     }
 
-    }
+}

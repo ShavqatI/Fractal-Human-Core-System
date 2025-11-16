@@ -14,4 +14,5 @@ public record PermissionResponse(
         LocalDateTime createdDate,
         LocalDateTime updatedDate
 
-) { }
+) {
+}

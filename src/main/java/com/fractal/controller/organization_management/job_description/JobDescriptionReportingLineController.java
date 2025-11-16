@@ -21,24 +21,26 @@ public class JobDescriptionReportingLineController {
 
     @PostMapping()
     public ResponseEntity<ReportingLineResponse> create(@PathVariable Long jobDescriptionId, @RequestBody @Valid ReportingLineRequest dto) {
-        return new ResponseEntity<>(reportingLineService.toDTO(reportingLineService.create(jobDescriptionId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(reportingLineService.toDTO(reportingLineService.create(jobDescriptionId, dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<ReportingLineResponse>> getAll(@PathVariable Long jobDescriptionId) {
         return ResponseEntity.ok(reportingLineService.getAllByJobDescriptionId(jobDescriptionId).stream().map(reportingLineService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ReportingLineResponse> getById(@PathVariable Long jobDescriptionId,@PathVariable Long id) {
-        return ResponseEntity.ok(reportingLineService.toDTO(reportingLineService.getById(jobDescriptionId,id)));
+    public ResponseEntity<ReportingLineResponse> getById(@PathVariable Long jobDescriptionId, @PathVariable Long id) {
+        return ResponseEntity.ok(reportingLineService.toDTO(reportingLineService.getById(jobDescriptionId, id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ReportingLineResponse> update(@PathVariable Long jobDescriptionId, @PathVariable Long id, @RequestBody @Valid ReportingLineRequest dto) {
-        return ResponseEntity.ok(reportingLineService.toDTO(reportingLineService.update(jobDescriptionId,id, dto)));
+        return ResponseEntity.ok(reportingLineService.toDTO(reportingLineService.update(jobDescriptionId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long jobDescriptionId,@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long jobDescriptionId, @PathVariable Long id) {
         reportingLineService.delete(jobDescriptionId, id);
         return ResponseEntity.noContent().build();
     }

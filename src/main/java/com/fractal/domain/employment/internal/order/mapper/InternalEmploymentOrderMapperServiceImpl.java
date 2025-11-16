@@ -42,12 +42,12 @@ class InternalEmploymentOrderMapperServiceImpl implements InternalEmploymentOrde
 
     @Override
     public InternalEmploymentOrder toEntity(InternalEmploymentOrderRequest dto) {
-        return mapToEntity(new InternalEmploymentOrder(),dto);
+        return mapToEntity(new InternalEmploymentOrder(), dto);
     }
 
     @Override
     public InternalEmploymentOrder toEntity(InternalEmploymentOrder order, InternalEmploymentOrderRequest dto) {
-        return mapToEntity(order,dto);
+        return mapToEntity(order, dto);
     }
 
     private InternalEmploymentOrder mapToEntity(InternalEmploymentOrder order, InternalEmploymentOrderRequest dto) {
@@ -55,7 +55,7 @@ class InternalEmploymentOrderMapperServiceImpl implements InternalEmploymentOrde
         order.setNumber(dto.number());
         order.setDate(dto.date());
         order.setStatus(statusService.getById(dto.statusId()));
-        dto.files().forEach(file-> order.addResource(resourceMapperService.toEntity(file,null)));
+        dto.files().forEach(file -> order.addResource(resourceMapperService.toEntity(file, null)));
         return order;
     }
 

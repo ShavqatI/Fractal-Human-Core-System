@@ -8,12 +8,19 @@ import java.util.List;
 
 public interface ExternalInstructorService {
     ExternalInstructor create(ExternalInstructorRequest dto);
+
     List<ExternalInstructor> getAll();
+
     ExternalInstructor getById(Long id);
+
     ExternalInstructor update(Long id, ExternalInstructorRequest dto);
+
     void deleteById(Long id);
+
     ExternalInstructorResponse toDTO(ExternalInstructor instructor);
+
     ExternalInstructorCompactResponse toCompactDTO(ExternalInstructor instructor);
+
     ExternalInstructor save(ExternalInstructor instructor);
 
 

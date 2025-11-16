@@ -26,7 +26,7 @@ import java.util.List;
 public class Interview extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "interview_type_id",referencedColumnName = "id")
+    @JoinColumn(name = "interview_type_id", referencedColumnName = "id")
     private InterviewType interviewType;
 
     @Column(name = "scheduled_time", nullable = false)
@@ -48,10 +48,10 @@ public class Interview extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "interview",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "interview", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Interviewer> interviewers = new ArrayList<>();
 
-    @OneToMany(mappedBy = "interview",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "interview", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Interviewee> interviewees = new ArrayList<>();
 
 

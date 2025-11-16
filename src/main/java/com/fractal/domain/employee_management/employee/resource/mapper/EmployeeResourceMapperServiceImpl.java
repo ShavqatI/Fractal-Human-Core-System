@@ -47,15 +47,15 @@ class EmployeeResourceMapperServiceImpl implements EmployeeResourceMapperService
 
     @Override
     public EmployeeResource toEntity(EmployeeResourceRequest dto, String resourceStoragePath) {
-        return mapToEntity(new EmployeeResource(),dto, resourceStoragePath);
+        return mapToEntity(new EmployeeResource(), dto, resourceStoragePath);
     }
 
     @Override
-    public EmployeeResource toEntity(EmployeeResource resource, EmployeeResourceRequest dto,String resourceStoragePath) {
-        return mapToEntity(resource,dto, resourceStoragePath);
+    public EmployeeResource toEntity(EmployeeResource resource, EmployeeResourceRequest dto, String resourceStoragePath) {
+        return mapToEntity(resource, dto, resourceStoragePath);
     }
 
-    private EmployeeResource mapToEntity(EmployeeResource resource, EmployeeResourceRequest dto,String resourceStoragePath) {
+    private EmployeeResource mapToEntity(EmployeeResource resource, EmployeeResourceRequest dto, String resourceStoragePath) {
         fileService.delete(resource.getUrl());
         resource.setEmployeeResourceType(resourceTypeService.getById(dto.employeeResourceTypeId()));
         resource.setFileName(dto.file().getOriginalFilename());

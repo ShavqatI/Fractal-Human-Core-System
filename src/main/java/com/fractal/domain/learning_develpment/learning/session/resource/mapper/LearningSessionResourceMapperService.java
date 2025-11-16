@@ -6,7 +6,9 @@ import com.fractal.domain.learning_develpment.learning.session.resource.dto.Lear
 
 public interface LearningSessionResourceMapperService {
     LearningSessionResourceResponse toDTO(LearningSessionResource resource);
+
     LearningSessionResource toEntity(LearningSessionResourceRequest dto, String resourceStoragePath);
+
     LearningSessionResource toEntity(LearningSessionResource resource, LearningSessionResourceRequest dto, String resourceStoragePath);
 }
 

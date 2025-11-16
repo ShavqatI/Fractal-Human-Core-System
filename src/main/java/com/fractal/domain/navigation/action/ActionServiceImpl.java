@@ -32,7 +32,7 @@ class ActionServiceImpl implements ActionService {
 
     @Override
     public Action getByUrl(String url) {
-        return actionRepository.findByUrl(url).orElseThrow(()-> new ResourceNotFoundException("Action with url: " + url + " not found"));
+        return actionRepository.findByUrl(url).orElseThrow(() -> new ResourceNotFoundException("Action with url: " + url + " not found"));
     }
 
     @Override
@@ -44,9 +44,8 @@ class ActionServiceImpl implements ActionService {
     @Transactional
     public Action update(Long id, ActionRequest dto) {
         try {
-            return save(mapperService.toEntity(findById(id),dto));
-        }
-        catch (DataAccessException e) {
+            return save(mapperService.toEntity(findById(id), dto));
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -71,13 +70,12 @@ class ActionServiceImpl implements ActionService {
     public Action save(Action action) {
         try {
             return actionRepository.save(action);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Action findById(Long id) {
-        return actionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Action with id: " + id + " not found"));
+        return actionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Action with id: " + id + " not found"));
     }
 }

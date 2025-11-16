@@ -7,13 +7,21 @@ import com.fractal.domain.location.region.dto.RegionResponse;
 import java.util.List;
 
 public interface RegionService {
-   Region create(RegionRequest dto);
-   List<Region> getAll();
-   List<Region> getByCountryId(Long countryId);
-   Region getByCode(String code);
-   Region getById(Long id);
-   Region update(Long id, RegionRequest dto);
-   void deleteById(Long id);
-   RegionResponse toDTO(Region region);
-   RegionCompactResponse toCompactDTO(Region region);
+    Region create(RegionRequest dto);
+
+    List<Region> getAll();
+
+    List<Region> getByCountryId(Long countryId);
+
+    Region getByCode(String code);
+
+    Region getById(Long id);
+
+    Region update(Long id, RegionRequest dto);
+
+    void deleteById(Long id);
+
+    RegionResponse toDTO(Region region);
+
+    RegionCompactResponse toCompactDTO(Region region);
 }

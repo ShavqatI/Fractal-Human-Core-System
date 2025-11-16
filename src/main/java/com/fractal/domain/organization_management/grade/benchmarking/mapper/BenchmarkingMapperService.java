@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.grade.benchmarking.dto.Benchma
 
 public interface BenchmarkingMapperService {
     BenchmarkingResponse toDTO(Benchmarking benchmarking);
+
     Benchmarking toEntity(BenchmarkingRequest dto);
+
     Benchmarking toEntity(Benchmarking benchmarking, BenchmarkingRequest dto);
 }
 

@@ -15,8 +15,9 @@ import lombok.experimental.SuperBuilder;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
 @Entity
-@Table(name = "identification_document",schema = "identification_schema", catalog = "fractal")
+@Table(name = "identification_document", schema = "identification_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @AllArgsConstructor
@@ -39,7 +40,7 @@ public class IdentificationDocument extends AbstractEntity {
     private LocalDate issueDate;
 
     @Column(name = "expiry_date")
-    private LocalDate expiryDate ;
+    private LocalDate expiryDate;
 
     @Column(name = "term_in_years")
     private Integer termInYears;
@@ -54,7 +55,7 @@ public class IdentificationDocument extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "identificationDocument",cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "identificationDocument", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<IdentificationDocumentResource> resources = new ArrayList<>();
 
     public void addResource(IdentificationDocumentResource resource) {
@@ -62,6 +63,7 @@ public class IdentificationDocument extends AbstractEntity {
         resource.setIdentificationDocument(this);
         resources.add(resource);
     }
+
     public void removeResource(IdentificationDocumentResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);

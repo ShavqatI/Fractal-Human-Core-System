@@ -36,7 +36,7 @@ class ReportingLineServiceImpl implements ReportingLineService {
 
     @Override
     public ReportingLine getById(Long jobDescriptionId, Long id) {
-        return reportingLineRepository.findByJobDescriptionIdAndId(jobDescriptionId,id).orElseThrow(()-> new ResourceNotFoundException("ReportingLine with id: " + id + " not found"));
+        return reportingLineRepository.findByJobDescriptionIdAndId(jobDescriptionId, id).orElseThrow(() -> new ResourceNotFoundException("ReportingLine with id: " + id + " not found"));
     }
 
     @Override
@@ -45,8 +45,8 @@ class ReportingLineServiceImpl implements ReportingLineService {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         ReportingLine reportingLine = jobDescription.getReportingLines().stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Reporting Line with id: " + id + " not found"));
-        reportingLine = reportingLineRepository.save(mapperService.toEntity(reportingLine,dto));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Reporting Line with id: " + id + " not found"));
+        reportingLine = reportingLineRepository.save(mapperService.toEntity(reportingLine, dto));
         jobDescriptionService.save(jobDescription);
         return reportingLine;
     }
@@ -57,7 +57,7 @@ class ReportingLineServiceImpl implements ReportingLineService {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         ReportingLine reportingLine = jobDescription.getReportingLines().stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("ReportingLine with id: " + id + " not found"));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("ReportingLine with id: " + id + " not found"));
         jobDescription.removeReportingLine(reportingLine);
         jobDescriptionService.save(jobDescription);
 

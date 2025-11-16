@@ -37,7 +37,7 @@ public class ExternalInstructorContactServiceImpl implements ExternalInstructorC
 
     @Override
     public ExternalInstructorContact getById(Long instructorId, Long id) {
-        return contactRepository.findByExternalInstructorIdAndId(instructorId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this, id));
+        return contactRepository.findByExternalInstructorIdAndId(instructorId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -46,8 +46,8 @@ public class ExternalInstructorContactServiceImpl implements ExternalInstructorC
         var instructor = instructorService.getById(instructorId);
         var contact = instructor.getContacts()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this, id));
-        contact = contactMapperService.toEntity(contact,dto);
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        contact = contactMapperService.toEntity(contact, dto);
         contactRepository.save(contact);
         instructorService.save(instructor);
         return contact;
@@ -59,7 +59,7 @@ public class ExternalInstructorContactServiceImpl implements ExternalInstructorC
         var instructor = instructorService.getById(instructorId);
         var contact = instructor.getContacts()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this, id));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         instructor.removeContact(contact);
         instructorService.save(instructor);
     }

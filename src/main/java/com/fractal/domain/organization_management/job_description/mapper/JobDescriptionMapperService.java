@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.job_description.dto.JobDescrip
 
 public interface JobDescriptionMapperService {
     JobDescriptionResponse toDTO(JobDescription jobDescription);
+
     JobDescription toEntity(JobDescriptionRequest dto);
+
     JobDescription toEntity(JobDescription jobDescription, JobDescriptionRequest dto);
 }
 

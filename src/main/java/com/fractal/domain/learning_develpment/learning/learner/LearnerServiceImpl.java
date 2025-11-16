@@ -12,9 +12,10 @@ class LearnerServiceImpl implements LearnerService {
 
     private final LearnerRepository learnerRepository;
     private final LearnerMapperService mapperService;
+
     @Override
     public Learner getById(Long id) {
-        return learnerRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return learnerRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
 

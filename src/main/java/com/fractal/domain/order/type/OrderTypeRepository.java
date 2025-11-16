@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-interface OrderTypeRepository extends JpaRepository<OrderType,Long> {
+interface OrderTypeRepository extends JpaRepository<OrderType, Long> {
     Optional<OrderType> findByCode(String code);
 
 }

@@ -18,4 +18,5 @@ public record ExternalLearnerRequest(
         List<ContactRequest> contacts,
         Long statusId
 
-) { }
+) {
+}

@@ -34,6 +34,7 @@ public class RegionController {
     public ResponseEntity<RegionResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(regionService.toDTO(regionService.getById(id)));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<RegionCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(regionService.getAll().stream().map(regionService::toCompactDTO).collect(Collectors.toList()));
@@ -48,8 +49,9 @@ public class RegionController {
     public ResponseEntity<RegionResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(regionService.toDTO(regionService.getByCode(code)));
     }
+
     @GetMapping("/county/{id}")
-    public ResponseEntity<List<RegionResponse>>  getByCountry(@PathVariable Long id) {
+    public ResponseEntity<List<RegionResponse>> getByCountry(@PathVariable Long id) {
         return ResponseEntity.ok(regionService.getByCountryId(id).stream().map(regionService::toDTO).collect(Collectors.toList()));
     }
 

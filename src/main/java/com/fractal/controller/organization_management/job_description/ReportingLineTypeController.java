@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class ReportingLineTypeController {
 
     private final ReportingLineTypeService reportingLineTypeService;
+
     @PostMapping
     public ResponseEntity<ReportingLineTypeResponse> create(@RequestBody @Valid ReportingLineTypeRequest dto) {
         return new ResponseEntity<>(reportingLineTypeService.toDTO(reportingLineTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<ReportingLineTypeResponse>> getAll() {
         return ResponseEntity.ok(reportingLineTypeService.getAll().stream().map(reportingLineTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ReportingLineTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(reportingLineTypeService.toDTO(reportingLineTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<ReportingLineTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(reportingLineTypeService.toDTO(reportingLineTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<ReportingLineTypeResponse> update(@PathVariable Long id, @RequestBody @Valid ReportingLineTypeRequest dto) {
-      return  ResponseEntity.ok(reportingLineTypeService.toDTO(reportingLineTypeService.update(id, dto)));
+        return ResponseEntity.ok(reportingLineTypeService.toDTO(reportingLineTypeService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         reportingLineTypeService.deleteById(id);

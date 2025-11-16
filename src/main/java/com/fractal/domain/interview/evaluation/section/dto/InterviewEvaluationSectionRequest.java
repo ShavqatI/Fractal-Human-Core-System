@@ -10,6 +10,5 @@ public record InterviewEvaluationSectionRequest(
         List<InterviewEvaluationQuestionRequest> questions,
         List<InterviewEvaluationSectionRequest> children,
         Long statusId
-    )
-
-{}
+) {
+}

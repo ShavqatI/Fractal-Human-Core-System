@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class ActionCategoryServiceImpl implements ActionCategoryService {
@@ -26,7 +27,7 @@ class ActionCategoryServiceImpl implements ActionCategoryService {
 
     @Override
     public ActionCategory getByCode(String code) {
-        return actionCategoryRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Action Category with code: " + code + " not found"));
+        return actionCategoryRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Action Category with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class ActionCategoryServiceImpl implements ActionCategoryService {
             actionCategory.setCode(dto.code());
             actionCategory.setName(dto.name());
             return save(actionCategory);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      actionCategoryRepository.delete(findById(id));
+        actionCategoryRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class ActionCategoryServiceImpl implements ActionCategoryService {
     private ActionCategory save(ActionCategory actionCategory) {
         try {
             return actionCategoryRepository.save(actionCategory);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private ActionCategory findById(Long id) {
-        return actionCategoryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Action Category with id: " + id + " not found"));
+        return actionCategoryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Action Category with id: " + id + " not found"));
     }
 
 }

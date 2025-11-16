@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ResourceMapperServiceImpl implements ResourceMapperService {
 
     private final FileService fileService;
+
     @Override
     public ResourceResponse toDTO(Resource resource) {
         return new ResourceResponse(
@@ -27,27 +28,27 @@ public class ResourceMapperServiceImpl implements ResourceMapperService {
 
     @Override
     public Resource toEntity(ResourceRequest dto) {
-        return mapToEntity(new Resource(),dto);
+        return mapToEntity(new Resource(), dto);
     }
 
     @Override
-    public Resource toEntity(MultipartFile file,String resourceStoragePath) {
-        return mapToEntity(new Resource(),file,resourceStoragePath);
+    public Resource toEntity(MultipartFile file, String resourceStoragePath) {
+        return mapToEntity(new Resource(), file, resourceStoragePath);
     }
 
     @Override
     public Resource toEntity(Resource resource, MultipartFile file, String resourceStoragePath) {
-        return mapToEntity(resource,file,resourceStoragePath);
+        return mapToEntity(resource, file, resourceStoragePath);
     }
 
     @Override
     public Resource toEntity(Resource resource, ResourceRequest dto) {
-        return mapToEntity(resource,dto);
+        return mapToEntity(resource, dto);
     }
 
     @Override
     public ResourceRequest fileToRequest(MultipartFile file, String url) {
-        return new ResourceRequest(url,file.getOriginalFilename(),file.getContentType(),file.getSize());
+        return new ResourceRequest(url, file.getOriginalFilename(), file.getContentType(), file.getSize());
     }
 
 
@@ -59,7 +60,8 @@ public class ResourceMapperServiceImpl implements ResourceMapperService {
         resource.setSizeInBytes(dto.sizeInBytes());
         return resource;
     }
-    private Resource mapToEntity(Resource resource, MultipartFile file,String resourceStoragePath) {
+
+    private Resource mapToEntity(Resource resource, MultipartFile file, String resourceStoragePath) {
         fileService.delete(resource.getUrl());
         resource.setFileName(file.getOriginalFilename());
         resource.setContentType(file.getContentType());

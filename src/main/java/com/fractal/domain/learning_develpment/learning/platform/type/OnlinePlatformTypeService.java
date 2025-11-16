@@ -6,11 +6,17 @@ import com.fractal.domain.learning_develpment.learning.platform.type.dto.OnlineP
 import java.util.List;
 
 public interface OnlinePlatformTypeService {
-   OnlinePlatformType create(OnlinePlatformTypeRequest dto);
-   List<OnlinePlatformType> getAll();
-   OnlinePlatformType getByCode(String code);
-   OnlinePlatformType getById(Long id);
-   OnlinePlatformType update(Long id, OnlinePlatformTypeRequest dto);
-   void deleteById(Long id);
-   OnlinePlatformTypeResponse toDTO(OnlinePlatformType onlinePlatformType);
+    OnlinePlatformType create(OnlinePlatformTypeRequest dto);
+
+    List<OnlinePlatformType> getAll();
+
+    OnlinePlatformType getByCode(String code);
+
+    OnlinePlatformType getById(Long id);
+
+    OnlinePlatformType update(Long id, OnlinePlatformTypeRequest dto);
+
+    void deleteById(Long id);
+
+    OnlinePlatformTypeResponse toDTO(OnlinePlatformType onlinePlatformType);
 }

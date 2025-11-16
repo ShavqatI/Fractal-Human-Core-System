@@ -36,7 +36,7 @@ class RegionServiceImpl implements RegionService {
 
     @Override
     public Region getByCode(String code) {
-        return regionRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Region with code: " + code + " not found"));
+        return regionRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Region with code: " + code + " not found"));
     }
 
     @Override
@@ -52,15 +52,14 @@ class RegionServiceImpl implements RegionService {
             region.setName(dto.name());
             region.setCountry(countryService.getById(dto.countryId()));
             return save(region);
-        }
-        catch (DataAccessException e){
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      regionRepository.delete(findById(id));
+        regionRepository.delete(findById(id));
     }
 
     @Override
@@ -94,13 +93,12 @@ class RegionServiceImpl implements RegionService {
     private Region save(Region region) {
         try {
             return regionRepository.save(region);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Region findById(Long id) {
-        return regionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Region with id: " + id + " not found"));
+        return regionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Region with id: " + id + " not found"));
     }
 }

@@ -4,7 +4,6 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.integration.mapping.order_type.dto.OrderTypeMappingRequest;
 import com.fractal.domain.integration.mapping.order_type.dto.OrderTypeMappingResponse;
 import com.fractal.domain.order.type.OrderTypeService;
-import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -30,6 +29,7 @@ class OrderTypeMappingServiceImpl implements OrderTypeMappingService {
     public List<OrderTypeMapping> getAll() {
         return orderTypeMappingRepository.findAll();
     }
+
     @Override
     public OrderTypeMapping getById(Long id) {
         return findById(id);
@@ -44,8 +44,7 @@ class OrderTypeMappingServiceImpl implements OrderTypeMappingService {
             orderTypeMapping.setReference(dto.reference());
             orderTypeMapping.setStatus(statusService.getById(dto.statusId()));
             return save(orderTypeMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -79,13 +78,12 @@ class OrderTypeMappingServiceImpl implements OrderTypeMappingService {
     private OrderTypeMapping save(OrderTypeMapping orderTypeMapping) {
         try {
             return orderTypeMappingRepository.save(orderTypeMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private OrderTypeMapping findById(Long id) {
-        return orderTypeMappingRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return orderTypeMappingRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

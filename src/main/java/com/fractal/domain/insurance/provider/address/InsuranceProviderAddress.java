@@ -17,6 +17,6 @@ import lombok.experimental.SuperBuilder;
 public class InsuranceProviderAddress extends Address {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="insurance_provider_id", referencedColumnName = "id")
+    @JoinColumn(name = "insurance_provider_id", referencedColumnName = "id")
     private InsuranceProvider insuranceProvider;
 }

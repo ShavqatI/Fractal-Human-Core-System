@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-interface SalaryClassificationRepository extends JpaRepository<SalaryClassification,Long> {
+interface SalaryClassificationRepository extends JpaRepository<SalaryClassification, Long> {
 
     Optional<SalaryClassification> findByCode(String code);
 

@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface EmployeeResourceTypeRepository extends JpaRepository<EmployeeResourceType,Long> {
+interface EmployeeResourceTypeRepository extends JpaRepository<EmployeeResourceType, Long> {
 
     EmployeeResourceType save(EmployeeResourceType employeeResourceType);
+
     List<EmployeeResourceType> findAll();
+
     Optional<EmployeeResourceType> findByCode(String code);
+
     Optional<EmployeeResourceType> findById(Long id);
 
 }

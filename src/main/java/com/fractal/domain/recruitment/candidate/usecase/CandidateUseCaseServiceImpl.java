@@ -10,7 +10,6 @@ import com.fractal.domain.employee_management.contact.mapper.EmployeeContactMapp
 import com.fractal.domain.employee_management.education.mapper.EmployeeEducationMapperService;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.EmployeeService;
-import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceRequest;
 import com.fractal.domain.employee_management.employee.resource.mapper.EmployeeResourceMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentMapperService;
 import com.fractal.domain.employee_management.identification_document.mapper.EmployeeIdentificationDocumentMapperService;
@@ -43,29 +42,29 @@ public class CandidateUseCaseServiceImpl implements CandidateUseCaseService {
 
     @Override
     public void hire(Long id) {
-      var candidate = candidateService.getById(id);
-      Employee employee = Employee.builder()
-              .firstName(candidate.getFirstName())
-              .lastName(candidate.getLastName())
-              .patronymicName(candidate.getPatronymicName())
-              .birthDate(candidate.getBirthDate())
-              .tin(candidate.getTin())
-              .ssn(candidate.getSsn())
-              .gender(candidate.getGender())
-              .maritalStatus(candidate.getMaritalStatus())
-              .nationality(candidate.getNationality())
-              .status(candidate.getStatus())
-              .build();
-       candidate.getIdentificationDocuments().forEach(identificationDocument -> employee.addIdentificationDocument(employeeIdentificationDocumentMapperService.copy(identificationDocument)));
-       candidate.getCitizenships().forEach(citizenship -> employee.addCitizenship(employeeCitizenshipMapperService.toEntity(new CitizenshipRequest(citizenship.getCountry().getId()))));
-       candidate.getAddresses().forEach(address-> employee.addAddress(employeeAddressMapperService.convert(EmployeeAddress.builder().build(),address)));
-       candidate.getContacts().forEach(contact -> employee.addContact(employeeContactMapperService.toEntity(new ContactRequest(contact.getContactType().getId(),contact.getValue()))));
-       candidate.getEducations().forEach(education-> employee.addEducation(employeeEducationMapperService.copy(education)));
-       candidate.getLanguageSkills().forEach(languageSkill -> employee.addLanguageSkill(employeeLanguageSkillMapperService.toEntity(new LanguageSkillRequest(languageSkill.getLanguage().getId(),languageSkill.getLanguageProficiency().getId()))));
-       candidate.getMilitaryServices().forEach(militaryService -> employee.addMilitaryService(employeeMilitaryServiceMapperService.copy(militaryService)));
-       candidate.getEmployments().forEach(employment -> employee.addEmployment(employeeEmploymentMapperService.copy(employment.getEmployment())));
-       candidate.getResources().forEach(resource -> employee.addResource(employeeResourceMapperService.copy(resource)));
-       candidate.getProfessionalExperiences().forEach(professionalExperience -> employee.addProfessionalExperience(employeeProfessionalExperienceMapperService.toEntity(new EmployeeProfessionalExperienceRequest(professionalExperience.getIndustry().getId(),professionalExperience.getYears()))));
-       employeeService.save(employee);
+        var candidate = candidateService.getById(id);
+        Employee employee = Employee.builder()
+                .firstName(candidate.getFirstName())
+                .lastName(candidate.getLastName())
+                .patronymicName(candidate.getPatronymicName())
+                .birthDate(candidate.getBirthDate())
+                .tin(candidate.getTin())
+                .ssn(candidate.getSsn())
+                .gender(candidate.getGender())
+                .maritalStatus(candidate.getMaritalStatus())
+                .nationality(candidate.getNationality())
+                .status(candidate.getStatus())
+                .build();
+        candidate.getIdentificationDocuments().forEach(identificationDocument -> employee.addIdentificationDocument(employeeIdentificationDocumentMapperService.copy(identificationDocument)));
+        candidate.getCitizenships().forEach(citizenship -> employee.addCitizenship(employeeCitizenshipMapperService.toEntity(new CitizenshipRequest(citizenship.getCountry().getId()))));
+        candidate.getAddresses().forEach(address -> employee.addAddress(employeeAddressMapperService.convert(EmployeeAddress.builder().build(), address)));
+        candidate.getContacts().forEach(contact -> employee.addContact(employeeContactMapperService.toEntity(new ContactRequest(contact.getContactType().getId(), contact.getValue()))));
+        candidate.getEducations().forEach(education -> employee.addEducation(employeeEducationMapperService.copy(education)));
+        candidate.getLanguageSkills().forEach(languageSkill -> employee.addLanguageSkill(employeeLanguageSkillMapperService.toEntity(new LanguageSkillRequest(languageSkill.getLanguage().getId(), languageSkill.getLanguageProficiency().getId()))));
+        candidate.getMilitaryServices().forEach(militaryService -> employee.addMilitaryService(employeeMilitaryServiceMapperService.copy(militaryService)));
+        candidate.getEmployments().forEach(employment -> employee.addEmployment(employeeEmploymentMapperService.copy(employment.getEmployment())));
+        candidate.getResources().forEach(resource -> employee.addResource(employeeResourceMapperService.copy(resource)));
+        candidate.getProfessionalExperiences().forEach(professionalExperience -> employee.addProfessionalExperience(employeeProfessionalExperienceMapperService.toEntity(new EmployeeProfessionalExperienceRequest(professionalExperience.getIndustry().getId(), professionalExperience.getYears()))));
+        employeeService.save(employee);
     }
 }

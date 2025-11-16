@@ -8,10 +8,15 @@ import java.util.List;
 public interface ExpenseResourceService {
 
     ExpenseResource create(Long expenseId, MultipartFile file);
+
     List<ExpenseResource> getAllByExpenseId(Long expenseId);
-    ExpenseResource getById(Long expenseId , Long id);
+
+    ExpenseResource getById(Long expenseId, Long id);
+
     ExpenseResource update(Long expenseId, Long id, MultipartFile file);
-    void delete(Long expenseId,Long id);
+
+    void delete(Long expenseId, Long id);
+
     ResourceResponse toDTO(ExpenseResource resource);
 
 }

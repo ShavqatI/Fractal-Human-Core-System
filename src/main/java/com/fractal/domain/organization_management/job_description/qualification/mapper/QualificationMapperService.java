@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.job_description.qualification.
 
 public interface QualificationMapperService {
     QualificationResponse toDTO(Qualification qualification);
+
     Qualification toEntity(QualificationRequest dto);
+
     Qualification toEntity(Qualification qualification, QualificationRequest dto);
 }
 

@@ -21,6 +21,6 @@ public class Accountability extends AbstractEntity {
     private String performanceMeasure;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "job_description_id",referencedColumnName = "id")
+    @JoinColumn(name = "job_description_id", referencedColumnName = "id")
     private JobDescription jobDescription;
 }

@@ -7,11 +7,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface AgreementResourceMapperService {
     ResourceResponse toDTO(AgreementResource resource);
+
     AgreementResource toEntity(ResourceRequest dto);
+
     AgreementResource toEntity(MultipartFile file, String resourceStoragePath);
+
     AgreementResource toEntity(AgreementResource resource, MultipartFile file, String resourceStoragePath);
+
     AgreementResource toEntity(AgreementResource resource, ResourceRequest dto);
-    ResourceRequest fileToRequest(MultipartFile file,String url);
+
+    ResourceRequest fileToRequest(MultipartFile file, String url);
 }
 
 

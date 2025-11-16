@@ -7,8 +7,11 @@ import com.fractal.domain.insurance.provider.dto.InsuranceProviderResponse;
 
 public interface InsuranceProviderMapperService {
     InsuranceProviderResponse toDTO(InsuranceProvider insuranceProvider);
+
     InsuranceProviderCompactResponse toCompactDTO(InsuranceProvider insuranceProvider);
+
     InsuranceProvider toEntity(InsuranceProviderRequest dto);
+
     InsuranceProvider toEntity(InsuranceProvider insuranceProvider, InsuranceProviderRequest dto);
 }
 

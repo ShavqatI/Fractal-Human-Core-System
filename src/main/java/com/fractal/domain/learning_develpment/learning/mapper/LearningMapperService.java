@@ -7,8 +7,11 @@ import com.fractal.domain.learning_develpment.learning.dto.LearningResponse;
 
 public interface LearningMapperService {
     LearningResponse toDTO(Learning learning);
+
     LearningCompactResponse toCompactDTO(Learning learning);
+
     Learning toEntity(LearningRequest dto);
+
     Learning toEntity(Learning learning, LearningRequest dto);
 }
 

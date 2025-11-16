@@ -29,12 +29,12 @@ class WorkScheduleMapperServiceImpl implements WorkScheduleMapperService {
 
     @Override
     public WorkSchedule toEntity(WorkScheduleRequest dto) {
-        return mapToEntity(new WorkSchedule(),dto);
+        return mapToEntity(new WorkSchedule(), dto);
     }
 
     @Override
     public WorkSchedule toEntity(WorkSchedule workSchedule, WorkScheduleRequest dto) {
-       return mapToEntity(workSchedule,dto);
+        return mapToEntity(workSchedule, dto);
     }
 
     private WorkSchedule mapToEntity(WorkSchedule workSchedule, WorkScheduleRequest dto) {

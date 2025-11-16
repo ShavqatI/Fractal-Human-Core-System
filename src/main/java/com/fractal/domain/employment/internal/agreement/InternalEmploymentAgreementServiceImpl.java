@@ -37,7 +37,7 @@ class InternalEmploymentAgreementServiceImpl implements InternalEmploymentAgreem
 
     @Override
     public InternalEmploymentAgreement getById(Long employmentId, Long id) {
-        return internalEmploymentAgreementRepository.findByInternalEmploymentIdAndId(employmentId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return internalEmploymentAgreementRepository.findByInternalEmploymentIdAndId(employmentId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -46,8 +46,8 @@ class InternalEmploymentAgreementServiceImpl implements InternalEmploymentAgreem
         var employment = employmentService.getById(employmentId);
         var agreement = employment.getAgreements()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        agreement = internalEmploymentAgreementMapperService.toEntity(agreement,dto);
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        agreement = internalEmploymentAgreementMapperService.toEntity(agreement, dto);
         internalEmploymentAgreementRepository.save(agreement);
         employmentService.save(employment);
         return agreement;
@@ -59,7 +59,7 @@ class InternalEmploymentAgreementServiceImpl implements InternalEmploymentAgreem
         var employment = employmentService.getById(employmentId);
         var agreement = employment.getAgreements()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         employment.removeAgreement(agreement);
         employmentService.save(employment);
     }
@@ -68,12 +68,12 @@ class InternalEmploymentAgreementServiceImpl implements InternalEmploymentAgreem
     public InternalEmploymentAgreementResponse toDTO(InternalEmploymentAgreement agreement) {
         return internalEmploymentAgreementMapperService.toDTO(agreement);
     }
+
     @Override
     public InternalEmploymentAgreement save(InternalEmploymentAgreement agreement) {
         try {
             return internalEmploymentAgreementRepository.save(agreement);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -84,6 +84,6 @@ class InternalEmploymentAgreementServiceImpl implements InternalEmploymentAgreem
     }
 
     private InternalEmploymentAgreement findById(Long id) {
-        return internalEmploymentAgreementRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return internalEmploymentAgreementRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

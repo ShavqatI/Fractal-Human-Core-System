@@ -6,7 +6,9 @@ import com.fractal.domain.vacation_management.accrual.period.record.dto.Vacation
 
 public interface VacationAccrualPeriodRecordMapperService {
     VacationAccrualPeriodRecordResponse toDTO(VacationAccrualPeriodRecord record);
+
     VacationAccrualPeriodRecord toEntity(VacationAccrualPeriodRecordRequest dto);
+
     VacationAccrualPeriodRecord toEntity(VacationAccrualPeriodRecord record, VacationAccrualPeriodRecordRequest dto);
 }
 

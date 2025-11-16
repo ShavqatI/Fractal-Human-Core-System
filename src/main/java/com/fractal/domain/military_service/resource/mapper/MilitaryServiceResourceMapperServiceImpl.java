@@ -16,7 +16,6 @@ class MilitaryServiceResourceMapperServiceImpl implements MilitaryServiceResourc
     private final ResourceMapperService resourceMapperService;
 
 
-
     @Override
     public ResourceResponse toDTO(MilitaryServiceResource resource) {
         return resourceMapperService.toDTO(resource);
@@ -29,29 +28,29 @@ class MilitaryServiceResourceMapperServiceImpl implements MilitaryServiceResourc
 
     @Override
     public MilitaryServiceResource toEntity(MultipartFile file, String resourceStoragePath) {
-        return convert(new MilitaryServiceResource(), resourceMapperService.toEntity(file,resourceStoragePath));
+        return convert(new MilitaryServiceResource(), resourceMapperService.toEntity(file, resourceStoragePath));
     }
 
     @Override
     public MilitaryServiceResource toEntity(MilitaryServiceResource resource, ResourceRequest dto) {
-        return (MilitaryServiceResource) resourceMapperService.toEntity(resource,dto);
+        return (MilitaryServiceResource) resourceMapperService.toEntity(resource, dto);
     }
 
     @Override
     public MilitaryServiceResource copy(MilitaryServiceResource militaryServiceResource) {
         Resource resource = resourceMapperService.copy(militaryServiceResource);
-        return convert(new MilitaryServiceResource(),resource);
+        return convert(new MilitaryServiceResource(), resource);
     }
 
 
     @Override
     public ResourceRequest fileToRequest(MultipartFile file, String resourceStoragePath) {
-        return resourceMapperService.fileToRequest(file,resourceStoragePath);
+        return resourceMapperService.fileToRequest(file, resourceStoragePath);
     }
 
     @Override
     public MilitaryServiceResource toEntity(MilitaryServiceResource resource, MultipartFile file, String resourceStoragePath) {
-        return convert(resource,resourceMapperService.toEntity(resource,file,resourceStoragePath));
+        return convert(resource, resourceMapperService.toEntity(resource, file, resourceStoragePath));
     }
 
     private MilitaryServiceResource convert(MilitaryServiceResource militaryServiceResource, Resource resource) {

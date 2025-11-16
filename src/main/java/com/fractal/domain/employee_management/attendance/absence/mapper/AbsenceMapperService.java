@@ -6,7 +6,9 @@ import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceResp
 
 public interface AbsenceMapperService {
     AbsenceResponse toDTO(Absence absence);
+
     Absence toEntity(AbsenceRequest dto);
+
     Absence toEntity(Absence absence, AbsenceRequest dto);
 }
 

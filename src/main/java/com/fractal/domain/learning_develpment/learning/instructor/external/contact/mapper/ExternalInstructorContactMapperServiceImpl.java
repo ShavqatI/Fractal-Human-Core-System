@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class ExternalInstructorContactMapperServiceImpl implements ExternalInstructorContactMapperService {
     private final ContactMapperService mapperService;
+
     @Override
     public ContactResponse toDTO(ExternalInstructorContact contact) {
         return mapperService.toDTO(contact);
@@ -19,12 +20,12 @@ class ExternalInstructorContactMapperServiceImpl implements ExternalInstructorCo
 
     @Override
     public ExternalInstructorContact toEntity(ContactRequest dto) {
-        return mapToEntity(new ExternalInstructorContact(),mapperService.toEntity(dto));
+        return mapToEntity(new ExternalInstructorContact(), mapperService.toEntity(dto));
     }
 
     @Override
     public ExternalInstructorContact toEntity(ExternalInstructorContact contact, ContactRequest dto) {
-        return mapToEntity(contact,mapperService.toEntity(contact,dto));
+        return mapToEntity(contact, mapperService.toEntity(contact, dto));
     }
 
     private ExternalInstructorContact mapToEntity(ExternalInstructorContact externalInstructorContact, Contact contact) {

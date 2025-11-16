@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface PaymentFrequencyRepository extends JpaRepository<PaymentFrequency,Long> {
+interface PaymentFrequencyRepository extends JpaRepository<PaymentFrequency, Long> {
     Optional<PaymentFrequency> findById(Long id);
+
     Optional<PaymentFrequency> findByCode(String code);
+
     List<PaymentFrequency> findAll();
 }

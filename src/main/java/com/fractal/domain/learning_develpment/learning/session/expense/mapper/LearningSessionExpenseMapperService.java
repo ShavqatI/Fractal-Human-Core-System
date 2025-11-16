@@ -6,7 +6,9 @@ import com.fractal.domain.learning_develpment.learning.session.expense.dto.Learn
 
 public interface LearningSessionExpenseMapperService {
     LearningSessionExpenseResponse toDTO(LearningSessionExpense expense);
+
     LearningSessionExpense toEntity(LearningSessionExpenseRequest dto);
+
     LearningSessionExpense toEntity(LearningSessionExpense expense, LearningSessionExpenseRequest dto);
 }
 

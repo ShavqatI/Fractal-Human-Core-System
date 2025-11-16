@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface AddressTypeRepository extends JpaRepository<AddressType,Long> {
+interface AddressTypeRepository extends JpaRepository<AddressType, Long> {
 
     AddressType save(AddressType addressType);
+
     List<AddressType> findAll();
+
     Optional<AddressType> findByCode(String code);
+
     Optional<AddressType> findById(Long id);
 
 }

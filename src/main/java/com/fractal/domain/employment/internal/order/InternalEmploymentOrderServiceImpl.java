@@ -37,7 +37,7 @@ public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrd
 
     @Override
     public InternalEmploymentOrder getById(Long employmentId, Long id) {
-        return orderRepository.findByInternalEmploymentIdAndId(employmentId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return orderRepository.findByInternalEmploymentIdAndId(employmentId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -46,8 +46,8 @@ public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrd
         var employment = employmentService.getById(employmentId);
         var order = employment.getOrders()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        order = orderRepository.save(orderMapperService.toEntity(order,dto));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        order = orderRepository.save(orderMapperService.toEntity(order, dto));
         employmentService.save(employment);
         return order;
     }
@@ -58,7 +58,7 @@ public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrd
         var employment = employmentService.getById(employmentId);
         var order = employment.getOrders()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         employment.removeOrder(order);
         employmentService.save(employment);
     }

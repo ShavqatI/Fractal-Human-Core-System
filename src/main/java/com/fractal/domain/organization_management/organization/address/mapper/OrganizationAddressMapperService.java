@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.organization.address.dto.Organ
 
 public interface OrganizationAddressMapperService {
     OrganizationAddressResponse toDTO(OrganizationAddress address);
+
     OrganizationAddress toEntity(OrganizationAddressRequest dto);
+
     OrganizationAddress toEntity(OrganizationAddress address, OrganizationAddressRequest dto);
 }
 

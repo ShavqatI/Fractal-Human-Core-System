@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-interface VacationCategoryRepository extends JpaRepository<VacationCategory,Long> {
+interface VacationCategoryRepository extends JpaRepository<VacationCategory, Long> {
     Optional<VacationCategory> findByCode(String code);
 
 }

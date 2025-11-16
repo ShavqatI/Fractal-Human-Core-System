@@ -26,4 +26,5 @@ public record ExternalOfflineLearningLocationAddressRequest(
         String roomNumber,
         Double latitude,
         Double longitude
-) implements OfflineLearningLocationAddressRequest { }
+) implements OfflineLearningLocationAddressRequest {
+}

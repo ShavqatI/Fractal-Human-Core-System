@@ -8,9 +8,14 @@ import java.util.List;
 public interface OrderResourceService {
 
     OrderResource create(Long orderId, MultipartFile file);
+
     List<OrderResource> getAllByOrderId(Long orderId);
-    OrderResource getById(Long orderId , Long id);
+
+    OrderResource getById(Long orderId, Long id);
+
     OrderResource update(Long orderId, Long id, MultipartFile file);
-    void delete(Long orderId,Long id);
+
+    void delete(Long orderId, Long id);
+
     ResourceResponse toDTO(OrderResource resource);
 }

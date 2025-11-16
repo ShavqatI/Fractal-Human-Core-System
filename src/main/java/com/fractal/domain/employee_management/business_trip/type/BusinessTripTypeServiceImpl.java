@@ -27,7 +27,7 @@ public class BusinessTripTypeServiceImpl implements BusinessTripTypeService {
 
     @Override
     public BusinessTripType getByCode(String code) {
-        return businessTripTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Vacation Type with code: " + code + " not found"));
+        return businessTripTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Vacation Type with code: " + code + " not found"));
 
     }
 
@@ -44,15 +44,14 @@ public class BusinessTripTypeServiceImpl implements BusinessTripTypeService {
             businessTripType.setName(dto.name());
             businessTripType.setDescription(dto.description());
             return save(businessTripType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       businessTripTypeRepository.delete(findById(id));
+        businessTripTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -77,14 +76,13 @@ public class BusinessTripTypeServiceImpl implements BusinessTripTypeService {
     private BusinessTripType save(BusinessTripType businessTripType) {
         try {
             return businessTripTypeRepository.save(businessTripType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private BusinessTripType findById(Long id) {
-        return businessTripTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Vacation Type with id: " + id + " not found"));
+        return businessTripTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Vacation Type with id: " + id + " not found"));
     }
 
 }

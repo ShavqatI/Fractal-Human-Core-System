@@ -29,7 +29,7 @@ class PaymentFrequencyServiceImpl implements PaymentFrequencyService {
 
     @Override
     public PaymentFrequency getByCode(String code) {
-        return paymentFrequencyRepository.findByCode(code).orElseThrow(()-> new ResourceWithCodeNotFoundException(this,code));
+        return paymentFrequencyRepository.findByCode(code).orElseThrow(() -> new ResourceWithCodeNotFoundException(this, code));
     }
 
     @Override
@@ -44,8 +44,7 @@ class PaymentFrequencyServiceImpl implements PaymentFrequencyService {
             paymentFrequency.setCode(dto.code());
             paymentFrequency.setName(dto.name());
             return save(paymentFrequency);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -75,13 +74,12 @@ class PaymentFrequencyServiceImpl implements PaymentFrequencyService {
     private PaymentFrequency save(PaymentFrequency paymentFrequency) {
         try {
             return paymentFrequencyRepository.save(paymentFrequency);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private PaymentFrequency findById(Long id) {
-        return paymentFrequencyRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return paymentFrequencyRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

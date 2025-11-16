@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-interface LanguageRepository extends JpaRepository<Language,Long> {
+interface LanguageRepository extends JpaRepository<Language, Long> {
     Optional<Language> findByCode(String code);
 }

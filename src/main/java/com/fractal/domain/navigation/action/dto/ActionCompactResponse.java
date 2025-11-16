@@ -1,7 +1,8 @@
- package com.fractal.domain.navigation.action.dto;
+package com.fractal.domain.navigation.action.dto;
 
- public record ActionCompactResponse(
-         Long id,
-         String name,
-         String url
- ) {}
+public record ActionCompactResponse(
+        Long id,
+        String name,
+        String url
+) {
+}

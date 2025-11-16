@@ -8,4 +8,5 @@ public record UserRequest(
         String username,
         String password,
         List<UserRoleRequest> userRoles
-) { }
+) {
+}

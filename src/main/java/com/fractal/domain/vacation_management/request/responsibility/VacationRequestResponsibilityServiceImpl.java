@@ -37,7 +37,7 @@ public class VacationRequestResponsibilityServiceImpl implements VacationRequest
 
     @Override
     public VacationRequestResponsibility getById(Long vacationRequestId, Long id) {
-        return responsibilityRepository.findByVacationRequestIdAndId(vacationRequestId,id).orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        return responsibilityRepository.findByVacationRequestIdAndId(vacationRequestId, id).orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
     }
 
     @Override
@@ -46,8 +46,8 @@ public class VacationRequestResponsibilityServiceImpl implements VacationRequest
         var request = vacationRequestService.getById(vacationRequestId);
         var responsibility = request.getResponsibilities()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
-        responsibility = responsibilityRepository.save(responsibilityMapperService.toEntity(responsibility,dto));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        responsibility = responsibilityRepository.save(responsibilityMapperService.toEntity(responsibility, dto));
         vacationRequestService.save(request);
         return responsibility;
     }
@@ -58,7 +58,7 @@ public class VacationRequestResponsibilityServiceImpl implements VacationRequest
         var request = vacationRequestService.getById(vacationRequestId);
         var responsibility = request.getResponsibilities()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
         request.removeResponsibility(responsibility);
         vacationRequestService.save(request);
     }

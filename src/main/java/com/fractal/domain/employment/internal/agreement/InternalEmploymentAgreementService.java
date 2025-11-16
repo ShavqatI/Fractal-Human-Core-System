@@ -7,12 +7,19 @@ import java.util.List;
 
 public interface InternalEmploymentAgreementService {
     InternalEmploymentAgreement create(Long employmentId, InternalEmploymentAgreementRequest dto);
+
     List<InternalEmploymentAgreement> getAllByInternalEmploymentId(Long employmentId);
-    InternalEmploymentAgreement getById(Long employmentId , Long id);
+
+    InternalEmploymentAgreement getById(Long employmentId, Long id);
+
     InternalEmploymentAgreement update(Long employmentId, Long id, InternalEmploymentAgreementRequest dto);
-    void delete(Long employmentId,Long id);
+
+    void delete(Long employmentId, Long id);
+
     InternalEmploymentAgreementResponse toDTO(InternalEmploymentAgreement agreement);
+
     InternalEmploymentAgreement save(InternalEmploymentAgreement agreement);
+
     InternalEmploymentAgreement getById(Long id);
 
 }

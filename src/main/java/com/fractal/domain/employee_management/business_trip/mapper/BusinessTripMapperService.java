@@ -6,7 +6,9 @@ import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResp
 
 public interface BusinessTripMapperService {
     BusinessTripResponse toDTO(BusinessTrip businessTrip);
+
     BusinessTrip toEntity(BusinessTripRequest dto);
+
     BusinessTrip toEntity(BusinessTrip businessTrip, BusinessTripRequest dto);
 }
 

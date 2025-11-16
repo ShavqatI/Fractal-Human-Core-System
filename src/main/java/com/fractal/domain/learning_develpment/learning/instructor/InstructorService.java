@@ -4,5 +4,6 @@ import com.fractal.domain.learning_develpment.learning.instructor.dto.Instructor
 
 public interface InstructorService {
     Instructor getById(Long id);
+
     InstructorCompactResponse toCompactDTO(Instructor instructor);
 }

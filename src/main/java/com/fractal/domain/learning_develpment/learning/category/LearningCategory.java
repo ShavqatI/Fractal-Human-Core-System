@@ -21,10 +21,10 @@ public class LearningCategory extends Dictionary {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id",referencedColumnName = "id")
+    @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private LearningCategory parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<LearningCategory> children = new ArrayList<>();
 
     public void addChild(LearningCategory learningCategory) {
@@ -32,6 +32,7 @@ public class LearningCategory extends Dictionary {
         learningCategory.setParent(this);
         children.add(learningCategory);
     }
+
     public void removeChild(LearningCategory learningCategory) {
         if (children != null && !children.isEmpty())
             children.remove(learningCategory);

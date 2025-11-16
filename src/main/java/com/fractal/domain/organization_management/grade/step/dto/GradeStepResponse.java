@@ -9,8 +9,9 @@ public record GradeStepResponse(
         Long id,
         BigDecimal minSalary,
 
-        BigDecimal  maxSalary,
+        BigDecimal maxSalary,
 
         StatusCompactResponse status,
         LocalDateTime createdDate
-) { }
+) {
+}

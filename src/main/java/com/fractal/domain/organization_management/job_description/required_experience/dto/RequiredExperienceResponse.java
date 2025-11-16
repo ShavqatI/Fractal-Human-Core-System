@@ -14,5 +14,5 @@ public record RequiredExperienceResponse(
         Boolean mandatory,
         String notes,
         LocalDateTime createdDate
-)
-{}
+) {
+}

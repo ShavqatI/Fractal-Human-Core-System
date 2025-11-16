@@ -15,9 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 class AuthorityServiceImpl implements AuthorityService {
 
-      private final AuthorityRepository authorityRepository;
-      private final AuthorityMapperService mapperService;
-      private final JobDescriptionService jobDescriptionService;
+    private final AuthorityRepository authorityRepository;
+    private final AuthorityMapperService mapperService;
+    private final JobDescriptionService jobDescriptionService;
 
     @Override
     @Transactional
@@ -36,7 +36,7 @@ class AuthorityServiceImpl implements AuthorityService {
 
     @Override
     public Authority getById(Long jobDescriptionId, Long id) {
-        return authorityRepository.findByJobDescriptionIdAndId(jobDescriptionId,id).orElseThrow(()-> new ResourceNotFoundException("Authority with id: " + id + " not found"));
+        return authorityRepository.findByJobDescriptionIdAndId(jobDescriptionId, id).orElseThrow(() -> new ResourceNotFoundException("Authority with id: " + id + " not found"));
     }
 
     @Override
@@ -45,8 +45,8 @@ class AuthorityServiceImpl implements AuthorityService {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         var authority = jobDescription.getAuthorities().stream()
                 .filter(q -> q.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Authority with id: " + id + " not found"));
-        authority = authorityRepository.save(mapperService.toEntity(authority,dto));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Authority with id: " + id + " not found"));
+        authority = authorityRepository.save(mapperService.toEntity(authority, dto));
         jobDescriptionService.save(jobDescription);
         return authority;
     }
@@ -57,7 +57,7 @@ class AuthorityServiceImpl implements AuthorityService {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         var authority = jobDescription.getAuthorities().stream()
                 .filter(q -> q.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Authority with id: " + id + " not found"));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Authority with id: " + id + " not found"));
         jobDescription.removeAuthority(authority);
         jobDescriptionService.save(jobDescription);
     }

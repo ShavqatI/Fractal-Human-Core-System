@@ -22,24 +22,27 @@ public class LearningSessionEnrollmentController {
 
     @PostMapping()
     public ResponseEntity<LearningSessionEnrollmentResponse> create(@PathVariable Long sessionId, @RequestBody @Valid LearningSessionEnrollmentRequest dto) {
-        return new ResponseEntity<>(enrollmentService.toDTO(enrollmentService.create(sessionId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(enrollmentService.toDTO(enrollmentService.create(sessionId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<LearningSessionEnrollmentResponse>> getAll(@PathVariable Long sessionId) {
         return ResponseEntity.ok(enrollmentService.getAllByLearningSessionId(sessionId).stream().map(enrollmentService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<LearningSessionEnrollmentResponse> getById(@PathVariable Long sessionId, @PathVariable Long id) {
-        return ResponseEntity.ok(enrollmentService.toDTO(enrollmentService.getById(sessionId,id)));
+        return ResponseEntity.ok(enrollmentService.toDTO(enrollmentService.getById(sessionId, id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<LearningSessionEnrollmentResponse> update(@PathVariable Long sessionId, @PathVariable Long id, @RequestBody @Valid LearningSessionEnrollmentRequest dto) {
-        return ResponseEntity.ok(enrollmentService.toDTO(enrollmentService.update(sessionId,id, dto)));
+        return ResponseEntity.ok(enrollmentService.toDTO(enrollmentService.update(sessionId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long sessionId, @PathVariable Long id) {
-        enrollmentService.delete(sessionId,id);
+        enrollmentService.delete(sessionId, id);
         return ResponseEntity.noContent().build();
     }
 

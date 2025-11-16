@@ -36,7 +36,7 @@ class SeparationReasonTypeServiceImpl implements SeparationReasonTypeService {
 
     @Override
     public SeparationReasonType getByCode(String code) {
-        return separationReasonTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Separation Reason with code: " + code + " not found"));
+        return separationReasonTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Separation Reason with code: " + code + " not found"));
     }
 
     @Override
@@ -53,15 +53,14 @@ class SeparationReasonTypeServiceImpl implements SeparationReasonTypeService {
             separationReasonType.setStatus(statusService.getById(dto.statusId()));
             dto.children().forEach(separationReasonTypeRequest -> separationReasonType.addChild(toEntity(separationReasonTypeRequest)));
             return save(separationReasonType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      separationReasonTypeRepository.delete(findById(id));
+        separationReasonTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -78,12 +77,12 @@ class SeparationReasonTypeServiceImpl implements SeparationReasonTypeService {
                         .stream()
                         .map(this::toDTO)
                         .collect(Collectors.toList()),
-                 statusService.toCompactDTO(separationReasonType.getStatus()),
+                statusService.toCompactDTO(separationReasonType.getStatus()),
                 separationReasonType.getCreatedDate()
         );
     }
 
-   @Override
+    @Override
     public SeparationReasonTypeCompactResponse toCompactDTO(SeparationReasonType separationReasonType) {
         return new SeparationReasonTypeCompactResponse(
                 separationReasonType.getId(),
@@ -99,41 +98,40 @@ class SeparationReasonTypeServiceImpl implements SeparationReasonTypeService {
                 .status(statusService.getById(dto.statusId()))
                 .build();
         dto.children().forEach(separationReasonTypeRequest -> separationReason.addChild(toEntity(separationReasonTypeRequest)));
-    return separationReason;
+        return separationReason;
     }
 
     private SeparationReasonType save(SeparationReasonType separationReasonType) {
         try {
             return separationReasonTypeRepository.save(separationReasonType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private SeparationReasonType findById(Long id) {
-        return separationReasonTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Separation Reason with id: " + id + " not found"));
+        return separationReasonTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Separation Reason with id: " + id + " not found"));
     }
 
     @Override
     public SeparationReasonType addChild(Long id, SeparationReasonTypeRequest dto) {
         var separationReasonType = findById(id);
         separationReasonType.addChild(toEntity(dto));
-       return save(separationReasonType);
+        return save(separationReasonType);
     }
 
     @Override
     public SeparationReasonType updateChild(Long id, Long childId, SeparationReasonTypeRequest dto) {
         var separationReasonType = findById(id);
-        var child = separationReasonType.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
-        update(child.getId(),dto);
+        var child = separationReasonType.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        update(child.getId(), dto);
         return save(separationReasonType);
     }
 
     @Override
     public void deleteChild(Long id, Long childId) {
         var separationReasonType = findById(id);
-        var child = separationReasonType.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        var child = separationReasonType.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
         separationReasonType.removeChild(child);
         save(separationReasonType);
     }

@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VacationAccrualPeriodRecordRepository extends JpaRepository<VacationAccrualPeriodRecord,Long> {
+public interface VacationAccrualPeriodRecordRepository extends JpaRepository<VacationAccrualPeriodRecord, Long> {
 
     List<VacationAccrualPeriodRecord> findAllByVacationAccrualPeriodId(Long periodId);
+
     Optional<VacationAccrualPeriodRecord> findByVacationAccrualPeriodIdAndId(Long periodId, Long id);
 }

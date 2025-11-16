@@ -16,6 +16,6 @@ import lombok.experimental.SuperBuilder;
 public class EmployeeAddress extends Address {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="employee_id", referencedColumnName = "id")
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 }

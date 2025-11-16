@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface EducationTypeRepository extends JpaRepository<EducationType,Long> {
+interface EducationTypeRepository extends JpaRepository<EducationType, Long> {
     Optional<EducationType> findById(Long id);
+
     Optional<EducationType> findByCode(String code);
+
     List<EducationType> findAll();
 }

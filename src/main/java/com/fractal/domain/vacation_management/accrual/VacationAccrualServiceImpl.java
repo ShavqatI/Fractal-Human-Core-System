@@ -1,6 +1,5 @@
 package com.fractal.domain.vacation_management.accrual;
 
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.vacation_management.accrual.dto.VacationAccrualRequest;
 import com.fractal.domain.vacation_management.accrual.dto.VacationAccrualResponse;
@@ -10,6 +9,7 @@ import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -23,6 +23,7 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
     private final VacationTypeService vacationTypeService;
 
     @Override
+    @Transactional
     public VacationAccrual create(VacationAccrualRequest dto) {
         return save(mapperService.toEntity(dto));
 
@@ -46,9 +47,8 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
     @Override
     public VacationAccrual update(Long id, VacationAccrualRequest dto) {
         try {
-          return save(mapperService.toEntity(findById(id),dto));
-       }
-        catch (DataAccessException e) {
+            return save(mapperService.toEntity(findById(id), dto));
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -63,17 +63,17 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
     }
 
     @Override
+    @Transactional
     public VacationAccrual save(VacationAccrual vacationAccrual) {
         try {
             return vacationAccrualRepository.save(vacationAccrual);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private VacationAccrual findById(Long id) {
-        return vacationAccrualRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return vacationAccrualRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override

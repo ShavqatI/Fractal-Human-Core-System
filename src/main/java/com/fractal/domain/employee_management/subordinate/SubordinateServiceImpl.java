@@ -44,16 +44,15 @@ class SubordinateServiceImpl implements SubordinateService {
     @Override
     public Subordinate update(Long id, SubordinateRequest dto) {
         try {
-         Subordinate subordinate = findById(id);
-         subordinate.setEmployee(employeeService.getById(dto.employeeId()));
-         subordinate.setSubordinateEmployee(employeeService.getById(dto.subordinateEmployeeId()));
-         subordinate.setSubordinateType(subordinateTypeService.getById(dto.subordinateTypeId()));
-         subordinate.setStatus(statusService.getById(dto.statusId()));
-         subordinate.setStartDate(dto.startDate());
-         subordinate.setEndDate(dto.endDate());
-        return save(subordinate);
-       }
-        catch (DataAccessException e) {
+            Subordinate subordinate = findById(id);
+            subordinate.setEmployee(employeeService.getById(dto.employeeId()));
+            subordinate.setSubordinateEmployee(employeeService.getById(dto.subordinateEmployeeId()));
+            subordinate.setSubordinateType(subordinateTypeService.getById(dto.subordinateTypeId()));
+            subordinate.setStatus(statusService.getById(dto.statusId()));
+            subordinate.setStartDate(dto.startDate());
+            subordinate.setEndDate(dto.endDate());
+            return save(subordinate);
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -90,14 +89,13 @@ class SubordinateServiceImpl implements SubordinateService {
     private Subordinate save(Subordinate subordinate) {
         try {
             return subordinateRepository.save(subordinate);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Subordinate findById(Long id) {
-        return subordinateRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Subordinate with id: " + id + " not found"));
+        return subordinateRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Subordinate with id: " + id + " not found"));
     }
 
 }

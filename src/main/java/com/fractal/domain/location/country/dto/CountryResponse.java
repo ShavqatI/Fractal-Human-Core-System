@@ -11,4 +11,5 @@ public record CountryResponse(
         String phonePrefix,
         LocalDateTime createdDate
 
-) { }
+) {
+}

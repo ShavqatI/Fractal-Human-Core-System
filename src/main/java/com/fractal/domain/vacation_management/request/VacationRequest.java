@@ -1,6 +1,5 @@
 package com.fractal.domain.vacation_management.request;
 
-import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.Employee;
@@ -57,13 +56,13 @@ public class VacationRequest extends ApprovalWorkflow {
     @Column(name = "description")
     private String description;
 
-    @OneToMany(mappedBy = "vacationRequest", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vacationRequest", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<VacationRequestResponsibility> responsibilities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "vacationRequest", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vacationRequest", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<VacationRequestState> states = new ArrayList<>();
 
-    @OneToMany(mappedBy = "vacationRequest", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vacationRequest", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<VacationRequestMedicalInfo> medicalInfos = new ArrayList<>();
 
     public void addResponsibility(VacationRequestResponsibility responsibility) {
@@ -71,6 +70,7 @@ public class VacationRequest extends ApprovalWorkflow {
         responsibility.setVacationRequest(this);
         responsibilities.add(responsibility);
     }
+
     public void removeResponsibility(VacationRequestResponsibility responsibility) {
         if (responsibilities != null && !responsibilities.isEmpty())
             responsibilities.remove(responsibility);
@@ -81,6 +81,7 @@ public class VacationRequest extends ApprovalWorkflow {
         medicalInfo.setVacationRequest(this);
         medicalInfos.add(medicalInfo);
     }
+
     public void removeMedicalInfo(VacationRequestMedicalInfo medicalInfo) {
         if (medicalInfos != null && !medicalInfos.isEmpty())
             medicalInfos.remove(medicalInfo);

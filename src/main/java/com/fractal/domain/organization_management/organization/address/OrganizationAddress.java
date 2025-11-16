@@ -20,6 +20,6 @@ import lombok.experimental.SuperBuilder;
 public class OrganizationAddress extends Address {
 
     @ManyToOne
-    @JoinColumn(name ="organization_id", referencedColumnName = "id")
+    @JoinColumn(name = "organization_id", referencedColumnName = "id")
     private Organization organization;
 }

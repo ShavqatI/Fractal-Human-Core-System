@@ -7,4 +7,5 @@ public record HayEvaluationRequest(
         Double point,
         Long statusId
 
-) implements GradingEvaluationRequest { }
+) implements GradingEvaluationRequest {
+}

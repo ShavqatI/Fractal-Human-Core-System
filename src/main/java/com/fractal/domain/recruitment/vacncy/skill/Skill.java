@@ -18,6 +18,6 @@ public class Skill extends AbstractEntity {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "vacancy_id",referencedColumnName = "id")
+    @JoinColumn(name = "vacancy_id", referencedColumnName = "id")
     private Vacancy vacancy;
 }

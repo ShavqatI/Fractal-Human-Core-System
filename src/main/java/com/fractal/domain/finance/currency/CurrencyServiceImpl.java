@@ -31,7 +31,7 @@ class CurrencyServiceImpl implements CurrencyService {
 
     @Override
     public Currency getByCode(String code) {
-        return currencyRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Currency with code: " + code + " not found"));
+        return currencyRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Currency with code: " + code + " not found"));
 
     }
 
@@ -49,15 +49,14 @@ class CurrencyServiceImpl implements CurrencyService {
             currency.setNumericCode(dto.numericCode());
             currency.setCountry(countryService.getById(dto.countryId()));
             return save(currency);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      currencyRepository.delete(findById(id));
+        currencyRepository.delete(findById(id));
     }
 
     @Override
@@ -94,13 +93,12 @@ class CurrencyServiceImpl implements CurrencyService {
     private Currency save(Currency gender) {
         try {
             return currencyRepository.save(gender);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Currency findById(Long id) {
-        return currencyRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Currency with id: " + id + " not found"));
+        return currencyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Currency with id: " + id + " not found"));
     }
 }

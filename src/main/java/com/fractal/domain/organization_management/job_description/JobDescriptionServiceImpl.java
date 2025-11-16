@@ -17,6 +17,7 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
 
     private final JobDescriptionRepository jobDescriptionRepository;
     private final JobDescriptionMapperService mapperService;
+
     @Override
     @Transactional
     public JobDescription create(JobDescriptionRequest dto) {
@@ -37,10 +38,9 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
     @Transactional
     public JobDescription update(Long id, JobDescriptionRequest dto) {
         try {
-            JobDescription jobDescription = mapperService.toEntity(findById(id),dto);
+            JobDescription jobDescription = mapperService.toEntity(findById(id), dto);
             return save(jobDescription);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -60,13 +60,12 @@ class JobDescriptionServiceImpl implements JobDescriptionService {
     public JobDescription save(JobDescription jobDescription) {
         try {
             return jobDescriptionRepository.save(jobDescription);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private JobDescription findById(Long id) {
-        return jobDescriptionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("JobDescription with id: " + id + " not found"));
+        return jobDescriptionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("JobDescription with id: " + id + " not found"));
     }
 }

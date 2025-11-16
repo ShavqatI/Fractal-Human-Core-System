@@ -6,7 +6,9 @@ import com.fractal.domain.testing.test.session.answer.dto.AnswerSubmissionRespon
 
 public interface AnswerSubmissionMapperService {
     AnswerSubmissionResponse toDTO(AnswerSubmission submission);
+
     AnswerSubmission toEntity(AnswerSubmissionRequest dto);
+
     AnswerSubmission toEntity(AnswerSubmission submission, AnswerSubmissionRequest dto);
 }
 

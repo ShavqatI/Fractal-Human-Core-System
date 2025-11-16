@@ -8,9 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface MilitaryServiceResourceRepository extends JpaRepository<MilitaryServiceResource,Long> {
+public interface MilitaryServiceResourceRepository extends JpaRepository<MilitaryServiceResource, Long> {
 
     List<MilitaryServiceResource> findAllByMilitaryServiceId(Long militaryServiceId);
+
     Optional<MilitaryServiceResource> findByMilitaryServiceIdAndId(Long militaryServiceId, Long id);
 
 }

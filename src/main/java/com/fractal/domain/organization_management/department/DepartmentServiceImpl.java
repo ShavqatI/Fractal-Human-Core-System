@@ -18,11 +18,12 @@ class DepartmentServiceImpl implements DepartmentService {
 
     private final DepartmentRepository departmentRepository;
     private final DepartmentMapperService mapperService;
+
     @Override
     @Transactional
     public Department create(DepartmentRequest dto) {
         Department department = mapperService.toEntity(dto);
-        department= generateLevelMap(department);
+        department = generateLevelMap(department);
         department = generateCode(department);
         return save(department);
     }
@@ -39,7 +40,7 @@ class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department getByCode(String code) {
-        return departmentRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Department with code : " + code + " not found"));
+        return departmentRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Department with code : " + code + " not found"));
     }
 
     @Override
@@ -50,9 +51,8 @@ class DepartmentServiceImpl implements DepartmentService {
     @Override
     public Department update(Long id, DepartmentRequest dto) {
         try {
-          return save(mapperService.toEntity(findById(id),dto));
-        }
-        catch (DataAccessException e) {
+            return save(mapperService.toEntity(findById(id), dto));
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -80,7 +80,7 @@ class DepartmentServiceImpl implements DepartmentService {
             throw new RuntimeException("Child can not have same organization unit as parent ");
         }
         department.addChild(child);
-        department= generateLevelMap(department);
+        department = generateLevelMap(department);
         department = generateCode(department);
         return save(department);
     }
@@ -88,15 +88,15 @@ class DepartmentServiceImpl implements DepartmentService {
     @Override
     public Department updateChild(Long id, Long childId, DepartmentRequest dto) {
         var department = findById(id);
-        var child = department.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
-        update(child.getId(),dto);
+        var child = department.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        update(child.getId(), dto);
         return save(department);
     }
 
     @Override
     public Department deleteChild(Long id, Long childId) {
         var department = findById(id);
-        var child = department.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        var child = department.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
         department.removeChild(child);
         return save(department);
     }
@@ -104,59 +104,58 @@ class DepartmentServiceImpl implements DepartmentService {
     private Department save(Department department) {
         try {
             return departmentRepository.save(department);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Department findById(Long id) {
-        return departmentRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Department with id: " + id + " not found"));
+        return departmentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Department with id: " + id + " not found"));
     }
 
     public Department generateLevelMap(Department department) {
         if (department.getId() == null) {
-           if(department.getLevelMap() == null) {
-               String levelMap =  department.getLevelMap() != null ? department.getLevelMap() : "001";
-               if (department.getOrganizationUnit().getLevel() == 1) {
-                   var lastDepartment =   departmentRepository.findFirstByOrderByIdDesc();
-                   if (lastDepartment.isPresent()) {
-                       String lastLevel = lastDepartment.get().getLevelMap().substring(0, 3);
-                       int nextNumber = Integer.parseInt(lastLevel) + 1;
-                       levelMap = String.format("%03d", nextNumber);
-                   }
-               }
-               department.setLevelMap(levelMap);
+            if (department.getLevelMap() == null) {
+                String levelMap = department.getLevelMap() != null ? department.getLevelMap() : "001";
+                if (department.getOrganizationUnit().getLevel() == 1) {
+                    var lastDepartment = departmentRepository.findFirstByOrderByIdDesc();
+                    if (lastDepartment.isPresent()) {
+                        String lastLevel = lastDepartment.get().getLevelMap().substring(0, 3);
+                        int nextNumber = Integer.parseInt(lastLevel) + 1;
+                        levelMap = String.format("%03d", nextNumber);
+                    }
+                }
+                department.setLevelMap(levelMap);
             }
-         }
+        }
 
-        if (department.getChildren() != null ) {
+        if (department.getChildren() != null) {
             for (int i = 0; i < department.getChildren().size(); i++) {
                 if (department.getChildren().get(i).getLevelMap() == null) {
                     String childLevel = department.getLevelMap() + "-" + String.format("%03d", i + 1);
                     department.getChildren().get(i).setLevelMap(childLevel);
                 }
-               generateLevelMap(department.getChildren().get(i));
+                generateLevelMap(department.getChildren().get(i));
             }
         }
         return department;
     }
 
     private Department generateCode(Department department) {
-        if(department.getCode() == null) {
-            String code = department.getOrganizationUnit().getCode() + "_" + department.getLevelMap().replace("-","_");
+        if (department.getCode() == null) {
+            String code = department.getOrganizationUnit().getCode() + "_" + department.getLevelMap().replace("-", "_");
             department.setCode(code);
         }
-        if (department.getChildren() != null ) {
+        if (department.getChildren() != null) {
             for (int i = 0; i < department.getChildren().size(); i++) {
                 if (department.getChildren().get(i).getCode() == null) {
-                    String code = department.getOrganizationUnit().getCode() + "_" + department.getLevelMap().replace("-","_");
+                    String code = department.getOrganizationUnit().getCode() + "_" + department.getLevelMap().replace("-", "_");
                     department.setCode(code);
                 }
                 generateCode(department.getChildren().get(i));
             }
         }
-       return department;
+        return department;
     }
 
 }

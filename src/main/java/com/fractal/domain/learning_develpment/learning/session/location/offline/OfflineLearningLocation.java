@@ -19,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 public class OfflineLearningLocation extends LearningLocation {
 
-    @OneToMany(mappedBy = "offlineLearningLocation", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "offlineLearningLocation", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OfflineLearningLocationAddress> addresses = new ArrayList<>();
 
     public void addAddress(OfflineLearningLocationAddress address) {
@@ -27,6 +27,7 @@ public class OfflineLearningLocation extends LearningLocation {
         address.setOfflineLearningLocation(this);
         addresses.add(address);
     }
+
     public void removeAddress(OfflineLearningLocationAddress address) {
         if (addresses != null && !addresses.isEmpty()) {
             addresses.remove(address);

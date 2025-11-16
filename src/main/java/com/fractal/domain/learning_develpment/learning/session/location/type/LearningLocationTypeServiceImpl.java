@@ -14,9 +14,10 @@ import java.util.List;
 class LearningLocationTypeServiceImpl implements LearningLocationTypeService {
 
     private final LearningLocationTypeRepository learningLocationTypeRepository;
+
     @Override
     public LearningLocationType create(LearningLocationTypeRequest dto) {
-       return save(toEntity(dto));
+        return save(toEntity(dto));
     }
 
     @Override
@@ -26,8 +27,7 @@ class LearningLocationTypeServiceImpl implements LearningLocationTypeService {
             learningLocationType.setCode(dto.code());
             learningLocationType.setName(dto.name());
             return save(learningLocationType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -40,7 +40,7 @@ class LearningLocationTypeServiceImpl implements LearningLocationTypeService {
 
     @Override
     public LearningLocationType getByCode(String code) {
-        return learningLocationTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
+        return learningLocationTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
     }
 
     @Override
@@ -50,7 +50,7 @@ class LearningLocationTypeServiceImpl implements LearningLocationTypeService {
 
     @Override
     public void deleteById(Long id) {
-       learningLocationTypeRepository.delete(findById(id));
+        learningLocationTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -62,6 +62,7 @@ class LearningLocationTypeServiceImpl implements LearningLocationTypeService {
                 learningLocationType.getCreatedDate()
         );
     }
+
     private LearningLocationType toEntity(LearningLocationTypeRequest dto) {
         return LearningLocationType.builder()
                 .code(dto.code())
@@ -72,14 +73,13 @@ class LearningLocationTypeServiceImpl implements LearningLocationTypeService {
     private LearningLocationType save(LearningLocationType learningLocationType) {
         try {
             return learningLocationTypeRepository.save(learningLocationType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private LearningLocationType findById(Long id) {
-        return learningLocationTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
+        return learningLocationTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
     }
 
 }

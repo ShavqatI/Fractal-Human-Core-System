@@ -31,7 +31,6 @@ public class GradeMatrixServiceImpl implements GradeMatrixService {
     }
 
 
-
     @Override
     public List<GradeMatrix> getAllByGradeId(Long gradeId) {
         return gradeMatrixRepository.findAllByGradeId(gradeId);
@@ -39,7 +38,7 @@ public class GradeMatrixServiceImpl implements GradeMatrixService {
 
     @Override
     public GradeMatrix getById(Long gradeId, Long id) {
-        return gradeMatrixRepository.findByGradeIdAndId(gradeId,id).orElseThrow(()-> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
+        return gradeMatrixRepository.findByGradeIdAndId(gradeId, id).orElseThrow(() -> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
     }
 
     @Override
@@ -48,8 +47,8 @@ public class GradeMatrixServiceImpl implements GradeMatrixService {
         var grade = gradeService.getById(gradeId);
         var matrix = grade.getMatrices()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
-        matrix = gradeMatrixRepository.save(mapperService.toEntity(matrix,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
+        matrix = gradeMatrixRepository.save(mapperService.toEntity(matrix, dto));
         gradeService.save(grade);
         return matrix;
     }
@@ -59,7 +58,7 @@ public class GradeMatrixServiceImpl implements GradeMatrixService {
         var grade = gradeService.getById(gradeId);
         var matrix = grade.getMatrices()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
         grade.removeMatrix(matrix);
         gradeService.save(grade);
     }

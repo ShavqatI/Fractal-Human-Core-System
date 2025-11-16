@@ -42,5 +42,5 @@ public record CandidateResponse(
         List<CandidateResourceResponse> resources,
         StatusCompactResponse status,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

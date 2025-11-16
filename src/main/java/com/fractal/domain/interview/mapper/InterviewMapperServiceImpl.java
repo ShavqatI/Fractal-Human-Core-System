@@ -66,22 +66,22 @@ class InterviewMapperServiceImpl implements InterviewMapperService {
 
     @Override
     public Interview toEntity(InterviewRequest dto) {
-        return mapToEntity(new Interview(),dto);
+        return mapToEntity(new Interview(), dto);
     }
 
     @Override
     public Interview toEntity(Interview interview, InterviewRequest dto) {
-       return mapToEntity(interview,dto);
+        return mapToEntity(interview, dto);
     }
 
-    private Interview mapToEntity(Interview interview , InterviewRequest dto) {
+    private Interview mapToEntity(Interview interview, InterviewRequest dto) {
         interview.setInterviewType(interviewTypeService.getById(dto.interviewTypeId()));
         interview.setScheduledTime(dto.scheduledTime());
         interview.setDurationMinutes(dto.durationMinutes());
         interview.setDescription(dto.description());
         interview.setNotes(dto.notes());
         interview.setDetails(dto.details());
-        dto.interviewers().forEach(interviewer-> interview.addInterviewer(interviewerMapperService.toEntity(interviewer)));
+        dto.interviewers().forEach(interviewer -> interview.addInterviewer(interviewerMapperService.toEntity(interviewer)));
         dto.interviewees().forEach(interviewee -> interview.addInterviewee(intervieweeMapperService.toEntity(interviewee)));
         interview.setStatus(statusService.getById(dto.statusId()));
         return interview;

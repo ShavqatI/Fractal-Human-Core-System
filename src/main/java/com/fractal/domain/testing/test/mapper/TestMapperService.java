@@ -7,8 +7,11 @@ import com.fractal.domain.testing.test.dto.TestResponse;
 
 public interface TestMapperService {
     TestResponse toDTO(Test test);
+
     TestCompactResponse toCompactDTO(Test test);
+
     Test toEntity(TestRequest dto);
+
     Test toEntity(Test test, TestRequest dto);
 }
 

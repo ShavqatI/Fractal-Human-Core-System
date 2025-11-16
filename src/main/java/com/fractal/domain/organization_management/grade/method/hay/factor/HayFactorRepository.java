@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-interface HayFactorRepository extends JpaRepository<HayFactor,Long> {
-   Optional<HayFactor> findByCode(String code);
+interface HayFactorRepository extends JpaRepository<HayFactor, Long> {
+    Optional<HayFactor> findByCode(String code);
 }

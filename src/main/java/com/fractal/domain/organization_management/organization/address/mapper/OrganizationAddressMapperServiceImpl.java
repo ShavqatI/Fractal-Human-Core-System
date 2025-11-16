@@ -48,12 +48,12 @@ class OrganizationAddressMapperServiceImpl implements OrganizationAddressMapperS
 
     @Override
     public OrganizationAddress toEntity(OrganizationAddressRequest dto) {
-        return mapToEntity(new OrganizationAddress(),dto);
+        return mapToEntity(new OrganizationAddress(), dto);
     }
 
     @Override
     public OrganizationAddress toEntity(OrganizationAddress address, OrganizationAddressRequest dto) {
-       return mapToEntity(address,dto);
+        return mapToEntity(address, dto);
     }
 
     private OrganizationAddress mapToEntity(OrganizationAddress address, OrganizationAddressRequest dto) {

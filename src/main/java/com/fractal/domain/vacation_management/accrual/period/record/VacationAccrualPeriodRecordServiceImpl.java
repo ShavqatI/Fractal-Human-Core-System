@@ -37,7 +37,7 @@ public class VacationAccrualPeriodRecordServiceImpl implements VacationAccrualPe
 
     @Override
     public VacationAccrualPeriodRecord getById(Long periodId, Long id) {
-        return recordRepository.findByVacationAccrualPeriodIdAndId(periodId,id).orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        return recordRepository.findByVacationAccrualPeriodIdAndId(periodId, id).orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
     }
 
     @Override
@@ -46,8 +46,8 @@ public class VacationAccrualPeriodRecordServiceImpl implements VacationAccrualPe
         var period = accrualPeriodService.getById(periodId);
         var record = period.getRecords()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
-        record = recordRepository.save(mapperService.toEntity(record,dto));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        record = recordRepository.save(mapperService.toEntity(record, dto));
         accrualPeriodService.save(period);
         return record;
     }
@@ -58,7 +58,7 @@ public class VacationAccrualPeriodRecordServiceImpl implements VacationAccrualPe
         var period = accrualPeriodService.getById(periodId);
         var record = period.getRecords()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
         period.removeRecord(record);
         accrualPeriodService.save(period);
     }

@@ -21,6 +21,7 @@ class AnswerSubmissionMapperServiceImpl implements AnswerSubmissionMapperService
     private final SelectedAnswerMapperService answerMapperService;
     private final QuestionService questionService;
     private final StatusService statusService;
+
     @Override
     public AnswerSubmissionResponse toDTO(AnswerSubmission submission) {
         return new AnswerSubmissionResponse(
@@ -50,7 +51,7 @@ class AnswerSubmissionMapperServiceImpl implements AnswerSubmissionMapperService
     private AnswerSubmission mapToEntity(AnswerSubmission submission, AnswerSubmissionRequest dto) {
         submission.setQuestion(questionService.getById(dto.questionId()));
         submission.setStatus(statusService.getById(dto.statusId()));
-        dto.answers().forEach(answer-> submission.addAnswer(answerMapperService.toEntity(answer)));
+        dto.answers().forEach(answer -> submission.addAnswer(answerMapperService.toEntity(answer)));
         return submission;
     }
 }

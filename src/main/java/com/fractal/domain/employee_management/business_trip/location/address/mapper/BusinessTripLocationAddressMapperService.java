@@ -8,9 +8,13 @@ import com.fractal.domain.employee_management.business_trip.location.address.dto
 
 public interface BusinessTripLocationAddressMapperService {
     BusinessTripLocationAddressResponse toDTO(BusinessTripLocationAddress address);
+
     BusinessTripLocationAddress toEntity(ExternalBusinessTripLocationAddressRequest dto);
+
     BusinessTripLocationAddress toEntity(InternalBusinessTripLocationAddressRequest dto);
+
     BusinessTripLocationAddress toEntity(BusinessTripLocationAddressRequest dto);
+
     BusinessTripLocationAddress toEntity(BusinessTripLocationAddress address, BusinessTripLocationAddressRequest dto);
 }
 

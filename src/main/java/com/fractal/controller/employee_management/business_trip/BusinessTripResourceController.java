@@ -28,23 +28,27 @@ public class BusinessTripResourceController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<ResourceResponse> create(@PathVariable Long businessTripId, @RequestParam("file") MultipartFile file) {
-        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(businessTripId,file)), HttpStatus.CREATED);
+        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(businessTripId, file)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<ResourceResponse>> getAll(@PathVariable Long businessTripId) {
         return ResponseEntity.ok(resourceService.getAllByBusinessTripId(businessTripId).stream().map(resourceService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ResourceResponse> getById(@PathVariable Long businessTripId,@PathVariable Long id) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(businessTripId,id)));
+    public ResponseEntity<ResourceResponse> getById(@PathVariable Long businessTripId, @PathVariable Long id) {
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(businessTripId, id)));
     }
-    @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ResourceResponse> update(@PathVariable Long businessTripId, @PathVariable Long id,@RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(businessTripId,id, file)));
+
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ResourceResponse> update(@PathVariable Long businessTripId, @PathVariable Long id, @RequestParam("file") MultipartFile file) {
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(businessTripId, id, file)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long businessTripId, @PathVariable Long id) {
-        resourceService.delete(businessTripId,id);
+        resourceService.delete(businessTripId, id);
         return ResponseEntity.noContent().build();
     }
 
@@ -68,7 +72,6 @@ public class BusinessTripResourceController {
             return ResponseEntity.badRequest().build();
         }
     }
-
 
 
 }

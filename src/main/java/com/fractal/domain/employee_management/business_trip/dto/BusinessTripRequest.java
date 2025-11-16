@@ -20,4 +20,5 @@ public record BusinessTripRequest(
         List<BusinessTripExpenseRequest> expenses,
         List<BusinessTripLocationRequest> locations,
         List<MultipartFile> files
-) { }
+) {
+}

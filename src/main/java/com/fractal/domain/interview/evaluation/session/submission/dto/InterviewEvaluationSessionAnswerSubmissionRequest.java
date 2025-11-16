@@ -8,4 +8,5 @@ public record InterviewEvaluationSessionAnswerSubmissionRequest(
         Long questionId,
         List<InterviewEvaluationSessionSelectedAnswerRequest> selectedAnswers,
         Long statusId
-) {}
+) {
+}

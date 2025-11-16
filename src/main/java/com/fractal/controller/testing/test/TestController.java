@@ -25,10 +25,12 @@ public class TestController {
     public ResponseEntity<TestResponse> create(@RequestBody @Valid TestRequest dto) {
         return new ResponseEntity<>(testService.toDTO(testService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<TestResponse>> getAll() {
         return ResponseEntity.ok(testService.getAll().stream().map(testService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<TestResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(testService.toDTO(testService.getById(id)));
@@ -38,14 +40,17 @@ public class TestController {
     public ResponseEntity<List<TestCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(testService.getAll().stream().map(testService::toCompactDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/compact/{id}")
     public ResponseEntity<TestCompactResponse> getByIdCompact(@PathVariable Long id) {
         return ResponseEntity.ok(testService.toCompactDTO(testService.getById(id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<TestResponse> update(@PathVariable Long id, @RequestBody @Valid TestRequest dto) {
-      return  ResponseEntity.ok(testService.toDTO(testService.update(id, dto)));
+        return ResponseEntity.ok(testService.toDTO(testService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         testService.deleteById(id);

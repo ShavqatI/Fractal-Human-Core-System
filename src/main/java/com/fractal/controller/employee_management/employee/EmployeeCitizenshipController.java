@@ -22,24 +22,27 @@ public class EmployeeCitizenshipController {
 
     @PostMapping()
     public ResponseEntity<CitizenshipResponse> create(@PathVariable Long employeeId, @RequestBody @Valid CitizenshipRequest dto) {
-        return new ResponseEntity<>(employeeCitizenshipService.toDTO(employeeCitizenshipService.create(employeeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(employeeCitizenshipService.toDTO(employeeCitizenshipService.create(employeeId, dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<CitizenshipResponse>> getAll(@PathVariable Long employeeId) {
         return ResponseEntity.ok(employeeCitizenshipService.getAllByEmployeeId(employeeId).stream().map(employeeCitizenshipService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<CitizenshipResponse> getById(@PathVariable Long employeeId, @PathVariable Long id) {
-        return ResponseEntity.ok(employeeCitizenshipService.toDTO(employeeCitizenshipService.getById(employeeId,id)));
+        return ResponseEntity.ok(employeeCitizenshipService.toDTO(employeeCitizenshipService.getById(employeeId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<CitizenshipResponse> update(@PathVariable Long employeeId, @PathVariable Long id, @RequestBody @Valid CitizenshipRequest dto) {
-        return ResponseEntity.ok(employeeCitizenshipService.toDTO(employeeCitizenshipService.update(employeeId,id, dto)));
+        return ResponseEntity.ok(employeeCitizenshipService.toDTO(employeeCitizenshipService.update(employeeId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long employeeId, @PathVariable Long id) {
-        employeeCitizenshipService.delete(employeeId,id);
+        employeeCitizenshipService.delete(employeeId, id);
         return ResponseEntity.noContent().build();
     }
 

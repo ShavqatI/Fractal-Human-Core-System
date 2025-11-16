@@ -22,4 +22,5 @@ public record InternalEmploymentRequest(
         List<CompensationComponentRequest> compensationComponents,
         Long statusId
 
-) implements EmploymentRequest { }
+) implements EmploymentRequest {
+}

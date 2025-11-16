@@ -37,7 +37,7 @@ public class CandidateEducationServiceImpl implements CandidateEducationService 
 
     @Override
     public CandidateEducation getById(Long candidateId, Long id) {
-        return educationRepository.findByCandidateIdAndId(candidateId,id).orElseThrow(()-> new ResourceNotFoundException("Candidate education with id: " + id + " not found"));
+        return educationRepository.findByCandidateIdAndId(candidateId, id).orElseThrow(() -> new ResourceNotFoundException("Candidate education with id: " + id + " not found"));
     }
 
     @Override
@@ -46,8 +46,8 @@ public class CandidateEducationServiceImpl implements CandidateEducationService 
         var candidate = candidateService.getById(candidateId);
         var education = candidate.getEducations()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate education with id: " + id + " not found"));
-        education = educationRepository.save(educationMapperService.toEntity(education,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Candidate education with id: " + id + " not found"));
+        education = educationRepository.save(educationMapperService.toEntity(education, dto));
         candidateService.save(candidate);
         return education;
     }
@@ -57,7 +57,7 @@ public class CandidateEducationServiceImpl implements CandidateEducationService 
         var candidate = candidateService.getById(candidateId);
         var education = candidate.getEducations()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate education with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Candidate education with id: " + id + " not found"));
         candidate.removeEducation(education);
         candidateService.save(candidate);
     }

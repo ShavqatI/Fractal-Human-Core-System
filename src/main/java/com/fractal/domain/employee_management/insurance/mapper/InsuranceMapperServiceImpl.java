@@ -29,32 +29,32 @@ class InsuranceMapperServiceImpl implements InsuranceMapperService {
     @Override
     public InsuranceResponse toDTO(Insurance insurance) {
         return new InsuranceResponse(
-                   insurance.getId(),
-                   employeeService.toCompactDTO(insurance.getEmployee()),
-                   insuranceTypeService.toDTO(insurance.getInsuranceType()),
-                   insuranceProviderService.toCompactDTO(insurance.getInsuranceProvider()),
-                   insurance.getPolicyNumber(),
-                   insurance.getStartDate(),
-                   insurance.getEndDate(),
-                   Optional.ofNullable(insurance.getCoverages())
+                insurance.getId(),
+                employeeService.toCompactDTO(insurance.getEmployee()),
+                insuranceTypeService.toDTO(insurance.getInsuranceType()),
+                insuranceProviderService.toCompactDTO(insurance.getInsuranceProvider()),
+                insurance.getPolicyNumber(),
+                insurance.getStartDate(),
+                insurance.getEndDate(),
+                Optional.ofNullable(insurance.getCoverages())
                         .orElse(emptyList())
                         .stream()
                         .map(coverageMapperService::toDTO)
                         .collect(Collectors.toList()),
-                   statusService.toCompactDTO(insurance.getStatus()),
-                   insurance.getCreatedDate()
+                statusService.toCompactDTO(insurance.getStatus()),
+                insurance.getCreatedDate()
 
         );
     }
 
     @Override
     public Insurance toEntity(InsuranceRequest dto) {
-        return mapToEntity(new Insurance(),dto);
+        return mapToEntity(new Insurance(), dto);
     }
 
     @Override
     public Insurance toEntity(Insurance insurance, InsuranceRequest dto) {
-        return mapToEntity(insurance,dto);
+        return mapToEntity(insurance, dto);
     }
 
     private Insurance mapToEntity(Insurance insurance, InsuranceRequest dto) {
@@ -65,7 +65,7 @@ class InsuranceMapperServiceImpl implements InsuranceMapperService {
         insurance.setStartDate(dto.startDate());
         insurance.setEndDate(dto.endDate());
         insurance.setStatus(statusService.getById(dto.statusId()));
-        dto.coverages().forEach(coverage-> insurance.addCoverage(coverageMapperService.toEntity(coverage)));
+        dto.coverages().forEach(coverage -> insurance.addCoverage(coverageMapperService.toEntity(coverage)));
         return insurance;
     }
 

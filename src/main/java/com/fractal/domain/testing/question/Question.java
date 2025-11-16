@@ -30,7 +30,7 @@ public class Question extends AbstractEntity {
     @JoinColumn(name = "question_type_id", referencedColumnName = "id")
     private QuestionType questionType;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Answer> answers = new ArrayList<>();
 
     @Column(name = "max_selectable_options")
@@ -49,6 +49,7 @@ public class Question extends AbstractEntity {
         answer.setQuestion(this);
         answers.add(answer);
     }
+
     public void removeAnswer(Answer answer) {
         if (answers != null && !answers.isEmpty())
             answers.remove(answer);

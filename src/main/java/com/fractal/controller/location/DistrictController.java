@@ -34,6 +34,7 @@ public class DistrictController {
     public ResponseEntity<DistrictResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(districtService.toDTO(districtService.getById(id)));
     }
+
     @GetMapping("compact")
     public ResponseEntity<List<DistrictCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(districtService.getAll().stream().map(districtService::toCompactDTO).collect(Collectors.toList()));
@@ -48,12 +49,14 @@ public class DistrictController {
     public ResponseEntity<DistrictResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(districtService.toDTO(districtService.getByCode(code)));
     }
+
     @GetMapping("/region/{id}")
-    public ResponseEntity<List<DistrictResponse>>  getByRegion(@PathVariable Long id) {
+    public ResponseEntity<List<DistrictResponse>> getByRegion(@PathVariable Long id) {
         return ResponseEntity.ok(districtService.getByRegionId(id).stream().map(districtService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/city/{id}")
-    public ResponseEntity<List<DistrictResponse>>  getByCity(@PathVariable Long id) {
+    public ResponseEntity<List<DistrictResponse>> getByCity(@PathVariable Long id) {
         return ResponseEntity.ok(districtService.getByCityId(id).stream().map(districtService::toDTO).collect(Collectors.toList()));
     }
 

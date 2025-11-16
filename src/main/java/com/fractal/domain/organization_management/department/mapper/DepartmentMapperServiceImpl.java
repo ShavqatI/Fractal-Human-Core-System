@@ -54,12 +54,12 @@ class DepartmentMapperServiceImpl implements DepartmentMapperService {
 
     @Override
     public Department toEntity(DepartmentRequest dto) {
-        return mapToEntity(new Department(),dto);
+        return mapToEntity(new Department(), dto);
     }
 
     @Override
     public Department toEntity(Department department, DepartmentRequest dto) {
-       return mapToEntity(department,dto);
+        return mapToEntity(department, dto);
     }
 
     private Department mapToEntity(Department department, DepartmentRequest dto) {
@@ -70,11 +70,9 @@ class DepartmentMapperServiceImpl implements DepartmentMapperService {
         department.setCloseDate(dto.closeDate());
         department.setCloseReason(dto.closeReason());
         department.setStatus(statusService.getById(dto.statusId()));
-        dto.children().forEach(child->department.addChild(toEntity(child)));
+        dto.children().forEach(child -> department.addChild(toEntity(child)));
         return department;
     }
-
-
 
 
 }

@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface EducationResourceRepository extends JpaRepository<EducationResource,Long> {
+public interface EducationResourceRepository extends JpaRepository<EducationResource, Long> {
     List<EducationResource> findAllByEducationId(Long educationId);
+
     Optional<EducationResource> findByEducationIdAndId(Long educationId, Long id);
 }

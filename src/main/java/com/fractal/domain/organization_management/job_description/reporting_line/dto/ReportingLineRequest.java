@@ -5,4 +5,5 @@ public record ReportingLineRequest(
         Long reportingTypeId,
         Long statusId
 
-) {}
+) {
+}

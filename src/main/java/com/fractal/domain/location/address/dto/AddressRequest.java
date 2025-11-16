@@ -29,4 +29,5 @@ public record AddressRequest(
         Double longitude,
         LocalDate startDate,
         LocalDate endDate
-) { }
+) {
+}

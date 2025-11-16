@@ -1,10 +1,10 @@
 package com.fractal.domain.employment.internal.compensation_component.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employment.payment_frequency.PaymentFrequencyService;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
+import com.fractal.domain.employment.payment_frequency.PaymentFrequencyService;
 import com.fractal.domain.employment.salary_classification.SalaryClassificationService;
 import com.fractal.domain.finance.currency.CurrencyService;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +20,7 @@ class CompensationComponentMapperServiceImpl implements CompensationComponentMap
     private final PaymentFrequencyService paymentFrequencyService;
     private final CurrencyService currencyService;
     private final StatusService statusService;
+
     @Override
     public CompensationComponentResponse toDTO(CompensationComponent compensationComponent) {
         return new CompensationComponentResponse(
@@ -41,12 +42,12 @@ class CompensationComponentMapperServiceImpl implements CompensationComponentMap
 
     @Override
     public CompensationComponent toEntity(CompensationComponentRequest dto) {
-        return mapToEntity(new CompensationComponent(),dto);
+        return mapToEntity(new CompensationComponent(), dto);
     }
 
     @Override
     public CompensationComponent toEntity(CompensationComponent compensationComponent, CompensationComponentRequest dto) {
-       return mapToEntity(compensationComponent,dto);
+        return mapToEntity(compensationComponent, dto);
     }
 
     private CompensationComponent mapToEntity(CompensationComponent compensationComponent, CompensationComponentRequest dto) {

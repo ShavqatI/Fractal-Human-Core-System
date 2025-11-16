@@ -36,15 +36,13 @@ class ExternalInstructorServiceImpl implements ExternalInstructorService {
     }
 
 
-
     @Override
     @Transactional
     public ExternalInstructor update(Long id, ExternalInstructorRequest dto) {
         try {
-            ExternalInstructor trainer = mapperService.toEntity(findById(id),dto);
+            ExternalInstructor trainer = mapperService.toEntity(findById(id), dto);
             return save(trainer);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -53,7 +51,7 @@ class ExternalInstructorServiceImpl implements ExternalInstructorService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      instructorRepository.delete(findById(id));
+        instructorRepository.delete(findById(id));
     }
 
     @Override
@@ -77,13 +75,12 @@ class ExternalInstructorServiceImpl implements ExternalInstructorService {
     public ExternalInstructor save(ExternalInstructor instructor) {
         try {
             return instructorRepository.save(instructor);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private ExternalInstructor findById(Long id) {
-        return instructorRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("External Instructor with id: " + id + " not found"));
+        return instructorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("External Instructor with id: " + id + " not found"));
     }
 }

@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface BenchmarkingTypeRepository extends JpaRepository<BenchmarkingType,Long> {
+interface BenchmarkingTypeRepository extends JpaRepository<BenchmarkingType, Long> {
     Optional<BenchmarkingType> findById(Long id);
+
     Optional<BenchmarkingType> findByCode(String code);
+
     List<BenchmarkingType> findAll();
 }

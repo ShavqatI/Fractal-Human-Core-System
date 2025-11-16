@@ -12,7 +12,7 @@ class DepartmentServiceTest {
                         .organizationUnit(null)
                         .levelMap(null)
                         .name("Dep#1")
-                .build();
+                        .build();
         Department child =
                 Department.builder()
                         .organizationUnit(null)
@@ -30,12 +30,9 @@ class DepartmentServiceTest {
         department.setChildren(List.of(child));
 
 
-
-
         //assignLevelMap(department);
 
     }
-
 
 
 }

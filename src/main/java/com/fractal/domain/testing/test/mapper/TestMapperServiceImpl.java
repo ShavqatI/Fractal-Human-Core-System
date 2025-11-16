@@ -20,6 +20,7 @@ class TestMapperServiceImpl implements TestMapperService {
 
     private final QuestionMapperService questionMapperService;
     private final StatusService statusService;
+
     @Override
     public TestResponse toDTO(Test test) {
         return new TestResponse(
@@ -62,7 +63,7 @@ class TestMapperServiceImpl implements TestMapperService {
         test.setDescription(dto.description());
         test.setDurationMinutes(dto.durationMinutes());
         test.setStatus(statusService.getById(dto.statusId()));
-        dto.questions().forEach(question-> test.addQuestion(questionMapperService.toEntity(question)));
+        dto.questions().forEach(question -> test.addQuestion(questionMapperService.toEntity(question)));
         return test;
     }
 }

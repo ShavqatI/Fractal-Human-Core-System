@@ -22,23 +22,27 @@ public class AnswerSubmissionController {
 
     @PostMapping()
     public ResponseEntity<AnswerSubmissionResponse> create(@PathVariable Long testSessionId, @RequestBody @Valid AnswerSubmissionRequest dto) {
-        return new ResponseEntity<>(submissionService.toDTO(submissionService.create(testSessionId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(submissionService.toDTO(submissionService.create(testSessionId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<AnswerSubmissionResponse>> getAll(@PathVariable Long testSessionId) {
         return ResponseEntity.ok(submissionService.getAllBySessionId(testSessionId).stream().map(submissionService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<AnswerSubmissionResponse> getById(@PathVariable Long testSessionId, @PathVariable Long id) {
-        return ResponseEntity.ok(submissionService.toDTO(submissionService.getById(testSessionId,id)));
+        return ResponseEntity.ok(submissionService.toDTO(submissionService.getById(testSessionId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<AnswerSubmissionResponse> update(@PathVariable Long testSessionId, @PathVariable Long id, @RequestBody @Valid AnswerSubmissionRequest dto) {
-        return ResponseEntity.ok(submissionService.toDTO(submissionService.update(testSessionId,id, dto)));
+        return ResponseEntity.ok(submissionService.toDTO(submissionService.update(testSessionId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long testSessionId, @PathVariable Long id) {
-        submissionService.delete(testSessionId,id);
+        submissionService.delete(testSessionId, id);
         return ResponseEntity.noContent().build();
     }
 

@@ -6,7 +6,9 @@ import com.fractal.domain.interview.evaluation.session.dto.InterviewEvaluationSe
 
 public interface InterviewEvaluationSessionMapperService {
     InterviewEvaluationSessionResponse toDTO(InterviewEvaluationSession session);
+
     InterviewEvaluationSession toEntity(InterviewEvaluationSessionRequest dto);
+
     InterviewEvaluationSession toEntity(InterviewEvaluationSession submission, InterviewEvaluationSessionRequest dto);
 }
 

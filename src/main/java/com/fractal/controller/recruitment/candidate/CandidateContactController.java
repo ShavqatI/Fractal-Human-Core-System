@@ -22,24 +22,27 @@ public class CandidateContactController {
 
     @PostMapping()
     public ResponseEntity<ContactResponse> create(@PathVariable Long candidateId, @RequestBody @Valid ContactRequest dto) {
-        return new ResponseEntity<>(contactService.toDTO(contactService.create(candidateId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(contactService.toDTO(contactService.create(candidateId, dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<ContactResponse>> getAll(@PathVariable Long candidateId) {
         return ResponseEntity.ok(contactService.getAllByCandidateId(candidateId).stream().map(contactService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ContactResponse> getById(@PathVariable Long candidateId,@PathVariable Long id) {
-        return ResponseEntity.ok(contactService.toDTO(contactService.getById(candidateId,id)));
+    public ResponseEntity<ContactResponse> getById(@PathVariable Long candidateId, @PathVariable Long id) {
+        return ResponseEntity.ok(contactService.toDTO(contactService.getById(candidateId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<ContactResponse> update(@PathVariable Long candidateId, @PathVariable Long id, @RequestBody @Valid ContactRequest dto) {
-        return ResponseEntity.ok(contactService.toDTO(contactService.update(candidateId,id, dto)));
+        return ResponseEntity.ok(contactService.toDTO(contactService.update(candidateId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long candidateId, @PathVariable Long id) {
-        contactService.delete(candidateId,id);
+        contactService.delete(candidateId, id);
         return ResponseEntity.noContent().build();
     }
 

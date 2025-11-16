@@ -7,8 +7,11 @@ import com.fractal.domain.organization_management.department.dto.DepartmentRespo
 
 public interface DepartmentMapperService {
     DepartmentResponse toDTO(Department department);
+
     DepartmentCompactResponse toCompactDTO(Department department);
+
     Department toEntity(DepartmentRequest dto);
+
     Department toEntity(Department department, DepartmentRequest dto);
 }
 

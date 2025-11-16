@@ -27,7 +27,7 @@ public class BusinessTripResourceServiceImpl implements BusinessTripResourceServ
     @Override
     public BusinessTripResource create(Long employeeId, MultipartFile file) {
         var businessTrip = businessTripService.getById(employeeId);
-        var resource = resourceMapperService.toEntity(file,resourceStoragePath);
+        var resource = resourceMapperService.toEntity(file, resourceStoragePath);
         businessTrip.addResource(resource);
         businessTripService.save(businessTrip);
         return resource;
@@ -40,7 +40,7 @@ public class BusinessTripResourceServiceImpl implements BusinessTripResourceServ
 
     @Override
     public BusinessTripResource getById(Long businessTripId, Long id) {
-        return resourceRepository.findByBusinessTripIdAndId(businessTripId,id).orElseThrow(()-> new ResourceNotFoundException("Business Trip Resource with id: " + id + " not found"));
+        return resourceRepository.findByBusinessTripIdAndId(businessTripId, id).orElseThrow(() -> new ResourceNotFoundException("Business Trip Resource with id: " + id + " not found"));
     }
 
     @Override
@@ -48,8 +48,8 @@ public class BusinessTripResourceServiceImpl implements BusinessTripResourceServ
         var businessTrip = businessTripService.getById(employeeId);
         var resource = businessTrip.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Business Trip Resource  with id: " + id + " not found"));
-        resource = resourceMapperService.toEntity(resource,file,resourceStoragePath);
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Business Trip Resource  with id: " + id + " not found"));
+        resource = resourceMapperService.toEntity(resource, file, resourceStoragePath);
         resourceRepository.save(resource);
         businessTripService.save(businessTrip);
         return resource;
@@ -60,7 +60,7 @@ public class BusinessTripResourceServiceImpl implements BusinessTripResourceServ
         var businessTrip = businessTripService.getById(employeeId);
         var resource = businessTrip.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Business Trip Resource  with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Business Trip Resource  with id: " + id + " not found"));
         fileService.delete(resource.getUrl());
         businessTrip.removeResource(resource);
         businessTripService.save(businessTrip);

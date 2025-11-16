@@ -15,12 +15,13 @@ import org.springframework.stereotype.Service;
 class GradingEvaluationMapperServiceImpl implements GradingEvaluationMapperService {
 
     private final HayEvaluationMapperService hayEvaluationMapperService;
+
     @Override
     public GradingEvaluationResponse toDTO(GradingEvaluation gradingEvaluation) {
         gradingEvaluation = (GradingEvaluation) Hibernate.unproxy(gradingEvaluation);
         if (gradingEvaluation instanceof HayEvaluation)
             return hayEvaluationMapperService.toDTO((HayEvaluation) gradingEvaluation);
-       return null;
+        return null;
     }
 
     @Override

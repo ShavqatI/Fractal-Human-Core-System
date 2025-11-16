@@ -20,7 +20,7 @@ import lombok.experimental.SuperBuilder;
 public class BusinessTripLocationAddress extends Address {
 
     @ManyToOne
-    @JoinColumn(name ="business_trip_location_id", referencedColumnName = "id")
+    @JoinColumn(name = "business_trip_location_id", referencedColumnName = "id")
     private BusinessTripLocation businessTripLocation;
 
 

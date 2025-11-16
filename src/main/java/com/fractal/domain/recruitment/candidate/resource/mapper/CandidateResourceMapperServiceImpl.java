@@ -29,14 +29,16 @@ class CandidateResourceMapperServiceImpl implements CandidateResourceMapperServi
     }
 
     @Override
-    public CandidateResource toEntity(CandidateResourceRequest dto,String resourceStoragePath) {
-        return mapToEntity(new CandidateResource(),dto, resourceStoragePath);
+    public CandidateResource toEntity(CandidateResourceRequest dto, String resourceStoragePath) {
+        return mapToEntity(new CandidateResource(), dto, resourceStoragePath);
     }
+
     @Override
-    public CandidateResource toEntity(CandidateResource resource, CandidateResourceRequest dto,String resourceStoragePath) {
-        return mapToEntity(resource,dto, resourceStoragePath);
+    public CandidateResource toEntity(CandidateResource resource, CandidateResourceRequest dto, String resourceStoragePath) {
+        return mapToEntity(resource, dto, resourceStoragePath);
     }
-    private CandidateResource mapToEntity(CandidateResource resource, CandidateResourceRequest dto,String resourceStoragePath) {
+
+    private CandidateResource mapToEntity(CandidateResource resource, CandidateResourceRequest dto, String resourceStoragePath) {
         fileService.delete(resource.getUrl());
         resource.setCandidateResourceType(resourceTypeService.getById(dto.candidateResourceTypeId()));
         resource.setFileName(dto.file().getOriginalFilename());

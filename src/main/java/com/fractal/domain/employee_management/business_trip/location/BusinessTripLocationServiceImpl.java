@@ -35,12 +35,12 @@ class BusinessTripLocationServiceImpl implements BusinessTripLocationService {
 
     @Override
     public BusinessTripLocation getById(Long businessTripId, Long id) {
-        return locationRepository.findByBusinessTripIdAndId(businessTripId,id).orElseThrow(()->new ResourceWithIdNotFoundException(this,id));
+        return locationRepository.findByBusinessTripIdAndId(businessTripId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
     public BusinessTripLocation getById(Long id) {
-        return locationRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return locationRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -53,8 +53,8 @@ class BusinessTripLocationServiceImpl implements BusinessTripLocationService {
         var businessTrip = businessTripService.getById(businessTripId);
         var location = businessTrip.getLocations()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        location = mapperService.toEntity(location,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        location = mapperService.toEntity(location, dto);
         locationRepository.save(location);
         businessTripService.save(businessTrip);
         return location;
@@ -65,7 +65,7 @@ class BusinessTripLocationServiceImpl implements BusinessTripLocationService {
         var businessTrip = businessTripService.getById(businessTripId);
         var location = businessTrip.getLocations()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         businessTrip.removeLocation(location);
         businessTripService.save(businessTrip);
     }
@@ -74,8 +74,7 @@ class BusinessTripLocationServiceImpl implements BusinessTripLocationService {
     public BusinessTripLocation save(BusinessTripLocation location) {
         try {
             return locationRepository.save(location);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }

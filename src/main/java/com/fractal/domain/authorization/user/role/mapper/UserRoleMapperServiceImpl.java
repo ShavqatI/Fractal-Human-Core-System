@@ -14,6 +14,7 @@ class UserRoleMapperServiceImpl implements UserRoleMapperService {
 
     private final RoleService roleService;
     private final StatusService statusService;
+
     @Override
     public UserRoleResponse toDTO(UserRole userRole) {
         return new UserRoleResponse(
@@ -27,14 +28,13 @@ class UserRoleMapperServiceImpl implements UserRoleMapperService {
 
     @Override
     public UserRole toEntity(UserRoleRequest dto) {
-        return mapToEntity(new UserRole(),dto);
+        return mapToEntity(new UserRole(), dto);
     }
 
     @Override
     public UserRole toEntity(UserRole userRole, UserRoleRequest dto) {
-        return mapToEntity(userRole,dto);
+        return mapToEntity(userRole, dto);
     }
-
 
 
     private UserRole mapToEntity(UserRole userRole, UserRoleRequest dto) {

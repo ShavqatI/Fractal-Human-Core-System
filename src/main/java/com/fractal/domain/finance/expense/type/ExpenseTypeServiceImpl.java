@@ -17,6 +17,7 @@ public class ExpenseTypeServiceImpl implements ExpenseTypeService {
 
     private final ExpenseTypeRepository expenseTypeRepository;
     private final ExpenseTypeCategoryService expenseTypeCategoryService;
+
     @Override
     public ExpenseType create(ExpenseTypeRequest dto) {
         return save(toEntity(dto));
@@ -29,7 +30,7 @@ public class ExpenseTypeServiceImpl implements ExpenseTypeService {
 
     @Override
     public ExpenseType getByCode(String code) {
-        return expenseTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Status with code: " + code + " not found"));
+        return expenseTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Status with code: " + code + " not found"));
 
     }
 
@@ -47,15 +48,14 @@ public class ExpenseTypeServiceImpl implements ExpenseTypeService {
             expenseType.setExpenseTypeCategory(expenseTypeCategoryService.getById(dto.categoryId()));
             expenseType.setDescription(dto.description());
             return save(expenseType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       expenseTypeRepository.delete(findById(id));
+        expenseTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -72,11 +72,11 @@ public class ExpenseTypeServiceImpl implements ExpenseTypeService {
 
     @Override
     public ExpenseTypeCompactResponse toCompactDTO(ExpenseType expenseType) {
-         return new ExpenseTypeCompactResponse(
+        return new ExpenseTypeCompactResponse(
                 expenseType.getId(),
                 expenseType.getCode(),
                 expenseType.getName()
-         );
+        );
     }
 
     private ExpenseType toEntity(ExpenseTypeRequest dto) {
@@ -91,14 +91,13 @@ public class ExpenseTypeServiceImpl implements ExpenseTypeService {
     private ExpenseType save(ExpenseType expenseType) {
         try {
             return expenseTypeRepository.save(expenseType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private ExpenseType findById(Long id) {
-        return expenseTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Status with id: " + id + " not found"));
+        return expenseTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Status with id: " + id + " not found"));
     }
 
 }

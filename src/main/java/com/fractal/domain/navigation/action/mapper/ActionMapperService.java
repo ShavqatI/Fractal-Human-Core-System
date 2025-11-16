@@ -7,8 +7,11 @@ import com.fractal.domain.navigation.action.dto.ActionResponse;
 
 public interface ActionMapperService {
     ActionResponse toDTO(Action action);
+
     ActionCompactResponse toCompactDTO(Action action);
+
     Action toEntity(ActionRequest dto);
+
     Action toEntity(Action action, ActionRequest dto);
 }
 

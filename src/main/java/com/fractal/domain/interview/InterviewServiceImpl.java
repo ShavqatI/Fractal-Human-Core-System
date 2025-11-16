@@ -30,33 +30,30 @@ class InterviewServiceImpl implements InterviewService {
     }
 
 
-
     @Override
     public Interview getById(Long id) {
-     return findById(id);
+        return findById(id);
     }
 
     @Override
     public Interview update(Long id, InterviewRequest dto) {
         try {
-            return save(mapperService.toEntity(findById(id),dto));
-        }
-        catch (DataAccessException e) {
+            return save(mapperService.toEntity(findById(id), dto));
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       interviewRepository.delete(findById(id));
+        interviewRepository.delete(findById(id));
     }
 
     @Override
     public Interview save(Interview interview) {
         try {
             return interviewRepository.save(interview);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -72,7 +69,7 @@ class InterviewServiceImpl implements InterviewService {
     }
 
     private Interview findById(Long id) {
-        return interviewRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Interview with id: " + id + " not found"));
+        return interviewRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Interview with id: " + id + " not found"));
 
     }
 }

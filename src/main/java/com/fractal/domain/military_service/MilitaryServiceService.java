@@ -10,6 +10,7 @@ public interface MilitaryServiceService {
     void delete(Long employeeId,Long id);*/
 
     MilitaryService getById(Long id);
+
     MilitaryService save(MilitaryService militaryService);
 
 }

@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface AreaTypeRepository extends JpaRepository<AreaType,Long> {
+interface AreaTypeRepository extends JpaRepository<AreaType, Long> {
     Optional<AreaType> findById(Long id);
+
     Optional<AreaType> findByCode(String code);
+
     List<AreaType> findAll();
 }

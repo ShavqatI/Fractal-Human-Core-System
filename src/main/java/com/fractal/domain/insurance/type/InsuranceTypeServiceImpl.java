@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class InsuranceTypeServiceImpl implements InsuranceTypeService {
@@ -26,7 +27,7 @@ class InsuranceTypeServiceImpl implements InsuranceTypeService {
 
     @Override
     public InsuranceType getByCode(String code) {
-        return insuranceTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Insurance Type with code: " + code + " not found"));
+        return insuranceTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Insurance Type with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class InsuranceTypeServiceImpl implements InsuranceTypeService {
             insuranceType.setCode(dto.code());
             insuranceType.setName(dto.name());
             return save(insuranceType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      insuranceTypeRepository.delete(findById(id));
+        insuranceTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class InsuranceTypeServiceImpl implements InsuranceTypeService {
     private InsuranceType save(InsuranceType insuranceType) {
         try {
             return insuranceTypeRepository.save(insuranceType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private InsuranceType findById(Long id) {
-        return insuranceTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Insurance Type with id: " + id + " not found"));
+        return insuranceTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Insurance Type with id: " + id + " not found"));
     }
 
 }

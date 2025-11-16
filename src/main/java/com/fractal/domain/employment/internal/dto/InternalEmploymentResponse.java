@@ -31,4 +31,5 @@ public record InternalEmploymentResponse(
         StatusCompactResponse status,
         LocalDateTime createdDate,
         LocalDateTime updatedDate
-) implements EmploymentResponse { }
+) implements EmploymentResponse {
+}

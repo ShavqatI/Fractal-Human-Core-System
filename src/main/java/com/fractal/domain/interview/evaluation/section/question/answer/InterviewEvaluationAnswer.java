@@ -30,5 +30,4 @@ public class InterviewEvaluationAnswer extends AbstractEntity {
     private InterviewEvaluationQuestion interviewEvaluationQuestion;
 
 
-
 }

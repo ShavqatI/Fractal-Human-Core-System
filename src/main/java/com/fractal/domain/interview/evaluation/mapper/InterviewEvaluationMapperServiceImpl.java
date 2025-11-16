@@ -35,20 +35,21 @@ class InterviewEvaluationMapperServiceImpl implements InterviewEvaluationMapperS
                 evaluation.getCreatedDate()
         );
     }
+
     @Override
     public InterviewEvaluation toEntity(InterviewEvaluationRequest dto) {
-        return mapToEntity(new InterviewEvaluation(),dto);
+        return mapToEntity(new InterviewEvaluation(), dto);
     }
 
     @Override
     public InterviewEvaluation toEntity(InterviewEvaluation evaluation, InterviewEvaluationRequest dto) {
-       return mapToEntity(evaluation,dto);
+        return mapToEntity(evaluation, dto);
     }
 
     private InterviewEvaluation mapToEntity(InterviewEvaluation evaluation, InterviewEvaluationRequest dto) {
         evaluation.setCode(dto.code());
         evaluation.setName(dto.name());
-        dto.sections().forEach(section-> evaluation.addSection(sectionMapperService.toEntity(section)));
+        dto.sections().forEach(section -> evaluation.addSection(sectionMapperService.toEntity(section)));
         evaluation.setStatus(statusService.getById(dto.statusId()));
         return evaluation;
 

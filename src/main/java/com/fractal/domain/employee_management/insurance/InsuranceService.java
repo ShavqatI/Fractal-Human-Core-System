@@ -10,12 +10,17 @@ public interface InsuranceService {
     Insurance create(InsuranceRequest dto);
 
     List<Insurance> getAllByEmployeeId(Long employeeId);
+
     List<Insurance> getAll();
+
     Insurance update(Long id, InsuranceRequest dto);
+
     void deleteById(Long id);
+
     Insurance getById(Long id);
 
     Insurance save(Insurance insurance);
+
     InsuranceResponse toDTO(Insurance insurance);
 
 

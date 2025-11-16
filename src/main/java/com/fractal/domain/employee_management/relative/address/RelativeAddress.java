@@ -16,6 +16,6 @@ import lombok.experimental.SuperBuilder;
 public class RelativeAddress extends Address {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="relative_id", referencedColumnName = "id")
+    @JoinColumn(name = "relative_id", referencedColumnName = "id")
     private Relative relative;
 }

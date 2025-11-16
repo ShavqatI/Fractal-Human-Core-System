@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.grade.matrix.dto.GradeMatrixRe
 
 public interface GradeMatrixMapperService {
     GradeMatrixResponse toDTO(GradeMatrix matrix);
+
     GradeMatrix toEntity(GradeMatrixRequest dto);
+
     GradeMatrix toEntity(GradeMatrix matrix, GradeMatrixRequest dto);
 
 }

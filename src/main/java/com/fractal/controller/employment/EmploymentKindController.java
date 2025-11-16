@@ -19,26 +19,32 @@ import java.util.stream.Collectors;
 public class EmploymentKindController {
 
     private final EmploymentKindService employmentKindService;
+
     @PostMapping
     public ResponseEntity<EmploymentKindResponse> create(@RequestBody @Valid EmploymentKindRequest dto) {
         return new ResponseEntity<>(employmentKindService.toDTO(employmentKindService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<EmploymentKindResponse>> getAll() {
         return ResponseEntity.ok(employmentKindService.getAll().stream().map(employmentKindService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<EmploymentKindResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(employmentKindService.toDTO(employmentKindService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<EmploymentKindResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(employmentKindService.toDTO(employmentKindService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<EmploymentKindResponse> update(@PathVariable Long id, @RequestBody @Valid EmploymentKindRequest dto) {
-      return  ResponseEntity.ok(employmentKindService.toDTO(employmentKindService.update(id, dto)));
+        return ResponseEntity.ok(employmentKindService.toDTO(employmentKindService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         employmentKindService.deleteById(id);

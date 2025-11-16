@@ -13,4 +13,5 @@ public record DepartmentMappingResponse(
         StatusCompactResponse status,
         LocalDateTime createdDate
 
-) { }
+) {
+}

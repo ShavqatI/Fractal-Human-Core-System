@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VacationRequestMedicalInfoRepository extends JpaRepository<VacationRequestMedicalInfo,Long> {
+public interface VacationRequestMedicalInfoRepository extends JpaRepository<VacationRequestMedicalInfo, Long> {
 
     List<VacationRequestMedicalInfo> findAllByVacationRequestId(Long vacationRequestId);
+
     Optional<VacationRequestMedicalInfo> findByVacationRequestIdAndId(Long vacationRequestId, Long id);
 }

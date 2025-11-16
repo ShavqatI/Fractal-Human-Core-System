@@ -18,16 +18,17 @@ public class DepartmentChildController {
 
     @PostMapping()
     public ResponseEntity<DepartmentResponse> create(@PathVariable Long departmentId, @RequestBody @Valid DepartmentRequest dto) {
-        return new ResponseEntity<>(departmentService.toDTO(departmentService.addChild(departmentId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(departmentService.toDTO(departmentService.addChild(departmentId, dto)), HttpStatus.CREATED);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<DepartmentResponse> update(@PathVariable Long departmentId, @PathVariable Long id, @RequestBody @Valid DepartmentRequest dto) {
-        return ResponseEntity.ok(departmentService.toDTO(departmentService.updateChild(departmentId,id, dto)));
+        return ResponseEntity.ok(departmentService.toDTO(departmentService.updateChild(departmentId, id, dto)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long departmentId, @PathVariable Long id) {
-        departmentService.deleteChild(departmentId,id);
+        departmentService.deleteChild(departmentId, id);
         return ResponseEntity.noContent().build();
     }
 }

@@ -27,31 +27,31 @@ class BusinessTripExpenseMapperServiceImpl implements BusinessTripExpenseMapperS
     @Override
     public BusinessTripExpenseResponse toDTO(BusinessTripExpense expense) {
         return new BusinessTripExpenseResponse(
-                   expense.getId(),
-                   expenseTypeService.toCompactDTO(expense.getExpenseType()),
-                   currencyService.toCompactDTO(expense.getCurrency()),
-                   expense.getAmount(),
-                   expense.getDescription(),
-                   expense.getDate(),
-                   Optional.ofNullable(expense.getResources())
+                expense.getId(),
+                expenseTypeService.toCompactDTO(expense.getExpenseType()),
+                currencyService.toCompactDTO(expense.getCurrency()),
+                expense.getAmount(),
+                expense.getDescription(),
+                expense.getDate(),
+                Optional.ofNullable(expense.getResources())
                         .orElse(emptyList())
                         .stream()
                         .map(resourceMapperService::toDTO)
                         .collect(Collectors.toList()),
-                   statusService.toCompactDTO(expense.getStatus()),
-                   expense.getCreatedDate()
+                statusService.toCompactDTO(expense.getStatus()),
+                expense.getCreatedDate()
 
         );
     }
 
     @Override
     public BusinessTripExpense toEntity(BusinessTripExpenseRequest dto) {
-        return mapToEntity(new BusinessTripExpense(),dto);
+        return mapToEntity(new BusinessTripExpense(), dto);
     }
 
     @Override
     public BusinessTripExpense toEntity(BusinessTripExpense expense, BusinessTripExpenseRequest dto) {
-        return mapToEntity(expense,dto);
+        return mapToEntity(expense, dto);
     }
 
     private BusinessTripExpense mapToEntity(BusinessTripExpense expense, BusinessTripExpenseRequest dto) {
@@ -61,7 +61,7 @@ class BusinessTripExpenseMapperServiceImpl implements BusinessTripExpenseMapperS
         expense.setDate(dto.date());
         expense.setDescription(dto.description());
         expense.setStatus(statusService.getById(dto.statusId()));
-        dto.files().forEach(file-> expense.addResource(resourceMapperService.toEntity(file,null)));
+        dto.files().forEach(file -> expense.addResource(resourceMapperService.toEntity(file, null)));
         return expense;
     }
 

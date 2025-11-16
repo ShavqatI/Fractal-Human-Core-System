@@ -25,28 +25,34 @@ public class ExpenseTypeController {
     public ResponseEntity<ExpenseTypeResponse> create(@RequestBody @Valid ExpenseTypeRequest dto) {
         return new ResponseEntity<>(typeService.toDTO(typeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<ExpenseTypeResponse>> getAll() {
         return ResponseEntity.ok(typeService.getAll().stream().map(typeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ExpenseTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(typeService.toDTO(typeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<ExpenseTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(typeService.toDTO(typeService.getByCode(code)));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<ExpenseTypeCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(typeService.getAll().stream().map(typeService::toCompactDTO).collect(Collectors.toList()));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<ExpenseTypeResponse> update(@PathVariable Long id, @RequestBody @Valid ExpenseTypeRequest dto) {
-        return  ResponseEntity.ok(typeService.toDTO(typeService.update(id, dto)));
+        return ResponseEntity.ok(typeService.toDTO(typeService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         typeService.deleteById(id);

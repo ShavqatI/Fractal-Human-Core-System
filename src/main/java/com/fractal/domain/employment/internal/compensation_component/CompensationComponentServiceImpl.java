@@ -37,7 +37,7 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
 
     @Override
     public CompensationComponent getById(Long employmentId, Long id) {
-        return compensationComponentRepository.findByInternalEmploymentIdAndId(employmentId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return compensationComponentRepository.findByInternalEmploymentIdAndId(employmentId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -46,8 +46,8 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
         var employment = employmentService.getById(employmentId);
         var compensationComponent = employment.getCompensationComponents()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        compensationComponent = compensationComponentMapperService.toEntity(compensationComponent,dto);
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        compensationComponent = compensationComponentMapperService.toEntity(compensationComponent, dto);
         compensationComponentRepository.save(compensationComponent);
         employmentService.save(employment);
         return compensationComponent;
@@ -59,7 +59,7 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
         var employment = employmentService.getById(employmentId);
         var compensationComponent = employment.getCompensationComponents()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         employment.removeCompensationComponent(compensationComponent);
         employmentService.save(employment);
     }
@@ -68,12 +68,12 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
     public CompensationComponentResponse toDTO(CompensationComponent agreement) {
         return compensationComponentMapperService.toDTO(agreement);
     }
+
     @Override
     public CompensationComponent save(CompensationComponent agreement) {
         try {
             return compensationComponentRepository.save(agreement);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -84,6 +84,6 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
     }
 
     private CompensationComponent findById(Long id) {
-        return compensationComponentRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return compensationComponentRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

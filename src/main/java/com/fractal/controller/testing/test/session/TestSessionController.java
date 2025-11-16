@@ -24,10 +24,12 @@ public class TestSessionController {
     public ResponseEntity<TestSessionResponse> create(@RequestBody @Valid TestSessionRequest dto) {
         return new ResponseEntity<>(testSessionService.toDTO(testSessionService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<TestSessionResponse>> getAll() {
         return ResponseEntity.ok(testSessionService.getAll().stream().map(testSessionService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<TestSessionResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(testSessionService.toDTO(testSessionService.getById(id)));
@@ -35,8 +37,9 @@ public class TestSessionController {
 
     @PutMapping("/{id}")
     public ResponseEntity<TestSessionResponse> update(@PathVariable Long id, @RequestBody @Valid TestSessionRequest dto) {
-      return  ResponseEntity.ok(testSessionService.toDTO(testSessionService.update(id, dto)));
+        return ResponseEntity.ok(testSessionService.toDTO(testSessionService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         testSessionService.deleteById(id);

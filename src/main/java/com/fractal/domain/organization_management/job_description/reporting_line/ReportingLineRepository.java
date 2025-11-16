@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ReportingLineRepository extends JpaRepository<ReportingLine,Long> {
+public interface ReportingLineRepository extends JpaRepository<ReportingLine, Long> {
 
     List<ReportingLine> findAllByJobDescriptionId(Long jobDescriptionId);
+
     Optional<ReportingLine> findByJobDescriptionIdAndId(Long jobDescriptionId, Long id);
 }

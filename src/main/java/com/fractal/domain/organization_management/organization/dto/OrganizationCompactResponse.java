@@ -4,5 +4,5 @@ public record OrganizationCompactResponse(
         Long id,
         String code,
         String name
-)
-{ }
+) {
+}

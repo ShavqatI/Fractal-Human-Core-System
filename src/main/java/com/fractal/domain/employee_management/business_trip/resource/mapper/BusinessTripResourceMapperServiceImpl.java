@@ -27,22 +27,22 @@ class BusinessTripResourceMapperServiceImpl implements BusinessTripResourceMappe
 
     @Override
     public BusinessTripResource toEntity(MultipartFile file, String resourceStoragePath) {
-        return convert(new BusinessTripResource(),resourceMapperService.toEntity(file,resourceStoragePath));
+        return convert(new BusinessTripResource(), resourceMapperService.toEntity(file, resourceStoragePath));
     }
 
     @Override
     public BusinessTripResource toEntity(BusinessTripResource resource, MultipartFile file, String resourceStoragePath) {
-        return convert(resource,resourceMapperService.toEntity(resource,file,resourceStoragePath));
+        return convert(resource, resourceMapperService.toEntity(resource, file, resourceStoragePath));
     }
 
     @Override
     public BusinessTripResource toEntity(BusinessTripResource resource, ResourceRequest dto) {
-        return (BusinessTripResource) resourceMapperService.toEntity(resource,dto);
+        return (BusinessTripResource) resourceMapperService.toEntity(resource, dto);
     }
 
     @Override
     public ResourceRequest fileToRequest(MultipartFile file, String url) {
-        return resourceMapperService.fileToRequest(file,url);
+        return resourceMapperService.fileToRequest(file, url);
     }
 
     private BusinessTripResource convert(BusinessTripResource businessTripResource, Resource resource) {

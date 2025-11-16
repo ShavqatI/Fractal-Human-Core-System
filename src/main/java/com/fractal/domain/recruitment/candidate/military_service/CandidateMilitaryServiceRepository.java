@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface CandidateMilitaryServiceRepository extends JpaRepository<CandidateMilitaryService,Long> {
+interface CandidateMilitaryServiceRepository extends JpaRepository<CandidateMilitaryService, Long> {
 
     List<CandidateMilitaryService> findAllByCandidateId(Long candidateId);
+
     Optional<CandidateMilitaryService> findByCandidateIdAndId(Long candidateId, Long id);
 }

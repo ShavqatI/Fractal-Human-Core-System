@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 public class DepartmentMapping extends Integration {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "department_id",updatable = false,referencedColumnName = "id")
+    @JoinColumn(name = "department_id", updatable = false, referencedColumnName = "id")
     protected Department department;
 
 }

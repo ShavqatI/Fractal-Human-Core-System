@@ -8,10 +8,16 @@ import java.util.List;
 public interface BenchmarkingTypeService {
 
     BenchmarkingType create(BenchmarkingTypeRequest dto);
+
     List<BenchmarkingType> getAll();
+
     BenchmarkingType getByCode(String code);
+
     BenchmarkingType getById(Long id);
+
     BenchmarkingType update(Long id, BenchmarkingTypeRequest dto);
+
     void deleteById(Long id);
+
     BenchmarkingTypeResponse toDTO(BenchmarkingType benchmarkingType);
 }

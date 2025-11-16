@@ -46,8 +46,7 @@ class UserCandidateMappingServiceImpl implements UserCandidateMappingService {
             userCandidateMapping.setCandidate(candidateService.getById(dto.candidateId()));
             userCandidateMapping.setStatus(statusService.getById(dto.statusId()));
             return save(userCandidateMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -79,13 +78,12 @@ class UserCandidateMappingServiceImpl implements UserCandidateMappingService {
     private UserCandidateMapping save(UserCandidateMapping userCandidateMapping) {
         try {
             return userCandidateMappingRepository.save(userCandidateMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private UserCandidateMapping findById(Long id) {
-        return userCandidateMappingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("UserEmployeeMapping  with id: " + id + " not found"));
+        return userCandidateMappingRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("UserEmployeeMapping  with id: " + id + " not found"));
     }
 }

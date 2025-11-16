@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface ReportingLineTypeRepository extends JpaRepository<ReportingLineType,Long> {
+interface ReportingLineTypeRepository extends JpaRepository<ReportingLineType, Long> {
     Optional<ReportingLineType> findById(Long id);
+
     Optional<ReportingLineType> findByCode(String code);
+
     List<ReportingLineType> findAll();
 }

@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface AccountabilityRepository extends JpaRepository<Accountability,Long> {
+public interface AccountabilityRepository extends JpaRepository<Accountability, Long> {
 
     List<Accountability> findAllByJobDescriptionId(Long jobDescriptionId);
+
     Optional<Accountability> findByJobDescriptionIdAndId(Long jobDescriptionId, Long id);
 }

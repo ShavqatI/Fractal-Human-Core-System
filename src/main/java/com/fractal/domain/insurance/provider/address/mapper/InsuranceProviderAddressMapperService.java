@@ -6,7 +6,9 @@ import com.fractal.domain.insurance.provider.address.dto.InsuranceProviderAddres
 
 public interface InsuranceProviderAddressMapperService {
     InsuranceProviderAddressResponse toDTO(InsuranceProviderAddress address);
+
     InsuranceProviderAddress toEntity(InsuranceProviderAddressRequest dto);
+
     InsuranceProviderAddress toEntity(InsuranceProviderAddress address, InsuranceProviderAddressRequest dto);
 }
 

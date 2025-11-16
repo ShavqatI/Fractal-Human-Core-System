@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface ContactTypeRepository extends JpaRepository<ContactType,Long> {
+interface ContactTypeRepository extends JpaRepository<ContactType, Long> {
     Optional<ContactType> findById(Long id);
+
     Optional<ContactType> findByCode(String code);
+
     List<ContactType> findAll();
 }

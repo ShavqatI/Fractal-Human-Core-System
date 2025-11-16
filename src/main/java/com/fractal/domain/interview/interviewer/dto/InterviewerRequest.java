@@ -7,5 +7,5 @@ public record InterviewerRequest(
         LocalDateTime scheduledTime,
         Integer durationMinutes,
         Long statusId
-)
-{}
+) {
+}

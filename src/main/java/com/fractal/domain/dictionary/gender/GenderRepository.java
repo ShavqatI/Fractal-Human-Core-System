@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface GenderRepository extends JpaRepository<Gender,Long> {
+interface GenderRepository extends JpaRepository<Gender, Long> {
     Optional<Gender> findById(Long id);
+
     Optional<Gender> findByCode(String code);
+
     List<Gender> findAll();
 }

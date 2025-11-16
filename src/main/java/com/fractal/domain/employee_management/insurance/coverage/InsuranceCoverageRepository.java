@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface InsuranceCoverageRepository extends JpaRepository<InsuranceCoverage,Long> {
+public interface InsuranceCoverageRepository extends JpaRepository<InsuranceCoverage, Long> {
 
     List<InsuranceCoverage> findAllByInsuranceId(Long insuranceId);
+
     Optional<InsuranceCoverage> findByInsuranceIdAndId(Long insuranceId, Long id);
 }

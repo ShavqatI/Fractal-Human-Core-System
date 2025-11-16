@@ -1,18 +1,13 @@
 package com.fractal.domain.vacation_management.schedule;
 
-import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.Employee;
-import com.fractal.domain.vacation_management.category.VacationCategory;
-import com.fractal.domain.vacation_management.order.VacationOrder;
 import com.fractal.domain.vacation_management.type.VacationType;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "vacation_schedule", schema = "vacation_schema", catalog = "fractal")

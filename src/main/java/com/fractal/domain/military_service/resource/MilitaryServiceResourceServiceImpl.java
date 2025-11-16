@@ -29,7 +29,7 @@ public class MilitaryServiceResourceServiceImpl implements MilitaryServiceResour
     @Transactional
     public MilitaryServiceResource create(Long militaryServiceId, MultipartFile file) {
         var militaryService = militaryServiceService.getById(militaryServiceId);
-        var resource = resourceMapperService.toEntity(file,resourceStoragePath);
+        var resource = resourceMapperService.toEntity(file, resourceStoragePath);
         militaryService.addResource(resource);
         militaryServiceService.save(militaryService);
         return resource;
@@ -42,7 +42,7 @@ public class MilitaryServiceResourceServiceImpl implements MilitaryServiceResour
 
     @Override
     public MilitaryServiceResource getById(Long militaryServiceId, Long id) {
-        return resourceRepository.findByMilitaryServiceIdAndId(militaryServiceId,id).orElseThrow(()-> new ResourceNotFoundException("Military Service Resource  with id: " + id + " not found"));
+        return resourceRepository.findByMilitaryServiceIdAndId(militaryServiceId, id).orElseThrow(() -> new ResourceNotFoundException("Military Service Resource  with id: " + id + " not found"));
     }
 
     @Override
@@ -51,8 +51,8 @@ public class MilitaryServiceResourceServiceImpl implements MilitaryServiceResour
         var militaryService = militaryServiceService.getById(militaryServiceId);
         var resource = militaryService.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Military Service Resource  with id: " + id + " not found"));
-        resource = resourceMapperService.toEntity(resource,file,resourceStoragePath);
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Military Service Resource  with id: " + id + " not found"));
+        resource = resourceMapperService.toEntity(resource, file, resourceStoragePath);
         militaryServiceService.save(militaryService);
         return resource;
     }
@@ -62,7 +62,7 @@ public class MilitaryServiceResourceServiceImpl implements MilitaryServiceResour
         var militaryService = militaryServiceService.getById(militaryServiceId);
         var resource = militaryService.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Military Service Resource  with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Military Service Resource  with id: " + id + " not found"));
         fileService.delete(resource.getUrl());
         militaryService.removeResource(resource);
         militaryServiceService.save(militaryService);

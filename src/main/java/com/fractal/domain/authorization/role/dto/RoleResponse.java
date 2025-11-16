@@ -13,4 +13,5 @@ public record RoleResponse(
         LocalDateTime createdDate,
         LocalDateTime updatedDate
 
-) { }
+) {
+}

@@ -28,7 +28,7 @@ class AreaTypeServiceImpl implements AreaTypeService {
 
     @Override
     public AreaType getByCode(String code) {
-        return areaTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Area Type with code: " + code + " not found"));
+        return areaTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Area Type with code: " + code + " not found"));
     }
 
     @Override
@@ -43,8 +43,7 @@ class AreaTypeServiceImpl implements AreaTypeService {
             areaType.setCode(dto.code());
             areaType.setName(dto.name());
             return save(areaType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -74,13 +73,12 @@ class AreaTypeServiceImpl implements AreaTypeService {
     private AreaType save(AreaType areaType) {
         try {
             return areaTypeRepository.save(areaType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private AreaType findById(Long id) {
-        return areaTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Area Type with id: " + id + " not found"));
+        return areaTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Area Type with id: " + id + " not found"));
     }
 }

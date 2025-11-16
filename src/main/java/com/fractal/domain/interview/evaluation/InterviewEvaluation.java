@@ -25,13 +25,13 @@ public class InterviewEvaluation extends ApprovalWorkflow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "code",unique = true)
+    @Column(name = "code", unique = true)
     protected String code;
 
     @Column(name = "name")
     protected String name;
 
-    @OneToMany(mappedBy = "interviewEvaluation",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "interviewEvaluation", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<InterviewEvaluationSection> sections = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -43,6 +43,7 @@ public class InterviewEvaluation extends ApprovalWorkflow {
         section.setInterviewEvaluation(this);
         sections.add(section);
     }
+
     public void removeSection(InterviewEvaluationSection section) {
         if (sections != null && !sections.isEmpty())
             sections.remove(section);

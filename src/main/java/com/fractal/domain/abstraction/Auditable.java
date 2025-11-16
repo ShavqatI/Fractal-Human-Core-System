@@ -24,17 +24,17 @@ public abstract class Auditable {
     @CreatedDate
     protected LocalDateTime createdDate;
 
-    @Column(name = "updated_date",insertable = false)
+    @Column(name = "updated_date", insertable = false)
     @LastModifiedDate
     protected LocalDateTime updatedDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "created_user_id",updatable = false,referencedColumnName = "id")
+    @JoinColumn(name = "created_user_id", updatable = false, referencedColumnName = "id")
     @CreatedBy
     protected User createdUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "updated_user_id",updatable = true,referencedColumnName = "id")
+    @JoinColumn(name = "updated_user_id", updatable = true, referencedColumnName = "id")
     @LastModifiedBy
     protected User updatedUser;
 

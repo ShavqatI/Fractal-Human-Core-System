@@ -7,4 +7,5 @@ public record InternalOfflineLearningLocationAddressRequest(
         Long organizationId,
         String roomNumber
 
-) implements OfflineLearningLocationAddressRequest { }
+) implements OfflineLearningLocationAddressRequest {
+}

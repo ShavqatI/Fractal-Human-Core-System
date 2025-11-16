@@ -28,7 +28,7 @@ class CountryServiceImpl implements CountryService {
 
     @Override
     public Country getByCode(String code) {
-        return countryRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Country  with code: " + code + " not found"));
+        return countryRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Country  with code: " + code + " not found"));
 
     }
 
@@ -47,15 +47,14 @@ class CountryServiceImpl implements CountryService {
             country.setNumericCode(dto.numericCode());
             country.setPhonePrefix(dto.phonePrefix());
             return save(country);
-        }
-        catch (DataAccessException e){
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       countryRepository.delete(findById(id));
+        countryRepository.delete(findById(id));
     }
 
     @Override
@@ -93,13 +92,12 @@ class CountryServiceImpl implements CountryService {
     private Country save(Country country) {
         try {
             return countryRepository.save(country);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Country findById(Long id) {
-        return countryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Country  with id: " + id + " not found"));
+        return countryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Country  with id: " + id + " not found"));
     }
 }

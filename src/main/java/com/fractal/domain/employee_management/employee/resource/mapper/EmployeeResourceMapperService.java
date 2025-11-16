@@ -7,9 +7,12 @@ import com.fractal.domain.recruitment.candidate.resource.CandidateResource;
 
 public interface EmployeeResourceMapperService {
     EmployeeResourceResponse toDTO(EmployeeResource resource);
+
     EmployeeResource copy(CandidateResource resource);
+
     EmployeeResource toEntity(EmployeeResourceRequest dto, String resourceStoragePath);
-    EmployeeResource toEntity(EmployeeResource resource, EmployeeResourceRequest dto,String resourceStoragePath);
+
+    EmployeeResource toEntity(EmployeeResource resource, EmployeeResourceRequest dto, String resourceStoragePath);
 
 
 }

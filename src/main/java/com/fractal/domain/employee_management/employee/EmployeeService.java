@@ -8,12 +8,20 @@ import java.util.List;
 
 public interface EmployeeService {
     Employee create(EmployeeRequest dto);
+
     List<Employee> getAll();
+
     Employee getByTin(String tin);
+
     Employee getById(Long id);
+
     Employee update(Long id, EmployeeRequest dto);
+
     void deleteById(Long id);
+
     EmployeeResponse toDTO(Employee employee);
+
     EmployeeCompactResponse toCompactDTO(Employee employee);
+
     Employee save(Employee employee);
 }

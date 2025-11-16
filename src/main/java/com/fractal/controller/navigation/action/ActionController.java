@@ -29,6 +29,7 @@ public class ActionController {
     public ResponseEntity<List<ActionResponse>> getAll() {
         return ResponseEntity.ok(actionService.getAll().stream().map(actionService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<ActionCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(actionService.getAll().stream().map(actionService::toCompactDTO).collect(Collectors.toList()));
@@ -38,14 +39,17 @@ public class ActionController {
     public ResponseEntity<ActionResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(actionService.toDTO(actionService.getById(id)));
     }
+
     @GetMapping("/url{url}")
     public ResponseEntity<ActionResponse> getById(@PathVariable String url) {
         return ResponseEntity.ok(actionService.toDTO(actionService.getByUrl(url)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<ActionResponse> update(@PathVariable Long id, @RequestBody @Valid ActionRequest dto) {
         return ResponseEntity.ok(actionService.toDTO(actionService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         actionService.deleteById(id);

@@ -1,8 +1,5 @@
 package com.fractal.controller.integration.mapping;
 
-import com.fractal.domain.finance.currency.dto.CurrencyCompactResponse;
-import com.fractal.domain.finance.currency.dto.CurrencyRequest;
-import com.fractal.domain.finance.currency.dto.CurrencyResponse;
 import com.fractal.domain.integration.mapping.order_type.OrderTypeMappingService;
 import com.fractal.domain.integration.mapping.order_type.dto.OrderTypeMappingRequest;
 import com.fractal.domain.integration.mapping.order_type.dto.OrderTypeMappingResponse;
@@ -27,10 +24,12 @@ public class OrderTypeMappingController {
     public ResponseEntity<OrderTypeMappingResponse> create(@RequestBody @Valid OrderTypeMappingRequest dto) {
         return new ResponseEntity<>(orderTypeMappingService.toDTO(orderTypeMappingService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<OrderTypeMappingResponse>> getAll() {
         return ResponseEntity.ok(orderTypeMappingService.getAll().stream().map(orderTypeMappingService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<OrderTypeMappingResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(orderTypeMappingService.toDTO(orderTypeMappingService.getById(id)));
@@ -38,10 +37,11 @@ public class OrderTypeMappingController {
 
     @PutMapping("/{id}")
     public ResponseEntity<OrderTypeMappingResponse> update(@PathVariable Long id, @RequestBody @Valid OrderTypeMappingRequest dto) {
-      return  ResponseEntity.ok(orderTypeMappingService.toDTO(orderTypeMappingService.update(id, dto)));
+        return ResponseEntity.ok(orderTypeMappingService.toDTO(orderTypeMappingService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         orderTypeMappingService.deleteById(id);

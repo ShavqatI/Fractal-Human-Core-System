@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface EmployeeRepository extends JpaRepository<Employee,Long> {
-     List<Employee> findAll();
-     Optional<Employee> findById(Long id);
-     Optional<Employee> findByTin(String tin);
+interface EmployeeRepository extends JpaRepository<Employee, Long> {
+    List<Employee> findAll();
+
+    Optional<Employee> findById(Long id);
+
+    Optional<Employee> findByTin(String tin);
 
 }

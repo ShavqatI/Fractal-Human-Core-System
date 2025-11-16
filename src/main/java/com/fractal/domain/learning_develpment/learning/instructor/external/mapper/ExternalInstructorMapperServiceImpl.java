@@ -26,6 +26,7 @@ class ExternalInstructorMapperServiceImpl implements ExternalInstructorMapperSer
     private final NationalityService nationalityService;
     private final StatusService statusService;
     private final ExternalInstructorContactMapperService contactMapperService;
+
     @Override
     public ExternalInstructorResponse toDTO(ExternalInstructor instructor) {
         return new ExternalInstructorResponse(
@@ -81,7 +82,7 @@ class ExternalInstructorMapperServiceImpl implements ExternalInstructorMapperSer
         instructor.setMaritalStatus(maritalStatusService.getById(dto.maritalStatusId()));
         instructor.setNationality(nationalityService.getById(dto.nationalityId()));
         instructor.setStatus(statusService.getById(dto.statusId()));
-        dto.contacts().forEach(contact->instructor.addContact(contactMapperService.toEntity(contact)));
+        dto.contacts().forEach(contact -> instructor.addContact(contactMapperService.toEntity(contact)));
         return instructor;
     }
 }

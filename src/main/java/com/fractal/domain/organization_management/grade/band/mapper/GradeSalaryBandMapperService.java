@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.grade.band.dto.GradeSalaryBand
 
 public interface GradeSalaryBandMapperService {
     GradeSalaryBandResponse toDTO(GradeSalaryBand salaryBand);
+
     GradeSalaryBand toEntity(GradeSalaryBandRequest dto);
+
     GradeSalaryBand toEntity(GradeSalaryBand salaryBand, GradeSalaryBandRequest dto);
 
 }

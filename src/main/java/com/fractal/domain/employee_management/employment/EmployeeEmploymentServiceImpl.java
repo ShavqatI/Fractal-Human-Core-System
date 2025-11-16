@@ -28,11 +28,11 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
 
     @Override
     @Transactional
-    public EmployeeEmployment create(Long employeeId,EmploymentRequest dto) {
+    public EmployeeEmployment create(Long employeeId, EmploymentRequest dto) {
         Employment employment = null;
         if (dto instanceof InternalEmploymentRequest) {
             employment = internalEmploymentService.create((InternalEmploymentRequest) dto);
-        } else if (dto instanceof ExternalEmploymentRequest ) {
+        } else if (dto instanceof ExternalEmploymentRequest) {
             employment = externalEmploymentService.create((ExternalEmploymentRequest) dto);
         }
         var employeeEmployment = EmployeeEmployment.builder().employment(employment).build();
@@ -44,7 +44,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
 
     @Override
     public EmployeeEmployment getById(Long employeeId, Long id) {
-        return employmentRepository.findByEmployeeIdAndEmploymentId(employeeId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return employmentRepository.findByEmployeeIdAndEmploymentId(employeeId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -58,11 +58,11 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
         var employee = employeeService.getById(employeeId);
         var employeeEmployment = employee.getEmployments()
                 .stream()
-                .filter(eh-> eh.getEmployment().getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(eh -> eh.getEmployment().getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         if (dto instanceof InternalEmploymentRequest) {
-            internalEmploymentService.update(employeeEmployment.getEmployment().getId(),(InternalEmploymentRequest) dto);
-        } else if (dto instanceof ExternalEmploymentRequest ) {
-            externalEmploymentService.update(employeeEmployment.getEmployment().getId(),(ExternalEmploymentRequest) dto);
+            internalEmploymentService.update(employeeEmployment.getEmployment().getId(), (InternalEmploymentRequest) dto);
+        } else if (dto instanceof ExternalEmploymentRequest) {
+            externalEmploymentService.update(employeeEmployment.getEmployment().getId(), (ExternalEmploymentRequest) dto);
         }
         employmentRepository.save(employeeEmployment);
         employeeService.save(employee);
@@ -76,7 +76,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
         var employee = employeeService.getById(employeeId);
         var employeeEmployment = employee.getEmployments()
                 .stream()
-                .filter(eh-> eh.getEmployment().getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(eh -> eh.getEmployment().getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         employee.removeEmployment(employeeEmployment);
         employeeService.save(employee);
     }

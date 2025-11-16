@@ -46,7 +46,7 @@ public class Agreement extends ApprovalWorkflow {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "agreement",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AgreementResource> resources = new ArrayList<>();
 
     public void addResource(AgreementResource resource) {
@@ -54,6 +54,7 @@ public class Agreement extends ApprovalWorkflow {
         resource.setAgreement(this);
         resources.add(resource);
     }
+
     public void removeResource(AgreementResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);

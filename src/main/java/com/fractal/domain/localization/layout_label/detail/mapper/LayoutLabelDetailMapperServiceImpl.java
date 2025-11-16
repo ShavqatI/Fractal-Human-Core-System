@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 class LayoutLabelDetailMapperServiceImpl implements LayoutLabelDetailMapperService {
 
     private final LanguageService languageService;
+
     @Override
     public LayoutLabelDetailResponse toDTO(LayoutLabelDetail layoutLabelDetail) {
         return new LayoutLabelDetailResponse(
@@ -25,12 +26,12 @@ class LayoutLabelDetailMapperServiceImpl implements LayoutLabelDetailMapperServi
 
     @Override
     public LayoutLabelDetail toEntity(LayoutLabelDetailRequest dto) {
-        return mapToEntity(new LayoutLabelDetail(),dto);
+        return mapToEntity(new LayoutLabelDetail(), dto);
     }
 
     @Override
     public LayoutLabelDetail toEntity(LayoutLabelDetail layoutLabelDetail, LayoutLabelDetailRequest dto) {
-        return mapToEntity(layoutLabelDetail,dto);
+        return mapToEntity(layoutLabelDetail, dto);
     }
 
     private LayoutLabelDetail mapToEntity(LayoutLabelDetail layoutLabelDetail, LayoutLabelDetailRequest dto) {

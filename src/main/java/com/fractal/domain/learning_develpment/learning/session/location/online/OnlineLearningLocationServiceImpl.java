@@ -34,7 +34,7 @@ class OnlineLearningLocationServiceImpl implements OnlineLearningLocationService
 
     @Override
     public OnlineLearningLocation getById(Long sessionId, Long id) {
-        return locationRepository.findByLearningSessionIdAndId(sessionId,id).orElseThrow(()->new ResourceNotFoundException("External Training Location with id: " + id + " not found"));
+        return locationRepository.findByLearningSessionIdAndId(sessionId, id).orElseThrow(() -> new ResourceNotFoundException("External Training Location with id: " + id + " not found"));
     }
 
     @Override
@@ -47,8 +47,8 @@ class OnlineLearningLocationServiceImpl implements OnlineLearningLocationService
         var session = learningSessionService.getById(sessionId);
         var location = (OnlineLearningLocation) session.getLocations()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("External Training Location  with id: " + id + " not found"));
-        location = mapperService.toEntity( location,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("External Training Location  with id: " + id + " not found"));
+        location = mapperService.toEntity(location, dto);
         locationRepository.save(location);
         learningSessionService.save(session);
         return location;
@@ -59,7 +59,7 @@ class OnlineLearningLocationServiceImpl implements OnlineLearningLocationService
         var session = learningSessionService.getById(sessionId);
         var location = (OnlineLearningLocation) session.getLocations()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("External Training Location  with id: " + id + " not found"));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("External Training Location  with id: " + id + " not found"));
         session.removeLocation(location);
         learningSessionService.save(session);
     }

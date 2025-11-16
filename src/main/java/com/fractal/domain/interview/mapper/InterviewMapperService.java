@@ -7,8 +7,11 @@ import com.fractal.domain.interview.dto.InterviewResponse;
 
 public interface InterviewMapperService {
     InterviewResponse toDTO(Interview interview);
+
     InterviewCompactResponse toCompactDTO(Interview interview);
+
     Interview toEntity(InterviewRequest dto);
+
     Interview toEntity(Interview interview, InterviewRequest dto);
 }
 

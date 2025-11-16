@@ -7,4 +7,5 @@ public record WorkScheduleRequest(
         LocalTime startTime,
         LocalTime endTime,
         Long statusId
-) { }
+) {
+}

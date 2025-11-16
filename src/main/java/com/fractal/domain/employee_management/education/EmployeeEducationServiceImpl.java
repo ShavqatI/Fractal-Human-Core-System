@@ -26,7 +26,7 @@ class EmployeeEducationServiceImpl implements EmployeeEducationService {
         var education = mapperService.toEntity(dto);
         employee.addEducation(education);
         employeeService.save(employee);
-       return education;
+        return education;
     }
 
     @Override
@@ -36,7 +36,7 @@ class EmployeeEducationServiceImpl implements EmployeeEducationService {
 
     @Override
     public EmployeeEducation getById(Long employeeId, Long id) {
-        return employeeEducationRepository.findByEmployeeIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Education with id: " + id + " not found"));
+        return employeeEducationRepository.findByEmployeeIdAndId(employeeId, id).orElseThrow(() -> new ResourceNotFoundException("Education with id: " + id + " not found"));
     }
 
     @Override
@@ -50,8 +50,8 @@ class EmployeeEducationServiceImpl implements EmployeeEducationService {
         var employee = employeeService.getById(employeeId);
         var education = employee.getEducations()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education with id: " + id + " not found"));
-        education = employeeEducationRepository.save(mapperService.toEntity(education,dto));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Education with id: " + id + " not found"));
+        education = employeeEducationRepository.save(mapperService.toEntity(education, dto));
         employeeService.save(employee);
         return education;
     }
@@ -62,7 +62,7 @@ class EmployeeEducationServiceImpl implements EmployeeEducationService {
         var employee = employeeService.getById(employeeId);
         var education = employee.getEducations()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education with id: " + id + " not found"));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Education with id: " + id + " not found"));
         employee.removeEducation(education);
         employeeService.save(employee);
     }
@@ -73,6 +73,6 @@ class EmployeeEducationServiceImpl implements EmployeeEducationService {
     }
 
     private EmployeeEducation findById(Long id) {
-        return employeeEducationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Education History with id: " + id + " not found"));
+        return employeeEducationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Education History with id: " + id + " not found"));
     }
 }

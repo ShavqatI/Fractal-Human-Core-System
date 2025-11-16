@@ -14,4 +14,5 @@ public record DistrictResponse(
         RegionResponse region,
         AreaTypeResponse areaType,
         LocalDateTime createdDate
-) { }
+) {
+}

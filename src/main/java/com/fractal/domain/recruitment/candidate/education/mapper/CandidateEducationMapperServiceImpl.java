@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 class CandidateEducationMapperServiceImpl implements CandidateEducationMapperService {
 
     private final EducationMapperService educationMapperService;
+
     @Override
     public EducationResponse toDTO(CandidateEducation education) {
         return educationMapperService.toDTO(education);
@@ -20,12 +21,12 @@ class CandidateEducationMapperServiceImpl implements CandidateEducationMapperSer
 
     @Override
     public CandidateEducation toEntity(EducationRequest dto) {
-        return convert(new CandidateEducation(),educationMapperService.toEntity(dto));
+        return convert(new CandidateEducation(), educationMapperService.toEntity(dto));
     }
 
     @Override
     public CandidateEducation toEntity(CandidateEducation education, EducationRequest dto) {
-        return convert(education,educationMapperService.toEntity(education,dto));
+        return convert(education, educationMapperService.toEntity(education, dto));
     }
 
     private CandidateEducation convert(CandidateEducation candidateEducation, Education education) {

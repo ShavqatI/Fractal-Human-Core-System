@@ -7,10 +7,16 @@ import java.util.List;
 
 public interface AttendanceService {
     Attendance create(AttendanceRequest dto);
+
     List<Attendance> getAll();
+
     Attendance getById(Long id);
+
     List<Attendance> getAllByEmployeeId(Long employeeId);
+
     Attendance update(Long id, AttendanceRequest dto);
+
     void deleteById(Long id);
+
     AttendanceResponse toDTO(Attendance attendance);
 }

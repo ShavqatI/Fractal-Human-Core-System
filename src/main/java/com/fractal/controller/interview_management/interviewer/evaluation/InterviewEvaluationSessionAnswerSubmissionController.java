@@ -22,24 +22,27 @@ public class InterviewEvaluationSessionAnswerSubmissionController {
 
     @PostMapping()
     public ResponseEntity<InterviewEvaluationSessionAnswerSubmissionResponse> create(@PathVariable Long evaluationSessionId, @RequestBody @Valid InterviewEvaluationSessionAnswerSubmissionRequest dto) {
-        return new ResponseEntity<>(answerSubmissionService.toDTO(answerSubmissionService.create(evaluationSessionId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(answerSubmissionService.toDTO(answerSubmissionService.create(evaluationSessionId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<InterviewEvaluationSessionAnswerSubmissionResponse>> getAll(@PathVariable Long evaluationSessionId) {
         return ResponseEntity.ok(answerSubmissionService.getAllByInterviewEvaluationSessionId(evaluationSessionId).stream().map(answerSubmissionService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<InterviewEvaluationSessionAnswerSubmissionResponse> getById(@PathVariable Long evaluationSessionId, @PathVariable Long id) {
-        return ResponseEntity.ok(answerSubmissionService.toDTO(answerSubmissionService.getById(evaluationSessionId,id)));
+        return ResponseEntity.ok(answerSubmissionService.toDTO(answerSubmissionService.getById(evaluationSessionId, id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<InterviewEvaluationSessionAnswerSubmissionResponse> update(@PathVariable Long evaluationSessionId, @PathVariable Long id, @RequestBody @Valid InterviewEvaluationSessionAnswerSubmissionRequest dto) {
-        return ResponseEntity.ok(answerSubmissionService.toDTO(answerSubmissionService.update(evaluationSessionId,id, dto)));
+        return ResponseEntity.ok(answerSubmissionService.toDTO(answerSubmissionService.update(evaluationSessionId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long evaluationSessionId, @PathVariable Long id) {
-        answerSubmissionService.delete(evaluationSessionId,id);
+        answerSubmissionService.delete(evaluationSessionId, id);
         return ResponseEntity.noContent().build();
     }
 

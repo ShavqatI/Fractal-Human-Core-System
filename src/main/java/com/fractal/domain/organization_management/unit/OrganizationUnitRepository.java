@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface OrganizationUnitRepository extends JpaRepository<OrganizationUnit,Long> {
+interface OrganizationUnitRepository extends JpaRepository<OrganizationUnit, Long> {
 
     OrganizationUnit save(OrganizationUnit organizationUnit);
+
     List<OrganizationUnit> findAll();
+
     Optional<OrganizationUnit> findByCode(String code);
+
     Optional<OrganizationUnit> findById(Long id);
 
 }

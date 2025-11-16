@@ -13,4 +13,5 @@ public record MenuRequest(
         Integer sequence,
         List<MenuRequest> children,
         List<MenuActionRequest> actions
-) {}
+) {
+}

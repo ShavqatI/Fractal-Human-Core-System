@@ -53,19 +53,19 @@ class InterviewEvaluationSectionMapperServiceImpl implements InterviewEvaluation
 
     @Override
     public InterviewEvaluationSection toEntity(InterviewEvaluationSectionRequest dto) {
-        return mapToEntity(new InterviewEvaluationSection(),dto);
+        return mapToEntity(new InterviewEvaluationSection(), dto);
     }
 
     @Override
     public InterviewEvaluationSection toEntity(InterviewEvaluationSection section, InterviewEvaluationSectionRequest dto) {
-       return mapToEntity(section,dto);
+        return mapToEntity(section, dto);
     }
 
     private InterviewEvaluationSection mapToEntity(InterviewEvaluationSection section, InterviewEvaluationSectionRequest dto) {
         section.setCode(dto.code());
         section.setName(dto.name());
-        dto.questions().forEach(question-> section.addQuestion(questionMapperService.toEntity(question)));
-        dto.children().forEach(child-> section.addChild(toEntity(child)));
+        dto.questions().forEach(question -> section.addQuestion(questionMapperService.toEntity(question)));
+        dto.children().forEach(child -> section.addChild(toEntity(child)));
         section.setStatus(statusService.getById(dto.statusId()));
         return section;
 

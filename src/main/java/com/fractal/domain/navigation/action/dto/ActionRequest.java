@@ -7,4 +7,5 @@ public record ActionRequest(
         Long layoutLabelId,
         Long actionTypeId,
         Long actionCategoryId
-) {}
+) {
+}

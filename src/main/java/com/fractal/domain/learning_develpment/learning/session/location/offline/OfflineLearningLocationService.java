@@ -7,12 +7,19 @@ import java.util.List;
 
 public interface OfflineLearningLocationService {
     OfflineLearningLocation create(Long sessionId, OfflineLearningLocationRequest dto);
+
     List<OfflineLearningLocation> getAllByLearningSessionId(Long sessionId);
-    OfflineLearningLocation getById(Long sessionId , Long id);
+
+    OfflineLearningLocation getById(Long sessionId, Long id);
+
     OfflineLearningLocation getById(Long id);
+
     OfflineLearningLocationResponse toDTO(OfflineLearningLocation location);
+
     OfflineLearningLocation update(Long sessionId, Long id, OfflineLearningLocationRequest dto);
-    void delete(Long sessionId,Long id);
+
+    void delete(Long sessionId, Long id);
+
     OfflineLearningLocation save(OfflineLearningLocation location);
 
 

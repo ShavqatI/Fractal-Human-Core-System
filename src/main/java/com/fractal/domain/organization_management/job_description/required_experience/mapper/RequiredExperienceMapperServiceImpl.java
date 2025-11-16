@@ -28,12 +28,12 @@ class RequiredExperienceMapperServiceImpl implements RequiredExperienceMapperSer
 
     @Override
     public RequiredExperience toEntity(RequiredExperienceRequest dto) {
-        return mapToEntity(new RequiredExperience(),dto);
+        return mapToEntity(new RequiredExperience(), dto);
     }
 
     @Override
     public RequiredExperience toEntity(RequiredExperience requiredExperience, RequiredExperienceRequest dto) {
-        return mapToEntity(requiredExperience,dto);
+        return mapToEntity(requiredExperience, dto);
     }
 
     private RequiredExperience mapToEntity(RequiredExperience requiredExperience, RequiredExperienceRequest dto) {
@@ -45,6 +45,6 @@ class RequiredExperienceMapperServiceImpl implements RequiredExperienceMapperSer
         requiredExperience.setEndDate(dto.endDate());
         requiredExperience.setMandatory(dto.mandatory());
         requiredExperience.setNotes(dto.notes());
-       return requiredExperience;
+        return requiredExperience;
     }
 }

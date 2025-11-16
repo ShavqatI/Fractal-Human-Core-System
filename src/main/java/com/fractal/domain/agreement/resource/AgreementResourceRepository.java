@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface AgreementResourceRepository extends JpaRepository<AgreementResource,Long> {
+public interface AgreementResourceRepository extends JpaRepository<AgreementResource, Long> {
     List<AgreementResource> findAllByAgreementId(Long agreementId);
+
     Optional<AgreementResource> findByAgreementIdAndId(Long agreementId, Long id);
 }

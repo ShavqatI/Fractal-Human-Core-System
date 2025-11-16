@@ -63,7 +63,7 @@ class LearningSessionExpenseMapperServiceImpl implements LearningSessionExpenseM
         expense.setDescription(dto.description());
         expense.setInvoiceNumber(dto.invoiceNumber());
         expense.setStatus(statusService.getById(dto.statusId()));
-        dto.files().forEach(file-> expense.addResource(resourceMapperService.toEntity(file,null)));
+        dto.files().forEach(file -> expense.addResource(resourceMapperService.toEntity(file, null)));
         return expense;
     }
 }

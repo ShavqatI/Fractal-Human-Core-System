@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BusinessTripExpenseRepository extends JpaRepository<BusinessTripExpense,Long> {
+public interface BusinessTripExpenseRepository extends JpaRepository<BusinessTripExpense, Long> {
 
     List<BusinessTripExpense> findAllByBusinessTripId(Long businessTrip);
+
     Optional<BusinessTripExpense> findByBusinessTripIdAndId(Long businessTrip, Long id);
 }

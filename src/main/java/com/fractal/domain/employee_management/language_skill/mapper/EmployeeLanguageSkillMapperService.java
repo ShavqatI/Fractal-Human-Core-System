@@ -6,7 +6,9 @@ import com.fractal.domain.employee_management.language_skill.EmployeeLanguageSki
 
 public interface EmployeeLanguageSkillMapperService {
     LanguageSkillResponse toDTO(EmployeeLanguageSkill languageSkill);
+
     EmployeeLanguageSkill toEntity(LanguageSkillRequest dto);
+
     EmployeeLanguageSkill toEntity(EmployeeLanguageSkill languageSkill, LanguageSkillRequest dto);
 }
 

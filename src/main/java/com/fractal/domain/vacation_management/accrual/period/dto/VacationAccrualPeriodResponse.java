@@ -1,7 +1,6 @@
 package com.fractal.domain.vacation_management.accrual.period.dto;
 
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
-import com.fractal.domain.vacation_management.accrual.period.record.dto.VacationAccrualPeriodRecordRequest;
 import com.fractal.domain.vacation_management.accrual.period.record.dto.VacationAccrualPeriodRecordResponse;
 
 import java.time.LocalDate;

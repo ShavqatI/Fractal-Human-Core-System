@@ -7,14 +7,14 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public record MilitaryServiceResponse(
-         Long id,
-         String accountNumber,
-         String title,
-         String categoryFund,
-         String address,
-         LocalDate beginDate,
-         LocalDate endDate,
-         List<ResourceResponse> resources,
-         LocalDateTime createdDate
+        Long id,
+        String accountNumber,
+        String title,
+        String categoryFund,
+        String address,
+        LocalDate beginDate,
+        LocalDate endDate,
+        List<ResourceResponse> resources,
+        LocalDateTime createdDate
 ) {
 }

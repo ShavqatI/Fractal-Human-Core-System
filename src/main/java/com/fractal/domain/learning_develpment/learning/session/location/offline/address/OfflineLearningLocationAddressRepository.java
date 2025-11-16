@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 interface OfflineLearningLocationAddressRepository extends JpaRepository<OfflineLearningLocationAddress, Long> {
     List<OfflineLearningLocationAddress> findAllByOfflineLearningLocationId(Long locationId);
+
     Optional<OfflineLearningLocationAddress> findByOfflineLearningLocationIdAndId(Long locationId, Long id);
 }

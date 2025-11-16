@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface CandidateContactRepository extends JpaRepository<CandidateContact,Long> {
+public interface CandidateContactRepository extends JpaRepository<CandidateContact, Long> {
 
     List<CandidateContact> findAllByCandidateId(Long employeeId);
+
     Optional<CandidateContact> findByCandidateIdAndId(Long employeeId, Long id);
 }

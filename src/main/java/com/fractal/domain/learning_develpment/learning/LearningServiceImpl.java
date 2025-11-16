@@ -1,4 +1,3 @@
-
 package com.fractal.domain.learning_develpment.learning;
 
 import com.fractal.domain.learning_develpment.learning.dto.LearningCompactResponse;
@@ -39,11 +38,10 @@ class LearningServiceImpl implements LearningService {
     @Override
     @Transactional
     public Learning update(Long id, LearningRequest dto) {
-       try {
-            Learning learning = mapperService.toEntity(findById(id),dto);
+        try {
+            Learning learning = mapperService.toEntity(findById(id), dto);
             return save(learning);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -51,7 +49,7 @@ class LearningServiceImpl implements LearningService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      learningRepository.delete(findById(id));
+        learningRepository.delete(findById(id));
     }
 
     @Override
@@ -70,14 +68,13 @@ class LearningServiceImpl implements LearningService {
     public Learning save(Learning learning) {
         try {
             return learningRepository.save(learning);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Learning findById(Long id) {
-        return learningRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return learningRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }
 

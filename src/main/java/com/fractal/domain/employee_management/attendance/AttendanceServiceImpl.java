@@ -42,10 +42,9 @@ class AttendanceServiceImpl implements AttendanceService {
     @Override
     public Attendance update(Long id, AttendanceRequest dto) {
         try {
-            Attendance attendance = mapperService.toEntity(findById(id),dto);
+            Attendance attendance = mapperService.toEntity(findById(id), dto);
             return save(attendance);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -54,7 +53,7 @@ class AttendanceServiceImpl implements AttendanceService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      attendanceRepository.delete(findById(id));
+        attendanceRepository.delete(findById(id));
     }
 
     @Override
@@ -65,13 +64,12 @@ class AttendanceServiceImpl implements AttendanceService {
     private Attendance save(Attendance attendance) {
         try {
             return attendanceRepository.save(attendance);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Attendance findById(Long id) {
-        return attendanceRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Attendance with id: " + id + " not found"));
+        return attendanceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Attendance with id: " + id + " not found"));
     }
 }

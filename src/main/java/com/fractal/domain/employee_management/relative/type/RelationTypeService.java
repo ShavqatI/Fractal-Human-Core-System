@@ -8,10 +8,16 @@ import java.util.List;
 public interface RelationTypeService {
 
     RelationType create(RelationTypeRequest dto);
+
     List<RelationType> getAll();
+
     RelationType getByCode(String code);
+
     RelationType getById(Long id);
+
     RelationType update(Long id, RelationTypeRequest dto);
+
     void deleteById(Long id);
+
     RelationTypeResponse toDTO(RelationType relationType);
 }

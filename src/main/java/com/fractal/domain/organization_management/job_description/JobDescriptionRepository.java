@@ -7,10 +7,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface JobDescriptionRepository extends JpaRepository<JobDescription,Long> {
+interface JobDescriptionRepository extends JpaRepository<JobDescription, Long> {
 
     JobDescription save(JobDescription jobDescription);
+
     List<JobDescription> findAll();
+
     Optional<JobDescription> findById(Long id);
 
 }

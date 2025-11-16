@@ -18,16 +18,17 @@ public class MenuChildController {
 
     @PostMapping()
     public ResponseEntity<MenuResponse> create(@PathVariable Long menuId, @RequestBody @Valid MenuRequest dto) {
-        return new ResponseEntity<>(menuService.toDTO(menuService.addChild(menuId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(menuService.toDTO(menuService.addChild(menuId, dto)), HttpStatus.CREATED);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<MenuResponse> update(@PathVariable Long menuId, @PathVariable Long id, @RequestBody @Valid MenuRequest dto) {
-        return ResponseEntity.ok(menuService.toDTO(menuService.updateChild(menuId,id, dto)));
+        return ResponseEntity.ok(menuService.toDTO(menuService.updateChild(menuId, id, dto)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long menuId, @PathVariable Long id) {
-        menuService.deleteChild(menuId,id);
+        menuService.deleteChild(menuId, id);
         return ResponseEntity.noContent().build();
     }
 }

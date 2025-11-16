@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "learning_session_resource",schema = "ld_schema", catalog = "fractal")
+@Table(name = "learning_session_resource", schema = "ld_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @NoArgsConstructor

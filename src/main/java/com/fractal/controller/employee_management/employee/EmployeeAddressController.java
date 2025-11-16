@@ -22,23 +22,27 @@ public class EmployeeAddressController {
 
     @PostMapping()
     public ResponseEntity<EmployeeAddressResponse> create(@PathVariable Long employeeId, @RequestBody @Valid EmployeeAddressRequest dto) {
-        return new ResponseEntity<>(addressService.toDTO(addressService.create(employeeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(addressService.toDTO(addressService.create(employeeId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<EmployeeAddressResponse>> getAll(@PathVariable Long employeeId) {
         return ResponseEntity.ok(addressService.getAllByEmployeeId(employeeId).stream().map(addressService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeAddressResponse> getById(@PathVariable Long employeeId,@PathVariable Long id) {
-        return ResponseEntity.ok(addressService.toDTO(addressService.getById(employeeId,id)));
+    public ResponseEntity<EmployeeAddressResponse> getById(@PathVariable Long employeeId, @PathVariable Long id) {
+        return ResponseEntity.ok(addressService.toDTO(addressService.getById(employeeId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<EmployeeAddressResponse> update(@PathVariable Long employeeId, @PathVariable Long id, @RequestBody @Valid EmployeeAddressRequest dto) {
-        return ResponseEntity.ok(addressService.toDTO(addressService.update(employeeId,id, dto)));
+        return ResponseEntity.ok(addressService.toDTO(addressService.update(employeeId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long employeeId, @PathVariable Long id) {
-        addressService.delete(employeeId,id);
+        addressService.delete(employeeId, id);
         return ResponseEntity.noContent().build();
     }
 

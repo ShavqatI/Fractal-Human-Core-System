@@ -27,7 +27,7 @@ class EmployeeMilitaryServiceServiceImpl implements EmployeeMilitaryServiceServi
         var militaryService = militaryServiceMapperService.toEntity(dto);
         employee.addMilitaryService(militaryService);
         employeeService.save(employee);
-       return militaryService;
+        return militaryService;
     }
 
     @Override
@@ -37,7 +37,7 @@ class EmployeeMilitaryServiceServiceImpl implements EmployeeMilitaryServiceServi
 
     @Override
     public EmployeeMilitaryService getById(Long employeeId, Long id) {
-        return militaryServiceRepository.findByEmployeeIdAndId(employeeId,id).orElseThrow(()-> new ResourceNotFoundException("Military Service with id: " + id + " not found"));
+        return militaryServiceRepository.findByEmployeeIdAndId(employeeId, id).orElseThrow(() -> new ResourceNotFoundException("Military Service with id: " + id + " not found"));
     }
 
     @Override
@@ -46,11 +46,11 @@ class EmployeeMilitaryServiceServiceImpl implements EmployeeMilitaryServiceServi
         var employee = employeeService.getById(employeeId);
         var militaryService = employee.getMilitaryServices()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Military Service with id: " + id + " not found"));
-        militaryService = militaryServiceMapperService.toEntity(militaryService,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Military Service with id: " + id + " not found"));
+        militaryService = militaryServiceMapperService.toEntity(militaryService, dto);
         militaryServiceRepository.save(militaryService);
         employeeService.save(employee);
-       return militaryService;
+        return militaryService;
     }
 
     @Override
@@ -59,7 +59,7 @@ class EmployeeMilitaryServiceServiceImpl implements EmployeeMilitaryServiceServi
         var employee = employeeService.getById(employeeId);
         var militaryService = employee.getMilitaryServices()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Military Service with id: " + id + " not found"));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Military Service with id: " + id + " not found"));
         employee.removeMilitaryService(militaryService);
         employeeService.save(employee);
     }
@@ -79,12 +79,12 @@ class EmployeeMilitaryServiceServiceImpl implements EmployeeMilitaryServiceServi
     public EmployeeMilitaryService save(EmployeeMilitaryService employeeMilitaryService) {
         try {
             return militaryServiceRepository.save(employeeMilitaryService);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
+
     private EmployeeMilitaryService findById(Long id) {
-        return militaryServiceRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Military service  with id: " + id + " not found"));
+        return militaryServiceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Military service  with id: " + id + " not found"));
     }
 }

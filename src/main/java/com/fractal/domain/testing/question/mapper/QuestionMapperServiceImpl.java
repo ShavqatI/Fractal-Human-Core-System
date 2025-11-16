@@ -22,6 +22,7 @@ class QuestionMapperServiceImpl implements QuestionMapperService {
     private final AnswerMapperService answerMapperService;
     private final QuestionTypeService questionTypeService;
     private final StatusService statusService;
+
     @Override
     public QuestionResponse toDTO(Question question) {
         return new QuestionResponse(
@@ -42,7 +43,7 @@ class QuestionMapperServiceImpl implements QuestionMapperService {
 
     @Override
     public QuestionCompactResponse toCompactDTO(Question question) {
-        return new QuestionCompactResponse(question.getId(),question.getText());
+        return new QuestionCompactResponse(question.getId(), question.getText());
     }
 
     @Override
@@ -60,7 +61,7 @@ class QuestionMapperServiceImpl implements QuestionMapperService {
         question.setQuestionType(questionTypeService.getById(dto.questionTypeId()));
         question.setMaxSelectableOptions(dto.maxSelectableOptions());
         question.setStatus(statusService.getById(dto.statusId()));
-        dto.answers().forEach(answer-> question.addAnswer(answerMapperService.toEntity(answer)));
+        dto.answers().forEach(answer -> question.addAnswer(answerMapperService.toEntity(answer)));
         return question;
     }
 }

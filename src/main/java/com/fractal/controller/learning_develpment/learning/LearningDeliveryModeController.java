@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class LearningDeliveryModeController {
 
     private final LearningDeliveryModeService deliveryModeService;
+
     @PostMapping
     public ResponseEntity<LearningDeliveryModeResponse> create(@RequestBody @Valid LearningDeliveryModeRequest dto) {
         return new ResponseEntity<>(deliveryModeService.toDTO(deliveryModeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<LearningDeliveryModeResponse>> getAll() {
         return ResponseEntity.ok(deliveryModeService.getAll().stream().map(deliveryModeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<LearningDeliveryModeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(deliveryModeService.toDTO(deliveryModeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<LearningDeliveryModeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(deliveryModeService.toDTO(deliveryModeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<LearningDeliveryModeResponse> update(@PathVariable Long id, @RequestBody @Valid LearningDeliveryModeRequest dto) {
-      return  ResponseEntity.ok(deliveryModeService.toDTO(deliveryModeService.update(id, dto)));
+        return ResponseEntity.ok(deliveryModeService.toDTO(deliveryModeService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         deliveryModeService.deleteById(id);

@@ -6,7 +6,9 @@ import com.fractal.domain.learning_develpment.learning.session.enrollment.dto.Le
 
 public interface LearningSessionEnrollmentMapperService {
     LearningSessionEnrollmentResponse toDTO(LearningSessionEnrollment enrollment);
+
     LearningSessionEnrollment toEntity(LearningSessionEnrollmentRequest dto);
+
     LearningSessionEnrollment toEntity(LearningSessionEnrollment enrollment, LearningSessionEnrollmentRequest dto);
 }
 

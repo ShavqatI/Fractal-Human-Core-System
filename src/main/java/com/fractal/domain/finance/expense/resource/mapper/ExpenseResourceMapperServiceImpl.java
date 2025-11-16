@@ -26,16 +26,16 @@ class ExpenseResourceMapperServiceImpl implements ExpenseResourceMapperService {
 
     @Override
     public ExpenseResource toEntity(MultipartFile file, String url) {
-        return (ExpenseResource) mapperService.toEntity(file,url);
+        return (ExpenseResource) mapperService.toEntity(file, url);
     }
 
     @Override
     public ExpenseResource toEntity(ExpenseResource resource, ResourceRequest dto) {
-        return (ExpenseResource) mapperService.toEntity(resource,dto);
+        return (ExpenseResource) mapperService.toEntity(resource, dto);
     }
 
     @Override
     public ResourceRequest fileToRequest(MultipartFile file, String url) {
-        return mapperService.fileToRequest(file,url);
+        return mapperService.fileToRequest(file, url);
     }
 }

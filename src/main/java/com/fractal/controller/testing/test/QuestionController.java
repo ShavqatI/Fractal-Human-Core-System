@@ -23,31 +23,37 @@ public class QuestionController {
 
     @PostMapping()
     public ResponseEntity<QuestionResponse> create(@PathVariable Long testId, @RequestBody @Valid QuestionRequest dto) {
-        return new ResponseEntity<>(questionService.toDTO(questionService.create(testId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(questionService.toDTO(questionService.create(testId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<QuestionResponse>> getAll(@PathVariable Long testId) {
         return ResponseEntity.ok(questionService.getAllByTestId(testId).stream().map(questionService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<QuestionResponse> getById(@PathVariable Long testId, @PathVariable Long id) {
-        return ResponseEntity.ok(questionService.toDTO(questionService.getById(testId,id)));
+        return ResponseEntity.ok(questionService.toDTO(questionService.getById(testId, id)));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<QuestionCompactResponse>> getAllCompact(@PathVariable Long testId) {
         return ResponseEntity.ok(questionService.getAllByTestId(testId).stream().map(questionService::toCompactDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/compact/{id}")
     public ResponseEntity<QuestionCompactResponse> getByIdCompact(@PathVariable Long testId, @PathVariable Long id) {
-        return ResponseEntity.ok(questionService.toCompactDTO(questionService.getById(testId,id)));
+        return ResponseEntity.ok(questionService.toCompactDTO(questionService.getById(testId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<QuestionResponse> update(@PathVariable Long testId, @PathVariable Long id, @RequestBody @Valid QuestionRequest dto) {
-        return ResponseEntity.ok(questionService.toDTO(questionService.update(testId,id, dto)));
+        return ResponseEntity.ok(questionService.toDTO(questionService.update(testId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long testId, @PathVariable Long id) {
-        questionService.delete(testId,id);
+        questionService.delete(testId, id);
         return ResponseEntity.noContent().build();
     }
 

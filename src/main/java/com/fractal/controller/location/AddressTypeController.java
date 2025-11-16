@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class AddressTypeController {
 
     private final AddressTypeService addressTypeService;
+
     @PostMapping
     public ResponseEntity<AddressTypeResponse> create(@RequestBody @Valid AddressTypeRequest dto) {
         return new ResponseEntity<>(addressTypeService.toDTO(addressTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<AddressTypeResponse>> getAll() {
         return ResponseEntity.ok(addressTypeService.getAll().stream().map(addressTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<AddressTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(addressTypeService.toDTO(addressTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<AddressTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(addressTypeService.toDTO(addressTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<AddressTypeResponse> update(@PathVariable Long id, @RequestBody @Valid AddressTypeRequest dto) {
-      return  ResponseEntity.ok(addressTypeService.toDTO(addressTypeService.update(id, dto)));
+        return ResponseEntity.ok(addressTypeService.toDTO(addressTypeService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         addressTypeService.deleteById(id);

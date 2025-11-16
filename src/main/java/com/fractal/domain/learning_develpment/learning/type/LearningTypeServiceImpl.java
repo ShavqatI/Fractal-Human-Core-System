@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class LearningTypeServiceImpl implements LearningTypeService {
@@ -27,7 +28,7 @@ class LearningTypeServiceImpl implements LearningTypeService {
 
     @Override
     public LearningType getByCode(String code) {
-        return learningTypeRepository.findByCode(code).orElseThrow(()-> new ResourceWithCodeNotFoundException(this,code));
+        return learningTypeRepository.findByCode(code).orElseThrow(() -> new ResourceWithCodeNotFoundException(this, code));
     }
 
     @Override
@@ -42,15 +43,14 @@ class LearningTypeServiceImpl implements LearningTypeService {
             learningType.setCode(dto.code());
             learningType.setName(dto.name());
             return save(learningType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      learningTypeRepository.delete(findById(id));
+        learningTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -73,14 +73,13 @@ class LearningTypeServiceImpl implements LearningTypeService {
     private LearningType save(LearningType learningType) {
         try {
             return learningTypeRepository.save(learningType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private LearningType findById(Long id) {
-        return learningTypeRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return learningTypeRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
 }

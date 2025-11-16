@@ -20,4 +20,5 @@ public record InterviewResponse(
         List<IntervieweeResponse> interviewees,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) {}
+) {
+}

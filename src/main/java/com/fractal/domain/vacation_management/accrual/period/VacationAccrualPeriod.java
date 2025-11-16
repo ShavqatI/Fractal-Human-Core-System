@@ -36,13 +36,15 @@ public class VacationAccrualPeriod extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "vacationAccrualPeriod", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vacationAccrualPeriod", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<VacationAccrualPeriodRecord> records = new ArrayList<>();
+
     public void addRecord(VacationAccrualPeriodRecord record) {
         if (records == null) records = new ArrayList<>();
         record.setVacationAccrualPeriod(this);
         records.add(record);
     }
+
     public void removeRecord(VacationAccrualPeriodRecord record) {
         if (records != null && !records.isEmpty())
             records.remove(record);

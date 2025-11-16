@@ -28,7 +28,7 @@ class MaritalStatusServiceImpl implements MaritalStatusService {
 
     @Override
     public MaritalStatus getByCode(String code) {
-        return maritalStatusRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Marital Status with code: " + code + " not found"));
+        return maritalStatusRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Marital Status with code: " + code + " not found"));
     }
 
     @Override
@@ -43,15 +43,14 @@ class MaritalStatusServiceImpl implements MaritalStatusService {
             maritalStatus.setCode(dto.code());
             maritalStatus.setName(dto.name());
             return save(maritalStatus);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       maritalStatusRepository.delete(findById(id));
+        maritalStatusRepository.delete(findById(id));
     }
 
     @Override
@@ -74,13 +73,12 @@ class MaritalStatusServiceImpl implements MaritalStatusService {
     private MaritalStatus save(MaritalStatus maritalStatus) {
         try {
             return maritalStatusRepository.save(maritalStatus);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private MaritalStatus findById(Long id) {
-        return maritalStatusRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Marital Status with id: " + id + " not found"));
+        return maritalStatusRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Marital Status with id: " + id + " not found"));
     }
 }

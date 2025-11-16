@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.grade.method.hay.dto.HayEvalua
 
 public interface HayEvaluationMapperService {
     HayEvaluationResponse toDTO(HayEvaluation hayEvaluation);
+
     HayEvaluation toEntity(HayEvaluationRequest dto);
+
     HayEvaluation toEntity(HayEvaluation hayEvaluation, HayEvaluationRequest dto);
 }
 

@@ -31,7 +31,6 @@ public class InsuranceProviderAddressServiceImpl implements InsuranceProviderAdd
     }
 
 
-
     @Override
     public List<InsuranceProviderAddress> getAllByInsuranceProviderId(Long insuranceProviderId) {
         return insuranceProviderAddressRepository.findAllByInsuranceProviderId(insuranceProviderId);
@@ -39,7 +38,7 @@ public class InsuranceProviderAddressServiceImpl implements InsuranceProviderAdd
 
     @Override
     public InsuranceProviderAddress getById(Long insuranceProviderId, Long id) {
-        return insuranceProviderAddressRepository.findByInsuranceProviderIdAndId(insuranceProviderId,id).orElseThrow(()-> new ResourceNotFoundException("Candidate address with id: " + id + " not found"));
+        return insuranceProviderAddressRepository.findByInsuranceProviderIdAndId(insuranceProviderId, id).orElseThrow(() -> new ResourceNotFoundException("Candidate address with id: " + id + " not found"));
     }
 
     @Override
@@ -48,8 +47,8 @@ public class InsuranceProviderAddressServiceImpl implements InsuranceProviderAdd
         var insuranceProvider = insuranceProviderService.getById(insuranceProviderId);
         var address = insuranceProvider.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate address with id: " + id + " not found"));
-        address = insuranceProviderAddressRepository.save(addressMapperService.toEntity(address,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Candidate address with id: " + id + " not found"));
+        address = insuranceProviderAddressRepository.save(addressMapperService.toEntity(address, dto));
         insuranceProviderService.save(insuranceProvider);
         return address;
     }
@@ -59,7 +58,7 @@ public class InsuranceProviderAddressServiceImpl implements InsuranceProviderAdd
         var insuranceProvider = insuranceProviderService.getById(insuranceProviderId);
         var address = insuranceProvider.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Candidate address with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Candidate address with id: " + id + " not found"));
         insuranceProvider.removeAddress(address);
         insuranceProviderService.save(insuranceProvider);
     }

@@ -17,4 +17,5 @@ public record UserResponse(
         LocalDateTime createdDate,
         LocalDateTime updatedDate
 
-) { }
+) {
+}

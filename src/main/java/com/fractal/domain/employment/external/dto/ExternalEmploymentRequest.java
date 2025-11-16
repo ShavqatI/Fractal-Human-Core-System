@@ -21,4 +21,5 @@ public record ExternalEmploymentRequest(
         List<SeparationReasonRequest> separationReasons,
         Long statusId
 
-) implements EmploymentRequest { }
+) implements EmploymentRequest {
+}

@@ -22,23 +22,27 @@ public class CandidateAddressController {
 
     @PostMapping()
     public ResponseEntity<CandidateAddressResponse> create(@PathVariable Long candidateId, @RequestBody @Valid CandidateAddressRequest dto) {
-        return new ResponseEntity<>(addressService.toDTO(addressService.create(candidateId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(addressService.toDTO(addressService.create(candidateId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<CandidateAddressResponse>> getAll(@PathVariable Long candidateId) {
         return ResponseEntity.ok(addressService.getAllByCandidateId(candidateId).stream().map(addressService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<CandidateAddressResponse> getById(@PathVariable Long candidateId, @PathVariable Long id) {
-        return ResponseEntity.ok(addressService.toDTO(addressService.getById(candidateId,id)));
+        return ResponseEntity.ok(addressService.toDTO(addressService.getById(candidateId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<CandidateAddressResponse> update(@PathVariable Long candidateId, @PathVariable Long id, @RequestBody @Valid CandidateAddressRequest dto) {
-        return ResponseEntity.ok(addressService.toDTO(addressService.update(candidateId,id, dto)));
+        return ResponseEntity.ok(addressService.toDTO(addressService.update(candidateId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long candidateId, @PathVariable Long id) {
-        addressService.delete(candidateId,id);
+        addressService.delete(candidateId, id);
         return ResponseEntity.noContent().build();
     }
 

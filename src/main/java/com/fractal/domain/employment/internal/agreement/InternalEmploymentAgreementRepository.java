@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface InternalEmploymentAgreementRepository extends JpaRepository<InternalEmploymentAgreement,Long> {
+interface InternalEmploymentAgreementRepository extends JpaRepository<InternalEmploymentAgreement, Long> {
 
     List<InternalEmploymentAgreement> findAllByInternalEmploymentId(Long employmentId);
+
     Optional<InternalEmploymentAgreement> findByInternalEmploymentIdAndId(Long employmentId, Long id);
 }

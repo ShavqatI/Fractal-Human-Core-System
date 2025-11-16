@@ -36,21 +36,22 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll() {
         return userRepository.findAll();
     }
+
     @Override
     public User getById(Long id) {
-       return findById(id);
+        return findById(id);
     }
 
     @Override
     @Transactional
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(()->new ResourceNotFoundException("User with username:" + username + " not found"));
+        return userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User with username:" + username + " not found"));
     }
 
     @Override
     @Transactional
     public User update(Long id, UserRequest dto) {
-        return mapperService.toEntity(findById(id),dto);
+        return mapperService.toEntity(findById(id), dto);
     }
 
     @Override
@@ -59,8 +60,7 @@ public class UserServiceImpl implements UserService {
             var user = findById(id);
             user.setPassword(passwordEncoder.encode(dto.password()));
             save(user);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }
@@ -69,13 +69,11 @@ public class UserServiceImpl implements UserService {
     public void changePassword(Long id, ChangePasswordRequest dto) {
         try {
             var user = findById(id);
-            if(passwordEncoder.matches(dto.oldPassword(),user.getPassword())){
+            if (passwordEncoder.matches(dto.oldPassword(), user.getPassword())) {
                 user.setPassword(passwordEncoder.encode(dto.newPassword()));
                 save(user);
-            }
-            else throw new RuntimeException("Old password is wrong!" + dto.oldPassword());
-        }
-        catch (Exception e){
+            } else throw new RuntimeException("Old password is wrong!" + dto.oldPassword());
+        } catch (Exception e) {
             throw new RuntimeException(e.getMessage());
         }
     }

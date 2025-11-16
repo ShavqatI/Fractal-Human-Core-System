@@ -7,10 +7,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface MilitaryServiceResourceMapperService {
     ResourceResponse toDTO(MilitaryServiceResource resource);
+
     MilitaryServiceResource toEntity(ResourceRequest dto);
+
     MilitaryServiceResource toEntity(MultipartFile file, String url);
-    ResourceRequest fileToRequest(MultipartFile file,String url);
+
+    ResourceRequest fileToRequest(MultipartFile file, String url);
+
     MilitaryServiceResource toEntity(MilitaryServiceResource resource, MultipartFile file, String resourceStoragePath);
+
     MilitaryServiceResource toEntity(MilitaryServiceResource resource, ResourceRequest dto);
 
     MilitaryServiceResource copy(MilitaryServiceResource resource);

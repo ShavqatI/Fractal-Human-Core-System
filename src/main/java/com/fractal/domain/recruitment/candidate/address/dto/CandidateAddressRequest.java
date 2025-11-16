@@ -21,4 +21,5 @@ public record CandidateAddressRequest(
         String house,
         String apartment
 
-) { }
+) {
+}

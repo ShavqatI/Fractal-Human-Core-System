@@ -23,14 +23,14 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class InterviewEvaluationSection extends AbstractEntity {
 
-    @Column(name = "code",unique = true)
+    @Column(name = "code", unique = true)
     protected String code;
 
     @Column(name = "name")
     protected String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "interview_evaluation_id",referencedColumnName = "id")
+    @JoinColumn(name = "interview_evaluation_id", referencedColumnName = "id")
     private InterviewEvaluation interviewEvaluation;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -41,10 +41,10 @@ public class InterviewEvaluationSection extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "interviewEvaluationSection",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "interviewEvaluationSection", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<InterviewEvaluationQuestion> questions = new ArrayList<>();
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<InterviewEvaluationSection> children = new ArrayList<>();
 
     @Transactional

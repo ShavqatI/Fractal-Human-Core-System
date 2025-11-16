@@ -168,7 +168,7 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
                 .gender(genderService.getById(dto.genderId()))
                 .status(statusService.getByCode("ACTIVE"))
                 .build();
-        dto.contacts().forEach(contact->candidate.addContact(contactMapperService.toEntity(contact)));
+        dto.contacts().forEach(contact -> candidate.addContact(contactMapperService.toEntity(contact)));
         return candidate;
     }
 
@@ -189,16 +189,16 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
         candidate.setNationality(nationalityService.getById(dto.nationalityId()));
         candidate.setStatus(statusService.getById(dto.statusId()));
 
-        dto.identificationDocuments().forEach(identificationDocument->candidate.addIdentificationDocument(identificationDocumentMapperService.toEntity(identificationDocument)));
-        dto.citizenships().forEach(citizenship-> candidate.addCitizenship(citizenshipMapperService.toEntity(citizenship)));
-        dto.addresses().forEach(address->candidate.addAddress(addressMapperService.toEntity(address)));
-        dto.contacts().forEach(contact->candidate.addContact(contactMapperService.toEntity(contact)));
-        dto.educations().forEach(education->candidate.addEducation(educationMapperService.toEntity(education)));
+        dto.identificationDocuments().forEach(identificationDocument -> candidate.addIdentificationDocument(identificationDocumentMapperService.toEntity(identificationDocument)));
+        dto.citizenships().forEach(citizenship -> candidate.addCitizenship(citizenshipMapperService.toEntity(citizenship)));
+        dto.addresses().forEach(address -> candidate.addAddress(addressMapperService.toEntity(address)));
+        dto.contacts().forEach(contact -> candidate.addContact(contactMapperService.toEntity(contact)));
+        dto.educations().forEach(education -> candidate.addEducation(educationMapperService.toEntity(education)));
         dto.languageSkills().forEach(languageSkill -> candidate.addLanguageSkill(languageSkillMapperService.toEntity(languageSkill)));
-        dto.employments().forEach(employment->candidate.addEmployment(employmentMapperService.toEntity(employment)));
-        dto.professionalExperiences().forEach(professionalExperience-> candidate.addProfessionalExperience(professionalExperienceMapperService.toEntity(professionalExperience)));
-        dto.militaryServices().forEach(militaryService->candidate.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
-        dto.resources().forEach(file-> candidate.addResource(resourceMapperService.toEntity(file,null)));
+        dto.employments().forEach(employment -> candidate.addEmployment(employmentMapperService.toEntity(employment)));
+        dto.professionalExperiences().forEach(professionalExperience -> candidate.addProfessionalExperience(professionalExperienceMapperService.toEntity(professionalExperience)));
+        dto.militaryServices().forEach(militaryService -> candidate.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
+        dto.resources().forEach(file -> candidate.addResource(resourceMapperService.toEntity(file, null)));
         return candidate;
     }
 }

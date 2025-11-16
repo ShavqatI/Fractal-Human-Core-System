@@ -23,7 +23,7 @@ class IdentificationDocumentResourceMapperServiceImpl implements IdentificationD
     @Override
     public IdentificationDocumentResource copy(IdentificationDocumentResource identificationDocumentResource) {
         Resource resource = resourceMapperService.copy(identificationDocumentResource);
-        return convert(new IdentificationDocumentResource(),resource);
+        return convert(new IdentificationDocumentResource(), resource);
     }
 
     @Override
@@ -33,22 +33,24 @@ class IdentificationDocumentResourceMapperServiceImpl implements IdentificationD
 
     @Override
     public IdentificationDocumentResource toEntity(MultipartFile file, String resourceStoragePath) {
-        return convert(new IdentificationDocumentResource(),resourceMapperService.toEntity(file, resourceStoragePath));
+        return convert(new IdentificationDocumentResource(), resourceMapperService.toEntity(file, resourceStoragePath));
     }
+
     @Override
     public IdentificationDocumentResource toEntity(IdentificationDocumentResource resource, MultipartFile file, String resourceStoragePath) {
-        return convert(resource,resourceMapperService.toEntity(resource,file,resourceStoragePath));
+        return convert(resource, resourceMapperService.toEntity(resource, file, resourceStoragePath));
     }
 
     @Override
     public IdentificationDocumentResource toEntity(IdentificationDocumentResource resource, ResourceRequest dto) {
-        return (IdentificationDocumentResource) resourceMapperService.toEntity(resource,dto);
+        return (IdentificationDocumentResource) resourceMapperService.toEntity(resource, dto);
     }
 
     @Override
     public ResourceRequest fileToRequest(MultipartFile file, String url) {
-        return resourceMapperService.fileToRequest(file,url);
+        return resourceMapperService.fileToRequest(file, url);
     }
+
     private IdentificationDocumentResource convert(IdentificationDocumentResource identificationDocumentResource, Resource resource) {
         identificationDocumentResource.setFileName(resource.getFileName());
         identificationDocumentResource.setContentType(resource.getContentType());
@@ -56,8 +58,6 @@ class IdentificationDocumentResourceMapperServiceImpl implements IdentificationD
         identificationDocumentResource.setUrl(resource.getUrl());
         return identificationDocumentResource;
     }
-
-
 
 
 }

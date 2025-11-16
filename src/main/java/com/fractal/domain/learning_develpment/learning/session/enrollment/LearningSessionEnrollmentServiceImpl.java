@@ -26,7 +26,7 @@ class LearningSessionEnrollmentServiceImpl implements LearningSessionEnrollmentS
         var enrollment = mapperService.toEntity(dto);
         session.addEnrollment(enrollment);
         sessionService.save(session);
-       return enrollment;
+        return enrollment;
     }
 
     @Override
@@ -36,7 +36,7 @@ class LearningSessionEnrollmentServiceImpl implements LearningSessionEnrollmentS
 
     @Override
     public LearningSessionEnrollment getById(Long sessionId, Long id) {
-        return learningSessionEnrollmentRepository.findByLearningSessionIdAndId(sessionId,id).orElseThrow(()-> new ResourceNotFoundException("Learning Session Enrollment with id: " + id + " not found"));
+        return learningSessionEnrollmentRepository.findByLearningSessionIdAndId(sessionId, id).orElseThrow(() -> new ResourceNotFoundException("Learning Session Enrollment with id: " + id + " not found"));
     }
 
     @Override
@@ -45,11 +45,11 @@ class LearningSessionEnrollmentServiceImpl implements LearningSessionEnrollmentS
         var session = sessionService.getById(sessionId);
         var enrollment = session.getEnrollments()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Learning Session Enrollment with id: " + id + " not found"));
-        enrollment = mapperService.toEntity(enrollment,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Learning Session Enrollment with id: " + id + " not found"));
+        enrollment = mapperService.toEntity(enrollment, dto);
         learningSessionEnrollmentRepository.save(enrollment);
         sessionService.save(session);
-       return enrollment;
+        return enrollment;
     }
 
     @Override
@@ -58,7 +58,7 @@ class LearningSessionEnrollmentServiceImpl implements LearningSessionEnrollmentS
         var session = sessionService.getById(sessionId);
         var trainingParticipation = session.getEnrollments()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Learning Session Enrollment with id: " + id + " not found"));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Learning Session Enrollment with id: " + id + " not found"));
         session.removeEnrollment(trainingParticipation);
         sessionService.save(session);
     }

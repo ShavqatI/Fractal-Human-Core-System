@@ -19,26 +19,32 @@ import java.util.stream.Collectors;
 public class GradingEvaluationTypeController {
 
     private final GradingEvaluationTypeService evaluationTypeService;
+
     @PostMapping
     public ResponseEntity<GradingEvaluationTypeResponse> create(@RequestBody @Valid GradingEvaluationTypeRequest dto) {
         return new ResponseEntity<>(evaluationTypeService.toDTO(evaluationTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<GradingEvaluationTypeResponse>> getAll() {
         return ResponseEntity.ok(evaluationTypeService.getAll().stream().map(evaluationTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<GradingEvaluationTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(evaluationTypeService.toDTO(evaluationTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<GradingEvaluationTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(evaluationTypeService.toDTO(evaluationTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<GradingEvaluationTypeResponse> update(@PathVariable Long id, @RequestBody @Valid GradingEvaluationTypeRequest dto) {
-      return  ResponseEntity.ok(evaluationTypeService.toDTO(evaluationTypeService.update(id, dto)));
+        return ResponseEntity.ok(evaluationTypeService.toDTO(evaluationTypeService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         evaluationTypeService.deleteById(id);

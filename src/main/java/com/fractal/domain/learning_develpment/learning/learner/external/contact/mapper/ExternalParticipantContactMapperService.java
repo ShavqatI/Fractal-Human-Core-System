@@ -6,7 +6,9 @@ import com.fractal.domain.learning_develpment.learning.learner.external.contact.
 
 public interface ExternalParticipantContactMapperService {
     ContactResponse toDTO(ExternalLearnerContact contact);
+
     ExternalLearnerContact toEntity(ContactRequest dto);
+
     ExternalLearnerContact toEntity(ExternalLearnerContact contact, ContactRequest dto);
 }
 

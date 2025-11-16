@@ -34,7 +34,7 @@ public class EmployeeProfessionalExperienceServiceImpl implements EmployeeProfes
 
     @Override
     public EmployeeProfessionalExperience getById(Long employeeId, Long id) {
-        return professionalExperienceRepository.findByEmployeeIdAndId(employeeId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return professionalExperienceRepository.findByEmployeeIdAndId(employeeId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -42,8 +42,8 @@ public class EmployeeProfessionalExperienceServiceImpl implements EmployeeProfes
         var employee = employeeService.getById(employeeId);
         var professionalExperience = employee.getProfessionalExperiences()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        professionalExperience = mapperService.toEntity(professionalExperience,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        professionalExperience = mapperService.toEntity(professionalExperience, dto);
         professionalExperienceRepository.save(professionalExperience);
         employeeService.save(employee);
         return professionalExperience;
@@ -54,7 +54,7 @@ public class EmployeeProfessionalExperienceServiceImpl implements EmployeeProfes
         var employee = employeeService.getById(employeeId);
         var professionalExperience = employee.getProfessionalExperiences()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         employee.removeProfessionalExperience(professionalExperience);
         employeeService.save(employee);
     }

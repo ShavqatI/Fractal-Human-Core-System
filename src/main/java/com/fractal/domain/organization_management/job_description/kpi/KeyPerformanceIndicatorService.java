@@ -8,9 +8,14 @@ import java.util.List;
 public interface KeyPerformanceIndicatorService {
 
     KeyPerformanceIndicator create(Long jobDescriptionId, KeyPerformanceIndicatorRequest dto);
+
     List<KeyPerformanceIndicator> getAllByJobDescriptionId(Long jobDescriptionId);
-    KeyPerformanceIndicator getById(Long jobDescriptionId ,Long id);
-    KeyPerformanceIndicator update(Long jobDescriptionId,Long id, KeyPerformanceIndicatorRequest dto);
+
+    KeyPerformanceIndicator getById(Long jobDescriptionId, Long id);
+
+    KeyPerformanceIndicator update(Long jobDescriptionId, Long id, KeyPerformanceIndicatorRequest dto);
+
     void delete(Long jobDescriptionId, Long id);
+
     KeyPerformanceIndicatorResponse toDTO(KeyPerformanceIndicator keyPerformanceIndicator);
 }

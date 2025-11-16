@@ -6,7 +6,9 @@ import com.fractal.domain.recruitment.candidate.citizenship.CandidateCitizenship
 
 public interface CandidateCitizenshipMapperService {
     CitizenshipResponse toDTO(CandidateCitizenship citizenship);
+
     CandidateCitizenship toEntity(CitizenshipRequest dto);
+
     CandidateCitizenship toEntity(CandidateCitizenship citizenship, CitizenshipRequest dto);
 }
 

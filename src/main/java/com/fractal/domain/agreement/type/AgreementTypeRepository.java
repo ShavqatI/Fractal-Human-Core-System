@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-interface AgreementTypeRepository extends JpaRepository<AgreementType,Long> {
+interface AgreementTypeRepository extends JpaRepository<AgreementType, Long> {
     Optional<AgreementType> findByCode(String code);
 
 }

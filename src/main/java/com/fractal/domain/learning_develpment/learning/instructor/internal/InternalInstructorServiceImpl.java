@@ -45,10 +45,9 @@ class InternalInstructorServiceImpl implements InternalInstructorService {
     @Override
     public InternalInstructor update(Long id, InternalInstructorRequest dto) {
         try {
-            InternalInstructor trainer = mapperService.toEntity(findById(id),dto);
+            InternalInstructor trainer = mapperService.toEntity(findById(id), dto);
             return save(trainer);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -57,7 +56,7 @@ class InternalInstructorServiceImpl implements InternalInstructorService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      instructorRepository.delete(findById(id));
+        instructorRepository.delete(findById(id));
     }
 
     @Override
@@ -74,13 +73,12 @@ class InternalInstructorServiceImpl implements InternalInstructorService {
     private InternalInstructor save(InternalInstructor trainer) {
         try {
             return instructorRepository.save(trainer);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private InternalInstructor findById(Long id) {
-        return instructorRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Internal Instructor with id: " + id + " not found"));
+        return instructorRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Internal Instructor with id: " + id + " not found"));
     }
 }

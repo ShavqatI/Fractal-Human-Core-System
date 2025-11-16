@@ -36,11 +36,11 @@ public class CandidateIdentificationDocumentServiceImpl implements CandidateIden
     }
 
     @Override
-    public CandidateIdentificationDocument getById(Long employeeId , Long id) {
+    public CandidateIdentificationDocument getById(Long employeeId, Long id) {
         var candidate = candidateService.getById(employeeId);
         return candidate.getIdentificationDocuments()
                 .stream()
-                .filter(i -> i.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification document with id: " + id + " not found"));
+                .filter(i -> i.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Identification document with id: " + id + " not found"));
 
     }
 
@@ -55,8 +55,8 @@ public class CandidateIdentificationDocumentServiceImpl implements CandidateIden
         var candidate = candidateService.getById(candidateId);
         var identificationDocument = candidate.getIdentificationDocuments()
                 .stream()
-                .filter(i-> i.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification document with id: " + id + " not found"));
-        identificationDocument = candidateIdentificationDocumentRepository.save(candidateIdentificationDocumentMapperService.toEntity(identificationDocument,dto));
+                .filter(i -> i.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Identification document with id: " + id + " not found"));
+        identificationDocument = candidateIdentificationDocumentRepository.save(candidateIdentificationDocumentMapperService.toEntity(identificationDocument, dto));
         candidateService.save(candidate);
         return identificationDocument;
     }
@@ -67,7 +67,7 @@ public class CandidateIdentificationDocumentServiceImpl implements CandidateIden
         var employee = candidateService.getById(employeeId);
         var identificationDocument = employee.getIdentificationDocuments()
                 .stream()
-                .filter(i -> i.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Identification document with id: " + id + " not found"));
+                .filter(i -> i.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Identification document with id: " + id + " not found"));
         employee.removeIdentificationDocument(identificationDocument);
         candidateService.save(employee);
     }
@@ -78,6 +78,6 @@ public class CandidateIdentificationDocumentServiceImpl implements CandidateIden
     }
 
     private CandidateIdentificationDocument findById(Long id) {
-        return candidateIdentificationDocumentRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Identification Document with id: " + id + " not found"));
+        return candidateIdentificationDocumentRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Identification Document with id: " + id + " not found"));
     }
 }

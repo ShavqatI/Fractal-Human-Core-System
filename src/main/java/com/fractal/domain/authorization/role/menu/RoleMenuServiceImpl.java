@@ -21,6 +21,7 @@ public class RoleMenuServiceImpl implements RoleMenuService {
     private final RoleMenuRepository roleMenuRepository;
     private final RoleService roleService;
     private final RoleMenuMapperService mapperService;
+
     @Override
     public RoleMenu create(Long roleId, RoleMenuRequest dto) {
         var role = roleService.getById(roleId);
@@ -35,7 +36,7 @@ public class RoleMenuServiceImpl implements RoleMenuService {
         var role = roleService.getById(roleId);
         return role.getRoleMenus()
                 .stream()
-                .filter(i -> i.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Role menu with id: " + id + " not found"));
+                .filter(i -> i.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Role menu with id: " + id + " not found"));
     }
 
     @Override
@@ -48,18 +49,18 @@ public class RoleMenuServiceImpl implements RoleMenuService {
         var role = roleService.getById(roleId);
         var roleMenu = role.getRoleMenus()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Role menu with id: " + id + " not found"));
-        roleMenu = save(mapperService.toEntity(roleMenu,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Role menu with id: " + id + " not found"));
+        roleMenu = save(mapperService.toEntity(roleMenu, dto));
         roleService.save(role);
         return roleMenu;
     }
 
     @Override
-    public void delete(Long roleId,Long id) {
+    public void delete(Long roleId, Long id) {
         var role = roleService.getById(roleId);
         var roleMenu = role.getRoleMenus()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Role menu with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Role menu with id: " + id + " not found"));
         role.removeMenu(roleMenu);
         roleService.save(role);
     }
@@ -71,7 +72,7 @@ public class RoleMenuServiceImpl implements RoleMenuService {
 
     @Override
     public RoleMenu getByRoleIdAndMenuId(Long roleId, Long menuId) {
-        return roleMenuRepository.findAllByRoleIdAndMenuId(roleId,menuId)
+        return roleMenuRepository.findAllByRoleIdAndMenuId(roleId, menuId)
                 .stream().filter(roleMenu -> "ACTIVE".equals(roleMenu.getStatus().getCode())).findFirst().orElse(null);
     }
 
@@ -98,8 +99,8 @@ public class RoleMenuServiceImpl implements RoleMenuService {
                 .filter(child -> getByRoleIdAndMenuId(roleId, child.getId()) != null)
                 .collect(Collectors.toList());
         menu.setChildren(filteredChildren);
-        filteredChildren.forEach(filteredChild-> checkMenu(roleId,filteredChild));
-       return menu;
+        filteredChildren.forEach(filteredChild -> checkMenu(roleId, filteredChild));
+        return menu;
     }
 }
 

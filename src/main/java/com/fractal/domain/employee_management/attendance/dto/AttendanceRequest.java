@@ -11,4 +11,5 @@ public record AttendanceRequest(
         LocalTime endTime,
         String remarks
 
-) { }
+) {
+}

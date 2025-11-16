@@ -28,7 +28,7 @@ class QuestionServiceImpl implements QuestionService {
         var question = mapperService.toEntity(dto);
         test.addQuestion(question);
         testService.save(test);
-       return question;
+        return question;
     }
 
     @Override
@@ -38,7 +38,7 @@ class QuestionServiceImpl implements QuestionService {
 
     @Override
     public Question getById(Long testId, Long id) {
-        return questionRepository.findByTestIdAndId(testId,id).orElseThrow(()-> new ResourceNotFoundException("Question  with id: " + id + " not found"));
+        return questionRepository.findByTestIdAndId(testId, id).orElseThrow(() -> new ResourceNotFoundException("Question  with id: " + id + " not found"));
     }
 
     @Override
@@ -52,11 +52,11 @@ class QuestionServiceImpl implements QuestionService {
         var test = testService.getById(testId);
         var question = test.getQuestions()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Question  with id: " + id + " not found"));
-        question = mapperService.toEntity(question,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Question  with id: " + id + " not found"));
+        question = mapperService.toEntity(question, dto);
         questionRepository.save(question);
         testService.save(test);
-       return question;
+        return question;
     }
 
     @Override
@@ -65,7 +65,7 @@ class QuestionServiceImpl implements QuestionService {
         var test = testService.getById(testId);
         var question = test.getQuestions()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Question  with id: " + id + " not found"));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Question  with id: " + id + " not found"));
         test.removeQuestion(question);
         testService.save(test);
     }
@@ -85,12 +85,12 @@ class QuestionServiceImpl implements QuestionService {
     public Question save(Question question) {
         try {
             return questionRepository.save(question);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
+
     private Question findById(Long id) {
-        return questionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Question with id: " + id + " not found"));
+        return questionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Question with id: " + id + " not found"));
     }
 }

@@ -30,28 +30,33 @@ public class CandidateResourceController {
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<CandidateResourceResponse> create(@PathVariable Long candidateId, @ModelAttribute @Valid CandidateResourceRequest dto) {
-        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(candidateId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(candidateId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<CandidateResourceResponse>> getAll(@PathVariable Long candidateId) {
         return ResponseEntity.ok(resourceService.getAllByCandidateId(candidateId).stream().map(resourceService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<CandidateResourceResponse> getById(@PathVariable Long candidateId, @PathVariable Long id) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(candidateId,id)));
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(candidateId, id)));
     }
-    @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<CandidateResourceResponse> update(@PathVariable Long candidateId, @PathVariable Long id, @ModelAttribute @Valid CandidateResourceRequest dto) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(candidateId,id, dto)));
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(candidateId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long candidateId, @PathVariable Long id) {
-        resourceService.delete(candidateId,id);
+        resourceService.delete(candidateId, id);
         return ResponseEntity.noContent().build();
     }
+
     @GetMapping("/download/{id}")
     public ResponseEntity<Resource> download(@PathVariable Long candidateId, @PathVariable Long id) {
-        var employeeResource = resourceService.getById(candidateId,id);
+        var employeeResource = resourceService.getById(candidateId, id);
         try {
             Path filePath = Path.of(employeeResource.getUrl()).toAbsolutePath();
             Resource resource = new FileSystemResource(filePath);
@@ -69,7 +74,6 @@ public class CandidateResourceController {
             return ResponseEntity.badRequest().build();
         }
     }
-
 
 
 }

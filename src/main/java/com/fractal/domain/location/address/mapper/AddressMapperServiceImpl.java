@@ -47,12 +47,12 @@ class AddressMapperServiceImpl implements AddressMapperService {
 
     @Override
     public Address toEntity(AddressRequest dto) {
-        return mapToEntity(new Address(),dto);
+        return mapToEntity(new Address(), dto);
     }
 
     @Override
     public Address toEntity(Address address, AddressRequest dto) {
-       return mapToEntity(address,dto);
+        return mapToEntity(address, dto);
     }
 
     private Address mapToEntity(Address address, AddressRequest dto) {

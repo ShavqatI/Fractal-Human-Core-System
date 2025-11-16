@@ -22,23 +22,27 @@ public class EmployeeRelativeController {
 
     @PostMapping()
     public ResponseEntity<RelativeResponse> create(@PathVariable Long employeeId, @RequestBody @Valid RelativeRequest dto) {
-        return new ResponseEntity<>(relativeService.toDTO(relativeService.create(employeeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(relativeService.toDTO(relativeService.create(employeeId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<RelativeResponse>> getAll(@PathVariable Long employeeId) {
         return ResponseEntity.ok(relativeService.getAllByEmployeeId(employeeId).stream().map(relativeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<RelativeResponse> getById(@PathVariable Long employeeId,@PathVariable Long id) {
-        return ResponseEntity.ok(relativeService.toDTO(relativeService.getById(employeeId,id)));
+    public ResponseEntity<RelativeResponse> getById(@PathVariable Long employeeId, @PathVariable Long id) {
+        return ResponseEntity.ok(relativeService.toDTO(relativeService.getById(employeeId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<RelativeResponse> update(@PathVariable Long employeeId, @PathVariable Long id, @RequestBody @Valid RelativeRequest dto) {
-        return ResponseEntity.ok(relativeService.toDTO(relativeService.update(employeeId,id, dto)));
+        return ResponseEntity.ok(relativeService.toDTO(relativeService.update(employeeId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long employeeId, @PathVariable Long id) {
-        relativeService.delete(employeeId,id);
+        relativeService.delete(employeeId, id);
         return ResponseEntity.noContent().build();
     }
 }

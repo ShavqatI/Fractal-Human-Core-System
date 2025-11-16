@@ -6,14 +6,11 @@ import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.contact.mapper.EmployeeContactMapperService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
-import com.fractal.domain.interview.interviewee.Interviewee;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeCompactResponse;
-import com.fractal.domain.interview.interviewee.dto.IntervieweeRequest;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeResponse;
 import com.fractal.domain.interview.interviewee.employee.EmployeeInterviewee;
 import com.fractal.domain.interview.interviewee.employee.dto.EmployeeIntervieweeRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -55,6 +52,7 @@ class EmployeeIntervieweeMapperServiceImpl implements EmployeeIntervieweeMapperS
 
         );
     }
+
     @Override
     public IntervieweeCompactResponse toCompactDTO(EmployeeInterviewee interviewee) {
         return new IntervieweeCompactResponse(
@@ -67,12 +65,12 @@ class EmployeeIntervieweeMapperServiceImpl implements EmployeeIntervieweeMapperS
 
     @Override
     public EmployeeInterviewee toEntity(EmployeeIntervieweeRequest dto) {
-        return mapToEntity(new EmployeeInterviewee(),dto);
+        return mapToEntity(new EmployeeInterviewee(), dto);
     }
 
     @Override
     public EmployeeInterviewee toEntity(EmployeeInterviewee interviewee, EmployeeIntervieweeRequest dto) {
-        return mapToEntity(interviewee,dto);
+        return mapToEntity(interviewee, dto);
     }
 
 

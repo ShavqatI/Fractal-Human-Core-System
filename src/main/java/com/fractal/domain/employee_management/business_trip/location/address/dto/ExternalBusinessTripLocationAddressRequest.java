@@ -14,4 +14,5 @@ public record ExternalBusinessTripLocationAddressRequest(
         Long districtId,
         @NotBlank
         String street
-) implements BusinessTripLocationAddressRequest { }
+) implements BusinessTripLocationAddressRequest {
+}

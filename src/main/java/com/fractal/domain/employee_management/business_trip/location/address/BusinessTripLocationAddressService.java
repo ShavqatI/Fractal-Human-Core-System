@@ -8,9 +8,14 @@ import java.util.List;
 public interface BusinessTripLocationAddressService {
 
     BusinessTripLocationAddress create(Long locationId, BusinessTripLocationAddressRequest dto);
+
     BusinessTripLocationAddress getById(Long locationId, Long id);
+
     List<BusinessTripLocationAddress> getAllByBusinessTripLocationId(Long locationId);
+
     BusinessTripLocationAddress update(Long locationId, Long id, BusinessTripLocationAddressRequest dto);
+
     void delete(Long externalTrainingLocationId, Long id);
+
     BusinessTripLocationAddressResponse toDTO(BusinessTripLocationAddress address);
 }

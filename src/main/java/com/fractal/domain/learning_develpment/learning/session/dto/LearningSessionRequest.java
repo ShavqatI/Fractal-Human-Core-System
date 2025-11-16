@@ -20,4 +20,5 @@ public record LearningSessionRequest(
         List<LearningSessionExpenseRequest> expenses,
         List<LearningLocationRequest> locations
 
-) { }
+) {
+}

@@ -7,8 +7,11 @@ import com.fractal.domain.organization_management.grade.method.hay.factor.dto.Ha
 
 public interface HayFactorMapperService {
     HayFactorResponse toDTO(HayFactor factor);
+
     HayFactorCompactResponse toCompactDTO(HayFactor factor);
+
     HayFactor toEntity(HayFactorRequest dto);
+
     HayFactor toEntity(HayFactor factor, HayFactorRequest dto);
 }
 

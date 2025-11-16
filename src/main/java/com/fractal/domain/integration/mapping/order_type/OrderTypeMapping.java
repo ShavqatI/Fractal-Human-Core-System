@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 public class OrderTypeMapping extends Integration {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_type_id",updatable = false,referencedColumnName = "id")
+    @JoinColumn(name = "order_type_id", updatable = false, referencedColumnName = "id")
     protected OrderType orderType;
 
 }

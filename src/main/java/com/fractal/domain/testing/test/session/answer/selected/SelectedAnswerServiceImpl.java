@@ -26,7 +26,7 @@ class SelectedAnswerServiceImpl implements SelectedAnswerService {
         var answer = mapperService.toEntity(dto);
         submission.addAnswer(answer);
         submissionService.save(submission);
-       return answer;
+        return answer;
     }
 
     @Override
@@ -36,7 +36,7 @@ class SelectedAnswerServiceImpl implements SelectedAnswerService {
 
     @Override
     public SelectedAnswer getById(Long questionId, Long id) {
-        return selectedAnswerRepository.findByAnswerSubmissionIdAndId(questionId,id).orElseThrow(()-> new ResourceNotFoundException("Selected Answer  with id: " + id + " not found"));
+        return selectedAnswerRepository.findByAnswerSubmissionIdAndId(questionId, id).orElseThrow(() -> new ResourceNotFoundException("Selected Answer  with id: " + id + " not found"));
     }
 
     @Override
@@ -45,11 +45,11 @@ class SelectedAnswerServiceImpl implements SelectedAnswerService {
         var submission = submissionService.getById(questionId);
         var answer = submission.getSelectedAnswers()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Selected Answer  with id: " + id + " not found"));
-        answer = mapperService.toEntity(answer,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Selected Answer  with id: " + id + " not found"));
+        answer = mapperService.toEntity(answer, dto);
         selectedAnswerRepository.save(answer);
         submissionService.save(submission);
-       return answer;
+        return answer;
     }
 
     @Override
@@ -58,7 +58,7 @@ class SelectedAnswerServiceImpl implements SelectedAnswerService {
         var submission = submissionService.getById(questionId);
         var answer = submission.getSelectedAnswers()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Selected Answer  with id: " + id + " not found"));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Selected Answer  with id: " + id + " not found"));
         submission.removeAnswer(answer);
         submissionService.save(submission);
     }

@@ -18,5 +18,5 @@ public record AbsenceResponse(
         String reason,
         String remarks,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

@@ -23,12 +23,12 @@ class EmployeeMilitaryServiceMapperServiceImpl implements EmployeeMilitaryServic
 
     @Override
     public EmployeeMilitaryService toEntity(MilitaryServiceRequest dto) {
-        return convert(new EmployeeMilitaryService(),mapperService.toEntity(dto));
+        return convert(new EmployeeMilitaryService(), mapperService.toEntity(dto));
     }
 
     @Override
     public EmployeeMilitaryService toEntity(EmployeeMilitaryService militaryService, MilitaryServiceRequest dto) {
-        return convert(militaryService,mapperService.toEntity(militaryService,dto));
+        return convert(militaryService, mapperService.toEntity(militaryService, dto));
     }
 
     @Override
@@ -45,7 +45,7 @@ class EmployeeMilitaryServiceMapperServiceImpl implements EmployeeMilitaryServic
 
     @Override
     public EmployeeMilitaryService copy(MilitaryService militaryService) {
-        var employeeMilitaryService = convert(new EmployeeMilitaryService(),mapperService.copy(militaryService));
+        var employeeMilitaryService = convert(new EmployeeMilitaryService(), mapperService.copy(militaryService));
         var militaryServiceResources = new ArrayList<>(employeeMilitaryService.getResources());
         employeeMilitaryService.setResources(new ArrayList<>());
         militaryServiceResources.forEach(militaryServiceResource -> employeeMilitaryService.addResource(militaryServiceResource));

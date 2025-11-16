@@ -2,8 +2,6 @@ package com.fractal.security;
 
 import com.fractal.domain.authorization.permission.Permission;
 import com.fractal.domain.authorization.permission.PermissionService;
-import com.fractal.domain.navigation.menu.Menu;
-import com.fractal.domain.navigation.menu.action.MenuAction;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -25,7 +23,6 @@ import org.springframework.security.web.access.intercept.RequestAuthorizationCon
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.util.List;
-import java.util.Optional;
 
 @Configuration
 @EnableMethodSecurity
@@ -37,14 +34,15 @@ public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final PermissionService permissionService;
     private final JwtLogoutHandler logoutHandler;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/authenticate", "/public/**","/api/**","/**").permitAll()
-                        .anyRequest().access((authentication, request) -> authorizationDecision(authentication.get(),request))
+                        .requestMatchers("/authenticate", "/public/**", "/api/**", "/**").permitAll()
+                        .anyRequest().access((authentication, request) -> authorizationDecision(authentication.get(), request))
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .logout(logout -> logout
@@ -69,7 +67,7 @@ public class SecurityConfig {
         return authProvider;
     }
 
-   private AuthorizationDecision authorizationDecision(Authentication authentication, RequestAuthorizationContext request) {
+    private AuthorizationDecision authorizationDecision(Authentication authentication, RequestAuthorizationContext request) {
         if (authentication.isAuthenticated()) {
             if (authentication instanceof AnonymousAuthenticationToken) {
                 return new AuthorizationDecision(false); // Deny access for anonymous users
@@ -78,7 +76,7 @@ public class SecurityConfig {
             List<Permission> permissions = permissionService.getActivePermissions(authentication);
             String requestUrl = request.getRequest().getRequestURI();
             for (var permission : permissions) {
-                String role  = "ROLE_" + permission.getRole().getCode();
+                String role = "ROLE_" + permission.getRole().getCode();
                 String urlPattern = permission.getMenuAction().getAction().getUrl();
                 if (requestUrl.matches(urlPattern.replace("**", ".*"))) {
                     boolean hasRole = authentication.getAuthorities().stream()
@@ -90,9 +88,6 @@ public class SecurityConfig {
         }
         return new AuthorizationDecision(false);
     }
-
-
-
 
 
 }

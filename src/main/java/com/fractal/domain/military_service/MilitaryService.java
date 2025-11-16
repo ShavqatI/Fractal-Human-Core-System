@@ -39,7 +39,7 @@ public class MilitaryService extends AbstractEntity {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @OneToMany(mappedBy = "militaryService",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "militaryService", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MilitaryServiceResource> resources = new ArrayList<>();
 
     public void addResource(MilitaryServiceResource resource) {
@@ -47,6 +47,7 @@ public class MilitaryService extends AbstractEntity {
         resource.setMilitaryService(this);
         resources.add(resource);
     }
+
     public void removeResource(MilitaryServiceResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);

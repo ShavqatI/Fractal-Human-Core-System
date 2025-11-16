@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @SuperBuilder
 public class Position extends Lifecycle {
 
-    @Column(name = "code",unique = true)
+    @Column(name = "code", unique = true)
     private String code;
 
     @Column(name = "name")
@@ -44,7 +44,7 @@ public class Position extends Lifecycle {
     private LocalDate closeDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id",referencedColumnName = "id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
 }

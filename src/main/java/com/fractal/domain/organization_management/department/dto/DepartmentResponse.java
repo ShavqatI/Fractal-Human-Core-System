@@ -20,4 +20,5 @@ public record DepartmentResponse(
         String closeReason,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) {}
+) {
+}

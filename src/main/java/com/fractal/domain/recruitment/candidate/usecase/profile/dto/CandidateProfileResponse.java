@@ -18,5 +18,5 @@ public record CandidateProfileResponse(
         List<ContactResponse> contacts,
         StatusCompactResponse status,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

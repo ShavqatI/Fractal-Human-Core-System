@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface InterviewerRepository extends JpaRepository<Interviewer,Long> {
+interface InterviewerRepository extends JpaRepository<Interviewer, Long> {
 
     Optional<Interviewer> findByInterviewIdAndId(Long interviewId, Long id);
 

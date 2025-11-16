@@ -28,7 +28,7 @@ class MeasurementUnitServiceImpl implements MeasurementUnitService {
 
     @Override
     public MeasurementUnit getByCode(String code) {
-        return measurementUnitRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Measurement Unit with code: " + code + " not found"));
+        return measurementUnitRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Measurement Unit with code: " + code + " not found"));
     }
 
     @Override
@@ -43,15 +43,14 @@ class MeasurementUnitServiceImpl implements MeasurementUnitService {
             measurementUnit.setCode(dto.code());
             measurementUnit.setName(dto.name());
             return save(measurementUnit);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       measurementUnitRepository.delete(findById(id));
+        measurementUnitRepository.delete(findById(id));
     }
 
     @Override
@@ -74,13 +73,12 @@ class MeasurementUnitServiceImpl implements MeasurementUnitService {
     private MeasurementUnit save(MeasurementUnit measurementUnit) {
         try {
             return measurementUnitRepository.save(measurementUnit);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private MeasurementUnit findById(Long id) {
-        return measurementUnitRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Measurement Unit with id: " + id + " not found"));
+        return measurementUnitRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Measurement Unit with id: " + id + " not found"));
     }
 }

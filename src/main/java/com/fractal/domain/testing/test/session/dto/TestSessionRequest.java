@@ -12,4 +12,5 @@ public record TestSessionRequest(
         Long statusId,
         List<AnswerSubmissionRequest> submissions
 
-) { }
+) {
+}

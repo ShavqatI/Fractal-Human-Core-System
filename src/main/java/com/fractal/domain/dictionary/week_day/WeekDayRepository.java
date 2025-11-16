@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface WeekDayRepository extends JpaRepository<WeekDay,Long> {
+interface WeekDayRepository extends JpaRepository<WeekDay, Long> {
     Optional<WeekDay> findById(Long id);
+
     Optional<WeekDay> findByCode(String code);
+
     List<WeekDay> findAll();
 }

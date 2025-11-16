@@ -6,4 +6,5 @@ public record LearningSessionResourceRequest(
         Long resourceTypeId,
         MultipartFile file
 
-) { }
+) {
+}

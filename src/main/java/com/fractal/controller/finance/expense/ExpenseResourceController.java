@@ -22,26 +22,29 @@ public class ExpenseResourceController {
 
     @PostMapping()
     public ResponseEntity<ResourceResponse> create(@PathVariable Long expenseId, @RequestBody @Valid MultipartFile file) {
-        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(expenseId,file)), HttpStatus.CREATED);
+        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(expenseId, file)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<ResourceResponse>> getAll(@PathVariable Long expenseId) {
         return ResponseEntity.ok(resourceService.getAllByExpenseId(expenseId).stream().map(resourceService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ResourceResponse> getById(@PathVariable Long expenseId, @PathVariable Long id) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(expenseId,id)));
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<ResourceResponse> update(@PathVariable Long expenseId, @PathVariable Long id, @RequestBody @Valid MultipartFile file) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(expenseId,id, file)));
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long expenseId, @PathVariable Long id) {
-        resourceService.delete(expenseId,id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(expenseId, id)));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ResourceResponse> update(@PathVariable Long expenseId, @PathVariable Long id, @RequestBody @Valid MultipartFile file) {
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(expenseId, id, file)));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long expenseId, @PathVariable Long id) {
+        resourceService.delete(expenseId, id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

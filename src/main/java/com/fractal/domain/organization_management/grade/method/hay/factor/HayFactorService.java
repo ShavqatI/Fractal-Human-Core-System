@@ -8,11 +8,18 @@ import java.util.List;
 
 public interface HayFactorService {
     HayFactor create(HayFactorRequest dto);
+
     List<HayFactor> getAll();
+
     HayFactor getByCode(String code);
+
     HayFactor getById(Long id);
+
     HayFactor update(Long id, HayFactorRequest dto);
+
     void deleteById(Long id);
+
     HayFactorResponse toDTO(HayFactor factor);
+
     HayFactorCompactResponse toCompactDTO(HayFactor factor);
 }

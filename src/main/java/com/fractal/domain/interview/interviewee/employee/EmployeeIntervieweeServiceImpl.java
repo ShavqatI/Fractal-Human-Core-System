@@ -1,10 +1,7 @@
 package com.fractal.domain.interview.interviewee.employee;
 
 import com.fractal.domain.interview.InterviewService;
-import com.fractal.domain.interview.interviewee.Interviewee;
-import com.fractal.domain.interview.interviewee.IntervieweeService;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeCompactResponse;
-import com.fractal.domain.interview.interviewee.dto.IntervieweeRequest;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeResponse;
 import com.fractal.domain.interview.interviewee.employee.dto.EmployeeIntervieweeRequest;
 import com.fractal.domain.interview.interviewee.employee.mapper.EmployeeIntervieweeMapperService;
@@ -38,9 +35,8 @@ class EmployeeIntervieweeServiceImpl implements EmployeeIntervieweeService {
 
     @Override
     public EmployeeInterviewee getById(Long interviewId, Long id) {
-        return intervieweeRepository.findByInterviewIdAndId(interviewId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return intervieweeRepository.findByInterviewIdAndId(interviewId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
-
 
 
     @Override
@@ -48,8 +44,8 @@ class EmployeeIntervieweeServiceImpl implements EmployeeIntervieweeService {
         var interview = interviewService.getById(interviewId);
         var interviewee = (EmployeeInterviewee) interview.getInterviewees()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        interviewee = intervieweeRepository.save(mapperService.toEntity(interviewee,dto));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        interviewee = intervieweeRepository.save(mapperService.toEntity(interviewee, dto));
         interviewService.save(interview);
         return interviewee;
     }
@@ -59,10 +55,11 @@ class EmployeeIntervieweeServiceImpl implements EmployeeIntervieweeService {
         var interview = interviewService.getById(interviewId);
         var interviewee = (EmployeeInterviewee) interview.getInterviewees()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         interview.removeInterviewee(interviewee);
         interviewService.save(interview);
     }
+
     @Override
     public IntervieweeResponse toDTO(EmployeeInterviewee interviewee) {
         return mapperService.toDTO(interviewee);

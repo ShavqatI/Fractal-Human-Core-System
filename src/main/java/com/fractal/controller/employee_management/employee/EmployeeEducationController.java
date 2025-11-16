@@ -22,23 +22,27 @@ public class EmployeeEducationController {
 
     @PostMapping()
     public ResponseEntity<EducationResponse> create(@PathVariable Long employeeId, @RequestBody @Valid EducationRequest dto) {
-        return new ResponseEntity<>(employeeEducationService.toDTO(employeeEducationService.create(employeeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(employeeEducationService.toDTO(employeeEducationService.create(employeeId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<EducationResponse>> getAll(@PathVariable Long employeeId) {
         return ResponseEntity.ok(employeeEducationService.getAllByEmployeeId(employeeId).stream().map(employeeEducationService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<EducationResponse> getById(@PathVariable Long employeeId,@PathVariable Long id) {
-        return ResponseEntity.ok(employeeEducationService.toDTO(employeeEducationService.getById(employeeId,id)));
+    public ResponseEntity<EducationResponse> getById(@PathVariable Long employeeId, @PathVariable Long id) {
+        return ResponseEntity.ok(employeeEducationService.toDTO(employeeEducationService.getById(employeeId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<EducationResponse> update(@PathVariable Long employeeId, @PathVariable Long id, @RequestBody @Valid EducationRequest dto) {
-        return ResponseEntity.ok(employeeEducationService.toDTO(employeeEducationService.update(employeeId,id, dto)));
+        return ResponseEntity.ok(employeeEducationService.toDTO(employeeEducationService.update(employeeId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long employeeId, @PathVariable Long id) {
-        employeeEducationService.delete(employeeId,id);
+        employeeEducationService.delete(employeeId, id);
         return ResponseEntity.noContent().build();
     }
 

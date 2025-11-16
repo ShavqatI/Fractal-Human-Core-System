@@ -26,24 +26,28 @@ public class MilitaryServiceResourceController {
     private final MilitaryServiceResourceService resourceService;
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ResourceResponse> create(@PathVariable Long militaryServiceId,  @RequestParam("file") MultipartFile file) {
-        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(militaryServiceId,file)), HttpStatus.CREATED);
+    public ResponseEntity<ResourceResponse> create(@PathVariable Long militaryServiceId, @RequestParam("file") MultipartFile file) {
+        return new ResponseEntity<>(resourceService.toDTO(resourceService.create(militaryServiceId, file)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<ResourceResponse>> getAll(@PathVariable Long militaryServiceId) {
         return ResponseEntity.ok(resourceService.getAllByMilitaryServiceId(militaryServiceId).stream().map(resourceService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<ResourceResponse> getById(@PathVariable Long militaryServiceId,@PathVariable Long id) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(militaryServiceId,id)));
+    public ResponseEntity<ResourceResponse> getById(@PathVariable Long militaryServiceId, @PathVariable Long id) {
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.getById(militaryServiceId, id)));
     }
-    @PutMapping(value = "/{id}",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<ResourceResponse> update(@PathVariable Long militaryServiceId, @PathVariable Long id,  @RequestParam("file") MultipartFile file) {
-        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(militaryServiceId,id, file)));
+
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ResourceResponse> update(@PathVariable Long militaryServiceId, @PathVariable Long id, @RequestParam("file") MultipartFile file) {
+        return ResponseEntity.ok(resourceService.toDTO(resourceService.update(militaryServiceId, id, file)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long militaryServiceId, @PathVariable Long id) {
-        resourceService.delete(militaryServiceId,id);
+        resourceService.delete(militaryServiceId, id);
         return ResponseEntity.noContent().build();
     }
 
@@ -68,7 +72,6 @@ public class MilitaryServiceResourceController {
         }
 
     }
-
 
 
 }

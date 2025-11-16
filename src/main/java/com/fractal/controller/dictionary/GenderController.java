@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class GenderController {
 
     private final GenderService genderService;
+
     @PostMapping
     public ResponseEntity<GenderResponse> create(@RequestBody @Valid GenderRequest dto) {
         return new ResponseEntity<>(genderService.toDTO(genderService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<GenderResponse>> getAll() {
         return ResponseEntity.ok(genderService.getAll().stream().map(genderService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<GenderResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(genderService.toDTO(genderService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<GenderResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(genderService.toDTO(genderService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<GenderResponse> update(@PathVariable Long id, @RequestBody @Valid GenderRequest dto) {
-      return  ResponseEntity.ok(genderService.toDTO(genderService.update(id, dto)));
+        return ResponseEntity.ok(genderService.toDTO(genderService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         genderService.deleteById(id);

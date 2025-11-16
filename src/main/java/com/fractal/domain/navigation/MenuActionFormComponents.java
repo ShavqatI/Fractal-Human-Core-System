@@ -25,7 +25,6 @@ public class MenuActionFormComponents extends AbstractEntity {
     private Integer sequence;
 
 
-
     public FormComponents getMenuComponent() {
         return formComponents;
     }

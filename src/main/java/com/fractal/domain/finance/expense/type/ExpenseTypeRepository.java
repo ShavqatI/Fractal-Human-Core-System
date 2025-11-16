@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-interface ExpenseTypeRepository extends JpaRepository<ExpenseType,Long> {
+interface ExpenseTypeRepository extends JpaRepository<ExpenseType, Long> {
     Optional<ExpenseType> findByCode(String code);
 
 }

@@ -11,4 +11,5 @@ public record QuestionRequest(
         Integer maxSelectableOptions,
         Long statusId
 
-) { }
+) {
+}

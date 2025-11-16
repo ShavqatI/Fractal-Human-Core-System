@@ -21,7 +21,7 @@ public class ExpenseResourceServiceImpl implements ExpenseResourceService {
     @Override
     public ExpenseResource create(Long expenseId, MultipartFile file) {
         var expense = expenseService.getById(expenseId);
-        var resource = resourceMapperService.toEntity(file,null);
+        var resource = resourceMapperService.toEntity(file, null);
         expense.addResource(resource);
         expenseService.save(expense);
         return resource;
@@ -34,7 +34,7 @@ public class ExpenseResourceServiceImpl implements ExpenseResourceService {
 
     @Override
     public ExpenseResource getById(Long expenseId, Long id) {
-        return resourceRepository.findByExpenseIdAndId(expenseId,id).orElseThrow(()-> new ResourceNotFoundException("Business Trip Resource with id: " + id + " not found"));
+        return resourceRepository.findByExpenseIdAndId(expenseId, id).orElseThrow(() -> new ResourceNotFoundException("Business Trip Resource with id: " + id + " not found"));
     }
 
     @Override
@@ -42,8 +42,8 @@ public class ExpenseResourceServiceImpl implements ExpenseResourceService {
         var expense = expenseService.getById(expenseId);
         var resource = expense.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Business Trip Resource  with id: " + id + " not found"));
-        resource = resourceMapperService.toEntity(resource,resourceMapperService.fileToRequest(file,null));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Business Trip Resource  with id: " + id + " not found"));
+        resource = resourceMapperService.toEntity(resource, resourceMapperService.fileToRequest(file, null));
         expenseService.save(expense);
         return resource;
     }
@@ -53,7 +53,7 @@ public class ExpenseResourceServiceImpl implements ExpenseResourceService {
         var expense = expenseService.getById(expenseId);
         var resource = expense.getResources()
                 .stream()
-                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Business Trip Resource  with id: " + id + " not found"));
+                .filter(r -> r.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Business Trip Resource  with id: " + id + " not found"));
         resourceRepository.delete(resource);
         expenseService.save(expense);
     }

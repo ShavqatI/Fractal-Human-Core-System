@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.job_description.reporting_line
 
 public interface ReportingLineMapperService {
     ReportingLineResponse toDTO(ReportingLine reportingLine);
+
     ReportingLine toEntity(ReportingLineRequest dto);
+
     ReportingLine toEntity(ReportingLine reportingLine, ReportingLineRequest dto);
 }
 

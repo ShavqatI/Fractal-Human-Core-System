@@ -6,7 +6,9 @@ import com.fractal.domain.employment.dto.EmploymentResponse;
 
 public interface EmploymentMapperService {
     EmploymentResponse toDTO(Employment employment);
+
     Employment toEntity(EmploymentRequest dto);
+
     Employment copy(Employment employment);
 }
 

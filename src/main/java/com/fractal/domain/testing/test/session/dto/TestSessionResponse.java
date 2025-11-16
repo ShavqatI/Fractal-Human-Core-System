@@ -16,5 +16,5 @@ public record TestSessionResponse(
         List<AnswerSubmissionResponse> submissions,
         StatusCompactResponse status,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

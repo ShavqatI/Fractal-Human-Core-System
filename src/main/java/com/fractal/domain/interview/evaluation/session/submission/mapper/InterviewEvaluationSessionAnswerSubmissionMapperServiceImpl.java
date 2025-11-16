@@ -54,12 +54,12 @@ class InterviewEvaluationSessionAnswerSubmissionMapperServiceImpl implements Int
 
     @Override
     public InterviewEvaluationSessionAnswerSubmission toEntity(InterviewEvaluationSessionAnswerSubmissionRequest dto) {
-        return mapToEntity(new InterviewEvaluationSessionAnswerSubmission(),dto);
+        return mapToEntity(new InterviewEvaluationSessionAnswerSubmission(), dto);
     }
 
     @Override
     public InterviewEvaluationSessionAnswerSubmission toEntity(InterviewEvaluationSessionAnswerSubmission submission, InterviewEvaluationSessionAnswerSubmissionRequest dto) {
-       return mapToEntity(submission,dto);
+        return mapToEntity(submission, dto);
     }
 
     private InterviewEvaluationSessionAnswerSubmission mapToEntity(InterviewEvaluationSessionAnswerSubmission submission, InterviewEvaluationSessionAnswerSubmissionRequest dto) {

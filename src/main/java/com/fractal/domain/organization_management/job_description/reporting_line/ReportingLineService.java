@@ -8,9 +8,14 @@ import java.util.List;
 public interface ReportingLineService {
 
     ReportingLine create(Long jobDescriptionId, ReportingLineRequest dto);
+
     List<ReportingLine> getAllByJobDescriptionId(Long jobDescriptionId);
-    ReportingLine getById(Long jobDescriptionId ,Long id);
-    ReportingLine update(Long jobDescriptionId,Long id, ReportingLineRequest dto);
+
+    ReportingLine getById(Long jobDescriptionId, Long id);
+
+    ReportingLine update(Long jobDescriptionId, Long id, ReportingLineRequest dto);
+
     void delete(Long jobDescriptionId, Long id);
+
     ReportingLineResponse toDTO(ReportingLine reportingLine);
 }

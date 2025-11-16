@@ -22,24 +22,27 @@ public class CandidateCitizenshipController {
 
     @PostMapping()
     public ResponseEntity<CitizenshipResponse> create(@PathVariable Long candidateId, @RequestBody @Valid CitizenshipRequest dto) {
-        return new ResponseEntity<>(citizenshipService.toDTO(citizenshipService.create(candidateId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(citizenshipService.toDTO(citizenshipService.create(candidateId, dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<CitizenshipResponse>> getAll(@PathVariable Long candidateId) {
         return ResponseEntity.ok(citizenshipService.getAllByCandidateId(candidateId).stream().map(citizenshipService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<CitizenshipResponse> getById(@PathVariable Long candidateId, @PathVariable Long id) {
-        return ResponseEntity.ok(citizenshipService.toDTO(citizenshipService.getById(candidateId,id)));
+        return ResponseEntity.ok(citizenshipService.toDTO(citizenshipService.getById(candidateId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<CitizenshipResponse> update(@PathVariable Long candidateId, @PathVariable Long id, @RequestBody @Valid CitizenshipRequest dto) {
-        return ResponseEntity.ok(citizenshipService.toDTO(citizenshipService.update(candidateId,id, dto)));
+        return ResponseEntity.ok(citizenshipService.toDTO(citizenshipService.update(candidateId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long candidateId, @PathVariable Long id) {
-        citizenshipService.delete(candidateId,id);
+        citizenshipService.delete(candidateId, id);
         return ResponseEntity.noContent().build();
     }
 

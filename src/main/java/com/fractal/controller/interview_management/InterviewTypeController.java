@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class InterviewTypeController {
 
     private final InterviewTypeService interviewTypeService;
+
     @PostMapping
     public ResponseEntity<InterviewTypeResponse> create(@RequestBody @Valid InterviewTypeRequest dto) {
         return new ResponseEntity<>(interviewTypeService.toDTO(interviewTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<InterviewTypeResponse>> getAll() {
         return ResponseEntity.ok(interviewTypeService.getAll().stream().map(interviewTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<InterviewTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(interviewTypeService.toDTO(interviewTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<InterviewTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(interviewTypeService.toDTO(interviewTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<InterviewTypeResponse> update(@PathVariable Long id, @RequestBody @Valid InterviewTypeRequest dto) {
-      return  ResponseEntity.ok(interviewTypeService.toDTO(interviewTypeService.update(id, dto)));
+        return ResponseEntity.ok(interviewTypeService.toDTO(interviewTypeService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         interviewTypeService.deleteById(id);

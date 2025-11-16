@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 class VacationAccrualPeriodRecordMapperServiceImpl implements VacationAccrualPeriodRecordMapperService {
     private final StatusService statusService;
     private final VacationTypeService vacationTypeService;
+
     @Override
     public VacationAccrualPeriodRecordResponse toDTO(VacationAccrualPeriodRecord record) {
         return new VacationAccrualPeriodRecordResponse(
@@ -29,12 +30,12 @@ class VacationAccrualPeriodRecordMapperServiceImpl implements VacationAccrualPer
 
     @Override
     public VacationAccrualPeriodRecord toEntity(VacationAccrualPeriodRecordRequest dto) {
-        return mapToEntity(new VacationAccrualPeriodRecord(),dto);
+        return mapToEntity(new VacationAccrualPeriodRecord(), dto);
     }
 
     @Override
     public VacationAccrualPeriodRecord toEntity(VacationAccrualPeriodRecord record, VacationAccrualPeriodRecordRequest dto) {
-        return mapToEntity(record,dto);
+        return mapToEntity(record, dto);
     }
 
     private VacationAccrualPeriodRecord mapToEntity(VacationAccrualPeriodRecord record, VacationAccrualPeriodRecordRequest dto) {

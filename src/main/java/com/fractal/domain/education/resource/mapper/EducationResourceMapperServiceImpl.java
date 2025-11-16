@@ -26,24 +26,24 @@ class EducationResourceMapperServiceImpl implements EducationResourceMapperServi
     }
 
 
-
     @Override
     public EducationResource toEntity(EducationResource resource, ResourceRequest dto) {
-        return (EducationResource) resourceMapperService.toEntity(resource,dto);
+        return (EducationResource) resourceMapperService.toEntity(resource, dto);
     }
 
     @Override
     public ResourceRequest fileToRequest(MultipartFile file, String url) {
-        return resourceMapperService.fileToRequest(file,url);
+        return resourceMapperService.fileToRequest(file, url);
     }
 
     @Override
     public EducationResource toEntity(MultipartFile file, String resourceStoragePath) {
-        return convert(new EducationResource(),resourceMapperService.toEntity(file, resourceStoragePath));
+        return convert(new EducationResource(), resourceMapperService.toEntity(file, resourceStoragePath));
     }
+
     @Override
     public EducationResource toEntity(EducationResource resource, MultipartFile file, String resourceStoragePath) {
-        return convert(resource,resourceMapperService.toEntity(resource,file,resourceStoragePath));
+        return convert(resource, resourceMapperService.toEntity(resource, file, resourceStoragePath));
     }
 
     private EducationResource convert(EducationResource educationResource, Resource resource) {
@@ -57,6 +57,6 @@ class EducationResourceMapperServiceImpl implements EducationResourceMapperServi
     @Override
     public EducationResource copy(EducationResource educationResource) {
         Resource resource = resourceMapperService.copy(educationResource);
-        return convert(new EducationResource(),resource);
+        return convert(new EducationResource(), resource);
     }
 }

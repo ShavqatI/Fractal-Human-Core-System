@@ -1,4 +1,3 @@
-
 package com.fractal.domain.authorization.permission;
 
 import com.fractal.domain.abstraction.AbstractEntity;
@@ -24,7 +23,7 @@ import java.time.LocalDateTime;
 public class Permission extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "role_id",referencedColumnName = "id")
+    @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -42,5 +41,5 @@ public class Permission extends AbstractEntity {
     @Column(name = "confirmed_date")
     private LocalDateTime confirmedDate;
 
-  }
+}
 

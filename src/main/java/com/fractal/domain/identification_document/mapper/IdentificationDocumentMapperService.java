@@ -6,8 +6,11 @@ import com.fractal.domain.identification_document.dto.IdentificationDocumentResp
 
 public interface IdentificationDocumentMapperService {
     IdentificationDocumentResponse toDTO(IdentificationDocument identificationDocument);
+
     IdentificationDocument toEntity(IdentificationDocumentRequest dto);
+
     IdentificationDocument toEntity(IdentificationDocument identificationDocument, IdentificationDocumentRequest dto);
+
     IdentificationDocument copy(IdentificationDocument identificationDocument);
 }
 

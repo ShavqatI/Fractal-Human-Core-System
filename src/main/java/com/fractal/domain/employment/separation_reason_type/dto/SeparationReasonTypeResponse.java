@@ -13,4 +13,5 @@ public record SeparationReasonTypeResponse(
         List<SeparationReasonTypeResponse> children,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) {}
+) {
+}

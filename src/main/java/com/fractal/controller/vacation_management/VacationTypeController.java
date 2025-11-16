@@ -19,26 +19,32 @@ import java.util.stream.Collectors;
 public class VacationTypeController {
 
     private final VacationTypeService vacationTypeService;
+
     @PostMapping
     public ResponseEntity<VacationTypeResponse> create(@RequestBody @Valid VacationTypeRequest dto) {
         return new ResponseEntity<>(vacationTypeService.toDTO(vacationTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<VacationTypeResponse>> getAll() {
         return ResponseEntity.ok(vacationTypeService.getAll().stream().map(vacationTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<VacationTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(vacationTypeService.toDTO(vacationTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<VacationTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(vacationTypeService.toDTO(vacationTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<VacationTypeResponse> update(@PathVariable Long id, @RequestBody @Valid VacationTypeRequest dto) {
-      return  ResponseEntity.ok(vacationTypeService.toDTO(vacationTypeService.update(id, dto)));
+        return ResponseEntity.ok(vacationTypeService.toDTO(vacationTypeService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         vacationTypeService.deleteById(id);

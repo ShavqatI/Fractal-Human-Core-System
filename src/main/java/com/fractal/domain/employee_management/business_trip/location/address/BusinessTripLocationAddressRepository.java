@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 interface BusinessTripLocationAddressRepository extends JpaRepository<BusinessTripLocationAddress, Long> {
     List<BusinessTripLocationAddress> findAllByBusinessTripLocationId(Long locationId);
+
     Optional<BusinessTripLocationAddress> findByBusinessTripLocationIdAndId(Long locationId, Long id);
 }

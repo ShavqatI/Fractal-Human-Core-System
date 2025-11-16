@@ -13,7 +13,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 public abstract class Dictionary extends AbstractEntity {
 
-    @Column(name = "code",unique = true)
+    @Column(name = "code", unique = true)
     protected String code;
 
     @Column(name = "name")

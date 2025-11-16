@@ -22,24 +22,27 @@ public class OfflineLearningLocationController {
 
     @PostMapping()
     public ResponseEntity<OfflineLearningLocationResponse> create(@PathVariable Long sessionId, @RequestBody @Valid OfflineLearningLocationRequest dto) {
-        return new ResponseEntity<>(locationService.toDTO(locationService.create(sessionId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(locationService.toDTO(locationService.create(sessionId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<OfflineLearningLocationResponse>> getAll(@PathVariable Long sessionId) {
         return ResponseEntity.ok(locationService.getAllByLearningSessionId(sessionId).stream().map(locationService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<OfflineLearningLocationResponse> getById(@PathVariable Long sessionId, @PathVariable Long id) {
-        return ResponseEntity.ok(locationService.toDTO(locationService.getById(sessionId,id)));
+        return ResponseEntity.ok(locationService.toDTO(locationService.getById(sessionId, id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<OfflineLearningLocationResponse> update(@PathVariable Long sessionId, @PathVariable Long id, @RequestBody @Valid OfflineLearningLocationRequest dto) {
-        return ResponseEntity.ok(locationService.toDTO(locationService.update(sessionId,id, dto)));
+        return ResponseEntity.ok(locationService.toDTO(locationService.update(sessionId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long sessionId, @PathVariable Long id) {
-        locationService.delete(sessionId,id);
+        locationService.delete(sessionId, id);
         return ResponseEntity.noContent().build();
     }
 

@@ -15,9 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 class QualificationServiceImpl implements QualificationService {
 
-      private final QualificationRepository qualificationRepository;
-      private final QualificationMapperService mapperService;
-      private final JobDescriptionService jobDescriptionService;
+    private final QualificationRepository qualificationRepository;
+    private final QualificationMapperService mapperService;
+    private final JobDescriptionService jobDescriptionService;
 
     @Override
     @Transactional
@@ -36,7 +36,7 @@ class QualificationServiceImpl implements QualificationService {
 
     @Override
     public Qualification getById(Long jobDescriptionId, Long id) {
-        return qualificationRepository.findByJobDescriptionIdAndId(jobDescriptionId,id).orElseThrow(()-> new ResourceNotFoundException("Qualification with id: " + id + " not found"));
+        return qualificationRepository.findByJobDescriptionIdAndId(jobDescriptionId, id).orElseThrow(() -> new ResourceNotFoundException("Qualification with id: " + id + " not found"));
     }
 
     @Override
@@ -45,8 +45,8 @@ class QualificationServiceImpl implements QualificationService {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         var qualification = jobDescription.getQualifications().stream()
                 .filter(q -> q.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Qualification with id: " + id + " not found"));
-        qualification = qualificationRepository.save(mapperService.toEntity(qualification,dto));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Qualification with id: " + id + " not found"));
+        qualification = qualificationRepository.save(mapperService.toEntity(qualification, dto));
         jobDescriptionService.save(jobDescription);
         return qualification;
     }
@@ -57,7 +57,7 @@ class QualificationServiceImpl implements QualificationService {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
         var qualification = jobDescription.getQualifications().stream()
                 .filter(q -> q.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Qualification with id: " + id + " not found"));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Qualification with id: " + id + " not found"));
         jobDescription.removeQualification(qualification);
         jobDescriptionService.save(jobDescription);
     }

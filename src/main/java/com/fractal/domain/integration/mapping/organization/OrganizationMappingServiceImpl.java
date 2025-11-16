@@ -4,7 +4,6 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.integration.mapping.organization.dto.OrganizationMappingRequest;
 import com.fractal.domain.integration.mapping.organization.dto.OrganizationMappingResponse;
 import com.fractal.domain.organization_management.organization.OrganizationService;
-import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -30,6 +29,7 @@ class OrganizationMappingServiceImpl implements OrganizationMappingService {
     public List<OrganizationMapping> getAll() {
         return organizationMappingRepository.findAll();
     }
+
     @Override
     public OrganizationMapping getById(Long id) {
         return findById(id);
@@ -44,8 +44,7 @@ class OrganizationMappingServiceImpl implements OrganizationMappingService {
             organizationMapping.setReference(dto.reference());
             organizationMapping.setStatus(statusService.getById(dto.statusId()));
             return save(organizationMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -79,13 +78,12 @@ class OrganizationMappingServiceImpl implements OrganizationMappingService {
     private OrganizationMapping save(OrganizationMapping organizationMapping) {
         try {
             return organizationMappingRepository.save(organizationMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private OrganizationMapping findById(Long id) {
-        return organizationMappingRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return organizationMappingRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

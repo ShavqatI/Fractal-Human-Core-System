@@ -21,7 +21,7 @@ public record GradeResponse(
         CurrencyCompactResponse currency,
         GradeLevelResponse level,
         BigDecimal minSalary,
-        BigDecimal  maxSalary,
+        BigDecimal maxSalary,
         LocalDate startDate,
         LocalDate endDate,
         StatusCompactResponse status,

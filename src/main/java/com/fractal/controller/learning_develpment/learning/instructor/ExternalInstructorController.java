@@ -34,6 +34,7 @@ public class ExternalInstructorController {
     public ResponseEntity<ExternalInstructorResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(instructorService.toDTO(instructorService.getById(id)));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<ExternalInstructorCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(instructorService.getAll().stream().map(instructorService::toCompactDTO).collect(Collectors.toList()));

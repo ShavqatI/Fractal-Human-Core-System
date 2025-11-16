@@ -34,7 +34,7 @@ class LearningSessionExpenseServiceImpl implements LearningSessionExpenseService
 
     @Override
     public LearningSessionExpense getById(Long sessionId, Long id) {
-        return expenseRepository.findByLearningSessionIdAndId(sessionId,id).orElseThrow(()->new ResourceNotFoundException("Learning Session Expense with id: " + id + " not found"));
+        return expenseRepository.findByLearningSessionIdAndId(sessionId, id).orElseThrow(() -> new ResourceNotFoundException("Learning Session Expense with id: " + id + " not found"));
     }
 
     @Override
@@ -47,8 +47,8 @@ class LearningSessionExpenseServiceImpl implements LearningSessionExpenseService
         var session = sessionService.getById(sessionId);
         var expense = session.getExpenses()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Learning Session Expense with id: " + id + " not found"));
-        expense = mapperService.toEntity( expense,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Learning Session Expense with id: " + id + " not found"));
+        expense = mapperService.toEntity(expense, dto);
         expenseRepository.save(expense);
         sessionService.save(session);
         return expense;
@@ -57,9 +57,9 @@ class LearningSessionExpenseServiceImpl implements LearningSessionExpenseService
     @Override
     public void delete(Long sessionId, Long id) {
         var session = sessionService.getById(sessionId);
-        var expense =  session.getExpenses()
+        var expense = session.getExpenses()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Learning Session Expense with id: " + id + " not found"));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Learning Session Expense with id: " + id + " not found"));
         session.removeExpense(expense);
         sessionService.save(session);
     }

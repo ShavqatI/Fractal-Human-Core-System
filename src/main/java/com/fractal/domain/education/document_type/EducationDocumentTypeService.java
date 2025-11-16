@@ -8,10 +8,16 @@ import java.util.List;
 public interface EducationDocumentTypeService {
 
     EducationDocumentType create(EducationDocumentTypeRequest dto);
+
     List<EducationDocumentType> getAll();
+
     EducationDocumentType getByCode(String code);
+
     EducationDocumentType getById(Long id);
+
     EducationDocumentType update(Long id, EducationDocumentTypeRequest dto);
+
     void deleteById(Long id);
+
     EducationDocumentTypeResponse toDTO(EducationDocumentType educationDocumentType);
 }

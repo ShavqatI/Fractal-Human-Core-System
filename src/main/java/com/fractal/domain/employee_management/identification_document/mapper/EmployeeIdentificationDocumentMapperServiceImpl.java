@@ -25,12 +25,12 @@ class EmployeeIdentificationDocumentMapperServiceImpl implements EmployeeIdentif
 
     @Override
     public EmployeeIdentificationDocument toEntity(IdentificationDocumentRequest dto) {
-        return convert(new EmployeeIdentificationDocument(),mapperService.toEntity(dto));
+        return convert(new EmployeeIdentificationDocument(), mapperService.toEntity(dto));
     }
 
     @Override
     public EmployeeIdentificationDocument toEntity(EmployeeIdentificationDocument identificationDocument, IdentificationDocumentRequest dto) {
-        return convert(identificationDocument,mapperService.toEntity(identificationDocument,dto));
+        return convert(identificationDocument, mapperService.toEntity(identificationDocument, dto));
     }
 
     @Override
@@ -51,10 +51,10 @@ class EmployeeIdentificationDocumentMapperServiceImpl implements EmployeeIdentif
 
     @Override
     public EmployeeIdentificationDocument copy(IdentificationDocument identificationDocument) {
-        var employeeIdentificationDocument = convert(new EmployeeIdentificationDocument(),mapperService.copy(identificationDocument));
+        var employeeIdentificationDocument = convert(new EmployeeIdentificationDocument(), mapperService.copy(identificationDocument));
         List<IdentificationDocumentResource> resources = new ArrayList<>(employeeIdentificationDocument.getResources());
         employeeIdentificationDocument.setResources(new ArrayList<>());
         resources.forEach(identificationDocumentResource -> employeeIdentificationDocument.addResource(identificationDocumentResource));
-       return employeeIdentificationDocument;
+        return employeeIdentificationDocument;
     }
 }

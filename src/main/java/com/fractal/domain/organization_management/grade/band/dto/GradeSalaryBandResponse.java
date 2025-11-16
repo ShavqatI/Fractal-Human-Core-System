@@ -9,7 +9,8 @@ public record GradeSalaryBandResponse(
         Long id,
         BigDecimal minSalary,
         BigDecimal averageSalary,
-        BigDecimal  maxSalary,
+        BigDecimal maxSalary,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) { }
+) {
+}

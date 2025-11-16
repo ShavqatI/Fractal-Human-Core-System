@@ -41,10 +41,10 @@ public class BusinessTrip extends ApprovalWorkflow {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @Column(name = "purpose",length = 5000)
+    @Column(name = "purpose", length = 5000)
     private String purpose;
 
-    @Column(name = "description",length = 1000)
+    @Column(name = "description", length = 1000)
     private String description;
 
     @Column(name = "start_date")
@@ -56,16 +56,16 @@ public class BusinessTrip extends ApprovalWorkflow {
     @Column(name = "days")
     private Integer days;
 
-    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BusinessTripOrder> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "businessTrip",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BusinessTripResource> resources = new ArrayList<>();
 
-    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BusinessTripExpense> expenses = new ArrayList<>();
 
-    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BusinessTripLocation> locations = new ArrayList<>();
 
     public void addOrder(BusinessTripOrder order) {
@@ -73,6 +73,7 @@ public class BusinessTrip extends ApprovalWorkflow {
         order.setBusinessTrip(this);
         orders.add(order);
     }
+
     public void removeOrder(BusinessTripOrder order) {
         if (orders != null && !orders.isEmpty())
             orders.remove(order);
@@ -83,6 +84,7 @@ public class BusinessTrip extends ApprovalWorkflow {
         resource.setBusinessTrip(this);
         resources.add(resource);
     }
+
     public void removeResource(BusinessTripResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);
@@ -93,6 +95,7 @@ public class BusinessTrip extends ApprovalWorkflow {
         expense.setBusinessTrip(this);
         expenses.add(expense);
     }
+
     public void removeExpense(BusinessTripExpense expense) {
         if (expenses != null && !expenses.isEmpty())
             expenses.remove(expense);
@@ -103,6 +106,7 @@ public class BusinessTrip extends ApprovalWorkflow {
         location.setBusinessTrip(this);
         locations.add(location);
     }
+
     public void removeLocation(BusinessTripLocation location) {
         if (locations != null && !locations.isEmpty())
             locations.remove(location);

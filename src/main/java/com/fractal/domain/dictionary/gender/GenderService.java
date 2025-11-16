@@ -8,10 +8,16 @@ import java.util.List;
 public interface GenderService {
 
     Gender create(GenderRequest dto);
+
     List<Gender> getAll();
+
     Gender getByCode(String code);
+
     Gender getById(Long id);
+
     Gender update(Long id, GenderRequest dto);
+
     void deleteById(Long id);
+
     GenderResponse toDTO(Gender gender);
 }

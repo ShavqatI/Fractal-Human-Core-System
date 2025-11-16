@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 interface InsuranceProviderAddressRepository extends JpaRepository<InsuranceProviderAddress, Long> {
     List<InsuranceProviderAddress> findAllByInsuranceProviderId(Long insuranceProviderId);
+
     Optional<InsuranceProviderAddress> findByInsuranceProviderIdAndId(Long insuranceProviderId, Long id);
 }

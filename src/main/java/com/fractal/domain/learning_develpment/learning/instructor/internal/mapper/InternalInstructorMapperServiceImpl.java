@@ -28,6 +28,7 @@ class InternalInstructorMapperServiceImpl implements InternalInstructorMapperSer
     private final StatusService statusService;
     private final EmployeeContactMapperService contactMapperService;
     private final EmployeeService employeeService;
+
     @Override
     public InternalInstructorResponse toDTO(InternalInstructor instructor) {
         return new InternalInstructorResponse(

@@ -4,7 +4,6 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.integration.mapping.employee.dto.EmployeeMappingRequest;
 import com.fractal.domain.integration.mapping.employee.dto.EmployeeMappingResponse;
-import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -30,6 +29,7 @@ class EmployeeMappingServiceImpl implements EmployeeMappingService {
     public List<EmployeeMapping> getAll() {
         return employeeMappingRepository.findAll();
     }
+
     @Override
     public EmployeeMapping getById(Long id) {
         return findById(id);
@@ -44,8 +44,7 @@ class EmployeeMappingServiceImpl implements EmployeeMappingService {
             employeeMapping.setReference(dto.reference());
             employeeMapping.setStatus(statusService.getById(dto.statusId()));
             return save(employeeMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -79,13 +78,12 @@ class EmployeeMappingServiceImpl implements EmployeeMappingService {
     private EmployeeMapping save(EmployeeMapping employeeMapping) {
         try {
             return employeeMappingRepository.save(employeeMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private EmployeeMapping findById(Long id) {
-        return employeeMappingRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return employeeMappingRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

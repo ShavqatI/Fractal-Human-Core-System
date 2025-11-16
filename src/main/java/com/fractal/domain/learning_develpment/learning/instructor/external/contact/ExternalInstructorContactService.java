@@ -8,10 +8,15 @@ import java.util.List;
 public interface ExternalInstructorContactService {
 
     ExternalInstructorContact create(Long instructorId, ContactRequest dto);
+
     List<ExternalInstructorContact> getAllByExternalInstructorId(Long instructorId);
-    ExternalInstructorContact getById(Long instructorId , Long id);
+
+    ExternalInstructorContact getById(Long instructorId, Long id);
+
     ExternalInstructorContact update(Long instructorId, Long id, ContactRequest dto);
-    void delete(Long instructorId,Long id);
+
+    void delete(Long instructorId, Long id);
+
     ContactResponse toDTO(ExternalInstructorContact contact);
 
 }

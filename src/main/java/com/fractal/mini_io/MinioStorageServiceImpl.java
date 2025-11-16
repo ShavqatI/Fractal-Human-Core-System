@@ -50,7 +50,7 @@ public class MinioStorageServiceImpl implements MinioStorageService {
 
     @Override
     public void createFolder(String bucket, String dirPath) throws Exception {
-        ByteArrayInputStream emptyContent = new ByteArrayInputStream(new byte[] {});
+        ByteArrayInputStream emptyContent = new ByteArrayInputStream(new byte[]{});
         minioClient.putObject(
                 PutObjectArgs.builder()
                         .bucket(bucket)

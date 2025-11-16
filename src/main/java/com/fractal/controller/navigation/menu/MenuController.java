@@ -29,29 +29,33 @@ public class MenuController {
     public ResponseEntity<List<MenuResponse>> getAll() {
         return ResponseEntity.ok(menuService.getAll().stream().map(menuService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/top-level")
     public ResponseEntity<List<MenuResponse>> getAllTopLevel() {
         return ResponseEntity.ok(menuService.getAllTopLevel().stream().map(menuService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<MenuCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(menuService.getAll().stream().map(menuService::toCompactDTO).collect(Collectors.toList()));
     }
 
 
-
     @GetMapping("/{id}")
     public ResponseEntity<MenuResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(menuService.toDTO(menuService.getById(id)));
     }
+
     @GetMapping("/url/{url}")
     public ResponseEntity<MenuResponse> getByUrl(@PathVariable String url) {
         return ResponseEntity.ok(menuService.toDTO(menuService.getByUrl(url)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<MenuResponse> update(@PathVariable Long id, @RequestBody @Valid MenuRequest dto) {
         return ResponseEntity.ok(menuService.toDTO(menuService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         menuService.deleteById(id);

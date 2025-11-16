@@ -7,10 +7,15 @@ import java.util.List;
 
 public interface CandidateEmploymentService {
     CandidateEmployment create(Long candidateId, ExternalEmploymentRequest dto);
+
     CandidateEmployment getById(Long candidateId, Long id);
+
     List<CandidateEmployment> getAllByCandidateId(Long candidateId);
+
     CandidateEmployment update(Long candidateId, Long id, ExternalEmploymentRequest dto);
+
     void delete(Long candidateId, Long id);
+
     EmploymentResponse toDTO(CandidateEmployment employment);
 
 }

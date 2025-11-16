@@ -9,4 +9,5 @@ public record InterviewEvaluationAnswerResponse(
         String text,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) {}
+) {
+}

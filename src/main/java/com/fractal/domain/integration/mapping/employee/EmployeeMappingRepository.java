@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-interface EmployeeMappingRepository extends JpaRepository<EmployeeMapping,Long> {
+interface EmployeeMappingRepository extends JpaRepository<EmployeeMapping, Long> {
 
 }

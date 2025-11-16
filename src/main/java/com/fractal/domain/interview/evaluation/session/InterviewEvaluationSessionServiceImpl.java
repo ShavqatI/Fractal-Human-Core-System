@@ -36,12 +36,12 @@ class InterviewEvaluationSessionServiceImpl implements InterviewEvaluationSessio
 
     @Override
     public InterviewEvaluationSession getById(Long interviewerId, Long id) {
-        return evaluationSessionRepository.findByInterviewerIdAndId(interviewerId,id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Session with id: " + id + " not found"));
+        return evaluationSessionRepository.findByInterviewerIdAndId(interviewerId, id).orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation Session with id: " + id + " not found"));
     }
 
     @Override
     public InterviewEvaluationSession getById(Long id) {
-        return evaluationSessionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Session with id: " + id + " not found"));
+        return evaluationSessionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation Session with id: " + id + " not found"));
     }
 
     @Override
@@ -49,8 +49,8 @@ class InterviewEvaluationSessionServiceImpl implements InterviewEvaluationSessio
         var interviewer = interviewerService.getById(interviewerId);
         var evaluationSession = interviewer.getEvaluationSessions()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Session id: " + id + " not found"));
-        evaluationSession = evaluationSessionRepository.save(mapperService.toEntity(evaluationSession,dto));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation Session id: " + id + " not found"));
+        evaluationSession = evaluationSessionRepository.save(mapperService.toEntity(evaluationSession, dto));
         interviewerService.save(interviewer);
         return evaluationSession;
     }
@@ -60,7 +60,7 @@ class InterviewEvaluationSessionServiceImpl implements InterviewEvaluationSessio
         var interviewer = interviewerService.getById(interviewerId);
         var evaluationSession = interviewer.getEvaluationSessions()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Session id: " + id + " not found"));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation Session id: " + id + " not found"));
         interviewer.removeEvaluationSession(evaluationSession);
         interviewerService.save(interviewer);
     }
@@ -70,8 +70,7 @@ class InterviewEvaluationSessionServiceImpl implements InterviewEvaluationSessio
     public InterviewEvaluationSession save(InterviewEvaluationSession session) {
         try {
             return evaluationSessionRepository.save(session);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }

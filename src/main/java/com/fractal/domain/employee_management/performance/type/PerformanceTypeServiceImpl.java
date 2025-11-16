@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class PerformanceTypeServiceImpl implements PerformanceTypeService {
@@ -26,7 +27,7 @@ class PerformanceTypeServiceImpl implements PerformanceTypeService {
 
     @Override
     public PerformanceType getByCode(String code) {
-        return performanceTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Performance Type with code: " + code + " not found"));
+        return performanceTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Performance Type with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class PerformanceTypeServiceImpl implements PerformanceTypeService {
             performanceType.setCode(dto.code());
             performanceType.setName(dto.name());
             return save(performanceType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      performanceTypeRepository.delete(findById(id));
+        performanceTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class PerformanceTypeServiceImpl implements PerformanceTypeService {
     private PerformanceType save(PerformanceType performanceType) {
         try {
             return performanceTypeRepository.save(performanceType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private PerformanceType findById(Long id) {
-        return performanceTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Performance Type with id: " + id + " not found"));
+        return performanceTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Performance Type with id: " + id + " not found"));
     }
 
 }

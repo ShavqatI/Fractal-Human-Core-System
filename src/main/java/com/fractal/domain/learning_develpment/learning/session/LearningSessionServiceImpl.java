@@ -29,7 +29,7 @@ class LearningSessionServiceImpl implements LearningSessionService {
         var session = mapperService.toEntity(dto);
         learning.addSession(session);
         learningService.save(learning);
-       return session;
+        return session;
     }
 
     @Override
@@ -39,7 +39,7 @@ class LearningSessionServiceImpl implements LearningSessionService {
 
     @Override
     public LearningSession getById(Long learningId, Long id) {
-        return learningSessionRepository.findByLearningIdAndId(learningId,id).orElseThrow(()-> new ResourceNotFoundException("Question  with id: " + id + " not found"));
+        return learningSessionRepository.findByLearningIdAndId(learningId, id).orElseThrow(() -> new ResourceNotFoundException("Question  with id: " + id + " not found"));
     }
 
     @Override
@@ -53,11 +53,11 @@ class LearningSessionServiceImpl implements LearningSessionService {
         var learning = learningService.getById(testId);
         var session = learning.getSessions()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        session = mapperService.toEntity(session,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        session = mapperService.toEntity(session, dto);
         learningSessionRepository.save(session);
         learningService.save(learning);
-       return session;
+        return session;
     }
 
     @Override
@@ -66,7 +66,7 @@ class LearningSessionServiceImpl implements LearningSessionService {
         var learning = learningService.getById(learningId);
         var question = learning.getSessions()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         learning.removeSession(question);
         learningService.save(learning);
     }
@@ -86,12 +86,12 @@ class LearningSessionServiceImpl implements LearningSessionService {
     public LearningSession save(LearningSession session) {
         try {
             return learningSessionRepository.save(session);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
+
     private LearningSession findById(Long id) {
-        return learningSessionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Question with id: " + id + " not found"));
+        return learningSessionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Question with id: " + id + " not found"));
     }
 }

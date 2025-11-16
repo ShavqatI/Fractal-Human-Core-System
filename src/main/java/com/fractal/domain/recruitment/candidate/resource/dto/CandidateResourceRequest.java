@@ -6,4 +6,5 @@ public record CandidateResourceRequest(
         Long candidateResourceTypeId,
         MultipartFile file
 
-) { }
+) {
+}

@@ -1,11 +1,11 @@
 package com.fractal.domain.vacation_management.schedule;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.vacation_management.request.VacationRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 import com.fractal.domain.vacation_management.schedule.mapper.VacationScheduleMapperService;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceStateException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -23,9 +23,9 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
 
     @Override
     public VacationSchedule create(VacationScheduleRequest dto) {
-       var schedule = save(mapperService.toEntity(dto));
-       schedule.setStatus(statusService.getByCode("CREATED"));
-       return schedule;
+        var schedule = save(mapperService.toEntity(dto));
+        schedule.setStatus(statusService.getByCode("CREATED"));
+        return schedule;
     }
 
     @Override
@@ -46,9 +46,8 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
     @Override
     public VacationSchedule update(Long id, VacationScheduleRequest dto) {
         try {
-           return save(mapperService.toEntity(findById(id),dto));
-       }
-        catch (DataAccessException e) {
+            return save(mapperService.toEntity(findById(id), dto));
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -62,45 +61,41 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
         return mapperService.toDTO(schedule);
     }
 
-    @Override
-    public VacationSchedule save(VacationSchedule schedule) {
+    private VacationSchedule save(VacationSchedule schedule) {
         try {
             return vacationScheduleRepository.save(schedule);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private VacationSchedule findById(Long id) {
-        return vacationScheduleRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Vacation with id: " + id + " not found"));
+        return vacationScheduleRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Vacation with id: " + id + " not found"));
     }
 
     @Override
     public VacationSchedule review(Long id) {
         var schedule = findById(id);
-        if(schedule.getStatus().getCode().equals("CREATED")){
+        if (schedule.getStatus().getCode().equals("CREATED")) {
             schedule.setReviewedDate(LocalDateTime.now());
             //schedule.setReviewedUser();
             schedule.setStatus(statusService.getByCode("REVIEWED"));
             return schedule;
-        }
-        else {
-            throw new UnsupportedOperationException("The status is not valid is: " + schedule.getStatus().getName());
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + schedule.getStatus().getName());
         }
     }
 
     @Override
     public VacationSchedule approve(Long id) {
         var schedule = findById(id);
-        if(schedule.getStatus().getCode().equals("REVIEWED")){
+        if (schedule.getStatus().getCode().equals("REVIEWED")) {
             schedule.setApprovedDate(LocalDateTime.now());
             //schedule.setApprovedUser();
             schedule.setStatus(statusService.getByCode("APPROVED"));
             return schedule;
-        }
-        else {
-            throw new UnsupportedOperationException("The status  is not valid is: " + schedule.getStatus().getName());
+        } else {
+            throw new ResourceStateException("The status  is not valid is: " + schedule.getStatus().getName());
         }
     }
 

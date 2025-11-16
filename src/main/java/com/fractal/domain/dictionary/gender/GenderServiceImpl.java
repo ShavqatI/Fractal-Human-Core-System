@@ -28,7 +28,7 @@ class GenderServiceImpl implements GenderService {
 
     @Override
     public Gender getByCode(String code) {
-        return genderRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Gender with code: " + code + " not found"));
+        return genderRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Gender with code: " + code + " not found"));
     }
 
     @Override
@@ -43,8 +43,7 @@ class GenderServiceImpl implements GenderService {
             gender.setCode(dto.code());
             gender.setName(dto.name());
             return save(gender);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -74,13 +73,12 @@ class GenderServiceImpl implements GenderService {
     private Gender save(Gender gender) {
         try {
             return genderRepository.save(gender);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Gender findById(Long id) {
-        return genderRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Gender with id: " + id + " not found"));
+        return genderRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Gender with id: " + id + " not found"));
     }
 }

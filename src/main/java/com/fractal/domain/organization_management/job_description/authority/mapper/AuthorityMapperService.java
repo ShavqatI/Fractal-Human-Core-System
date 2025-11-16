@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.job_description.authority.dto.
 
 public interface AuthorityMapperService {
     AuthorityResponse toDTO(Authority authority);
+
     Authority toEntity(AuthorityRequest dto);
+
     Authority toEntity(Authority authority, AuthorityRequest dto);
 }
 

@@ -9,4 +9,5 @@ public record EmployeeIntervieweeRequest(
         LocalDateTime scheduledTime,
         Integer durationMinutes,
         Long statusId
-) implements IntervieweeRequest { }
+) implements IntervieweeRequest {
+}

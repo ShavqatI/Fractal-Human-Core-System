@@ -10,4 +10,5 @@ public record RegionResponse(
         String name,
         CountryResponse country,
         LocalDateTime createdDate
-) { }
+) {
+}

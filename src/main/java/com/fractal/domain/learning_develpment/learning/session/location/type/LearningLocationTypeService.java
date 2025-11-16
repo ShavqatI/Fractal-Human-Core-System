@@ -6,11 +6,17 @@ import com.fractal.domain.learning_develpment.learning.session.location.type.dto
 import java.util.List;
 
 public interface LearningLocationTypeService {
-   LearningLocationType create(LearningLocationTypeRequest dto);
-   List<LearningLocationType> getAll();
-   LearningLocationType getByCode(String code);
-   LearningLocationType getById(Long id);
-   LearningLocationType update(Long id, LearningLocationTypeRequest dto);
-   void deleteById(Long id);
-   LearningLocationTypeResponse toDTO(LearningLocationType learningLocationType);
+    LearningLocationType create(LearningLocationTypeRequest dto);
+
+    List<LearningLocationType> getAll();
+
+    LearningLocationType getByCode(String code);
+
+    LearningLocationType getById(Long id);
+
+    LearningLocationType update(Long id, LearningLocationTypeRequest dto);
+
+    void deleteById(Long id);
+
+    LearningLocationTypeResponse toDTO(LearningLocationType learningLocationType);
 }

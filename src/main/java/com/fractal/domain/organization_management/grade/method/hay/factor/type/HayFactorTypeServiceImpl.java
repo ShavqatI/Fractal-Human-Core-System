@@ -33,7 +33,7 @@ class HayFactorTypeServiceImpl implements HayFactorTypeService {
 
     @Override
     public HayFactorType getByCode(String code) {
-        return hayFactorTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("HayFactor Type with code: " + code + " not found"));
+        return hayFactorTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("HayFactor Type with code: " + code + " not found"));
     }
 
     @Override
@@ -48,17 +48,16 @@ class HayFactorTypeServiceImpl implements HayFactorTypeService {
             hayFactorType.setCode(dto.code());
             hayFactorType.setName(dto.name());
             hayFactorType.setDescription(dto.description());
-            dto.children().forEach(child->hayFactorType.addChild(toEntity(child)));
+            dto.children().forEach(child -> hayFactorType.addChild(toEntity(child)));
             return save(hayFactorType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       hayFactorTypeRepository.delete(findById(id));
+        hayFactorTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -97,15 +96,15 @@ class HayFactorTypeServiceImpl implements HayFactorTypeService {
     @Override
     public HayFactorType updateChild(Long id, Long childId, HayFactorTypeRequest dto) {
         var factorType = findById(id);
-        var child = factorType.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
-        update(child.getId(),dto);
+        var child = factorType.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        update(child.getId(), dto);
         return save(factorType);
     }
 
     @Override
     public HayFactorType deleteChild(Long id, Long childId) {
         var factorType = findById(id);
-        var child = factorType.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        var child = factorType.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
         factorType.removeChild(child);
         return save(factorType);
     }
@@ -116,7 +115,7 @@ class HayFactorTypeServiceImpl implements HayFactorTypeService {
                 .name(dto.name())
                 .description(dto.description())
                 .build();
-        dto.children().forEach(child->factorType.addChild(toEntity(child)));
+        dto.children().forEach(child -> factorType.addChild(toEntity(child)));
         return factorType;
 
     }
@@ -124,13 +123,12 @@ class HayFactorTypeServiceImpl implements HayFactorTypeService {
     private HayFactorType save(HayFactorType hayFactorType) {
         try {
             return hayFactorTypeRepository.save(hayFactorType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private HayFactorType findById(Long id) {
-        return hayFactorTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("HayFactor Type  with id: " + id + " not found"));
+        return hayFactorTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("HayFactor Type  with id: " + id + " not found"));
     }
 }

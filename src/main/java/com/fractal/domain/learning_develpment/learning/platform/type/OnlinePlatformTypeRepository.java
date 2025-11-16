@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface OnlinePlatformTypeRepository extends JpaRepository<OnlinePlatformType,Long> {
+interface OnlinePlatformTypeRepository extends JpaRepository<OnlinePlatformType, Long> {
 
     OnlinePlatformType save(OnlinePlatformType onlinePlatformType);
+
     List<OnlinePlatformType> findAll();
+
     Optional<OnlinePlatformType> findByCode(String code);
+
     Optional<OnlinePlatformType> findById(Long id);
 
 }

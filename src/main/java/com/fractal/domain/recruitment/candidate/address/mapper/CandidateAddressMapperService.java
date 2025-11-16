@@ -6,7 +6,9 @@ import com.fractal.domain.recruitment.candidate.address.dto.CandidateAddressResp
 
 public interface CandidateAddressMapperService {
     CandidateAddressResponse toDTO(CandidateAddress address);
+
     CandidateAddress toEntity(CandidateAddressRequest dto);
+
     CandidateAddress toEntity(CandidateAddress address, CandidateAddressRequest dto);
 }
 

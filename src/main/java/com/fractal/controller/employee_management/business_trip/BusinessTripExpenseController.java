@@ -22,26 +22,29 @@ public class BusinessTripExpenseController {
 
     @PostMapping()
     public ResponseEntity<BusinessTripExpenseResponse> create(@PathVariable Long businessTripId, @RequestBody @Valid BusinessTripExpenseRequest dto) {
-        return new ResponseEntity<>(expenseService.toDTO(expenseService.create(businessTripId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(expenseService.toDTO(expenseService.create(businessTripId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<BusinessTripExpenseResponse>> getAll(@PathVariable Long businessTripId) {
         return ResponseEntity.ok(expenseService.getAllByBusinessTripId(businessTripId).stream().map(expenseService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<BusinessTripExpenseResponse> getById(@PathVariable Long businessTripId,@PathVariable Long id) {
-        return ResponseEntity.ok(expenseService.toDTO(expenseService.getById(businessTripId,id)));
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<BusinessTripExpenseResponse> update(@PathVariable Long businessTripId, @PathVariable Long id, @RequestBody @Valid BusinessTripExpenseRequest dto) {
-        return ResponseEntity.ok(expenseService.toDTO(expenseService.update(businessTripId,id, dto)));
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long businessTripId, @PathVariable Long id) {
-        expenseService.delete(businessTripId,id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<BusinessTripExpenseResponse> getById(@PathVariable Long businessTripId, @PathVariable Long id) {
+        return ResponseEntity.ok(expenseService.toDTO(expenseService.getById(businessTripId, id)));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<BusinessTripExpenseResponse> update(@PathVariable Long businessTripId, @PathVariable Long id, @RequestBody @Valid BusinessTripExpenseRequest dto) {
+        return ResponseEntity.ok(expenseService.toDTO(expenseService.update(businessTripId, id, dto)));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long businessTripId, @PathVariable Long id) {
+        expenseService.delete(businessTripId, id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

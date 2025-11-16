@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.organization.contact.Organizat
 
 public interface OrganizationContactMapperService {
     ContactResponse toDTO(OrganizationContact contact);
+
     OrganizationContact toEntity(ContactRequest dto);
+
     OrganizationContact toEntity(OrganizationContact contact, ContactRequest dto);
 }
 

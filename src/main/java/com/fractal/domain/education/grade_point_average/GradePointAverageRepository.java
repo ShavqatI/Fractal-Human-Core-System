@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface GradePointAverageRepository extends JpaRepository<GradePointAverage,Long> {
+interface GradePointAverageRepository extends JpaRepository<GradePointAverage, Long> {
     Optional<GradePointAverage> findById(Long id);
+
     List<GradePointAverage> findAll();
 }

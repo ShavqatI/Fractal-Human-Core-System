@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface StatusCategoryRepository extends JpaRepository<StatusCategory,Long> {
+interface StatusCategoryRepository extends JpaRepository<StatusCategory, Long> {
     Optional<StatusCategory> findById(Long id);
+
     Optional<StatusCategory> findByCode(String code);
+
     List<StatusCategory> findAll();
 }

@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface QualificationRepository extends JpaRepository<Qualification,Long> {
+public interface QualificationRepository extends JpaRepository<Qualification, Long> {
 
     List<Qualification> findAllByJobDescriptionId(Long jobDescriptionId);
+
     Optional<Qualification> findByJobDescriptionIdAndId(Long jobDescriptionId, Long id);
 }

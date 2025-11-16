@@ -31,7 +31,6 @@ public class BenchmarkingServiceImpl implements BenchmarkingService {
     }
 
 
-
     @Override
     public List<Benchmarking> getAllByGradeId(Long gradeId) {
         return benchmarkingRepository.findAllByGradeId(gradeId);
@@ -39,7 +38,7 @@ public class BenchmarkingServiceImpl implements BenchmarkingService {
 
     @Override
     public Benchmarking getById(Long gradeId, Long id) {
-        return benchmarkingRepository.findByGradeIdAndId(gradeId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return benchmarkingRepository.findByGradeIdAndId(gradeId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -48,8 +47,8 @@ public class BenchmarkingServiceImpl implements BenchmarkingService {
         var grade = gradeService.getById(gradeId);
         var benchmarking = grade.getBenchmarkings()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        benchmarking = benchmarkingRepository.save(mapperService.toEntity(benchmarking,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        benchmarking = benchmarkingRepository.save(mapperService.toEntity(benchmarking, dto));
         gradeService.save(grade);
         return benchmarking;
     }
@@ -59,7 +58,7 @@ public class BenchmarkingServiceImpl implements BenchmarkingService {
         var grade = gradeService.getById(gradeId);
         var benchmarking = grade.getBenchmarkings()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         grade.removeBenchmarking(benchmarking);
         gradeService.save(grade);
     }

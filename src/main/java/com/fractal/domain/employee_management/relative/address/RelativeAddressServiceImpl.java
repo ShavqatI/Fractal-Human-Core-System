@@ -29,7 +29,7 @@ public class RelativeAddressServiceImpl implements RelativeAddressService {
 
     @Override
     public RelativeAddress getById(Long relativeId, Long id) {
-        return addressRepository.findByRelativeIdAndId(relativeId,id).orElseThrow(()-> new ResourceNotFoundException("Relative address with id: " + id + " not found"));
+        return addressRepository.findByRelativeIdAndId(relativeId, id).orElseThrow(() -> new ResourceNotFoundException("Relative address with id: " + id + " not found"));
     }
 
     @Override
@@ -42,8 +42,8 @@ public class RelativeAddressServiceImpl implements RelativeAddressService {
         var relative = relativeService.getById(relativeId);
         var address = relative.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Relative address with id: " + id + " not found"));
-        address = addressRepository.save(addressMapperService.toEntity(address,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Relative address with id: " + id + " not found"));
+        address = addressRepository.save(addressMapperService.toEntity(address, dto));
         relativeService.save(relative);
         return address;
     }
@@ -53,7 +53,7 @@ public class RelativeAddressServiceImpl implements RelativeAddressService {
         var relative = relativeService.getById(relativeId);
         var address = relative.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Relative address with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Relative address with id: " + id + " not found"));
         relative.removeAddress(address);
         addressRepository.delete(address);
         relativeService.save(relative);
@@ -61,6 +61,6 @@ public class RelativeAddressServiceImpl implements RelativeAddressService {
 
     @Override
     public RelativeAddressResponse toDTO(RelativeAddress address) {
-       return addressMapperService.toDTO(address);
+        return addressMapperService.toDTO(address);
     }
 }

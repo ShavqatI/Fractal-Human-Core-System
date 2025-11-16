@@ -20,7 +20,6 @@ class LayoutLabelDetailServiceImpl implements LayoutLabelDetailService {
     private final LayoutLabelService layoutLabelService;
 
 
-
     @Override
     public LayoutLabelDetail create(Long menuId, LayoutLabelDetailRequest dto) {
         var layoutLabel = layoutLabelService.getById(menuId);
@@ -29,24 +28,25 @@ class LayoutLabelDetailServiceImpl implements LayoutLabelDetailService {
         layoutLabelService.save(layoutLabel);
         return detail;
     }
+
     @Override
     public List<LayoutLabelDetail> getAllByLayoutLabelId(Long layoutLabelId) {
         return layoutLabelDetailRepository.findAllByLayoutLabelId(layoutLabelId);
     }
 
     @Override
-    public LayoutLabelDetail getById(Long layoutLabelId,Long id) {
-        return layoutLabelDetailRepository.findByLayoutLabelIdAndId(layoutLabelId,id).orElseThrow(()->new ResourceNotFoundException("Layout Label Detail with id: " + id + " not found"));
+    public LayoutLabelDetail getById(Long layoutLabelId, Long id) {
+        return layoutLabelDetailRepository.findByLayoutLabelIdAndId(layoutLabelId, id).orElseThrow(() -> new ResourceNotFoundException("Layout Label Detail with id: " + id + " not found"));
     }
 
     @Override
     @Transactional
-    public LayoutLabelDetail update(Long layoutLabelId,Long id, LayoutLabelDetailRequest dto) {
+    public LayoutLabelDetail update(Long layoutLabelId, Long id, LayoutLabelDetailRequest dto) {
         var layoutLabel = layoutLabelService.getById(layoutLabelId);
         var detail = layoutLabel.getLayoutLabelDetails().stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Layout Label Detail with id: " + id + " not found"));
-        detail = layoutLabelDetailRepository.save(mapperService.toEntity(detail,dto));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Layout Label Detail with id: " + id + " not found"));
+        detail = layoutLabelDetailRepository.save(mapperService.toEntity(detail, dto));
         layoutLabelService.save(layoutLabel);
         return detail;
     }
@@ -56,7 +56,7 @@ class LayoutLabelDetailServiceImpl implements LayoutLabelDetailService {
         var layoutLabel = layoutLabelService.getById(layoutLabelId);
         var detail = layoutLabel.getLayoutLabelDetails().stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Layout Label Detail with id: " + id + " not found"));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Layout Label Detail with id: " + id + " not found"));
         layoutLabel.removeDetail(detail);
         layoutLabelService.save(layoutLabel);
     }

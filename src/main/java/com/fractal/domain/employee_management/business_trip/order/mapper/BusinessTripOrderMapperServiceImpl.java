@@ -25,29 +25,29 @@ class BusinessTripOrderMapperServiceImpl implements BusinessTripOrderMapperServi
     @Override
     public BusinessTripOrderResponse toDTO(BusinessTripOrder order) {
         return new BusinessTripOrderResponse(
-                   order.getId(),
-                   orderTypeService.toDTO(order.getOrderType()),
-                   order.getNumber(),
-                   order.getDate(),
-                   statusService.toCompactDTO(order.getStatus()),
-                   Optional.ofNullable(order.getResources())
+                order.getId(),
+                orderTypeService.toDTO(order.getOrderType()),
+                order.getNumber(),
+                order.getDate(),
+                statusService.toCompactDTO(order.getStatus()),
+                Optional.ofNullable(order.getResources())
                         .orElse(emptyList())
                         .stream()
                         .map(resourceMapperService::toDTO)
                         .collect(Collectors.toList()),
-                   order.getCreatedDate()
+                order.getCreatedDate()
 
         );
     }
 
     @Override
     public BusinessTripOrder toEntity(BusinessTripOrderRequest dto) {
-        return mapToEntity(new BusinessTripOrder(),dto);
+        return mapToEntity(new BusinessTripOrder(), dto);
     }
 
     @Override
     public BusinessTripOrder toEntity(BusinessTripOrder order, BusinessTripOrderRequest dto) {
-        return mapToEntity(order,dto);
+        return mapToEntity(order, dto);
     }
 
     private BusinessTripOrder mapToEntity(BusinessTripOrder order, BusinessTripOrderRequest dto) {
@@ -55,7 +55,7 @@ class BusinessTripOrderMapperServiceImpl implements BusinessTripOrderMapperServi
         order.setNumber(dto.number());
         order.setDate(dto.date());
         order.setStatus(statusService.getById(dto.statusId()));
-        dto.files().forEach(file-> order.addResource(resourceMapperService.toEntity(file,null)));
+        dto.files().forEach(file -> order.addResource(resourceMapperService.toEntity(file, null)));
         return order;
     }
 

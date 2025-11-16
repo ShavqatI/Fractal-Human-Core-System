@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class AbsenceTypeServiceImpl implements AbsenceTypeService {
@@ -26,7 +27,7 @@ class AbsenceTypeServiceImpl implements AbsenceTypeService {
 
     @Override
     public AbsenceType getByCode(String code) {
-        return absenceTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Absence Type with code: " + code + " not found"));
+        return absenceTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Absence Type with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class AbsenceTypeServiceImpl implements AbsenceTypeService {
             absenceType.setCode(dto.code());
             absenceType.setName(dto.name());
             return save(absenceType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      absenceTypeRepository.delete(findById(id));
+        absenceTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class AbsenceTypeServiceImpl implements AbsenceTypeService {
     private AbsenceType save(AbsenceType absenceType) {
         try {
             return absenceTypeRepository.save(absenceType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private AbsenceType findById(Long id) {
-        return absenceTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Absence Type with id: " + id + " not found"));
+        return absenceTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Absence Type with id: " + id + " not found"));
     }
 
 }

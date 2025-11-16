@@ -19,6 +19,7 @@ class IntervieweeMapperServiceImpl implements IntervieweeMapperService {
 
     private final CandidateIntervieweeMapperService candidateIntervieweeMapperService;
     private final EmployeeIntervieweeMapperService employeeIntervieweeMapperService;
+
     @Override
     public IntervieweeResponse toDTO(Interviewee interviewee) {
         if (interviewee instanceof CandidateInterviewee candidateInterviewee) {
@@ -41,7 +42,7 @@ class IntervieweeMapperServiceImpl implements IntervieweeMapperService {
 
     @Override
     public Interviewee toEntity(IntervieweeRequest dto) {
-        if(dto instanceof CandidateIntervieweeRequest candidateIntervieweeRequest) {
+        if (dto instanceof CandidateIntervieweeRequest candidateIntervieweeRequest) {
             return candidateIntervieweeMapperService.toEntity(candidateIntervieweeRequest);
         } else if (dto instanceof EmployeeIntervieweeRequest employeeIntervieweeRequest) {
             return employeeIntervieweeMapperService.toEntity(employeeIntervieweeRequest);

@@ -20,30 +20,37 @@ import java.util.stream.Collectors;
 public class LayoutLabelController {
 
     private final LayoutLabelService layoutLabelService;
+
     @PostMapping
     public ResponseEntity<LayoutLabelResponse> create(@RequestBody @Valid LayoutLabelRequest dto) {
         return new ResponseEntity<>(layoutLabelService.toDTO(layoutLabelService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<LayoutLabelResponse>> getAll() {
         return ResponseEntity.ok(layoutLabelService.getAll().stream().map(layoutLabelService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/list")
     public ResponseEntity<List<LayoutLabelResponse>> getAllByListAndLanguage(@RequestBody LayoutLabelListRequest dto) {
         return ResponseEntity.ok(layoutLabelService.getAllByListAndLanguageCode(dto).stream().map(layoutLabelService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<LayoutLabelResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(layoutLabelService.toDTO(layoutLabelService.getById(id)));
     }
+
     @GetMapping("/name/{name}")
     public ResponseEntity<LayoutLabelResponse> getByName(@PathVariable String name) {
         return ResponseEntity.ok(layoutLabelService.toDTO(layoutLabelService.getByName(name)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<LayoutLabelResponse> update(@PathVariable Long id, @RequestBody @Valid LayoutLabelRequest dto) {
-      return  ResponseEntity.ok(layoutLabelService.toDTO(layoutLabelService.update(id, dto)));
+        return ResponseEntity.ok(layoutLabelService.toDTO(layoutLabelService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         layoutLabelService.deleteById(id);

@@ -28,7 +28,7 @@ class InstructorAssignmentTypeServiceImpl implements InstructorAssignmentTypeSer
 
     @Override
     public InstructorAssignmentType getByCode(String code) {
-        return instructorAssignmentTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Instructor Assignment Type with code: " + code + " not found"));
+        return instructorAssignmentTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Instructor Assignment Type with code: " + code + " not found"));
     }
 
     @Override
@@ -43,8 +43,7 @@ class InstructorAssignmentTypeServiceImpl implements InstructorAssignmentTypeSer
             instructorAssignmentType.setCode(dto.code());
             instructorAssignmentType.setName(dto.name());
             return save(instructorAssignmentType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -74,13 +73,12 @@ class InstructorAssignmentTypeServiceImpl implements InstructorAssignmentTypeSer
     private InstructorAssignmentType save(InstructorAssignmentType instructorAssignmentType) {
         try {
             return instructorAssignmentTypeRepository.save(instructorAssignmentType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private InstructorAssignmentType findById(Long id) {
-        return instructorAssignmentTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Instructor Assignment Type with id: " + id + " not found"));
+        return instructorAssignmentTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Instructor Assignment Type with id: " + id + " not found"));
     }
 }

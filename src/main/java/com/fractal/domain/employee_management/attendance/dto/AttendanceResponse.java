@@ -18,5 +18,5 @@ public record AttendanceResponse(
         long overtimeHours,
         String remarks,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

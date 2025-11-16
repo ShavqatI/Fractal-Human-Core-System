@@ -7,12 +7,19 @@ import java.util.List;
 
 public interface BusinessTripLocationService {
     BusinessTripLocation create(Long businessTripId, BusinessTripLocationRequest dto);
+
     List<BusinessTripLocation> getAllByBusinessTripId(Long businessTripId);
-    BusinessTripLocation getById(Long businessTripId , Long id);
+
+    BusinessTripLocation getById(Long businessTripId, Long id);
+
     BusinessTripLocation getById(Long id);
+
     BusinessTripLocationResponse toDTO(BusinessTripLocation location);
+
     BusinessTripLocation update(Long businessTripId, Long id, BusinessTripLocationRequest dto);
-    void delete(Long businessTripId,Long id);
+
+    void delete(Long businessTripId, Long id);
+
     BusinessTripLocation save(BusinessTripLocation location);
 
 

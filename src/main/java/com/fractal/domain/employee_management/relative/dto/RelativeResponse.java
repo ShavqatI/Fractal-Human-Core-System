@@ -26,6 +26,6 @@ public record RelativeResponse(
         List<RelativeAddressResponse> addresses,
         List<ContactResponse> contacts,
         LocalDateTime createdDate
-){
+) {
 
 }

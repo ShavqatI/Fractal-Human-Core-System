@@ -14,5 +14,5 @@ public record TestResponse(
         List<QuestionResponse> questions,
         StatusCompactResponse status,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

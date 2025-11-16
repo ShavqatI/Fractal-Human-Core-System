@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "authentication", schema = "user_schema", catalog = "fractal")
-public class Authentication   {
+public class Authentication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -41,7 +41,6 @@ public class Authentication   {
     @ManyToOne
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
-
 
 
 }

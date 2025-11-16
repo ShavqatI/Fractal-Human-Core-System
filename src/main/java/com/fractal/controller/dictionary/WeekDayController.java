@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class WeekDayController {
 
     private final WeekDayService weekDayService;
+
     @PostMapping
     public ResponseEntity<WeekDayResponse> create(@RequestBody @Valid WeekDayRequest dto) {
         return new ResponseEntity<>(weekDayService.toDTO(weekDayService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<WeekDayResponse>> getAll() {
         return ResponseEntity.ok(weekDayService.getAll().stream().map(weekDayService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<WeekDayResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(weekDayService.toDTO(weekDayService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<WeekDayResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(weekDayService.toDTO(weekDayService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<WeekDayResponse> update(@PathVariable Long id, @RequestBody @Valid WeekDayRequest dto) {
-      return  ResponseEntity.ok(weekDayService.toDTO(weekDayService.update(id, dto)));
+        return ResponseEntity.ok(weekDayService.toDTO(weekDayService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         weekDayService.deleteById(id);

@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 public class OnlineLearningLocation extends LearningLocation {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "online_platform_id",referencedColumnName = "id")
+    @JoinColumn(name = "online_platform_id", referencedColumnName = "id")
     private OnlinePlatform onlinePlatform;
 
     @Column(name = "url")

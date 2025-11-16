@@ -31,7 +31,6 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
     }
 
 
-
     @Override
     public List<OrganizationAddress> getAllByOrganizationId(Long organizationId) {
         return organizationAddressRepository.findAllByOrganizationId(organizationId);
@@ -39,7 +38,7 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
 
     @Override
     public OrganizationAddress getById(Long organizationId, Long id) {
-        return organizationAddressRepository.findByOrganizationIdAndId(organizationId,id).orElseThrow(()-> new ResourceNotFoundException("Organization address with id: " + id + " not found"));
+        return organizationAddressRepository.findByOrganizationIdAndId(organizationId, id).orElseThrow(() -> new ResourceNotFoundException("Organization address with id: " + id + " not found"));
     }
 
     @Override
@@ -48,8 +47,8 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
         var organization = organizationService.getById(organizationId);
         var address = organization.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization address with id: " + id + " not found"));
-        address = organizationAddressRepository.save(addressMapperService.toEntity(address,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Organization address with id: " + id + " not found"));
+        address = organizationAddressRepository.save(addressMapperService.toEntity(address, dto));
         organizationService.save(organization);
         return address;
     }
@@ -59,7 +58,7 @@ public class OrganizationAddressServiceImpl implements OrganizationAddressServic
         var organization = organizationService.getById(organizationId);
         var address = organization.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization address with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Organization address with id: " + id + " not found"));
         organization.removeAddress(address);
         organizationService.save(organization);
     }

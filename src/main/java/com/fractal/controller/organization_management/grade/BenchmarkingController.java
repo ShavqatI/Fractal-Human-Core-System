@@ -21,23 +21,27 @@ public class BenchmarkingController {
 
     @PostMapping()
     public ResponseEntity<BenchmarkingResponse> create(@PathVariable Long gradeId, @RequestBody @Valid BenchmarkingRequest dto) {
-        return new ResponseEntity<>(benchmarkingService.toDTO(benchmarkingService.create(gradeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(benchmarkingService.toDTO(benchmarkingService.create(gradeId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<BenchmarkingResponse>> getAll(@PathVariable Long gradeId) {
         return ResponseEntity.ok(benchmarkingService.getAllByGradeId(gradeId).stream().map(benchmarkingService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<BenchmarkingResponse> getById(@PathVariable Long gradeId, @PathVariable Long id) {
-        return ResponseEntity.ok(benchmarkingService.toDTO(benchmarkingService.getById(gradeId,id)));
+        return ResponseEntity.ok(benchmarkingService.toDTO(benchmarkingService.getById(gradeId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<BenchmarkingResponse> update(@PathVariable Long gradeId, @PathVariable Long id, @RequestBody @Valid BenchmarkingRequest dto) {
-        return ResponseEntity.ok(benchmarkingService.toDTO(benchmarkingService.update(gradeId,id, dto)));
+        return ResponseEntity.ok(benchmarkingService.toDTO(benchmarkingService.update(gradeId, id, dto)));
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Long gradeId, @PathVariable Long id) {
-        benchmarkingService.delete(gradeId,id);
+        benchmarkingService.delete(gradeId, id);
         return ResponseEntity.noContent().build();
     }
 

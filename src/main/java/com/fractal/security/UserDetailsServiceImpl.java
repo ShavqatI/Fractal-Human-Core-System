@@ -14,9 +14,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     private final UserService userService;
     private final UserRoleService roleService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserDetailsImpl userDetails = new UserDetailsImpl(userService.findByUsername(username),roleService);
+        UserDetailsImpl userDetails = new UserDetailsImpl(userService.findByUsername(username), roleService);
         return userDetails;
     }
 }

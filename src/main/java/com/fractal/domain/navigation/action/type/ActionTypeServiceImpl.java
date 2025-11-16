@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class ActionTypeServiceImpl implements ActionTypeService {
@@ -26,7 +27,7 @@ class ActionTypeServiceImpl implements ActionTypeService {
 
     @Override
     public ActionType getByCode(String code) {
-        return actionTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Action Type with code: " + code + " not found"));
+        return actionTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Action Type with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class ActionTypeServiceImpl implements ActionTypeService {
             actionType.setCode(dto.code());
             actionType.setName(dto.name());
             return save(actionType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      actionTypeRepository.delete(findById(id));
+        actionTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class ActionTypeServiceImpl implements ActionTypeService {
     private ActionType save(ActionType actionType) {
         try {
             return actionTypeRepository.save(actionType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private ActionType findById(Long id) {
-        return actionTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Action Type with id: " + id + " not found"));
+        return actionTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Action Type with id: " + id + " not found"));
     }
 
 }

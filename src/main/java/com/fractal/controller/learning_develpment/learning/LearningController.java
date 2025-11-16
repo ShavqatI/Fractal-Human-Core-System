@@ -34,6 +34,7 @@ public class LearningController {
     public ResponseEntity<LearningResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(learningService.toDTO(learningService.getById(id)));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<LearningCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(learningService.getAll().stream().map(learningService::toCompactDTO).collect(Collectors.toList()));

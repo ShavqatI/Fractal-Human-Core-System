@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface LearningDeliveryModeRepository extends JpaRepository<LearningDeliveryMode,Long> {
+interface LearningDeliveryModeRepository extends JpaRepository<LearningDeliveryMode, Long> {
     Optional<LearningDeliveryMode> findById(Long id);
+
     Optional<LearningDeliveryMode> findByCode(String code);
+
     List<LearningDeliveryMode> findAll();
 }

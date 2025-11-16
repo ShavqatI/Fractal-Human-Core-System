@@ -81,5 +81,5 @@ public class AuthenticationController {
             var user = userService.findByUsername(userDetails.getUsername());
             return user;
         } else return null;
-     }
+    }
 }

@@ -13,4 +13,5 @@ public record HayEvaluationResponse(
         StatusCompactResponse status,
         LocalDateTime createdDate
 
-) implements GradingEvaluationResponse { }
+) implements GradingEvaluationResponse {
+}

@@ -25,5 +25,5 @@ public record ExternalInstructorResponse(
         StatusCompactResponse status,
         LocalDateTime createdDate
 
-)
-{ }
+) {
+}

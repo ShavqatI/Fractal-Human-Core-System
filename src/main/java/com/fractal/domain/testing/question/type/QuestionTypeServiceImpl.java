@@ -14,9 +14,10 @@ import java.util.List;
 class QuestionTypeServiceImpl implements QuestionTypeService {
 
     private final QuestionTypeRepository questionTypeRepository;
+
     @Override
     public QuestionType create(QuestionTypeRequest dto) {
-       return save(toEntity(dto));
+        return save(toEntity(dto));
     }
 
     @Override
@@ -26,8 +27,7 @@ class QuestionTypeServiceImpl implements QuestionTypeService {
             questionType.setCode(dto.code());
             questionType.setName(dto.name());
             return save(questionType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -40,7 +40,7 @@ class QuestionTypeServiceImpl implements QuestionTypeService {
 
     @Override
     public QuestionType getByCode(String code) {
-        return questionTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Question Type with code: " + code + " not found"));
+        return questionTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Question Type with code: " + code + " not found"));
     }
 
     @Override
@@ -50,7 +50,7 @@ class QuestionTypeServiceImpl implements QuestionTypeService {
 
     @Override
     public void deleteById(Long id) {
-       questionTypeRepository.delete(findById(id));
+        questionTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -62,6 +62,7 @@ class QuestionTypeServiceImpl implements QuestionTypeService {
                 questionType.getCreatedDate()
         );
     }
+
     private QuestionType toEntity(QuestionTypeRequest dto) {
         return QuestionType.builder()
                 .code(dto.code())
@@ -72,14 +73,13 @@ class QuestionTypeServiceImpl implements QuestionTypeService {
     private QuestionType save(QuestionType questionType) {
         try {
             return questionTypeRepository.save(questionType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private QuestionType findById(Long id) {
-        return questionTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Question Type with id: " + id + " not found"));
+        return questionTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Question Type with id: " + id + " not found"));
     }
 
 }

@@ -28,4 +28,5 @@ public record OrganizationAddressResponse(
         LocalDate endDate,
         LocalDateTime createdDate,
         LocalDateTime updatedDate
-) { }
+) {
+}

@@ -8,12 +8,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface RegionRepository extends JpaRepository<Region,Long> {
+interface RegionRepository extends JpaRepository<Region, Long> {
 
     Region save(Region region);
+
     List<Region> findAll();
+
     List<Region> findByCountry(Country country);
+
     Optional<Region> findByCode(String code);
+
     Optional<Region> findById(Long id);
 
 }

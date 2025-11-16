@@ -4,4 +4,5 @@ public record InterviewEvaluationSectionCompactResponse(
         Long id,
         String code,
         String name
-) {}
+) {
+}

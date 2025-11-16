@@ -28,7 +28,7 @@ class WeekDayServiceImpl implements WeekDayService {
 
     @Override
     public WeekDay getByCode(String code) {
-        return weekDayRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Week Day with code: " + code + " not found"));
+        return weekDayRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Week Day with code: " + code + " not found"));
     }
 
     @Override
@@ -44,15 +44,14 @@ class WeekDayServiceImpl implements WeekDayService {
             weekDay.setName(dto.name());
             weekDay.setIndex(dto.index());
             return save(weekDay);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      weekDayRepository.delete(findById(id));
+        weekDayRepository.delete(findById(id));
     }
 
     @Override
@@ -77,13 +76,12 @@ class WeekDayServiceImpl implements WeekDayService {
     private WeekDay save(WeekDay weekDay) {
         try {
             return weekDayRepository.save(weekDay);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private WeekDay findById(Long id) {
-        return weekDayRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Week Day with id: " + id + " not found"));
+        return weekDayRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Week Day with id: " + id + " not found"));
     }
 }

@@ -28,7 +28,7 @@ class IndustryServiceImpl implements IndustryService {
 
     @Override
     public Industry getByCode(String code) {
-        return industryRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Nationality with code: " + code + " not found"));
+        return industryRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Nationality with code: " + code + " not found"));
     }
 
     @Override
@@ -43,15 +43,14 @@ class IndustryServiceImpl implements IndustryService {
             industry.setCode(dto.code());
             industry.setName(dto.name());
             return save(industry);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      industryRepository.delete(findById(id));
+        industryRepository.delete(findById(id));
     }
 
     @Override
@@ -74,13 +73,12 @@ class IndustryServiceImpl implements IndustryService {
     private Industry save(Industry industry) {
         try {
             return industryRepository.save(industry);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Industry findById(Long id) {
-        return industryRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Nationality with id: " + id + " not found"));
+        return industryRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Nationality with id: " + id + " not found"));
     }
 }

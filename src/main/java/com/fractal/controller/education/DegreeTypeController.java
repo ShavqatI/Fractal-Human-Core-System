@@ -19,26 +19,32 @@ import java.util.stream.Collectors;
 public class DegreeTypeController {
 
     private final DegreeTypeService degreeTypeService;
+
     @PostMapping
     public ResponseEntity<DegreeTypeResponse> create(@RequestBody @Valid DegreeTypeRequest dto) {
         return new ResponseEntity<>(degreeTypeService.toDTO(degreeTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<DegreeTypeResponse>> getAll() {
         return ResponseEntity.ok(degreeTypeService.getAll().stream().map(degreeTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<DegreeTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(degreeTypeService.toDTO(degreeTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<DegreeTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(degreeTypeService.toDTO(degreeTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<DegreeTypeResponse> update(@PathVariable Long id, @RequestBody @Valid DegreeTypeRequest dto) {
-      return  ResponseEntity.ok(degreeTypeService.toDTO(degreeTypeService.update(id, dto)));
+        return ResponseEntity.ok(degreeTypeService.toDTO(degreeTypeService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         degreeTypeService.deleteById(id);

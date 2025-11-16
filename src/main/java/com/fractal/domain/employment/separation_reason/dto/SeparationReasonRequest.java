@@ -5,6 +5,5 @@ import jakarta.validation.constraints.NotNull;
 public record SeparationReasonRequest(
         @NotNull
         Long separationReasonTypeId
-)
-
-{}
+) {
+}

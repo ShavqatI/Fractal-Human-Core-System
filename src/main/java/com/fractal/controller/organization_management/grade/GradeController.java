@@ -29,6 +29,7 @@ public class GradeController {
     public ResponseEntity<List<GradeResponse>> getAll() {
         return ResponseEntity.ok(gradeService.getAll().stream().map(gradeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<GradeCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(gradeService.getAll().stream().map(gradeService::toCompactDTO).collect(Collectors.toList()));

@@ -21,7 +21,7 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class Organization extends Lifecycle {
 
-    @Column(name = "code",unique = true)
+    @Column(name = "code", unique = true)
     private String code;
 
     @Column(name = "name")
@@ -45,20 +45,20 @@ public class Organization extends Lifecycle {
     private Organization parent;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id",referencedColumnName = "id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Organization> children = new ArrayList<>();
 
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OrganizationAddress> addresses = new ArrayList<>();
 
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OrganizationContact> contacts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<OrganizationWorkSchedule> workSchedules = new ArrayList<>();
 
 
@@ -67,6 +67,7 @@ public class Organization extends Lifecycle {
         address.setOrganization(this);
         addresses.add(address);
     }
+
     public void removeAddress(OrganizationAddress address) {
         if (addresses != null && !addresses.isEmpty()) {
             addresses.remove(address);
@@ -78,24 +79,29 @@ public class Organization extends Lifecycle {
         contact.setOrganization(this);
         contacts.add(contact);
     }
+
     public void removeContact(OrganizationContact contact) {
         if (contacts != null && !contacts.isEmpty())
             contacts.remove(contact);
     }
+
     public void addChild(Organization organization) {
         if (children == null) children = new ArrayList<>();
         organization.setParent(this);
         children.add(organization);
     }
+
     public void removeChild(Organization organization) {
         if (children != null && !children.isEmpty())
             children.remove(organization);
     }
+
     public void addWorkSchedule(OrganizationWorkSchedule workSchedule) {
         if (workSchedules == null) workSchedules = new ArrayList<>();
         workSchedule.setOrganization(this);
         workSchedules.add(workSchedule);
     }
+
     public void removeWorkSchedule(OrganizationWorkSchedule workSchedule) {
         if (workSchedules != null && !workSchedules.isEmpty())
             workSchedules.remove(workSchedule);

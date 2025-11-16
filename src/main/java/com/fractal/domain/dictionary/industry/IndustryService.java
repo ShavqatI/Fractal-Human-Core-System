@@ -8,10 +8,16 @@ import java.util.List;
 public interface IndustryService {
 
     Industry create(IndustryRequest dto);
+
     List<Industry> getAll();
+
     Industry getByCode(String code);
+
     Industry getById(Long id);
+
     Industry update(Long id, IndustryRequest dto);
+
     void deleteById(Long id);
+
     IndustryResponse toDTO(Industry industry);
 }

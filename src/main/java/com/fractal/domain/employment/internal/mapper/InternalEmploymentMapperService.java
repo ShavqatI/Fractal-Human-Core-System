@@ -6,7 +6,9 @@ import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 
 public interface InternalEmploymentMapperService {
     InternalEmploymentResponse toDTO(InternalEmployment employment);
+
     InternalEmployment toEntity(InternalEmploymentRequest dto);
+
     InternalEmployment toEntity(InternalEmployment employment, InternalEmploymentRequest dto);
 }
 

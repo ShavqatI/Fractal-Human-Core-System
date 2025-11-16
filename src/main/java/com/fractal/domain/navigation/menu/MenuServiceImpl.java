@@ -37,7 +37,7 @@ class MenuServiceImpl implements MenuService {
 
     @Override
     public Menu getByUrl(String url) {
-        return menuRepository.findByUrl(url).orElseThrow(()-> new ResourceNotFoundException("Menu with url: " + url + " not found"));
+        return menuRepository.findByUrl(url).orElseThrow(() -> new ResourceNotFoundException("Menu with url: " + url + " not found"));
     }
 
     @Override
@@ -49,9 +49,8 @@ class MenuServiceImpl implements MenuService {
     @Transactional
     public Menu update(Long id, MenuRequest dto) {
         try {
-            return save(mapperService.toEntity(findById(id),dto));
-        }
-        catch (DataAccessException e) {
+            return save(mapperService.toEntity(findById(id), dto));
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -89,15 +88,15 @@ class MenuServiceImpl implements MenuService {
     @Transactional
     public Menu updateChild(Long id, Long childId, MenuRequest dto) {
         var menu = findById(id);
-        var child = menu.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
-        update(child.getId(),dto);
+        var child = menu.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        update(child.getId(), dto);
         return save(menu);
     }
 
     @Override
     public Menu deleteChild(Long id, Long childId) {
         var menu = findById(id);
-        var child = menu.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        var child = menu.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
         menu.removeChild(child);
         return save(menu);
     }
@@ -106,13 +105,12 @@ class MenuServiceImpl implements MenuService {
     public Menu save(Menu menu) {
         try {
             return menuRepository.save(menu);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Menu findById(Long id) {
-        return menuRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Menu with id: " + id + " not found"));
+        return menuRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Menu with id: " + id + " not found"));
     }
 }

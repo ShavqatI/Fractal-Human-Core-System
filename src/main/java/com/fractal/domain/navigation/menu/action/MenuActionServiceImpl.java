@@ -21,7 +21,7 @@ class MenuActionServiceImpl implements MenuActionService {
 
     @Override
     @Transactional
-    public MenuAction create(Long menuId,MenuActionRequest dto) {
+    public MenuAction create(Long menuId, MenuActionRequest dto) {
         var menu = menuService.getById(menuId);
         var menuAction = mapperService.toEntity(dto);
         menu.addAction(menuAction);
@@ -35,23 +35,23 @@ class MenuActionServiceImpl implements MenuActionService {
     }
 
     @Override
-    public MenuAction getById(Long menuId,Long id) {
-        return menuActionRepository.findByMenuIdAndId(menuId,id).orElseThrow(()->new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
+    public MenuAction getById(Long menuId, Long id) {
+        return menuActionRepository.findByMenuIdAndId(menuId, id).orElseThrow(() -> new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
     }
 
     @Override
     public MenuAction getById(Long id) {
-        return menuActionRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
+        return menuActionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
     }
 
     @Override
     @Transactional
-    public MenuAction update(Long menuId,Long id, MenuActionRequest dto) {
+    public MenuAction update(Long menuId, Long id, MenuActionRequest dto) {
         var menu = menuService.getById(menuId);
         var menuAction = menu.getMenuActions().stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
-        menuAction = menuActionRepository.save(mapperService.toEntity(menuAction,dto));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
+        menuAction = menuActionRepository.save(mapperService.toEntity(menuAction, dto));
         menuService.save(menu);
         return menuAction;
     }
@@ -61,7 +61,7 @@ class MenuActionServiceImpl implements MenuActionService {
         var menu = menuService.getById(menuId);
         var menuAction = menu.getMenuActions().stream()
                 .filter(r -> r.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Menu actions with id: " + id + " not found"));
         menu.removeAction(menuAction);
         menuService.save(menu);
     }

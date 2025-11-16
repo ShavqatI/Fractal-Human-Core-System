@@ -21,23 +21,27 @@ public class OrganizationAddressController {
 
     @PostMapping()
     public ResponseEntity<OrganizationAddressResponse> create(@PathVariable Long organizationId, @RequestBody @Valid OrganizationAddressRequest dto) {
-        return new ResponseEntity<>(addressService.toDTO(addressService.create(organizationId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(addressService.toDTO(addressService.create(organizationId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<OrganizationAddressResponse>> getAll(@PathVariable Long organizationId) {
         return ResponseEntity.ok(addressService.getAllByOrganizationId(organizationId).stream().map(addressService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<OrganizationAddressResponse> getById(@PathVariable Long organizationId, @PathVariable Long id) {
-        return ResponseEntity.ok(addressService.toDTO(addressService.getById(organizationId,id)));
+        return ResponseEntity.ok(addressService.toDTO(addressService.getById(organizationId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<OrganizationAddressResponse> update(@PathVariable Long organizationId, @PathVariable Long id, @RequestBody @Valid OrganizationAddressRequest dto) {
-        return ResponseEntity.ok(addressService.toDTO(addressService.update(organizationId,id, dto)));
+        return ResponseEntity.ok(addressService.toDTO(addressService.update(organizationId, id, dto)));
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Long organizationId, @PathVariable Long id) {
-        addressService.delete(organizationId,id);
+        addressService.delete(organizationId, id);
         return ResponseEntity.noContent().build();
     }
 

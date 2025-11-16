@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public record OrganizationResponse (
+public record OrganizationResponse(
         Long id,
         String name,
         String fullName,
@@ -28,5 +28,5 @@ public record OrganizationResponse (
         List<OrganizationResponse> children,
         StatusCompactResponse status,
         LocalDateTime createdDate
-)
-{ }
+) {
+}

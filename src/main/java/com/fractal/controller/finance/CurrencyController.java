@@ -25,14 +25,17 @@ public class CurrencyController {
     public ResponseEntity<CurrencyResponse> create(@RequestBody @Valid CurrencyRequest dto) {
         return new ResponseEntity<>(currencyService.toDTO(currencyService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<CurrencyResponse>> getAll() {
         return ResponseEntity.ok(currencyService.getAll().stream().map(currencyService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<CurrencyResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(currencyService.toDTO(currencyService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<CurrencyResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(currencyService.toDTO(currencyService.getByCode(code)));
@@ -42,12 +45,14 @@ public class CurrencyController {
     public ResponseEntity<List<CurrencyCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(currencyService.getAll().stream().map(currencyService::toCompactDTO).collect(Collectors.toList()));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<CurrencyResponse> update(@PathVariable Long id, @RequestBody @Valid CurrencyRequest dto) {
-      return  ResponseEntity.ok(currencyService.toDTO(currencyService.update(id, dto)));
+        return ResponseEntity.ok(currencyService.toDTO(currencyService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         currencyService.deleteById(id);

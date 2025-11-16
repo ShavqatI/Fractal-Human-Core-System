@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "external_instructor_contact",schema = "ld_schema", catalog = "fractal")
+@Table(name = "external_instructor_contact", schema = "ld_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @NoArgsConstructor

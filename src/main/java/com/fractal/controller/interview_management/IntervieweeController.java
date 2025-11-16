@@ -22,8 +22,9 @@ public class IntervieweeController {
 
     @PostMapping()
     public ResponseEntity<IntervieweeResponse> create(@PathVariable Long interviewId, @RequestBody @Valid IntervieweeRequest dto) {
-        return new ResponseEntity<>(intervieweeService.toDTO(intervieweeService.create(interviewId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(intervieweeService.toDTO(intervieweeService.create(interviewId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<IntervieweeResponse>> getAll(@PathVariable Long interviewId) {
         return ResponseEntity.ok(intervieweeService.getAllByInterviewId(interviewId).stream().map(intervieweeService::toDTO).collect(Collectors.toList()));
@@ -35,11 +36,12 @@ public class IntervieweeController {
 
     @PutMapping("/{id}")
     public ResponseEntity<IntervieweeResponse> update(@PathVariable Long interviewId, @PathVariable Long id, @RequestBody @Valid IntervieweeRequest dto) {
-        return ResponseEntity.ok(intervieweeService.toDTO(intervieweeService.update(interviewId,id, dto)));
+        return ResponseEntity.ok(intervieweeService.toDTO(intervieweeService.update(interviewId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long interviewId, @PathVariable Long id) {
-        intervieweeService.delete(interviewId,id);
+        intervieweeService.delete(interviewId, id);
         return ResponseEntity.noContent().build();
     }
 

@@ -33,6 +33,7 @@ class JobDescriptionMapperServiceImpl implements JobDescriptionMapperService {
     private final AccountabilityMapperService accountabilityMapperService;
     private final PositionService positionService;
     private final StatusService statusService;
+
     @Override
     public JobDescriptionResponse toDTO(JobDescription jobDescription) {
         return new JobDescriptionResponse(
@@ -83,12 +84,12 @@ class JobDescriptionMapperServiceImpl implements JobDescriptionMapperService {
 
     @Override
     public JobDescription toEntity(JobDescriptionRequest dto) {
-        return mapToEntity( new JobDescription(),dto);
+        return mapToEntity(new JobDescription(), dto);
     }
 
     @Override
     public JobDescription toEntity(JobDescription jobDescription, JobDescriptionRequest dto) {
-        return mapToEntity( jobDescription,dto);
+        return mapToEntity(jobDescription, dto);
     }
 
     private JobDescription mapToEntity(JobDescription jobDescription, JobDescriptionRequest dto) {
@@ -99,7 +100,7 @@ class JobDescriptionMapperServiceImpl implements JobDescriptionMapperService {
         jobDescription.setPosition(positionService.getById(dto.positionId()));
         dto.reportingLines().forEach(reportingLine -> jobDescription.addReportingLine(reportingLineMapperService.toEntity(reportingLine)));
         dto.responsibilities().forEach(responsibilityRequest -> jobDescription.addResponsibility(responsibilityMapperService.toEntity(responsibilityRequest)));
-        dto.qualifications().forEach(qualificationRequest-> jobDescription.addQualification(qualificationMapperService.toEntity(qualificationRequest)));
+        dto.qualifications().forEach(qualificationRequest -> jobDescription.addQualification(qualificationMapperService.toEntity(qualificationRequest)));
         dto.requiredExperiences().forEach(requiredExperienceRequest -> jobDescription.addRequiredExperience(requiredExperienceMapperService.toEntity(requiredExperienceRequest)));
         dto.keyPerformanceIndicators().forEach(keyPerformanceIndicator -> jobDescription.addKeyPerformanceIndicator(keyPerformanceIndicatorMapperService.toEntity(keyPerformanceIndicator)));
         dto.keyPerformanceIndicators().forEach(keyPerformanceIndicator -> jobDescription.addKeyPerformanceIndicator(keyPerformanceIndicatorMapperService.toEntity(keyPerformanceIndicator)));

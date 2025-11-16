@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface RelativeRepository extends JpaRepository<Relative,Long> {
+interface RelativeRepository extends JpaRepository<Relative, Long> {
     List<Relative> findAllByEmployeeId(Long employeeId);
+
     Optional<Relative> findByEmployeeIdAndId(Long employeeId, Long id);
 }

@@ -39,10 +39,9 @@ class CandidateServiceImpl implements CandidateService {
     @Transactional
     public Candidate update(Long id, CandidateRequest dto) {
         try {
-            Candidate candidate = mapperService.toEntity(findById(id),dto);
+            Candidate candidate = mapperService.toEntity(findById(id), dto);
             return save(candidate);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -51,7 +50,7 @@ class CandidateServiceImpl implements CandidateService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      candidateRepository.delete(findById(id));
+        candidateRepository.delete(findById(id));
     }
 
     @Override
@@ -63,18 +62,18 @@ class CandidateServiceImpl implements CandidateService {
     public CandidateCompactResponse toCompactDTO(Candidate candidate) {
         return mapperService.toCompactDTO(candidate);
     }
+
     @Override
     @Transactional
     public Candidate save(Candidate candidate) {
         try {
             return candidateRepository.save(candidate);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Candidate findById(Long id) {
-        return candidateRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Candidate with id: " + id + " not found"));
+        return candidateRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Candidate with id: " + id + " not found"));
     }
 }

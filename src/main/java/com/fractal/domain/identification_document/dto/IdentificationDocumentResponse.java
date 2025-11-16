@@ -21,4 +21,5 @@ public record IdentificationDocumentResponse(
         StatusCompactResponse status,
         List<ResourceResponse> resources,
         LocalDateTime createdDate
-) { }
+) {
+}

@@ -33,6 +33,7 @@ public class OnlinePlatformController {
     public ResponseEntity<OnlinePlatformResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(onlinePlatformService.toDTO(onlinePlatformService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<OnlinePlatformResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(onlinePlatformService.toDTO(onlinePlatformService.getByCode(code)));

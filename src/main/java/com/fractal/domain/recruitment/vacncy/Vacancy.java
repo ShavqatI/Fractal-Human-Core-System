@@ -50,18 +50,17 @@ public class Vacancy extends AbstractEntity {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "vacancy",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "vacancy", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Skill> skills = new ArrayList<>();
 
-    @OneToMany(mappedBy = "vacancy",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "vacancy", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Experience> experiences = new ArrayList<>();
 
-    @OneToMany(mappedBy = "vacancy",cascade = CascadeType.ALL,orphanRemoval = true)
+    @OneToMany(mappedBy = "vacancy", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Duty> responsibilities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "vacancy",cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "vacancy", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Candidate> candidates = new ArrayList<>();
-
 
 
 }

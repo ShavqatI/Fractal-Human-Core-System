@@ -18,12 +18,10 @@ import lombok.experimental.SuperBuilder;
 public class HayEvaluation extends GradingEvaluation {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "hay_factor_id",referencedColumnName = "id")
+    @JoinColumn(name = "hay_factor_id", referencedColumnName = "id")
     private HayFactor hayFactor;
 
     private Double point;
-
-
 
 
 }

@@ -9,4 +9,5 @@ public record CandidateProfessionalExperienceResponse(
         IndustryResponse industry,
         Integer years,
         LocalDateTime createdDate
-) { }
+) {
+}

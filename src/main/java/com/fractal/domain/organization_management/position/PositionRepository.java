@@ -6,9 +6,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-interface PositionRepository extends JpaRepository<Position,Long> {
+interface PositionRepository extends JpaRepository<Position, Long> {
 
     Optional<Position> findByCode(String code);
+
     Optional<Position> findFirstByOrderByIdDesc();
 
 

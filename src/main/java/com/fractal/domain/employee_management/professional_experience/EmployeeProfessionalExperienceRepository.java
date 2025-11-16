@@ -10,5 +10,6 @@ import java.util.Optional;
 interface EmployeeProfessionalExperienceRepository extends JpaRepository<EmployeeProfessionalExperience, Long> {
 
     List<EmployeeProfessionalExperience> findAllByEmployeeId(Long employeeId);
+
     Optional<EmployeeProfessionalExperience> findByEmployeeIdAndId(Long employeeId, Long id);
 }

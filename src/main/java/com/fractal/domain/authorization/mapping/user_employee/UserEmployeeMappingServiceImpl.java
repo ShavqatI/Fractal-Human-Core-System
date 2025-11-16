@@ -46,8 +46,7 @@ class UserEmployeeMappingServiceImpl implements UserEmployeeMappingService {
             userEmployeeMapping.setEmployee(employeeService.getById(dto.employeeId()));
             userEmployeeMapping.setStatus(statusService.getById(dto.statusId()));
             return save(userEmployeeMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -79,13 +78,12 @@ class UserEmployeeMappingServiceImpl implements UserEmployeeMappingService {
     private UserEmployeeMapping save(UserEmployeeMapping userEmployeeMapping) {
         try {
             return userEmployeeMappingRepository.save(userEmployeeMapping);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private UserEmployeeMapping findById(Long id) {
-        return userEmployeeMappingRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("UserEmployeeMapping  with id: " + id + " not found"));
+        return userEmployeeMappingRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("UserEmployeeMapping  with id: " + id + " not found"));
     }
 }

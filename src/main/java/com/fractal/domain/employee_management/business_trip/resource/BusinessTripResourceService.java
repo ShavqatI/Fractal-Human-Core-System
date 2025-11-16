@@ -8,10 +8,15 @@ import java.util.List;
 public interface BusinessTripResourceService {
 
     BusinessTripResource create(Long businessTripId, MultipartFile file);
+
     List<BusinessTripResource> getAllByBusinessTripId(Long businessTripId);
-    BusinessTripResource getById(Long businessTripId , Long id);
+
+    BusinessTripResource getById(Long businessTripId, Long id);
+
     BusinessTripResource update(Long businessTripId, Long id, MultipartFile file);
-    void delete(Long businessTripId,Long id);
+
+    void delete(Long businessTripId, Long id);
+
     ResourceResponse toDTO(BusinessTripResource resource);
 
 }

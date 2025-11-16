@@ -38,8 +38,8 @@ public class CandidateProfileServiceImpl implements CandidateProfileService {
         var candidateContact = candidate.getContacts().stream().filter(contact -> contact.getContactType().getCode().equals("EMAIL")).findFirst().get();
         var password = PasswordGeneratorService.generate(8);
         var status = statusService.getByCode("ACTIVE");
-        var user = userService.create(new UserRequest(candidateContact.getValue().toLowerCase(),password,List.of(new UserRoleRequest(roleService.getByCode("CANDIDATE").getId(),status.getId()))));
-        userCandidateMappingService.create(new UserCandidateMappingRequest(user.getId(),candidate.getId(),status.getId()));
+        var user = userService.create(new UserRequest(candidateContact.getValue().toLowerCase(), password, List.of(new UserRoleRequest(roleService.getByCode("CANDIDATE").getId(), status.getId()))));
+        userCandidateMappingService.create(new UserCandidateMappingRequest(user.getId(), candidate.getId(), status.getId()));
         return candidate;
     }
 

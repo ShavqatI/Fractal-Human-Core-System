@@ -27,22 +27,22 @@ class AgreementResourceMapperServiceImpl implements AgreementResourceMapperServi
 
     @Override
     public AgreementResource toEntity(MultipartFile file, String resourceStoragePath) {
-        return convert(new AgreementResource(),resourceMapperService.toEntity(file,resourceStoragePath));
+        return convert(new AgreementResource(), resourceMapperService.toEntity(file, resourceStoragePath));
     }
 
     @Override
     public AgreementResource toEntity(AgreementResource resource, MultipartFile file, String resourceStoragePath) {
-        return convert(resource,resourceMapperService.toEntity(resource,file,resourceStoragePath));
+        return convert(resource, resourceMapperService.toEntity(resource, file, resourceStoragePath));
     }
 
     @Override
     public AgreementResource toEntity(AgreementResource resource, ResourceRequest dto) {
-        return (AgreementResource) resourceMapperService.toEntity(resource,dto);
+        return (AgreementResource) resourceMapperService.toEntity(resource, dto);
     }
 
     @Override
     public ResourceRequest fileToRequest(MultipartFile file, String url) {
-        return resourceMapperService.fileToRequest(file,url);
+        return resourceMapperService.fileToRequest(file, url);
     }
 
     private AgreementResource convert(AgreementResource agreementResource, Resource resource) {

@@ -25,12 +25,12 @@ class ContactMapperServiceImpl implements ContactMapperService {
 
     @Override
     public Contact toEntity(ContactRequest dto) {
-        return mapToEntity(new Contact(),dto);
+        return mapToEntity(new Contact(), dto);
     }
 
     @Override
     public Contact toEntity(Contact contact, ContactRequest dto) {
-        return mapToEntity(contact,dto);
+        return mapToEntity(contact, dto);
     }
 
     private Contact mapToEntity(Contact contact, ContactRequest dto) {

@@ -31,7 +31,6 @@ public class OfflineLearningLocationAddressServiceImpl implements OfflineLearnin
     }
 
 
-
     @Override
     public List<OfflineLearningLocationAddress> getAllByOfflineLearningLocationId(Long locationId) {
         return offlineLearningLocationAddressRepository.findAllByOfflineLearningLocationId(locationId);
@@ -39,7 +38,7 @@ public class OfflineLearningLocationAddressServiceImpl implements OfflineLearnin
 
     @Override
     public OfflineLearningLocationAddress getById(Long locationId, Long id) {
-        return offlineLearningLocationAddressRepository.findByOfflineLearningLocationIdAndId(locationId,id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return offlineLearningLocationAddressRepository.findByOfflineLearningLocationIdAndId(locationId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -48,8 +47,8 @@ public class OfflineLearningLocationAddressServiceImpl implements OfflineLearnin
         var location = locationService.getById(locationId);
         var address = location.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        address = offlineLearningLocationAddressRepository.save(addressMapperService.toEntity(address,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        address = offlineLearningLocationAddressRepository.save(addressMapperService.toEntity(address, dto));
         locationService.save(location);
         return address;
     }
@@ -59,7 +58,7 @@ public class OfflineLearningLocationAddressServiceImpl implements OfflineLearnin
         var location = locationService.getById(externalTrainingLocationId);
         var address = location.getAddresses()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         location.removeAddress(address);
         locationService.save(location);
     }

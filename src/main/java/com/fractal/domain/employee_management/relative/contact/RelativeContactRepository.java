@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RelativeContactRepository extends JpaRepository<RelativeContact,Long> {
+public interface RelativeContactRepository extends JpaRepository<RelativeContact, Long> {
     List<RelativeContact> findAllByRelativeId(Long relativeId);
+
     Optional<RelativeContact> findByRelativeIdAndId(Long relativeId, Long id);
 }

@@ -22,7 +22,7 @@ public class GradeStep extends AbstractEntity {
     private BigDecimal minSalary;
 
     @Column(name = "max_salary")
-    private BigDecimal  maxSalary;
+    private BigDecimal maxSalary;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "grade_id", referencedColumnName = "id")

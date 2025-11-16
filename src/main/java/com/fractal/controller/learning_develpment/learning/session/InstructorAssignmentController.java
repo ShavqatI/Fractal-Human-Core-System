@@ -22,24 +22,27 @@ public class InstructorAssignmentController {
 
     @PostMapping()
     public ResponseEntity<InstructorAssignmentResponse> create(@PathVariable Long sessionId, @RequestBody @Valid InstructorAssignmentRequest dto) {
-        return new ResponseEntity<>(instructorAssignmentService.toDTO(instructorAssignmentService.create(sessionId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(instructorAssignmentService.toDTO(instructorAssignmentService.create(sessionId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<InstructorAssignmentResponse>> getAll(@PathVariable Long sessionId) {
         return ResponseEntity.ok(instructorAssignmentService.getAllByLearningSessionId(sessionId).stream().map(instructorAssignmentService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<InstructorAssignmentResponse> getById(@PathVariable Long sessionId, @PathVariable Long id) {
-        return ResponseEntity.ok(instructorAssignmentService.toDTO(instructorAssignmentService.getById(sessionId,id)));
+        return ResponseEntity.ok(instructorAssignmentService.toDTO(instructorAssignmentService.getById(sessionId, id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<InstructorAssignmentResponse> update(@PathVariable Long sessionId, @PathVariable Long id, @RequestBody @Valid InstructorAssignmentRequest dto) {
-        return ResponseEntity.ok(instructorAssignmentService.toDTO(instructorAssignmentService.update(sessionId,id, dto)));
+        return ResponseEntity.ok(instructorAssignmentService.toDTO(instructorAssignmentService.update(sessionId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long sessionId, @PathVariable Long id) {
-        instructorAssignmentService.delete(sessionId,id);
+        instructorAssignmentService.delete(sessionId, id);
         return ResponseEntity.noContent().build();
     }
 

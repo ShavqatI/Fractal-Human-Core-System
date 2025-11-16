@@ -41,7 +41,7 @@ class InsuranceServiceImpl implements InsuranceService {
     @Override
     public Insurance update(Long id, InsuranceRequest dto) {
         var insurance = findById(id);
-        return save(mapperService.toEntity(insurance,dto));
+        return save(mapperService.toEntity(insurance, dto));
     }
 
     @Override
@@ -53,8 +53,7 @@ class InsuranceServiceImpl implements InsuranceService {
     public Insurance save(Insurance insurance) {
         try {
             return insuranceRepository.save(insurance);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -65,6 +64,6 @@ class InsuranceServiceImpl implements InsuranceService {
     }
 
     private Insurance findById(Long id) {
-        return insuranceRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Insurance with id: " + id + " not found"));
+        return insuranceRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Insurance with id: " + id + " not found"));
     }
 }

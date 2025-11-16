@@ -16,9 +16,9 @@ import java.util.List;
 @RequiredArgsConstructor
 class AccountabilityServiceImpl implements AccountabilityService {
 
-      private final AccountabilityRepository accountabilityRepository;
-      private final AccountabilityMapperService mapperService;
-      private final JobDescriptionService jobDescriptionService;
+    private final AccountabilityRepository accountabilityRepository;
+    private final AccountabilityMapperService mapperService;
+    private final JobDescriptionService jobDescriptionService;
 
     @Override
     @Transactional
@@ -37,15 +37,15 @@ class AccountabilityServiceImpl implements AccountabilityService {
 
     @Override
     public Accountability getById(Long jobDescriptionId, Long id) {
-        return accountabilityRepository.findByJobDescriptionIdAndId(jobDescriptionId,id).orElseThrow(()-> new ResourceNotFoundException("Accountability with id: " + id + " not found"));
+        return accountabilityRepository.findByJobDescriptionIdAndId(jobDescriptionId, id).orElseThrow(() -> new ResourceNotFoundException("Accountability with id: " + id + " not found"));
     }
 
     @Override
     @Transactional
     public Accountability update(Long jobDescriptionId, Long id, AccountabilityRequest dto) {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
-        var accountability = findById(jobDescription,id);
-        accountability = accountabilityRepository.save(mapperService.toEntity(accountability,dto));
+        var accountability = findById(jobDescription, id);
+        accountability = accountabilityRepository.save(mapperService.toEntity(accountability, dto));
         jobDescriptionService.save(jobDescription);
         return accountability;
     }
@@ -54,7 +54,7 @@ class AccountabilityServiceImpl implements AccountabilityService {
     @Transactional
     public void delete(Long jobDescriptionId, Long id) {
         var jobDescription = jobDescriptionService.getById(jobDescriptionId);
-        var accountability = findById(jobDescription,id);
+        var accountability = findById(jobDescription, id);
         jobDescription.removeAccountability(accountability);
         jobDescriptionService.save(jobDescription);
     }
@@ -67,6 +67,6 @@ class AccountabilityServiceImpl implements AccountabilityService {
     private Accountability findById(JobDescription jobDescription, Long id) {
         return jobDescription.getAccountabilities().stream()
                 .filter(q -> q.getId().equals(id))
-                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Accountability with id: " + id + " not found"));
+                .findFirst().orElseThrow(() -> new ResourceNotFoundException("Accountability with id: " + id + " not found"));
     }
 }

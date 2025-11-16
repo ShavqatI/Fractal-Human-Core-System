@@ -16,7 +16,6 @@ class LanguageSkillMapperServiceImpl implements LanguageSkillMapperService {
     private final LanguageProficiencyService languageProficiencyService;
 
 
-
     @Override
     public LanguageSkillResponse toDTO(LanguageSkill languageSkill) {
         return new LanguageSkillResponse(
@@ -29,12 +28,12 @@ class LanguageSkillMapperServiceImpl implements LanguageSkillMapperService {
 
     @Override
     public LanguageSkill toEntity(LanguageSkillRequest dto) {
-        return mapToEntity(new LanguageSkill(),dto);
+        return mapToEntity(new LanguageSkill(), dto);
     }
 
     @Override
     public LanguageSkill toEntity(LanguageSkill languageSkill, LanguageSkillRequest dto) {
-       return mapToEntity(languageSkill,dto);
+        return mapToEntity(languageSkill, dto);
     }
 
     private LanguageSkill mapToEntity(LanguageSkill languageSkill, LanguageSkillRequest dto) {

@@ -6,7 +6,8 @@ public record GradeStepRequest(
 
         BigDecimal minSalary,
 
-        BigDecimal  maxSalary,
+        BigDecimal maxSalary,
 
         Long statusId
-) { }
+) {
+}

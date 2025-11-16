@@ -9,6 +9,8 @@ import com.fractal.domain.vacation_management.type.VacationTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.temporal.ChronoUnit;
+
 @Service
 @RequiredArgsConstructor
 class VacationScheduleMapperServiceImpl implements VacationScheduleMapperService {
@@ -33,12 +35,12 @@ class VacationScheduleMapperServiceImpl implements VacationScheduleMapperService
 
     @Override
     public VacationSchedule toEntity(VacationScheduleRequest dto) {
-        return mapToEntity(new VacationSchedule(),dto);
+        return mapToEntity(new VacationSchedule(), dto);
     }
 
     @Override
     public VacationSchedule toEntity(VacationSchedule vacationSchedule, VacationScheduleRequest dto) {
-        return mapToEntity(vacationSchedule,dto);
+        return mapToEntity(vacationSchedule, dto);
     }
 
     private VacationSchedule mapToEntity(VacationSchedule vacationSchedule, VacationScheduleRequest dto) {
@@ -46,6 +48,7 @@ class VacationScheduleMapperServiceImpl implements VacationScheduleMapperService
         vacationSchedule.setVacationType(vacationTypeService.getByCode("ANNUAL"));
         vacationSchedule.setStartDate(dto.startDate());
         vacationSchedule.setEndDate(dto.endDate());
+        vacationSchedule.setDays((int) ChronoUnit.DAYS.between(dto.startDate(), dto.endDate()) + 1);
         return vacationSchedule;
     }
 }

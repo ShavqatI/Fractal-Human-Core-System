@@ -7,8 +7,11 @@ import com.fractal.domain.interview.evaluation.section.question.dto.InterviewEva
 
 public interface InterviewEvaluationQuestionMapperService {
     InterviewEvaluationQuestionResponse toDTO(InterviewEvaluationQuestion question);
+
     InterviewEvaluationQuestionCompactResponse toCompactDTO(InterviewEvaluationQuestion question);
+
     InterviewEvaluationQuestion toEntity(InterviewEvaluationQuestionRequest dto);
+
     InterviewEvaluationQuestion toEntity(InterviewEvaluationQuestion question, InterviewEvaluationQuestionRequest dto);
 }
 

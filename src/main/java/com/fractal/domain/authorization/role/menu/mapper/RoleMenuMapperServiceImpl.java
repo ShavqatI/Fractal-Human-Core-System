@@ -28,12 +28,12 @@ class RoleMenuMapperServiceImpl implements RoleMenuMapperService {
 
     @Override
     public RoleMenu toEntity(RoleMenuRequest dto) {
-        return mapToEntity(new RoleMenu(),dto);
+        return mapToEntity(new RoleMenu(), dto);
     }
 
     @Override
     public RoleMenu toEntity(RoleMenu roleMenu, RoleMenuRequest dto) {
-        return mapToEntity(roleMenu,dto);
+        return mapToEntity(roleMenu, dto);
     }
 
     private RoleMenu mapToEntity(RoleMenu roleMenu, RoleMenuRequest dto) {

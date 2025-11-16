@@ -10,5 +10,6 @@ import java.util.Optional;
 interface RelativeAddressRepository extends JpaRepository<RelativeAddress, Long> {
 
     List<RelativeAddress> findAllByRelativeId(Long relativeId);
-    Optional<RelativeAddress> findByRelativeIdAndId(Long relativeId,Long id);
+
+    Optional<RelativeAddress> findByRelativeIdAndId(Long relativeId, Long id);
 }

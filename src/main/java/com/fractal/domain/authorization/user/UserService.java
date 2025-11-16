@@ -10,15 +10,25 @@ import java.util.List;
 
 public interface UserService {
     User create(UserRequest dto);
+
     User getById(Long id);
+
     User findByUsername(String username);
+
     List<User> getAll();
+
     User update(Long id, UserRequest dto);
+
     void resetPassword(Long id, ResetPasswordRequest dto);
+
     void changePassword(Long id, ChangePasswordRequest dto);
+
     void deleteById(Long id);
+
     User save(User user);
+
     List<UserRole> getActiveRoles(Long id);
+
     UserResponse toDTO(User user);
 
 }

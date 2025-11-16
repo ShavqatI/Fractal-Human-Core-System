@@ -19,14 +19,17 @@ import java.util.stream.Collectors;
 public class InterviewController {
 
     private final InterviewService interviewTypeService;
+
     @PostMapping
     public ResponseEntity<InterviewResponse> create(@RequestBody @Valid InterviewRequest dto) {
         return new ResponseEntity<>(interviewTypeService.toDTO(interviewTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<InterviewResponse>> getAll() {
         return ResponseEntity.ok(interviewTypeService.getAll().stream().map(interviewTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<InterviewResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(interviewTypeService.toDTO(interviewTypeService.getById(id)));
@@ -34,10 +37,11 @@ public class InterviewController {
 
     @PutMapping("/{id}")
     public ResponseEntity<InterviewResponse> update(@PathVariable Long id, @RequestBody @Valid InterviewRequest dto) {
-      return  ResponseEntity.ok(interviewTypeService.toDTO(interviewTypeService.update(id, dto)));
+        return ResponseEntity.ok(interviewTypeService.toDTO(interviewTypeService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         interviewTypeService.deleteById(id);

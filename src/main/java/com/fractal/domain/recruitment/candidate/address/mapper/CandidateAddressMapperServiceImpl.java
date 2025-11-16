@@ -41,12 +41,12 @@ class CandidateAddressMapperServiceImpl implements CandidateAddressMapperService
 
     @Override
     public CandidateAddress toEntity(CandidateAddressRequest dto) {
-        return mapToEntity(new CandidateAddress(),dto);
+        return mapToEntity(new CandidateAddress(), dto);
     }
 
     @Override
     public CandidateAddress toEntity(CandidateAddress address, CandidateAddressRequest dto) {
-       return mapToEntity(address,dto);
+        return mapToEntity(address, dto);
     }
 
     private CandidateAddress mapToEntity(CandidateAddress address, CandidateAddressRequest dto) {

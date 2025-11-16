@@ -12,8 +12,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class InterviewerMapperServiceImpl implements InterviewerMapperService {
 
-   private final EmployeeService employeeService;
-   private final StatusService statusService;
+    private final EmployeeService employeeService;
+    private final StatusService statusService;
+
     @Override
     public InterviewerResponse toDTO(Interviewer interviewer) {
         return null;
@@ -21,15 +22,15 @@ class InterviewerMapperServiceImpl implements InterviewerMapperService {
 
     @Override
     public Interviewer toEntity(InterviewerRequest dto) {
-        return mapToEntity(new Interviewer(),dto);
+        return mapToEntity(new Interviewer(), dto);
     }
 
     @Override
     public Interviewer toEntity(Interviewer interviewer, InterviewerRequest dto) {
-        return mapToEntity(interviewer,dto);
+        return mapToEntity(interviewer, dto);
     }
 
-    private Interviewer mapToEntity(Interviewer interviewer , InterviewerRequest dto) {
+    private Interviewer mapToEntity(Interviewer interviewer, InterviewerRequest dto) {
         interviewer.setEmployee(employeeService.getById(dto.employeeId()));
         interviewer.setScheduledTime(dto.scheduledTime());
         interviewer.setDurationMinutes(dto.durationMinutes());

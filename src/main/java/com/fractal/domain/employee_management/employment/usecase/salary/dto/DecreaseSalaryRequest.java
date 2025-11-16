@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public record DecreaseSalaryRequest(
-   BigDecimal amount,
-   LocalDate startDate,
-   String reason
-) { }
+        BigDecimal amount,
+        LocalDate startDate,
+        String reason
+) {
+}

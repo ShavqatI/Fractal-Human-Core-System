@@ -12,4 +12,5 @@ public record OfflineLearningLocationRequest(
         Integer capacity,
         List<OfflineLearningLocationAddressRequest> addresses,
         Long statusId
-) implements LearningLocationRequest { }
+) implements LearningLocationRequest {
+}

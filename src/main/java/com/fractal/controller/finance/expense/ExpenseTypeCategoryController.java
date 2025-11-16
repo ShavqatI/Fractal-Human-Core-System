@@ -24,14 +24,17 @@ public class ExpenseTypeCategoryController {
     public ResponseEntity<ExpenseTypeCategoryResponse> create(@RequestBody @Valid ExpenseTypeCategoryRequest dto) {
         return new ResponseEntity<>(categoryService.toDTO(categoryService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<ExpenseTypeCategoryResponse>> getAll() {
         return ResponseEntity.ok(categoryService.getAll().stream().map(categoryService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<ExpenseTypeCategoryResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(categoryService.toDTO(categoryService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<ExpenseTypeCategoryResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(categoryService.toDTO(categoryService.getByCode(code)));
@@ -39,10 +42,11 @@ public class ExpenseTypeCategoryController {
 
     @PutMapping("/{id}")
     public ResponseEntity<ExpenseTypeCategoryResponse> update(@PathVariable Long id, @RequestBody @Valid ExpenseTypeCategoryRequest dto) {
-      return  ResponseEntity.ok(categoryService.toDTO(categoryService.update(id, dto)));
+        return ResponseEntity.ok(categoryService.toDTO(categoryService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         categoryService.deleteById(id);

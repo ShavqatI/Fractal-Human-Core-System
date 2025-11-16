@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ResponsibilityRepository extends JpaRepository<Responsibility,Long> {
+public interface ResponsibilityRepository extends JpaRepository<Responsibility, Long> {
 
     List<Responsibility> findAllByJobDescriptionId(Long jobDescriptionId);
+
     Optional<Responsibility> findByJobDescriptionIdAndId(Long jobDescriptionId, Long id);
 }

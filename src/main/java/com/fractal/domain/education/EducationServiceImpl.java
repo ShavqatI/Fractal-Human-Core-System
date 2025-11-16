@@ -78,14 +78,13 @@ class EducationServiceImpl implements EducationService {
     public Education save(Education education) {
         try {
             return educationRepository.save(education);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
 
     private Education findById(Long id) {
-        return educationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Education History with id: " + id + " not found"));
+        return educationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Education History with id: " + id + " not found"));
     }
 }

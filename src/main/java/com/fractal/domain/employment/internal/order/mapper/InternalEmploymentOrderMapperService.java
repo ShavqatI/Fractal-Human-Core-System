@@ -6,7 +6,9 @@ import com.fractal.domain.employment.internal.order.dto.InternalEmploymentOrderR
 
 public interface InternalEmploymentOrderMapperService {
     InternalEmploymentOrderResponse toDTO(InternalEmploymentOrder order);
+
     InternalEmploymentOrder toEntity(InternalEmploymentOrderRequest dto);
+
     InternalEmploymentOrder toEntity(InternalEmploymentOrder order, InternalEmploymentOrderRequest dto);
 }
 

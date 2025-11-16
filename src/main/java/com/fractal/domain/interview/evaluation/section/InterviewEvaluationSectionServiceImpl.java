@@ -29,7 +29,7 @@ class InterviewEvaluationSectionServiceImpl implements InterviewEvaluationSectio
         var section = mapperService.toEntity(dto);
         evaluation.addSection(section);
         interviewEvaluationService.save(evaluation);
-       return section;
+        return section;
     }
 
     @Override
@@ -39,7 +39,7 @@ class InterviewEvaluationSectionServiceImpl implements InterviewEvaluationSectio
 
     @Override
     public InterviewEvaluationSection getById(Long evaluationId, Long id) {
-        return sectionRepository.findByInterviewEvaluationIdAndId(evaluationId,id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Section with id: " + id + " not found"));
+        return sectionRepository.findByInterviewEvaluationIdAndId(evaluationId, id).orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation Section with id: " + id + " not found"));
     }
 
     @Override
@@ -48,8 +48,8 @@ class InterviewEvaluationSectionServiceImpl implements InterviewEvaluationSectio
         var evaluation = interviewEvaluationService.getById(evaluationId);
         var section = evaluation.getSections()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education with id: " + id + " not found"));
-        section = sectionRepository.save(mapperService.toEntity(section,dto));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Education with id: " + id + " not found"));
+        section = sectionRepository.save(mapperService.toEntity(section, dto));
         interviewEvaluationService.save(evaluation);
         return section;
     }
@@ -60,7 +60,7 @@ class InterviewEvaluationSectionServiceImpl implements InterviewEvaluationSectio
         var evaluation = interviewEvaluationService.getById(employeeId);
         var section = evaluation.getSections()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education with id: " + id + " not found"));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Education with id: " + id + " not found"));
         evaluation.removeSection(section);
         interviewEvaluationService.save(evaluation);
     }
@@ -86,12 +86,11 @@ class InterviewEvaluationSectionServiceImpl implements InterviewEvaluationSectio
     @Override
     public InterviewEvaluationSection updateChild(Long id, Long childId, InterviewEvaluationSectionRequest dto) {
         var section = getById(id);
-        var child = section.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        var child = section.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
         try {
-            child = mapperService.toEntity(child,dto);
+            child = mapperService.toEntity(child, dto);
             save(child);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
         return save(section);
@@ -100,22 +99,21 @@ class InterviewEvaluationSectionServiceImpl implements InterviewEvaluationSectio
     @Override
     public InterviewEvaluationSection deleteChild(Long id, Long childId) {
         var section = getById(id);
-        var child = section.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        var child = section.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
         section.removeChild(child);
         return section;
     }
 
     @Override
     public InterviewEvaluationSection getById(Long id) {
-        return sectionRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Section with id: " + id + " not found"));
+        return sectionRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation Section with id: " + id + " not found"));
     }
 
     @Override
     public InterviewEvaluationSection save(InterviewEvaluationSection section) {
         try {
             return sectionRepository.save(section);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }

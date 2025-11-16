@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 interface GradeStepRepository extends JpaRepository<GradeStep, Long> {
     List<GradeStep> findAllByGradeId(Long gradeId);
+
     Optional<GradeStep> findByGradeIdAndId(Long gradeId, Long id);
 }

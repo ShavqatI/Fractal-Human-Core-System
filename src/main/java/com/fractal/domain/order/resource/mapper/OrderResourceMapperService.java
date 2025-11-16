@@ -7,11 +7,16 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface OrderResourceMapperService {
     ResourceResponse toDTO(OrderResource resource);
+
     OrderResource toEntity(ResourceRequest dto);
+
     OrderResource toEntity(MultipartFile file, String resourceStoragePath);
+
     OrderResource toEntity(OrderResource resource, MultipartFile file, String resourceStoragePath);
+
     OrderResource toEntity(OrderResource resource, ResourceRequest dto);
-    ResourceRequest fileToRequest(MultipartFile file,String url);
+
+    ResourceRequest fileToRequest(MultipartFile file, String url);
 }
 
 

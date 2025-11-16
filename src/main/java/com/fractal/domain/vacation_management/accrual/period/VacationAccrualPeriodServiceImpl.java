@@ -39,7 +39,7 @@ public class VacationAccrualPeriodServiceImpl implements VacationAccrualPeriodSe
 
     @Override
     public VacationAccrualPeriod getById(Long accrualId, Long id) {
-        return periodRepository.findByVacationAccrualIdAndId(accrualId,id).orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        return periodRepository.findByVacationAccrualIdAndId(accrualId, id).orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
     }
 
     @Override
@@ -53,8 +53,8 @@ public class VacationAccrualPeriodServiceImpl implements VacationAccrualPeriodSe
         var accrual = vacationAccrualService.getById(accrualId);
         var period = accrual.getPeriods()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
-        period = save(mapperService.toEntity(period,dto));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        period = save(mapperService.toEntity(period, dto));
         vacationAccrualService.save(accrual);
         return period;
     }
@@ -65,7 +65,7 @@ public class VacationAccrualPeriodServiceImpl implements VacationAccrualPeriodSe
         var accrual = vacationAccrualService.getById(vacationRequestId);
         var period = accrual.getPeriods()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
         accrual.removePeriod(period);
         vacationAccrualService.save(accrual);
     }
@@ -76,11 +76,11 @@ public class VacationAccrualPeriodServiceImpl implements VacationAccrualPeriodSe
     }
 
     @Override
+    @Transactional
     public VacationAccrualPeriod save(VacationAccrualPeriod period) {
         try {
             return periodRepository.save(period);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }

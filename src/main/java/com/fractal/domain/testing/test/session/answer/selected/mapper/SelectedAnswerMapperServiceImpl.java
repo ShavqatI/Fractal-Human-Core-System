@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 class SelectedAnswerMapperServiceImpl implements SelectedAnswerMapperService {
 
     private final AnswerService answerService;
+
     @Override
     public SelectedAnswerResponse toDTO(SelectedAnswer selectedAnswer) {
         return new SelectedAnswerResponse(

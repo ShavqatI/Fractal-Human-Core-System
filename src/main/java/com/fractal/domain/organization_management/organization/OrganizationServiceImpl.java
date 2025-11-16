@@ -35,12 +35,12 @@ class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public List<Organization> getAllTopLevel() {
-        return organizationRepository.findAllByOrganizationUnitCodeIn(List.of("HEADOFFICE","BRANCH"))  ;
+        return organizationRepository.findAllByOrganizationUnitCodeIn(List.of("HEADOFFICE", "BRANCH"));
     }
 
     @Override
     public Organization getByCode(String code) {
-        return organizationRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Organization with code: " + code + " not found"));
+        return organizationRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Organization with code: " + code + " not found"));
 
     }
 
@@ -53,10 +53,9 @@ class OrganizationServiceImpl implements OrganizationService {
     @Transactional
     public Organization update(Long id, OrganizationRequest dto) {
         try {
-            Organization organization = mapperService.toEntity(findById(id),dto);
+            Organization organization = mapperService.toEntity(findById(id), dto);
             return save(organization);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
@@ -65,7 +64,7 @@ class OrganizationServiceImpl implements OrganizationService {
     @Override
     @Transactional
     public void deleteById(Long id) {
-      organizationRepository.delete(findById(id));
+        organizationRepository.delete(findById(id));
     }
 
     @Override
@@ -96,39 +95,39 @@ class OrganizationServiceImpl implements OrganizationService {
     @Transactional
     public Organization updateChild(Long id, Long childId, OrganizationRequest dto) {
         var organization = findById(id);
-        var child = organization.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
-        update(child.getId(),dto);
+        var child = organization.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        update(child.getId(), dto);
         return save(organization);
     }
 
     @Override
     public Organization deleteChild(Long id, Long childId) {
         var organization = findById(id);
-        var child = organization.getChildren().stream().filter(ch-> ch.getId().equals(childId)).findFirst().orElseThrow(()->new ResourceNotFoundException("Child with id: " + childId + " not found"));
+        var child = organization.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
         organization.removeChild(child);
-       return save(organization);
+        return save(organization);
     }
+
     @Override
     @Transactional
     public Organization save(Organization organization) {
         try {
             return organizationRepository.save(organization);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Organization findById(Long id) {
-        return organizationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Organization with id: " + id + " not found"));
+        return organizationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Organization with id: " + id + " not found"));
     }
 
     public Organization generateLevelMap(Organization organization) {
         if (organization.getId() == null) {
-            if(organization.getLevelMap() == null) {
-                String levelMap =  organization.getLevelMap() != null ? organization.getLevelMap() : "001";
+            if (organization.getLevelMap() == null) {
+                String levelMap = organization.getLevelMap() != null ? organization.getLevelMap() : "001";
                 if (organization.getOrganizationUnit().getLevel() == 1) {
-                    var lastDepartment =   organizationRepository.findFirstByOrderByIdDesc();
+                    var lastDepartment = organizationRepository.findFirstByOrderByIdDesc();
                     if (lastDepartment.isPresent()) {
                         String lastLevel = lastDepartment.get().getLevelMap().substring(0, 3);
                         int nextNumber = Integer.parseInt(lastLevel) + 1;
@@ -139,7 +138,7 @@ class OrganizationServiceImpl implements OrganizationService {
             }
         }
 
-        if (organization.getChildren() != null ) {
+        if (organization.getChildren() != null) {
             for (int i = 0; i < organization.getChildren().size(); i++) {
                 if (organization.getChildren().get(i).getLevelMap() == null) {
                     String childLevel = organization.getLevelMap() + "-" + String.format("%03d", i + 1);
@@ -152,14 +151,14 @@ class OrganizationServiceImpl implements OrganizationService {
     }
 
     private Organization generateCode(Organization organization) {
-        if(organization.getCode() == null) {
-            String code = organization.getOrganizationUnit().getCode() + "_" + organization.getLevelMap().replace("-","_");
+        if (organization.getCode() == null) {
+            String code = organization.getOrganizationUnit().getCode() + "_" + organization.getLevelMap().replace("-", "_");
             organization.setCode(code);
         }
-        if (organization.getChildren() != null ) {
+        if (organization.getChildren() != null) {
             for (int i = 0; i < organization.getChildren().size(); i++) {
                 if (organization.getChildren().get(i).getCode() == null) {
-                    String code = organization.getOrganizationUnit().getCode() + "_" + organization.getLevelMap().replace("-","_");
+                    String code = organization.getOrganizationUnit().getCode() + "_" + organization.getLevelMap().replace("-", "_");
                     organization.setCode(code);
                 }
                 generateCode(organization.getChildren().get(i));

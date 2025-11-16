@@ -34,6 +34,7 @@ public class LearningCategoryController {
     public ResponseEntity<LearningCategoryResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(categoryService.toDTO(categoryService.getById(id)));
     }
+
     @GetMapping("/compact")
     public ResponseEntity<List<LearningCategoryCompactResponse>> getAllCompact() {
         return ResponseEntity.ok(categoryService.getAll().stream().map(categoryService::toCompactDTO).collect(Collectors.toList()));

@@ -19,28 +19,34 @@ import java.util.stream.Collectors;
 public class MaritalStatusController {
 
     private final MaritalStatusService maritalStatusService;
+
     @PostMapping
     public ResponseEntity<MaritalStatusResponse> create(@RequestBody @Valid MaritalStatusRequest dto) {
         return new ResponseEntity<>(maritalStatusService.toDTO(maritalStatusService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<MaritalStatusResponse>> getAll() {
         return ResponseEntity.ok(maritalStatusService.getAll().stream().map(maritalStatusService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<MaritalStatusResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(maritalStatusService.toDTO(maritalStatusService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<MaritalStatusResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(maritalStatusService.toDTO(maritalStatusService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<MaritalStatusResponse> update(@PathVariable Long id, @RequestBody @Valid MaritalStatusRequest dto) {
-      return  ResponseEntity.ok(maritalStatusService.toDTO(maritalStatusService.update(id, dto)));
+        return ResponseEntity.ok(maritalStatusService.toDTO(maritalStatusService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         maritalStatusService.deleteById(id);

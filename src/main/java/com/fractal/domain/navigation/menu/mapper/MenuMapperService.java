@@ -7,8 +7,11 @@ import com.fractal.domain.navigation.menu.dto.MenuResponse;
 
 public interface MenuMapperService {
     MenuResponse toDTO(Menu menu);
+
     MenuCompactResponse toCompactDTO(Menu menu);
+
     Menu toEntity(MenuRequest dto);
+
     Menu toEntity(Menu menu, MenuRequest dto);
 }
 

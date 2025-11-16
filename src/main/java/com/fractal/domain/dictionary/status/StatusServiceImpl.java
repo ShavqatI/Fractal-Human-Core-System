@@ -17,6 +17,7 @@ public class StatusServiceImpl implements StatusService {
 
     private final StatusRepository statusRepository;
     private final StatusCategoryService statusCategoryService;
+
     @Override
     public Status create(StatusRequest dto) {
         return save(toEntity(dto));
@@ -29,7 +30,7 @@ public class StatusServiceImpl implements StatusService {
 
     @Override
     public Status getByCode(String code) {
-        return statusRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Status with code: " + code + " not found"));
+        return statusRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Status with code: " + code + " not found"));
 
     }
 
@@ -47,15 +48,14 @@ public class StatusServiceImpl implements StatusService {
             status.setStatusCategory(statusCategoryService.getById(dto.statusCategoryId()));
             status.setDescription(dto.description());
             return save(status);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       statusRepository.delete(findById(id));
+        statusRepository.delete(findById(id));
     }
 
     @Override
@@ -72,11 +72,11 @@ public class StatusServiceImpl implements StatusService {
 
     @Override
     public StatusCompactResponse toCompactDTO(Status status) {
-         return new StatusCompactResponse(
+        return new StatusCompactResponse(
                 status.getId(),
                 status.getCode(),
                 status.getName()
-         );
+        );
     }
 
     private Status toEntity(StatusRequest dto) {
@@ -91,14 +91,13 @@ public class StatusServiceImpl implements StatusService {
     private Status save(Status status) {
         try {
             return statusRepository.save(status);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Status findById(Long id) {
-        return statusRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Status with id: " + id + " not found"));
+        return statusRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Status with id: " + id + " not found"));
     }
 
 }

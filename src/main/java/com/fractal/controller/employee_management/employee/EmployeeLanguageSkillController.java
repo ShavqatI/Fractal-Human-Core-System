@@ -22,23 +22,27 @@ public class EmployeeLanguageSkillController {
 
     @PostMapping
     public ResponseEntity<LanguageSkillResponse> create(@PathVariable Long employeeId, @RequestBody @Valid LanguageSkillRequest dto) {
-        return new ResponseEntity<>(languageSkillService.toDTO(languageSkillService.create(employeeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(languageSkillService.toDTO(languageSkillService.create(employeeId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<LanguageSkillResponse>> getAll(@PathVariable Long employeeId) {
         return ResponseEntity.ok(languageSkillService.getAllByCandidateId(employeeId).stream().map(languageSkillService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<LanguageSkillResponse> getById(@PathVariable Long employeeId, @PathVariable Long id) {
-        return ResponseEntity.ok(languageSkillService.toDTO(languageSkillService.getById(employeeId,id)));
+        return ResponseEntity.ok(languageSkillService.toDTO(languageSkillService.getById(employeeId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<LanguageSkillResponse> update(@PathVariable Long employeeId, @PathVariable Long id, @RequestBody @Valid LanguageSkillRequest dto) {
-        return ResponseEntity.ok(languageSkillService.toDTO(languageSkillService.update(employeeId,id, dto)));
+        return ResponseEntity.ok(languageSkillService.toDTO(languageSkillService.update(employeeId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long employeeId, @PathVariable Long id) {
-        languageSkillService.delete(employeeId,id);
+        languageSkillService.delete(employeeId, id);
         return ResponseEntity.noContent().build();
     }
 

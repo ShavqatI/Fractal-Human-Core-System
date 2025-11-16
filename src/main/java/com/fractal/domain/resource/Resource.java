@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "resource",schema = "resource_schema", catalog = "fractal")
+@Table(name = "resource", schema = "resource_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @NoArgsConstructor
@@ -19,16 +19,16 @@ public class Resource extends Auditable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     protected Long id;
 
-    @Column(name = "url",length = 1000)
-    private  String url;
+    @Column(name = "url", length = 1000)
+    private String url;
 
     @Column(name = "file_name")
-    private  String fileName;
+    private String fileName;
 
     @Column(name = "content_type")
-    private  String contentType;
+    private String contentType;
 
     @Column(name = "size_in_bytes")
-    private  Long sizeInBytes;
+    private Long sizeInBytes;
 
 }

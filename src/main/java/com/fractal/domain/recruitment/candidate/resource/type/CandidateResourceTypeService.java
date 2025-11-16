@@ -6,11 +6,17 @@ import com.fractal.domain.recruitment.candidate.resource.type.dto.CandidateResou
 import java.util.List;
 
 public interface CandidateResourceTypeService {
-   CandidateResourceType create(CandidateResourceTypeRequest dto);
-   List<CandidateResourceType> getAll();
-   CandidateResourceType getByCode(String code);
-   CandidateResourceType getById(Long id);
-   CandidateResourceType update(Long id, CandidateResourceTypeRequest dto);
-   void deleteById(Long id);
-   CandidateResourceTypeResponse toDTO(CandidateResourceType candidateResourceType);
+    CandidateResourceType create(CandidateResourceTypeRequest dto);
+
+    List<CandidateResourceType> getAll();
+
+    CandidateResourceType getByCode(String code);
+
+    CandidateResourceType getById(Long id);
+
+    CandidateResourceType update(Long id, CandidateResourceTypeRequest dto);
+
+    void deleteById(Long id);
+
+    CandidateResourceTypeResponse toDTO(CandidateResourceType candidateResourceType);
 }

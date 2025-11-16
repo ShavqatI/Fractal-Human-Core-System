@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface MaritalStatusRepository extends JpaRepository<MaritalStatus,Long> {
+interface MaritalStatusRepository extends JpaRepository<MaritalStatus, Long> {
     Optional<MaritalStatus> findById(Long id);
+
     Optional<MaritalStatus> findByCode(String code);
+
     List<MaritalStatus> findAll();
 }

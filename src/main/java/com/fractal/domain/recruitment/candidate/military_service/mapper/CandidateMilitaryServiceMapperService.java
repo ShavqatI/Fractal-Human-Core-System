@@ -6,7 +6,9 @@ import com.fractal.domain.recruitment.candidate.military_service.CandidateMilita
 
 public interface CandidateMilitaryServiceMapperService {
     MilitaryServiceResponse toDTO(CandidateMilitaryService militaryService);
+
     CandidateMilitaryService toEntity(MilitaryServiceRequest dto);
+
     CandidateMilitaryService toEntity(CandidateMilitaryService militaryService, MilitaryServiceRequest dto);
 }
 

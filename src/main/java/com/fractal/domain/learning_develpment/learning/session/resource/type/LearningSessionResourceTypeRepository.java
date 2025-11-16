@@ -7,11 +7,14 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface LearningSessionResourceTypeRepository extends JpaRepository<LearningSessionResourceType,Long> {
+interface LearningSessionResourceTypeRepository extends JpaRepository<LearningSessionResourceType, Long> {
 
     LearningSessionResourceType save(LearningSessionResourceType learningSessionResourceType);
+
     List<LearningSessionResourceType> findAll();
+
     Optional<LearningSessionResourceType> findByCode(String code);
+
     Optional<LearningSessionResourceType> findById(Long id);
 
 }

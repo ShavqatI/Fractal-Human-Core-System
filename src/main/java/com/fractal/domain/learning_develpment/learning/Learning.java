@@ -37,19 +37,19 @@ public class Learning extends ApprovalWorkflow {
     private Integer capacity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "learning_type_id",referencedColumnName = "id")
+    @JoinColumn(name = "learning_type_id", referencedColumnName = "id")
     private LearningType type;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "learning_category_id",referencedColumnName = "id")
+    @JoinColumn(name = "learning_category_id", referencedColumnName = "id")
     private LearningCategory category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "learning_level_id",referencedColumnName = "id")
+    @JoinColumn(name = "learning_level_id", referencedColumnName = "id")
     private LearningLevel level;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "learning_delivery_mode_id",referencedColumnName = "id")
+    @JoinColumn(name = "learning_delivery_mode_id", referencedColumnName = "id")
     private LearningDeliveryMode deliveryMode;
 
     private Boolean mandatory;
@@ -58,7 +58,7 @@ public class Learning extends ApprovalWorkflow {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "learning", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "learning", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<LearningSession> sessions = new ArrayList<>();
 
     public void addSession(LearningSession session) {
@@ -66,6 +66,7 @@ public class Learning extends ApprovalWorkflow {
         session.setLearning(this);
         sessions.add(session);
     }
+
     public void removeSession(LearningSession session) {
         if (sessions != null && !sessions.isEmpty())
             sessions.remove(session);

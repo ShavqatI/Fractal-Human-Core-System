@@ -6,7 +6,9 @@ import com.fractal.domain.recruitment.candidate.language_skill.CandidateLanguage
 
 public interface CandidateLanguageSkillMapperService {
     LanguageSkillResponse toDTO(CandidateLanguageSkill languageSkill);
+
     CandidateLanguageSkill toEntity(LanguageSkillRequest dto);
+
     CandidateLanguageSkill toEntity(CandidateLanguageSkill languageSkill, LanguageSkillRequest dto);
 }
 

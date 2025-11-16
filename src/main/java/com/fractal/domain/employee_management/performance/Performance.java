@@ -51,10 +51,10 @@ public class Performance extends AbstractEntity {
     @Column(name = "comments", length = 2000)
     private String comments;
 
-    @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Goal> goals;
 
-    @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "performance", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Improvement> improvements;
 
 
@@ -84,7 +84,6 @@ public class Performance extends AbstractEntity {
         if (improvements != null && !improvements.isEmpty())
             improvements.remove(improvement);
     }
-
 
 
 }

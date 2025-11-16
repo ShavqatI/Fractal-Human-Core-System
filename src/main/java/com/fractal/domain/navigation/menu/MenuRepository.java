@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface MenuRepository extends JpaRepository<Menu,Long> {
+interface MenuRepository extends JpaRepository<Menu, Long> {
     Optional<Menu> findByUrl(String url);
 
     List<Menu> findAllByLevel(long level);

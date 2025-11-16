@@ -6,7 +6,9 @@ import com.fractal.domain.recruitment.candidate.employment.CandidateEmployment;
 
 public interface CandidateEmploymentMapperService {
     ExternalEmploymentResponse toDTO(CandidateEmployment employment);
+
     CandidateEmployment toEntity(ExternalEmploymentRequest dto);
+
     CandidateEmployment toEntity(CandidateEmployment employment, ExternalEmploymentRequest dto);
 }
 

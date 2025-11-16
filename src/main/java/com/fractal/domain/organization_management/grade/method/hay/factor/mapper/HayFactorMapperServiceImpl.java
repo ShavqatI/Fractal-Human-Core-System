@@ -47,12 +47,12 @@ class HayFactorMapperServiceImpl implements HayFactorMapperService {
 
     @Override
     public HayFactor toEntity(HayFactorRequest dto) {
-        return mapToEntity(new HayFactor(),dto);
+        return mapToEntity(new HayFactor(), dto);
     }
 
     @Override
     public HayFactor toEntity(HayFactor factor, HayFactorRequest dto) {
-        return mapToEntity(factor,dto);
+        return mapToEntity(factor, dto);
     }
 
     private HayFactor mapToEntity(HayFactor factor, HayFactorRequest dto) {

@@ -30,12 +30,12 @@ class GradeMatrixMapperServiceImpl implements GradeMatrixMapperService {
 
     @Override
     public GradeMatrix toEntity(GradeMatrixRequest dto) {
-        return mapToEntity(new GradeMatrix(),dto);
+        return mapToEntity(new GradeMatrix(), dto);
     }
 
     @Override
     public GradeMatrix toEntity(GradeMatrix matrix, GradeMatrixRequest dto) {
-       return mapToEntity(matrix,dto);
+        return mapToEntity(matrix, dto);
     }
 
     private GradeMatrix mapToEntity(GradeMatrix matrix, GradeMatrixRequest dto) {

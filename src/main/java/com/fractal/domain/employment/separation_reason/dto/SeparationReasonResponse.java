@@ -8,4 +8,5 @@ public record SeparationReasonResponse(
         Long id,
         SeparationReasonTypeCompactResponse separationReasonType,
         LocalDateTime createdDate
-) {}
+) {
+}

@@ -3,9 +3,9 @@ package com.fractal.domain.interview.evaluation.session.mapper;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.interview.evaluation.section.question.InterviewEvaluationQuestionService;
 import com.fractal.domain.interview.evaluation.session.InterviewEvaluationSession;
-import com.fractal.domain.interview.evaluation.session.submission.mapper.InterviewEvaluationSessionAnswerSubmissionMapperService;
 import com.fractal.domain.interview.evaluation.session.dto.InterviewEvaluationSessionRequest;
 import com.fractal.domain.interview.evaluation.session.dto.InterviewEvaluationSessionResponse;
+import com.fractal.domain.interview.evaluation.session.submission.mapper.InterviewEvaluationSessionAnswerSubmissionMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,14 +38,15 @@ class InterviewEvaluationSessionMapperServiceImpl implements InterviewEvaluation
                 session.getCreatedDate()
         );
     }
+
     @Override
     public InterviewEvaluationSession toEntity(InterviewEvaluationSessionRequest dto) {
-        return mapToEntity(new InterviewEvaluationSession(),dto);
+        return mapToEntity(new InterviewEvaluationSession(), dto);
     }
 
     @Override
     public InterviewEvaluationSession toEntity(InterviewEvaluationSession session, InterviewEvaluationSessionRequest dto) {
-       return mapToEntity(session,dto);
+        return mapToEntity(session, dto);
     }
 
     private InterviewEvaluationSession mapToEntity(InterviewEvaluationSession session, InterviewEvaluationSessionRequest dto) {

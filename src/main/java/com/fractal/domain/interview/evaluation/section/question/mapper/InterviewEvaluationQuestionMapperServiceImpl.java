@@ -49,18 +49,18 @@ class InterviewEvaluationQuestionMapperServiceImpl implements InterviewEvaluatio
 
     @Override
     public InterviewEvaluationQuestion toEntity(InterviewEvaluationQuestionRequest dto) {
-        return mapToEntity(new InterviewEvaluationQuestion(),dto);
+        return mapToEntity(new InterviewEvaluationQuestion(), dto);
     }
 
     @Override
     public InterviewEvaluationQuestion toEntity(InterviewEvaluationQuestion question, InterviewEvaluationQuestionRequest dto) {
-       return mapToEntity(question,dto);
+        return mapToEntity(question, dto);
     }
 
     private InterviewEvaluationQuestion mapToEntity(InterviewEvaluationQuestion question, InterviewEvaluationQuestionRequest dto) {
         question.setText(dto.text());
         question.setQuestionType(questionTypeService.getById(dto.questionTypeId()));
-        dto.answers().forEach(answer-> question.addAnswer(answerMapperService.toEntity(answer)));
+        dto.answers().forEach(answer -> question.addAnswer(answerMapperService.toEntity(answer)));
         question.setMaxSelectableOptions(dto.maxSelectableOptions());
         question.setStatus(statusService.getById(dto.statusId()));
         return question;

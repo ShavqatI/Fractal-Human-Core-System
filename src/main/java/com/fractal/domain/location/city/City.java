@@ -13,6 +13,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
+
 @Entity
 @Table(name = "city", schema = "location_schema", catalog = "fractal")
 @Data
@@ -22,11 +23,11 @@ import java.util.List;
 public class City extends Location {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="region_id", referencedColumnName = "id")
+    @JoinColumn(name = "region_id", referencedColumnName = "id")
     private Region region;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name ="area_type_id", referencedColumnName = "id")
+    @JoinColumn(name = "area_type_id", referencedColumnName = "id")
     private AreaType areaType;
 
     @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)

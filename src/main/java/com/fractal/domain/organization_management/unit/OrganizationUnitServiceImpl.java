@@ -11,9 +11,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-class OrganizationUnitServiceImpl  implements OrganizationUnitService {
+class OrganizationUnitServiceImpl implements OrganizationUnitService {
 
     private final OrganizationUnitRepository organizationUnitRepository;
+
     @Override
     public OrganizationUnit create(OrganizationUnitRequest dto) {
         return save(toEntity(dto));
@@ -30,7 +31,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
     }
 
     private OrganizationUnit findByCode(String code) {
-        return organizationUnitRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Organization Unit with code: " + code + " not found"));
+        return organizationUnitRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Organization Unit with code: " + code + " not found"));
     }
 
     @Override
@@ -47,8 +48,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
             organizationUnit.setDescription(dto.description());
             organizationUnit.setLevel(dto.level());
             return save(organizationUnit);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -57,6 +57,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
     public void deleteById(Long id) {
         organizationUnitRepository.delete(findById(id));
     }
+
     public OrganizationUnitResponse toDTO(OrganizationUnit organizationUnit) {
         return new OrganizationUnitResponse(
                 organizationUnit.getId(),
@@ -67,6 +68,7 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
                 organizationUnit.getCreatedDate()
         );
     }
+
     private OrganizationUnit toEntity(OrganizationUnitRequest dto) {
         return OrganizationUnit.builder()
                 .code(dto.code())
@@ -79,15 +81,14 @@ class OrganizationUnitServiceImpl  implements OrganizationUnitService {
     private OrganizationUnit save(OrganizationUnit organizationUnit) {
         try {
             return organizationUnitRepository.save(organizationUnit);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
     }
 
     private OrganizationUnit findById(Long id) {
-        return organizationUnitRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Organization Unit with id: " + id + " not found"));
+        return organizationUnitRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Organization Unit with id: " + id + " not found"));
     }
 
 }

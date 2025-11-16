@@ -37,34 +37,33 @@ public class JobDescription extends AbstractEntity {
     private LocalDate effectiveDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id",referencedColumnName = "id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "position_id",referencedColumnName = "id")
+    @JoinColumn(name = "position_id", referencedColumnName = "id")
     private Position position;
 
 
-
-    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "jobDescription", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ReportingLine> reportingLines = new ArrayList<>();
 
-    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "jobDescription", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Responsibility> responsibilities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "jobDescription", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Qualification> qualifications = new ArrayList<>();
 
-    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "jobDescription", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<RequiredExperience> requiredExperiences = new ArrayList<>();
 
-    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "jobDescription", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<KeyPerformanceIndicator> keyPerformanceIndicators = new ArrayList<>();
 
-    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "jobDescription", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Authority> authorities = new ArrayList<>();
 
-    @OneToMany(mappedBy = "jobDescription",cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "jobDescription", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Accountability> accountabilities = new ArrayList<>();
 
     public void addReportingLine(ReportingLine reportingLine) {
@@ -72,6 +71,7 @@ public class JobDescription extends AbstractEntity {
         reportingLine.setJobDescription(this);
         reportingLines.add(reportingLine);
     }
+
     public void removeReportingLine(ReportingLine reportingLine) {
         if (reportingLines != null && !reportingLines.isEmpty())
             reportingLines.remove(reportingLine);
@@ -83,6 +83,7 @@ public class JobDescription extends AbstractEntity {
         responsibility.setJobDescription(this);
         responsibilities.add(responsibility);
     }
+
     public void removeResponsibility(Responsibility responsibility) {
         if (responsibilities != null && !responsibilities.isEmpty())
             responsibilities.remove(responsibility);
@@ -93,9 +94,10 @@ public class JobDescription extends AbstractEntity {
         qualification.setJobDescription(this);
         qualifications.add(qualification);
     }
+
     public void removeQualification(Qualification qualification) {
         if (qualifications != null && !qualifications.isEmpty())
-        qualifications.remove(qualification);
+            qualifications.remove(qualification);
     }
 
     public void addRequiredExperience(RequiredExperience requiredExperience) {
@@ -103,6 +105,7 @@ public class JobDescription extends AbstractEntity {
         requiredExperience.setJobDescription(this);
         requiredExperiences.add(requiredExperience);
     }
+
     public void removeRequiredExperience(RequiredExperience requiredExperience) {
         if (requiredExperiences != null && !requiredExperiences.isEmpty())
             requiredExperiences.remove(requiredExperience);
@@ -113,6 +116,7 @@ public class JobDescription extends AbstractEntity {
         keyPerformanceIndicator.setJobDescription(this);
         keyPerformanceIndicators.add(keyPerformanceIndicator);
     }
+
     public void removeKeyPerformanceIndicator(KeyPerformanceIndicator keyPerformanceIndicator) {
         if (keyPerformanceIndicators != null && !keyPerformanceIndicators.isEmpty())
             keyPerformanceIndicators.remove(keyPerformanceIndicator);
@@ -123,6 +127,7 @@ public class JobDescription extends AbstractEntity {
         authority.setJobDescription(this);
         authorities.add(authority);
     }
+
     public void removeAuthority(Authority authority) {
         if (authorities != null && !authorities.isEmpty())
             authorities.remove(authority);
@@ -133,11 +138,11 @@ public class JobDescription extends AbstractEntity {
         accountability.setJobDescription(this);
         accountabilities.add(accountability);
     }
+
     public void removeAccountability(Accountability accountability) {
         if (accountabilities != null && !accountabilities.isEmpty())
             accountabilities.remove(accountability);
     }
-
 
 
 }

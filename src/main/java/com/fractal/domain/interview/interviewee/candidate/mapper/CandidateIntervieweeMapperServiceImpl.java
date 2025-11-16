@@ -4,11 +4,9 @@ import com.fractal.domain.dictionary.gender.GenderService;
 import com.fractal.domain.dictionary.marital_status.MaritalStatusService;
 import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.interview.interviewee.Interviewee;
 import com.fractal.domain.interview.interviewee.candidate.CandidateInterviewee;
 import com.fractal.domain.interview.interviewee.candidate.dto.CandidateIntervieweeRequest;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeCompactResponse;
-import com.fractal.domain.interview.interviewee.dto.IntervieweeRequest;
 import com.fractal.domain.interview.interviewee.dto.IntervieweeResponse;
 import com.fractal.domain.recruitment.candidate.CandidateService;
 import com.fractal.domain.recruitment.candidate.contact.mapper.CandidateContactMapperService;
@@ -54,6 +52,7 @@ class CandidateIntervieweeMapperServiceImpl implements CandidateIntervieweeMappe
 
         );
     }
+
     @Override
     public IntervieweeCompactResponse toCompactDTO(CandidateInterviewee interviewee) {
         return new IntervieweeCompactResponse(
@@ -66,12 +65,12 @@ class CandidateIntervieweeMapperServiceImpl implements CandidateIntervieweeMappe
 
     @Override
     public CandidateInterviewee toEntity(CandidateIntervieweeRequest dto) {
-        return mapToEntity(new CandidateInterviewee(),dto);
+        return mapToEntity(new CandidateInterviewee(), dto);
     }
 
     @Override
     public CandidateInterviewee toEntity(CandidateInterviewee interviewee, CandidateIntervieweeRequest dto) {
-        return mapToEntity(interviewee,dto);
+        return mapToEntity(interviewee, dto);
     }
 
 

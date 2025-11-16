@@ -8,9 +8,14 @@ import java.util.List;
 public interface EducationResourceService {
 
     EducationResource create(Long educationId, MultipartFile file);
+
     List<EducationResource> getAllByEducationId(Long educationId);
-    EducationResource getById(Long educationId , Long id);
+
+    EducationResource getById(Long educationId, Long id);
+
     EducationResource update(Long educationId, Long id, MultipartFile file);
-    void delete(Long educationId,Long id);
+
+    void delete(Long educationId, Long id);
+
     ResourceResponse toDTO(EducationResource resource);
 }

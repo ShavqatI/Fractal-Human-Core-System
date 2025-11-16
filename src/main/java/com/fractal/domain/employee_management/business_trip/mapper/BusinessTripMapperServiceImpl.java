@@ -72,12 +72,12 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
 
     @Override
     public BusinessTrip toEntity(BusinessTripRequest dto) {
-        return mapToEntity(new BusinessTrip(),dto);
+        return mapToEntity(new BusinessTrip(), dto);
     }
 
     @Override
     public BusinessTrip toEntity(BusinessTrip businessTrip, BusinessTripRequest dto) {
-        return mapToEntity(businessTrip,dto);
+        return mapToEntity(businessTrip, dto);
     }
 
     private BusinessTrip mapToEntity(BusinessTrip businessTrip, BusinessTripRequest dto) {
@@ -89,10 +89,10 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
         businessTrip.setStartDate(dto.startDate());
         businessTrip.setEndDate(dto.endDate());
         businessTrip.setDays((int) ChronoUnit.DAYS.between(dto.startDate(), dto.endDate()));
-        dto.orders().forEach(order-> businessTrip.addOrder(orderMapperService.toEntity(order)));
-        dto.expenses().forEach(expense-> businessTrip.addExpense(expenseMapperService.toEntity(expense)));
-        dto.locations().forEach(location-> businessTrip.addLocation(locationMapperService.toEntity(location)));
-        dto.files().forEach(file-> businessTrip.addResource(resourceMapperService.toEntity(file,null)));
-      return businessTrip;
+        dto.orders().forEach(order -> businessTrip.addOrder(orderMapperService.toEntity(order)));
+        dto.expenses().forEach(expense -> businessTrip.addExpense(expenseMapperService.toEntity(expense)));
+        dto.locations().forEach(location -> businessTrip.addLocation(locationMapperService.toEntity(location)));
+        dto.files().forEach(file -> businessTrip.addResource(resourceMapperService.toEntity(file, null)));
+        return businessTrip;
     }
 }

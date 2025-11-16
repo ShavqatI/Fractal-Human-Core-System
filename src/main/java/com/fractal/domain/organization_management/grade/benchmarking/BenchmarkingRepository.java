@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 interface BenchmarkingRepository extends JpaRepository<Benchmarking, Long> {
     List<Benchmarking> findAllByGradeId(Long gradeId);
+
     Optional<Benchmarking> findByGradeIdAndId(Long gradeId, Long id);
 }

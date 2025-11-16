@@ -18,16 +18,17 @@ public class HayFactorTypeChildController {
 
     @PostMapping()
     public ResponseEntity<HayFactorTypeResponse> create(@PathVariable Long factorTypeId, @RequestBody @Valid HayFactorTypeRequest dto) {
-        return new ResponseEntity<>(factorTypeService.toDTO(factorTypeService.addChild(factorTypeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(factorTypeService.toDTO(factorTypeService.addChild(factorTypeId, dto)), HttpStatus.CREATED);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<HayFactorTypeResponse> update(@PathVariable Long factorTypeId, @PathVariable Long id, @RequestBody @Valid HayFactorTypeRequest dto) {
-        return ResponseEntity.ok(factorTypeService.toDTO(factorTypeService.updateChild(factorTypeId,id, dto)));
+        return ResponseEntity.ok(factorTypeService.toDTO(factorTypeService.updateChild(factorTypeId, id, dto)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long factorTypeId, @PathVariable Long id) {
-        factorTypeService.deleteChild(factorTypeId,id);
+        factorTypeService.deleteChild(factorTypeId, id);
         return ResponseEntity.noContent().build();
     }
 }

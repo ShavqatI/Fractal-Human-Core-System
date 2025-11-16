@@ -35,12 +35,12 @@ class OfflineLearningLocationServiceImpl implements OfflineLearningLocationServi
 
     @Override
     public OfflineLearningLocation getById(Long sessionId, Long id) {
-        return locationRepository.findByLearningSessionIdAndId(sessionId,id).orElseThrow(()->new ResourceWithIdNotFoundException(this,id));
+        return locationRepository.findByLearningSessionIdAndId(sessionId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
     public OfflineLearningLocation getById(Long id) {
-        return locationRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return locationRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -53,8 +53,8 @@ class OfflineLearningLocationServiceImpl implements OfflineLearningLocationServi
         var session = learningSessionService.getById(sessionId);
         var location = (OfflineLearningLocation) session.getLocations()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        location = mapperService.toEntity( location,dto);
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        location = mapperService.toEntity(location, dto);
         locationRepository.save(location);
         learningSessionService.save(session);
         return location;
@@ -65,7 +65,7 @@ class OfflineLearningLocationServiceImpl implements OfflineLearningLocationServi
         var session = learningSessionService.getById(sessionId);
         var location = (OfflineLearningLocation) session.getLocations()
                 .stream()
-                .filter(m-> m.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+                .filter(m -> m.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
         session.removeLocation(location);
         learningSessionService.save(session);
     }
@@ -74,8 +74,7 @@ class OfflineLearningLocationServiceImpl implements OfflineLearningLocationServi
     public OfflineLearningLocation save(OfflineLearningLocation location) {
         try {
             return locationRepository.save(location);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }

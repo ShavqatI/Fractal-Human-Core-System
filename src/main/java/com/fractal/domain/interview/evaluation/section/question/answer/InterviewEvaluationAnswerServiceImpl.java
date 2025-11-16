@@ -27,7 +27,7 @@ class InterviewEvaluationAnswerServiceImpl implements InterviewEvaluationAnswerS
         var answer = mapperService.toEntity(dto);
         question.addAnswer(answer);
         questionService.save(question);
-       return answer;
+        return answer;
     }
 
     @Override
@@ -37,9 +37,8 @@ class InterviewEvaluationAnswerServiceImpl implements InterviewEvaluationAnswerS
 
     @Override
     public InterviewEvaluationAnswer getById(Long questionId, Long id) {
-        return answerRepository.findByInterviewEvaluationQuestionIdAndId(questionId,id).orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Answer with id: " + id + " not found"));
+        return answerRepository.findByInterviewEvaluationQuestionIdAndId(questionId, id).orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation Answer with id: " + id + " not found"));
     }
-
 
 
     @Override
@@ -48,8 +47,8 @@ class InterviewEvaluationAnswerServiceImpl implements InterviewEvaluationAnswerS
         var question = questionService.getById(questionId);
         var answer = question.getAnswers()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Interview Evaluation Answer with id: " + id + " not found"));
-        answer = answerRepository.save(mapperService.toEntity(answer,dto));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Interview Evaluation Answer with id: " + id + " not found"));
+        answer = answerRepository.save(mapperService.toEntity(answer, dto));
         questionService.save(question);
         return answer;
     }
@@ -60,7 +59,7 @@ class InterviewEvaluationAnswerServiceImpl implements InterviewEvaluationAnswerS
         var question = questionService.getById(employeeId);
         var answer = question.getAnswers()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Education with id: " + id + " not found"));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Education with id: " + id + " not found"));
         question.removeAnswer(answer);
         questionService.save(question);
     }

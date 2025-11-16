@@ -1,7 +1,6 @@
 package com.fractal.controller.employment;
 
 
-
 import com.fractal.domain.employment.type.EmploymentTypeService;
 import com.fractal.domain.employment.type.dto.EmploymentTypeRequest;
 import com.fractal.domain.employment.type.dto.EmploymentTypeResponse;
@@ -20,26 +19,32 @@ import java.util.stream.Collectors;
 public class EmploymentTypeController {
 
     private final EmploymentTypeService employmentTypeService;
+
     @PostMapping
     public ResponseEntity<EmploymentTypeResponse> create(@RequestBody @Valid EmploymentTypeRequest dto) {
         return new ResponseEntity<>(employmentTypeService.toDTO(employmentTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<EmploymentTypeResponse>> getAll() {
         return ResponseEntity.ok(employmentTypeService.getAll().stream().map(employmentTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<EmploymentTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(employmentTypeService.toDTO(employmentTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<EmploymentTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(employmentTypeService.toDTO(employmentTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<EmploymentTypeResponse> update(@PathVariable Long id, @RequestBody @Valid EmploymentTypeRequest dto) {
-      return  ResponseEntity.ok(employmentTypeService.toDTO(employmentTypeService.update(id, dto)));
+        return ResponseEntity.ok(employmentTypeService.toDTO(employmentTypeService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         employmentTypeService.deleteById(id);

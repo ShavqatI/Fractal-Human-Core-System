@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface CurrencyRepository extends JpaRepository<Currency,Long> {
+interface CurrencyRepository extends JpaRepository<Currency, Long> {
     Optional<Currency> findById(Long id);
+
     Optional<Currency> findByCode(String code);
+
     List<Currency> findAll();
 }

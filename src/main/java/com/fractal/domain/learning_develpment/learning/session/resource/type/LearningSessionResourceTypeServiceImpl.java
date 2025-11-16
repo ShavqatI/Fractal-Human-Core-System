@@ -14,9 +14,10 @@ import java.util.List;
 class LearningSessionResourceTypeServiceImpl implements LearningSessionResourceTypeService {
 
     private final LearningSessionResourceTypeRepository learningSessionResourceTypeRepository;
+
     @Override
     public LearningSessionResourceType create(LearningSessionResourceTypeRequest dto) {
-       return save(toEntity(dto));
+        return save(toEntity(dto));
     }
 
     @Override
@@ -26,8 +27,7 @@ class LearningSessionResourceTypeServiceImpl implements LearningSessionResourceT
             learningSessionResourceType.setCode(dto.code());
             learningSessionResourceType.setName(dto.name());
             return save(learningSessionResourceType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -40,7 +40,7 @@ class LearningSessionResourceTypeServiceImpl implements LearningSessionResourceT
 
     @Override
     public LearningSessionResourceType getByCode(String code) {
-        return learningSessionResourceTypeRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
+        return learningSessionResourceTypeRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Address Type with code: " + code + " not found"));
     }
 
     @Override
@@ -50,7 +50,7 @@ class LearningSessionResourceTypeServiceImpl implements LearningSessionResourceT
 
     @Override
     public void deleteById(Long id) {
-       learningSessionResourceTypeRepository.delete(findById(id));
+        learningSessionResourceTypeRepository.delete(findById(id));
     }
 
     @Override
@@ -62,6 +62,7 @@ class LearningSessionResourceTypeServiceImpl implements LearningSessionResourceT
                 learningSessionResourceType.getCreatedDate()
         );
     }
+
     private LearningSessionResourceType toEntity(LearningSessionResourceTypeRequest dto) {
         return LearningSessionResourceType.builder()
                 .code(dto.code())
@@ -72,14 +73,13 @@ class LearningSessionResourceTypeServiceImpl implements LearningSessionResourceT
     private LearningSessionResourceType save(LearningSessionResourceType learningSessionResourceType) {
         try {
             return learningSessionResourceTypeRepository.save(learningSessionResourceType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private LearningSessionResourceType findById(Long id) {
-        return learningSessionResourceTypeRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
+        return learningSessionResourceTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Address Type with id: " + id + " not found"));
     }
 
 }

@@ -19,26 +19,32 @@ import java.util.stream.Collectors;
 public class BusinessTripTypeController {
 
     private final BusinessTripTypeService businessTripTypeService;
+
     @PostMapping
     public ResponseEntity<BusinessTripTypeResponse> create(@RequestBody @Valid BusinessTripTypeRequest dto) {
         return new ResponseEntity<>(businessTripTypeService.toDTO(businessTripTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<BusinessTripTypeResponse>> getAll() {
         return ResponseEntity.ok(businessTripTypeService.getAll().stream().map(businessTripTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<BusinessTripTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(businessTripTypeService.toDTO(businessTripTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<BusinessTripTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(businessTripTypeService.toDTO(businessTripTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<BusinessTripTypeResponse> update(@PathVariable Long id, @RequestBody @Valid BusinessTripTypeRequest dto) {
-      return  ResponseEntity.ok(businessTripTypeService.toDTO(businessTripTypeService.update(id, dto)));
+        return ResponseEntity.ok(businessTripTypeService.toDTO(businessTripTypeService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         businessTripTypeService.deleteById(id);

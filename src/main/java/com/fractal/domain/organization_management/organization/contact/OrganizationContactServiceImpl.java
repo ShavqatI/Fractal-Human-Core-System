@@ -38,7 +38,7 @@ public class OrganizationContactServiceImpl implements OrganizationContactServic
 
     @Override
     public OrganizationContact getById(Long organizationId, Long id) {
-        return contactRepository.findByOrganizationIdAndId(organizationId,id).orElseThrow(()-> new ResourceNotFoundException("Organization contact with id: " + id + " not found"));
+        return contactRepository.findByOrganizationIdAndId(organizationId, id).orElseThrow(() -> new ResourceNotFoundException("Organization contact with id: " + id + " not found"));
     }
 
     @Override
@@ -47,8 +47,8 @@ public class OrganizationContactServiceImpl implements OrganizationContactServic
         var organization = organizationService.getById(organizationId);
         var contact = organization.getContacts()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization contact with id: " + id + " not found"));
-        contact = contactRepository.save(contactMapperService.toEntity(contact,dto));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Organization contact with id: " + id + " not found"));
+        contact = contactRepository.save(contactMapperService.toEntity(contact, dto));
         organizationService.save(organization);
         return contact;
     }
@@ -58,7 +58,7 @@ public class OrganizationContactServiceImpl implements OrganizationContactServic
         var organization = organizationService.getById(organizationId);
         var contact = organization.getContacts()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization contact with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Organization contact with id: " + id + " not found"));
         organization.removeContact(contact);
         organizationService.save(organization);
     }

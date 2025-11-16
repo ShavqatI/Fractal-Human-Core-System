@@ -15,4 +15,5 @@ public record InterviewEvaluationQuestionResponse(
         Integer maxSelectableOptions,
         StatusCompactResponse status,
         LocalDateTime createdDate
-) {}
+) {
+}

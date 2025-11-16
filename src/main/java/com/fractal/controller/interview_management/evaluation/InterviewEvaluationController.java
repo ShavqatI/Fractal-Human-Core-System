@@ -19,14 +19,17 @@ import java.util.stream.Collectors;
 public class InterviewEvaluationController {
 
     private final InterviewEvaluationService evaluationService;
+
     @PostMapping
     public ResponseEntity<InterviewEvaluationResponse> create(@RequestBody @Valid InterviewEvaluationRequest dto) {
         return new ResponseEntity<>(evaluationService.toDTO(evaluationService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<InterviewEvaluationResponse>> getAll() {
         return ResponseEntity.ok(evaluationService.getAll().stream().map(evaluationService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<InterviewEvaluationResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(evaluationService.toDTO(evaluationService.getById(id)));
@@ -34,10 +37,11 @@ public class InterviewEvaluationController {
 
     @PutMapping("/{id}")
     public ResponseEntity<InterviewEvaluationResponse> update(@PathVariable Long id, @RequestBody @Valid InterviewEvaluationRequest dto) {
-      return  ResponseEntity.ok(evaluationService.toDTO(evaluationService.update(id, dto)));
+        return ResponseEntity.ok(evaluationService.toDTO(evaluationService.update(id, dto)));
 
 
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         evaluationService.deleteById(id);

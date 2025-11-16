@@ -22,24 +22,27 @@ public class InterviewEvaluationQuestionController {
 
     @PostMapping()
     public ResponseEntity<InterviewEvaluationQuestionResponse> create(@PathVariable Long sectionId, @RequestBody @Valid InterviewEvaluationQuestionRequest dto) {
-        return new ResponseEntity<>(questionService.toDTO(questionService.create(sectionId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(questionService.toDTO(questionService.create(sectionId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<InterviewEvaluationQuestionResponse>> getAll(@PathVariable Long sectionId) {
         return ResponseEntity.ok(questionService.getAllBySectionId(sectionId).stream().map(questionService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<InterviewEvaluationQuestionResponse> getById(@PathVariable Long sectionId, @PathVariable Long id) {
-        return ResponseEntity.ok(questionService.toDTO(questionService.getById(sectionId,id)));
+        return ResponseEntity.ok(questionService.toDTO(questionService.getById(sectionId, id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<InterviewEvaluationQuestionResponse> update(@PathVariable Long sectionId, @PathVariable Long id, @RequestBody @Valid InterviewEvaluationQuestionRequest dto) {
-        return ResponseEntity.ok(questionService.toDTO(questionService.update(sectionId,id, dto)));
+        return ResponseEntity.ok(questionService.toDTO(questionService.update(sectionId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long sectionId, @PathVariable Long id) {
-        questionService.delete(sectionId,id);
+        questionService.delete(sectionId, id);
         return ResponseEntity.noContent().build();
     }
 

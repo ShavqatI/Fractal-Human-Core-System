@@ -41,12 +41,12 @@ class UserMapperServiceImpl implements UserMapperService {
 
     @Override
     public User toEntity(UserRequest dto) {
-        return mapToEntity(new User(),dto);
+        return mapToEntity(new User(), dto);
     }
 
     @Override
     public User toEntity(User user, UserRequest dto) {
-       return mapToEntity(user,dto);
+        return mapToEntity(user, dto);
     }
 
     private User mapToEntity(User user, UserRequest dto) {
@@ -56,7 +56,7 @@ class UserMapperServiceImpl implements UserMapperService {
         user.setAccountNonLocked(true);
         user.setCredentialsNonExpired(true);
         user.setEnabled(true);
-        dto.userRoles().forEach(userRole-> user.addRole(userRoleMapperService.toEntity(userRole)));
+        dto.userRoles().forEach(userRole -> user.addRole(userRoleMapperService.toEntity(userRole)));
         return user;
     }
 

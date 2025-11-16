@@ -26,4 +26,5 @@ public record OfflineLearningLocationAddressResponse(
         Double longitude,
         LocalDateTime createdDate,
         LocalDateTime updatedDate
-) { }
+) {
+}

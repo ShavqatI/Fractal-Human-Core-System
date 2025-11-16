@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface OrganizationWorkScheduleRepository extends JpaRepository<OrganizationWorkSchedule,Long> {
+public interface OrganizationWorkScheduleRepository extends JpaRepository<OrganizationWorkSchedule, Long> {
     List<OrganizationWorkSchedule> findAllByOrganizationId(Long organizationId);
+
     Optional<OrganizationWorkSchedule> findByOrganizationIdAndId(Long organizationId, Long id);
 }

@@ -22,14 +22,15 @@ class InterviewEvaluationAnswerMapperServiceImpl implements InterviewEvaluationA
                 answer.getCreatedDate()
         );
     }
+
     @Override
     public InterviewEvaluationAnswer toEntity(InterviewEvaluationAnswerRequest dto) {
-        return mapToEntity(new InterviewEvaluationAnswer(),dto);
+        return mapToEntity(new InterviewEvaluationAnswer(), dto);
     }
 
     @Override
     public InterviewEvaluationAnswer toEntity(InterviewEvaluationAnswer answer, InterviewEvaluationAnswerRequest dto) {
-       return mapToEntity(answer,dto);
+        return mapToEntity(answer, dto);
     }
 
     private InterviewEvaluationAnswer mapToEntity(InterviewEvaluationAnswer answer, InterviewEvaluationAnswerRequest dto) {

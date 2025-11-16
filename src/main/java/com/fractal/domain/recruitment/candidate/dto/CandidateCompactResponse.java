@@ -13,5 +13,5 @@ public record CandidateCompactResponse(
         String gender,
         String maritalStatus,
         String nationality
-)
-{ }
+) {
+}

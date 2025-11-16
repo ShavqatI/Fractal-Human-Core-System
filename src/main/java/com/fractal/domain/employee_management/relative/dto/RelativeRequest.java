@@ -20,6 +20,6 @@ public record RelativeRequest(
         List<RelativeAddressRequest> addresses,
         List<ContactRequest> contacts
 
-){
+) {
 
 }

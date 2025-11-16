@@ -6,7 +6,9 @@ import com.fractal.domain.authorization.user.dto.UserResponse;
 
 public interface UserMapperService {
     UserResponse toDTO(User user);
+
     User toEntity(UserRequest dto);
+
     User toEntity(User user, UserRequest dto);
 }
 

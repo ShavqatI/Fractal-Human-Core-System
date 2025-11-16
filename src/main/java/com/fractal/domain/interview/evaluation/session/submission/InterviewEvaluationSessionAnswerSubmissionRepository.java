@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface InterviewEvaluationSessionAnswerSubmissionRepository extends JpaRepository<InterviewEvaluationSessionAnswerSubmission,Long> {
+interface InterviewEvaluationSessionAnswerSubmissionRepository extends JpaRepository<InterviewEvaluationSessionAnswerSubmission, Long> {
 
     Optional<InterviewEvaluationSessionAnswerSubmission> findByInterviewEvaluationSessionIdAndId(Long evaluationSessionId, Long id);
 

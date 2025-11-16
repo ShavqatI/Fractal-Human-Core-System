@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class AccreditationStatusServiceImpl implements AccreditationStatusService {
@@ -26,7 +27,7 @@ class AccreditationStatusServiceImpl implements AccreditationStatusService {
 
     @Override
     public AccreditationStatus getByCode(String code) {
-        return accreditationStatusRepository.findByCode(code).orElseThrow(()-> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
+        return accreditationStatusRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Employment Type with code: " + code + " not found"));
     }
 
     @Override
@@ -41,15 +42,14 @@ class AccreditationStatusServiceImpl implements AccreditationStatusService {
             educationDocumentType.setCode(dto.code());
             educationDocumentType.setName(dto.name());
             return save(educationDocumentType);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      accreditationStatusRepository.delete(findById(id));
+        accreditationStatusRepository.delete(findById(id));
     }
 
     @Override
@@ -72,14 +72,13 @@ class AccreditationStatusServiceImpl implements AccreditationStatusService {
     private AccreditationStatus save(AccreditationStatus accreditationStatus) {
         try {
             return accreditationStatusRepository.save(accreditationStatus);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private AccreditationStatus findById(Long id) {
-        return accreditationStatusRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Accreditation Status with id: " + id + " not found"));
+        return accreditationStatusRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Accreditation Status with id: " + id + " not found"));
     }
 
 }

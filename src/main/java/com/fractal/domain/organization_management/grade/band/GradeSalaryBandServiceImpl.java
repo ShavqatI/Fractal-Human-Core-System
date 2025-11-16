@@ -31,7 +31,6 @@ public class GradeSalaryBandServiceImpl implements GradeSalaryBandService {
     }
 
 
-
     @Override
     public List<GradeSalaryBand> getAllByGradeId(Long gradeId) {
         return gradeSalaryBandRepository.findAllByGradeId(gradeId);
@@ -39,7 +38,7 @@ public class GradeSalaryBandServiceImpl implements GradeSalaryBandService {
 
     @Override
     public GradeSalaryBand getById(Long gradeId, Long id) {
-        return gradeSalaryBandRepository.findByGradeIdAndId(gradeId,id).orElseThrow(()-> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
+        return gradeSalaryBandRepository.findByGradeIdAndId(gradeId, id).orElseThrow(() -> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
     }
 
     @Override
@@ -48,8 +47,8 @@ public class GradeSalaryBandServiceImpl implements GradeSalaryBandService {
         var grade = gradeService.getById(gradeId);
         var salaryBand = grade.getSalaryBands()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
-        salaryBand = gradeSalaryBandRepository.save(mapperService.toEntity(salaryBand,dto));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
+        salaryBand = gradeSalaryBandRepository.save(mapperService.toEntity(salaryBand, dto));
         gradeService.save(grade);
         return salaryBand;
     }
@@ -59,7 +58,7 @@ public class GradeSalaryBandServiceImpl implements GradeSalaryBandService {
         var grade = gradeService.getById(gradeId);
         var salaryBand = grade.getSalaryBands()
                 .stream()
-                .filter(a-> a.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
+                .filter(a -> a.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Grade step with id: " + id + " not found"));
         grade.removeSalaryBand(salaryBand);
         gradeService.save(grade);
     }

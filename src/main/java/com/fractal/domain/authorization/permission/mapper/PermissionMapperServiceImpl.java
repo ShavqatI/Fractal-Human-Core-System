@@ -31,15 +31,15 @@ class PermissionMapperServiceImpl implements PermissionMapperService {
 
     @Override
     public Permission toEntity(PermissionRequest dto) {
-        return mapToEntity(new Permission(),dto);
+        return mapToEntity(new Permission(), dto);
     }
 
     @Override
     public Permission toEntity(Permission permission, PermissionRequest dto) {
-        return mapToEntity(permission,dto);
+        return mapToEntity(permission, dto);
     }
 
-    private Permission mapToEntity(Permission permission,PermissionRequest dto) {
+    private Permission mapToEntity(Permission permission, PermissionRequest dto) {
         permission.setRole(roleService.getById(dto.roleId()));
         permission.setMenuAction(menuActionService.getById(dto.menuActionId()));
         permission.setStatus(statusService.getById(dto.statusId()));

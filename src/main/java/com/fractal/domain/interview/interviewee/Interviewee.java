@@ -21,7 +21,7 @@ import java.time.LocalDateTime;
 public class Interviewee extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "interview_id",referencedColumnName = "id")
+    @JoinColumn(name = "interview_id", referencedColumnName = "id")
     private Interview interview;
 
     @Column(name = "scheduled_time", nullable = false)

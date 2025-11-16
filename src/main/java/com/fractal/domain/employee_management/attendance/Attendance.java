@@ -32,7 +32,7 @@ public class Attendance extends AbstractEntity {
     private Status status;
 
     @Column(name = "start_time")
-    private LocalTime startTime ;
+    private LocalTime startTime;
 
     @Column(name = "end_time")
     private LocalTime endTime;

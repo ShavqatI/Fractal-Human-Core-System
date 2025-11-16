@@ -30,16 +30,14 @@ class LearningSessionResourceMapperServiceImpl implements LearningSessionResourc
 
     @Override
     public LearningSessionResource toEntity(LearningSessionResourceRequest dto, String resourceStoragePath) {
-        return mapToEntity(new LearningSessionResource(),dto,resourceStoragePath);
+        return mapToEntity(new LearningSessionResource(), dto, resourceStoragePath);
     }
-
 
 
     @Override
     public LearningSessionResource toEntity(LearningSessionResource resource, LearningSessionResourceRequest dto, String resourceStoragePath) {
-        return mapToEntity(resource,dto,resourceStoragePath);
+        return mapToEntity(resource, dto, resourceStoragePath);
     }
-
 
 
     private LearningSessionResource mapToEntity(LearningSessionResource resource, LearningSessionResourceRequest dto, String resourceStoragePath) {

@@ -38,12 +38,12 @@ public class BusinessTripExpenseServiceImpl implements BusinessTripExpenseServic
 
     @Override
     public BusinessTripExpense getById(Long businessTripId, Long id) {
-        return expenseRepository.findByBusinessTripIdAndId(businessTripId,id).orElseThrow(()-> new ResourceNotFoundException("Business Trip Expense with id:" + id + " not found"));
+        return expenseRepository.findByBusinessTripIdAndId(businessTripId, id).orElseThrow(() -> new ResourceNotFoundException("Business Trip Expense with id:" + id + " not found"));
     }
 
     @Override
     public BusinessTripExpense getById(Long id) {
-        return expenseRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("EBusiness Trip Expense with id:" + id + " not found"));
+        return expenseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("EBusiness Trip Expense with id:" + id + " not found"));
     }
 
     @Override
@@ -52,8 +52,8 @@ public class BusinessTripExpenseServiceImpl implements BusinessTripExpenseServic
         var businessTrip = businessTripService.getById(businessTripId);
         var expense = businessTrip.getExpenses()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Business Trip Expense with id: " + id + " not found"));
-        expense = expenseMapperService.toEntity(expense,dto);
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Business Trip Expense with id: " + id + " not found"));
+        expense = expenseMapperService.toEntity(expense, dto);
         businessTripService.save(businessTrip);
         return expense;
     }
@@ -64,7 +64,7 @@ public class BusinessTripExpenseServiceImpl implements BusinessTripExpenseServic
         var businessTrip = businessTripService.getById(businessTripId);
         var expense = businessTrip.getExpenses()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("EBusiness Trip Expense with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("EBusiness Trip Expense with id: " + id + " not found"));
         businessTrip.removeExpense(expense);
         businessTripService.save(businessTrip);
     }
@@ -78,8 +78,7 @@ public class BusinessTripExpenseServiceImpl implements BusinessTripExpenseServic
     public BusinessTripExpense save(BusinessTripExpense expense) {
         try {
             return expenseRepository.save(expense);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }

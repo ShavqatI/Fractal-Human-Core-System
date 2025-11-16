@@ -49,21 +49,21 @@ class MenuMapperServiceImpl implements MenuMapperService {
 
     @Override
     public MenuCompactResponse toCompactDTO(Menu menu) {
-         return new MenuCompactResponse(
+        return new MenuCompactResponse(
                 menu.getId(),
                 menu.getName(),
                 menu.getUrl()
-         );
+        );
     }
 
     @Override
     public Menu toEntity(MenuRequest dto) {
-        return mapToEntity( new Menu(),dto);
+        return mapToEntity(new Menu(), dto);
     }
 
     @Override
     public Menu toEntity(Menu menu, MenuRequest dto) {
-        return mapToEntity( menu,dto);
+        return mapToEntity(menu, dto);
     }
 
     private Menu mapToEntity(Menu menu, MenuRequest dto) {
@@ -73,8 +73,8 @@ class MenuMapperServiceImpl implements MenuMapperService {
         menu.setIcon(dto.icon());
         menu.setLayoutLabel(layoutLabelService.getById(dto.layoutLabelId()));
         menu.setSequence(dto.sequence());
-        dto.children().forEach(child->menu.addChild(toEntity(child)));
-        dto.actions().forEach(action->menu.addAction(menuActionMapperService.toEntity(action)));
+        dto.children().forEach(child -> menu.addChild(toEntity(child)));
+        dto.actions().forEach(action -> menu.addAction(menuActionMapperService.toEntity(action)));
         return menu;
     }
 }

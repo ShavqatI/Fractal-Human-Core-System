@@ -10,4 +10,5 @@ public record InterviewEvaluationSessionRequest(
         LocalDateTime endDate,
         List<InterviewEvaluationSessionAnswerSubmissionRequest> submissions,
         Long statusId
-) {}
+) {
+}

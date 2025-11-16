@@ -19,26 +19,32 @@ import java.util.stream.Collectors;
 public class RelationTypeController {
 
     private final RelationTypeService relationTypeService;
+
     @PostMapping
     public ResponseEntity<RelationTypeResponse> create(@RequestBody @Valid RelationTypeRequest dto) {
         return new ResponseEntity<>(relationTypeService.toDTO(relationTypeService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<RelationTypeResponse>> getAll() {
         return ResponseEntity.ok(relationTypeService.getAll().stream().map(relationTypeService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<RelationTypeResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(relationTypeService.toDTO(relationTypeService.getById(id)));
     }
+
     @GetMapping("/code/{code}")
     public ResponseEntity<RelationTypeResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(relationTypeService.toDTO(relationTypeService.getByCode(code)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<RelationTypeResponse> update(@PathVariable Long id, @RequestBody @Valid RelationTypeRequest dto) {
-      return  ResponseEntity.ok(relationTypeService.toDTO(relationTypeService.update(id, dto)));
+        return ResponseEntity.ok(relationTypeService.toDTO(relationTypeService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         relationTypeService.deleteById(id);

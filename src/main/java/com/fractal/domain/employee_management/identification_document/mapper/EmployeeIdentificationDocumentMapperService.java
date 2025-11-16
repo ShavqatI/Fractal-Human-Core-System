@@ -8,9 +8,13 @@ import com.fractal.domain.identification_document.dto.IdentificationDocumentResp
 
 public interface EmployeeIdentificationDocumentMapperService {
     IdentificationDocumentResponse toDTO(EmployeeIdentificationDocument identificationDocument);
+
     EmployeeIdentificationDocument toEntity(IdentificationDocumentRequest dto);
+
     EmployeeIdentificationDocument toEntity(EmployeeIdentificationDocument identificationDocument, IdentificationDocumentRequest dto);
+
     EmployeeIdentificationDocument convert(EmployeeIdentificationDocument employeeIdentificationDocument, IdentificationDocument identificationDocument);
+
     EmployeeIdentificationDocument copy(IdentificationDocument identificationDocument);
 }
 

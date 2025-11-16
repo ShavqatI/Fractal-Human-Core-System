@@ -21,12 +21,12 @@ class CandidateMilitaryServiceMapperServiceImpl implements CandidateMilitaryServ
 
     @Override
     public CandidateMilitaryService toEntity(MilitaryServiceRequest dto) {
-        return convert(new CandidateMilitaryService(),mapperService.toEntity(dto));
+        return convert(new CandidateMilitaryService(), mapperService.toEntity(dto));
     }
 
     @Override
     public CandidateMilitaryService toEntity(CandidateMilitaryService militaryService, MilitaryServiceRequest dto) {
-        return convert(militaryService,mapperService.toEntity(militaryService,dto));
+        return convert(militaryService, mapperService.toEntity(militaryService, dto));
     }
 
     private CandidateMilitaryService convert(CandidateMilitaryService candidateMilitaryService, MilitaryService militaryService) {

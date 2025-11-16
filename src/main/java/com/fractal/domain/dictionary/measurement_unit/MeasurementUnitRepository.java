@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface MeasurementUnitRepository extends JpaRepository<MeasurementUnit,Long> {
+interface MeasurementUnitRepository extends JpaRepository<MeasurementUnit, Long> {
     Optional<MeasurementUnit> findById(Long id);
+
     Optional<MeasurementUnit> findByCode(String code);
+
     List<MeasurementUnit> findAll();
 }

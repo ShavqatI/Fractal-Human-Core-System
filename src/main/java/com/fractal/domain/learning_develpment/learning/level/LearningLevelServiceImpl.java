@@ -9,6 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 class LearningLevelServiceImpl implements LearningLevelService {
@@ -27,7 +28,7 @@ class LearningLevelServiceImpl implements LearningLevelService {
 
     @Override
     public LearningLevel getByCode(String code) {
-        return learningLevelRepository.findByCode(code).orElseThrow(()-> new ResourceWithCodeNotFoundException(this,code));
+        return learningLevelRepository.findByCode(code).orElseThrow(() -> new ResourceWithCodeNotFoundException(this, code));
     }
 
     @Override
@@ -42,15 +43,14 @@ class LearningLevelServiceImpl implements LearningLevelService {
             learningLevel.setCode(dto.code());
             learningLevel.setName(dto.name());
             return save(learningLevel);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-      learningLevelRepository.delete(findById(id));
+        learningLevelRepository.delete(findById(id));
     }
 
     @Override
@@ -73,14 +73,13 @@ class LearningLevelServiceImpl implements LearningLevelService {
     private LearningLevel save(LearningLevel learningLevel) {
         try {
             return learningLevelRepository.save(learningLevel);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private LearningLevel findById(Long id) {
-        return learningLevelRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return learningLevelRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
 }

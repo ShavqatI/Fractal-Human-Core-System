@@ -29,4 +29,5 @@ public record RelativeAddressResponse(
         LocalDateTime createdDate,
         LocalDateTime updatedDate
 
-) { }
+) {
+}

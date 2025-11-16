@@ -33,11 +33,11 @@ public class LearningSession extends ApprovalWorkflow {
     protected Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "learning_id",referencedColumnName = "id")
+    @JoinColumn(name = "learning_id", referencedColumnName = "id")
     protected Learning learning;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "learning_delivery_mode_id",referencedColumnName = "id")
+    @JoinColumn(name = "learning_delivery_mode_id", referencedColumnName = "id")
     protected LearningDeliveryMode deliveryMode;
 
     protected LocalDateTime startTime;
@@ -47,19 +47,19 @@ public class LearningSession extends ApprovalWorkflow {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     protected Status status;
 
-    @OneToMany(mappedBy = "learningSession", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "learningSession", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<InstructorAssignment> instructorAssignments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "learningSession", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "learningSession", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<LearningSessionEnrollment> enrollments = new ArrayList<>();
 
-    @OneToMany(mappedBy = "learningSession", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "learningSession", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     public List<LearningSessionResource> resources = new ArrayList<>();
 
-    @OneToMany(mappedBy = "learningSession", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "learningSession", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<LearningSessionExpense> expenses = new ArrayList<>();
 
-    @OneToMany(mappedBy = "learningSession", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "learningSession", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<LearningLocation> locations = new ArrayList<>();
 
     public void addInstructorAssignment(InstructorAssignment instructorAssignment) {
@@ -67,6 +67,7 @@ public class LearningSession extends ApprovalWorkflow {
         instructorAssignment.setLearningSession(this);
         instructorAssignments.add(instructorAssignment);
     }
+
     public void removeInstructorAssignment(InstructorAssignment instructorAssignment) {
         if (instructorAssignments != null && !instructorAssignments.isEmpty())
             instructorAssignments.remove(instructorAssignment);
@@ -77,6 +78,7 @@ public class LearningSession extends ApprovalWorkflow {
         enrollment.setLearningSession(this);
         enrollments.add(enrollment);
     }
+
     public void removeEnrollment(LearningSessionEnrollment enrollment) {
         if (enrollments != null && !enrollments.isEmpty())
             enrollments.remove(enrollment);
@@ -87,6 +89,7 @@ public class LearningSession extends ApprovalWorkflow {
         resource.setLearningSession(this);
         resources.add(resource);
     }
+
     public void removeResource(LearningSessionResource resource) {
         if (resources != null && !resources.isEmpty())
             resources.remove(resource);
@@ -97,6 +100,7 @@ public class LearningSession extends ApprovalWorkflow {
         expense.setLearningSession(this);
         expenses.add(expense);
     }
+
     public void removeExpense(LearningSessionExpense expense) {
         if (expenses != null && !expenses.isEmpty())
             expenses.remove(expense);
@@ -107,6 +111,7 @@ public class LearningSession extends ApprovalWorkflow {
         location.setLearningSession(this);
         locations.add(location);
     }
+
     public void removeLocation(LearningLocation location) {
         if (locations != null && !locations.isEmpty())
             locations.remove(location);

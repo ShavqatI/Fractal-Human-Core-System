@@ -6,7 +6,9 @@ import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRespo
 
 public interface VacationScheduleMapperService {
     VacationScheduleResponse toDTO(VacationSchedule vacationSchedule);
+
     VacationSchedule toEntity(VacationScheduleRequest dto);
+
     VacationSchedule toEntity(VacationSchedule vacationSchedule, VacationScheduleRequest dto);
 }
 

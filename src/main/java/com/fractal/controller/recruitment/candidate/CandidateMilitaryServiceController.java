@@ -22,23 +22,27 @@ public class CandidateMilitaryServiceController {
 
     @PostMapping()
     public ResponseEntity<MilitaryServiceResponse> create(@PathVariable Long candidateId, @RequestBody @Valid MilitaryServiceRequest dto) {
-        return new ResponseEntity<>(militaryServiceService.toDTO(militaryServiceService.create(candidateId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(militaryServiceService.toDTO(militaryServiceService.create(candidateId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<MilitaryServiceResponse>> getAll(@PathVariable Long candidateId) {
         return ResponseEntity.ok(militaryServiceService.getAllByCandidateId(candidateId).stream().map(militaryServiceService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<MilitaryServiceResponse> getById(@PathVariable Long candidateId, @PathVariable Long id) {
-        return ResponseEntity.ok(militaryServiceService.toDTO(militaryServiceService.getById(candidateId,id)));
+        return ResponseEntity.ok(militaryServiceService.toDTO(militaryServiceService.getById(candidateId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<MilitaryServiceResponse> update(@PathVariable Long candidateId, @PathVariable Long id, @RequestBody @Valid MilitaryServiceRequest dto) {
-        return ResponseEntity.ok(militaryServiceService.toDTO(militaryServiceService.update(candidateId,id, dto)));
+        return ResponseEntity.ok(militaryServiceService.toDTO(militaryServiceService.update(candidateId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long candidateId, @PathVariable Long id) {
-        militaryServiceService.delete(candidateId,id);
+        militaryServiceService.delete(candidateId, id);
         return ResponseEntity.noContent().build();
     }
 

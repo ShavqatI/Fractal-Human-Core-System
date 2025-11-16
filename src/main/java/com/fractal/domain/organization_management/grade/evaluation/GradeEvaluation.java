@@ -22,6 +22,6 @@ public class GradeEvaluation extends AbstractEntity {
     private Grade grade;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name ="grading_evaluation_id", referencedColumnName = "id")
+    @JoinColumn(name = "grading_evaluation_id", referencedColumnName = "id")
     private GradingEvaluation evaluation;
 }

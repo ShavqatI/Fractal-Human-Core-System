@@ -22,26 +22,29 @@ public class VacationAccrualPeriodController {
 
     @PostMapping()
     public ResponseEntity<VacationAccrualPeriodResponse> create(@PathVariable Long accrualId, @RequestBody @Valid VacationAccrualPeriodRequest dto) {
-        return new ResponseEntity<>(periodService.toDTO(periodService.create(accrualId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(periodService.toDTO(periodService.create(accrualId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<VacationAccrualPeriodResponse>> getAll(@PathVariable Long accrualId) {
         return ResponseEntity.ok(periodService.getAllByVacationAccrualId(accrualId).stream().map(periodService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<VacationAccrualPeriodResponse> getById(@PathVariable Long accrualId, @PathVariable Long id) {
-        return ResponseEntity.ok(periodService.toDTO(periodService.getById(accrualId,id)));
-    }
-    @PutMapping("/{id}")
-    public ResponseEntity<VacationAccrualPeriodResponse> update(@PathVariable Long accrualId, @PathVariable Long id, @RequestBody @Valid VacationAccrualPeriodRequest dto) {
-        return ResponseEntity.ok(periodService.toDTO(periodService.update(accrualId,id, dto)));
-    }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long accrualId, @PathVariable Long id) {
-        periodService.delete(accrualId,id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(periodService.toDTO(periodService.getById(accrualId, id)));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<VacationAccrualPeriodResponse> update(@PathVariable Long accrualId, @PathVariable Long id, @RequestBody @Valid VacationAccrualPeriodRequest dto) {
+        return ResponseEntity.ok(periodService.toDTO(periodService.update(accrualId, id, dto)));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long accrualId, @PathVariable Long id) {
+        periodService.delete(accrualId, id);
+        return ResponseEntity.noContent().build();
+    }
 
 
 }

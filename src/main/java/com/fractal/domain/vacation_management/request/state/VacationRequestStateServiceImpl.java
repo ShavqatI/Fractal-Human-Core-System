@@ -15,6 +15,7 @@ class VacationRequestStateServiceImpl implements VacationRequestStateService {
 
     private final VacationRequestStateRepository stateRepository;
     private final StatusService statusService;
+
     @Override
     public VacationRequestState create(VacationRequest vacationRequest) {
         var state = VacationRequestState.builder()
@@ -23,6 +24,7 @@ class VacationRequestStateServiceImpl implements VacationRequestStateService {
                 .build();
         return save(state);
     }
+
     @Override
     public List<VacationRequestState> getAll() {
         return stateRepository.findAll();
@@ -45,8 +47,7 @@ class VacationRequestStateServiceImpl implements VacationRequestStateService {
             state.setVacationRequest(vacationRequest);
             state.setStatus(vacationRequest.getStatus());
             return save(state);
-       }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -57,24 +58,23 @@ class VacationRequestStateServiceImpl implements VacationRequestStateService {
     }
 
     public VacationRequestStateResponse toDTO(VacationRequestState state) {
-     return new VacationRequestStateResponse(
-             state.getId(),
-             statusService.toCompactDTO(state.getStatus()),
-             state.getCreatedDate()
-     );
+        return new VacationRequestStateResponse(
+                state.getId(),
+                statusService.toCompactDTO(state.getStatus()),
+                state.getCreatedDate()
+        );
     }
 
     @Override
     public VacationRequestState save(VacationRequestState state) {
         try {
             return stateRepository.save(state);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private VacationRequestState findById(Long id) {
-        return stateRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return stateRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

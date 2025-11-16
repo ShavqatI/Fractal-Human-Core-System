@@ -31,7 +31,7 @@ class HayFactorServiceImpl implements HayFactorService {
 
     @Override
     public HayFactor getByCode(String code) {
-        return hayFactorRepository.findByCode(code).orElseThrow(()-> new ResourceWithCodeNotFoundException(this,code));
+        return hayFactorRepository.findByCode(code).orElseThrow(() -> new ResourceWithCodeNotFoundException(this, code));
     }
 
     @Override
@@ -42,16 +42,15 @@ class HayFactorServiceImpl implements HayFactorService {
     @Override
     public HayFactor update(Long id, HayFactorRequest dto) {
         try {
-            return save(mapperService.toEntity(findById(id),dto));
-        }
-        catch (DataAccessException e) {
+            return save(mapperService.toEntity(findById(id), dto));
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     @Override
     public void deleteById(Long id) {
-       hayFactorRepository.delete(findById(id));
+        hayFactorRepository.delete(findById(id));
     }
 
     @Override
@@ -68,13 +67,12 @@ class HayFactorServiceImpl implements HayFactorService {
     public HayFactor save(HayFactor factor) {
         try {
             return hayFactorRepository.save(factor);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private HayFactor findById(Long id) {
-        return hayFactorRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        return hayFactorRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 }

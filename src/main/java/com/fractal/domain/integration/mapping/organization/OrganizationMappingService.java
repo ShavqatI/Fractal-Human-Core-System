@@ -8,9 +8,14 @@ import java.util.List;
 public interface OrganizationMappingService {
 
     OrganizationMapping create(OrganizationMappingRequest dto);
+
     List<OrganizationMapping> getAll();
+
     OrganizationMapping getById(Long id);
+
     OrganizationMapping update(Long id, OrganizationMappingRequest dto);
+
     void deleteById(Long id);
+
     OrganizationMappingResponse toDTO(OrganizationMapping organizationMapping);
 }

@@ -6,7 +6,9 @@ import com.fractal.domain.insurance.provider.contact.InsuranceProviderContact;
 
 public interface InsuranceProviderContactMapperService {
     ContactResponse toDTO(InsuranceProviderContact contact);
+
     InsuranceProviderContact toEntity(ContactRequest dto);
+
     InsuranceProviderContact toEntity(InsuranceProviderContact contact, ContactRequest dto);
 }
 

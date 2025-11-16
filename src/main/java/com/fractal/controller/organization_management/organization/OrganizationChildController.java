@@ -18,16 +18,17 @@ public class OrganizationChildController {
 
     @PostMapping()
     public ResponseEntity<OrganizationResponse> create(@PathVariable Long organizationId, @RequestBody @Valid OrganizationRequest dto) {
-        return new ResponseEntity<>(organizationService.toDTO(organizationService.addChild(organizationId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(organizationService.toDTO(organizationService.addChild(organizationId, dto)), HttpStatus.CREATED);
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<OrganizationResponse> update(@PathVariable Long organizationId, @PathVariable Long id, @RequestBody @Valid OrganizationRequest dto) {
-        return ResponseEntity.ok(organizationService.toDTO(organizationService.updateChild(organizationId,id, dto)));
+        return ResponseEntity.ok(organizationService.toDTO(organizationService.updateChild(organizationId, id, dto)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long organizationId, @PathVariable Long id) {
-        organizationService.deleteChild(organizationId,id);
+        organizationService.deleteChild(organizationId, id);
         return ResponseEntity.noContent().build();
     }
 }

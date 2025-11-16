@@ -22,10 +22,10 @@ public class HayFactorType extends Dictionary {
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id",referencedColumnName = "id")
+    @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private HayFactorType parent;
 
-    @OneToMany(mappedBy = "parent",cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<HayFactorType> children = new ArrayList<>();
 
     public void addChild(HayFactorType factorType) {
@@ -33,6 +33,7 @@ public class HayFactorType extends Dictionary {
         factorType.setParent(this);
         children.add(factorType);
     }
+
     public void removeChild(HayFactorType factorType) {
         if (children != null && !children.isEmpty())
             children.remove(factorType);

@@ -32,13 +32,13 @@ public class InsuranceProvider extends AbstractEntity {
     private String tinNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "status_id",referencedColumnName = "id")
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "insuranceProvider", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "insuranceProvider", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<InsuranceProviderContact> contacts = new ArrayList<>();
 
-    @OneToMany(mappedBy = "insuranceProvider", cascade = CascadeType.ALL,orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "insuranceProvider", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<InsuranceProviderAddress> addresses = new ArrayList<>();
 
     public void addContact(InsuranceProviderContact contact) {
@@ -58,6 +58,7 @@ public class InsuranceProvider extends AbstractEntity {
         address.setInsuranceProvider(this);
         addresses.add(address);
     }
+
     @Transactional
     public void removeAddress(InsuranceProviderAddress address) {
         if (addresses != null && !addresses.isEmpty()) {

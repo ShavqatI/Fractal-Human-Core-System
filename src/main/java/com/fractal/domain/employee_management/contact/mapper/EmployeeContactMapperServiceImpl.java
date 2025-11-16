@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 class EmployeeContactMapperServiceImpl implements EmployeeContactMapperService {
     private final ContactMapperService mapperService;
+
     @Override
     public ContactResponse toDTO(EmployeeContact contact) {
         return mapperService.toDTO(contact);
@@ -19,12 +20,12 @@ class EmployeeContactMapperServiceImpl implements EmployeeContactMapperService {
 
     @Override
     public EmployeeContact toEntity(ContactRequest dto) {
-        return mapToEntity(new EmployeeContact(),mapperService.toEntity(dto));
+        return mapToEntity(new EmployeeContact(), mapperService.toEntity(dto));
     }
 
     @Override
     public EmployeeContact toEntity(EmployeeContact contact, ContactRequest dto) {
-        return mapToEntity(contact,mapperService.toEntity(contact,dto));
+        return mapToEntity(contact, mapperService.toEntity(contact, dto));
     }
 
     private EmployeeContact mapToEntity(EmployeeContact employeeContact, Contact contact) {

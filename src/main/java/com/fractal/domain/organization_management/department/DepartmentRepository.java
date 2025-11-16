@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface DepartmentRepository extends JpaRepository<Department,Long> {
+interface DepartmentRepository extends JpaRepository<Department, Long> {
 
     Optional<Department> findFirstByOrderByIdDesc();
+
     Optional<Department> findByCode(String code);
 
     List<Department> findAllByOrganizationUnitCode(String code);

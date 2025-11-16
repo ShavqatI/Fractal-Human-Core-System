@@ -21,23 +21,27 @@ public class GradeStepController {
 
     @PostMapping()
     public ResponseEntity<GradeStepResponse> create(@PathVariable Long gradeId, @RequestBody @Valid GradeStepRequest dto) {
-        return new ResponseEntity<>(gradeStepService.toDTO(gradeStepService.create(gradeId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(gradeStepService.toDTO(gradeStepService.create(gradeId, dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<GradeStepResponse>> getAll(@PathVariable Long gradeId) {
         return ResponseEntity.ok(gradeStepService.getAllByGradeId(gradeId).stream().map(gradeStepService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<GradeStepResponse> getById(@PathVariable Long gradeId, @PathVariable Long id) {
-        return ResponseEntity.ok(gradeStepService.toDTO(gradeStepService.getById(gradeId,id)));
+        return ResponseEntity.ok(gradeStepService.toDTO(gradeStepService.getById(gradeId, id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<GradeStepResponse> update(@PathVariable Long gradeId, @PathVariable Long id, @RequestBody @Valid GradeStepRequest dto) {
-        return ResponseEntity.ok(gradeStepService.toDTO(gradeStepService.update(gradeId,id, dto)));
+        return ResponseEntity.ok(gradeStepService.toDTO(gradeStepService.update(gradeId, id, dto)));
     }
+
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable Long gradeId, @PathVariable Long id) {
-        gradeStepService.delete(gradeId,id);
+        gradeStepService.delete(gradeId, id);
         return ResponseEntity.noContent().build();
     }
 

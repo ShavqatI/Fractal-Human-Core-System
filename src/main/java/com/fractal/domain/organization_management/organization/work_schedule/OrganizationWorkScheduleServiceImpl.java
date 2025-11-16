@@ -36,7 +36,7 @@ public class OrganizationWorkScheduleServiceImpl implements OrganizationWorkSche
 
     @Override
     public OrganizationWorkSchedule getById(Long organizationId, Long id) {
-        return workScheduleRepository.findByOrganizationIdAndId(organizationId,id).orElseThrow(()-> new ResourceNotFoundException("Organization work schedule with id: " + id + " not found"));
+        return workScheduleRepository.findByOrganizationIdAndId(organizationId, id).orElseThrow(() -> new ResourceNotFoundException("Organization work schedule with id: " + id + " not found"));
     }
 
     @Override
@@ -45,8 +45,8 @@ public class OrganizationWorkScheduleServiceImpl implements OrganizationWorkSche
         var organization = organizationService.getById(organizationId);
         var workSchedule = organization.getWorkSchedules()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization work schedule with id: " + id + " not found"));
-        workSchedule = workScheduleRepository.save(mapperService.toEntity(workSchedule,dto));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Organization work schedule with id: " + id + " not found"));
+        workSchedule = workScheduleRepository.save(mapperService.toEntity(workSchedule, dto));
         organizationService.save(organization);
         return workSchedule;
     }
@@ -56,7 +56,7 @@ public class OrganizationWorkScheduleServiceImpl implements OrganizationWorkSche
         var organization = organizationService.getById(organizationId);
         var workSchedule = organization.getWorkSchedules()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Organization work schedule with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Organization work schedule with id: " + id + " not found"));
         organization.removeWorkSchedule(workSchedule);
         organizationService.save(organization);
     }

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 class EmployeeEducationMapperServiceImpl implements EmployeeEducationMapperService {
 
     private final EducationMapperService educationMapperService;
+
     @Override
     public EducationResponse toDTO(EmployeeEducation education) {
         return educationMapperService.toDTO(education);
@@ -22,12 +23,12 @@ class EmployeeEducationMapperServiceImpl implements EmployeeEducationMapperServi
 
     @Override
     public EmployeeEducation toEntity(EducationRequest dto) {
-        return convert(new EmployeeEducation(),educationMapperService.toEntity(dto));
+        return convert(new EmployeeEducation(), educationMapperService.toEntity(dto));
     }
 
     @Override
     public EmployeeEducation toEntity(EmployeeEducation education, EducationRequest dto) {
-        return convert(education,educationMapperService.toEntity(education,dto));
+        return convert(education, educationMapperService.toEntity(education, dto));
     }
 
     @Override
@@ -52,14 +53,12 @@ class EmployeeEducationMapperServiceImpl implements EmployeeEducationMapperServi
 
     @Override
     public EmployeeEducation copy(Education education) {
-        var employeeEducation = convert(new EmployeeEducation(),educationMapperService.copy(education));
+        var employeeEducation = convert(new EmployeeEducation(), educationMapperService.copy(education));
         var educationResources = new ArrayList<>(employeeEducation.getResources());
         employeeEducation.setResources(new ArrayList<>());
         educationResources.forEach(educationResource -> employeeEducation.addResource(educationResource));
         return employeeEducation;
     }
-
-
 
 
 }

@@ -13,4 +13,5 @@ public record OnlineLearningLocationRequest(
         LocalDateTime endTime,
         Integer capacity,
         Long statusId
-) implements LearningLocationRequest { }
+) implements LearningLocationRequest {
+}

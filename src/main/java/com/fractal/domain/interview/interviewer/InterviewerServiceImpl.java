@@ -35,13 +35,13 @@ class InterviewerServiceImpl implements InterviewerService {
 
     @Override
     public Interviewer getById(Long interviewId, Long id) {
-        return interviewerRepository.findByInterviewIdAndId(interviewId,id).orElseThrow(()->new ResourceNotFoundException("Interviewer with id: " + id + " not found"));
+        return interviewerRepository.findByInterviewIdAndId(interviewId, id).orElseThrow(() -> new ResourceNotFoundException("Interviewer with id: " + id + " not found"));
 
     }
 
     @Override
     public Interviewer getById(Long id) {
-        return interviewerRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Interviewer with id: " + id + " not found"));
+        return interviewerRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Interviewer with id: " + id + " not found"));
     }
 
     @Override
@@ -49,8 +49,8 @@ class InterviewerServiceImpl implements InterviewerService {
         var interview = interviewService.getById(interviewId);
         var interviewer = interview.getInterviewers()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Interviewee with id: " + id + " not found"));
-        interviewer = interviewerRepository.save(mapperService.toEntity(interviewer,dto));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Interviewee with id: " + id + " not found"));
+        interviewer = interviewerRepository.save(mapperService.toEntity(interviewer, dto));
         interviewService.save(interview);
         return interviewer;
     }
@@ -60,7 +60,7 @@ class InterviewerServiceImpl implements InterviewerService {
         var interview = interviewService.getById(interviewId);
         var interviewer = interview.getInterviewers()
                 .stream()
-                .filter(e-> e.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Interviewee with id: " + id + " not found"));
+                .filter(e -> e.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Interviewee with id: " + id + " not found"));
         interview.removeInterviewer(interviewer);
         interviewService.save(interview);
     }
@@ -69,8 +69,7 @@ class InterviewerServiceImpl implements InterviewerService {
     public Interviewer save(Interviewer interviewer) {
         try {
             return interviewerRepository.save(interviewer);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }

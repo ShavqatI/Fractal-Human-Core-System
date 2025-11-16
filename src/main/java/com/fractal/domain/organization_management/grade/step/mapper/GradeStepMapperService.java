@@ -6,7 +6,9 @@ import com.fractal.domain.organization_management.grade.step.dto.GradeStepRespon
 
 public interface GradeStepMapperService {
     GradeStepResponse toDTO(GradeStep step);
+
     GradeStep toEntity(GradeStepRequest dto);
+
     GradeStep toEntity(GradeStep step, GradeStepRequest dto);
 }
 

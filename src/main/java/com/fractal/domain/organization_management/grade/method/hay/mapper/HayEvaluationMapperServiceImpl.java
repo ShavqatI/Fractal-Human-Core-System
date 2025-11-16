@@ -14,6 +14,7 @@ class HayEvaluationMapperServiceImpl implements HayEvaluationMapperService {
 
     private final HayFactorService factorService;
     private final StatusService statusService;
+
     @Override
     public HayEvaluationResponse toDTO(HayEvaluation hayEvaluation) {
         return new HayEvaluationResponse(
@@ -24,6 +25,7 @@ class HayEvaluationMapperServiceImpl implements HayEvaluationMapperService {
                 hayEvaluation.getCreatedDate()
         );
     }
+
     @Override
     public HayEvaluation toEntity(HayEvaluationRequest dto) {
         return mapToEntity(new HayEvaluation(), dto);

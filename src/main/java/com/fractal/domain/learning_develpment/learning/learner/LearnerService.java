@@ -4,5 +4,6 @@ import com.fractal.domain.learning_develpment.learning.learner.dto.LearnerCompac
 
 public interface LearnerService {
     Learner getById(Long id);
+
     LearnerCompactResponse toCompactDTO(Learner learner);
 }

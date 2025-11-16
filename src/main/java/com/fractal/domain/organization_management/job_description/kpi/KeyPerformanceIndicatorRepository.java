@@ -7,8 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface KeyPerformanceIndicatorRepository extends JpaRepository<KeyPerformanceIndicator,Long> {
+public interface KeyPerformanceIndicatorRepository extends JpaRepository<KeyPerformanceIndicator, Long> {
 
     List<KeyPerformanceIndicator> findAllByJobDescriptionId(Long jobDescriptionId);
+
     Optional<KeyPerformanceIndicator> findByJobDescriptionIdAndId(Long jobDescriptionId, Long id);
 }

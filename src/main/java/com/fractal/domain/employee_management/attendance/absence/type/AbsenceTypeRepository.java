@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-interface AbsenceTypeRepository extends JpaRepository<AbsenceType,Long> {
+interface AbsenceTypeRepository extends JpaRepository<AbsenceType, Long> {
     Optional<AbsenceType> findById(Long id);
+
     Optional<AbsenceType> findByCode(String code);
+
     List<AbsenceType> findAll();
 }

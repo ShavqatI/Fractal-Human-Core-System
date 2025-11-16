@@ -17,7 +17,7 @@ import lombok.experimental.SuperBuilder;
 public class EmployeeMapping extends Integration {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id",updatable = false,referencedColumnName = "id")
+    @JoinColumn(name = "employee_id", updatable = false, referencedColumnName = "id")
     protected Employee employee;
 
 }

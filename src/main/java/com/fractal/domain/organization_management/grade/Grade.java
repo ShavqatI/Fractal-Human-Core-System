@@ -39,7 +39,7 @@ public class Grade extends Dictionary {
     private BigDecimal minSalary;
 
     @Column(name = "max_salary")
-    private BigDecimal  maxSalary;
+    private BigDecimal maxSalary;
 
     @Column(name = "start_date")
     private LocalDate startDate;
@@ -58,37 +58,41 @@ public class Grade extends Dictionary {
     @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private Grade parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Grade> children = new ArrayList<>();
 
-    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<GradeStep> steps = new ArrayList<>();
 
-    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Benchmarking> benchmarkings = new ArrayList<>();
 
-    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<GradeMatrix> matrices = new ArrayList<>();
 
-    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<GradeSalaryBand> salaryBands = new ArrayList<>();
 
-    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "grade", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<GradeEvaluation> evaluations = new ArrayList<>();
+
     public void addChild(Grade grade) {
         if (children == null) children = new ArrayList<>();
         grade.setParent(this);
         children.add(grade);
     }
+
     public void removeChild(Grade grade) {
         if (children != null && !children.isEmpty())
             children.remove(grade);
     }
+
     public void addStep(GradeStep step) {
         if (steps == null) steps = new ArrayList<>();
         step.setGrade(this);
         steps.add(step);
     }
+
     public void removeStep(GradeStep step) {
         if (steps != null && !steps.isEmpty())
             steps.remove(step);
@@ -99,6 +103,7 @@ public class Grade extends Dictionary {
         benchmarking.setGrade(this);
         benchmarkings.add(benchmarking);
     }
+
     public void removeBenchmarking(Benchmarking benchmarking) {
         if (benchmarkings != null && !benchmarkings.isEmpty())
             benchmarkings.remove(benchmarking);
@@ -109,6 +114,7 @@ public class Grade extends Dictionary {
         matrix.setGrade(this);
         matrices.add(matrix);
     }
+
     public void removeMatrix(GradeMatrix matrix) {
         if (matrices != null && !matrices.isEmpty())
             matrices.remove(matrix);
@@ -119,6 +125,7 @@ public class Grade extends Dictionary {
         salaryBand.setGrade(this);
         salaryBands.add(salaryBand);
     }
+
     public void removeSalaryBand(GradeSalaryBand salaryBand) {
         if (salaryBands != null && !salaryBands.isEmpty())
             salaryBands.remove(salaryBand);
@@ -129,6 +136,7 @@ public class Grade extends Dictionary {
         evaluation.setGrade(this);
         evaluations.add(evaluation);
     }
+
     public void removeEvaluation(GradeEvaluation evaluation) {
         if (evaluations != null && !evaluations.isEmpty())
             evaluations.remove(evaluation);

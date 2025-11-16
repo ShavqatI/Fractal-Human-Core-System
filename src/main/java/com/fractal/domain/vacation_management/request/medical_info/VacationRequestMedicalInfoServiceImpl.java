@@ -37,7 +37,7 @@ public class VacationRequestMedicalInfoServiceImpl implements VacationRequestMed
 
     @Override
     public VacationRequestMedicalInfo getById(Long vacationRequestId, Long id) {
-        return medicalInfoRepository.findByVacationRequestIdAndId(vacationRequestId,id).orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        return medicalInfoRepository.findByVacationRequestIdAndId(vacationRequestId, id).orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
     }
 
     @Override
@@ -46,8 +46,8 @@ public class VacationRequestMedicalInfoServiceImpl implements VacationRequestMed
         var request = vacationRequestService.getById(vacationRequestId);
         var medicalInfo = request.getMedicalInfos()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
-        medicalInfo = medicalInfoRepository.save(mapperService.toEntity(medicalInfo,dto));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        medicalInfo = medicalInfoRepository.save(mapperService.toEntity(medicalInfo, dto));
         vacationRequestService.save(request);
         return medicalInfo;
     }
@@ -58,7 +58,7 @@ public class VacationRequestMedicalInfoServiceImpl implements VacationRequestMed
         var request = vacationRequestService.getById(vacationRequestId);
         var medicalInfo = request.getMedicalInfos()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
         request.removeMedicalInfo(medicalInfo);
         vacationRequestService.save(request);
     }

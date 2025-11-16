@@ -4,4 +4,5 @@ public record PermissionRequest(
         Long roleId,
         Long menuActionId,
         Long statusId
-) { }
+) {
+}

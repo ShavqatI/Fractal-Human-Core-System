@@ -53,7 +53,7 @@ public class ExternalLearner extends Learner {
     @JoinColumn(name = "nationality_id", referencedColumnName = "id")
     private Nationality nationality;
 
-    @OneToMany(mappedBy = "externalLearner", cascade = CascadeType.ALL,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "externalLearner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ExternalLearnerContact> contacts = new ArrayList<>();
 
     public void addContact(ExternalLearnerContact contact) {

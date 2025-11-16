@@ -7,8 +7,11 @@ import com.fractal.domain.employment.external.dto.ExternalEmploymentResponse;
 
 public interface ExternalEmploymentMapperService {
     ExternalEmploymentResponse toDTO(ExternalEmployment employment);
+
     ExternalEmployment toEntity(ExternalEmploymentRequest dto);
+
     ExternalEmployment toEntity(ExternalEmployment employment, ExternalEmploymentRequest dto);
+
     Employment copy(ExternalEmployment employment);
 }
 

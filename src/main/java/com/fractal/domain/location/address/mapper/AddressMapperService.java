@@ -6,6 +6,8 @@ import com.fractal.domain.location.address.dto.AddressResponse;
 
 public interface AddressMapperService {
     AddressResponse toDTO(Address address);
+
     Address toEntity(AddressRequest dto);
+
     Address toEntity(Address address, AddressRequest dto);
 }

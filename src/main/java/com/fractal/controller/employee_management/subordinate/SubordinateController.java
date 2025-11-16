@@ -19,22 +19,27 @@ import java.util.stream.Collectors;
 public class SubordinateController {
 
     private final SubordinateService subordinateService;
+
     @PostMapping
     public ResponseEntity<SubordinateResponse> create(@RequestBody @Valid SubordinateRequest dto) {
         return new ResponseEntity<>(subordinateService.toDTO(subordinateService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<SubordinateResponse>> getAll() {
         return ResponseEntity.ok(subordinateService.getAll().stream().map(subordinateService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<SubordinateResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(subordinateService.toDTO(subordinateService.getById(id)));
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<SubordinateResponse> update(@PathVariable Long id, @RequestBody @Valid SubordinateRequest dto) {
-      return  ResponseEntity.ok(subordinateService.toDTO(subordinateService.update(id, dto)));
+        return ResponseEntity.ok(subordinateService.toDTO(subordinateService.update(id, dto)));
     }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         subordinateService.deleteById(id);

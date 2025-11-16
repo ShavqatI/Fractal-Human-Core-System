@@ -21,12 +21,12 @@ class EmployeeLanguageSkillMapperServiceImpl implements EmployeeLanguageSkillMap
 
     @Override
     public EmployeeLanguageSkill toEntity(LanguageSkillRequest dto) {
-        return convert(new EmployeeLanguageSkill(),mapperService.toEntity(dto));
+        return convert(new EmployeeLanguageSkill(), mapperService.toEntity(dto));
     }
 
     @Override
     public EmployeeLanguageSkill toEntity(EmployeeLanguageSkill languageSkill, LanguageSkillRequest dto) {
-        return convert(languageSkill,mapperService.toEntity(languageSkill,dto));
+        return convert(languageSkill, mapperService.toEntity(languageSkill, dto));
     }
 
     private EmployeeLanguageSkill convert(EmployeeLanguageSkill employeeLanguageSkill, LanguageSkill languageSkill) {

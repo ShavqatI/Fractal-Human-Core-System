@@ -21,4 +21,5 @@ public record InsuranceProviderAddressResponse(
 
         LocalDateTime createdDate,
         LocalDateTime updatedDate
-) { }
+) {
+}

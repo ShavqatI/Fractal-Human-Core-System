@@ -38,7 +38,7 @@ class CandidateCitizenshipServiceImpl implements CandidateCitizenshipService {
 
     @Override
     public CandidateCitizenship getById(Long candidateId, Long id) {
-        return citizenshipRepository.findByCandidateIdAndId(candidateId,id).orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
+        return citizenshipRepository.findByCandidateIdAndId(candidateId, id).orElseThrow(() -> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
     }
 
     @Override
@@ -47,8 +47,8 @@ class CandidateCitizenshipServiceImpl implements CandidateCitizenshipService {
         var candidate = candidateService.getById(candidateId);
         var citizenship = candidate.getCitizenships()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
-        citizenship = citizenshipRepository.save(mapperService.toEntity(citizenship,dto));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
+        citizenship = citizenshipRepository.save(mapperService.toEntity(citizenship, dto));
         candidateService.save(candidate);
         return citizenship;
     }
@@ -59,7 +59,7 @@ class CandidateCitizenshipServiceImpl implements CandidateCitizenshipService {
         var candidate = candidateService.getById(candidateId);
         var citizenship = candidate.getCitizenships()
                 .stream()
-                .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
+                .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Citizenship with id: " + id + " not found"));
         candidate.removeCitizenship(citizenship);
         candidateService.save(candidate);
     }

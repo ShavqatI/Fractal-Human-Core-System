@@ -21,24 +21,26 @@ public class JobDescriptionAuthorityController {
 
     @PostMapping()
     public ResponseEntity<AuthorityResponse> create(@PathVariable Long jobDescriptionId, @RequestBody @Valid AuthorityRequest dto) {
-        return new ResponseEntity<>(authorityService.toDTO(authorityService.create(jobDescriptionId,dto)), HttpStatus.CREATED);
+        return new ResponseEntity<>(authorityService.toDTO(authorityService.create(jobDescriptionId, dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<AuthorityResponse>> getAll(@PathVariable Long jobDescriptionId) {
         return ResponseEntity.ok(authorityService.getAllByJobDescriptionId(jobDescriptionId).stream().map(authorityService::toDTO).collect(Collectors.toList()));
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<AuthorityResponse> getById(@PathVariable Long jobDescriptionId,@PathVariable Long id) {
-        return ResponseEntity.ok(authorityService.toDTO(authorityService.getById(jobDescriptionId,id)));
+    public ResponseEntity<AuthorityResponse> getById(@PathVariable Long jobDescriptionId, @PathVariable Long id) {
+        return ResponseEntity.ok(authorityService.toDTO(authorityService.getById(jobDescriptionId, id)));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<AuthorityResponse> update(@PathVariable Long jobDescriptionId, @PathVariable Long id, @RequestBody @Valid AuthorityRequest dto) {
-        return ResponseEntity.ok(authorityService.toDTO(authorityService.update(jobDescriptionId,id, dto)));
+        return ResponseEntity.ok(authorityService.toDTO(authorityService.update(jobDescriptionId, id, dto)));
     }
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long jobDescriptionId,@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long jobDescriptionId, @PathVariable Long id) {
         authorityService.delete(jobDescriptionId, id);
         return ResponseEntity.noContent().build();
     }
