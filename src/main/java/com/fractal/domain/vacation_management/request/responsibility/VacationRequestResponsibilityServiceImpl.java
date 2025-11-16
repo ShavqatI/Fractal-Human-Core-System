@@ -55,12 +55,12 @@ public class VacationRequestResponsibilityServiceImpl implements VacationRequest
     @Override
     @Transactional
     public void delete(Long vacationRequestId, Long id) {
-        var vacation = vacationRequestService.getById(vacationRequestId);
-        var order = vacation.getResponsibilities()
+        var request = vacationRequestService.getById(vacationRequestId);
+        var responsibility = request.getResponsibilities()
                 .stream()
                 .filter(c-> c.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
-        vacation.removeResponsibility(order);
-        vacationRequestService.save(vacation);
+        request.removeResponsibility(responsibility);
+        vacationRequestService.save(request);
     }
 
     @Override

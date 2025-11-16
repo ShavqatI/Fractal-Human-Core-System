@@ -1,5 +1,6 @@
 package com.fractal.domain.vacation_management.request;
 
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.vacation_management.dto.VacationResponse;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -20,10 +22,12 @@ class VacationRequestServiceImpl implements VacationRequestService {
     private final VacationRequestRepository vacationRequestRepository;
     private final VacationRequestMapperService mapperService;
     private final VacationRequestStateService stateService;
+    private final StatusService statusService;
 
     @Override
     public VacationRequest create(VacationRequestRequest dto) {
         var request = save(mapperService.toEntity(dto));
+        request.setStatus(statusService.getByCode("CREATED"));
         stateService.create(request);
         return request;
     }
@@ -78,4 +82,33 @@ class VacationRequestServiceImpl implements VacationRequestService {
         return vacationRequestRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 
+    @Override
+    public VacationRequest review(Long id) {
+        var vacationRequest = findById(id);
+        if(vacationRequest.getStatus().getCode().equals("CREATED")){
+            vacationRequest.setReviewedDate(LocalDateTime.now());
+            //vacationRequest.setReviewedUser();
+            vacationRequest.setStatus(statusService.getByCode("REVIEWED"));
+            stateService.create(vacationRequest);
+            return vacationRequest;
+        }
+        else {
+            throw new UnsupportedOperationException("The status of request is not valid is: " + vacationRequest.getStatus().getName());
+        }
+    }
+
+    @Override
+    public VacationRequest approve(Long id) {
+        var vacationRequest = findById(id);
+        if(vacationRequest.getStatus().getCode().equals("REVIEWED")){
+            vacationRequest.setApprovedDate(LocalDateTime.now());
+            //vacationRequest.setApprovedUser();
+            vacationRequest.setStatus(statusService.getByCode("APPROVED"));
+            stateService.create(vacationRequest);
+            return vacationRequest;
+        }
+        else {
+            throw new UnsupportedOperationException("The status of request is not valid is: " + vacationRequest.getStatus().getName());
+        }
+    }
 }

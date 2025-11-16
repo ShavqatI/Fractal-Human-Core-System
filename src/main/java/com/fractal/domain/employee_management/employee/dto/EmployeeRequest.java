@@ -6,10 +6,12 @@ import com.fractal.domain.education.dto.EducationRequest;
 import com.fractal.domain.education.language_skill.dto.LanguageSkillRequest;
 import com.fractal.domain.employee_management.address.dto.EmployeeAddressRequest;
 import com.fractal.domain.employee_management.employee.resource.dto.EmployeeResourceRequest;
+import com.fractal.domain.employee_management.professional_experience.dto.EmployeeProfessionalExperienceRequest;
 import com.fractal.domain.employee_management.relative.dto.RelativeRequest;
 import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
+import com.fractal.domain.recruitment.candidate.professional_experience.dto.CandidateProfessionalExperienceRequest;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,6 +35,7 @@ public record EmployeeRequest(
         List<RelativeRequest> relatives,
         List<MilitaryServiceRequest> militaryServices,
         List<EmploymentRequest> employments,
+        List<EmployeeProfessionalExperienceRequest> professionalExperiences,
         List<EmployeeResourceRequest> resources,
         Long statusId
 ){

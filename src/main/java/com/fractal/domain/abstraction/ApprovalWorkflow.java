@@ -7,7 +7,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
@@ -16,6 +18,8 @@ import java.time.LocalDateTime;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public abstract class ApprovalWorkflow extends Auditable {
 
     @Column(name = "reviewed_date")
@@ -32,35 +36,4 @@ public abstract class ApprovalWorkflow extends Auditable {
     @JoinColumn(name = "approved_user_id")
     protected User approvedUser;
 
-    public LocalDateTime getReviewedDate() {
-        return reviewedDate;
-    }
-
-    protected void setReviewedDate(LocalDateTime reviewedDate) {
-        this.reviewedDate = reviewedDate;
-    }
-
-    public User getReviewedUser() {
-        return reviewedUser;
-    }
-
-    protected void setReviewedUser(User reviewedUser) {
-        this.reviewedUser = reviewedUser;
-    }
-
-    public LocalDateTime getApprovedDate() {
-        return approvedDate;
-    }
-
-    protected void setApprovedDate(LocalDateTime approvedDate) {
-        this.approvedDate = approvedDate;
-    }
-
-    public User getApprovedUser() {
-        return approvedUser;
-    }
-
-    protected void setApprovedUser(User approvedUser) {
-        this.approvedUser = approvedUser;
-    }
 }

@@ -16,6 +16,8 @@ import com.fractal.domain.employee_management.employment.mapper.EmployeeEmployme
 import com.fractal.domain.employee_management.identification_document.mapper.EmployeeIdentificationDocumentMapperService;
 import com.fractal.domain.employee_management.language_skill.mapper.EmployeeLanguageSkillMapperService;
 import com.fractal.domain.employee_management.military_service.mapper.EmployeeMilitaryServiceMapperService;
+import com.fractal.domain.employee_management.professional_experience.dto.EmployeeProfessionalExperienceRequest;
+import com.fractal.domain.employee_management.professional_experience.mapper.EmployeeProfessionalExperienceMapperService;
 import com.fractal.domain.recruitment.candidate.CandidateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,7 @@ public class CandidateUseCaseServiceImpl implements CandidateUseCaseService {
     private final EmployeeMilitaryServiceMapperService employeeMilitaryServiceMapperService;
     private final EmployeeEmploymentMapperService employeeEmploymentMapperService;
     private final EmployeeResourceMapperService employeeResourceMapperService;
+    private final EmployeeProfessionalExperienceMapperService employeeProfessionalExperienceMapperService;
 
 
     @Override
@@ -62,6 +65,7 @@ public class CandidateUseCaseServiceImpl implements CandidateUseCaseService {
        candidate.getMilitaryServices().forEach(militaryService -> employee.addMilitaryService(employeeMilitaryServiceMapperService.copy(militaryService)));
        candidate.getEmployments().forEach(employment -> employee.addEmployment(employeeEmploymentMapperService.copy(employment.getEmployment())));
        candidate.getResources().forEach(resource -> employee.addResource(employeeResourceMapperService.copy(resource)));
-      employeeService.save(employee);
+       candidate.getProfessionalExperiences().forEach(professionalExperience -> employee.addProfessionalExperience(employeeProfessionalExperienceMapperService.toEntity(new EmployeeProfessionalExperienceRequest(professionalExperience.getIndustry().getId(),professionalExperience.getYears()))));
+       employeeService.save(employee);
     }
 }

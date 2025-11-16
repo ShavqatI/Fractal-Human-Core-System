@@ -1,12 +1,13 @@
 package com.fractal.domain.vacation_management.request;
 
+import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.vacation_management.dto.VacationResponse;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
 
 import java.util.List;
 
-public interface VacationRequestService {
+public interface VacationRequestService extends ApprovalWorkflowAware<Long,VacationRequest> {
     VacationRequest create(VacationRequestRequest dto);
     List<VacationRequest> getAll();
     VacationRequest getById(Long id);
@@ -15,4 +16,6 @@ public interface VacationRequestService {
     void deleteById(Long id);
     VacationRequestResponse toDTO(VacationRequest vacationRequest);
     VacationRequest save(VacationRequest vacationRequest);
+
+
 }

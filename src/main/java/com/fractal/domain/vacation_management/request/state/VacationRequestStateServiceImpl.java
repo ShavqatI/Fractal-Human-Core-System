@@ -2,9 +2,6 @@ package com.fractal.domain.vacation_management.request.state;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.vacation_management.request.VacationRequest;
-import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
-import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
-import com.fractal.domain.vacation_management.request.mapper.VacationRequestMapperService;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -38,7 +35,7 @@ class VacationRequestStateServiceImpl implements VacationRequestStateService {
 
     @Override
     public List<VacationRequestState> getAllByVacationRequestId(Long vacationRequestId) {
-        return stateRepository.findAllByEmployeeId(vacationRequestId);
+        return stateRepository.findAllByVacationRequestId(vacationRequestId);
     }
 
     @Override

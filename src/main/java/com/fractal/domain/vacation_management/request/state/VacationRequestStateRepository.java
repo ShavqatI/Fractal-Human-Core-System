@@ -8,6 +8,6 @@ import java.util.List;
 @Repository
 interface VacationRequestStateRepository extends JpaRepository<VacationRequestState,Long> {
 
-    List<VacationRequestState> findAllByEmployeeId(Long employeeId);
+    List<VacationRequestState> findAllByVacationRequestId(Long vacationRequestId);
 
 }

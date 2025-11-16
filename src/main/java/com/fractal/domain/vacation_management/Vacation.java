@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "vacation", schema = "employee_schema", catalog = "fractal")
+@Table(name = "vacation", schema = "vacation_schema", catalog = "fractal")
 @Data
 @Builder
 @AllArgsConstructor

@@ -1,16 +1,16 @@
 package com.fractal.domain.vacation_management.request;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.vacation_management.request.medical_info.VacationRequestMedicalInfo;
 import com.fractal.domain.vacation_management.request.responsibility.VacationRequestResponsibility;
 import com.fractal.domain.vacation_management.request.state.VacationRequestState;
 import com.fractal.domain.vacation_management.type.VacationType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -19,10 +19,15 @@ import java.util.List;
 @Entity
 @Table(name = "vacation_request", schema = "vacation_schema", catalog = "fractal")
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class VacationRequest extends AbstractEntity {
+public class VacationRequest extends ApprovalWorkflow {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
@@ -58,6 +63,9 @@ public class VacationRequest extends AbstractEntity {
     @OneToMany(mappedBy = "vacationRequest", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<VacationRequestState> states = new ArrayList<>();
 
+    @OneToMany(mappedBy = "vacationRequest", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<VacationRequestMedicalInfo> medicalInfos = new ArrayList<>();
+
     public void addResponsibility(VacationRequestResponsibility responsibility) {
         if (responsibilities == null) responsibilities = new ArrayList<>();
         responsibility.setVacationRequest(this);
@@ -66,6 +74,16 @@ public class VacationRequest extends AbstractEntity {
     public void removeResponsibility(VacationRequestResponsibility responsibility) {
         if (responsibilities != null && !responsibilities.isEmpty())
             responsibilities.remove(responsibility);
+    }
+
+    public void addMedicalInfo(VacationRequestMedicalInfo medicalInfo) {
+        if (medicalInfos == null) medicalInfos = new ArrayList<>();
+        medicalInfo.setVacationRequest(this);
+        medicalInfos.add(medicalInfo);
+    }
+    public void removeMedicalInfo(VacationRequestMedicalInfo medicalInfo) {
+        if (medicalInfos != null && !medicalInfos.isEmpty())
+            medicalInfos.remove(medicalInfo);
     }
 
 }

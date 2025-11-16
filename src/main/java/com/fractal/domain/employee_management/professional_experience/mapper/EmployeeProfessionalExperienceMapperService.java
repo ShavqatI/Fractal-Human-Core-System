@@ -1,0 +1,13 @@
+package com.fractal.domain.employee_management.professional_experience.mapper;
+
+import com.fractal.domain.employee_management.professional_experience.EmployeeProfessionalExperience;
+import com.fractal.domain.employee_management.professional_experience.dto.EmployeeProfessionalExperienceRequest;
+import com.fractal.domain.employee_management.professional_experience.dto.EmployeeProfessionalExperienceResponse;
+
+public interface EmployeeProfessionalExperienceMapperService {
+    EmployeeProfessionalExperienceResponse toDTO(EmployeeProfessionalExperience professionalExperience);
+    EmployeeProfessionalExperience toEntity(EmployeeProfessionalExperienceRequest dto);
+    EmployeeProfessionalExperience toEntity(EmployeeProfessionalExperience professionalExperience, EmployeeProfessionalExperienceRequest dto);
+}
+
+

@@ -7,12 +7,16 @@ import com.fractal.domain.vacation_management.dto.VacationResponse;
 import com.fractal.domain.vacation_management.request.VacationRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
+import com.fractal.domain.vacation_management.request.medical_info.dto.VacationRequestMedicalInfoRequest;
+import com.fractal.domain.vacation_management.request.medical_info.mapper.VacationRequestMedicalInfoMapperService;
 import com.fractal.domain.vacation_management.request.responsibility.mapper.VacationRequestResponsibilityMapperService;
 import com.fractal.domain.vacation_management.request.state.VacationRequestStateService;
 import com.fractal.domain.vacation_management.type.VacationTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -27,6 +31,7 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
     private final VacationTypeService vacationTypeService;
     private final VacationRequestStateService stateService;
     private final VacationRequestResponsibilityMapperService responsibilityMapperService;
+    private final VacationRequestMedicalInfoMapperService medicalInfoMapperService;
 
     @Override
     public VacationRequestResponse toDTO(VacationRequest vacationRequest) {
@@ -43,6 +48,11 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
                         .orElse(emptyList())
                         .stream()
                         .map(responsibilityMapperService::toDTO)
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(vacationRequest.getMedicalInfos())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(medicalInfoMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(vacationRequest.getStates())
                         .orElse(emptyList())
@@ -68,11 +78,12 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
         vacationRequest.setEmployee(employeeService.getById(dto.employeeId()));
         vacationRequest.setSuccessorEmployee(employeeService.getById(dto.successorEmployeeId()));
         vacationRequest.setVacationType(vacationTypeService.getById(dto.vacationTypeId()));
-        vacationRequest.setStatus(statusService.getById(dto.statusId()));
         vacationRequest.setStartDate(dto.startDate());
         vacationRequest.setEndDate(dto.endDate());
-        vacationRequest.setDays(dto.days());
+        vacationRequest.setDays((int) ChronoUnit.DAYS.between(dto.startDate(), dto.endDate()) + 1);
         vacationRequest.setDescription(dto.description());
+        dto.responsibilities().forEach(responsibility -> vacationRequest.addResponsibility(responsibilityMapperService.toEntity(responsibility)));
+        dto.medicalInfos().forEach(medicalInfo -> vacationRequest.addMedicalInfo(medicalInfoMapperService.toEntity(medicalInfo)));
         return vacationRequest;
     }
 }

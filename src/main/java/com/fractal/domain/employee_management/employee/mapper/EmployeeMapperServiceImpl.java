@@ -18,6 +18,7 @@ import com.fractal.domain.employee_management.employment.mapper.EmployeeEmployme
 import com.fractal.domain.employee_management.identification_document.mapper.EmployeeIdentificationDocumentMapperService;
 import com.fractal.domain.employee_management.language_skill.mapper.EmployeeLanguageSkillMapperService;
 import com.fractal.domain.employee_management.military_service.mapper.EmployeeMilitaryServiceMapperService;
+import com.fractal.domain.employee_management.professional_experience.mapper.EmployeeProfessionalExperienceMapperService;
 import com.fractal.domain.employee_management.relative.mapper.RelativeMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -50,6 +51,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
     private final EmployeeMilitaryServiceMapperService militaryServiceMapperService;
     private final EmployeeResourceMapperService employeeResourceMapperService;
     private final EmployeeEmploymentMapperService employmentMapperService;
+    private final EmployeeProfessionalExperienceMapperService professionalExperienceMapperService;
 
     @Override
     public EmployeeResponse toDTO(Employee employee) {
@@ -108,6 +110,11 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                         .orElse(emptyList())
                         .stream()
                         .map(employment -> employmentMapperService.toDTO(employment))
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(employee.getProfessionalExperiences())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(professionalExperienceMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(employee.getResources())
                         .orElse(emptyList())
@@ -168,6 +175,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
         dto.relatives().forEach(relative->employee.addRelative(relativeMapperService.toEntity(relative)));
         dto.militaryServices().forEach(militaryService->employee.addMilitaryService(militaryServiceMapperService.toEntity(militaryService)));
         dto.employments().forEach(employment->employee.addEmployment(employmentMapperService.toEntity(employment)));
+        dto.professionalExperiences().forEach(professionalExperience-> employee.addProfessionalExperience(professionalExperienceMapperService.toEntity(professionalExperience)));
         dto.resources().forEach(resource-> employee.addResource(employeeResourceMapperService.toEntity(resource,null)));
        return employee;
     }
