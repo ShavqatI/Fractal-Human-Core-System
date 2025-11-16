@@ -1,8 +1,9 @@
-package com.fractal.domain.vacation_management;
+package com.fractal.domain.vacation_management.vacation;
 
-import com.fractal.domain.vacation_management.dto.VacationRequest;
-import com.fractal.domain.vacation_management.dto.VacationResponse;
-import com.fractal.domain.vacation_management.mapper.VacationMapperService;
+import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.vacation_management.vacation.dto.VacationRequest;
+import com.fractal.domain.vacation_management.vacation.dto.VacationResponse;
+import com.fractal.domain.vacation_management.vacation.mapper.VacationMapperService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -16,10 +17,13 @@ class VacationServiceImpl implements VacationService {
 
     private final VacationRepository vacationRepository;
     private final VacationMapperService mapperService;
+    private final StatusService statusService;
 
     @Override
     public Vacation create(VacationRequest dto) {
-        return save(mapperService.toEntity(dto));
+        var vacation = save(mapperService.toEntity(dto));
+        vacation.setStatus(statusService.getByCode("CREATED"));
+        return vacation;
     }
 
     @Override
@@ -40,9 +44,8 @@ class VacationServiceImpl implements VacationService {
     @Override
     public Vacation update(Long id, VacationRequest dto) {
         try {
-           return save(mapperService.toEntity(findById(id),dto));
-       }
-        catch (DataAccessException e) {
+            return save(mapperService.toEntity(findById(id), dto));
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
@@ -60,14 +63,13 @@ class VacationServiceImpl implements VacationService {
     public Vacation save(Vacation vacation) {
         try {
             return vacationRepository.save(vacation);
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
 
     private Vacation findById(Long id) {
-        return vacationRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Vacation with id: " + id + " not found"));
+        return vacationRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Vacation with id: " + id + " not found"));
     }
 
 }

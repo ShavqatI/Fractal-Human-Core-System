@@ -1,4 +1,4 @@
-package com.fractal.domain.vacation_management.order;
+package com.fractal.domain.vacation_management.vacation.order;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,8 +8,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VacationOrderRepository extends JpaRepository<VacationOrder,Long> {
+public interface VacationOrderRepository extends JpaRepository<VacationOrder, Long> {
 
     List<VacationOrder> findAllByVacationId(Long vacationId);
+
     Optional<VacationOrder> findByVacationIdAndId(Long vacationId, Long id);
 }

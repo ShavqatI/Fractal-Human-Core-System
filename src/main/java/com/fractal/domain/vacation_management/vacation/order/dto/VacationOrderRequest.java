@@ -1,4 +1,4 @@
-package com.fractal.domain.vacation_management.order.dto;
+package com.fractal.domain.vacation_management.vacation.order.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -11,4 +11,5 @@ public record VacationOrderRequest(
         LocalDate date,
         Long statusId,
         List<MultipartFile> files
-) {}
+) {
+}

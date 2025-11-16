@@ -1,4 +1,4 @@
-package com.fractal.domain.vacation_management.order.dto;
+package com.fractal.domain.vacation_management.vacation.order.dto;
 
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.order.type.dto.OrderTypeResponse;

@@ -1,16 +1,18 @@
-package com.fractal.domain.vacation_management.order;
+package com.fractal.domain.vacation_management.vacation.order;
 
-import com.fractal.domain.vacation_management.Vacation;
 import com.fractal.domain.order.Order;
+import com.fractal.domain.vacation_management.vacation.Vacation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "vacation_order", schema = "employee_schema", catalog = "fractal")
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
