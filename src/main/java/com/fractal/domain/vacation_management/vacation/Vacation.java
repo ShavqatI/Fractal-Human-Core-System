@@ -11,6 +11,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class Vacation extends AbstractEntity {
     @JoinColumn(name = "vacation_request_id", referencedColumnName = "id")
     private VacationRequest vacationRequest;
 
+    private BigDecimal compensationPercentage;
+    private BigDecimal successorCompensationPercentage;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;

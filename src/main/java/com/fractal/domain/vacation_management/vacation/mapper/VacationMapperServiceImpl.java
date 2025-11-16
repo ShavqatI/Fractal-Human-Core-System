@@ -31,6 +31,8 @@ class VacationMapperServiceImpl implements VacationMapperService {
                 vacation.getId(),
                 employeeService.toCompactDTO(vacation.getEmployee()),
                 vacationRequestService.toDTO(vacation.getVacationRequest()),
+                vacation.getCompensationPercentage(),
+                vacation.getSuccessorCompensationPercentage(),
                 Optional.ofNullable(vacation.getOrders())
                         .orElse(emptyList())
                         .stream()
@@ -55,6 +57,8 @@ class VacationMapperServiceImpl implements VacationMapperService {
         var request = vacationRequestService.getById(dto.vacationRequestId());
         vacation.setEmployee(request.getEmployee());
         vacation.setVacationRequest(request);
+        vacation.setCompensationPercentage(dto.compensationPercentage());
+        vacation.setSuccessorCompensationPercentage(dto.successorCompensationPercentage());
         return vacation;
     }
 }
