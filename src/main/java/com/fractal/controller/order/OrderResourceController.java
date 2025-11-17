@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/order/{orderId}/resource")
+@RequestMapping("/api/v1/order-management/{orderId}/resource")
 @RequiredArgsConstructor
 public class OrderResourceController {
 

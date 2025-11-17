@@ -6,7 +6,7 @@ import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequ
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.employee_management.business_trip.expense.mapper.BusinessTripExpenseMapperService;
 import com.fractal.domain.employee_management.business_trip.location.mapper.BusinessTripLocationMapperService;
-import com.fractal.domain.employee_management.business_trip.order.mapper.BusinessTripOrderMapperService;
+import com.fractal.domain.order.business_trip.mapper.BusinessTripOrderMapperService;
 import com.fractal.domain.employee_management.business_trip.resource.mapper.BusinessTripResourceMapperService;
 import com.fractal.domain.employee_management.business_trip.type.BusinessTripTypeService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
@@ -28,8 +28,6 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
     private final StatusService statusService;
     private final BusinessTripTypeService businessTripTypeService;
     private final BusinessTripResourceMapperService resourceMapperService;
-    private final BusinessTripOrderMapperService orderMapperService;
-    private final OrganizationService organizationService;
     private final BusinessTripExpenseMapperService expenseMapperService;
     private final BusinessTripLocationMapperService locationMapperService;
 
@@ -46,11 +44,6 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
                 businessTrip.getStartDate(),
                 businessTrip.getEndDate(),
                 businessTrip.getDays(),
-                Optional.ofNullable(businessTrip.getOrders())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(orderMapperService::toDTO)
-                        .collect(Collectors.toList()),
                 Optional.ofNullable(businessTrip.getExpenses())
                         .orElse(emptyList())
                         .stream()
@@ -88,8 +81,7 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
         businessTrip.setDescription(dto.description());
         businessTrip.setStartDate(dto.startDate());
         businessTrip.setEndDate(dto.endDate());
-        businessTrip.setDays((int) ChronoUnit.DAYS.between(dto.startDate(), dto.endDate()));
-        dto.orders().forEach(order -> businessTrip.addOrder(orderMapperService.toEntity(order)));
+        businessTrip.setDays((int) ChronoUnit.DAYS.between(dto.startDate(), dto.endDate()) + 1);
         dto.expenses().forEach(expense -> businessTrip.addExpense(expenseMapperService.toEntity(expense)));
         dto.locations().forEach(location -> businessTrip.addLocation(locationMapperService.toEntity(location)));
         dto.files().forEach(file -> businessTrip.addResource(resourceMapperService.toEntity(file, null)));

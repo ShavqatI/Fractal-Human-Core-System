@@ -4,10 +4,9 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.vacation_management.request.VacationRequestService;
 import com.fractal.domain.vacation_management.vacation.Vacation;
-import com.fractal.domain.vacation_management.category.VacationCategoryService;
 import com.fractal.domain.vacation_management.vacation.dto.VacationRequest;
 import com.fractal.domain.vacation_management.vacation.dto.VacationResponse;
-import com.fractal.domain.vacation_management.vacation.order.mapper.VacationOrderMapperService;
+import com.fractal.domain.order.vacation.mapper.VacationOrderMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ class VacationMapperServiceImpl implements VacationMapperService {
     private final EmployeeService employeeService;
     private final StatusService statusService;
     private final VacationRequestService vacationRequestService;
-    private final VacationOrderMapperService orderMapperService;
+
 
     @Override
     public VacationResponse toDTO(Vacation vacation) {
@@ -33,11 +32,6 @@ class VacationMapperServiceImpl implements VacationMapperService {
                 vacationRequestService.toDTO(vacation.getVacationRequest()),
                 vacation.getCompensationPercentage(),
                 vacation.getSuccessorCompensationPercentage(),
-                Optional.ofNullable(vacation.getOrders())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(orderMapperService::toDTO)
-                        .collect(Collectors.toList()),
                 statusService.toCompactDTO(vacation.getStatus()),
                 vacation.getCreatedDate()
         );

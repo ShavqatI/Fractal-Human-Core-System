@@ -1,4 +1,4 @@
-package com.fractal.domain.vacation_management.vacation.order;
+package com.fractal.domain.order.vacation;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;

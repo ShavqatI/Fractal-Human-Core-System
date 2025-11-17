@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "order", schema = "employee_schema", catalog = "fractal")
+@Table(name = "order", schema = "order_schema", catalog = "fractal")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Setter
 @Getter

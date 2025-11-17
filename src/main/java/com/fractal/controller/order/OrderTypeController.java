@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/order/type")
+@RequestMapping("/api/v1/order-management/type")
 @RequiredArgsConstructor
 public class OrderTypeController {
 

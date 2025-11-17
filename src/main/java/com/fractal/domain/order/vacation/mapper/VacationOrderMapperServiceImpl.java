@@ -1,11 +1,12 @@
-package com.fractal.domain.employee_management.business_trip.order.mapper;
+package com.fractal.domain.order.vacation.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.business_trip.order.BusinessTripOrder;
-import com.fractal.domain.employee_management.business_trip.order.dto.BusinessTripOrderRequest;
-import com.fractal.domain.employee_management.business_trip.order.dto.BusinessTripOrderResponse;
 import com.fractal.domain.order.resource.mapper.OrderResourceMapperService;
 import com.fractal.domain.order.type.OrderTypeService;
+import com.fractal.domain.order.vacation.VacationOrder;
+import com.fractal.domain.order.vacation.dto.VacationOrderRequest;
+import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
+import com.fractal.domain.vacation_management.vacation.VacationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +17,19 @@ import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
-class BusinessTripOrderMapperServiceImpl implements BusinessTripOrderMapperService {
+class VacationOrderMapperServiceImpl implements VacationOrderMapperService {
 
     private final OrderTypeService orderTypeService;
     private final OrderResourceMapperService resourceMapperService;
     private final StatusService statusService;
+    private final VacationService vacationService;
 
     @Override
-    public BusinessTripOrderResponse toDTO(BusinessTripOrder order) {
-        return new BusinessTripOrderResponse(
+    public VacationOrderResponse toDTO(VacationOrder order) {
+        return new VacationOrderResponse(
                 order.getId(),
                 orderTypeService.toDTO(order.getOrderType()),
+                vacationService.toDTO(order.getVacation()),
                 order.getNumber(),
                 order.getDate(),
                 statusService.toCompactDTO(order.getStatus()),
@@ -41,17 +44,18 @@ class BusinessTripOrderMapperServiceImpl implements BusinessTripOrderMapperServi
     }
 
     @Override
-    public BusinessTripOrder toEntity(BusinessTripOrderRequest dto) {
-        return mapToEntity(new BusinessTripOrder(), dto);
+    public VacationOrder toEntity(VacationOrderRequest dto) {
+        return mapToEntity(new VacationOrder(), dto);
     }
 
     @Override
-    public BusinessTripOrder toEntity(BusinessTripOrder order, BusinessTripOrderRequest dto) {
+    public VacationOrder toEntity(VacationOrder order, VacationOrderRequest dto) {
         return mapToEntity(order, dto);
     }
 
-    private BusinessTripOrder mapToEntity(BusinessTripOrder order, BusinessTripOrderRequest dto) {
+    private VacationOrder mapToEntity(VacationOrder order, VacationOrderRequest dto) {
         order.setOrderType(orderTypeService.getById(dto.orderTypeId()));
+        order.setVacation(vacationService.getById(dto.vacationId()));
         order.setNumber(dto.number());
         order.setDate(dto.date());
         order.setStatus(statusService.getById(dto.statusId()));

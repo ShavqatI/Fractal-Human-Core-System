@@ -1,4 +1,4 @@
-package com.fractal.controller.vacation_management;
+package com.fractal.controller.order;
 
 
 import com.fractal.domain.order.resource.OrderResourceService;

@@ -1,4 +1,4 @@
-package com.fractal.domain.vacation_management.vacation.order;
+package com.fractal.domain.order.vacation;
 
 import com.fractal.domain.order.Order;
 import com.fractal.domain.vacation_management.vacation.Vacation;
@@ -10,7 +10,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "vacation_order", schema = "employee_schema", catalog = "fractal")
+@Table(name = "vacation_order", schema = "order_schema", catalog = "fractal")
 @Getter
 @Setter
 @SuperBuilder

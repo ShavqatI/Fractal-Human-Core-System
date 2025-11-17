@@ -2,7 +2,7 @@ package com.fractal.domain.employee_management.business_trip.dto;
 
 import com.fractal.domain.employee_management.business_trip.expense.dto.BusinessTripExpenseRequest;
 import com.fractal.domain.employee_management.business_trip.location.dto.BusinessTripLocationRequest;
-import com.fractal.domain.employee_management.business_trip.order.dto.BusinessTripOrderRequest;
+import com.fractal.domain.order.business_trip.dto.BusinessTripOrderRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
@@ -16,7 +16,6 @@ public record BusinessTripRequest(
         String description,
         LocalDate startDate,
         LocalDate endDate,
-        List<BusinessTripOrderRequest> orders,
         List<BusinessTripExpenseRequest> expenses,
         List<BusinessTripLocationRequest> locations,
         List<MultipartFile> files

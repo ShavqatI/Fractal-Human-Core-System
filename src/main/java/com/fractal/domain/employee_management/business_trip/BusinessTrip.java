@@ -4,7 +4,7 @@ import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.business_trip.expense.BusinessTripExpense;
 import com.fractal.domain.employee_management.business_trip.location.BusinessTripLocation;
-import com.fractal.domain.employee_management.business_trip.order.BusinessTripOrder;
+import com.fractal.domain.order.business_trip.BusinessTripOrder;
 import com.fractal.domain.employee_management.business_trip.resource.BusinessTripResource;
 import com.fractal.domain.employee_management.business_trip.type.BusinessTripType;
 import com.fractal.domain.employee_management.employee.Employee;
@@ -57,9 +57,6 @@ public class BusinessTrip extends ApprovalWorkflow {
     private Integer days;
 
     @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<BusinessTripOrder> orders = new ArrayList<>();
-
-    @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BusinessTripResource> resources = new ArrayList<>();
 
     @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -67,17 +64,6 @@ public class BusinessTrip extends ApprovalWorkflow {
 
     @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BusinessTripLocation> locations = new ArrayList<>();
-
-    public void addOrder(BusinessTripOrder order) {
-        if (orders == null) orders = new ArrayList<>();
-        order.setBusinessTrip(this);
-        orders.add(order);
-    }
-
-    public void removeOrder(BusinessTripOrder order) {
-        if (orders != null && !orders.isEmpty())
-            orders.remove(order);
-    }
 
     public void addResource(BusinessTripResource resource) {
         if (resources == null) resources = new ArrayList<>();

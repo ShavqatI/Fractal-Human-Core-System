@@ -6,10 +6,7 @@ import com.fractal.domain.agreement.resource.AgreementResource;
 import com.fractal.domain.agreement.type.AgreementType;
 import com.fractal.domain.dictionary.status.Status;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
@@ -19,7 +16,8 @@ import java.util.List;
 @Entity
 @Table(name = "agreement", schema = "employee_schema", catalog = "fractal")
 @Inheritance(strategy = InheritanceType.JOINED)
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 public class Agreement extends ApprovalWorkflow {
