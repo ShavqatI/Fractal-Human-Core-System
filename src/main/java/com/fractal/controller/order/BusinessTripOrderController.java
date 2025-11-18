@@ -9,10 +9,17 @@ import com.fractal.domain.order.vacation.dto.VacationOrderRequest;
 import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -48,6 +55,13 @@ public class BusinessTripOrderController {
         orderService.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("print/{id}")
+    public ResponseEntity<BusinessTripOrderResponse> print( @PathVariable Long id) {
+       return null;
+    }
+
+
 
 
 }

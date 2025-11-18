@@ -2,7 +2,7 @@ package com.fractal.domain.order.employment;
 
 import com.fractal.domain.order.employment.dto.InternalEmploymentOrderRequest;
 import com.fractal.domain.order.employment.dto.InternalEmploymentOrderResponse;
-import com.fractal.domain.order.employment.mapper.BusinessTripOrderMapperService;
+import com.fractal.domain.order.employment.mapper.InternalEmploymentOrderMapperService;
 import com.fractal.domain.order.state.OrderStateService;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.List;
 public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrderService {
 
     private final InternalEmploymentOrderRepository orderRepository;
-    private final BusinessTripOrderMapperService orderMapperService;
+    private final InternalEmploymentOrderMapperService orderMapperService;
     private final OrderStateService stateService;
 
 

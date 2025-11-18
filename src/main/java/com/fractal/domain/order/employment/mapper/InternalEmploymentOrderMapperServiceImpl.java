@@ -18,7 +18,7 @@ import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
-class BusinessTripOrderMapperServiceImpl implements BusinessTripOrderMapperService {
+class InternalEmploymentOrderMapperServiceImpl implements InternalEmploymentOrderMapperService {
 
     private final OrderTypeService orderTypeService;
     private final OrderResourceMapperService resourceMapperService;

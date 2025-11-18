@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface InternalEmploymentOrderRepository extends JpaRepository<InternalEmploymentOrderRecord, Long> {
+public interface InternalEmploymentOrderRecordRepository extends JpaRepository<InternalEmploymentOrderRecord, Long> {
 
     List<InternalEmploymentOrderRecord> findAllByInternalEmploymentOrderId(Long orderId);
 

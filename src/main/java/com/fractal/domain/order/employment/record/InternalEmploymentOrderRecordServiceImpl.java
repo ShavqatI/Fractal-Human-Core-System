@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InternalEmploymentOrderRecordServiceImpl implements InternalEmploymentOrderRecordService {
 
-    private final InternalEmploymentOrderRepository recordRepository;
+    private final InternalEmploymentOrderRecordRepository recordRepository;
     private final InternalEmploymentOrderRecordMapperService mapperService;
     private final InternalEmploymentOrderService internalEmploymentOrderService;
 
