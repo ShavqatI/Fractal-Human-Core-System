@@ -1,8 +1,10 @@
 package com.fractal.domain.vacation_management.accrual.period;
 
+import com.fractal.domain.vacation_management.accrual.period.dto.PeriodRequest;
 import com.fractal.domain.vacation_management.accrual.period.dto.VacationAccrualPeriodRequest;
 import com.fractal.domain.vacation_management.accrual.period.dto.VacationAccrualPeriodResponse;
 
+import java.time.Period;
 import java.util.List;
 
 public interface VacationAccrualPeriodService {
@@ -14,6 +16,7 @@ public interface VacationAccrualPeriodService {
     VacationAccrualPeriod getById(Long accrualId, Long id);
 
     VacationAccrualPeriod getById(Long id);
+    VacationAccrualPeriod getByPeriod(Long accrualId,PeriodRequest dto);
 
     VacationAccrualPeriod update(Long accrualId, Long id, VacationAccrualPeriodRequest dto);
 
@@ -22,5 +25,7 @@ public interface VacationAccrualPeriodService {
     VacationAccrualPeriodResponse toDTO(VacationAccrualPeriod period);
 
     VacationAccrualPeriod save(VacationAccrualPeriod period);
+
+
 
 }

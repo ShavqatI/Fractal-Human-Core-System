@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/employee-management/vacation")
+@RequestMapping("/api/v1/vacation-management/vacation")
 @RequiredArgsConstructor
 public class VacationController {
 

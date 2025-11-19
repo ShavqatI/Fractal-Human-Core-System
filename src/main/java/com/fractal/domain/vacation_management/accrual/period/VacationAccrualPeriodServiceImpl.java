@@ -1,6 +1,7 @@
 package com.fractal.domain.vacation_management.accrual.period;
 
 import com.fractal.domain.vacation_management.accrual.VacationAccrualService;
+import com.fractal.domain.vacation_management.accrual.period.dto.PeriodRequest;
 import com.fractal.domain.vacation_management.accrual.period.dto.VacationAccrualPeriodRequest;
 import com.fractal.domain.vacation_management.accrual.period.dto.VacationAccrualPeriodResponse;
 import com.fractal.domain.vacation_management.accrual.period.mapper.VacationAccrualPeriodMapperService;
@@ -45,6 +46,11 @@ public class VacationAccrualPeriodServiceImpl implements VacationAccrualPeriodSe
     @Override
     public VacationAccrualPeriod getById(Long id) {
         return periodRepository.findById(id).orElseThrow(ResourceWithIdNotFoundException::new);
+    }
+
+    @Override
+    public VacationAccrualPeriod getByPeriod(Long accrualId, PeriodRequest dto) {
+        return periodRepository.findAllByVacationAccrualIdAndStartDateAndEndDate(accrualId,dto.startDate(),dto.endDate());
     }
 
     @Override

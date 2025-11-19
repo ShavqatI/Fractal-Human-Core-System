@@ -19,4 +19,6 @@ public interface VacationAccrualPeriodRecordService {
 
     VacationAccrualPeriodRecordResponse toDTO(VacationAccrualPeriodRecord record);
 
+    Integer getAllRemainingDays(Long periodId);
+
 }

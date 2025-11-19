@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
@@ -66,6 +67,14 @@ public class VacationAccrualPeriodRecordServiceImpl implements VacationAccrualPe
     @Override
     public VacationAccrualPeriodRecordResponse toDTO(VacationAccrualPeriodRecord record) {
         return mapperService.toDTO(record);
+    }
+
+    @Override
+    public Integer getAllRemainingDays(Long periodId) {
+        return recordRepository.findAllByVacationAccrualPeriodId(periodId)
+                .stream()
+                .mapToInt(VacationAccrualPeriodRecord::getRemainingDays)
+                .sum();
     }
 
 

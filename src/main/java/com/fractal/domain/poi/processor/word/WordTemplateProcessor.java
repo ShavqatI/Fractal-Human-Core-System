@@ -1,19 +1,17 @@
 package com.fractal.domain.poi.processor.word;
 
-import org.apache.poi.xwpf.usermodel.*;
-import org.springframework.stereotype.Service;
 
-import java.io.*;
+import org.apache.poi.xwpf.usermodel.*;
+
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Service
-class WordTemplateProcessorServiceImpl implements WordTemplateProcessorService {
+public class WordTemplateProcessor {
 
-    @Override
     public void process(Path templatePath, Path outputPath, Map<String, String> variables) throws Exception {
         try (InputStream is = Files.newInputStream(templatePath);
              XWPFDocument document = new XWPFDocument(is)) {
@@ -109,4 +107,24 @@ class WordTemplateProcessorServiceImpl implements WordTemplateProcessorService {
         }
     }
 
+
+
+
+
+    public static void main(String[] args) throws Exception {
+        Path file =  Path.of("C:\\My Data\\fractal\\2025\\backend\\FILE-STORAGE\\document-template-manager\\0af7c45b-dda8-4293-824f-88415484eda8_37_Фармон - Танбех.docx");
+        Path file2 =  Path.of("C:\\My Data\\fractal\\2025\\backend\\FILE-STORAGE\\myTemp2.docx");
+        WordTemplateProcessor wordTemplateProcessor = new WordTemplateProcessor();
+        Map<String, String> values = Map.of(
+                "${docDate}", "2025-01-01",
+                "${branchName}", "DMB",
+                "${fullBankName}", "CJSC ICB",
+                "employeeName", "Test test",
+                "${employeePosition}", "Officer",
+                "${punishmentType}", "Blblalal",
+                "${sourceDocument}", "#12354788",
+                "${hrHead}", "Jigarakt"
+        );
+        wordTemplateProcessor.process(file,file2,values);
+    }
 }

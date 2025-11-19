@@ -1,9 +1,10 @@
 package com.fractal.domain.poi.processor.word;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Map;
 
 public interface WordTemplateProcessorService {
 
-    void processTemplate(String templatePath, String outputPath, Map<String, String> values) throws IOException;
+    void process(Path templatePath, Path outputPath, Map<String, String> values) throws Exception;
 }

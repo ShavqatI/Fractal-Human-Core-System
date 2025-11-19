@@ -1,6 +1,8 @@
 package com.fractal.domain.order.type;
 
 import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManagerService;
+import com.fractal.domain.order.category.OrderCategory;
+import com.fractal.domain.order.category.OrderCategoryService;
 import com.fractal.domain.order.type.dto.OrderTypeRequest;
 import com.fractal.domain.order.type.dto.OrderTypeResponse;
 import com.fractal.exception.ResourceNotFoundException;
@@ -12,10 +14,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class OrderTypeServiceImpl implements OrderTypeService {
+class OrderTypeServiceImpl implements OrderTypeService {
 
     private final OrderTypeRepository orderTypeRepository;
     private final DocumentTemplateManagerService documentTemplateManagerService;
+    private final OrderCategoryService orderCategoryService;
 
     @Override
     public OrderType create(OrderTypeRequest dto) {
@@ -47,6 +50,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
             orderType.setDescription(dto.description());
             orderType.setSeries(dto.series());
             orderType.setDocumentTemplateManager(documentTemplateManagerService.getById(dto.documentTemplateManagerId()));
+            orderType.setOrderCategory(orderCategoryService.getById(dto.orderCategoryId()));
             return save(orderType);
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
@@ -67,6 +71,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
                 orderType.getDescription(),
                 orderType.getSeries(),
                 documentTemplateManagerService.toDTO(orderType.getDocumentTemplateManager()),
+                orderCategoryService.toDTO(orderType.getOrderCategory()),
                 orderType.getCreatedDate()
         );
     }
@@ -78,6 +83,7 @@ public class OrderTypeServiceImpl implements OrderTypeService {
                 .description(dto.description())
                 .series(dto.series())
                 .documentTemplateManager(documentTemplateManagerService.getById(dto.documentTemplateManagerId()))
+                .orderCategory(orderCategoryService.getById(dto.orderCategoryId()))
                 .build();
     }
 
