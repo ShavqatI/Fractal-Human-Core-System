@@ -4,6 +4,8 @@ package com.fractal.controller.vacation_management.accrual;
 import com.fractal.domain.vacation_management.accrual.VacationAccrualService;
 import com.fractal.domain.vacation_management.accrual.dto.VacationAccrualRequest;
 import com.fractal.domain.vacation_management.accrual.dto.VacationAccrualResponse;
+import com.fractal.domain.vacation_management.accrual.period.dto.PeriodRequest;
+import com.fractal.domain.vacation_management.accrual.usecase.VacationAccrualUseCaseService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 public class VacationAccrualController {
 
     private final VacationAccrualService vacationAccrualService;
+    private final VacationAccrualUseCaseService accrualUseCaseService;
 
     @PostMapping
     public ResponseEntity<VacationAccrualResponse> create(@RequestBody @Valid VacationAccrualRequest dto) {
@@ -46,4 +49,11 @@ public class VacationAccrualController {
         return ResponseEntity.noContent().build();
 
     }
+
+    @PostMapping("all-remaining-days/{employeeId}")
+    public ResponseEntity<Integer> getEmployeeAllRemainingDays(@PathVariable Long employeeId,@RequestBody @Valid PeriodRequest dto) {
+        return new ResponseEntity<>(accrualUseCaseService.getEmployeeAllRemainingDays(employeeId,dto),HttpStatus.OK);
+    }
+
+
 }
