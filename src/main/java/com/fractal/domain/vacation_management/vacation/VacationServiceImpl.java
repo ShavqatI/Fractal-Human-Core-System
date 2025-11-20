@@ -17,12 +17,11 @@ class VacationServiceImpl implements VacationService {
 
     private final VacationRepository vacationRepository;
     private final VacationMapperService mapperService;
-    private final StatusService statusService;
+
 
     @Override
     public Vacation create(VacationRequest dto) {
         var vacation = save(mapperService.toEntity(dto));
-        vacation.setStatus(statusService.getByCode("CREATED"));
         return vacation;
     }
 

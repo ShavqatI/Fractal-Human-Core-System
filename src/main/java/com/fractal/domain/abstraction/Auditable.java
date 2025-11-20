@@ -30,12 +30,12 @@ public abstract class Auditable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "created_user_id", updatable = false, referencedColumnName = "id")
-    @CreatedBy
+    //@CreatedBy
     protected User createdUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "updated_user_id", updatable = true, referencedColumnName = "id")
-    @LastModifiedBy
+    //@LastModifiedBy
     protected User updatedUser;
 
     public LocalDateTime getCreatedDate() {

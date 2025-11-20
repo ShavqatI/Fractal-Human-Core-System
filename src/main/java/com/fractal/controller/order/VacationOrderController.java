@@ -4,6 +4,7 @@ package com.fractal.controller.order;
 import com.fractal.domain.order.vacation.VacationOrderService;
 import com.fractal.domain.order.vacation.dto.VacationOrderRequest;
 import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
+import com.fractal.domain.vacation_management.vacation.VacationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class VacationOrderController {
 
     private final VacationOrderService orderService;
+
 
     @PostMapping()
     public ResponseEntity<VacationOrderResponse> create( @RequestBody @Valid VacationOrderRequest dto) {

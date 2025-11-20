@@ -55,11 +55,11 @@ class VacationOrderMapperServiceImpl implements VacationOrderMapperService {
 
     private VacationOrder mapToEntity(VacationOrder order, VacationOrderRequest dto) {
         order.setOrderType(orderTypeService.getById(dto.orderTypeId()));
-        order.setVacation(vacationService.getById(dto.vacationId()));
         order.setNumber(dto.number());
         order.setDate(dto.date());
-        order.setStatus(statusService.getById(dto.statusId()));
         dto.files().forEach(file -> order.addResource(resourceMapperService.toEntity(file, null)));
+        vacationService.deleteById(order.getVacation().getId());
+        order.setVacation(vacationService.create(dto.vacation()));
         return order;
     }
 
