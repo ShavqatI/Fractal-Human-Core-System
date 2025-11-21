@@ -48,5 +48,10 @@ public class VacationOrderController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("print/{id}")
+    public ResponseEntity<Void> print( @PathVariable Long id) {
+        orderService.print(id);
+        return ResponseEntity.noContent().build();
+    }
 
 }

@@ -58,6 +58,7 @@ class VacationOrderMapperServiceImpl implements VacationOrderMapperService {
         order.setNumber(dto.number());
         order.setDate(dto.date());
         dto.files().forEach(file -> order.addResource(resourceMapperService.toEntity(file, null)));
+        if(order.getVacation() != null)
         vacationService.deleteById(order.getVacation().getId());
         order.setVacation(vacationService.create(dto.vacation()));
         return order;

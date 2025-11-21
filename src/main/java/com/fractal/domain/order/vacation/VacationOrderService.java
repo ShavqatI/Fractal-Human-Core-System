@@ -20,4 +20,6 @@ public interface VacationOrderService extends ApprovalWorkflowAware<Long, Vacati
 
     VacationOrderResponse toDTO(VacationOrder vacationOrder);
 
+    void print(Long id);
+
 }

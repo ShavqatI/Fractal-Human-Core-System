@@ -26,7 +26,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     @Override
     @Transactional
     public BusinessTripOrder create(BusinessTripOrderRequest dto) {
-        var order = orderMapperService.toEntity(dto);
+        var order = save(orderMapperService.toEntity(dto));
         stateService.create(order);
         return order;
     }
@@ -44,7 +44,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     @Override
     @Transactional
     public BusinessTripOrder update(Long id, BusinessTripOrderRequest dto) {
-        var order = orderRepository.save(orderMapperService.toEntity(getById(id), dto));
+        var order = save(orderMapperService.toEntity(getById(id), dto));
         return order;
     }
 

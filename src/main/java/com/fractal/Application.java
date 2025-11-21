@@ -23,8 +23,6 @@ public class Application implements CommandLineRunner {
     private final MenuActionService menuActionService;
     private final ActionService actionService;
     private final MenuService menuService;
-    private final WordTemplateProcessorService wordTemplateProcessorService;
-    private final WordToPdfConverterService wordToPdfConverterService;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -32,20 +30,7 @@ public class Application implements CommandLineRunner {
 
 
     @Override
-    public void run(String... args) throws Exception {
-        Map<String, String> values = Map.of(
-                "docDate", "2025-01-01",
-                "branchName", "DMB",
-                "fullBankName", "CJSC ICB",
-                "employeeName", "Test test",
-                "employeePosition", "Officer",
-                "punishmentType", "Blblalal",
-                "sourceDocument", "#12354788",
-                "hrHead", "Jigarakt"
-        );
-        wordTemplateProcessorService.process(Path.of("C:\\My Data\\fractal\\2025\\backend\\FILE-STORAGE\\document-template-manager\\0af7c45b-dda8-4293-824f-88415484eda8_37_Фармон - Танбех.docx"), Path.of("C:\\My Data\\fractal\\2025\\backend\\FILE-STORAGE\\test_temp2.DOCX"), values);
-        wordToPdfConverterService.convert(Path.of("C:\\My Data\\fractal\\2025\\backend\\FILE-STORAGE\\test_temp2.DOCX"),Path.of("C:\\My Data\\fractal\\2025\\backend\\FILE-STORAGE\\test_temp2.pdf"));
-    }
+    public void run(String... args) throws Exception {}
 
     private String buildUrl(MenuAction menuAction) {
         var actionUrl = actionService.getById(menuAction.getAction().getId()).getUrl();

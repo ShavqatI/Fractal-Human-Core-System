@@ -1,5 +1,7 @@
 package com.fractal.domain.vacation_management.request.mapper;
 
+import com.fractal.domain.dictionary.calendar.holiday.HolidayCalendar;
+import com.fractal.domain.dictionary.calendar.holiday.HolidayCalendarService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.vacation_management.request.VacationRequest;
@@ -12,7 +14,9 @@ import com.fractal.domain.vacation_management.type.VacationTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -28,6 +32,7 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
     private final VacationRequestStateService stateService;
     private final VacationRequestResponsibilityMapperService responsibilityMapperService;
     private final VacationRequestMedicalInfoMapperService medicalInfoMapperService;
+    private final HolidayCalendarService holidayCalendarService;
 
     @Override
     public VacationRequestResponse toDTO(VacationRequest vacationRequest) {
@@ -75,11 +80,16 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
         vacationRequest.setSuccessorEmployee(employeeService.getById(dto.successorEmployeeId()));
         vacationRequest.setVacationType(vacationTypeService.getById(dto.vacationTypeId()));
         vacationRequest.setStartDate(dto.startDate());
-        vacationRequest.setEndDate(dto.endDate());
-        vacationRequest.setDays((int) ChronoUnit.DAYS.between(dto.startDate(), dto.endDate()) + 1);
+        vacationRequest.setEndDate(calculateEndDate(dto.startDate(),dto.endDate()));
+        vacationRequest.setDays((int) ChronoUnit.DAYS.between(dto.startDate(), vacationRequest.getEndDate()) + 1);
         vacationRequest.setDescription(dto.description());
         dto.responsibilities().forEach(responsibility -> vacationRequest.addResponsibility(responsibilityMapperService.toEntity(responsibility)));
         dto.medicalInfos().forEach(medicalInfo -> vacationRequest.addMedicalInfo(medicalInfoMapperService.toEntity(medicalInfo)));
         return vacationRequest;
+    }
+
+    private LocalDate calculateEndDate(LocalDate startDate, LocalDate endDate) {
+        List<HolidayCalendar> holidays = holidayCalendarService.getByDates(startDate,endDate);
+        return endDate.plusDays(holidays.size());
     }
 }

@@ -33,6 +33,7 @@ public class Vacation extends AbstractEntity {
 
     private BigDecimal compensationPercentage;
     private BigDecimal successorCompensationPercentage;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;

@@ -1,4 +1,3 @@
-/*
 package com.fractal.config;
 
 import com.fractal.domain.authorization.user.User;
@@ -41,4 +40,3 @@ public class AuditConfig {
     }
 }
 
-*/

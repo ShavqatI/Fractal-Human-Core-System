@@ -1,5 +1,6 @@
 package com.fractal.domain.vacation_management.schedule;
 
+import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
@@ -20,6 +21,7 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
     private final VacationScheduleRepository vacationScheduleRepository;
     private final VacationScheduleMapperService mapperService;
     private final StatusService statusService;
+    private final AuthenticatedService authenticatedService;
 
     @Override
     public VacationSchedule create(VacationScheduleRequest dto) {
@@ -78,9 +80,9 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
         var schedule = findById(id);
         if (schedule.getStatus().getCode().equals("CREATED")) {
             schedule.setReviewedDate(LocalDateTime.now());
-            //schedule.setReviewedUser();
+            //schedule.setReviewedUser(authenticatedService.getUser());
             schedule.setStatus(statusService.getByCode("REVIEWED"));
-            return schedule;
+            return save(schedule);
         } else {
             throw new ResourceStateException("The status is not valid is: " + schedule.getStatus().getName());
         }
@@ -91,9 +93,9 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
         var schedule = findById(id);
         if (schedule.getStatus().getCode().equals("REVIEWED")) {
             schedule.setApprovedDate(LocalDateTime.now());
-            //schedule.setApprovedUser();
+            //schedule.setApprovedUser(authenticatedService.getUser());
             schedule.setStatus(statusService.getByCode("APPROVED"));
-            return schedule;
+            return save(schedule);
         } else {
             throw new ResourceStateException("The status  is not valid is: " + schedule.getStatus().getName());
         }
