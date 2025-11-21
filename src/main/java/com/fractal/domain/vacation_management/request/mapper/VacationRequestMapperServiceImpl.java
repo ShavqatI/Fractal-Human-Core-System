@@ -14,6 +14,7 @@ import com.fractal.domain.vacation_management.type.VacationTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -83,6 +84,7 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
         vacationRequest.setEndDate(calculateEndDate(dto.startDate(),dto.endDate()));
         vacationRequest.setDays((int) ChronoUnit.DAYS.between(dto.startDate(), vacationRequest.getEndDate()) + 1);
         vacationRequest.setDescription(dto.description());
+        vacationRequest.setWorkingDays(calculateWorkingDays(vacationRequest.getStartDate(),vacationRequest.getEndDate()));
         dto.responsibilities().forEach(responsibility -> vacationRequest.addResponsibility(responsibilityMapperService.toEntity(responsibility)));
         dto.medicalInfos().forEach(medicalInfo -> vacationRequest.addMedicalInfo(medicalInfoMapperService.toEntity(medicalInfo)));
         return vacationRequest;
@@ -92,4 +94,22 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
         List<HolidayCalendar> holidays = holidayCalendarService.getByDates(startDate,endDate);
         return endDate.plusDays(holidays.size());
     }
+
+    public int countWeekdays(LocalDate startDate, LocalDate endDate) {
+        long days = ChronoUnit.DAYS.between(startDate, endDate) + 1;
+        int weekdays = 0;
+        for (long i = 0; i < days; i++) {
+            DayOfWeek dow = startDate.plusDays(i).getDayOfWeek();
+            if (dow != DayOfWeek.SATURDAY && dow != DayOfWeek.SUNDAY) {
+                weekdays++;
+            }
+        }
+        return weekdays;
+    }
+    private int calculateWorkingDays(LocalDate startDate, LocalDate endDate) {
+        List<HolidayCalendar> holidays = holidayCalendarService.getByDates(startDate,endDate);
+        var weekDays = countWeekdays(startDate,endDate);
+        return weekDays - holidays.size();
+    }
+
 }

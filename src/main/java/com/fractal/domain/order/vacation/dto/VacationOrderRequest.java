@@ -11,6 +11,7 @@ public record VacationOrderRequest(
         VacationRequest vacation,
         String number,
         LocalDate date,
+        String sourceDocument,
         List<MultipartFile> files
 ) {
 }

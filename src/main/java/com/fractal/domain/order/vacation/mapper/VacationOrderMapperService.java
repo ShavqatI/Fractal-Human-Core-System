@@ -6,9 +6,7 @@ import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
 
 public interface VacationOrderMapperService {
     VacationOrderResponse toDTO(VacationOrder order);
-
     VacationOrder toEntity(VacationOrderRequest dto);
-
     VacationOrder toEntity(VacationOrder order, VacationOrderRequest dto);
 }
 

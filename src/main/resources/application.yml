@@ -46,6 +46,7 @@ resource-storage:
   learning: "${resource-storage.root-path}/learning/"
   document-template-manager: "${resource-storage.root-path}/document-template-manager/"
   business-trip: "${resource-storage.root-path}/business-trip/"
+  temporary : "${resource-storage.root-path}/temporary/"
 
 encryption:
   password: K2VP1tcbCwzcqWl5btvqEg==

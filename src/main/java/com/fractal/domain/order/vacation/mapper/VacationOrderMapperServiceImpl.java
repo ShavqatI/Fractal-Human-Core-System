@@ -32,6 +32,7 @@ class VacationOrderMapperServiceImpl implements VacationOrderMapperService {
                 vacationService.toDTO(order.getVacation()),
                 order.getNumber(),
                 order.getDate(),
+                order.getSourceDocument(),
                 statusService.toCompactDTO(order.getStatus()),
                 Optional.ofNullable(order.getResources())
                         .orElse(emptyList())
@@ -57,6 +58,7 @@ class VacationOrderMapperServiceImpl implements VacationOrderMapperService {
         order.setOrderType(orderTypeService.getById(dto.orderTypeId()));
         order.setNumber(dto.number());
         order.setDate(dto.date());
+        order.setSourceDocument(dto.sourceDocument());
         dto.files().forEach(file -> order.addResource(resourceMapperService.toEntity(file, null)));
         if(order.getVacation() != null)
         vacationService.deleteById(order.getVacation().getId());

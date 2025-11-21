@@ -15,6 +15,7 @@ public record VacationOrderResponse(
         VacationResponse vacation,
         String number,
         LocalDate date,
+        String sourceDocument,
         StatusCompactResponse status,
         List<ResourceResponse> resources,
         LocalDateTime createdDate

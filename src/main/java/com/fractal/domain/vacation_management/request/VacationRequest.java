@@ -53,6 +53,9 @@ public class VacationRequest extends ApprovalWorkflow {
     @Column(name = "days")
     private Integer days;
 
+    @Column(name = "working_days")
+    private Integer workingDays;
+
     @Column(name = "description")
     private String description;
 
