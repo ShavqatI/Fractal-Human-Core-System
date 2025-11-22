@@ -5,6 +5,8 @@ import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.order.vacation.VacationOrder;
 import com.fractal.domain.vacation_management.request.VacationRequest;
+import com.fractal.domain.vacation_management.request.responsibility.VacationRequestResponsibility;
+import com.fractal.domain.vacation_management.vacation.allocation.VacationAllocation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,4 +39,18 @@ public class Vacation extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
+
+    @OneToMany(mappedBy = "vacation", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<VacationAllocation> allocations = new ArrayList<>();
+
+    public void addAllocation(VacationAllocation allocation) {
+        if (allocations == null) allocations = new ArrayList<>();
+        allocation.setVacation(this);
+        allocations.add(allocation);
+    }
+
+    public void removeResponsibility(VacationAllocation allocation) {
+        if (allocations != null && !allocations.isEmpty())
+            allocations.remove(allocation);
+    }
 }

@@ -12,6 +12,7 @@ public interface VacationAccrualPeriodRecordService {
     List<VacationAccrualPeriodRecord> getAllByVacationAccrualPeriodId(Long periodId);
 
     VacationAccrualPeriodRecord getById(Long periodId, Long id);
+    VacationAccrualPeriodRecord getById(Long id);
 
     VacationAccrualPeriodRecord update(Long periodId, Long id, VacationAccrualPeriodRecordRequest dto);
 
@@ -20,5 +21,8 @@ public interface VacationAccrualPeriodRecordService {
     VacationAccrualPeriodRecordResponse toDTO(VacationAccrualPeriodRecord record);
 
     Integer getAllRemainingDays(Long periodId);
+
+    void decrease(Long id, int days);
+    void increase(Long id, int days);
 
 }

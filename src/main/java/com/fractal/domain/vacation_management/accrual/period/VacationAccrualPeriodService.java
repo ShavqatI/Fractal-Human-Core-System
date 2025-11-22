@@ -27,8 +27,7 @@ public interface VacationAccrualPeriodService {
 
     VacationAccrualPeriod save(VacationAccrualPeriod period);
 
-    void decrease(Long id, Long vacationTypeId, int days);
-    void increase(Long id, Long vacationTypeId, int days);
+
 
 
 

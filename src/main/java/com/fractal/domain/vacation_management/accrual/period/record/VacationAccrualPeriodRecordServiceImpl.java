@@ -5,6 +5,7 @@ import com.fractal.domain.vacation_management.accrual.period.record.dto.Vacation
 import com.fractal.domain.vacation_management.accrual.period.record.dto.VacationAccrualPeriodRecordResponse;
 import com.fractal.domain.vacation_management.accrual.period.record.mapper.VacationAccrualPeriodRecordMapperService;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,6 +40,11 @@ public class VacationAccrualPeriodRecordServiceImpl implements VacationAccrualPe
     @Override
     public VacationAccrualPeriodRecord getById(Long periodId, Long id) {
         return recordRepository.findByVacationAccrualPeriodIdAndId(periodId, id).orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+    }
+
+    @Override
+    public VacationAccrualPeriodRecord getById(Long id) {
+        return recordRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 
     @Override
@@ -77,5 +83,19 @@ public class VacationAccrualPeriodRecordServiceImpl implements VacationAccrualPe
                 .sum();
     }
 
+    @Override
+    public void decrease(Long id, int days) {
+        var record = getById(id);
+        record.setRemainingDays(record.getRemainingDays() - days);
+        record.setUtilizedDays(days);
+        recordRepository.save(record);
+    }
 
+    @Override
+    public void increase(Long id, int days) {
+        var record = getById(id);
+        record.setRemainingDays(record.getRemainingDays() + days);
+        record.setUtilizedDays(record.getUtilizedDays() - days);
+        recordRepository.save(record);
+    }
 }

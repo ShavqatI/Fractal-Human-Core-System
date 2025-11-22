@@ -14,6 +14,8 @@ import com.fractal.domain.resource.FileService;
 import com.fractal.domain.vacation_management.accrual.VacationAccrual;
 import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriod;
 import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriodService;
+import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecord;
+import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecordService;
 import com.fractal.domain.vacation_management.vacation.VacationService;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
@@ -41,7 +43,7 @@ public class VacationOrderServiceImpl implements VacationOrderService {
     private final EmployeeUseCaseService employeeUseCaseService;
     private final OrderUseCaseService orderUseCaseService;
     private final FileService fileService;
-    private final VacationAccrualPeriodService vacationAccrualPeriodService;
+    private final VacationAccrualPeriodRecordService vacationAccrualPeriodRecordService;
 
     @Value("${resource-storage.temporary}")
     private String resourceStoragePath;
@@ -111,7 +113,7 @@ public class VacationOrderServiceImpl implements VacationOrderService {
             order.setStatus(statusService.getByCode("APPROVED"));
             order.getVacation().setStatus(order.getStatus());
             stateService.create(order);
-
+            order.getVacation().getAllocations().forEach(allocation -> vacationAccrualPeriodRecordService.decrease(allocation.getVacationAccrualPeriodRecord().getId(),order.getVacation().getVacationRequest().getDays()));
             return order;
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
@@ -154,7 +156,6 @@ public class VacationOrderServiceImpl implements VacationOrderService {
         }
 
         var vacationAccrual = order.getVacation().getEmployee().getVacationAccruals().stream().findFirst().get();
-        vacationAccrualPeriodService.decrease(vacationAccrual.getId(),request.getVacationType().getId(),request.getDays());
     }
 
 
