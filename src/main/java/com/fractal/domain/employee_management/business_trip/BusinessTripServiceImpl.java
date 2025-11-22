@@ -1,13 +1,16 @@
 package com.fractal.domain.employee_management.business_trip;
 
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.employee_management.business_trip.mapper.BusinessTripMapperService;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceStateException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -16,11 +19,15 @@ class BusinessTripServiceImpl implements BusinessTripService {
 
     private final BusinessTripRepository businessTripRepository;
     private final BusinessTripMapperService mapperService;
+    private final StatusService statusService;
 
 
     @Override
     public BusinessTrip create(BusinessTripRequest dto) {
-        return save(mapperService.toEntity(dto));
+        var businessTrip = mapperService.toEntity(dto);
+        businessTrip.setStatus(statusService.getByCode("CREATED"));
+        return save(businessTrip);
+
     }
 
     @Override
@@ -69,4 +76,29 @@ class BusinessTripServiceImpl implements BusinessTripService {
         return businessTripRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("BusinessTrip with id: " + id + " not found"));
     }
 
+    @Override
+    public BusinessTrip review(Long id) {
+        var businessTrip = getById(id);
+        if (businessTrip.getStatus().getCode().equals("CREATED")) {
+            businessTrip.setApprovedDate(LocalDateTime.now());
+            //businessTrip.setApprovedUser(authenticatedService.getUser());
+            businessTrip.setStatus(statusService.getByCode("REVIEWED"));
+            return businessTrip;
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + businessTrip.getStatus().getName());
+        }
+    }
+
+    @Override
+    public BusinessTrip approve(Long id) {
+        var businessTrip = getById(id);
+        if (businessTrip.getStatus().getCode().equals("REVIEWED")) {
+            businessTrip.setApprovedDate(LocalDateTime.now());
+            //businessTrip.setApprovedUser(authenticatedService.getUser());
+            businessTrip.setStatus(statusService.getByCode("APPROVED"));
+            return businessTrip;
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + businessTrip.getStatus().getName());
+        }
+    }
 }

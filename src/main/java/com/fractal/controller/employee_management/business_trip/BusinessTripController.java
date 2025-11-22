@@ -4,6 +4,7 @@ package com.fractal.controller.employee_management.business_trip;
 import com.fractal.domain.employee_management.business_trip.BusinessTripService;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
+import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,16 @@ public class BusinessTripController {
     @PutMapping("/{id}")
     public ResponseEntity<BusinessTripResponse> update(@PathVariable Long id, @RequestBody @Valid BusinessTripRequest dto) {
         return ResponseEntity.ok(businessTripService.toDTO(businessTripService.update(id, dto)));
+    }
+
+    @PutMapping("review/{id}")
+    public ResponseEntity<BusinessTripResponse> review(@PathVariable Long id) {
+        return ResponseEntity.ok(businessTripService.toDTO(businessTripService.review(id)));
+    }
+
+    @PutMapping("approve/{id}")
+    public ResponseEntity<BusinessTripResponse> approve(@PathVariable Long id) {
+        return ResponseEntity.ok(businessTripService.toDTO(businessTripService.approve(id)));
     }
 
     @DeleteMapping("/{id}")

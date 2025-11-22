@@ -35,6 +35,11 @@ class InternalEmploymentServiceImpl implements InternalEmploymentService {
     }
 
     @Override
+    public InternalEmployment getByPositionId(Long positionId) {
+        return null;
+    }
+
+    @Override
     @Transactional
     public InternalEmployment update(Long id, InternalEmploymentRequest dto) {
         try {

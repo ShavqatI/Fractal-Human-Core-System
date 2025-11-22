@@ -11,7 +11,6 @@ public record BusinessTripOrderRequest(
         List<BusinessTripOrderRecordRequest> records,
         String number,
         LocalDate date,
-        Long statusId,
         List<MultipartFile> files
 
 ) {

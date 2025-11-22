@@ -45,6 +45,7 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
                 vacationRequest.getStartDate(),
                 vacationRequest.getEndDate(),
                 vacationRequest.getDays(),
+                vacationRequest.getWorkingDate(),
                 vacationRequest.getDescription(),
                 Optional.ofNullable(vacationRequest.getResponsibilities())
                         .orElse(emptyList())
@@ -82,9 +83,10 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
         vacationRequest.setVacationType(vacationTypeService.getById(dto.vacationTypeId()));
         vacationRequest.setStartDate(dto.startDate());
         vacationRequest.setEndDate(calculateEndDate(dto.startDate(),dto.endDate()));
-        vacationRequest.setDays((int) ChronoUnit.DAYS.between(dto.startDate(), vacationRequest.getEndDate()) + 1);
+        vacationRequest.setDays(calculateDays(dto.startDate(),dto.endDate()));
         vacationRequest.setDescription(dto.description());
-        vacationRequest.setWorkingDays(calculateWorkingDays(vacationRequest.getStartDate(),vacationRequest.getEndDate()));
+        vacationRequest.setWorkingDays(calculateWorkingDays(vacationRequest.getStartDate(),dto.endDate()));
+        vacationRequest.setWorkingDate(calculateWorkingDate(vacationRequest.getEndDate()));
         dto.responsibilities().forEach(responsibility -> vacationRequest.addResponsibility(responsibilityMapperService.toEntity(responsibility)));
         dto.medicalInfos().forEach(medicalInfo -> vacationRequest.addMedicalInfo(medicalInfoMapperService.toEntity(medicalInfo)));
         return vacationRequest;
@@ -93,6 +95,10 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
     private LocalDate calculateEndDate(LocalDate startDate, LocalDate endDate) {
         List<HolidayCalendar> holidays = holidayCalendarService.getByDates(startDate,endDate);
         return endDate.plusDays(holidays.size());
+    }
+
+    private int calculateDays(LocalDate startDate, LocalDate endDate) {
+        return (int) ChronoUnit.DAYS.between(startDate, endDate) + 1;
     }
 
     public int countWeekdays(LocalDate startDate, LocalDate endDate) {
@@ -110,6 +116,25 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
         List<HolidayCalendar> holidays = holidayCalendarService.getByDates(startDate,endDate);
         var weekDays = countWeekdays(startDate,endDate);
         return weekDays - holidays.size();
+    }
+
+    private LocalDate calculateWorkingDate(LocalDate date){
+        var weekDay = getWeekDay(date);
+        weekDay = isHoliday(weekDay);
+        return weekDay;
+    }
+
+    private LocalDate getWeekDay(LocalDate date) {
+        DayOfWeek dow = date.getDayOfWeek();
+        if (dow != DayOfWeek.SATURDAY && dow != DayOfWeek.SUNDAY) {
+            return date;
+        }
+        else return getWeekDay(date.plusDays(1L));
+    }
+    private LocalDate isHoliday(LocalDate date){
+        var holidayCalendar = holidayCalendarService.getByDate(date);
+        if(holidayCalendar.isEmpty()) return date;
+        else return isHoliday(date.plusDays(1L));
     }
 
 }

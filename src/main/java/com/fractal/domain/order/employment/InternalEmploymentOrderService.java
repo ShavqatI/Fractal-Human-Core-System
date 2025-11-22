@@ -1,11 +1,13 @@
 package com.fractal.domain.order.employment;
 
+import com.fractal.domain.abstraction.ApprovalWorkflowAware;
+import com.fractal.domain.order.business_trip.BusinessTripOrder;
 import com.fractal.domain.order.employment.dto.InternalEmploymentOrderRequest;
 import com.fractal.domain.order.employment.dto.InternalEmploymentOrderResponse;
 
 import java.util.List;
 
-public interface InternalEmploymentOrderService {
+public interface InternalEmploymentOrderService extends ApprovalWorkflowAware<Long, InternalEmploymentOrder> {
 
     InternalEmploymentOrder create(InternalEmploymentOrderRequest dto);
 

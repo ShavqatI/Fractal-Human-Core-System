@@ -11,7 +11,6 @@ import java.util.List;
 public record BusinessTripRequest(
         Long employeeId,
         Long businessTripTypeId,
-        Long statusId,
         String purpose,
         String description,
         LocalDate startDate,

@@ -76,7 +76,6 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
     private BusinessTrip mapToEntity(BusinessTrip businessTrip, BusinessTripRequest dto) {
         businessTrip.setEmployee(employeeService.getById(dto.employeeId()));
         businessTrip.setBusinessTripType(businessTripTypeService.getById(dto.businessTripTypeId()));
-        businessTrip.setStatus(statusService.getById(dto.statusId()));
         businessTrip.setPurpose(dto.purpose());
         businessTrip.setDescription(dto.description());
         businessTrip.setStartDate(dto.startDate());

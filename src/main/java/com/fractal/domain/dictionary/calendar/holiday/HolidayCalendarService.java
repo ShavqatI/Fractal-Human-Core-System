@@ -5,6 +5,7 @@ import com.fractal.domain.dictionary.calendar.holiday.dto.HolidayCalenderRespons
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface HolidayCalendarService {
 
@@ -13,7 +14,7 @@ public interface HolidayCalendarService {
     List<HolidayCalendar> getAll();
 
     HolidayCalendar getByCode(String code);
-    HolidayCalendar getByDate(LocalDate date);
+    Optional<HolidayCalendar> getByDate(LocalDate date);
     List<HolidayCalendar> getByDates(LocalDate startDate, LocalDate endDate);
     HolidayCalendar getById(Long id);
 

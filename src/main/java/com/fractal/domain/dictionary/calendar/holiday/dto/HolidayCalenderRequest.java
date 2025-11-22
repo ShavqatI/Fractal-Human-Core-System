@@ -9,7 +9,6 @@ import java.time.LocalDate;
 
 public record HolidayCalenderRequest(
         @NotBlank
-        @Pattern(regexp = "^[A-Z_0-9]{3,50}$", message = "Code must be in Latin uppercase letters")
         String code,
         @NotBlank
         @Size(min = 3, max = 100, message = "The name length should be in (3 to 20 symbols)")

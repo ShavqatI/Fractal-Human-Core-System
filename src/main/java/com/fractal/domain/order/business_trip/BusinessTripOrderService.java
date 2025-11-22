@@ -1,11 +1,13 @@
 package com.fractal.domain.order.business_trip;
 
+import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderRequest;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
+import com.fractal.domain.order.vacation.VacationOrder;
 
 import java.util.List;
 
-public interface BusinessTripOrderService {
+public interface BusinessTripOrderService extends ApprovalWorkflowAware<Long, BusinessTripOrder> {
 
     BusinessTripOrder create(BusinessTripOrderRequest dto);
 

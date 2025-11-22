@@ -11,4 +11,6 @@ interface EmployeeEmploymentRepository extends JpaRepository<EmployeeEmployment,
     List<EmployeeEmployment> findAllByEmployeeId(Long employeeId);
 
     Optional<EmployeeEmployment> findByEmployeeIdAndEmploymentId(Long employeeId, Long id);
+
+    List<EmployeeEmployment> findAllByEmploymentEndDateIsNullAndEmploymentStatusCode(String statusCode);
 }

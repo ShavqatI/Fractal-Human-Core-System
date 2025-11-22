@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -36,6 +37,11 @@ public class VacationAccrualPeriodServiceImpl implements VacationAccrualPeriodSe
     @Override
     public List<VacationAccrualPeriod> getAllByVacationAccrualId(Long accrualId) {
         return periodRepository.findAllByVacationAccrualId(accrualId);
+    }
+
+    @Override
+    public List<VacationAccrualPeriod> getAllActiveByVacationAccrualId(Long accrualId) {
+        return periodRepository.findAllByVacationAccrualIdAndStatusCodeOrderByStartDateDesc(accrualId,"ACTIVE");
     }
 
     @Override
@@ -91,5 +97,21 @@ public class VacationAccrualPeriodServiceImpl implements VacationAccrualPeriodSe
         }
     }
 
+    @Override
+    public void decrease(Long id, Long vacationTypeId, int days) {
+        var period = getById(id);
+        var record = period.getRecords().stream().filter(r-> r.getVacationType().getId().equals(vacationTypeId)).findFirst().get();
+        record.setRemainingDays(record.getRemainingDays() - days);
+        record.setUtilizedDays(days);
+        save(period);
+    }
 
+    @Override
+    public void increase(Long id, Long vacationTypeId, int days) {
+        var period = getById(id);
+        var record = period.getRecords().stream().filter(r-> r.getVacationType().getId().equals(vacationTypeId)).findFirst().get();
+        record.setRemainingDays(record.getRemainingDays() + days);
+        record.setUtilizedDays(record.getUtilizedDays() - days);
+        save(period);
+    }
 }

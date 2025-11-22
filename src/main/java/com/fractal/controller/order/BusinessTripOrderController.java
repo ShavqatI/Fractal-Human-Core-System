@@ -7,6 +7,7 @@ import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
 import com.fractal.domain.order.vacation.VacationOrderService;
 import com.fractal.domain.order.vacation.dto.VacationOrderRequest;
 import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
+import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
@@ -54,6 +55,16 @@ public class BusinessTripOrderController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         orderService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("review/{id}")
+    public ResponseEntity<BusinessTripOrderResponse> review(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.toDTO(orderService.review(id)));
+    }
+
+    @PutMapping("approve/{id}")
+    public ResponseEntity<BusinessTripOrderResponse> approve(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.toDTO(orderService.approve(id)));
     }
 
     @GetMapping("print/{id}")

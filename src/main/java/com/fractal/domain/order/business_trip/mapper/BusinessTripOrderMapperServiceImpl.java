@@ -62,7 +62,6 @@ class BusinessTripOrderMapperServiceImpl implements BusinessTripOrderMapperServi
         order.setOrderType(orderTypeService.getById(dto.orderTypeId()));
         order.setNumber(dto.number());
         order.setDate(dto.date());
-        order.setStatus(statusService.getById(dto.statusId()));
         dto.files().forEach(file -> order.addResource(resourceMapperService.toEntity(file, null)));
         dto.records().forEach(record-> order.addRecord(recordMapperService.toEntity(record)));
         return order;

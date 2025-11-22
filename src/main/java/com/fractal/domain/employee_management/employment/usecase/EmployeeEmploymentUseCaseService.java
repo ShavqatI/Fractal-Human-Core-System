@@ -1,13 +1,13 @@
-package com.fractal.domain.employee_management.employee.usecase;
+package com.fractal.domain.employee_management.employment.usecase;
 
 import com.fractal.domain.employee_management.employee.Employee;
-import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 
 import java.util.Optional;
 
-public interface EmployeeUseCaseService {
+public interface EmployeeEmploymentUseCaseService {
 
-    String getFullName(Employee employee);
     Optional<InternalEmploymentResponse> getCurrentEmployment(Employee employee);
+    String getHrHeadEmployeeName();
+    String getCEOEmployeeName();
 }

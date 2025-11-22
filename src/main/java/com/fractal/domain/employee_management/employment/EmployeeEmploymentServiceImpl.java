@@ -1,20 +1,28 @@
 package com.fractal.domain.employee_management.employment;
 
+import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentMapperService;
 import com.fractal.domain.employment.Employment;
+import com.fractal.domain.employment.EmploymentService;
 import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.employment.external.ExternalEmploymentService;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentRequest;
+import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
+import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
+import com.fractal.domain.organization_management.position.PositionService;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +33,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     private final InternalEmploymentService internalEmploymentService;
     private final ExternalEmploymentService externalEmploymentService;
     private final EmployeeEmploymentMapperService employmentMapperService;
+
 
     @Override
     @Transactional
@@ -50,6 +59,11 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     @Override
     public List<EmployeeEmployment> getAllByEmployeeId(Long employeeId) {
         return employmentRepository.findAllByEmployeeId(employeeId);
+    }
+
+    @Override
+    public List<EmployeeEmployment> getAllActive() {
+        return employmentRepository.findAllByEmploymentEndDateIsNullAndEmploymentStatusCode("ACTIVE");
     }
 
 
@@ -85,4 +99,6 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     public EmploymentResponse toDTO(EmployeeEmployment employment) {
         return employmentMapperService.toDTO(employment);
     }
+
+
 }

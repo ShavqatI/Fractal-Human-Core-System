@@ -11,7 +11,6 @@ public record InternalEmploymentOrderRequest(
         List<InternalEmploymentOrderRecordRequest> records,
         String number,
         LocalDate date,
-        Long statusId,
         List<MultipartFile> files
 
 ) {

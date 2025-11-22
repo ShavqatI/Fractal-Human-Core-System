@@ -12,6 +12,7 @@ import java.util.Optional;
 public interface VacationAccrualPeriodRepository extends JpaRepository<VacationAccrualPeriod, Long> {
 
     List<VacationAccrualPeriod> findAllByVacationAccrualId(Long accrualId);
+    List<VacationAccrualPeriod> findAllByVacationAccrualIdAndStatusCodeOrderByStartDateDesc(Long accrualId, String statusCode);
     VacationAccrualPeriod findAllByVacationAccrualIdAndStartDateAndEndDate(Long accrualId, LocalDate startDate,LocalDate endDate);
     Optional<VacationAccrualPeriod> findByVacationAccrualIdAndId(Long accrualId, Long id);
 }

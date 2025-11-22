@@ -1,5 +1,8 @@
 package com.fractal;
 
+import com.fractal.domain.employee_management.employee.EmployeeService;
+import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
+import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.navigation.action.ActionService;
 import com.fractal.domain.navigation.menu.Menu;
 import com.fractal.domain.navigation.menu.MenuService;
@@ -23,6 +26,10 @@ public class Application implements CommandLineRunner {
     private final MenuActionService menuActionService;
     private final ActionService actionService;
     private final MenuService menuService;
+    //private final EmployeeUseCaseService employeeUseCaseService;
+    //private final EmployeeService employeeService;
+
+    private final EmployeeEmploymentService employeeEmploymentService;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -30,7 +37,9 @@ public class Application implements CommandLineRunner {
 
 
     @Override
-    public void run(String... args) throws Exception {}
+    public void run(String... args) throws Exception {
+       //employeeEmploymentService.getAll().size();
+    }
 
     private String buildUrl(MenuAction menuAction) {
         var actionUrl = actionService.getById(menuAction.getAction().getId()).getUrl();

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -35,8 +36,8 @@ class HolidayCalendarServiceImpl implements HolidayCalendarService {
     }
 
     @Override
-    public HolidayCalendar getByDate(LocalDate date) {
-        return holidayCalendarRepository.findByDate(date).orElseThrow(()->new ResourceNotFoundException("Holiday with date :" + date + " not found"));
+    public Optional<HolidayCalendar> getByDate(LocalDate date) {
+        return holidayCalendarRepository.findByDate(date);
     }
 
     @Override

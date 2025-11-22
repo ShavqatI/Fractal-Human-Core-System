@@ -1,17 +1,20 @@
 package com.fractal.domain.order.business_trip;
 
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.business_trip.BusinessTripService;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderRequest;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
 import com.fractal.domain.order.business_trip.mapper.BusinessTripOrderMapperService;
 import com.fractal.domain.order.state.OrderStateService;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,12 +24,15 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     private final BusinessTripOrderRepository orderRepository;
     private final BusinessTripOrderMapperService orderMapperService;
     private final OrderStateService stateService;
+    private final StatusService statusService;
 
 
     @Override
     @Transactional
     public BusinessTripOrder create(BusinessTripOrderRequest dto) {
-        var order = save(orderMapperService.toEntity(dto));
+        var order = orderMapperService.toEntity(dto);
+        order.setStatus(statusService.getByCode("CREATED"));
+        order = save(order);
         stateService.create(order);
         return order;
     }
@@ -70,4 +76,33 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     }
 
 
+    @Override
+    public BusinessTripOrder review(Long id) {
+        var order = getById(id);
+        if (order.getStatus().getCode().equals("CREATED")) {
+            order.setReviewedDate(LocalDateTime.now());
+            //order.setReviewedUser(authenticatedService.getUser());
+            order.setStatus(statusService.getByCode("REVIEWED"));
+            stateService.create(order);
+            return order;
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
+        }
+    }
+
+    @Override
+    public BusinessTripOrder approve(Long id) {
+        var order = getById(id);
+        if (order.getStatus().getCode().equals("REVIEWED")) {
+            order.setApprovedDate(LocalDateTime.now());
+            //order.setApprovedUser(authenticatedService.getUser());
+            order.setStatus(statusService.getByCode("APPROVED"));
+            order.setStatus(order.getStatus());
+            stateService.create(order);
+
+            return order;
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
+        }
+    }
 }

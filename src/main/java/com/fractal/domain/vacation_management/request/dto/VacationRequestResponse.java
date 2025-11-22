@@ -19,6 +19,7 @@ public record VacationRequestResponse(
         LocalDate startDate,
         LocalDate endDate,
         Integer days,
+        LocalDate workingDate,
         String description,
         List<VacationRequestResponsibilityResponse> responsibilities,
         List<VacationRequestMedicalInfoResponse> medicalInfos,

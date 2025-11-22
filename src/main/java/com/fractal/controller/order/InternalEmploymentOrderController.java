@@ -4,6 +4,7 @@ package com.fractal.controller.order;
 import com.fractal.domain.order.employment.InternalEmploymentOrderService;
 import com.fractal.domain.order.employment.dto.InternalEmploymentOrderRequest;
 import com.fractal.domain.order.employment.dto.InternalEmploymentOrderResponse;
+import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -38,6 +39,15 @@ public class InternalEmploymentOrderController {
     @PutMapping("/{id}")
     public ResponseEntity<InternalEmploymentOrderResponse> update(@PathVariable Long id, @RequestBody @Valid InternalEmploymentOrderRequest dto) {
         return ResponseEntity.ok(orderService.toDTO(orderService.update(id, dto)));
+    }
+    @PutMapping("review/{id}")
+    public ResponseEntity<InternalEmploymentOrderResponse> review(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.toDTO(orderService.review(id)));
+    }
+
+    @PutMapping("approve/{id}")
+    public ResponseEntity<InternalEmploymentOrderResponse> approve(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.toDTO(orderService.approve(id)));
     }
 
     @DeleteMapping("/{id}")

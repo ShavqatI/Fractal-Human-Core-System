@@ -1,6 +1,7 @@
 package com.fractal.controller.order;
 
 
+import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
 import com.fractal.domain.order.vacation.VacationOrderService;
 import com.fractal.domain.order.vacation.dto.VacationOrderRequest;
 import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
@@ -40,6 +41,16 @@ public class VacationOrderController {
     @PutMapping("/{id}")
     public ResponseEntity<VacationOrderResponse> update(@PathVariable Long id, @RequestBody @Valid VacationOrderRequest dto) {
         return ResponseEntity.ok(orderService.toDTO(orderService.update(id, dto)));
+    }
+
+    @PutMapping("review/{id}")
+    public ResponseEntity<VacationOrderResponse> review(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.toDTO(orderService.review(id)));
+    }
+
+    @PutMapping("approve/{id}")
+    public ResponseEntity<VacationOrderResponse> approve(@PathVariable Long id) {
+        return ResponseEntity.ok(orderService.toDTO(orderService.approve(id)));
     }
 
     @DeleteMapping("/{id}")

@@ -1,11 +1,12 @@
 package com.fractal.domain.employee_management.business_trip;
 
+import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 
 import java.util.List;
 
-public interface BusinessTripService {
+public interface BusinessTripService extends ApprovalWorkflowAware<Long,BusinessTrip> {
     BusinessTrip create(BusinessTripRequest dto);
 
     List<BusinessTrip> getAll();

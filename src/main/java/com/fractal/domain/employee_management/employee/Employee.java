@@ -16,6 +16,7 @@ import com.fractal.domain.employee_management.performance.Performance;
 import com.fractal.domain.employee_management.professional_experience.EmployeeProfessionalExperience;
 import com.fractal.domain.employee_management.relative.Relative;
 import com.fractal.domain.employee_management.subordinate.Subordinate;
+import com.fractal.domain.vacation_management.accrual.VacationAccrual;
 import com.fractal.domain.vacation_management.vacation.Vacation;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -78,6 +79,9 @@ public class Employee extends Person {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<Vacation> vacations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private final List<VacationAccrual> vacationAccruals = new ArrayList<>();
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private final List<Subordinate> subordinates = new ArrayList<>();

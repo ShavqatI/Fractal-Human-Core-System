@@ -10,6 +10,10 @@ import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
 import com.fractal.domain.order.vacation.mapper.VacationOrderMapperService;
 import com.fractal.domain.poi.processor.word.WordTemplateProcessorService;
 import com.fractal.domain.poi.processor.word.WordToPdfConverterService;
+import com.fractal.domain.resource.FileService;
+import com.fractal.domain.vacation_management.accrual.VacationAccrual;
+import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriod;
+import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriodService;
 import com.fractal.domain.vacation_management.vacation.VacationService;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
@@ -20,10 +24,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -39,6 +40,8 @@ public class VacationOrderServiceImpl implements VacationOrderService {
     private final WordToPdfConverterService wordToPdfConverterService;
     private final EmployeeUseCaseService employeeUseCaseService;
     private final OrderUseCaseService orderUseCaseService;
+    private final FileService fileService;
+    private final VacationAccrualPeriodService vacationAccrualPeriodService;
 
     @Value("${resource-storage.temporary}")
     private String resourceStoragePath;
@@ -84,9 +87,6 @@ public class VacationOrderServiceImpl implements VacationOrderService {
         return orderMapperService.toDTO(order);
     }
 
-
-
-
     @Override
     public VacationOrder review(Long id) {
         var order = getById(id);
@@ -111,6 +111,7 @@ public class VacationOrderServiceImpl implements VacationOrderService {
             order.setStatus(statusService.getByCode("APPROVED"));
             order.getVacation().setStatus(order.getStatus());
             stateService.create(order);
+
             return order;
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
@@ -120,8 +121,9 @@ public class VacationOrderServiceImpl implements VacationOrderService {
     @Override
     public void print(Long id)  {
         var order = getById(id);
+        var request = order.getVacation().getVacationRequest();
         var employment = employeeUseCaseService.getCurrentEmployment(order.getVacation().getEmployee()).get();
-        var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx").toAbsolutePath();
+        var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
         var pdfFilePath =  Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
 
         Map<String, String> values = new HashMap<>();
@@ -129,23 +131,31 @@ public class VacationOrderServiceImpl implements VacationOrderService {
 
         values.put("branchName", "DMB");
         values.put("employeeName", employeeUseCaseService.getFullName(order.getVacation().getEmployee()));
-        values.put("employeePosition", employment.getPosition().getName());
-        values.put("fullBankName", employment.getOrganization().getFullName());
-        values.put("calendarDays", order.getVacation().getVacationRequest().getDays().toString());
-        values.put("startDate", order.getVacation().getVacationRequest().getStartDate().toString());
-        values.put("endDate", order.getVacation().getVacationRequest().getEndDate().toString());
-        values.put("returnDay", order.getVacation().getVacationRequest().getEndDate().plusDays(1L).toString());
-        values.put("successorEmployeeName", employeeUseCaseService.getFullName(order.getVacation().getVacationRequest().getSuccessorEmployee()));
+        values.put("employeePosition", employment.position().name());
+        values.put("fullBankName", employment.organization().name());
+        values.put("calendarDays", request.getDays().toString());
+        values.put("startDate", request.getStartDate().toString());
+        values.put("endDate", request.getEndDate().toString());
+        values.put("startDateYear", request.getEndDate().toString());
+        values.put("endDateYear", request.getEndDate().toString());
+        values.put("returnDay", request.getWorkingDate().toString());
+        values.put("successorEmployeeName", employeeUseCaseService.getFullName(request.getSuccessorEmployee()));
         values.put("percent", order.getVacation().getSuccessorCompensationPercentage().toString());
-        values.put("workingDays", order.getVacation().getVacationRequest().getWorkingDays().toString());
+        values.put("workingDays", request.getWorkingDays().toString());
         values.put("sourceDocument", order.getSourceDocument());
-        values.put("hrHead", "test head");
+        values.putAll(orderUseCaseService.getFooter());
 
         try {
-            wordTemplateProcessorService.process(Path.of(order.getOrderType().getDocumentTemplateManager().getFilePath()), wordFilePath, values);
+           wordTemplateProcessorService.process(Path.of(order.getOrderType().getDocumentTemplateManager().getFilePath()), wordFilePath, values);
+            wordToPdfConverterService.convert(wordFilePath,pdfFilePath);
+            fileService.delete(wordFilePath.toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        wordToPdfConverterService.convert(wordFilePath,pdfFilePath);
+
+        var vacationAccrual = order.getVacation().getEmployee().getVacationAccruals().stream().findFirst().get();
+        vacationAccrualPeriodService.decrease(vacationAccrual.getId(),request.getVacationType().getId(),request.getDays());
     }
+
+
 }
