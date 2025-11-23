@@ -25,7 +25,6 @@ class BusinessTripServiceImpl implements BusinessTripService {
     @Override
     public BusinessTrip create(BusinessTripRequest dto) {
         var businessTrip = mapperService.toEntity(dto);
-        businessTrip.setStatus(statusService.getByCode("CREATED"));
         return save(businessTrip);
 
     }

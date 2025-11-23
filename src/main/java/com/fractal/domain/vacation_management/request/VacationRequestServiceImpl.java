@@ -27,7 +27,6 @@ class VacationRequestServiceImpl implements VacationRequestService {
     @Override
     public VacationRequest create(VacationRequestRequest dto) {
         var request = save(mapperService.toEntity(dto));
-        request.setStatus(statusService.getByCode("CREATED"));
         stateService.create(request);
         return request;
     }

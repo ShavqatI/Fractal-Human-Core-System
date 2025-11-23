@@ -10,7 +10,6 @@ import java.util.List;
 public record VacationRequestRequest(
         @NotNull
         Long employeeId,
-        @NotNull
         Long successorEmployeeId,
         @NotNull
         Long vacationTypeId,

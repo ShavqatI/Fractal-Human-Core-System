@@ -35,7 +35,10 @@ class VacationScheduleMapperServiceImpl implements VacationScheduleMapperService
 
     @Override
     public VacationSchedule toEntity(VacationScheduleRequest dto) {
-        return mapToEntity(new VacationSchedule(), dto);
+        var schedule = mapToEntity(new VacationSchedule(), dto);
+        schedule.setStatus(statusService.getByCode("CREATED"));
+        return schedule;
+
     }
 
     @Override

@@ -41,7 +41,9 @@ class BusinessTripLocationMapperServiceImpl implements BusinessTripLocationMappe
 
     @Override
     public BusinessTripLocation toEntity(BusinessTripLocationRequest dto) {
-        return mapToEntity(new BusinessTripLocation(), dto);
+        var location =  mapToEntity(new BusinessTripLocation(), dto);
+        location.setStatus(statusService.getByCode("CREATED"));
+        return location;
     }
 
     @Override
@@ -53,7 +55,6 @@ class BusinessTripLocationMapperServiceImpl implements BusinessTripLocationMappe
         location.setBusinessTripLocationType(locationTypeService.getById(dto.locationTypeId()));
         location.setStartTime(dto.startTime());
         location.setEndTime(dto.endTime());
-        location.setStatus(statusService.getById(dto.statusId()));
         dto.addresses().forEach(address -> location.addAddress(addressMapperService.toEntity(address)));
         return location;
     }

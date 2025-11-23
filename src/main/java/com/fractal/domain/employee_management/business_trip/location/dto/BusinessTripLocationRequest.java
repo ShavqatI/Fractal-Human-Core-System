@@ -9,7 +9,6 @@ public record BusinessTripLocationRequest(
         Long locationTypeId,
         LocalDateTime startTime,
         LocalDateTime endTime,
-        List<BusinessTripLocationAddressRequest> addresses,
-        Long statusId
+        List<BusinessTripLocationAddressRequest> addresses
 ) {
 }

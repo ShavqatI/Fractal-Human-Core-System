@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 public class BusinessTripOrder extends Order {
 
-    @OneToMany(mappedBy = "businessTripOrder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "businessTripOrder", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BusinessTripOrderRecord> records = new ArrayList<>();
 
     public void addRecord(BusinessTripOrderRecord record) {

@@ -8,5 +8,6 @@ public interface OrderUseCaseService {
 
      Map getHeader(Order order);
      Map getFooter();
+     String getCEO();
 
 }

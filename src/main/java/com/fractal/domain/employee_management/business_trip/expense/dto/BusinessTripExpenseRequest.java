@@ -12,9 +12,6 @@ public record BusinessTripExpenseRequest(
         Long currencyId,
         BigDecimal amount,
         String description,
-        List<MultipartFile> files,
-        Long statusId
-
-
+        List<MultipartFile> files
 ) {
 }

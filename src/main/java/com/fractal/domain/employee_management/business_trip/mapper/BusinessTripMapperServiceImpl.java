@@ -63,7 +63,9 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
 
     @Override
     public BusinessTrip toEntity(BusinessTripRequest dto) {
-        return mapToEntity(new BusinessTrip(), dto);
+       var businessTrip = mapToEntity(new BusinessTrip(), dto);
+        businessTrip.setStatus(statusService.getByCode("CREATED"));
+        return businessTrip;
     }
 
     @Override

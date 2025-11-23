@@ -46,7 +46,9 @@ class BusinessTripExpenseMapperServiceImpl implements BusinessTripExpenseMapperS
 
     @Override
     public BusinessTripExpense toEntity(BusinessTripExpenseRequest dto) {
-        return mapToEntity(new BusinessTripExpense(), dto);
+        var expense = mapToEntity(new BusinessTripExpense(), dto);
+        expense.setStatus(statusService.getByCode("CREATED"));
+        return expense;
     }
 
     @Override
@@ -60,7 +62,6 @@ class BusinessTripExpenseMapperServiceImpl implements BusinessTripExpenseMapperS
         expense.setAmount(dto.amount());
         expense.setDate(dto.date());
         expense.setDescription(dto.description());
-        expense.setStatus(statusService.getById(dto.statusId()));
         dto.files().forEach(file -> expense.addResource(resourceMapperService.toEntity(file, null)));
         return expense;
     }

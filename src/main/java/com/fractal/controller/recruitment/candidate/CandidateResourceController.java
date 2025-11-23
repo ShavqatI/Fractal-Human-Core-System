@@ -4,6 +4,7 @@ package com.fractal.controller.recruitment.candidate;
 import com.fractal.domain.recruitment.candidate.resource.CandidateResourceService;
 import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceRequest;
 import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceResponse;
+import com.fractal.domain.resource.FileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 public class CandidateResourceController {
 
     private final CandidateResourceService resourceService;
+    private final FileService fileService;
 
 
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
@@ -59,17 +61,7 @@ public class CandidateResourceController {
         var employeeResource = resourceService.getById(candidateId, id);
         try {
             Path filePath = Path.of(employeeResource.getUrl()).toAbsolutePath();
-            Resource resource = new FileSystemResource(filePath);
-            String encodedFilename = URLEncoder.encode(resource.getFilename(), StandardCharsets.UTF_8);
-            if (!resource.exists()) {
-                return ResponseEntity.noContent().build();
-            }
-            return ResponseEntity.ok()
-                    .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + encodedFilename + "\"")
-                    .body(resource);
-
-
+            return fileService.download(filePath);
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }

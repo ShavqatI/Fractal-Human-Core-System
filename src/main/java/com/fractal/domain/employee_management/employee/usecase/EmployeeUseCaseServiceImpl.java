@@ -26,18 +26,20 @@ class EmployeeUseCaseServiceImpl implements EmployeeUseCaseService {
     @Override
     public String getFullName(Employee employee) {
         StringBuilder sb = new StringBuilder();
-        sb.append(employee.getLastName() + " ");
-        sb.append(employee.getFirstName()+ " ");
-        sb.append(employee.getPatronymicName());
+        if(employee != null) {
+            sb.append(employee.getLastName() + " ");
+            sb.append(employee.getFirstName() + " ");
+            sb.append(employee.getPatronymicName());
+        }
         return sb.toString();
     }
 
     @Override
     public String getLastNameWithInitials(Employee employee) {
         StringBuilder sb = new StringBuilder();
-        sb.append(employee.getLastName() + " ");
-        sb.append(employee.getFirstName().substring(1) + ". ");
-        sb.append(employee.getPatronymicName().substring(1));
+        sb.append(employee.getLastName()).append(" ");
+        sb.append(employee.getFirstName().substring(0,1)).append(". ");
+        sb.append(employee.getPatronymicName().substring(0,1)).append(".");
         return sb.toString();
     }
 

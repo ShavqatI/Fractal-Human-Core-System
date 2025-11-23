@@ -40,7 +40,9 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
         return new VacationRequestResponse(
                 vacationRequest.getId(),
                 employeeService.toCompactDTO(vacationRequest.getEmployee()),
-                employeeService.toCompactDTO(vacationRequest.getSuccessorEmployee()),
+                Optional.ofNullable(vacationRequest.getSuccessorEmployee())
+                        .map(employeeService::toCompactDTO)
+                        .orElse(null),
                 vacationTypeService.toDTO(vacationRequest.getVacationType()),
                 vacationRequest.getStartDate(),
                 vacationRequest.getEndDate(),
@@ -69,7 +71,9 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
 
     @Override
     public VacationRequest toEntity(VacationRequestRequest dto) {
-        return mapToEntity(new VacationRequest(), dto);
+        var request = mapToEntity(new VacationRequest(), dto);
+        request.setStatus(statusService.getByCode("CREATED"));
+        return request;
     }
 
     @Override
@@ -79,6 +83,7 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
 
     private VacationRequest mapToEntity(VacationRequest vacationRequest, VacationRequestRequest dto) {
         vacationRequest.setEmployee(employeeService.getById(dto.employeeId()));
+        if(dto.successorEmployeeId() != null)
         vacationRequest.setSuccessorEmployee(employeeService.getById(dto.successorEmployeeId()));
         vacationRequest.setVacationType(vacationTypeService.getById(dto.vacationTypeId()));
         vacationRequest.setStartDate(dto.startDate());
@@ -104,7 +109,7 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
     public int countWeekdays(LocalDate startDate, LocalDate endDate) {
         long days = ChronoUnit.DAYS.between(startDate, endDate) + 1;
         int weekdays = 0;
-        for (long i = 0; i < days; i++) {
+        for (long i = 0; i <= days; i++) {
             DayOfWeek dow = startDate.plusDays(i).getDayOfWeek();
             if (dow != DayOfWeek.SATURDAY && dow != DayOfWeek.SUNDAY) {
                 weekdays++;

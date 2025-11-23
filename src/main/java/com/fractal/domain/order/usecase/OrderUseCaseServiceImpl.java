@@ -41,5 +41,10 @@ class OrderUseCaseServiceImpl implements OrderUseCaseService {
         return employeeUseCaseService.getCurrentEmployment(employee);
     }
 
+    @Override
+    public String getCEO() {
+       return employeeUseCaseService.getLastNameWithInitials(employeeEmploymentUseCaseService.getCEOEmployee());
+    }
+
 
 }

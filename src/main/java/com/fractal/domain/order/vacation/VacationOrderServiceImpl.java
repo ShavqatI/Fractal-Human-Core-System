@@ -46,6 +46,7 @@ public class VacationOrderServiceImpl implements VacationOrderService {
     private final AuthenticatedService authenticatedService;
 
 
+
     @Value("${resource-storage.temporary}")
     private String resourceStoragePath;
 
@@ -124,28 +125,14 @@ public class VacationOrderServiceImpl implements VacationOrderService {
     @Override
     public Path print(Long id)  {
         var order = getById(id);
-        var request = order.getVacation().getVacationRequest();
-        var employment = employeeUseCaseService.getCurrentEmployment(order.getVacation().getEmployee()).get();
         var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
         var pdfFilePath =  Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
-        var period = getPeriod(order.getVacation().getAllocations().stream().findFirst().get().getVacationAccrualPeriodRecord().getId());
 
         Map<String, String> values = new HashMap<>();
-        values.putAll(orderUseCaseService.getHeader(order));
 
-        values.put("employeeName", employeeUseCaseService.getFullName(order.getVacation().getEmployee()));
-        values.put("employeePosition", employment.position().name());
-        values.put("fullBankName", employment.organization().name());
-        values.put("calendarDays", request.getDays().toString());
-        values.put("startDate", request.getStartDate().toString());
-        values.put("endDate", request.getEndDate().toString());
-        values.put("startDateYear", period.getStartDate().toString());
-        values.put("endDateYear", period.getEndDate().toString());
-        values.put("returnDay", request.getWorkingDate().toString());
-        values.put("successorEmployeeName", employeeUseCaseService.getFullName(request.getSuccessorEmployee()));
-        values.put("percent", order.getVacation().getSuccessorCompensationPercentage().toString());
-        values.put("workingDays", request.getWorkingDays().toString());
-        values.put("sourceDocument", order.getSourceDocument());
+        values.putAll(orderUseCaseService.getHeader(order));
+        values.putAll(getCommonValues(order));
+        values.putAll(typeDecision(order));
         values.putAll(orderUseCaseService.getFooter());
 
         try {
@@ -161,6 +148,65 @@ public class VacationOrderServiceImpl implements VacationOrderService {
     private VacationAccrualPeriod getPeriod(Long recordId){
         return vacationAccrualPeriodRecordService.getById(recordId).getVacationAccrualPeriod();
     }
+
+    private Map getCommonValues(VacationOrder order){
+        Map<String, String> values = new HashMap<>();
+        var employment = employeeUseCaseService.getCurrentEmployment(order.getVacation().getEmployee()).get();
+
+        values.put("employeeName", employeeUseCaseService.getFullName(order.getVacation().getEmployee()));
+        values.put("employeePosition", employment.position().name());
+
+        return values;
+    }
+    private Map getAnnualValues(VacationOrder order) {
+        Map<String,String> values = new HashMap<>();
+        var employment = employeeUseCaseService.getCurrentEmployment(order.getVacation().getEmployee()).get();
+
+        var request = order.getVacation().getVacationRequest();
+        var period = getPeriod(order.getVacation().getAllocations().stream().findFirst().get().getVacationAccrualPeriodRecord().getId());
+        values.put("fullBankName", employment.organization().name());
+
+        values.put("calendarDays", request.getDays().toString());
+        values.put("startDate", request.getStartDate().toString());
+        values.put("endDate", request.getEndDate().toString());
+        values.put("startDateYear", period.getStartDate().toString());
+        values.put("endDateYear", period.getEndDate().toString());
+        values.put("returnDay", request.getWorkingDate().toString());
+        values.put("successorEmployeeName", employeeUseCaseService.getFullName(request.getSuccessorEmployee()));
+        values.put("percent", order.getVacation().getSuccessorCompensationPercentage().toString());
+        values.put("workingDays", request.getWorkingDays().toString());
+        values.put("sourceDocument", order.getSourceDocument());
+        return values;
+    }
+    private Map getSickValues(VacationOrder order) {
+        Map<String,String> values = new HashMap<>();
+        var employment = employeeUseCaseService.getCurrentEmployment(order.getVacation().getEmployee()).get();
+        var successorEmployment = employeeUseCaseService.getCurrentEmployment(order.getVacation().getVacationRequest().getSuccessorEmployee()).get();
+        var request = order.getVacation().getVacationRequest();
+
+        values.put("fullBankName", employment.organization().name());
+        values.put("startDate", request.getStartDate().toString());
+        values.put("endDate", request.getEndDate().toString());
+        values.put("successorEmployeeName", employeeUseCaseService.getFullName(request.getSuccessorEmployee()));
+        values.put("successorEmployeePosition", successorEmployment.position().name());
+        values.put("percent", order.getVacation().getSuccessorCompensationPercentage().toString());
+        values.put("workingDays", request.getWorkingDays().toString());
+        values.put("sourceDocument", order.getSourceDocument());
+        values.put("ceo", orderUseCaseService.getCEO());
+        return values;
+   }
+
+    private Map<String,String> typeDecision(VacationOrder order){
+        switch (order.getVacation().getVacationRequest().getVacationType().getCode()) {
+            case "ANNUAL":
+                return getAnnualValues(order);
+            case "SICKVACATION" :
+                return getSickValues(order);
+            default: return new HashMap<>();
+        }
+    }
+
+
 
 
 
