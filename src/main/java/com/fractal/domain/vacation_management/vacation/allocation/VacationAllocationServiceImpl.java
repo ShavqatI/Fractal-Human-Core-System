@@ -32,12 +32,12 @@ public class VacationAllocationServiceImpl implements VacationAllocationService 
 
     @Override
     public List<VacationAllocation> getAllByVacationRequestId(Long vacationRequestId) {
-        return allocationRepository.findAllByVacationRequestId(vacationRequestId);
+        return allocationRepository.findAllByVacationId(vacationRequestId);
     }
 
     @Override
     public VacationAllocation getById(Long vacationRequestId, Long id) {
-        return allocationRepository.findByVacationRequestIdAndId(vacationRequestId, id).orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
+        return allocationRepository.findByVacationIdAndId(vacationRequestId, id).orElseThrow(() -> new ResourceNotFoundException("Employee contact with id: " + id + " not found"));
     }
 
     @Override

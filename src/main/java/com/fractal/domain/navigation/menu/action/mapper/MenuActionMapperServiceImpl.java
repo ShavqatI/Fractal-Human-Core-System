@@ -5,6 +5,7 @@ import com.fractal.domain.navigation.action.ActionService;
 import com.fractal.domain.navigation.menu.action.MenuAction;
 import com.fractal.domain.navigation.menu.action.dto.MenuActionRequest;
 import com.fractal.domain.navigation.menu.action.dto.MenuActionResponse;
+import com.fractal.domain.navigation.menu.mapper.MenuMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,15 +17,15 @@ class MenuActionMapperServiceImpl implements MenuActionMapperService {
     private final StatusService statusService;
 
 
+
     @Override
     public MenuActionResponse toDTO(MenuAction menuAction) {
         return new MenuActionResponse(
                 menuAction.getId(),
-                new MenuActionResponse.Menu(menuAction.getMenu().getId(), menuAction.getMenu().getName()),
+                new MenuActionResponse.Menu(menuAction.getMenu().getId(),menuAction.getMenu().getName()),
                 actionService.toCompactDTO(menuAction.getAction()),
                 statusService.toCompactDTO(menuAction.getStatus()),
                 menuAction.getCreatedDate()
-
         );
     }
 

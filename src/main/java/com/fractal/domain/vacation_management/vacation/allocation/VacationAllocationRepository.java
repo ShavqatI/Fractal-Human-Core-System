@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface VacationAllocationRepository extends JpaRepository<VacationAllocation, Long> {
 
-    List<VacationAllocation> findAllByVacationRequestId(Long vacationRequestId);
+    List<VacationAllocation> findAllByVacationId(Long vacationId);
 
-    Optional<VacationAllocation> findByVacationRequestIdAndId(Long vacationRequestId, Long id);
+    Optional<VacationAllocation> findByVacationIdAndId(Long vacationId, Long id);
 }

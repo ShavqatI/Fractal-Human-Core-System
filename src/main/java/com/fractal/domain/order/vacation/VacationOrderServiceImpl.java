@@ -118,8 +118,8 @@ public class VacationOrderServiceImpl implements VacationOrderService {
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }
-    }
 
+    }
     @Override
     public void print(Long id)  {
         var order = getById(id);
@@ -127,6 +127,7 @@ public class VacationOrderServiceImpl implements VacationOrderService {
         var employment = employeeUseCaseService.getCurrentEmployment(order.getVacation().getEmployee()).get();
         var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
         var pdfFilePath =  Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
+        var period = getPeriod(order.getVacation().getAllocations().stream().findFirst().get().getVacationAccrualPeriodRecord().getId());
 
         Map<String, String> values = new HashMap<>();
         values.putAll(orderUseCaseService.getHeader(order));
@@ -138,8 +139,8 @@ public class VacationOrderServiceImpl implements VacationOrderService {
         values.put("calendarDays", request.getDays().toString());
         values.put("startDate", request.getStartDate().toString());
         values.put("endDate", request.getEndDate().toString());
-        values.put("startDateYear", request.getEndDate().toString());
-        values.put("endDateYear", request.getEndDate().toString());
+        values.put("startDateYear", period.getStartDate().toString());
+        values.put("endDateYear", period.getEndDate().toString());
         values.put("returnDay", request.getWorkingDate().toString());
         values.put("successorEmployeeName", employeeUseCaseService.getFullName(request.getSuccessorEmployee()));
         values.put("percent", order.getVacation().getSuccessorCompensationPercentage().toString());
@@ -154,9 +155,12 @@ public class VacationOrderServiceImpl implements VacationOrderService {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-        var vacationAccrual = order.getVacation().getEmployee().getVacationAccruals().stream().findFirst().get();
     }
+
+    private VacationAccrualPeriod getPeriod(Long recordId){
+        return vacationAccrualPeriodRecordService.getById(recordId).getVacationAccrualPeriod();
+    }
+
 
 
 }

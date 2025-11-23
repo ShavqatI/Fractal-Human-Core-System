@@ -21,9 +21,9 @@ class PermissionMapperServiceImpl implements PermissionMapperService {
     public PermissionResponse toDTO(Permission permission) {
         return new PermissionResponse(
                 permission.getId(),
-                roleService.toDTO(permission.getRole()),
+                roleService.toCompactDTO(permission.getRole()),
                 menuActionService.toDTO(permission.getMenuAction()),
-                statusService.toDTO(permission.getStatus()),
+                statusService.toCompactDTO(permission.getStatus()),
                 permission.getCreatedDate(),
                 permission.getUpdatedDate()
         );

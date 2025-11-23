@@ -4,6 +4,8 @@ import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
 import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
+import com.fractal.domain.vacation_management.vacation.allocation.dto.VacationAllocationRequest;
+import com.fractal.domain.vacation_management.vacation.allocation.dto.VacationAllocationResponse;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -15,6 +17,7 @@ public record VacationResponse(
         VacationRequestResponse vacationRequest,
         BigDecimal compensationPercentage,
         BigDecimal successorCompensationPercentage,
+        List<VacationAllocationResponse> allocations,
         StatusCompactResponse status,
         LocalDateTime createdDate
 ) {

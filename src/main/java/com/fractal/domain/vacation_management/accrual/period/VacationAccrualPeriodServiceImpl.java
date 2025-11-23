@@ -97,4 +97,10 @@ public class VacationAccrualPeriodServiceImpl implements VacationAccrualPeriodSe
         }
     }
 
+    @Override
+    public VacationAccrualPeriod getByRecordId(Long recordId) {
+       return null;
+        // return periodRepository.findAll().stream().filter(period -> period.getRecords().stream().filter(record-> record.getId() =));
+    }
+
 }

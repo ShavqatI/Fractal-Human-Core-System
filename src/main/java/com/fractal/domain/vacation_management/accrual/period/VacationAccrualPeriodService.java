@@ -26,6 +26,7 @@ public interface VacationAccrualPeriodService {
     VacationAccrualPeriodResponse toDTO(VacationAccrualPeriod period);
 
     VacationAccrualPeriod save(VacationAccrualPeriod period);
+    VacationAccrualPeriod getByRecordId(Long recordId);
 
 
 
