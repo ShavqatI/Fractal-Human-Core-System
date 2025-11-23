@@ -2,8 +2,6 @@ package com.fractal.domain.employee_management.employment;
 
 import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
-import com.fractal.domain.employment.internal.InternalEmployment;
-import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 
 import java.util.List;
 

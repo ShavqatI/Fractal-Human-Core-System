@@ -1,7 +1,6 @@
 package com.fractal.domain.order.type;
 
 import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManagerService;
-import com.fractal.domain.order.category.OrderCategory;
 import com.fractal.domain.order.category.OrderCategoryService;
 import com.fractal.domain.order.type.dto.OrderTypeRequest;
 import com.fractal.domain.order.type.dto.OrderTypeResponse;

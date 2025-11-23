@@ -4,23 +4,12 @@ package com.fractal.controller.order;
 import com.fractal.domain.order.business_trip.BusinessTripOrderService;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderRequest;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
-import com.fractal.domain.order.vacation.VacationOrderService;
-import com.fractal.domain.order.vacation.dto.VacationOrderRequest;
-import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
-import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 

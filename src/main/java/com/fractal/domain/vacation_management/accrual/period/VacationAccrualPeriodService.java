@@ -3,9 +3,7 @@ package com.fractal.domain.vacation_management.accrual.period;
 import com.fractal.domain.vacation_management.accrual.period.dto.PeriodRequest;
 import com.fractal.domain.vacation_management.accrual.period.dto.VacationAccrualPeriodRequest;
 import com.fractal.domain.vacation_management.accrual.period.dto.VacationAccrualPeriodResponse;
-import com.fractal.domain.vacation_management.type.VacationType;
 
-import java.time.Period;
 import java.util.List;
 
 public interface VacationAccrualPeriodService {

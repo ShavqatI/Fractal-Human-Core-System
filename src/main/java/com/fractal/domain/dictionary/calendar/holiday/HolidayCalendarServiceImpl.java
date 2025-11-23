@@ -2,7 +2,6 @@ package com.fractal.domain.dictionary.calendar.holiday;
 
 import com.fractal.domain.dictionary.calendar.holiday.dto.HolidayCalenderRequest;
 import com.fractal.domain.dictionary.calendar.holiday.dto.HolidayCalenderResponse;
-import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithCodeNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;

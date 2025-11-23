@@ -6,7 +6,10 @@ import com.fractal.domain.agreement.resource.AgreementResource;
 import com.fractal.domain.agreement.type.AgreementType;
 import com.fractal.domain.dictionary.status.Status;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;

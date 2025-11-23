@@ -4,6 +4,7 @@ import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.order.vacation.dto.VacationOrderRequest;
 import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
 
+import java.nio.file.Path;
 import java.util.List;
 
 public interface VacationOrderService extends ApprovalWorkflowAware<Long, VacationOrder> {
@@ -20,6 +21,6 @@ public interface VacationOrderService extends ApprovalWorkflowAware<Long, Vacati
 
     VacationOrderResponse toDTO(VacationOrder vacationOrder);
 
-    void print(Long id);
+    Path print(Long id);
 
 }

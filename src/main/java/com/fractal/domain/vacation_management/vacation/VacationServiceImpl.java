@@ -1,6 +1,5 @@
 package com.fractal.domain.vacation_management.vacation;
 
-import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.vacation_management.vacation.dto.VacationRequest;
 import com.fractal.domain.vacation_management.vacation.dto.VacationResponse;
 import com.fractal.domain.vacation_management.vacation.mapper.VacationMapperService;

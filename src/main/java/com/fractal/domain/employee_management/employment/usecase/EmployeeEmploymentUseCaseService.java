@@ -8,6 +8,6 @@ import java.util.Optional;
 public interface EmployeeEmploymentUseCaseService {
 
     Optional<InternalEmploymentResponse> getCurrentEmployment(Employee employee);
-    String getHrHeadEmployeeName();
-    String getCEOEmployeeName();
+    Employee getHrHeadEmployee();
+    Employee getCEOEmployee();
 }

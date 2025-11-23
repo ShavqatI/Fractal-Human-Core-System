@@ -83,7 +83,7 @@ class BusinessTripServiceImpl implements BusinessTripService {
             businessTrip.setApprovedDate(LocalDateTime.now());
             //businessTrip.setApprovedUser(authenticatedService.getUser());
             businessTrip.setStatus(statusService.getByCode("REVIEWED"));
-            return businessTrip;
+            return save(businessTrip);
         } else {
             throw new ResourceStateException("The status is not valid is: " + businessTrip.getStatus().getName());
         }
@@ -96,7 +96,7 @@ class BusinessTripServiceImpl implements BusinessTripService {
             businessTrip.setApprovedDate(LocalDateTime.now());
             //businessTrip.setApprovedUser(authenticatedService.getUser());
             businessTrip.setStatus(statusService.getByCode("APPROVED"));
-            return businessTrip;
+            return save(businessTrip);
         } else {
             throw new ResourceStateException("The status is not valid is: " + businessTrip.getStatus().getName());
         }

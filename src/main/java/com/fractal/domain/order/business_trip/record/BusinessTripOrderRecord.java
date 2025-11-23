@@ -1,16 +1,14 @@
 package com.fractal.domain.order.business_trip.record;
 
 import com.fractal.domain.abstraction.AbstractEntity;
-import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.order.business_trip.BusinessTripOrder;
-import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriod;
-import com.fractal.domain.vacation_management.type.VacationType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "business_trip_order_record", schema = "order_schema", catalog = "fractal")

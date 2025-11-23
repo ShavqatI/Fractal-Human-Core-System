@@ -4,8 +4,6 @@ package com.fractal.controller.order;
 import com.fractal.domain.order.category.OrderCategoryService;
 import com.fractal.domain.order.category.dto.OrderCategoryRequest;
 import com.fractal.domain.order.category.dto.OrderCategoryResponse;
-import com.fractal.domain.order.type.dto.OrderTypeRequest;
-import com.fractal.domain.order.type.dto.OrderTypeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

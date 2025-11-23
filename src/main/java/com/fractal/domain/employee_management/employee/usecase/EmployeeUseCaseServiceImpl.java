@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +29,15 @@ class EmployeeUseCaseServiceImpl implements EmployeeUseCaseService {
         sb.append(employee.getLastName() + " ");
         sb.append(employee.getFirstName()+ " ");
         sb.append(employee.getPatronymicName());
+        return sb.toString();
+    }
+
+    @Override
+    public String getLastNameWithInitials(Employee employee) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(employee.getLastName() + " ");
+        sb.append(employee.getFirstName().substring(1) + ". ");
+        sb.append(employee.getPatronymicName().substring(1));
         return sb.toString();
     }
 

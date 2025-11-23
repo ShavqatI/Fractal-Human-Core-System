@@ -3,10 +3,10 @@ package com.fractal.domain.poi.processor.word;
 import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -17,9 +17,7 @@ class WordTemplateProcessorServiceImpl implements WordTemplateProcessorService {
     public void process(Path templatePath, Path outputPath, Map<String, String> variables) throws Exception {
         try (InputStream is = Files.newInputStream(templatePath);
              XWPFDocument document = new XWPFDocument(is)) {
-
-            processDocument(document, variables);
-
+              processDocument(document, variables);
             try (OutputStream os = Files.newOutputStream(outputPath)) {
                 document.write(os);
             }
@@ -57,56 +55,69 @@ class WordTemplateProcessorServiceImpl implements WordTemplateProcessorService {
             }
         }
     }
-
     private void replaceInParagraph(XWPFParagraph paragraph, Map<String, String> variables) {
         List<XWPFRun> runs = paragraph.getRuns();
         if (runs == null || runs.isEmpty()) return;
 
-        // Collect full text
-        StringBuilder fullText = new StringBuilder();
+        // Combine runs text to find placeholders
+        StringBuilder paragraphText = new StringBuilder();
         for (XWPFRun run : runs) {
             String text = run.getText(0);
-            if (text != null) fullText.append(text);
+            paragraphText.append(text != null ? text : "");
         }
+        String fullText = paragraphText.toString();
 
-        String originalText = fullText.toString();
-        String replacedText = originalText;
+        for (Map.Entry<String, String> entry : variables.entrySet()) {
+            String placeholder = "${" + entry.getKey() + "}";
+            String value = entry.getValue();
 
-        // Replace placeholders
-        for (Map.Entry<String, String> e : variables.entrySet()) {
-            replacedText = replacedText.replace("${" + e.getKey() + "}", e.getValue());
-        }
+            int index = fullText.indexOf(placeholder);
+            while (index >= 0) { // Replace all occurrences
+                int remaining = placeholder.length();
+                int runIndex = 0;
+                int runPos = 0;
+                boolean firstRun = true;
 
-        if (replacedText.equals(originalText)) return;
+                while (runIndex < runs.size() && remaining > 0) {
+                    XWPFRun run = runs.get(runIndex);
+                    String runText = run.getText(0);
+                    if (runText == null) {
+                        runIndex++;
+                        continue;
+                    }
 
-        int newTextIndex = 0;                     // pointer inside replacedText
-        int newTextLength = replacedText.length();
+                    int runLength = runText.length();
 
-        for (XWPFRun run : runs) {
-            String oldRunText = run.getText(0);
-            if (oldRunText == null) continue;
+                    if (runPos + runLength <= index) {
+                        runPos += runLength;
+                        runIndex++;
+                        continue;
+                    }
 
-            int oldLen = oldRunText.length();
-            int remaining = newTextLength - newTextIndex;
+                    // Placeholder starts in this run
+                    int startInRun = Math.max(0, index - runPos);
+                    int endInRun = Math.min(runLength, startInRun + remaining);
 
-            if (remaining <= 0) {
-                // No more characters left -> empty run
-                run.setText("", 0);
-                continue;
-            }
+                    String before = runText.substring(0, startInRun);
+                    String after = runText.substring(endInRun);
 
-            if (remaining < oldLen) {
-                // Last run containing remaining characters
-                String sub = replacedText.substring(newTextIndex, newTextIndex + remaining);
-                run.setText(sub, 0);
-                newTextIndex += remaining;
-            } else {
-                // Normal case
-                String sub = replacedText.substring(newTextIndex, newTextIndex + oldLen);
-                run.setText(sub, 0);
-                newTextIndex += oldLen;
+                    // Insert value only in the first run
+                    String newText = before + (firstRun ? value : "") + after;
+                    run.setText(newText, 0);
+
+                    firstRun = false;
+
+                    remaining -= (endInRun - startInRun);
+                    runPos += runLength;
+                    runIndex++;
+                }
+
+                // Update fullText to find next occurrence
+                fullText = fullText.substring(0, index) + value + fullText.substring(index + placeholder.length());
+                index = fullText.indexOf(placeholder);
             }
         }
     }
+
 
 }

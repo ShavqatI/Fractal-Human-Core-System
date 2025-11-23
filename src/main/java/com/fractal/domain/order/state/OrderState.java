@@ -2,7 +2,6 @@ package com.fractal.domain.order.state;
 
 import com.fractal.domain.order.Order;
 import com.fractal.domain.state.EntityState;
-import com.fractal.domain.vacation_management.request.VacationRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

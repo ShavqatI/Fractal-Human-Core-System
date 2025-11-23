@@ -4,7 +4,6 @@ package com.fractal.controller.order;
 import com.fractal.domain.order.employment.InternalEmploymentOrderService;
 import com.fractal.domain.order.employment.dto.InternalEmploymentOrderRequest;
 import com.fractal.domain.order.employment.dto.InternalEmploymentOrderResponse;
-import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

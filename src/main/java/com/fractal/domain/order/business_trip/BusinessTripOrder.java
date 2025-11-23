@@ -1,10 +1,12 @@
 package com.fractal.domain.order.business_trip;
 
-import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.order.Order;
 import com.fractal.domain.order.business_trip.record.BusinessTripOrderRecord;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 public class BusinessTripOrder extends Order {
 
-    @OneToMany(mappedBy = "businessTripOrder", cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "businessTripOrder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<BusinessTripOrderRecord> records = new ArrayList<>();
 
     public void addRecord(BusinessTripOrderRecord record) {

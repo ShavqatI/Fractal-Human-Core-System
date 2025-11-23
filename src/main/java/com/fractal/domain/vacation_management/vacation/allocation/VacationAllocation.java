@@ -2,8 +2,6 @@ package com.fractal.domain.vacation_management.vacation.allocation;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecord;
-import com.fractal.domain.vacation_management.request.VacationRequest;
-import com.fractal.domain.vacation_management.type.VacationType;
 import com.fractal.domain.vacation_management.vacation.Vacation;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

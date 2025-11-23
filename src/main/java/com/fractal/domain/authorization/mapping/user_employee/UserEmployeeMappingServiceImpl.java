@@ -2,8 +2,10 @@ package com.fractal.domain.authorization.mapping.user_employee;
 
 import com.fractal.domain.authorization.mapping.user_employee.dto.UserEmployeeMappingRequest;
 import com.fractal.domain.authorization.mapping.user_employee.dto.UserEmployeeMappingResponse;
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.authorization.user.UserService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +38,11 @@ class UserEmployeeMappingServiceImpl implements UserEmployeeMappingService {
     @Override
     public UserEmployeeMapping getById(Long id) {
         return findById(id);
+    }
+
+    @Override
+    public Employee getEmployee(User user) {
+        return userEmployeeMappingRepository.findByUserId(user.getId()).get().getEmployee();
     }
 
     @Override

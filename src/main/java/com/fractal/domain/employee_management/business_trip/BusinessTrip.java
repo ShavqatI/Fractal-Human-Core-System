@@ -4,7 +4,6 @@ import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.business_trip.expense.BusinessTripExpense;
 import com.fractal.domain.employee_management.business_trip.location.BusinessTripLocation;
-import com.fractal.domain.order.business_trip.BusinessTripOrder;
 import com.fractal.domain.employee_management.business_trip.resource.BusinessTripResource;
 import com.fractal.domain.employee_management.business_trip.type.BusinessTripType;
 import com.fractal.domain.employee_management.employee.Employee;

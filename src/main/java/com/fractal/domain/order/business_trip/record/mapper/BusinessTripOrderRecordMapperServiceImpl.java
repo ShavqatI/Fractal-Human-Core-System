@@ -1,6 +1,5 @@
 package com.fractal.domain.order.business_trip.record.mapper;
 
-import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.business_trip.BusinessTripService;
 import com.fractal.domain.order.business_trip.record.BusinessTripOrderRecord;
 import com.fractal.domain.order.business_trip.record.dto.BusinessTripOrderRecordRequest;

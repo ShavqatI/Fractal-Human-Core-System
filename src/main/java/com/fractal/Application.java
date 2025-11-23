@@ -1,22 +1,16 @@
 package com.fractal;
 
-import com.fractal.domain.employee_management.employee.EmployeeService;
-import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.navigation.action.ActionService;
 import com.fractal.domain.navigation.menu.Menu;
 import com.fractal.domain.navigation.menu.MenuService;
 import com.fractal.domain.navigation.menu.action.MenuAction;
 import com.fractal.domain.navigation.menu.action.MenuActionService;
-import com.fractal.domain.poi.processor.word.WordTemplateProcessorService;
-import com.fractal.domain.poi.processor.word.WordToPdfConverterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.nio.file.Path;
-import java.util.Map;
 import java.util.Optional;
 
 @SpringBootApplication(scanBasePackages = "com.fractal")

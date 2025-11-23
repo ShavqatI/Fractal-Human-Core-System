@@ -8,8 +8,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 class AuthenticatedServiceImpl implements AuthenticatedService {
@@ -25,12 +23,8 @@ class AuthenticatedServiceImpl implements AuthenticatedService {
                 var userDetails = (UserDetails) principal;
                 User user = userService.findByUsername(userDetails.getUsername());
                 return user;
-            } else {
-                System.out.println(principal.getClass());
-            }
-        } else {
-            System.out.println("Not auth");
-        }
+            } else {}
+        } else {}
         return null;
     }
 }

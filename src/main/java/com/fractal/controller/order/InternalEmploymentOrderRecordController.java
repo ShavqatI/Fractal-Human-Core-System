@@ -1,9 +1,6 @@
 package com.fractal.controller.order;
 
 
-import com.fractal.domain.order.business_trip.record.BusinessTripOrderRecordService;
-import com.fractal.domain.order.business_trip.record.dto.BusinessTripOrderRecordRequest;
-import com.fractal.domain.order.business_trip.record.dto.BusinessTripOrderRecordResponse;
 import com.fractal.domain.order.employment.record.InternalEmploymentOrderRecordService;
 import com.fractal.domain.order.employment.record.dto.InternalEmploymentOrderRecordRequest;
 import com.fractal.domain.order.employment.record.dto.InternalEmploymentOrderRecordResponse;

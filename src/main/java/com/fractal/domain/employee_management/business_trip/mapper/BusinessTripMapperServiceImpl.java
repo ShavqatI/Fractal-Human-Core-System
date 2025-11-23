@@ -6,11 +6,9 @@ import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequ
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.employee_management.business_trip.expense.mapper.BusinessTripExpenseMapperService;
 import com.fractal.domain.employee_management.business_trip.location.mapper.BusinessTripLocationMapperService;
-import com.fractal.domain.order.business_trip.mapper.BusinessTripOrderMapperService;
 import com.fractal.domain.employee_management.business_trip.resource.mapper.BusinessTripResourceMapperService;
 import com.fractal.domain.employee_management.business_trip.type.BusinessTripTypeService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
-import com.fractal.domain.organization_management.organization.OrganizationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -11,10 +11,7 @@ import com.fractal.domain.order.vacation.mapper.VacationOrderMapperService;
 import com.fractal.domain.poi.processor.word.WordTemplateProcessorService;
 import com.fractal.domain.poi.processor.word.WordToPdfConverterService;
 import com.fractal.domain.resource.FileService;
-import com.fractal.domain.vacation_management.accrual.VacationAccrual;
 import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriod;
-import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriodService;
-import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecord;
 import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecordService;
 import com.fractal.domain.vacation_management.vacation.VacationService;
 import com.fractal.exception.ResourceStateException;
@@ -26,7 +23,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -37,13 +37,14 @@ public class VacationOrderServiceImpl implements VacationOrderService {
     private final StatusService statusService;
     private final OrderStateService stateService;
     private final VacationService vacationService;
-    private final AuthenticatedService authenticatedService;
     private final WordTemplateProcessorService wordTemplateProcessorService;
     private final WordToPdfConverterService wordToPdfConverterService;
     private final EmployeeUseCaseService employeeUseCaseService;
     private final OrderUseCaseService orderUseCaseService;
     private final FileService fileService;
     private final VacationAccrualPeriodRecordService vacationAccrualPeriodRecordService;
+    private final AuthenticatedService authenticatedService;
+
 
     @Value("${resource-storage.temporary}")
     private String resourceStoragePath;
@@ -121,7 +122,7 @@ public class VacationOrderServiceImpl implements VacationOrderService {
 
     }
     @Override
-    public void print(Long id)  {
+    public Path print(Long id)  {
         var order = getById(id);
         var request = order.getVacation().getVacationRequest();
         var employment = employeeUseCaseService.getCurrentEmployment(order.getVacation().getEmployee()).get();
@@ -132,7 +133,6 @@ public class VacationOrderServiceImpl implements VacationOrderService {
         Map<String, String> values = new HashMap<>();
         values.putAll(orderUseCaseService.getHeader(order));
 
-        values.put("branchName", "DMB");
         values.put("employeeName", employeeUseCaseService.getFullName(order.getVacation().getEmployee()));
         values.put("employeePosition", employment.position().name());
         values.put("fullBankName", employment.organization().name());
@@ -149,17 +149,20 @@ public class VacationOrderServiceImpl implements VacationOrderService {
         values.putAll(orderUseCaseService.getFooter());
 
         try {
-           wordTemplateProcessorService.process(Path.of(order.getOrderType().getDocumentTemplateManager().getFilePath()), wordFilePath, values);
+            wordTemplateProcessorService.process(Path.of(order.getOrderType().getDocumentTemplateManager().getFilePath()), wordFilePath, values);
             wordToPdfConverterService.convert(wordFilePath,pdfFilePath);
             fileService.delete(wordFilePath.toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        return pdfFilePath;
     }
 
     private VacationAccrualPeriod getPeriod(Long recordId){
         return vacationAccrualPeriodRecordService.getById(recordId).getVacationAccrualPeriod();
     }
+
+
 
 
 

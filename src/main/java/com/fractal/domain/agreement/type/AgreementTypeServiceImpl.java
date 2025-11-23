@@ -46,7 +46,7 @@ public class AgreementTypeServiceImpl implements AgreementTypeService {
             agreementType.setName(dto.name());
             agreementType.setDescription(dto.description());
             agreementType.setSeries(dto.series());
-            documentTemplateManagerService.getById(dto.documentTemplateManagerId());
+            agreementType.setDocumentTemplateManager(documentTemplateManagerService.getById(dto.documentTemplateManagerId()));
             return save(agreementType);
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());

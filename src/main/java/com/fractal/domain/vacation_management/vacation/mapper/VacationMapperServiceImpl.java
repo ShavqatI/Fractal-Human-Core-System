@@ -7,7 +7,6 @@ import com.fractal.domain.vacation_management.vacation.Vacation;
 import com.fractal.domain.vacation_management.vacation.allocation.mapper.VacationAllocationMapperService;
 import com.fractal.domain.vacation_management.vacation.dto.VacationRequest;
 import com.fractal.domain.vacation_management.vacation.dto.VacationResponse;
-import com.fractal.domain.order.vacation.mapper.VacationOrderMapperService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

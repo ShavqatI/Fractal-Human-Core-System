@@ -1,17 +1,22 @@
 package com.fractal.controller.order;
 
 
-import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
 import com.fractal.domain.order.vacation.VacationOrderService;
 import com.fractal.domain.order.vacation.dto.VacationOrderRequest;
 import com.fractal.domain.order.vacation.dto.VacationOrderResponse;
-import com.fractal.domain.vacation_management.vacation.VacationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,9 +65,21 @@ public class VacationOrderController {
     }
 
     @GetMapping("print/{id}")
-    public ResponseEntity<Void> print( @PathVariable Long id) {
-        orderService.print(id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Resource> print( @PathVariable Long id) {
+        Path path = orderService.print(id);
+        try {
+            Resource resource = new FileSystemResource(path);
+            String encodedFilename = URLEncoder.encode(resource.getFilename(), StandardCharsets.UTF_8);
+            if (!resource.exists()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok()
+                    .contentType(MediaType.APPLICATION_PDF) // PDF content type
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + encodedFilename + "\"") // inline instead of attachment
+                    .body(resource);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
     }
 
 }

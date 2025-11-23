@@ -4,8 +4,6 @@ package com.fractal.controller.order;
 import com.fractal.domain.order.business_trip.record.BusinessTripOrderRecordService;
 import com.fractal.domain.order.business_trip.record.dto.BusinessTripOrderRecordRequest;
 import com.fractal.domain.order.business_trip.record.dto.BusinessTripOrderRecordResponse;
-import com.fractal.domain.vacation_management.accrual.period.record.dto.VacationAccrualPeriodRecordRequest;
-import com.fractal.domain.vacation_management.accrual.period.record.dto.VacationAccrualPeriodRecordResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

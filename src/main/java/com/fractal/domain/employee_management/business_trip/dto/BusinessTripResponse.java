@@ -3,7 +3,6 @@ package com.fractal.domain.employee_management.business_trip.dto;
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.employee_management.business_trip.expense.dto.BusinessTripExpenseResponse;
 import com.fractal.domain.employee_management.business_trip.location.dto.BusinessTripLocationResponse;
-import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
 import com.fractal.domain.employee_management.business_trip.type.dto.BusinessTripTypeResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.resource.dto.ResourceResponse;
