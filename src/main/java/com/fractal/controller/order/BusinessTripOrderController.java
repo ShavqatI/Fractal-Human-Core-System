@@ -4,12 +4,15 @@ package com.fractal.controller.order;
 import com.fractal.domain.order.business_trip.BusinessTripOrderService;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderRequest;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
+import com.fractal.domain.resource.FileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +22,7 @@ import java.util.stream.Collectors;
 public class BusinessTripOrderController {
 
     private final BusinessTripOrderService orderService;
+    private final FileService fileService;
 
     @PostMapping()
     public ResponseEntity<BusinessTripOrderResponse> create(@RequestBody @Valid BusinessTripOrderRequest dto) {
@@ -57,8 +61,9 @@ public class BusinessTripOrderController {
     }
 
     @GetMapping("print/{id}")
-    public ResponseEntity<BusinessTripOrderResponse> print( @PathVariable Long id) {
-       return null;
+    public ResponseEntity<StreamingResponseBody> print(@PathVariable Long id) {
+        Path path = orderService.print(id);
+        return fileService.view(path);
     }
 
 

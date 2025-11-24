@@ -28,7 +28,7 @@ public class EmployeeProfessionalExperienceServiceImpl implements EmployeeProfes
     }
 
     @Override
-    public List<EmployeeProfessionalExperience> getAllByCandidateId(Long employeeId) {
+    public List<EmployeeProfessionalExperience> getAllByEmployeeId(Long employeeId) {
         return professionalExperienceRepository.findAllByEmployeeId(employeeId);
     }
 

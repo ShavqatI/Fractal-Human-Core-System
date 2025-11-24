@@ -27,7 +27,7 @@ public class EmployeeProfessionalExperienceController {
 
     @GetMapping
     public ResponseEntity<List<EmployeeProfessionalExperienceResponse>> getAll(@PathVariable Long employeeId) {
-        return ResponseEntity.ok(professionalExperienceService.getAllByCandidateId(employeeId).stream().map(professionalExperienceService::toDTO).collect(Collectors.toList()));
+        return ResponseEntity.ok(professionalExperienceService.getAllByEmployeeId(employeeId).stream().map(professionalExperienceService::toDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")

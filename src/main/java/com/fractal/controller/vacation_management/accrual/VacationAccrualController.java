@@ -32,6 +32,10 @@ public class VacationAccrualController {
     public ResponseEntity<List<VacationAccrualResponse>> getAll() {
         return ResponseEntity.ok(vacationAccrualService.getAll().stream().map(vacationAccrualService::toDTO).collect(Collectors.toList()));
     }
+    @GetMapping("employee/{employeeId}")
+    public ResponseEntity<List<VacationAccrualResponse>> getAllByEmployee(@PathVariable Long employeeId) {
+        return ResponseEntity.ok(vacationAccrualService.getAllByEmployeeId(employeeId).stream().map(vacationAccrualService::toDTO).collect(Collectors.toList()));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<VacationAccrualResponse> getById(@PathVariable Long id) {

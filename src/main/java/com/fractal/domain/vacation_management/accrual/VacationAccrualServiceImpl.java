@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,7 +42,10 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
 
     @Override
     public List<VacationAccrual> getAllByEmployeeId(Long employeeId) {
-        return vacationAccrualRepository.findAllByEmployeeId(employeeId);
+        return vacationAccrualRepository.findAllByEmployeeId(employeeId)
+                .stream()
+                .filter(accrual -> accrual.getPeriods().stream().filter(period -> period.getStatus().getCode().equals("ACTIVE")).isParallel())
+                .collect(Collectors.toList());
     }
 
     @Override

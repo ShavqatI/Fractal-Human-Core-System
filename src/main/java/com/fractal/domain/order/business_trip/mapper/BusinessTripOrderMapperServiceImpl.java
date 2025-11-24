@@ -11,6 +11,7 @@ import com.fractal.domain.order.type.OrderTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -37,6 +38,10 @@ class BusinessTripOrderMapperServiceImpl implements BusinessTripOrderMapperServi
                         .collect(Collectors.toList()),
                 order.getNumber(),
                 order.getDate(),
+                order.getStartDate(),
+                order.getEndDate(),
+                order.getJustification(),
+                order.getSourceDocument(),
                 statusService.toCompactDTO(order.getStatus()),
                 Optional.ofNullable(order.getResources())
                         .orElse(emptyList())
@@ -62,6 +67,11 @@ class BusinessTripOrderMapperServiceImpl implements BusinessTripOrderMapperServi
         order.setOrderType(orderTypeService.getById(dto.orderTypeId()));
         order.setNumber(dto.number());
         order.setDate(dto.date());
+        order.setStartDate(dto.startDate());
+        order.setEndDate(dto.endDate());
+        order.setDays((int) ChronoUnit.DAYS.between(dto.startDate(), dto.endDate()) + 1);
+        order.setJustification(dto.justification());
+        order.setSourceDocument(dto.sourceDocument());
         dto.files().forEach(file -> order.addResource(resourceMapperService.toEntity(file, null)));
         dto.records().forEach(record-> order.addRecord(recordMapperService.toEntity(record)));
         return order;

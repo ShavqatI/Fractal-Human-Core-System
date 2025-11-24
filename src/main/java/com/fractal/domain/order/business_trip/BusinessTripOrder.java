@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BusinessTripOrder extends Order {
+
+    @Column(name = "start_date")
+    protected LocalDate startDate;
+
+    @Column(name = "end_date")
+    protected LocalDate endDate;
+
+    @Column(name = "days")
+    protected Integer days;
 
     @OneToMany(mappedBy = "businessTripOrder", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BusinessTripOrderRecord> records = new ArrayList<>();

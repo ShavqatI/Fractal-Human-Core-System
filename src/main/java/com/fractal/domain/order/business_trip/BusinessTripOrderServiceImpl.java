@@ -1,19 +1,33 @@
 package com.fractal.domain.order.business_trip;
 
+import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.business_trip.location.mapper.BusinessTripLocationMapperService;
+import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderRequest;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
 import com.fractal.domain.order.business_trip.mapper.BusinessTripOrderMapperService;
 import com.fractal.domain.order.state.OrderStateService;
+import com.fractal.domain.order.usecase.OrderUseCaseService;
+import com.fractal.domain.poi.processor.word.WordTemplateProcessorService;
+import com.fractal.domain.poi.processor.word.WordToPdfConverterService;
+import com.fractal.domain.resource.FileService;
+import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecordService;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.file.Path;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +37,16 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     private final BusinessTripOrderMapperService orderMapperService;
     private final OrderStateService stateService;
     private final StatusService statusService;
+    private final WordTemplateProcessorService wordTemplateProcessorService;
+    private final WordToPdfConverterService wordToPdfConverterService;
+    private final EmployeeUseCaseService employeeUseCaseService;
+    private final OrderUseCaseService orderUseCaseService;
+    private final FileService fileService;
+    private final AuthenticatedService authenticatedService;
+    private final BusinessTripLocationMapperService businessTripLocationMapperService;
+
+    @Value("${resource-storage.temporary}")
+    private String resourceStoragePath;
 
 
     @Override
@@ -102,5 +126,50 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }
+    }
+
+    @Override
+    public Path print(Long id)  {
+        var order = getById(id);
+        var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
+        var pdfFilePath =  Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
+        var employees = order.getRecords().stream().map(record -> record.getBusinessTrip().getEmployee()).collect(Collectors.toList());
+        StringBuilder employeeList = new StringBuilder();
+        employees.forEach(employee -> employeeList.append(employeeUseCaseService.getFullName(employee) + "\n"));
+        Map<String, String> values = new HashMap<>();
+
+        values.putAll(orderUseCaseService.getHeader(order));
+
+        values.put("calendarDays", order.getDays().toString());
+        values.put("startDate", order.startDate.toString());
+        values.put("endDate", order.getEndDate().toString());
+        values.put("location", getLocation(order));
+        values.put("justification", order.getJustification());
+        values.put("employeeList", employeeList.toString());
+        values.put("sourceDocument", order.getSourceDocument());
+
+        values.putAll(orderUseCaseService.getFooter());
+
+        try {
+            wordTemplateProcessorService.process(Path.of(order.getOrderType().getDocumentTemplateManager().getFilePath()), wordFilePath, values);
+            wordToPdfConverterService.convert(wordFilePath,pdfFilePath);
+            fileService.delete(wordFilePath.toString());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return pdfFilePath;
+    }
+
+    private String getLocation(BusinessTripOrder order){
+       StringBuilder fullAddress = new StringBuilder();
+       var businessTripLocation = order.getRecords().stream().map(record -> record.getBusinessTrip().getLocations().getFirst()).findFirst();
+       var businessTripLocationResponse = businessTripLocationMapperService.toDTO(businessTripLocation.get());
+       var address = businessTripLocationResponse.addresses().getFirst();
+        fullAddress.append(address.country().name() + " ");
+        fullAddress.append(address.region().name() + " ");
+        fullAddress.append(address.city().name() + " ");
+        fullAddress.append(address.district().name() + " ");
+        fullAddress.append(address.street());
+       return fullAddress.toString();
     }
 }

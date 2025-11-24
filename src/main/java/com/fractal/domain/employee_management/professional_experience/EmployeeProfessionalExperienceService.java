@@ -7,15 +7,15 @@ import java.util.List;
 
 public interface EmployeeProfessionalExperienceService {
 
-    EmployeeProfessionalExperience create(Long candidateId, EmployeeProfessionalExperienceRequest dto);
+    EmployeeProfessionalExperience create(Long employeeId, EmployeeProfessionalExperienceRequest dto);
 
-    List<EmployeeProfessionalExperience> getAllByCandidateId(Long candidateId);
+    List<EmployeeProfessionalExperience> getAllByEmployeeId(Long employeeId);
 
-    EmployeeProfessionalExperience getById(Long candidateId, Long id);
+    EmployeeProfessionalExperience getById(Long employeeId, Long id);
 
     EmployeeProfessionalExperienceResponse toDTO(EmployeeProfessionalExperience professionalExperience);
 
-    EmployeeProfessionalExperience update(Long candidateId, Long id, EmployeeProfessionalExperienceRequest dto);
+    EmployeeProfessionalExperience update(Long employeeId, Long id, EmployeeProfessionalExperienceRequest dto);
 
     void delete(Long candidateId, Long id);
 }

@@ -10,5 +10,4 @@ public record VacationAllocationResponse(
         Integer days,
         LocalDateTime createdDate
 
-) {
-}
+) { }

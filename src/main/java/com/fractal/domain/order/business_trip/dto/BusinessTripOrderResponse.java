@@ -15,6 +15,10 @@ public record BusinessTripOrderResponse(
         List<BusinessTripOrderRecordResponse> records,
         String number,
         LocalDate date,
+        LocalDate startDate,
+        LocalDate endDate,
+        String justification,
+        String sourceDocument,
         StatusCompactResponse status,
         List<ResourceResponse> resources,
         LocalDateTime createdDate
