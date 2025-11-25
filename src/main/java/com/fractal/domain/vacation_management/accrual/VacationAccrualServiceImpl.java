@@ -42,10 +42,8 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
 
     @Override
     public List<VacationAccrual> getAllByEmployeeId(Long employeeId) {
-        return vacationAccrualRepository.findAllByEmployeeId(employeeId)
-                .stream()
-                .filter(accrual -> accrual.getPeriods().stream().filter(period -> period.getStatus().getCode().equals("ACTIVE")).isParallel())
-                .collect(Collectors.toList());
+        return vacationAccrualRepository.findAllByEmployeeId(employeeId);
+
     }
 
     @Override
@@ -84,6 +82,5 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
     public void calculate() {
         var employees = employeeService.getAll().stream().filter(employee -> employee.getStatus().getCode().equals("ACTIVE"));
         var vacationTypes = vacationTypeService.getAll().stream().filter(vacationType -> vacationType.getDays() > 0);
-
     }
 }
