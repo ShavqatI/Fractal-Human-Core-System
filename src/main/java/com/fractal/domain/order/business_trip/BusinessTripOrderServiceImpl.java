@@ -42,7 +42,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     private final EmployeeUseCaseService employeeUseCaseService;
     private final OrderUseCaseService orderUseCaseService;
     private final FileService fileService;
-    private final AuthenticatedService authenticatedService;
+    //private final AuthenticatedService authenticatedService;
     private final BusinessTripLocationMapperService businessTripLocationMapperService;
 
     @Value("${resource-storage.temporary}")
