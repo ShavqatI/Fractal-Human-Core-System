@@ -4,6 +4,7 @@ package com.fractal.domain.order;
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.order.resource.OrderResource;
+import com.fractal.domain.order.state.OrderState;
 import com.fractal.domain.order.type.OrderType;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -50,8 +51,11 @@ public class Order extends ApprovalWorkflow {
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<OrderResource> resources = new ArrayList<>();
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<OrderState> states = new ArrayList<>();
 
     public void addResource(OrderResource resource) {
         if (resources == null) resources = new ArrayList<>();

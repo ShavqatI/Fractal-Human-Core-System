@@ -10,6 +10,7 @@ import com.fractal.domain.vacation_management.vacation.dto.VacationResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -57,8 +58,12 @@ class VacationMapperServiceImpl implements VacationMapperService {
         var request = vacationRequestService.getById(dto.vacationRequestId());
         vacation.setEmployee(request.getEmployee());
         vacation.setVacationRequest(request);
-        vacation.setCompensationPercentage(dto.compensationPercentage());
-        vacation.setSuccessorCompensationPercentage(dto.successorCompensationPercentage());
+        if(dto.compensationPercentage() != null)
+         vacation.setCompensationPercentage(dto.compensationPercentage());
+        else vacation.setCompensationPercentage(BigDecimal.ZERO);
+        if(dto.successorCompensationPercentage() !=null)
+         vacation.setSuccessorCompensationPercentage(dto.successorCompensationPercentage());
+        else vacation.setSuccessorCompensationPercentage(BigDecimal.ZERO);
         dto.allocations().forEach(allocation-> vacation.addAllocation(allocationMapperService.toEntity(allocation)));
         return vacation;
     }

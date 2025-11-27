@@ -1,9 +1,12 @@
 package com.fractal.domain.vacation_management.accrual;
 
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.vacation_management.accrual.dto.VacationAccrualRequest;
 import com.fractal.domain.vacation_management.accrual.dto.VacationAccrualResponse;
 import com.fractal.domain.vacation_management.accrual.mapper.VacationAccrualMapperService;
+import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriod;
+import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecord;
 import com.fractal.domain.vacation_management.type.VacationTypeService;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +14,8 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +27,7 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
     private final VacationAccrualMapperService mapperService;
     private final EmployeeService employeeService;
     private final VacationTypeService vacationTypeService;
+    private final StatusService statusService;
 
     @Override
     @Transactional
@@ -79,8 +85,48 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
     }
 
     @Override
-    public void calculate() {
+    public void accrual() {
         var employees = employeeService.getAll().stream().filter(employee -> employee.getStatus().getCode().equals("ACTIVE"));
-        var vacationTypes = vacationTypeService.getAll().stream().filter(vacationType -> vacationType.getDays() > 0);
+        var vacationTypes = vacationTypeService.getAll().stream().filter(vt -> (vt.getCode().equals("ANNUAL") || vt.getCode().equals("CASUAL"))).collect(Collectors.toList());
+        employees.forEach(employee -> {
+            VacationAccrual accrual;
+            if(employee.getVacationAccruals().isEmpty()){
+               accrual = VacationAccrual.builder()
+                       .status(statusService.getByCode("ACTIVE"))
+                       .employee(employee)
+                       .build();
+            }
+            else {
+                accrual = employee.getVacationAccruals().getFirst();
+            }
+
+            var period = VacationAccrualPeriod.builder()
+                    .startDate(LocalDate.now().with(TemporalAdjusters.firstDayOfYear()))
+                    .endDate(LocalDate.now().with(TemporalAdjusters.lastDayOfYear()))
+                    .status(statusService.getByCode("ACTIVE"))
+                    .build();
+             var periodStart = period.getStartDate();
+             var periodEndDate = period.getEndDate();
+             var existPeriod = accrual.getPeriods().stream().filter(period1 -> period1.getStartDate().equals(periodStart) && period1.getEndDate().equals(periodEndDate)).findFirst();
+             if(!existPeriod.isEmpty()){
+                 period = existPeriod.get();
+             }
+            VacationAccrualPeriod finalPeriod = period;
+            vacationTypes.forEach(vacationType -> {
+                 var record = VacationAccrualPeriodRecord.builder()
+                         .vacationType(vacationType)
+                         .accruedDays(vacationType.getDays())
+                         .utilizedDays(0)
+                         .remainingDays(vacationType.getDays())
+                         .date(LocalDate.now())
+                         .status(statusService.getByCode("ACTIVE"))
+                         .build();
+                 finalPeriod.addRecord(record);
+             });
+             period = finalPeriod;
+             accrual.addPeriod(period);
+             save(accrual);
+        });
+
     }
 }

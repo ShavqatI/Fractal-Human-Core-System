@@ -1,5 +1,6 @@
 package com.fractal.domain.vacation_management.vacation.allocation;
 
+import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecordService;
 import com.fractal.domain.vacation_management.vacation.VacationService;
 import com.fractal.domain.vacation_management.vacation.allocation.dto.VacationAllocationRequest;
 import com.fractal.domain.vacation_management.vacation.allocation.dto.VacationAllocationResponse;
@@ -18,6 +19,7 @@ public class VacationAllocationServiceImpl implements VacationAllocationService 
     private final VacationAllocationRepository allocationRepository;
     private final VacationAllocationMapperService mapperService;
     private final VacationService vacationService;
+    private final VacationAccrualPeriodRecordService vacationAccrualPeriodRecordService;
 
 
     @Override
@@ -67,6 +69,4 @@ public class VacationAllocationServiceImpl implements VacationAllocationService 
     public VacationAllocationResponse toDTO(VacationAllocation order) {
         return mapperService.toDTO(order);
     }
-
-
 }

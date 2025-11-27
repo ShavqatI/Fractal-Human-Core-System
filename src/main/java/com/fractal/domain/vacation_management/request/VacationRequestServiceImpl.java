@@ -62,6 +62,14 @@ class VacationRequestServiceImpl implements VacationRequestService {
         vacationRequestRepository.delete(findById(id));
     }
 
+    @Override
+    public void close(Long id) {
+        var request = findById(id);
+        request.setStatus(statusService.getByCode("CLOSE"));
+        request = save(request);
+        stateService.create(request);
+    }
+
     public VacationRequestResponse toDTO(VacationRequest vacationRequest) {
         return mapperService.toDTO(vacationRequest);
     }

@@ -1,5 +1,6 @@
 package com.fractal.domain.vacation_management.vacation;
 
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.vacation_management.vacation.dto.VacationRequest;
 import com.fractal.domain.vacation_management.vacation.dto.VacationResponse;
 import com.fractal.domain.vacation_management.vacation.mapper.VacationMapperService;
@@ -16,6 +17,7 @@ class VacationServiceImpl implements VacationService {
 
     private final VacationRepository vacationRepository;
     private final VacationMapperService mapperService;
+    private final StatusService statusService;
 
 
     @Override
@@ -51,6 +53,13 @@ class VacationServiceImpl implements VacationService {
     @Override
     public void deleteById(Long id) {
         vacationRepository.delete(findById(id));
+    }
+
+    @Override
+    public void close(Long id) {
+        var vacation = findById(id);
+        vacation.setStatus(statusService.getByCode("CLOSE"));
+        save(vacation);
     }
 
     public VacationResponse toDTO(Vacation vacation) {

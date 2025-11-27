@@ -58,6 +58,13 @@ class BusinessTripServiceImpl implements BusinessTripService {
         businessTripRepository.delete(findById(id));
     }
 
+    @Override
+    public void close(Long id) {
+        var businessTrip = findById(id);
+        businessTrip.setStatus(statusService.getByCode("CLOSE"));
+        save(businessTrip);
+    }
+
     public BusinessTripResponse toDTO(BusinessTrip businessTrip) {
         return mapperService.toDTO(businessTrip);
     }

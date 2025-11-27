@@ -18,6 +18,7 @@ public interface BusinessTripService extends ApprovalWorkflowAware<Long,Business
     BusinessTrip update(Long id, BusinessTripRequest dto);
 
     void deleteById(Long id);
+    void close(Long id);
 
     BusinessTripResponse toDTO(BusinessTrip businessTrip);
 

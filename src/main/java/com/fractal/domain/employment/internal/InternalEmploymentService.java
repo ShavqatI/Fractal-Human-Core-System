@@ -11,7 +11,6 @@ public interface InternalEmploymentService {
     List<InternalEmployment> getAll();
 
     InternalEmployment getById(Long id);
-    InternalEmployment getByPositionId(Long positionId);
 
     InternalEmployment update(Long id, InternalEmploymentRequest dto);
 

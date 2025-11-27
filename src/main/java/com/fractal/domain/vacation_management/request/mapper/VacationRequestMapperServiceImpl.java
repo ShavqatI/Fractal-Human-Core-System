@@ -109,7 +109,7 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
     public int countWeekdays(LocalDate startDate, LocalDate endDate) {
         long days = ChronoUnit.DAYS.between(startDate, endDate) + 1;
         int weekdays = 0;
-        for (long i = 0; i <= days; i++) {
+        for (long i = 0; i < days; i++) {
             DayOfWeek dow = startDate.plusDays(i).getDayOfWeek();
             if (dow != DayOfWeek.SATURDAY && dow != DayOfWeek.SUNDAY) {
                 weekdays++;
@@ -124,9 +124,10 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
     }
 
     private LocalDate calculateWorkingDate(LocalDate date){
-        var weekDay = getWeekDay(date);
-        weekDay = isHoliday(weekDay);
-        return weekDay;
+        var workingDate = date.plusDays(1);
+        workingDate = getWeekDay(workingDate);
+        workingDate = isHoliday(workingDate);
+        return workingDate;
     }
 
     private LocalDate getWeekDay(LocalDate date) {

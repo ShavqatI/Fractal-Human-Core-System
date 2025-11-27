@@ -22,6 +22,6 @@ public interface VacationAccrualService {
 
     VacationAccrual save(VacationAccrual vacationAccrual);
 
-    void calculate();
+    void accrual();
 
 }

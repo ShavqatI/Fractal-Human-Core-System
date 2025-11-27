@@ -37,8 +37,11 @@ class OrderUseCaseServiceImpl implements OrderUseCaseService {
     }
 
     private Optional<InternalEmploymentResponse> getCurrentUserEmployeeEmployment() {
-        var employee = userEmployeeMappingService.getEmployee(authenticatedService.getUser());
-        return employeeUseCaseService.getCurrentEmployment(employee);
+        if(authenticatedService.getUser() != null) {
+            var employee = userEmployeeMappingService.getEmployee(authenticatedService.getUser());
+            return employeeUseCaseService.getCurrentEmployment(employee);
+        }
+        return Optional.empty();
     }
 
     @Override

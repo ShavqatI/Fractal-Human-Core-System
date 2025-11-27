@@ -2,6 +2,7 @@ package com.fractal.domain.order.business_trip;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.business_trip.BusinessTripService;
 import com.fractal.domain.employee_management.business_trip.location.mapper.BusinessTripLocationMapperService;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderRequest;
@@ -33,6 +34,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
 
+    private final BusinessTripService businessTripService;
     private final BusinessTripOrderRepository orderRepository;
     private final BusinessTripOrderMapperService orderMapperService;
     private final OrderStateService stateService;
@@ -82,6 +84,8 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
         orderRepository.delete(getById(id));
     }
 
+
+
     @Override
     public BusinessTripOrderResponse toDTO(BusinessTripOrder order) {
         return orderMapperService.toDTO(order);
@@ -117,6 +121,9 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
         var order = getById(id);
         if (order.getStatus().getCode().equals("REVIEWED")) {
             order.setApprovedDate(LocalDateTime.now());
+            order.getRecords().forEach(record -> {
+                businessTripService.close(record.getBusinessTrip().getId());
+            });
             //order.setApprovedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("APPROVED"));
             order.setStatus(order.getStatus());
@@ -165,11 +172,14 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
        var businessTripLocation = order.getRecords().stream().map(record -> record.getBusinessTrip().getLocations().getFirst()).findFirst();
        var businessTripLocationResponse = businessTripLocationMapperService.toDTO(businessTripLocation.get());
        var address = businessTripLocationResponse.addresses().getFirst();
-        fullAddress.append(address.country().name() + " ");
-        fullAddress.append(address.region().name() + " ");
-        fullAddress.append(address.city().name() + " ");
-        fullAddress.append(address.district().name() + " ");
-        fullAddress.append(address.street());
+       if (businessTripLocationResponse.locationType().code().equals("INTERNAL")) {
+           if(address.district().name() != null)
+               fullAddress.append(address.district().name());
+           else fullAddress.append(address.city().name());
+       }
+       else if (businessTripLocationResponse.locationType().code().equals("EXTERNAL"))
+           fullAddress.append(address.country().name());
+
        return fullAddress.toString();
     }
 }

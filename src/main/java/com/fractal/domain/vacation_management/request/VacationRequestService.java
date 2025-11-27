@@ -18,6 +18,7 @@ public interface VacationRequestService extends ApprovalWorkflowAware<Long, Vaca
     VacationRequest update(Long id, VacationRequestRequest dto);
 
     void deleteById(Long id);
+    void close(Long id);
 
     VacationRequestResponse toDTO(VacationRequest vacationRequest);
 
