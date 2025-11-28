@@ -3,6 +3,7 @@ package com.fractal.domain.vacation_management.request;
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.vacation_management.request.education.VacationRequestEducation;
 import com.fractal.domain.vacation_management.request.medical_info.VacationRequestMedicalInfo;
 import com.fractal.domain.vacation_management.request.responsibility.VacationRequestResponsibility;
 import com.fractal.domain.vacation_management.request.state.VacationRequestState;
@@ -71,6 +72,9 @@ public class VacationRequest extends ApprovalWorkflow {
     @OneToMany(mappedBy = "vacationRequest", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<VacationRequestMedicalInfo> medicalInfos = new ArrayList<>();
 
+    @OneToMany(mappedBy = "vacationRequest", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<VacationRequestEducation> educations = new ArrayList<>();
+
     public void addResponsibility(VacationRequestResponsibility responsibility) {
         if (responsibilities == null) responsibilities = new ArrayList<>();
         responsibility.setVacationRequest(this);
@@ -91,6 +95,16 @@ public class VacationRequest extends ApprovalWorkflow {
     public void removeMedicalInfo(VacationRequestMedicalInfo medicalInfo) {
         if (medicalInfos != null && !medicalInfos.isEmpty())
             medicalInfos.remove(medicalInfo);
+    }
+    public void addEducation(VacationRequestEducation education) {
+        if (educations == null) educations = new ArrayList<>();
+        education.setVacationRequest(this);
+        educations.add(education);
+    }
+
+    public void removeEducation(VacationRequestEducation education) {
+        if (educations != null && !educations.isEmpty())
+            educations.remove(education);
     }
 
 }
