@@ -7,6 +7,7 @@ import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.vacation_management.request.VacationRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
+import com.fractal.domain.vacation_management.request.education.mapper.VacationRequestEducationMapperService;
 import com.fractal.domain.vacation_management.request.medical_info.mapper.VacationRequestMedicalInfoMapperService;
 import com.fractal.domain.vacation_management.request.responsibility.mapper.VacationRequestResponsibilityMapperService;
 import com.fractal.domain.vacation_management.request.state.VacationRequestStateService;
@@ -33,6 +34,7 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
     private final VacationRequestStateService stateService;
     private final VacationRequestResponsibilityMapperService responsibilityMapperService;
     private final VacationRequestMedicalInfoMapperService medicalInfoMapperService;
+    private final VacationRequestEducationMapperService educationMapperService;
     private final HolidayCalendarService holidayCalendarService;
 
     @Override
@@ -58,6 +60,11 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
                         .orElse(emptyList())
                         .stream()
                         .map(medicalInfoMapperService::toDTO)
+                        .collect(Collectors.toList()),
+                Optional.ofNullable(vacationRequest.getEducations())
+                        .orElse(emptyList())
+                        .stream()
+                        .map(educationMapperService::toDTO)
                         .collect(Collectors.toList()),
                 Optional.ofNullable(vacationRequest.getStates())
                         .orElse(emptyList())
@@ -94,6 +101,7 @@ class VacationRequestMapperServiceImpl implements VacationRequestMapperService {
         vacationRequest.setWorkingDate(calculateWorkingDate(vacationRequest.getEndDate()));
         dto.responsibilities().forEach(responsibility -> vacationRequest.addResponsibility(responsibilityMapperService.toEntity(responsibility)));
         dto.medicalInfos().forEach(medicalInfo -> vacationRequest.addMedicalInfo(medicalInfoMapperService.toEntity(medicalInfo)));
+        dto.educations().forEach(education -> vacationRequest.addEducation(educationMapperService.toEntity(education)));
         return vacationRequest;
     }
 

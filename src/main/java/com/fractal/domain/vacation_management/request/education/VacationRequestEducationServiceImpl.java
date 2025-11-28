@@ -1,7 +1,5 @@
 package com.fractal.domain.vacation_management.request.education;
 
-import com.fractal.domain.education.dto.EducationRequest;
-import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.vacation_management.request.VacationRequestService;
 import com.fractal.domain.vacation_management.request.education.dto.VacationRequestEducationRequest;
 import com.fractal.domain.vacation_management.request.education.dto.VacationRequestEducationResponse;
@@ -33,12 +31,12 @@ class VacationRequestEducationServiceImpl implements VacationRequestEducationSer
 
     @Override
     public List<VacationRequestEducation> getAllByVacationRequestId(Long vacationRequestId) {
-        return vacationRequestEducationRepository.findAllByEmployeeId(vacationRequestId);
+        return vacationRequestEducationRepository.findAllByVacationRequestId(vacationRequestId);
     }
 
     @Override
     public VacationRequestEducation getById(Long vacationRequestId, Long id) {
-        return vacationRequestEducationRepository.findByEmployeeIdAndId(vacationRequestId, id).orElseThrow(() -> new ResourceNotFoundException("Education with id: " + id + " not found"));
+        return vacationRequestEducationRepository.findByVacationRequestIdAndId(vacationRequestId, id).orElseThrow(() -> new ResourceNotFoundException("Education with id: " + id + " not found"));
     }
 
     @Override

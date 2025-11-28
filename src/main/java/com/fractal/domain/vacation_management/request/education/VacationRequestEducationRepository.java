@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 interface VacationRequestEducationRepository extends JpaRepository<VacationRequestEducation, Long> {
-    List<VacationRequestEducation> findAllByEmployeeId(Long employeeId);
+    List<VacationRequestEducation> findAllByVacationRequestId(Long vacationRequestId);
 
-    Optional<VacationRequestEducation> findByEmployeeIdAndId(Long employeeId, Long id);
+    Optional<VacationRequestEducation> findByVacationRequestIdAndId(Long vacationRequestId, Long id);
 }

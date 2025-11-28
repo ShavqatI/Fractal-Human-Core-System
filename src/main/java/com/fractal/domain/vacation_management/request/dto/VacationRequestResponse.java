@@ -2,6 +2,7 @@ package com.fractal.domain.vacation_management.request.dto;
 
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
+import com.fractal.domain.vacation_management.request.education.dto.VacationRequestEducationResponse;
 import com.fractal.domain.vacation_management.request.medical_info.dto.VacationRequestMedicalInfoResponse;
 import com.fractal.domain.vacation_management.request.responsibility.dto.VacationRequestResponsibilityResponse;
 import com.fractal.domain.vacation_management.request.state.VacationRequestStateResponse;
@@ -23,6 +24,7 @@ public record VacationRequestResponse(
         String description,
         List<VacationRequestResponsibilityResponse> responsibilities,
         List<VacationRequestMedicalInfoResponse> medicalInfos,
+        List<VacationRequestEducationResponse> educations,
         List<VacationRequestStateResponse> states,
         StatusCompactResponse status,
         LocalDateTime createdDate
