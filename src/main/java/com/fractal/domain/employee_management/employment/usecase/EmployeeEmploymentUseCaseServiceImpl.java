@@ -5,10 +5,12 @@ import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
+import com.fractal.domain.employee_management.employment.usecase.hire.dto.Hire;
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.EmploymentService;
 import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
+import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.organization_management.position.PositionService;
 import lombok.RequiredArgsConstructor;
@@ -84,5 +86,23 @@ class EmployeeEmploymentUseCaseServiceImpl implements EmployeeEmploymentUseCaseS
             return internalEmploymentService.getById(employment.getId());
         }
         return null;
+    }
+
+    @Override
+    public void hire(Long employeeId, Hire dto) {
+        employeeEmploymentService.create(employeeId,
+                new InternalEmploymentRequest(
+                        dto.getOrganizationId(),
+                        dto.getDepartmentId(),
+                        dto.getPositionId(),
+                        dto.getEmploymentTypeId(),
+                        dto.getStartDate(),
+                        dto.getEndDate(),
+                        List.of(),
+                        List.of(),
+                        dto.getCompensationComponents(),
+                        statusService.getByCode("CREATED").getId()
+                )
+        );
     }
 }

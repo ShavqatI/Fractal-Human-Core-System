@@ -6,13 +6,8 @@ import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;
 
-public interface EmployeeEmploymentMapperService {
-    EmploymentResponse toDTO(EmployeeEmployment employment);
-    EmployeeEmployment toEntity(EmploymentRequest dto);
-
-    EmployeeEmployment toEntity(EmployeeEmployment employment, EmploymentRequest dto);
-
-    EmployeeEmployment copy(Employment employment);
-}
+public interface EmployeeEmploymentApprovedMapperService {
+    InternalEmploymentApprovedResponse toDTO(EmployeeEmployment employment);
+    }
 
 

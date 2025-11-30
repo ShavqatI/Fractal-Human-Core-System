@@ -1,6 +1,7 @@
 package com.fractal.domain.employee_management.employment;
 
 import com.fractal.domain.employee_management.employee.EmployeeService;
+import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentApprovedMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentMapperService;
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.dto.EmploymentRequest;
@@ -29,6 +30,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     private final InternalEmploymentService internalEmploymentService;
     private final ExternalEmploymentService externalEmploymentService;
     private final EmployeeEmploymentMapperService employmentMapperService;
+    private final EmployeeEmploymentApprovedMapperService employmentApprovedMapperService;
 
 
     @Override
@@ -113,7 +115,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
 
     @Override
     public InternalEmploymentApprovedResponse toApprovedDTO(EmployeeEmployment employment) {
-        return employmentMapperService.toApprovedDTO(employment);
+        return employmentApprovedMapperService.toDTO(employment);
     }
 
 

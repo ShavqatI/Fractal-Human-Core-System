@@ -24,11 +24,6 @@ public class EmployeeInternalEmploymentController {
     public ResponseEntity<List<EmploymentResponse>> getAll() {
         return ResponseEntity.ok(employmentService.getAll().stream().map(employmentService::toDTO).collect(Collectors.toList()));
     }
-    @GetMapping
-    public ResponseEntity<List<EmploymentResponse>> getAllApproved() {
-        return ResponseEntity.ok(employmentService.getAll().stream().map(employmentService::toDTO).collect(Collectors.toList()));
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<EmploymentResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(employmentService.toDTO(employmentService.getById(id)));
