@@ -2,7 +2,7 @@ package com.fractal.controller.vacation_management;
 
 
 import com.fractal.domain.vacation_management.schedule.VacationScheduleService;
-import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleEmployeeRequest;
+import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleSelfRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 import jakarta.validation.Valid;
@@ -26,7 +26,7 @@ public class VacationScheduleController {
         return new ResponseEntity<>(vacationScheduleService.toDTO(vacationScheduleService.create(dto)), HttpStatus.CREATED);
     }
     @PostMapping("/employee")
-    public ResponseEntity<VacationScheduleResponse> create(@RequestBody @Valid VacationScheduleEmployeeRequest dto) {
+    public ResponseEntity<VacationScheduleResponse> create(@RequestBody @Valid VacationScheduleSelfRequest dto) {
         return new ResponseEntity<>(vacationScheduleService.toDTO(vacationScheduleService.create(dto)), HttpStatus.CREATED);
     }
 

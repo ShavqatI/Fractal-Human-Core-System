@@ -4,7 +4,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record VacationScheduleEmployeeRequest(
+public record VacationScheduleSelfRequest(
         @NotNull
         LocalDate startDate,
         @NotNull

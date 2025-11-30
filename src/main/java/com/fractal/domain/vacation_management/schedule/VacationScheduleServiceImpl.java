@@ -2,7 +2,7 @@ package com.fractal.domain.vacation_management.schedule;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleEmployeeRequest;
+import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleSelfRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 import com.fractal.domain.vacation_management.schedule.mapper.VacationScheduleMapperService;
@@ -31,7 +31,7 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
     }
 
     @Override
-    public VacationSchedule create(VacationScheduleEmployeeRequest dto) {
+    public VacationSchedule create(VacationScheduleSelfRequest dto) {
         return create(new VacationScheduleRequest(authenticatedService.getEmployeeId(), dto.startDate(),dto.startDate().plusDays(dto.days())));
     }
 

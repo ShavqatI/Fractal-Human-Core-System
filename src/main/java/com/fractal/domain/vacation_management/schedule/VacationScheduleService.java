@@ -1,7 +1,7 @@
 package com.fractal.domain.vacation_management.schedule;
 
 import com.fractal.domain.abstraction.ApprovalWorkflowAware;
-import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleEmployeeRequest;
+import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleSelfRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 
@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface VacationScheduleService extends ApprovalWorkflowAware<Long, VacationSchedule> {
     VacationSchedule create(VacationScheduleRequest dto);
-    VacationSchedule create(VacationScheduleEmployeeRequest dto);
+    VacationSchedule create(VacationScheduleSelfRequest dto);
 
     List<VacationSchedule> getAll();
 
