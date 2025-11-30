@@ -30,6 +30,11 @@ class InternalEmploymentServiceImpl implements InternalEmploymentService {
     }
 
     @Override
+    public List<InternalEmployment> getAllApproved() {
+        return employmentRepository.findAllByStatusCode("APPROVED");
+    }
+
+    @Override
     public InternalEmployment getById(Long id) {
         return findById(id);
     }

@@ -1,5 +1,6 @@
 package com.fractal.domain.authorization;
 
+import com.fractal.component.CurrentUserHolder;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.authorization.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 class AuthenticatedServiceImpl implements AuthenticatedService {
 
     private final UserService userService;
+    private final CurrentUserHolder currentUserHolder;
 
     @Override
     public User getUser() {

@@ -1,5 +1,7 @@
 package com.fractal.security;
 
+import com.fractal.component.CurrentUserHolder;
+import com.fractal.domain.authorization.AuthenticatedService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +23,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final UserDetailsService userDetailsService;
     private final JwtService jwtService;
-
+    private final CurrentUserHolder currentUserHolder;
+    private final AuthenticatedService authenticatedService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
@@ -43,10 +46,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+                currentUserHolder.set(authenticatedService.getUser());
             }
         }
 
-        filterChain.doFilter(request, response);
+
+        try {
+            filterChain.doFilter(request, response);
+        } finally {
+            // always clear to avoid leaking ThreadLocal data
+            currentUserHolder.clear();
+        }
     }
 }
 

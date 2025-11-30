@@ -35,6 +35,9 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 public class Employee extends Person {
 
+    @Column(name = "uuid")
+    private String uuid;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;

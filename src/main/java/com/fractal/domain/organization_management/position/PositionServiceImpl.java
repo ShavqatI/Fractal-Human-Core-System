@@ -31,6 +31,11 @@ class PositionServiceImpl implements PositionService {
     }
 
     @Override
+    public void create(List<PositionRequest> dto) {
+        dto.forEach(r-> create(r));
+    }
+
+    @Override
     public List<Position> getAll() {
         return positionRepository.findAll();
     }
@@ -101,7 +106,7 @@ class PositionServiceImpl implements PositionService {
         return Position.builder()
                 .name(dto.name())
                 .description(dto.description())
-                .department(Optional.of(departmentService.getById(dto.departmentId())).orElse(null))
+                .department(dto.departmentId() != null ? Optional.of(departmentService.getById(dto.departmentId())).orElse(null): null)
                 .grade(dto.gradeId() != null ? Optional.of(gradeService.getById(dto.gradeId())).orElse(null) : null)
                 .openDate(dto.openDate())
                 .openReason(dto.openReason())

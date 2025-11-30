@@ -314,13 +314,16 @@ public class VacationOrderServiceImpl implements VacationOrderService {
     private Map getEducationValues(VacationOrder order) {
         Map<String,String> values = new HashMap<>();
         var employment = employeeUseCaseService.getCurrentEmployment(order.getVacation().getEmployee()).get();
-
         var request = order.getVacation().getVacationRequest();
+        var universityName = request.getEducations().getFirst().getInstitutionName();
+
         values.put("fullBankName", employment.organization().name());
         values.put("calendarDays", request.getDays().toString());
         values.put("startDate", request.getStartDate().toString());
         values.put("endDate", request.getEndDate().toString());
         values.put("returnDay", request.getWorkingDate().toString());
+        values.put("universityName", universityName);
+
         values.put("successorEmployeeName", employeeUseCaseService.getFullName(request.getSuccessorEmployee()));
         values.put("percent", order.getVacation().getSuccessorCompensationPercentage().toString());
         values.put("workingDays", request.getWorkingDays().toString());

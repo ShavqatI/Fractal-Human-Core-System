@@ -24,6 +24,11 @@ public class PositionController {
     public ResponseEntity<PositionResponse> create(@RequestBody @Valid PositionRequest dto) {
         return new ResponseEntity<>(positionService.toDTO(positionService.create(dto)), HttpStatus.CREATED);
     }
+    @PostMapping("bulck")
+    public ResponseEntity<Void> create(@RequestBody @Valid List<PositionRequest> dto) {
+         positionService.create(dto);
+        return ResponseEntity.noContent().build();
+    }
 
     @GetMapping
     public ResponseEntity<List<PositionResponse>> getAll() {

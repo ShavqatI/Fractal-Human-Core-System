@@ -4,6 +4,7 @@ package com.fractal.controller.employee_management.employee.employment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
+import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,10 @@ public class EmployeeEmploymentController {
     @GetMapping
     public ResponseEntity<List<EmploymentResponse>> getAll(@PathVariable Long employeeId) {
         return ResponseEntity.ok(employmentService.getAllByEmployeeId(employeeId).stream().map(employmentService::toDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("/approved")
+    public ResponseEntity<List<InternalEmploymentApprovedResponse>> getAllApproved() {
+        return ResponseEntity.ok(employmentService.getAllApproved().stream().map(employmentService::toApprovedDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")

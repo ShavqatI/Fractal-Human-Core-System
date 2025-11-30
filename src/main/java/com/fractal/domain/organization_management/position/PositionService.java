@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface PositionService {
     Position create(PositionRequest dto);
+    void create(List<PositionRequest> dto);
 
     List<Position> getAll();
 

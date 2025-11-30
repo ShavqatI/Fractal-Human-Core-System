@@ -1,9 +1,11 @@
 package com.fractal.domain.employment.internal.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employee.mapper.EmployeeMapperService;
 import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.agreement.mapper.InternalEmploymentAgreementMapperService;
 import com.fractal.domain.employment.internal.compensation_component.mapper.CompensationComponentMapperService;
+import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.employment.kind.EmploymentKindService;
@@ -33,6 +35,7 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
     private final SeparationReasonMapperService separationReasonMapperService;
     private final EmploymentKindService employmentKindService;
     private final CompensationComponentMapperService compensationComponentMapperService;
+
 
     @Override
     public InternalEmploymentResponse toDTO(InternalEmployment employment) {
@@ -65,7 +68,6 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
                 employment.getUpdatedDate()
         );
     }
-
     @Override
     public InternalEmployment toEntity(InternalEmploymentRequest dto) {
         return mapToEntity(new InternalEmployment(), dto);

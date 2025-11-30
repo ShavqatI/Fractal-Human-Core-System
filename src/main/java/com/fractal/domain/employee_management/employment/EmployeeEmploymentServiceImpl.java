@@ -7,14 +7,18 @@ import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.employment.external.ExternalEmploymentService;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentRequest;
+import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
+import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -58,6 +62,16 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
         return employmentRepository.findAllByEmploymentEndDateIsNullAndEmploymentStatusCode("ACTIVE");
     }
 
+    @Override
+    public List<EmployeeEmployment> getAllApproved() {
+       return employmentRepository.findAllByEmploymentEndDateIsNullAndEmploymentStatusCode("APPROVED")
+                .stream().filter(employeeEmployment -> {
+                    var employeeEmployment1 = (EmployeeEmployment) Hibernate.unproxy(employeeEmployment);
+                    var employment = (Employment) Hibernate.unproxy(employeeEmployment1.getEmployment());
+                    return employment instanceof InternalEmployment;
+                }).collect(Collectors.toList());
+    }
+
 
     @Override
     public EmployeeEmployment update(Long employeeId, Long id, EmploymentRequest dto) {
@@ -90,6 +104,11 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     @Override
     public EmploymentResponse toDTO(EmployeeEmployment employment) {
         return employmentMapperService.toDTO(employment);
+    }
+
+    @Override
+    public InternalEmploymentApprovedResponse toApprovedDTO(EmployeeEmployment employment) {
+        return employmentMapperService.toApprovedDTO(employment);
     }
 
 

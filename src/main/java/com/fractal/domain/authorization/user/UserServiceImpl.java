@@ -1,5 +1,6 @@
 package com.fractal.domain.authorization.user;
 
+import com.fractal.component.CurrentUserHolder;
 import com.fractal.domain.authorization.user.dto.ChangePasswordRequest;
 import com.fractal.domain.authorization.user.dto.ResetPasswordRequest;
 import com.fractal.domain.authorization.user.dto.UserRequest;
@@ -24,6 +25,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapperService mapperService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final CurrentUserHolder currentUserHolder;
 
 
     @Override
@@ -45,7 +47,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User findByUsername(String username) {
-        return userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User with username:" + username + " not found"));
+        var user = userRepository.findByUsername(username).orElseThrow(() -> new ResourceNotFoundException("User with username:" + username + " not found"));
+        return user;
     }
 
     @Override

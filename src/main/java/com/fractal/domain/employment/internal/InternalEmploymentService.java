@@ -9,6 +9,7 @@ public interface InternalEmploymentService {
     InternalEmployment create(InternalEmploymentRequest dto);
 
     List<InternalEmployment> getAll();
+    List<InternalEmployment> getAllApproved();
 
     InternalEmployment getById(Long id);
 

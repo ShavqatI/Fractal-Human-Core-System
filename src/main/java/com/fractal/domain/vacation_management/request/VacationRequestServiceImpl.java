@@ -1,5 +1,7 @@
 package com.fractal.domain.vacation_management.request;
 
+import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
@@ -13,7 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +27,7 @@ class VacationRequestServiceImpl implements VacationRequestService {
     private final VacationRequestMapperService mapperService;
     private final VacationRequestStateService stateService;
     private final StatusService statusService;
+    private final AuthenticatedService authenticatedService;
 
     @Override
     public VacationRequest create(VacationRequestRequest dto) {
@@ -33,7 +38,7 @@ class VacationRequestServiceImpl implements VacationRequestService {
 
     @Override
     public List<VacationRequest> getAll() {
-        return vacationRequestRepository.findAll();
+        return vacationRequestRepository.findAll().stream().sorted(Comparator.comparing(VacationRequest::getId).reversed()).collect(Collectors.toList());
     }
 
     @Override
@@ -93,7 +98,7 @@ class VacationRequestServiceImpl implements VacationRequestService {
         var vacationRequest = findById(id);
         if (vacationRequest.getStatus().getCode().equals("CREATED")) {
             vacationRequest.setReviewedDate(LocalDateTime.now());
-            //vacationRequest.setReviewedUser();
+            vacationRequest.setReviewedUser(authenticatedService.getUser());
             vacationRequest.setStatus(statusService.getByCode("REVIEWED"));
             stateService.create(vacationRequest);
             return vacationRequest;
@@ -107,7 +112,7 @@ class VacationRequestServiceImpl implements VacationRequestService {
         var vacationRequest = findById(id);
         if (vacationRequest.getStatus().getCode().equals("REVIEWED")) {
             vacationRequest.setApprovedDate(LocalDateTime.now());
-            //vacationRequest.setApprovedUser();
+            vacationRequest.setApprovedUser(authenticatedService.getUser());
             vacationRequest.setStatus(statusService.getByCode("APPROVED"));
             stateService.create(vacationRequest);
             return vacationRequest;

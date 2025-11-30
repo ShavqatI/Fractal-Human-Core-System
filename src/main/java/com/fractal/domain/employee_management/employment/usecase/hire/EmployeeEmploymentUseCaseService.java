@@ -1,7 +1,10 @@
 package com.fractal.domain.employee_management.employment.usecase.hire;
 
+import com.fractal.domain.employee_management.employment.usecase.hire.dto.Hire;
+
 public interface EmployeeEmploymentUseCaseService {
-    void hirePermanent(Long employeeId);
+    void hire(Long employeeId, Hire dto);
+    /*void hirePermanent(Long employeeId);
 
     void hirePermanentWithSurcharge(Long employeeId);
 
@@ -11,11 +14,11 @@ public interface EmployeeEmploymentUseCaseService {
 
     void offBoard(Long employeeId);
 
-    void transferInternal(Long employeeId);
+    void transferInternal(Long employeeId, InternalTransfer dto);
 
-    void transferInterOrganization(Long employeeId);
+    void transferInterOrganization(Long employeeId, InterOrganizationTransfer dto);
 
-    void rotate(Long employeeId);
+    void rotate(Long employeeId);*/
 
 
 }
