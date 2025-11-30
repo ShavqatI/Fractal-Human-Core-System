@@ -1,0 +1,26 @@
+package com.fractal.domain.order.employment;
+
+import com.fractal.domain.abstraction.ApprovalWorkflowAware;
+import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
+import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
+
+import java.util.List;
+
+public interface EmploymentOrderService extends ApprovalWorkflowAware<Long, EmploymentOrder> {
+
+    EmploymentOrder create(EmploymentOrderRequest dto);
+
+    List<EmploymentOrder> getAll();
+
+    EmploymentOrder getById(Long id);
+
+    EmploymentOrder update(Long id, EmploymentOrderRequest dto);
+
+    void delete(Long id);
+
+    EmploymentOrderResponse toDTO(EmploymentOrder employmentOrder);
+
+    EmploymentOrder save(EmploymentOrder order);
+
+
+}

@@ -1,9 +1,9 @@
 package com.fractal.domain.order.employment;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.order.employment.dto.InternalEmploymentOrderRequest;
-import com.fractal.domain.order.employment.dto.InternalEmploymentOrderResponse;
-import com.fractal.domain.order.employment.mapper.InternalEmploymentOrderMapperService;
+import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
+import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
+import com.fractal.domain.order.employment.mapper.EmploymentOrderMapperService;
 import com.fractal.domain.order.state.OrderStateService;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
@@ -17,17 +17,17 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrderService {
+public class EmploymentOrderServiceImpl implements EmploymentOrderService {
 
-    private final InternalEmploymentOrderRepository orderRepository;
-    private final InternalEmploymentOrderMapperService orderMapperService;
+    private final EmploymentOrderRepository orderRepository;
+    private final EmploymentOrderMapperService orderMapperService;
     private final OrderStateService stateService;
     private final StatusService statusService;
 
 
     @Override
     @Transactional
-    public InternalEmploymentOrder create(InternalEmploymentOrderRequest dto) {
+    public EmploymentOrder create(EmploymentOrderRequest dto) {
         var order = orderMapperService.toEntity(dto);
         order.setStatus(statusService.getByCode("CREATED"));
         order = save(order);
@@ -36,18 +36,18 @@ public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrd
     }
 
     @Override
-    public List<InternalEmploymentOrder> getAll() {
+    public List<EmploymentOrder> getAll() {
         return orderRepository.findAll();
     }
 
     @Override
-    public InternalEmploymentOrder getById(Long id) {
+    public EmploymentOrder getById(Long id) {
         return orderRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this,id));
     }
 
     @Override
     @Transactional
-    public InternalEmploymentOrder update(Long id, InternalEmploymentOrderRequest dto) {
+    public EmploymentOrder update(Long id, EmploymentOrderRequest dto) {
         var order = save(orderMapperService.toEntity(getById(id), dto));
         return order;
     }
@@ -59,13 +59,13 @@ public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrd
     }
 
     @Override
-    public InternalEmploymentOrderResponse toDTO(InternalEmploymentOrder order) {
+    public EmploymentOrderResponse toDTO(EmploymentOrder order) {
         return orderMapperService.toDTO(order);
     }
 
     @Override
     @Transactional
-    public InternalEmploymentOrder save(InternalEmploymentOrder order) {
+    public EmploymentOrder save(EmploymentOrder order) {
         try {
             return orderRepository.save(order);
         } catch (DataAccessException e) {
@@ -75,7 +75,7 @@ public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrd
 
 
     @Override
-    public InternalEmploymentOrder review(Long id) {
+    public EmploymentOrder review(Long id) {
         var order = getById(id);
         if (order.getStatus().getCode().equals("CREATED")) {
             order.setReviewedDate(LocalDateTime.now());
@@ -89,7 +89,7 @@ public class InternalEmploymentOrderServiceImpl implements InternalEmploymentOrd
     }
 
     @Override
-    public InternalEmploymentOrder approve(Long id) {
+    public EmploymentOrder approve(Long id) {
         var order = getById(id);
         if (order.getStatus().getCode().equals("REVIEWED")) {
             order.setApprovedDate(LocalDateTime.now());

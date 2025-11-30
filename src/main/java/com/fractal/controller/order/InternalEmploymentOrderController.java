@@ -1,9 +1,9 @@
 package com.fractal.controller.order;
 
 
-import com.fractal.domain.order.employment.InternalEmploymentOrderService;
-import com.fractal.domain.order.employment.dto.InternalEmploymentOrderRequest;
-import com.fractal.domain.order.employment.dto.InternalEmploymentOrderResponse;
+import com.fractal.domain.order.employment.EmploymentOrderService;
+import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
+import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,34 +18,34 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class InternalEmploymentOrderController {
 
-    private final InternalEmploymentOrderService orderService;
+    private final EmploymentOrderService orderService;
 
     @PostMapping()
-    public ResponseEntity<InternalEmploymentOrderResponse> create(@RequestBody @Valid InternalEmploymentOrderRequest dto) {
+    public ResponseEntity<EmploymentOrderResponse> create(@RequestBody @Valid EmploymentOrderRequest dto) {
         return new ResponseEntity<>(orderService.toDTO(orderService.create(dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<InternalEmploymentOrderResponse>> getAll() {
+    public ResponseEntity<List<EmploymentOrderResponse>> getAll() {
         return ResponseEntity.ok(orderService.getAll().stream().map(orderService::toDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<InternalEmploymentOrderResponse> getById( @PathVariable Long id) {
+    public ResponseEntity<EmploymentOrderResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(orderService.toDTO(orderService.getById(id)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<InternalEmploymentOrderResponse> update(@PathVariable Long id, @RequestBody @Valid InternalEmploymentOrderRequest dto) {
+    public ResponseEntity<EmploymentOrderResponse> update(@PathVariable Long id, @RequestBody @Valid EmploymentOrderRequest dto) {
         return ResponseEntity.ok(orderService.toDTO(orderService.update(id, dto)));
     }
     @PutMapping("review/{id}")
-    public ResponseEntity<InternalEmploymentOrderResponse> review(@PathVariable Long id) {
+    public ResponseEntity<EmploymentOrderResponse> review(@PathVariable Long id) {
         return ResponseEntity.ok(orderService.toDTO(orderService.review(id)));
     }
 
     @PutMapping("approve/{id}")
-    public ResponseEntity<InternalEmploymentOrderResponse> approve(@PathVariable Long id) {
+    public ResponseEntity<EmploymentOrderResponse> approve(@PathVariable Long id) {
         return ResponseEntity.ok(orderService.toDTO(orderService.approve(id)));
     }
 

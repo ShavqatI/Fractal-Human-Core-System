@@ -11,6 +11,7 @@ public interface EmployeeEmploymentService {
     EmployeeEmployment create(Long employeeId, EmploymentRequest dto);
 
     EmployeeEmployment getById(Long employeeId, Long id);
+    EmployeeEmployment getById(Long id);
 
     List<EmployeeEmployment> getAllByEmployeeId(Long employeeId);
 

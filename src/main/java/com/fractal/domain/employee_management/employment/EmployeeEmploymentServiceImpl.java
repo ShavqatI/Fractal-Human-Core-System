@@ -53,6 +53,11 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     }
 
     @Override
+    public EmployeeEmployment getById(Long id) {
+        return getById(id);
+    }
+
+    @Override
     public List<EmployeeEmployment> getAllByEmployeeId(Long employeeId) {
         return employmentRepository.findAllByEmployeeId(employeeId);
     }

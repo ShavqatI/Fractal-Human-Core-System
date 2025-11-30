@@ -2,10 +2,10 @@
 package com.fractal.domain.order.employment.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.order.employment.InternalEmploymentOrder;
-import com.fractal.domain.order.employment.dto.InternalEmploymentOrderRequest;
-import com.fractal.domain.order.employment.dto.InternalEmploymentOrderResponse;
-import com.fractal.domain.order.employment.record.mapper.InternalEmploymentOrderRecordMapperService;
+import com.fractal.domain.order.employment.EmploymentOrder;
+import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
+import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
+import com.fractal.domain.order.employment.record.mapper.EmploymentOrderRecordMapperService;
 import com.fractal.domain.order.resource.mapper.OrderResourceMapperService;
 import com.fractal.domain.order.type.OrderTypeService;
 import lombok.RequiredArgsConstructor;
@@ -18,16 +18,16 @@ import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
-class InternalEmploymentOrderMapperServiceImpl implements InternalEmploymentOrderMapperService {
+class EmploymentOrderMapperServiceImpl implements EmploymentOrderMapperService {
 
     private final OrderTypeService orderTypeService;
     private final OrderResourceMapperService resourceMapperService;
     private final StatusService statusService;
-    private final InternalEmploymentOrderRecordMapperService recordMapperService;
+    private final EmploymentOrderRecordMapperService recordMapperService;
 
     @Override
-    public InternalEmploymentOrderResponse toDTO(InternalEmploymentOrder order) {
-        return new InternalEmploymentOrderResponse(
+    public EmploymentOrderResponse toDTO(EmploymentOrder order) {
+        return new EmploymentOrderResponse(
                 order.getId(),
                 orderTypeService.toDTO(order.getOrderType()),
                 Optional.ofNullable(order.getRecords())
@@ -49,16 +49,16 @@ class InternalEmploymentOrderMapperServiceImpl implements InternalEmploymentOrde
     }
 
     @Override
-    public InternalEmploymentOrder toEntity(InternalEmploymentOrderRequest dto) {
-        return mapToEntity(new InternalEmploymentOrder(), dto);
+    public EmploymentOrder toEntity(EmploymentOrderRequest dto) {
+        return mapToEntity(new EmploymentOrder(), dto);
     }
 
     @Override
-    public InternalEmploymentOrder toEntity(InternalEmploymentOrder order, InternalEmploymentOrderRequest dto) {
+    public EmploymentOrder toEntity(EmploymentOrder order, EmploymentOrderRequest dto) {
         return mapToEntity(order, dto);
     }
 
-    private InternalEmploymentOrder mapToEntity(InternalEmploymentOrder order, InternalEmploymentOrderRequest dto) {
+    private EmploymentOrder mapToEntity(EmploymentOrder order, EmploymentOrderRequest dto) {
         order.setOrderType(orderTypeService.getById(dto.orderTypeId()));
         order.setNumber(dto.number());
         order.setDate(dto.date());
