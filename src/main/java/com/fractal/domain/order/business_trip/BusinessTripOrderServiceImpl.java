@@ -44,7 +44,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     private final EmployeeUseCaseService employeeUseCaseService;
     private final OrderUseCaseService orderUseCaseService;
     private final FileService fileService;
-    //private final AuthenticatedService authenticatedService;
+    private final AuthenticatedService authenticatedService;
     private final BusinessTripLocationMapperService businessTripLocationMapperService;
 
     @Value("${resource-storage.temporary}")
@@ -107,7 +107,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
         var order = getById(id);
         if (order.getStatus().getCode().equals("CREATED")) {
             order.setReviewedDate(LocalDateTime.now());
-            //order.setReviewedUser(authenticatedService.getUser());
+            order.setReviewedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("REVIEWED"));
             stateService.create(order);
             return order;
@@ -124,7 +124,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
             order.getRecords().forEach(record -> {
                 businessTripService.close(record.getBusinessTrip().getId());
             });
-            //order.setApprovedUser(authenticatedService.getUser());
+            order.setApprovedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("APPROVED"));
             order.setStatus(order.getStatus());
             stateService.create(order);

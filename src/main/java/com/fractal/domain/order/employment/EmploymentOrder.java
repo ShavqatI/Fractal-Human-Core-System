@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 public class EmploymentOrder extends Order {
 
-    @OneToMany(mappedBy = "employmentOrder", cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employmentOrder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<EmploymentOrderRecord> records = new ArrayList<>();
 
     public void addRecord(EmploymentOrderRecord record) {

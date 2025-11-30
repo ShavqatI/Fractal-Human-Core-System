@@ -1,8 +1,10 @@
 package com.fractal.domain.authorization;
 
 import com.fractal.component.CurrentUserHolder;
+import com.fractal.domain.authorization.mapping.user_employee.UserEmployeeMappingService;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.authorization.user.UserService;
+import com.fractal.domain.employee_management.employee.Employee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,8 +16,7 @@ import org.springframework.stereotype.Service;
 class AuthenticatedServiceImpl implements AuthenticatedService {
 
     private final UserService userService;
-    private final CurrentUserHolder currentUserHolder;
-
+    private final UserEmployeeMappingService userEmployeeMappingService;
     @Override
     public User getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -28,5 +29,10 @@ class AuthenticatedServiceImpl implements AuthenticatedService {
             } else {}
         } else {}
         return null;
+    }
+
+    @Override
+    public Long getEmployeeId() {
+       return userEmployeeMappingService.getEmployee(getUser()).getId();
     }
 }

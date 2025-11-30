@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/order-management/internal-employment")
+@RequestMapping("/api/v1/order-management/employment")
 @RequiredArgsConstructor
-public class InternalEmploymentOrderController {
+public class EmploymentOrderController {
 
     private final EmploymentOrderService orderService;
 

@@ -56,7 +56,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
 
     @Override
     public EmployeeEmployment getById(Long id) {
-        return getById(id);
+        return employmentRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
 
     @Override

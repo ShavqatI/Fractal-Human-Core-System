@@ -64,7 +64,6 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     }
 
     @Override
-    @Transactional
     public EmploymentOrder save(EmploymentOrder order) {
         try {
             return orderRepository.save(order);
