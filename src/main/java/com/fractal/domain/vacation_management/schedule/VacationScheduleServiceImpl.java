@@ -46,8 +46,8 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
     }
 
     @Override
-    public List<VacationSchedule> getAllByEmployeeId(Long employeeId) {
-        return vacationScheduleRepository.findAllByEmployeeId(employeeId);
+    public List<VacationSchedule> getAllByEmployeeId() {
+        return vacationScheduleRepository.findAllByEmployeeId(authenticatedService.getEmployeeId());
     }
 
     @Override
@@ -57,6 +57,11 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
+    }
+
+    @Override
+    public VacationSchedule update(Long id, VacationScheduleSelfRequest dto) {
+        return update(id,new VacationScheduleRequest(authenticatedService.getEmployeeId(), dto.startDate(),dto.startDate().plusDays(dto.days())));
     }
 
     @Override
@@ -85,7 +90,7 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
         var schedule = findById(id);
         if (schedule.getStatus().getCode().equals("CREATED")) {
             schedule.setReviewedDate(LocalDateTime.now());
-            //schedule.setReviewedUser(authenticatedService.getUser());
+            schedule.setReviewedUser(authenticatedService.getUser());
             schedule.setStatus(statusService.getByCode("REVIEWED"));
             return save(schedule);
         } else {
@@ -98,7 +103,7 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
         var schedule = findById(id);
         if (schedule.getStatus().getCode().equals("REVIEWED")) {
             schedule.setApprovedDate(LocalDateTime.now());
-            //schedule.setApprovedUser(authenticatedService.getUser());
+            schedule.setApprovedUser(authenticatedService.getUser());
             schedule.setStatus(statusService.getByCode("APPROVED"));
             return save(schedule);
         } else {

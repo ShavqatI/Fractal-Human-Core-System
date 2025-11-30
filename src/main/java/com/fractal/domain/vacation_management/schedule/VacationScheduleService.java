@@ -15,9 +15,10 @@ public interface VacationScheduleService extends ApprovalWorkflowAware<Long, Vac
 
     VacationSchedule getById(Long id);
 
-    List<VacationSchedule> getAllByEmployeeId(Long employeeId);
+    List<VacationSchedule> getAllByEmployeeId();
 
     VacationSchedule update(Long id, VacationScheduleRequest dto);
+    VacationSchedule update(Long id, VacationScheduleSelfRequest dto);
 
     void deleteById(Long id);
 

@@ -1,10 +1,10 @@
-package com.fractal.controller.vacation_management;
+package com.fractal.controller.vacation_management.schedule;
 
 
 import com.fractal.domain.vacation_management.schedule.VacationScheduleService;
-import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleSelfRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
+import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleSelfRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,24 +15,20 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/vacation-management/schedule")
+@RequestMapping("/api/v1/vacation-management/schedule/self")
 @RequiredArgsConstructor
-public class VacationScheduleController {
+public class VacationScheduleSelfController {
 
     private final VacationScheduleService vacationScheduleService;
 
     @PostMapping
-    public ResponseEntity<VacationScheduleResponse> create(@RequestBody @Valid VacationScheduleRequest dto) {
-        return new ResponseEntity<>(vacationScheduleService.toDTO(vacationScheduleService.create(dto)), HttpStatus.CREATED);
-    }
-    @PostMapping("/employee")
     public ResponseEntity<VacationScheduleResponse> create(@RequestBody @Valid VacationScheduleSelfRequest dto) {
         return new ResponseEntity<>(vacationScheduleService.toDTO(vacationScheduleService.create(dto)), HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<VacationScheduleResponse>> getAll() {
-        return ResponseEntity.ok(vacationScheduleService.getAll().stream().map(vacationScheduleService::toDTO).collect(Collectors.toList()));
+        return ResponseEntity.ok(vacationScheduleService.getAllByEmployeeId().stream().map(vacationScheduleService::toDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
@@ -41,7 +37,7 @@ public class VacationScheduleController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<VacationScheduleResponse> update(@PathVariable Long id, @RequestBody @Valid VacationScheduleRequest dto) {
+    public ResponseEntity<VacationScheduleResponse> update(@PathVariable Long id, @RequestBody @Valid VacationScheduleSelfRequest dto) {
         return ResponseEntity.ok(vacationScheduleService.toDTO(vacationScheduleService.update(id, dto)));
     }
 
