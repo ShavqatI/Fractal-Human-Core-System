@@ -1,4 +1,4 @@
-package com.fractal.domain.profile.vacation.dto;
+package com.fractal.domain.profile.vacation.schedule;
 
 import jakarta.validation.constraints.NotNull;
 

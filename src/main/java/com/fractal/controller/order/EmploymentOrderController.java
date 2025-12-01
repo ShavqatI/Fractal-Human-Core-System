@@ -50,6 +50,7 @@ public class EmploymentOrderController {
     }
 
     @DeleteMapping("/{id}")
+    @CrossOrigin(value = "*")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         orderService.delete(id);
         return ResponseEntity.noContent().build();

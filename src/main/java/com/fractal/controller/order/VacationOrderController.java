@@ -71,6 +71,7 @@ public class VacationOrderController {
     }
 
     @GetMapping("print/{id}")
+    @CrossOrigin(value = "*")
     public ResponseEntity<StreamingResponseBody> print( @PathVariable Long id) {
         Path path = orderService.print(id);
         return fileService.view(path);

@@ -55,6 +55,7 @@ public class OrderResourceController {
     }
 
     @GetMapping("/download/{id}")
+    @CrossOrigin(value = "*")
     public ResponseEntity<Resource> download(@PathVariable Long orderId, @PathVariable Long id) {
         var orderResource = resourceService.getById(orderId, id);
         try {

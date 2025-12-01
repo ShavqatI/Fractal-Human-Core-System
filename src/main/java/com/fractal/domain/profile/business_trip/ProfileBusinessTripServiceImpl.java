@@ -5,6 +5,8 @@ import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.business_trip.BusinessTripService;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
+import com.fractal.domain.profile.vacation.request.ProfileVacationRequestRequest;
+import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,18 +22,7 @@ class ProfileBusinessTripServiceImpl implements ProfileBusinessTripService {
 
     @Override
     public BusinessTrip create(ProfileBusinessTripRequest dto) {
-        var request = new BusinessTripRequest(
-                authenticatedService.getEmployeeId(),
-                dto.businessTripTypeId(),
-                dto.purpose(),
-                dto.description(),
-                dto.startDate(),
-                dto.endDate(),
-                dto.expenses(),
-                dto.locations(),
-                dto.files()
-        );
-      return businessTripService.create(request);
+       return businessTripService.create(mapDTO(dto));
     }
 
     @Override
@@ -44,18 +35,7 @@ class ProfileBusinessTripServiceImpl implements ProfileBusinessTripService {
     }
     @Override
     public BusinessTrip update(Long id, ProfileBusinessTripRequest dto) {
-        var request = new BusinessTripRequest(
-                authenticatedService.getEmployeeId(),
-                dto.businessTripTypeId(),
-                dto.purpose(),
-                dto.description(),
-                dto.startDate(),
-                dto.endDate(),
-                dto.expenses(),
-                dto.locations(),
-                dto.files()
-        );
-        return businessTripService.update(id,request);
+        return businessTripService.update(id,mapDTO(dto));
     }
 
     @Override
@@ -82,5 +62,19 @@ class ProfileBusinessTripServiceImpl implements ProfileBusinessTripService {
     public BusinessTrip review(Long id) {
         var businessTrip = findById(id);
         return businessTripService.review(businessTrip.getId());
+    }
+
+    private BusinessTripRequest mapDTO(ProfileBusinessTripRequest dto) {
+        return new BusinessTripRequest(
+                authenticatedService.getEmployeeId(),
+                dto.businessTripTypeId(),
+                dto.purpose(),
+                dto.description(),
+                dto.startDate(),
+                dto.endDate(),
+                dto.expenses(),
+                dto.locations(),
+                dto.files()
+        );
     }
 }

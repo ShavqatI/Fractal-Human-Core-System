@@ -1,7 +1,6 @@
-package com.fractal.domain.profile.vacation;
+package com.fractal.domain.profile.vacation.schedule;
 
 import com.fractal.domain.vacation_management.schedule.VacationSchedule;
-import com.fractal.domain.profile.vacation.dto.ProfileVacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 
 import java.util.List;

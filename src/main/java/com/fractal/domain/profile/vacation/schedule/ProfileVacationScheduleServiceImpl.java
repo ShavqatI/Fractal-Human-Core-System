@@ -1,9 +1,8 @@
-package com.fractal.domain.profile.vacation;
+package com.fractal.domain.profile.vacation.schedule;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.vacation_management.schedule.VacationSchedule;
 import com.fractal.domain.vacation_management.schedule.VacationScheduleService;
-import com.fractal.domain.profile.vacation.dto.ProfileVacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 import com.fractal.exception.ResourceWithIdNotFoundException;
@@ -21,7 +20,7 @@ class ProfileVacationScheduleServiceImpl implements ProfileVacationScheduleServi
 
     @Override
     public VacationSchedule create(ProfileVacationScheduleRequest dto) {
-        return vacationScheduleService.create(new VacationScheduleRequest(authenticatedService.getEmployeeId(), dto.startDate(),dto.startDate().plusDays(dto.days() - 1)));
+        return vacationScheduleService.create(mapDTO(dto));
     }
     @Override
     public VacationSchedule getById(Long id) {
@@ -35,7 +34,7 @@ class ProfileVacationScheduleServiceImpl implements ProfileVacationScheduleServi
     @Override
     public VacationSchedule update(Long id, ProfileVacationScheduleRequest dto) {
         var schedule = findById(id);
-        return vacationScheduleService.update(schedule.getId(),new VacationScheduleRequest(authenticatedService.getEmployeeId(), dto.startDate(),dto.startDate().plusDays(dto.days() - 1)));
+        return vacationScheduleService.update(schedule.getId(),mapDTO(dto));
     }
 
     @Override
@@ -54,6 +53,14 @@ class ProfileVacationScheduleServiceImpl implements ProfileVacationScheduleServi
     private VacationSchedule findById(Long id){
         var schedule = getAll().stream().filter(s-> s.getEmployee().getId().equals(authenticatedService.getEmployeeId()) && s.getId().equals(id)).findFirst().orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
         return schedule;
+    }
+
+    private VacationScheduleRequest mapDTO(ProfileVacationScheduleRequest dto) {
+       return new VacationScheduleRequest(
+               authenticatedService.getEmployeeId(),
+               dto.startDate(),
+               dto.startDate().plusDays(dto.days() - 1)
+       );
     }
 
 }
