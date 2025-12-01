@@ -39,8 +39,6 @@ public class ProfileVacationScheduleController {
     public ResponseEntity<VacationScheduleResponse> review(@PathVariable Long id) {
         return ResponseEntity.ok(vacationScheduleService.toDTO(vacationScheduleService.review(id)));
     }
-
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         vacationScheduleService.deleteById(id);
