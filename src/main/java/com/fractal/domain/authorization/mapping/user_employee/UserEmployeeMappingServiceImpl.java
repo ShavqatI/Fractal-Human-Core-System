@@ -67,7 +67,7 @@ class UserEmployeeMappingServiceImpl implements UserEmployeeMappingService {
     public UserEmployeeMappingResponse toDTO(UserEmployeeMapping userEmployeeMapping) {
         return new UserEmployeeMappingResponse(
                 userEmployeeMapping.getId(),
-                userEmployeeMapping.getUser().getUsername(),
+                userService.toCompactDTO(userEmployeeMapping.getUser()),
                 employeeService.toCompactDTO(userEmployeeMapping.getEmployee()),
                 statusService.toCompactDTO(userEmployeeMapping.getStatus()),
                 userEmployeeMapping.getCreatedDate()

@@ -316,7 +316,7 @@ public class VacationOrderServiceImpl implements VacationOrderService {
         var employment = employeeUseCaseService.getCurrentEmployment(order.getVacation().getEmployee()).get();
         var request = order.getVacation().getVacationRequest();
         var universityName = request.getEducations().getFirst().getInstitutionName();
-
+        System.out.println(universityName);
         values.put("fullBankName", employment.organization().name());
         values.put("calendarDays", request.getDays().toString());
         values.put("startDate", request.getStartDate().toString());

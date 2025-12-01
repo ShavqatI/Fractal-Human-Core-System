@@ -1,9 +1,6 @@
 package com.fractal.domain.authorization.user;
 
-import com.fractal.domain.authorization.user.dto.ChangePasswordRequest;
-import com.fractal.domain.authorization.user.dto.ResetPasswordRequest;
-import com.fractal.domain.authorization.user.dto.UserRequest;
-import com.fractal.domain.authorization.user.dto.UserResponse;
+import com.fractal.domain.authorization.user.dto.*;
 import com.fractal.domain.authorization.user.role.UserRole;
 
 import java.util.List;
@@ -30,5 +27,6 @@ public interface UserService {
     List<UserRole> getActiveRoles(Long id);
 
     UserResponse toDTO(User user);
+    UserCompactResponse toCompactDTO(User user);
 
 }

@@ -1,5 +1,6 @@
 package com.fractal.domain.employee_management.business_trip;
 
+import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
@@ -20,6 +21,7 @@ class BusinessTripServiceImpl implements BusinessTripService {
     private final BusinessTripRepository businessTripRepository;
     private final BusinessTripMapperService mapperService;
     private final StatusService statusService;
+    private final AuthenticatedService authenticatedService;
 
 
     @Override
@@ -41,7 +43,7 @@ class BusinessTripServiceImpl implements BusinessTripService {
 
     @Override
     public List<BusinessTrip> getAllByEmployeeId(Long employeeId) {
-        return businessTripRepository.findAllByEmployeeId(employeeId);
+        return businessTripRepository.findAllByEmployeeId(authenticatedService.getEmployeeId());
     }
 
     @Override
@@ -52,7 +54,6 @@ class BusinessTripServiceImpl implements BusinessTripService {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
-
     @Override
     public void deleteById(Long id) {
         businessTripRepository.delete(findById(id));
@@ -87,7 +88,7 @@ class BusinessTripServiceImpl implements BusinessTripService {
         var businessTrip = getById(id);
         if (businessTrip.getStatus().getCode().equals("CREATED")) {
             businessTrip.setApprovedDate(LocalDateTime.now());
-            //businessTrip.setApprovedUser(authenticatedService.getUser());
+            businessTrip.setApprovedUser(authenticatedService.getUser());
             businessTrip.setStatus(statusService.getByCode("REVIEWED"));
             return save(businessTrip);
         } else {
@@ -100,7 +101,7 @@ class BusinessTripServiceImpl implements BusinessTripService {
         var businessTrip = getById(id);
         if (businessTrip.getStatus().getCode().equals("REVIEWED")) {
             businessTrip.setApprovedDate(LocalDateTime.now());
-            //businessTrip.setApprovedUser(authenticatedService.getUser());
+            businessTrip.setApprovedUser(authenticatedService.getUser());
             businessTrip.setStatus(statusService.getByCode("APPROVED"));
             return save(businessTrip);
         } else {

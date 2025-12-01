@@ -2,7 +2,6 @@ package com.fractal.domain.vacation_management.schedule;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleSelfRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 import com.fractal.domain.vacation_management.schedule.mapper.VacationScheduleMapperService;
@@ -29,12 +28,6 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
         var schedule = mapperService.toEntity(dto);
         return save(schedule);
     }
-
-    @Override
-    public VacationSchedule create(VacationScheduleSelfRequest dto) {
-        return create(new VacationScheduleRequest(authenticatedService.getEmployeeId(), dto.startDate(),dto.startDate().plusDays(dto.days())));
-    }
-
     @Override
     public List<VacationSchedule> getAll() {
         return vacationScheduleRepository.findAll();
@@ -46,8 +39,8 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
     }
 
     @Override
-    public List<VacationSchedule> getAllByEmployeeId() {
-        return vacationScheduleRepository.findAllByEmployeeId(authenticatedService.getEmployeeId());
+    public List<VacationSchedule> getAllByEmployeeId(Long employeeId) {
+        return vacationScheduleRepository.findAllByEmployeeId(employeeId);
     }
 
     @Override
@@ -57,11 +50,6 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
-    }
-
-    @Override
-    public VacationSchedule update(Long id, VacationScheduleSelfRequest dto) {
-        return update(id,new VacationScheduleRequest(authenticatedService.getEmployeeId(), dto.startDate(),dto.startDate().plusDays(dto.days())));
     }
 
     @Override

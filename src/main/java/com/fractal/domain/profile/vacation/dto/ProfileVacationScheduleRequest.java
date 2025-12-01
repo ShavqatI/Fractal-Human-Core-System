@@ -1,10 +1,10 @@
-package com.fractal.domain.vacation_management.schedule.dto;
+package com.fractal.domain.profile.vacation.dto;
 
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
-public record VacationScheduleSelfRequest(
+public record ProfileVacationScheduleRequest(
         @NotNull
         LocalDate startDate,
         @NotNull

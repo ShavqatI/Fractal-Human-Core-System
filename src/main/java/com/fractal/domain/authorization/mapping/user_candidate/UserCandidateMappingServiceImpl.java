@@ -60,7 +60,7 @@ class UserCandidateMappingServiceImpl implements UserCandidateMappingService {
     public UserCandidateMappingResponse toDTO(UserCandidateMapping userCandidateMapping) {
         return new UserCandidateMappingResponse(
                 userCandidateMapping.getId(),
-                userCandidateMapping.getUser().getUsername(),
+                userService.toCompactDTO(userCandidateMapping.getUser()),
                 candidateService.toCompactDTO(userCandidateMapping.getCandidate()),
                 statusService.toCompactDTO(userCandidateMapping.getStatus()),
                 userCandidateMapping.getCreatedDate()

@@ -25,6 +25,7 @@ public record EmployeeRequest(
         Long genderId,
         Long maritalStatusId,
         Long nationalityId,
+        String uuid,
         List<IdentificationDocumentRequest> identificationDocuments,
         List<CitizenshipRequest> citizenships,
         List<EmployeeAddressRequest> addresses,

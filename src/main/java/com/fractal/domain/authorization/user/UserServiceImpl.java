@@ -1,10 +1,7 @@
 package com.fractal.domain.authorization.user;
 
 import com.fractal.component.CurrentUserHolder;
-import com.fractal.domain.authorization.user.dto.ChangePasswordRequest;
-import com.fractal.domain.authorization.user.dto.ResetPasswordRequest;
-import com.fractal.domain.authorization.user.dto.UserRequest;
-import com.fractal.domain.authorization.user.dto.UserResponse;
+import com.fractal.domain.authorization.user.dto.*;
 import com.fractal.domain.authorization.user.mapper.UserMapperService;
 import com.fractal.domain.authorization.user.role.UserRole;
 import com.fractal.exception.ResourceNotFoundException;
@@ -90,6 +87,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse toDTO(User user) {
         return mapperService.toDTO(user);
+    }
+
+    @Override
+    public UserCompactResponse toCompactDTO(User user) {
+        return mapperService.toCompactDTO(user);
     }
 
     @Override

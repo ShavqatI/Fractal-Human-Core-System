@@ -1,6 +1,7 @@
 package com.fractal.domain.authorization.user.mapper;
 
 import com.fractal.domain.authorization.user.User;
+import com.fractal.domain.authorization.user.dto.UserCompactResponse;
 import com.fractal.domain.authorization.user.dto.UserRequest;
 import com.fractal.domain.authorization.user.dto.UserResponse;
 import com.fractal.domain.authorization.user.role.mapper.UserRoleMapperService;
@@ -36,6 +37,14 @@ class UserMapperServiceImpl implements UserMapperService {
                         .collect(Collectors.toList()),
                 user.getCreatedDate(),
                 user.getUpdatedDate()
+        );
+    }
+
+    @Override
+    public UserCompactResponse toCompactDTO(User user) {
+        return new UserCompactResponse(
+                user.getId(),
+                user.getUsername()
         );
     }
 

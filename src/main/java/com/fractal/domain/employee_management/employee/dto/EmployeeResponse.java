@@ -31,6 +31,7 @@ public record EmployeeResponse(
         GenderResponse gender,
         MaritalStatusResponse maritalStatus,
         NationalityResponse nationality,
+        String uuid,
         List<IdentificationDocumentResponse> identificationDocuments,
         List<CitizenshipResponse> citizenships,
         List<EmployeeAddressResponse> addresses,

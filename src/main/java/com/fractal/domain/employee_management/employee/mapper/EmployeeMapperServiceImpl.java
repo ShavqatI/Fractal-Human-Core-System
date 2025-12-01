@@ -66,6 +66,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
                 genderService.toDTO(employee.getGender()),
                 maritalStatusService.toDTO(employee.getMaritalStatus()),
                 nationalityService.toDTO(employee.getNationality()),
+                employee.getUuid(),
                 Optional.ofNullable(employee.getIdentificationDocuments())
                         .orElse(emptyList())
                         .stream()
@@ -164,6 +165,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
         employee.setGender(genderService.getById(dto.genderId()));
         employee.setMaritalStatus(maritalStatusService.getById(dto.maritalStatusId()));
         employee.setNationality(nationalityService.getById(dto.nationalityId()));
+        employee.setUuid(dto.uuid());
         employee.setStatus(statusService.getById(dto.statusId()));
 
         dto.identificationDocuments().forEach(identificationDocument -> employee.addIdentificationDocument(identificationDocumentMapperService.toEntity(identificationDocument)));

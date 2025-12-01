@@ -2,10 +2,7 @@ package com.fractal.controller.authorization.user;
 
 
 import com.fractal.domain.authorization.user.UserService;
-import com.fractal.domain.authorization.user.dto.ChangePasswordRequest;
-import com.fractal.domain.authorization.user.dto.ResetPasswordRequest;
-import com.fractal.domain.authorization.user.dto.UserRequest;
-import com.fractal.domain.authorization.user.dto.UserResponse;
+import com.fractal.domain.authorization.user.dto.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -30,6 +27,10 @@ public class UserController {
     @GetMapping
     public ResponseEntity<List<UserResponse>> getAll() {
         return ResponseEntity.ok(userService.getAll().stream().map(userService::toDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("/compact")
+    public ResponseEntity<List<UserCompactResponse>> getAllCompact() {
+        return ResponseEntity.ok(userService.getAll().stream().map(userService::toCompactDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")

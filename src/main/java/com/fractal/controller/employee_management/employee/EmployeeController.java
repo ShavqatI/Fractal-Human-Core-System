@@ -25,6 +25,11 @@ public class EmployeeController {
     public ResponseEntity<EmployeeResponse> create(@RequestBody @Valid EmployeeRequest dto) {
         return new ResponseEntity<>(employeeService.toDTO(employeeService.create(dto)), HttpStatus.CREATED);
     }
+    @PostMapping("/bulck")
+    public ResponseEntity<Void> create(@RequestBody @Valid List<EmployeeRequest> dto) {
+        dto.forEach(d->employeeService.create(d));
+        return ResponseEntity.noContent().build();
+    }
 
     @GetMapping
     public ResponseEntity<List<EmployeeResponse>> getAll() {

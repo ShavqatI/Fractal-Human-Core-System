@@ -1,8 +1,8 @@
-package com.fractal.controller.vacation_management.schedule;
+package com.fractal.controller.profile;
 
 
-import com.fractal.domain.vacation_management.schedule.VacationScheduleService;
-import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
+import com.fractal.domain.profile.vacation.ProfileVacationScheduleService;
+import com.fractal.domain.profile.vacation.dto.ProfileVacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,28 +14,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/vacation-management/schedule")
+@RequestMapping("/api/v1/profile-management/vacation/schedule")
 @RequiredArgsConstructor
-public class VacationScheduleController {
+public class ProfileVacationScheduleController {
 
-    private final VacationScheduleService vacationScheduleService;
+    private final ProfileVacationScheduleService vacationScheduleService;
 
     @PostMapping
-    public ResponseEntity<VacationScheduleResponse> create(@RequestBody @Valid VacationScheduleRequest dto) {
+    public ResponseEntity<VacationScheduleResponse> create(@RequestBody @Valid ProfileVacationScheduleRequest dto) {
         return new ResponseEntity<>(vacationScheduleService.toDTO(vacationScheduleService.create(dto)), HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<VacationScheduleResponse>> getAll() {
         return ResponseEntity.ok(vacationScheduleService.getAll().stream().map(vacationScheduleService::toDTO).collect(Collectors.toList()));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<VacationScheduleResponse> getById(@PathVariable Long id) {
-        return ResponseEntity.ok(vacationScheduleService.toDTO(vacationScheduleService.getById(id)));
-    }
-
     @PutMapping("/{id}")
-    public ResponseEntity<VacationScheduleResponse> update(@PathVariable Long id, @RequestBody @Valid VacationScheduleRequest dto) {
+    public ResponseEntity<VacationScheduleResponse> update(@PathVariable Long id, @RequestBody @Valid ProfileVacationScheduleRequest dto) {
         return ResponseEntity.ok(vacationScheduleService.toDTO(vacationScheduleService.update(id, dto)));
     }
 
@@ -44,10 +40,6 @@ public class VacationScheduleController {
         return ResponseEntity.ok(vacationScheduleService.toDTO(vacationScheduleService.review(id)));
     }
 
-    @PutMapping("approve/{id}")
-    public ResponseEntity<VacationScheduleResponse> approve(@PathVariable Long id) {
-        return ResponseEntity.ok(vacationScheduleService.toDTO(vacationScheduleService.approve(id)));
-    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
