@@ -131,7 +131,9 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
 
     @Override
     public Employee toEntity(EmployeeRequest dto) {
-        return mapToEntity(new Employee(), dto);
+       var employee = mapToEntity(new Employee(), dto);
+        employee.setStatus(statusService.getByCode("CREATED"));
+        return employee;
     }
 
     @Override
@@ -166,7 +168,7 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
         employee.setMaritalStatus(maritalStatusService.getById(dto.maritalStatusId()));
         employee.setNationality(nationalityService.getById(dto.nationalityId()));
         employee.setUuid(dto.uuid());
-        employee.setStatus(statusService.getById(dto.statusId()));
+
 
         dto.identificationDocuments().forEach(identificationDocument -> employee.addIdentificationDocument(identificationDocumentMapperService.toEntity(identificationDocument)));
         dto.citizenships().forEach(citizenship -> employee.addCitizenship(employeeCitizenshipMapperService.toEntity(citizenship)));

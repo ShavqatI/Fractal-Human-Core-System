@@ -70,7 +70,9 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
     }
     @Override
     public InternalEmployment toEntity(InternalEmploymentRequest dto) {
-        return mapToEntity(new InternalEmployment(), dto);
+        var employment = mapToEntity(new InternalEmployment(), dto);
+        employment.setStatus(statusService.getByCode("CREATED"));
+        return employment;
     }
 
     @Override
@@ -85,7 +87,7 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
         employment.setDepartment(departmentService.getById(dto.departmentId()));
         employment.setPosition(positionService.getById(dto.positionId()));
         employment.setEmploymentType(employmentTypeService.getById(dto.employmentTypeId()));
-        employment.setStatus(statusService.getById(dto.statusId()));
+
         dto.agreements().forEach(agreementRequest -> employment.addAgreement(agreementMapperService.toEntity(agreementRequest)));
         dto.separationReasons().forEach(separationReason -> employment.addSeparationReason(separationReasonMapperService.toEntity(separationReason)));
         dto.compensationComponents().forEach(compensationComponent -> employment.addCompensationComponent(compensationComponentMapperService.toEntity(compensationComponent)));

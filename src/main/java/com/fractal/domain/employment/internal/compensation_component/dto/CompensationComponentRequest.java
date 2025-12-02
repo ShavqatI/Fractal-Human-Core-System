@@ -13,7 +13,6 @@ public record CompensationComponentRequest(
         BigDecimal netAmount,
         BigDecimal taxAmount,
         BigDecimal deductionAmount,
-        Boolean taxable,
-        Long statusId
+        Boolean taxable
 ) {
 }

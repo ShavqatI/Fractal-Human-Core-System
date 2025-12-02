@@ -42,7 +42,9 @@ class CompensationComponentMapperServiceImpl implements CompensationComponentMap
 
     @Override
     public CompensationComponent toEntity(CompensationComponentRequest dto) {
-        return mapToEntity(new CompensationComponent(), dto);
+        var compensationComponent = mapToEntity(new CompensationComponent(), dto);
+        compensationComponent.setStatus(statusService.getByCode("CREATED"));
+        return compensationComponent;
     }
 
     @Override
@@ -61,7 +63,6 @@ class CompensationComponentMapperServiceImpl implements CompensationComponentMap
         compensationComponent.setTaxAmount(dto.taxAmount());
         compensationComponent.setDeductionAmount(dto.deductionAmount());
         compensationComponent.setTaxable(dto.taxable());
-        compensationComponent.setStatus(statusService.getById(dto.statusId()));
         return compensationComponent;
     }
 

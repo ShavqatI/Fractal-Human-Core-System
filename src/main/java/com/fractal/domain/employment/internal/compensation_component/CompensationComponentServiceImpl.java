@@ -1,15 +1,21 @@
 package com.fractal.domain.employment.internal.compensation_component;
 
+import com.fractal.domain.authorization.AuthenticatedService;
+import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
 import com.fractal.domain.employment.internal.compensation_component.mapper.CompensationComponentMapperService;
+import com.fractal.domain.employment.internal.compensation_component.state.CompensationComponentStateService;
+import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,6 +25,9 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
     private final CompensationComponentRepository compensationComponentRepository;
     private final CompensationComponentMapperService compensationComponentMapperService;
     private final InternalEmploymentService employmentService;
+    private final AuthenticatedService authenticatedService;
+    private final StatusService statusService;
+    private final CompensationComponentStateService stateService;
 
     @Override
     @Transactional
@@ -81,6 +90,35 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
     @Override
     public CompensationComponent getById(Long id) {
         return findById(id);
+    }
+
+    @Override
+    public CompensationComponent review(Long id) {
+        var compensationComponent = getById(id);
+        if (compensationComponent.getStatus().getCode().equals("CREATED")) {
+            compensationComponent.setReviewedDate(LocalDateTime.now());
+            compensationComponent.setReviewedUser(authenticatedService.getUser());
+            compensationComponent.setStatus(statusService.getByCode("REVIEWED"));
+            stateService.create(compensationComponent);
+            return compensationComponent;
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + compensationComponent.getStatus().getName());
+        }
+    }
+
+    @Override
+    public CompensationComponent approve(Long id) {
+        var compensationComponent = getById(id);
+        if (compensationComponent.getStatus().getCode().equals("REVIEWED")) {
+            compensationComponent.setApprovedDate(LocalDateTime.now());
+            compensationComponent.setApprovedUser(authenticatedService.getUser());
+            compensationComponent.setStatus(statusService.getByCode("APPROVED"));
+            stateService.create(compensationComponent);
+            return compensationComponent;
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + compensationComponent.getStatus().getName());
+        }
+
     }
 
     private CompensationComponent findById(Long id) {

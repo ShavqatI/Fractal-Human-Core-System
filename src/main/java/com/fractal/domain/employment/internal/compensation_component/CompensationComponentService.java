@@ -1,11 +1,13 @@
 package com.fractal.domain.employment.internal.compensation_component;
 
+import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
+import com.fractal.domain.order.vacation.VacationOrder;
 
 import java.util.List;
 
-public interface CompensationComponentService {
+public interface CompensationComponentService extends ApprovalWorkflowAware<Long, CompensationComponent> {
     CompensationComponent create(Long employmentId, CompensationComponentRequest dto);
 
     List<CompensationComponent> getAllByInternalEmploymentId(Long employmentId);

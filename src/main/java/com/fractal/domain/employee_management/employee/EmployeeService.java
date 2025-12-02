@@ -1,12 +1,14 @@
 package com.fractal.domain.employee_management.employee;
 
+import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
+import com.fractal.domain.order.vacation.VacationOrder;
 
 import java.util.List;
 
-public interface EmployeeService {
+public interface EmployeeService extends ApprovalWorkflowAware<Long, Employee> {
     Employee create(EmployeeRequest dto);
 
     List<Employee> getAll();

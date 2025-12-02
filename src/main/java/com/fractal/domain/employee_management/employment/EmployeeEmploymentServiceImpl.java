@@ -1,8 +1,13 @@
 package com.fractal.domain.employee_management.employment;
 
+import com.fractal.domain.authorization.AuthenticatedService;
+import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentApprovedMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentMapperService;
+import com.fractal.domain.employee_management.employment.state.EmployeeEmploymentState;
+import com.fractal.domain.employee_management.employment.state.EmployeeEmploymentStateService;
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
@@ -12,12 +17,14 @@ import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
+import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +38,9 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     private final ExternalEmploymentService externalEmploymentService;
     private final EmployeeEmploymentMapperService employmentMapperService;
     private final EmployeeEmploymentApprovedMapperService employmentApprovedMapperService;
+    private final AuthenticatedService authenticatedService;
+    private final EmployeeEmploymentStateService stateService;
+    private final StatusService statusService;
 
 
     @Override
@@ -116,6 +126,35 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     @Override
     public InternalEmploymentApprovedResponse toApprovedDTO(EmployeeEmployment employment) {
         return employmentApprovedMapperService.toDTO(employment);
+    }
+
+    @Override
+    public EmployeeEmployment review(Long id) {
+        var employeeEmployment = getById(id);
+        if (employeeEmployment.getStatus().getCode().equals("CREATED")) {
+            employeeEmployment.setReviewedDate(LocalDateTime.now());
+            employeeEmployment.setReviewedUser(authenticatedService.getUser());
+            employeeEmployment.setStatus(statusService.getByCode("REVIEWED"));
+            stateService.create(employeeEmployment);
+            return employeeEmployment;
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + employeeEmployment.getStatus().getName());
+        }
+    }
+
+    @Override
+    public EmployeeEmployment approve(Long id) {
+        var employeeEmployment = getById(id);
+        if (employeeEmployment.getStatus().getCode().equals("REVIEWED")) {
+            employeeEmployment.setApprovedDate(LocalDateTime.now());
+            employeeEmployment.setApprovedUser(authenticatedService.getUser());
+            employeeEmployment.setStatus(statusService.getByCode("APPROVED"));
+            stateService.create(employeeEmployment);
+            return employeeEmployment;
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + employeeEmployment.getStatus().getName());
+        }
+
     }
 
 

@@ -1,6 +1,7 @@
 package com.fractal.domain.employee_management.employee;
 
 import com.fractal.domain.abstraction.Person;
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.address.EmployeeAddress;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
@@ -8,7 +9,9 @@ import com.fractal.domain.employee_management.citizenship.EmployeeCitizenship;
 import com.fractal.domain.employee_management.contact.EmployeeContact;
 import com.fractal.domain.employee_management.education.EmployeeEducation;
 import com.fractal.domain.employee_management.employee.resource.EmployeeResource;
+import com.fractal.domain.employee_management.employee.state.EmployeeState;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
+import com.fractal.domain.employee_management.employment.state.EmployeeEmploymentState;
 import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
 import com.fractal.domain.employee_management.language_skill.EmployeeLanguageSkill;
 import com.fractal.domain.employee_management.military_service.EmployeeMilitaryService;
@@ -24,6 +27,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +38,20 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class Employee extends Person {
+
+    @Column(name = "reviewed_date")
+    private LocalDateTime reviewedDate;
+
+    @ManyToOne
+    @JoinColumn(name = "reviewed_user_id")
+    private User reviewedUser;
+
+    @Column(name = "approved_date")
+    private LocalDateTime approvedDate;
+
+    @ManyToOne
+    @JoinColumn(name = "approved_user_id")
+    private User approvedUser;
 
     @Column(name = "uuid")
     private String uuid;
@@ -91,6 +109,9 @@ public class Employee extends Person {
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<EmployeeProfessionalExperience> professionalExperiences = new ArrayList<>();
+
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<EmployeeState> states = new ArrayList<>();
 
 
     public void addIdentificationDocument(EmployeeIdentificationDocument identificationDocument) {

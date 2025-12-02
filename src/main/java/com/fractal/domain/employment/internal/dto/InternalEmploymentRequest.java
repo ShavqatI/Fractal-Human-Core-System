@@ -17,8 +17,7 @@ public record InternalEmploymentRequest(
         LocalDate endDate,
         List<InternalEmploymentAgreementRequest> agreements,
         List<SeparationReasonRequest> separationReasons,
-        List<CompensationComponentRequest> compensationComponents,
-        Long statusId
+        List<CompensationComponentRequest> compensationComponents
 
 ) implements EmploymentRequest {
 }

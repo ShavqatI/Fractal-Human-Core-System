@@ -36,8 +36,5 @@ public record EmployeeRequest(
         List<MilitaryServiceRequest> militaryServices,
         List<EmploymentRequest> employments,
         List<EmployeeProfessionalExperienceRequest> professionalExperiences,
-        List<EmployeeResourceRequest> resources,
-        Long statusId
-) {
-
-}
+        List<EmployeeResourceRequest> resources
+        ) { }

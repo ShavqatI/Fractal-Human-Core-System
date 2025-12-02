@@ -1,15 +1,20 @@
 package com.fractal.domain.employee_management.employee;
 
+import com.fractal.domain.authorization.AuthenticatedService;
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
 import com.fractal.domain.employee_management.employee.mapper.EmployeeMapperService;
+import com.fractal.domain.employee_management.employee.state.EmployeeStateService;
 import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceStateException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -18,6 +23,10 @@ class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapperService employeeMapperService;
+    private final AuthenticatedService authenticatedService;
+    private final StatusService statusService;
+    private final EmployeeStateService stateService;
+
 
     @Override
     @Transactional
@@ -78,4 +87,32 @@ class EmployeeServiceImpl implements EmployeeService {
     }
 
 
+    @Override
+    public Employee review(Long id) {
+        var employee = getById(id);
+        if (employee.getStatus().getCode().equals("CREATED")) {
+            employee.setReviewedDate(LocalDateTime.now());
+            employee.setReviewedUser(authenticatedService.getUser());
+            employee.setStatus(statusService.getByCode("REVIEWED"));
+            stateService.create(employee);
+            return employee;
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + employee.getStatus().getName());
+        }
+    }
+
+    @Override
+    public Employee approve(Long id) {
+        var employee = getById(id);
+        if (employee.getStatus().getCode().equals("REVIEWED")) {
+            employee.setApprovedDate(LocalDateTime.now());
+            employee.setApprovedUser(authenticatedService.getUser());
+            employee.setStatus(statusService.getByCode("APPROVED"));
+            stateService.create(employee);
+            return employee;
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + employee.getStatus().getName());
+        }
+
+    }
 }
