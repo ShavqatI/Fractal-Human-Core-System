@@ -5,7 +5,7 @@ import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
-import com.fractal.domain.employee_management.employment.usecase.hire.dto.Hire;
+import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.EmploymentService;
 import com.fractal.domain.employment.internal.InternalEmployment;
@@ -89,7 +89,7 @@ class EmployeeEmploymentUseCaseServiceImpl implements EmployeeEmploymentUseCaseS
     }
 
     @Override
-    public void hire(Long employeeId, Hire dto) {
+    public void hire(Long employeeId, HireRequest dto) {
         employeeEmploymentService.create(employeeId,
                 new InternalEmploymentRequest(
                         dto.getOrganizationId(),

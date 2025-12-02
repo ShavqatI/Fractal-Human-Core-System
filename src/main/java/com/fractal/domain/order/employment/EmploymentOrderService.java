@@ -4,6 +4,7 @@ import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
 
+import java.nio.file.Path;
 import java.util.List;
 
 public interface EmploymentOrderService extends ApprovalWorkflowAware<Long, EmploymentOrder> {
@@ -21,6 +22,8 @@ public interface EmploymentOrderService extends ApprovalWorkflowAware<Long, Empl
     EmploymentOrderResponse toDTO(EmploymentOrder employmentOrder);
 
     EmploymentOrder save(EmploymentOrder order);
+
+    Path print(Long id);
 
 
 }

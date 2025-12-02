@@ -2,6 +2,8 @@ package com.fractal.controller.employee_management.employee.employment;
 
 
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
+import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
+import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
 import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 public class EmployeeEmploymentController {
 
     private final EmployeeEmploymentService employmentService;
+    private final EmployeeEmploymentUseCaseService employmentUseCaseService;
 
     @PostMapping()
     public ResponseEntity<EmploymentResponse> create(@PathVariable Long employeeId, @RequestBody @Valid EmploymentRequest dto) {
@@ -50,5 +53,14 @@ public class EmployeeEmploymentController {
         employmentService.delete(employeeId, id);
         return ResponseEntity.noContent().build();
     }
+
+
+    @PostMapping("/hire")
+    public ResponseEntity<Void> hire(@PathVariable Long employeeId, @RequestBody @Valid HireRequest dto) {
+        employmentUseCaseService.hire(employeeId, dto);
+        return ResponseEntity.noContent().build();
+    }
+
+
 
 }

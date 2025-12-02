@@ -1,5 +1,6 @@
 package com.fractal.domain.order.employment;
 
+import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
@@ -12,6 +13,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -23,6 +25,7 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     private final EmploymentOrderMapperService orderMapperService;
     private final OrderStateService stateService;
     private final StatusService statusService;
+    private final AuthenticatedService authenticatedService;
 
 
     @Override
@@ -72,13 +75,18 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
         }
     }
 
+    @Override
+    public Path print(Long id) {
+        return null;
+    }
+
 
     @Override
     public EmploymentOrder review(Long id) {
         var order = getById(id);
         if (order.getStatus().getCode().equals("CREATED")) {
             order.setReviewedDate(LocalDateTime.now());
-            //order.setReviewedUser(authenticatedService.getUser());
+            order.setReviewedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("REVIEWED"));
             stateService.create(order);
             return order;
@@ -92,7 +100,7 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
         var order = getById(id);
         if (order.getStatus().getCode().equals("REVIEWED")) {
             order.setApprovedDate(LocalDateTime.now());
-            //order.setApprovedUser(authenticatedService.getUser());
+            order.setApprovedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("APPROVED"));
             stateService.create(order);
 

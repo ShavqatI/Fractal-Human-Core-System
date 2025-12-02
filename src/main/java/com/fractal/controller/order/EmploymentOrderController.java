@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,10 +52,17 @@ public class EmploymentOrderController {
     }
 
     @DeleteMapping("/{id}")
-    @CrossOrigin(value = "*")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         orderService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("print/{id}")
+    @CrossOrigin(value = "*")
+    public ResponseEntity<StreamingResponseBody> print(@PathVariable Long id) {
+        //Path path = orderService.print(id);
+        //return fileService.view(path);
+        return null;
     }
 
 

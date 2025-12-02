@@ -356,8 +356,6 @@ public class VacationOrderServiceImpl implements VacationOrderService {
         }
     }
 
-
-
     private void addAccrualOnRecall(VacationOrder order){
         var request = vacationRequestService.getById(order.getVacation().getVacationRequest().getId());
         if (request.getVacationType().getCode().equals("RECALL")){

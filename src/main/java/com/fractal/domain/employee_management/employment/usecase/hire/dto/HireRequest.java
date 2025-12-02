@@ -9,7 +9,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Hire {
+public class HireRequest {
     private Long organizationId;
     protected Long departmentId;
     protected Long positionId;
