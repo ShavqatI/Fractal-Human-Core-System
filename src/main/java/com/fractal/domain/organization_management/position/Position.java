@@ -38,8 +38,8 @@ public class Position extends Lifecycle {
     @JoinColumn(name = "grade_id", referencedColumnName = "id")
     private Grade grade;
 
-    private LocalDate canceledDate;
-    private String canceledReason;
+    private LocalDate cancelDate;
+    private String cancelReason;
     @ManyToOne
     @JoinColumn(name = "canceled_user_id")
     protected User canceledUser;

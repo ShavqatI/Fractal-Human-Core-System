@@ -93,8 +93,8 @@ class PositionServiceImpl implements PositionService {
     public Position cancel(Long id, PositionCancelRequest dto) {
         try {
             Position position = findById(id);
-            position.setCanceledDate(LocalDate.now());
-            position.setCanceledReason(dto.reason());
+            position.setCancelDate(LocalDate.now());
+            position.setCancelReason(dto.reason());
             position.setCanceledUser(SpringContext.getBean(CurrentUserHolder.class).get());
             return save(position);
         } catch (DataAccessException e) {
@@ -141,7 +141,9 @@ class PositionServiceImpl implements PositionService {
                 position.getId(),
                 position.getName(),
                 position.getDescription(),
-                departmentService.toCompactDTO(position.getDepartment()),
+                Optional.ofNullable(position.getDepartment())
+                        .map(departmentService::toCompactDTO)
+                        .orElse(null),
                 Optional.ofNullable(position.getGrade())
                         .map(gradeService::toCompactDTO)
                         .orElse(null),
@@ -149,6 +151,8 @@ class PositionServiceImpl implements PositionService {
                 position.getOpenReason(),
                 position.getCloseDate(),
                 position.getCloseReason(),
+                position.getCancelDate(),
+                position.getCancelReason(),
                 statusService.toCompactDTO(position.getStatus()),
                 position.getCreatedDate()
         );

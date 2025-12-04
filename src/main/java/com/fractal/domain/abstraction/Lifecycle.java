@@ -1,6 +1,7 @@
 package com.fractal.domain.abstraction;
 
 
+import com.fractal.domain.authorization.user.User;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -29,4 +30,8 @@ public abstract class Lifecycle extends ApprovalWorkflow {
 
     @Column(name = "close_reason")
     protected String closeReason;
+
+    @ManyToOne
+    @JoinColumn(name = "closed_user_id")
+    protected User closedUser;
 }

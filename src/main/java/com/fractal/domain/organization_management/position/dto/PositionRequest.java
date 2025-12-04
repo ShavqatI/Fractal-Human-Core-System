@@ -14,7 +14,6 @@ public record PositionRequest(
         String name,
         @NotBlank
         String description,
-        //@NotNull
         Long departmentId,
         Long gradeId,
         LocalDate openDate,

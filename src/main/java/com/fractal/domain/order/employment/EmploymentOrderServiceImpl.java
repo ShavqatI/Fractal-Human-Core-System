@@ -50,6 +50,7 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     private final WordTemplateProcessorService wordTemplateProcessorService;
     private final WordToPdfConverterService wordToPdfConverterService;
     private final FileService fileService;
+    private final EmployeeEmploymentUseCaseService employeeEmploymentUseCaseService;
 
     @Value("${resource-storage.temporary}")
     private String resourceStoragePath;
@@ -190,6 +191,8 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
 
         values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
         values.put("employeePosition", employment.position().name());
+        values.put("ceo",employeeUseCaseService.getLastNameWithInitials(employeeEmploymentUseCaseService.getCEOEmployee()));
+
 
         return values;
     }

@@ -17,6 +17,8 @@ public record PositionResponse(
         String openReason,
         LocalDate closeDate,
         String closeReason,
+        LocalDate cancelDate,
+        String cancelReason,
         StatusCompactResponse status,
         LocalDateTime createdDate
 ) {
