@@ -2,6 +2,7 @@ package com.fractal.controller.organization_management;
 
 import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
 import com.fractal.domain.organization_management.position.PositionService;
+import com.fractal.domain.organization_management.position.dto.PositionCancelRequest;
 import com.fractal.domain.organization_management.position.dto.PositionCompactResponse;
 import com.fractal.domain.organization_management.position.dto.PositionRequest;
 import com.fractal.domain.organization_management.position.dto.PositionResponse;
@@ -69,6 +70,10 @@ public class PositionController {
     @PutMapping("approve/{id}")
     public ResponseEntity<PositionResponse> approve(@PathVariable Long id) {
         return ResponseEntity.ok(positionService.toDTO(positionService.approve(id)));
+    }
+    @PutMapping("approve/{id}")
+    public ResponseEntity<PositionResponse> cancel(@PathVariable Long id,@RequestBody @Valid PositionCancelRequest dto) {
+        return ResponseEntity.ok(positionService.toDTO(positionService.cancel(id,dto)));
     }
 
     @DeleteMapping("/{id}")

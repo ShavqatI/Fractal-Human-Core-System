@@ -1,6 +1,7 @@
 package com.fractal.domain.organization_management.position;
 
 import com.fractal.domain.abstraction.Lifecycle;
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.grade.Grade;
@@ -37,11 +38,11 @@ public class Position extends Lifecycle {
     @JoinColumn(name = "grade_id", referencedColumnName = "id")
     private Grade grade;
 
-    @Column(name = "open_date")
-    private LocalDate openDate;
-
-    @Column(name = "close_date")
-    private LocalDate closeDate;
+    private LocalDate canceledDate;
+    private String canceledReason;
+    @ManyToOne
+    @JoinColumn(name = "canceled_user_id")
+    protected User canceledUser;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")

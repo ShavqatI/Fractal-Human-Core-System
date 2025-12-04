@@ -1,19 +1,20 @@
 package com.fractal.domain.organization_management.position;
 
+import com.fractal.component.CurrentUserHolder;
+import com.fractal.component.SpringContext;
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.order.employment.EmploymentOrder;
 import com.fractal.domain.organization_management.department.DepartmentService;
 import com.fractal.domain.organization_management.grade.GradeService;
-import com.fractal.domain.organization_management.position.dto.PositionCompactResponse;
-import com.fractal.domain.organization_management.position.dto.PositionRequest;
-import com.fractal.domain.organization_management.position.dto.PositionResponse;
+import com.fractal.domain.organization_management.position.dto.*;
 import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceStateException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,7 @@ class PositionServiceImpl implements PositionService {
     private final DepartmentService departmentService;
     private final StatusService statusService;
     private final GradeService gradeService;
-    private final AuthenticatedService authenticatedService;
+
 
     @Override
     public Position create(PositionRequest dto) {
@@ -74,16 +75,31 @@ class PositionServiceImpl implements PositionService {
     }
 
     @Override
-    public Position close(Long id, PositionRequest dto) {
+    public Position close(Long id, PositionCloseRequest dto) {
         try {
+            var currentUserHolder = SpringContext.getBean(CurrentUserHolder.class);
             Position position = findById(id);
             position.setCloseDate(dto.closeDate());
             position.setCloseReason(dto.closeReason());
+            position.setClosedUser(currentUserHolder.get());
             return save(position);
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
+    }
+
+    @Override
+    public Position cancel(Long id, PositionCancelRequest dto) {
+        try {
+            Position position = findById(id);
+            position.setCanceledDate(LocalDate.now());
+            position.setCanceledReason(dto.reason());
+            position.setCanceledUser(SpringContext.getBean(CurrentUserHolder.class).get());
+            return save(position);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
     @Override
@@ -93,30 +109,30 @@ class PositionServiceImpl implements PositionService {
 
     @Override
     public Position review(Long id) {
-        var order = getById(id);
-        if (order.getStatus().getCode().equals("CREATED")) {
-            order.setReviewedDate(LocalDateTime.now());
-            order.setReviewedUser(authenticatedService.getUser());
-            order.setStatus(statusService.getByCode("REVIEWED"));
+        var position = getById(id);
+        if (position.getStatus().getCode().equals("CREATED")) {
+             position.setReviewedDate(LocalDateTime.now());
+             position.setReviewedUser(SpringContext.getBean(CurrentUserHolder.class).get());
+             position.setStatus(statusService.getByCode("REVIEWED"));
             //stateService.create(order);
-            return order;
+            return position;
         } else {
-            throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
+            throw new ResourceStateException("The status is not valid is: " + position.getStatus().getName());
         }
     }
 
     @Override
     public Position approve(Long id) {
-        var order = getById(id);
-        if (order.getStatus().getCode().equals("REVIEWED")) {
-            order.setApprovedDate(LocalDateTime.now());
-            order.setApprovedUser(authenticatedService.getUser());
-            order.setStatus(statusService.getByCode("APPROVED"));
+        var position = getById(id);
+        if (position.getStatus().getCode().equals("REVIEWED")) {
+            position.setApprovedDate(LocalDateTime.now());
+            position.setApprovedUser(SpringContext.getBean(CurrentUserHolder.class).get());
+            position.setStatus(statusService.getByCode("APPROVED"));
             //stateService.create(order);
 
-            return order;
+            return position;
         } else {
-            throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
+            throw new ResourceStateException("The status is not valid is: " + position.getStatus().getName());
         }
     }
     @Override
