@@ -136,6 +136,7 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
                 List.of(new EmploymentOrderRecordRequest(employment.getId())),
                 dto.number(),
                 dto.date(),
+                dto.sourceDocument(),
                 List.of()
         ));
     }
@@ -148,6 +149,7 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
                 List.of(new EmploymentOrderRecordRequest(employment.getId())),
                 dto.number(),
                 dto.date(),
+                dto.sourceDocument(),
                 List.of()
         ));
 

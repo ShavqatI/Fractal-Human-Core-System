@@ -11,6 +11,7 @@ public record EmploymentOrderRequest(
         List<EmploymentOrderRecordRequest> records,
         String number,
         LocalDate date,
+        String sourceDocument,
         List<MultipartFile> files
 
 ) {
