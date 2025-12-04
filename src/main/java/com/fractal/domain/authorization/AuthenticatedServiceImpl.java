@@ -1,10 +1,8 @@
 package com.fractal.domain.authorization;
 
-import com.fractal.component.CurrentUserHolder;
 import com.fractal.domain.authorization.mapping.user_employee.UserEmployeeMappingService;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.authorization.user.UserService;
-import com.fractal.domain.employee_management.employee.Employee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -26,4 +26,5 @@ public interface EmployeeService extends ApprovalWorkflowAware<Long, Employee> {
     EmployeeCompactResponse toCompactDTO(Employee employee);
 
     Employee save(Employee employee);
+    void activate(Long id);
 }

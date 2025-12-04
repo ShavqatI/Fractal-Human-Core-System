@@ -28,8 +28,6 @@ class EmployeeEmploymentUseCaseServiceImpl implements EmployeeEmploymentUseCaseS
     private final EmploymentService employmentService;
     private final StatusService statusService;
     private final PositionService positionService;
-    private final EmployeeUseCaseService employeeUseCaseService;
-
 
     @Override
     public Optional<InternalEmploymentResponse> getCurrentEmployment(Employee employee) {
@@ -100,8 +98,8 @@ class EmployeeEmploymentUseCaseServiceImpl implements EmployeeEmploymentUseCaseS
                         dto.getEndDate(),
                         List.of(),
                         List.of(),
-                        dto.getCompensationComponents(),
-                        statusService.getByCode("CREATED").getId()
+                        dto.getCompensationComponents()
+
                 )
         );
     }

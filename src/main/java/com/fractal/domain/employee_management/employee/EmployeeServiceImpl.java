@@ -1,5 +1,7 @@
 package com.fractal.domain.employee_management.employee;
 
+import com.fractal.component.CurrentUserHolder;
+import com.fractal.component.SpringContext;
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
@@ -23,7 +25,6 @@ class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapperService employeeMapperService;
-    private final AuthenticatedService authenticatedService;
     private final StatusService statusService;
     private final EmployeeStateService stateService;
 
@@ -52,8 +53,7 @@ class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public Employee update(Long id, EmployeeRequest dto) {
-        var employee = employeeMapperService.toEntity(findById(id), dto);
-        return employee;
+        return save(employeeMapperService.toEntity(findById(id), dto));
     }
 
     @Override
@@ -75,11 +75,15 @@ class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee save(Employee employee) {
         try {
-            return employeeRepository.save(employee);
+            employee = employeeRepository.save(employee);
+            stateService.create(employee);
+            return employee;
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
+
+
 
 
     private Employee findById(Long id) {
@@ -92,7 +96,7 @@ class EmployeeServiceImpl implements EmployeeService {
         var employee = getById(id);
         if (employee.getStatus().getCode().equals("CREATED")) {
             employee.setReviewedDate(LocalDateTime.now());
-            employee.setReviewedUser(authenticatedService.getUser());
+            //employee.setReviewedUser(authenticatedService.getUser());
             employee.setStatus(statusService.getByCode("REVIEWED"));
             stateService.create(employee);
             return employee;
@@ -106,13 +110,27 @@ class EmployeeServiceImpl implements EmployeeService {
         var employee = getById(id);
         if (employee.getStatus().getCode().equals("REVIEWED")) {
             employee.setApprovedDate(LocalDateTime.now());
-            employee.setApprovedUser(authenticatedService.getUser());
+            CurrentUserHolder currentUserHolder = SpringContext.getBean(CurrentUserHolder.class);
+            employee.setReviewedUser(currentUserHolder.get());
             employee.setStatus(statusService.getByCode("APPROVED"));
             stateService.create(employee);
             return employee;
         } else {
             throw new ResourceStateException("The status is not valid is: " + employee.getStatus().getName());
         }
+    }
 
+    @Override
+    public void activate(Long id) {
+        var employee = getById(id);
+        if (employee.getStatus().getCode().equals("APPROVED")) {
+            employee.setApprovedDate(LocalDateTime.now());
+            CurrentUserHolder currentUserHolder = SpringContext.getBean(CurrentUserHolder.class);
+            employee.setApprovedUser(currentUserHolder.get());
+            employee.setStatus(statusService.getByCode("ACTIVE"));
+            stateService.create(employee);
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + employee.getStatus().getName());
+        }
     }
 }

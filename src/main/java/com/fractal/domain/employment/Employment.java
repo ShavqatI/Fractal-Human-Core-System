@@ -1,8 +1,11 @@
 package com.fractal.domain.employment;
 
+import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.abstraction.Auditable;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.employment.internal.compensation_component.state.CompensationComponentState;
 import com.fractal.domain.employment.separation_reason.SeparationReason;
+import com.fractal.domain.employment.state.EmploymentState;
 import com.fractal.domain.employment.type.EmploymentType;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,7 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Employment extends Auditable {
+public class Employment extends ApprovalWorkflow {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Setter(AccessLevel.NONE)
@@ -42,6 +45,10 @@ public class Employment extends Auditable {
 
     @OneToMany(mappedBy = "employment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<SeparationReason> separationReasons = new ArrayList<>();
+
+    @OneToMany(mappedBy = "employment", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<EmploymentState> states = new ArrayList<>();
+
 
 
     @Transactional

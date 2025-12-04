@@ -2,6 +2,8 @@ package com.fractal.domain.order.employment;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
+import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
 import com.fractal.domain.order.employment.mapper.EmploymentOrderMapperService;
@@ -26,6 +28,7 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     private final OrderStateService stateService;
     private final StatusService statusService;
     private final AuthenticatedService authenticatedService;
+    private final EmployeeEmploymentUseCaseService employmentUseCaseService;
 
 
     @Override
@@ -69,7 +72,9 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     @Override
     public EmploymentOrder save(EmploymentOrder order) {
         try {
-            return orderRepository.save(order);
+            order = orderRepository.save(order);
+            stateService.create(order);
+            return order;
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
@@ -78,6 +83,11 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     @Override
     public Path print(Long id) {
         return null;
+    }
+
+    @Override
+    public void hire(Long employeeId, HireRequest dto) {
+        employmentUseCaseService.hire(employeeId,dto);
     }
 
 

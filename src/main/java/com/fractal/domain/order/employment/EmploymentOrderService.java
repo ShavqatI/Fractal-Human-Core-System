@@ -1,6 +1,7 @@
 package com.fractal.domain.order.employment;
 
 import com.fractal.domain.abstraction.ApprovalWorkflowAware;
+import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
 
@@ -24,6 +25,8 @@ public interface EmploymentOrderService extends ApprovalWorkflowAware<Long, Empl
     EmploymentOrder save(EmploymentOrder order);
 
     Path print(Long id);
+
+    void hire(Long employeeId, HireRequest dto);
 
 
 }

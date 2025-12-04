@@ -22,9 +22,7 @@ import com.fractal.domain.employee_management.subordinate.Subordinate;
 import com.fractal.domain.vacation_management.accrual.VacationAccrual;
 import com.fractal.domain.vacation_management.vacation.Vacation;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
@@ -33,7 +31,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "employee", schema = "employee_schema", catalog = "fractal")
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)

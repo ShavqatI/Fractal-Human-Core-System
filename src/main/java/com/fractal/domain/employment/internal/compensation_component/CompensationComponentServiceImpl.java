@@ -4,6 +4,7 @@ import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
+import com.fractal.domain.employment.internal.compensation_component.dto.ApprovalWorkflowAwareRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
 import com.fractal.domain.employment.internal.compensation_component.mapper.CompensationComponentMapperService;
@@ -93,8 +94,8 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
     }
 
     @Override
-    public CompensationComponent review(Long id) {
-        var compensationComponent = getById(id);
+    public CompensationComponent review(ApprovalWorkflowAwareRequest dto) {
+        var compensationComponent = getById(dto.employmentId(),dto.id());
         if (compensationComponent.getStatus().getCode().equals("CREATED")) {
             compensationComponent.setReviewedDate(LocalDateTime.now());
             compensationComponent.setReviewedUser(authenticatedService.getUser());
@@ -107,8 +108,8 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
     }
 
     @Override
-    public CompensationComponent approve(Long id) {
-        var compensationComponent = getById(id);
+    public CompensationComponent approve(ApprovalWorkflowAwareRequest dto) {
+        var compensationComponent = getById(dto.employmentId(),dto.id());
         if (compensationComponent.getStatus().getCode().equals("REVIEWED")) {
             compensationComponent.setApprovedDate(LocalDateTime.now());
             compensationComponent.setApprovedUser(authenticatedService.getUser());

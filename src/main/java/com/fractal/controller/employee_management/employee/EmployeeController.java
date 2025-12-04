@@ -5,6 +5,9 @@ import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
+import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
+import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
+import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,7 @@ import java.util.stream.Collectors;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final EmployeeEmploymentUseCaseService employmentUseCaseService;
 
     @PostMapping
     public ResponseEntity<EmployeeResponse> create(@RequestBody @Valid EmployeeRequest dto) {
@@ -61,5 +65,21 @@ public class EmployeeController {
         employeeService.deleteById(id);
         return ResponseEntity.noContent().build();
 
+    }
+
+    @PostMapping("/hire")
+    public ResponseEntity<Void> hire(@PathVariable Long employeeId, @RequestBody @Valid HireRequest dto) {
+        employmentUseCaseService.hire(employeeId, dto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("review/{id}")
+    public ResponseEntity<EmployeeResponse> review(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.toDTO(employeeService.review(id)));
+    }
+
+    @PutMapping("approve/{id}")
+    public ResponseEntity<EmployeeResponse> approve(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.toDTO(employeeService.approve(id)));
     }
 }

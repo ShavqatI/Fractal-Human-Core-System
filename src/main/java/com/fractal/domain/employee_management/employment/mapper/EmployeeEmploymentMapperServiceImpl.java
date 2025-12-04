@@ -1,5 +1,6 @@
 package com.fractal.domain.employee_management.employment.mapper;
 
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employment.Employment;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 class EmployeeEmploymentMapperServiceImpl implements EmployeeEmploymentMapperService {
 
     private final EmploymentMapperService employmentMapperService;
+    private final StatusService statusService;
 
 
     @Override
@@ -30,7 +32,9 @@ class EmployeeEmploymentMapperServiceImpl implements EmployeeEmploymentMapperSer
 
     @Override
     public EmployeeEmployment toEntity(EmploymentRequest dto) {
-        return mapToEntity(new EmployeeEmployment(), dto);
+        var employeeEmployment = mapToEntity(new EmployeeEmployment(), dto);
+        employeeEmployment.setStatus(statusService.getByCode("CREATED"));
+        return employeeEmployment;
     }
 
     @Override

@@ -1,7 +1,6 @@
 package com.fractal.domain.employment.internal.compensation_component.state;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +13,7 @@ import java.util.List;
 @RequiredArgsConstructor
 class CompensationComponentStateServiceImpl implements CompensationComponentStateService {
 
-    private final CompensationComponentRepository stateRepository;
+    private final CompensationComponentStateRepository stateRepository;
     private final StatusService statusService;
 
     @Override

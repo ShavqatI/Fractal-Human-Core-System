@@ -4,6 +4,7 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
+import com.fractal.domain.order.employment.EmploymentOrder;
 import com.fractal.domain.order.state.OrderStateService;
 import com.fractal.domain.order.usecase.OrderUseCaseService;
 import com.fractal.domain.order.vacation.dto.VacationOrderRequest;
@@ -26,6 +27,7 @@ import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -62,10 +64,9 @@ public class VacationOrderServiceImpl implements VacationOrderService {
     @Override
     @Transactional
     public VacationOrder create(VacationOrderRequest dto) {
-        var order = orderRepository.save(orderMapperService.toEntity(dto));
+        var order = save(orderMapperService.toEntity(dto));
         order.setStatus(statusService.getByCode("CREATED"));
         order.getVacation().setStatus(order.getStatus());
-        stateService.create(order);
         return order;
     }
 
@@ -85,7 +86,7 @@ public class VacationOrderServiceImpl implements VacationOrderService {
         var order = getById(id);
         order = orderMapperService.toEntity(order,dto);
         order.getVacation().setStatus(order.getStatus());
-        return orderRepository.save(order);
+        return save(order);
     }
 
     @Override
@@ -95,6 +96,18 @@ public class VacationOrderServiceImpl implements VacationOrderService {
         vacationService.deleteById(oder.getVacation().getId());
         orderRepository.delete(getById(id));
     }
+
+    private VacationOrder save(VacationOrder order) {
+        try {
+            order = orderRepository.save(order);
+            stateService.create(order);
+            return order;
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
+    }
+
+
 
     @Override
     public VacationOrderResponse toDTO(VacationOrder order) {

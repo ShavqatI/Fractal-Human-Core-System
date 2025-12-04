@@ -11,10 +11,10 @@ import java.util.List;
 @Setter
 public class HireRequest {
     private Long organizationId;
-    protected Long departmentId;
-    protected Long positionId;
-    protected Long employmentTypeId;
-    protected LocalDate startDate;
-    protected LocalDate endDate;
-    List<CompensationComponentRequest> compensationComponents;
+    private Long departmentId;
+    private Long positionId;
+    private Long employmentTypeId;
+    private LocalDate startDate;
+    private LocalDate endDate;
+    private List<CompensationComponentRequest> compensationComponents;
 }

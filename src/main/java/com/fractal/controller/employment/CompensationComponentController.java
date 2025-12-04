@@ -1,6 +1,8 @@
 package com.fractal.controller.employment;
 
+import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponentService;
+import com.fractal.domain.employment.internal.compensation_component.dto.ApprovalWorkflowAwareRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
 import jakarta.validation.Valid;
@@ -37,6 +39,16 @@ public class CompensationComponentController {
     @PutMapping("/{id}")
     public ResponseEntity<CompensationComponentResponse> update(@PathVariable Long employmentId, @PathVariable Long id, @RequestBody @Valid CompensationComponentRequest dto) {
         return ResponseEntity.ok(compensationComponentService.toDTO(compensationComponentService.update(employmentId, id, dto)));
+    }
+
+    @PutMapping("review/{id}")
+    public ResponseEntity<CompensationComponentResponse> review(@PathVariable Long employmentId,@PathVariable Long id) {
+        return ResponseEntity.ok(compensationComponentService.toDTO(compensationComponentService.review(new ApprovalWorkflowAwareRequest(employmentId,id))));
+    }
+
+    @PutMapping("approve/{id}")
+    public ResponseEntity<CompensationComponentResponse> approve(@PathVariable Long employmentId,@PathVariable Long id) {
+        return ResponseEntity.ok(compensationComponentService.toDTO(compensationComponentService.approve(new ApprovalWorkflowAwareRequest(employmentId,id))));
     }
 
     @DeleteMapping("/{id}")

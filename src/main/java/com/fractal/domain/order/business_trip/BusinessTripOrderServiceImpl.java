@@ -10,6 +10,7 @@ import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
 import com.fractal.domain.order.business_trip.mapper.BusinessTripOrderMapperService;
 import com.fractal.domain.order.state.OrderStateService;
 import com.fractal.domain.order.usecase.OrderUseCaseService;
+import com.fractal.domain.order.vacation.VacationOrder;
 import com.fractal.domain.poi.processor.word.WordTemplateProcessorService;
 import com.fractal.domain.poi.processor.word.WordToPdfConverterService;
 import com.fractal.domain.resource.FileService;
@@ -56,9 +57,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     public BusinessTripOrder create(BusinessTripOrderRequest dto) {
         var order = orderMapperService.toEntity(dto);
         order.setStatus(statusService.getByCode("CREATED"));
-        order = save(order);
-        stateService.create(order);
-        return order;
+        return save(order);
     }
 
     @Override
@@ -74,8 +73,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     @Override
     @Transactional
     public BusinessTripOrder update(Long id, BusinessTripOrderRequest dto) {
-        var order = save(orderMapperService.toEntity(getById(id), dto));
-        return order;
+        return save(orderMapperService.toEntity(getById(id), dto));
     }
 
     @Override
@@ -95,7 +93,9 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     @Transactional
     public BusinessTripOrder save(BusinessTripOrder order) {
         try {
-            return orderRepository.save(order);
+            order = orderRepository.save(order);
+            stateService.create(order);
+            return order;
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
@@ -182,4 +182,5 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
 
        return fullAddress.toString();
     }
+
 }

@@ -11,7 +11,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "compensation_componentState_state", schema = "state_schema", catalog = "fractal")
+@Table(name = "compensation_component_state", schema = "state_schema", catalog = "fractal")
 @Setter
 @Getter
 @SuperBuilder

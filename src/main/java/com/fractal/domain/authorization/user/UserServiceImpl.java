@@ -1,6 +1,5 @@
 package com.fractal.domain.authorization.user;
 
-import com.fractal.component.CurrentUserHolder;
 import com.fractal.domain.authorization.user.dto.*;
 import com.fractal.domain.authorization.user.mapper.UserMapperService;
 import com.fractal.domain.authorization.user.role.UserRole;
@@ -22,7 +21,7 @@ public class UserServiceImpl implements UserService {
     private final UserMapperService mapperService;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final CurrentUserHolder currentUserHolder;
+
 
 
     @Override
