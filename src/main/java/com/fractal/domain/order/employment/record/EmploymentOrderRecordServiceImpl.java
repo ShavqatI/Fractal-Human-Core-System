@@ -31,7 +31,7 @@ public class EmploymentOrderRecordServiceImpl implements EmploymentOrderRecordSe
     }
 
     @Override
-    public List<EmploymentOrderRecord> getAllByInternalEmploymentOrderId(Long orderId) {
+    public List<EmploymentOrderRecord> getAllByEmploymentOrderId(Long orderId) {
         return recordRepository.findAllByEmploymentOrderId(orderId);
     }
 

@@ -9,7 +9,7 @@ public interface EmploymentOrderRecordService {
 
     EmploymentOrderRecord create(Long orderId, EmploymentOrderRecordRequest dto);
 
-    List<EmploymentOrderRecord> getAllByInternalEmploymentOrderId(Long orderId);
+    List<EmploymentOrderRecord> getAllByEmploymentOrderId(Long orderId);
 
     EmploymentOrderRecord getById(Long orderId, Long id);
 

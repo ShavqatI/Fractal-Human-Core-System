@@ -2,6 +2,8 @@ package com.fractal.domain.order.employment;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
+import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
 import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderHireRequest;
@@ -10,9 +12,12 @@ import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
 import com.fractal.domain.order.employment.mapper.EmploymentOrderMapperService;
 import com.fractal.domain.order.employment.record.dto.EmploymentOrderRecordRequest;
 import com.fractal.domain.order.state.OrderStateService;
+import com.fractal.domain.order.usecase.OrderUseCaseService;
+import com.fractal.domain.order.vacation.VacationOrder;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +26,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +41,11 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     private final StatusService statusService;
     private final AuthenticatedService authenticatedService;
     private final EmployeeEmploymentUseCaseService employmentUseCaseService;
+    private final OrderUseCaseService orderUseCaseService;
+    private final EmployeeUseCaseService employeeUseCaseService;
+
+    @Value("${resource-storage.temporary}")
+    private String resourceStoragePath;
 
 
     @Override
@@ -86,7 +99,25 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
 
     @Override
     public Path print(Long id) {
-        return null;
+        var order = getById(id);
+        var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
+        var pdfFilePath =  Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
+
+        Map<String, String> values = new HashMap<>();
+
+        values.putAll(orderUseCaseService.getHeader(order));
+        values.putAll(getCommonValues(order));
+        values.putAll(templateProcessorService.process(order));
+        values.putAll(orderUseCaseService.getFooter());
+
+        try {
+            wordTemplateProcessorService.process(Path.of(order.getOrderType().getDocumentTemplateManager().getFilePath()), wordFilePath, values);
+            wordToPdfConverterService.convert(wordFilePath,pdfFilePath);
+            fileService.delete(wordFilePath.toString());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return pdfFilePath;
     }
 
     @Override
@@ -142,5 +173,21 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }
+    }
+
+    private Map<String,String> getCommonValues(EmploymentOrder order){
+        Map<String, String> values = new HashMap<>();
+        var employeeEmployment = getEmployment(order);
+
+        var employment = employeeUseCaseService.getCurrentEmployment(employeeEmployment.getEmployee()).get();
+
+        values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
+        values.put("employeePosition", employment.position().name());
+
+        return values;
+    }
+
+    private EmployeeEmployment getEmployment(EmploymentOrder order){
+        return order.getRecords().getFirst().getEmployment();
     }
 }

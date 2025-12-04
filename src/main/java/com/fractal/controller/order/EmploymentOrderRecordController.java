@@ -27,7 +27,7 @@ public class EmploymentOrderRecordController {
 
     @GetMapping
     public ResponseEntity<List<EmploymentOrderRecordResponse>> getAll(@PathVariable Long orderId) {
-        return ResponseEntity.ok(recordService.getAllByInternalEmploymentOrderId(orderId).stream().map(recordService::toDTO).collect(Collectors.toList()));
+        return ResponseEntity.ok(recordService.getAllByEmploymentOrderId(orderId).stream().map(recordService::toDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
