@@ -5,6 +5,7 @@ import com.fractal.domain.order.employment.EmploymentOrderService;
 import com.fractal.domain.order.employment.dto.EmploymentOrderHireRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
+import com.fractal.domain.resource.FileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 public class EmploymentOrderController {
 
     private final EmploymentOrderService orderService;
+    private final FileService fileService;
 
     @PostMapping("/hire")
     public ResponseEntity<EmploymentOrderResponse> hire(@RequestBody @Valid EmploymentOrderHireRequest dto) {
@@ -72,9 +74,8 @@ public class EmploymentOrderController {
     @GetMapping("print/{id}")
     @CrossOrigin(value = "*")
     public ResponseEntity<StreamingResponseBody> print(@PathVariable Long id) {
-        //Path path = orderService.print(id);
-        //return fileService.view(path);
-        return null;
+        Path path = orderService.print(id);
+        return fileService.view(path);
     }
 
 

@@ -14,6 +14,9 @@ import com.fractal.domain.order.employment.record.dto.EmploymentOrderRecordReque
 import com.fractal.domain.order.state.OrderStateService;
 import com.fractal.domain.order.usecase.OrderUseCaseService;
 import com.fractal.domain.order.vacation.VacationOrder;
+import com.fractal.domain.poi.processor.word.WordTemplateProcessorService;
+import com.fractal.domain.poi.processor.word.WordToPdfConverterService;
+import com.fractal.domain.resource.FileService;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +46,10 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     private final EmployeeEmploymentUseCaseService employmentUseCaseService;
     private final OrderUseCaseService orderUseCaseService;
     private final EmployeeUseCaseService employeeUseCaseService;
+    private final EmploymentOrderTemplateProcessorService templateProcessorService;
+    private final WordTemplateProcessorService wordTemplateProcessorService;
+    private final WordToPdfConverterService wordToPdfConverterService;
+    private final FileService fileService;
 
     @Value("${resource-storage.temporary}")
     private String resourceStoragePath;

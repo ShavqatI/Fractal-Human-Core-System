@@ -1,6 +1,7 @@
 package com.fractal.domain.order.employment;
 
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
+import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.order.usecase.OrderUseCaseService;
 import com.fractal.domain.order.vacation.VacationOrder;
 import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriod;
@@ -18,6 +19,7 @@ class EmploymentOrderTemplateProcessorService {
     private final EmployeeUseCaseService employeeUseCaseService;
     private final VacationAccrualPeriodRecordService vacationAccrualPeriodRecordService;
     private final OrderUseCaseService orderUseCaseService;
+
 
     private VacationAccrualPeriod getPeriod(Long recordId){
         return vacationAccrualPeriodRecordService.getById(recordId).getVacationAccrualPeriod();
@@ -41,21 +43,13 @@ class EmploymentOrderTemplateProcessorService {
 
     private Map<String,String> getPermanentValues(EmploymentOrder order) {
         Map<String,String> values = new HashMap<>();
-        var employment = employeeUseCaseService.getCurrentEmployment(order.getVacation().getEmployee()).get();
+        var employment = employeeUseCaseService.getCurrentEmployment(getEmployment(order).getEmployee()).get();
 
-        var request = order.getVacation().getVacationRequest();
-        var period = getPeriod(order.getVacation().getAllocations().stream().findFirst().get().getVacationAccrualPeriodRecord().getId());
+        var compensationComponent  = employment.compensationComponents().stream().filter(cc-> cc.salaryClassification().code().equals("BASICSALARY")).findFirst().get();
 
-        values.put("fullBankName", employment.organization().name());
-        values.put("calendarDays", request.getDays().toString());
-        values.put("startDate", request.getStartDate().toString());
-        values.put("endDate", request.getEndDate().toString());
-        values.put("startDateYear", period.getStartDate().toString());
-        values.put("endDateYear", period.getEndDate().toString());
-        values.put("returnDay", request.getWorkingDate().toString());
-        values.put("successorEmployeeName", employeeUseCaseService.getFullName(request.getSuccessorEmployee()));
-        values.put("percent", order.getVacation().getSuccessorCompensationPercentage().toString());
-        values.put("workingDays", request.getWorkingDays().toString());
+        values.put("startDate", employment.startDate().toString());
+        values.put("newSalary", compensationComponent.grossAmount().toString());
+        //values.put("newSalaryInLetters", period.getEndDate().toString());
         values.put("sourceDocument", order.getSourceDocument());
         return values;
     }
@@ -197,6 +191,10 @@ class EmploymentOrderTemplateProcessorService {
         values.put("workingDays", request.getWorkingDays().toString());
         values.put("sourceDocument", order.getSourceDocument());
         return values;
+    }
+
+    private EmployeeEmployment getEmployment(EmploymentOrder order){
+        return order.getRecords().getFirst().getEmployment();
     }
 
 }

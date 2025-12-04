@@ -1,11 +1,8 @@
 package com.fractal.domain.abstraction;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.MappedSuperclass;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import jakarta.persistence.*;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
@@ -15,7 +12,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @SuperBuilder
 @Data
-public abstract class Lifecycle extends AbstractEntity {
+public abstract class Lifecycle extends ApprovalWorkflow {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Setter(AccessLevel.NONE)
+    protected Long id;
 
     @Column(name = "open_date")
     protected LocalDate openDate;

@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 public class BonusOrder extends Order {
 
-    @OneToMany(mappedBy = "employmentOrder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bonusOrder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<BonusOrderRecord> records = new ArrayList<>();
 
     public void addRecord(BonusOrderRecord record) {

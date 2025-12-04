@@ -20,8 +20,8 @@ public record PositionRequest(
         LocalDate openDate,
         String openReason,
         LocalDate closeDate,
-        String closeReason,
-        Long statusId
+        String closeReason
+
 ) {
 
 }
