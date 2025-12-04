@@ -71,7 +71,7 @@ public class PositionController {
     public ResponseEntity<PositionResponse> approve(@PathVariable Long id) {
         return ResponseEntity.ok(positionService.toDTO(positionService.approve(id)));
     }
-    @PutMapping("approve/{id}")
+    @PutMapping("cancel/{id}")
     public ResponseEntity<PositionResponse> cancel(@PathVariable Long id,@RequestBody @Valid PositionCancelRequest dto) {
         return ResponseEntity.ok(positionService.toDTO(positionService.cancel(id,dto)));
     }

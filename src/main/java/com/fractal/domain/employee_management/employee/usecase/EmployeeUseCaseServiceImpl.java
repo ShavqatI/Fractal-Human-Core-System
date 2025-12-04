@@ -55,4 +55,14 @@ class EmployeeUseCaseServiceImpl implements EmployeeUseCaseService {
                 ).findFirst().map(employment-> internalEmploymentService.toDTO((InternalEmployment) employment));
         return response;
     }
+
+    @Override
+    public Optional<InternalEmploymentResponse> getEmployment(EmployeeEmployment employment) {
+       var  employeeEmployment = (EmployeeEmployment) Hibernate.unproxy(employment);
+       var employment1 = (Employment) Hibernate.unproxy(employeeEmployment.getEmployment());
+       if(employment1 instanceof InternalEmployment){
+           return Optional.ofNullable(internalEmploymentService.toDTO((InternalEmployment) employment1));
+       }
+       return Optional.empty();
+    }
 }
