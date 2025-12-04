@@ -87,8 +87,8 @@ class EmployeeEmploymentUseCaseServiceImpl implements EmployeeEmploymentUseCaseS
     }
 
     @Override
-    public void hire(Long employeeId, HireRequest dto) {
-        employeeEmploymentService.create(employeeId,
+    public EmployeeEmployment hire(Long employeeId, HireRequest dto) {
+       return employeeEmploymentService.create(employeeId,
                 new InternalEmploymentRequest(
                         dto.getOrganizationId(),
                         dto.getDepartmentId(),

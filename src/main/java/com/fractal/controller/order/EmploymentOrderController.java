@@ -2,6 +2,7 @@ package com.fractal.controller.order;
 
 
 import com.fractal.domain.order.employment.EmploymentOrderService;
+import com.fractal.domain.order.employment.dto.EmploymentOrderHireRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
 import jakarta.validation.Valid;
@@ -22,10 +23,21 @@ public class EmploymentOrderController {
 
     private final EmploymentOrderService orderService;
 
+    @PostMapping("/hire")
+    public ResponseEntity<EmploymentOrderResponse> hire(@RequestBody @Valid EmploymentOrderHireRequest dto) {
+        return new ResponseEntity<>(orderService.toDTO(orderService.hire(dto)), HttpStatus.CREATED);
+    }
+    @PostMapping("/transfer")
+    public ResponseEntity<EmploymentOrderResponse> transfer(@RequestBody @Valid EmploymentOrderHireRequest dto) {
+        return new ResponseEntity<>(orderService.toDTO(orderService.hire(dto)), HttpStatus.CREATED);
+    }
+
+    /*
     @PostMapping()
     public ResponseEntity<EmploymentOrderResponse> create(@RequestBody @Valid EmploymentOrderRequest dto) {
         return new ResponseEntity<>(orderService.toDTO(orderService.create(dto)), HttpStatus.CREATED);
     }
+    */
 
     @GetMapping
     public ResponseEntity<List<EmploymentOrderResponse>> getAll() {

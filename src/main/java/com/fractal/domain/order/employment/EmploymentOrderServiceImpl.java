@@ -4,9 +4,11 @@ import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
 import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
+import com.fractal.domain.order.employment.dto.EmploymentOrderHireRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
 import com.fractal.domain.order.employment.mapper.EmploymentOrderMapperService;
+import com.fractal.domain.order.employment.record.dto.EmploymentOrderRecordRequest;
 import com.fractal.domain.order.state.OrderStateService;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
@@ -14,8 +16,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -86,8 +90,28 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     }
 
     @Override
-    public void hire(Long employeeId, HireRequest dto) {
-        employmentUseCaseService.hire(employeeId,dto);
+    public EmploymentOrder hire(EmploymentOrderHireRequest dto) {
+        var employment = employmentUseCaseService.hire(dto.employeeId(),dto.hire());
+        return create(new EmploymentOrderRequest(
+                dto.orderTypeId(),
+                List.of(new EmploymentOrderRecordRequest(employment.getId())),
+                dto.number(),
+                dto.date(),
+                List.of()
+        ));
+    }
+
+    @Override
+    public EmploymentOrder transfer(EmploymentOrderHireRequest dto) {
+        var employment = employmentUseCaseService.hire(dto.employeeId(),dto.hire());
+        return create(new EmploymentOrderRequest(
+                dto.orderTypeId(),
+                List.of(new EmploymentOrderRecordRequest(employment.getId())),
+                dto.number(),
+                dto.date(),
+                List.of()
+        ));
+
     }
 
 

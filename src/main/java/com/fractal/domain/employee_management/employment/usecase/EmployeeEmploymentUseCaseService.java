@@ -1,6 +1,7 @@
 package com.fractal.domain.employee_management.employment.usecase;
 
 import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 
@@ -11,5 +12,5 @@ public interface EmployeeEmploymentUseCaseService {
     Optional<InternalEmploymentResponse> getCurrentEmployment(Employee employee);
     Employee getHrHeadEmployee();
     Employee getCEOEmployee();
-    void hire(Long employeeId, HireRequest dto);
+    EmployeeEmployment hire(Long employeeId, HireRequest dto);
 }
