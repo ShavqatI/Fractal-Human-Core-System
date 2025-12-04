@@ -3,15 +3,14 @@ package com.fractal.domain.integration.mapping.position;
 import com.fractal.domain.abstraction.Integration;
 import com.fractal.domain.organization_management.position.Position;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "position_mapping", schema = "integration_schema", catalog = "fractal")
 @EqualsAndHashCode(callSuper = true)
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 public class PositionMapping extends Integration {

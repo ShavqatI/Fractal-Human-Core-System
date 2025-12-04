@@ -20,6 +20,7 @@ public interface PositionService extends ApprovalWorkflowAware<Long, Position> {
     Position getById(Long id);
 
     Position update(Long id, PositionRequest dto);
+    Position close(Long id, PositionRequest dto);
 
     void deleteById(Long id);
     PositionResponse toDTO(Position position);

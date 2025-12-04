@@ -62,7 +62,6 @@ class PositionServiceImpl implements PositionService {
             position.setName(dto.name());
             position.setDescription(dto.description());
             position.setDepartment(departmentService.getById(dto.departmentId()));
-            position.setStatus(statusService.getById(dto.statusId()));
             position.setGrade(dto.gradeId() != null ? Optional.of(gradeService.getById(dto.gradeId())).orElse(null) : null);
             position.setOpenDate(dto.openDate());
             position.setOpenReason(dto.openReason());
@@ -72,6 +71,19 @@ class PositionServiceImpl implements PositionService {
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
+    }
+
+    @Override
+    public Position close(Long id, PositionRequest dto) {
+        try {
+            Position position = findById(id);
+            position.setCloseDate(dto.closeDate());
+            position.setCloseReason(dto.closeReason());
+            return save(position);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
+
     }
 
     @Override
