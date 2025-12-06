@@ -238,7 +238,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
 
     @Override
     public EmployeeEmployment getActiveEmployment(Long employeeId) {
-        var employeeEmployment = employmentRepository.findByEmployeeIdAndEmploymentEndDateIsNullAndStatusCode(employeeId,"ACTIVE");
+        var employeeEmployment = employmentRepository.findActiveEmployment(employeeId);
         return employeeEmployment.isPresent() ?  employeeEmployment.get() : null;
     }
 
