@@ -83,7 +83,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
 
     @Override
     public List<EmployeeEmployment> getAllActive() {
-        return employmentRepository.findAllByEmploymentEndDateIsNullAndEmploymentStatusCode("ACTIVE");
+        return employmentRepository.findAllByStatus("ACTIVE");
     }
 
     @Override
@@ -93,7 +93,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
 
     @Override
     public List<EmployeeEmployment> getAllApproved() {
-       return employmentRepository.findAllByEmploymentEndDateIsNullAndEmploymentStatusCode("APPROVED")
+       return employmentRepository.findAllByStatus("APPROVED")
                 .stream().filter(employeeEmployment -> {
                     var employeeEmployment1 = (EmployeeEmployment) Hibernate.unproxy(employeeEmployment);
                     var employment = (Employment) Hibernate.unproxy(employeeEmployment1.getEmployment());

@@ -35,5 +35,13 @@ interface EmployeeEmploymentRepository extends JpaRepository<EmployeeEmployment,
             Long employeeId,
             LocalDate date
     );
-    List<EmployeeEmployment> findAllByEmploymentEndDateIsNullAndEmploymentStatusCode(String statusCode);
+
+    @Query("""
+    select ee from EmployeeEmployment ee
+    where ee.employment.endDate is null 
+      and ee.status.code = :status
+    order by ee.employment.startDate desc
+    LIMIT 1
+""")
+    List<EmployeeEmployment> findAllByStatus(String status);
 }
