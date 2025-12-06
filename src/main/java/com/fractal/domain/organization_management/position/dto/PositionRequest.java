@@ -16,6 +16,7 @@ public record PositionRequest(
         String description,
         Long departmentId,
         Long gradeId,
+        Boolean supervisory,
         LocalDate openDate,
         String openReason,
         LocalDate closeDate,

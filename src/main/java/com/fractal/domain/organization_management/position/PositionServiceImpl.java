@@ -64,6 +64,7 @@ class PositionServiceImpl implements PositionService {
             position.setDescription(dto.description());
             position.setDepartment(departmentService.getById(dto.departmentId()));
             position.setGrade(dto.gradeId() != null ? Optional.of(gradeService.getById(dto.gradeId())).orElse(null) : null);
+            position.setSupervisory(dto.supervisory());
             position.setOpenDate(dto.openDate());
             position.setOpenReason(dto.openReason());
             position.setCloseDate(dto.closeDate());
@@ -149,6 +150,7 @@ class PositionServiceImpl implements PositionService {
                 Optional.ofNullable(position.getGrade())
                         .map(gradeService::toCompactDTO)
                         .orElse(null),
+                position.isSupervisory(),
                 position.getOpenDate(),
                 position.getOpenReason(),
                 position.getCloseDate(),
@@ -175,6 +177,7 @@ class PositionServiceImpl implements PositionService {
                 .description(dto.description())
                 .department(dto.departmentId() != null ? Optional.of(departmentService.getById(dto.departmentId())).orElse(null): null)
                 .grade(dto.gradeId() != null ? Optional.of(gradeService.getById(dto.gradeId())).orElse(null) : null)
+                .supervisory(dto.supervisory())
                 .openDate(dto.openDate())
                 .openReason(dto.openReason())
                 .closeDate(dto.closeDate())

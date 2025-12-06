@@ -13,6 +13,7 @@ public record PositionResponse(
         String description,
         DepartmentCompactResponse department,
         GradeCompactResponse grade,
+        Boolean supervisory,
         LocalDate openDate,
         String openReason,
         LocalDate closeDate,
