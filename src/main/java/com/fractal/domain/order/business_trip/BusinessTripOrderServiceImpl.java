@@ -109,8 +109,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
             order.setReviewedDate(LocalDateTime.now());
             order.setReviewedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("REVIEWED"));
-            stateService.create(order);
-            return order;
+            return save(order);
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }
@@ -127,9 +126,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
             order.setApprovedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("APPROVED"));
             order.setStatus(order.getStatus());
-            stateService.create(order);
-
-            return order;
+            return save(order);
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }

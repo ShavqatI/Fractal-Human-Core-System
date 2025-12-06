@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @Service
 @RequiredArgsConstructor
@@ -50,6 +51,22 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
     public List<VacationAccrual> getAllByEmployeeId(Long employeeId) {
         return vacationAccrualRepository.findAllByEmployeeId(employeeId);
 
+    }
+
+    @Override
+    public int getAllEmployeeRemainingDays(Long employeeId) {
+        var days = 0;
+        var accrual = getAllByEmployeeId(employeeId).getFirst();
+        var periods = accrual.getPeriods().stream().filter(p-> statusService.getById(p.getStatus().getId()).getCode().equals("ACTIVE")).findFirst();
+        if(periods.isPresent()){
+          if(!periods.get().getRecords().isEmpty()){
+              var records = periods.get().getRecords();
+               days = records.stream()
+                      .mapToInt(r -> r.getRemainingDays())
+                      .sum();
+          }
+        }
+       return days;
     }
 
     @Override

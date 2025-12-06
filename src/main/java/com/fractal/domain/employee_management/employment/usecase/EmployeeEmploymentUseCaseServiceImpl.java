@@ -16,6 +16,7 @@ import com.fractal.domain.organization_management.position.PositionService;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,6 +24,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 class EmployeeEmploymentUseCaseServiceImpl implements EmployeeEmploymentUseCaseService {
+
     private final EmployeeEmploymentService employeeEmploymentService;
     private final InternalEmploymentService internalEmploymentService;
     private final EmploymentService employmentService;
@@ -86,21 +88,5 @@ class EmployeeEmploymentUseCaseServiceImpl implements EmployeeEmploymentUseCaseS
         return null;
     }
 
-    @Override
-    public EmployeeEmployment hire(Long employeeId, HireRequest dto) {
-       return employeeEmploymentService.create(employeeId,
-                new InternalEmploymentRequest(
-                        dto.getOrganizationId(),
-                        dto.getDepartmentId(),
-                        dto.getPositionId(),
-                        dto.getEmploymentTypeId(),
-                        dto.getStartDate(),
-                        dto.getEndDate(),
-                        List.of(),
-                        List.of(),
-                        dto.getCompensationComponents()
 
-                )
-        );
-    }
 }

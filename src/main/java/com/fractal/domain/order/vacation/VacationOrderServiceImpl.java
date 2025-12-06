@@ -118,8 +118,7 @@ public class VacationOrderServiceImpl implements VacationOrderService {
             order.setReviewedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("REVIEWED"));
             order.getVacation().setStatus(order.getStatus());
-            stateService.create(order);
-            return order;
+            return save(order);
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }
@@ -135,10 +134,9 @@ public class VacationOrderServiceImpl implements VacationOrderService {
             order.getVacation().setStatus(order.getStatus());
             vacationService.close(order.getVacation().getId());
             vacationRequestService.close(order.getVacation().getVacationRequest().getId());
-            stateService.create(order);
             order.getVacation().getAllocations().forEach(allocation -> vacationAccrualPeriodRecordService.decrease(allocation.getVacationAccrualPeriodRecord().getId(), allocation.getDays()));
             addAccrualOnRecall(order);
-            return order;
+            return save(order);
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }

@@ -4,16 +4,14 @@ import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
+import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
+import com.fractal.domain.employee_management.employment.state.ApprovalWorkflowAwareRequest;
 import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
-import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
-import com.fractal.domain.order.employment.dto.EmploymentOrderHireRequest;
-import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
-import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
+import com.fractal.domain.order.employment.dto.*;
 import com.fractal.domain.order.employment.mapper.EmploymentOrderMapperService;
 import com.fractal.domain.order.employment.record.dto.EmploymentOrderRecordRequest;
 import com.fractal.domain.order.state.OrderStateService;
 import com.fractal.domain.order.usecase.OrderUseCaseService;
-import com.fractal.domain.order.vacation.VacationOrder;
 import com.fractal.domain.poi.processor.word.WordTemplateProcessorService;
 import com.fractal.domain.poi.processor.word.WordToPdfConverterService;
 import com.fractal.domain.resource.FileService;
@@ -24,10 +22,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +39,7 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     private final OrderStateService stateService;
     private final StatusService statusService;
     private final AuthenticatedService authenticatedService;
-    private final EmployeeEmploymentUseCaseService employmentUseCaseService;
+    private final EmployeeEmploymentService employeeEmploymentService;
     private final OrderUseCaseService orderUseCaseService;
     private final EmployeeUseCaseService employeeUseCaseService;
     private final EmploymentOrderTemplateProcessorService templateProcessorService;
@@ -61,9 +57,7 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     public EmploymentOrder create(EmploymentOrderRequest dto) {
         var order = orderMapperService.toEntity(dto);
         order.setStatus(statusService.getByCode("CREATED"));
-        order = save(order);
-        stateService.create(order);
-        return order;
+        return save(order);
     }
 
     @Override
@@ -95,6 +89,7 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     }
 
     @Override
+    @Transactional
     public EmploymentOrder save(EmploymentOrder order) {
         try {
             order = orderRepository.save(order);
@@ -105,32 +100,12 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
         }
     }
 
-    @Override
-    public Path print(Long id) {
-        var order = getById(id);
-        var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
-        var pdfFilePath =  Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
 
-        Map<String, String> values = new HashMap<>();
-
-        values.putAll(orderUseCaseService.getHeader(order));
-        values.putAll(getCommonValues(order));
-        values.putAll(templateProcessorService.process(order));
-        values.putAll(orderUseCaseService.getFooter());
-
-        try {
-            wordTemplateProcessorService.process(Path.of(order.getOrderType().getDocumentTemplateManager().getFilePath()), wordFilePath, values);
-            wordToPdfConverterService.convert(wordFilePath,pdfFilePath);
-            fileService.delete(wordFilePath.toString());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return pdfFilePath;
-    }
 
     @Override
+    @Transactional
     public EmploymentOrder hire(EmploymentOrderHireRequest dto) {
-        var employment = employmentUseCaseService.hire(dto.employeeId(),dto.hire());
+        var employment = employeeEmploymentService.hire(dto.employeeId(),dto.hire());
         return create(new EmploymentOrderRequest(
                 dto.orderTypeId(),
                 List.of(new EmploymentOrderRecordRequest(employment.getId())),
@@ -142,8 +117,35 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     }
 
     @Override
+    public EmploymentOrder terminate(EmploymentOrderTerminationRequest dto) {
+        var employment = employeeEmploymentService.terminate(dto.employeeId(),dto.termination());
+        return create(new EmploymentOrderRequest(
+                dto.orderTypeId(),
+                List.of(new EmploymentOrderRecordRequest(employment.getId())),
+                dto.number(),
+                dto.date(),
+                dto.sourceDocument(),
+                List.of()
+        ));
+    }
+
+    @Override
+    public EmploymentOrder transfer(EmploymentOrderTransferRequest dto) {
+        var employment = employeeEmploymentService.transfer(dto.employeeId(),dto.transfer());
+        return create(new EmploymentOrderRequest(
+                dto.orderTypeId(),
+                List.of(new EmploymentOrderRecordRequest(employment.getId())),
+                dto.number(),
+                dto.date(),
+                dto.sourceDocument(),
+                List.of()
+        ));
+    }
+
+    @Override
+    @Transactional
     public EmploymentOrder transfer(EmploymentOrderHireRequest dto) {
-        var employment = employmentUseCaseService.hire(dto.employeeId(),dto.hire());
+        var employment = employeeEmploymentService.hire(dto.employeeId(),dto.hire());
         return create(new EmploymentOrderRequest(
                 dto.orderTypeId(),
                 List.of(new EmploymentOrderRecordRequest(employment.getId())),
@@ -163,8 +165,10 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
             order.setReviewedDate(LocalDateTime.now());
             order.setReviewedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("REVIEWED"));
-            stateService.create(order);
-            return order;
+            order.getRecords().forEach(employmentOrderRecord -> {
+                employeeEmploymentService.review(new ApprovalWorkflowAwareRequest(employmentOrderRecord.getEmployment().getEmployee().getId(),employmentOrderRecord.getEmployment().getEmployment().getId()));
+            });
+            return save(order);
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }
@@ -177,26 +181,46 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
             order.setApprovedDate(LocalDateTime.now());
             order.setApprovedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("APPROVED"));
-            stateService.create(order);
-
-            return order;
+            order.getRecords().forEach(employmentOrderRecord -> {
+                employeeEmploymentService.approve(new ApprovalWorkflowAwareRequest(employmentOrderRecord.getEmployment().getEmployee().getId(),employmentOrderRecord.getEmployment().getEmployment().getId()));
+            });
+            return save(order);
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }
+    }
+
+    @Override
+    public Path print(Long id) {
+        var order = getById(id);
+        var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
+        var pdfFilePath =  Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
+
+        Map<String, String> values = new HashMap<>();
+
+        values.putAll(orderUseCaseService.getHeader(order));
+        values.putAll(getCommonValues(order));
+        values.putAll(templateProcessorService.process(order));
+        values.putAll(orderUseCaseService.getFooter());
+        try {
+            wordTemplateProcessorService.process(Path.of(order.getOrderType().getDocumentTemplateManager().getFilePath()), wordFilePath, values);
+            wordToPdfConverterService.convert(wordFilePath,pdfFilePath);
+            fileService.delete(wordFilePath.toString());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return pdfFilePath;
     }
 
     private Map<String,String> getCommonValues(EmploymentOrder order){
         Map<String, String> values = new HashMap<>();
         var employeeEmployment = getEmployment(order);
 
-        var employment = employeeUseCaseService.getCurrentEmployment(employeeEmployment.getEmployee()).get();
-
+        var employment = employeeUseCaseService.getEmployment(employeeEmployment).get();
         values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
         values.put("employeePosition", employment.position().name());
         values.put("ceo",employeeUseCaseService.getLastNameWithInitials(employeeEmploymentUseCaseService.getCEOEmployee()));
-
-
-        return values;
+     return values;
     }
 
     private EmployeeEmployment getEmployment(EmploymentOrder order){

@@ -12,5 +12,5 @@ public interface EmployeeEmploymentUseCaseService {
     Optional<InternalEmploymentResponse> getCurrentEmployment(Employee employee);
     Employee getHrHeadEmployee();
     Employee getCEOEmployee();
-    EmployeeEmployment hire(Long employeeId, HireRequest dto);
+
 }

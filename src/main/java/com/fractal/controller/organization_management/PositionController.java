@@ -2,10 +2,7 @@ package com.fractal.controller.organization_management;
 
 import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
 import com.fractal.domain.organization_management.position.PositionService;
-import com.fractal.domain.organization_management.position.dto.PositionCancelRequest;
-import com.fractal.domain.organization_management.position.dto.PositionCompactResponse;
-import com.fractal.domain.organization_management.position.dto.PositionRequest;
-import com.fractal.domain.organization_management.position.dto.PositionResponse;
+import com.fractal.domain.organization_management.position.dto.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -74,6 +71,10 @@ public class PositionController {
     @PutMapping("cancel/{id}")
     public ResponseEntity<PositionResponse> cancel(@PathVariable Long id,@RequestBody @Valid PositionCancelRequest dto) {
         return ResponseEntity.ok(positionService.toDTO(positionService.cancel(id,dto)));
+    }
+    @PutMapping("close/{id}")
+    public ResponseEntity<PositionResponse> close(@PathVariable Long id,@RequestBody @Valid PositionCloseRequest dto) {
+        return ResponseEntity.ok(positionService.toDTO(positionService.close(id,dto)));
     }
 
     @DeleteMapping("/{id}")

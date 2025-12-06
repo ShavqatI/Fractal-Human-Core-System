@@ -8,6 +8,7 @@ import com.fractal.domain.employment.internal.compensation_component.mapper.Comp
 import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
+import com.fractal.domain.employment.internal.dto.TerminationRequest;
 import com.fractal.domain.employment.kind.EmploymentKindService;
 import com.fractal.domain.employment.separation_reason.mapper.SeparationReasonMapperService;
 import com.fractal.domain.employment.type.EmploymentTypeService;
@@ -78,6 +79,14 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
     @Override
     public InternalEmployment toEntity(InternalEmployment employment, InternalEmploymentRequest dto) {
         return mapToEntity(employment, dto);
+    }
+
+    @Override
+    public InternalEmployment toEntity(InternalEmployment employment, TerminationRequest dto) {
+        employment.setEndDate(dto.endDate());
+        employment.setStatus(statusService.getByCode("CREATED"));
+        dto.separationReasons().forEach(separationReason -> employment.addSeparationReason(separationReasonMapperService.toEntity(separationReason)));
+        return employment;
     }
 
     private InternalEmployment mapToEntity(InternalEmployment employment, InternalEmploymentRequest dto) {

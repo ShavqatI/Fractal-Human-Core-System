@@ -29,9 +29,25 @@ class EmploymentServiceImpl implements EmploymentService {
     @Override
     public Employment save(Employment employment) {
         try {
-            return employmentRepository.save(employment);
+            employment = employmentRepository.save(employment);
+            stateService.create(employment);
+            return employment;
+
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
+    }
+
+    @Override
+    public Employment activate(Long id) {
+        var employment = getById(id);
+        if (employment.getStatus().getCode().equals("APPROVED")) {
+            employment.setReviewedDate(LocalDateTime.now());
+            employment.setReviewedUser(authenticatedService.getUser());
+            employment.setStatus(statusService.getByCode("ACTIVE"));
+            return save(employment);
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + employment.getStatus().getName());
         }
     }
 
@@ -42,8 +58,7 @@ class EmploymentServiceImpl implements EmploymentService {
             employment.setReviewedDate(LocalDateTime.now());
             employment.setReviewedUser(authenticatedService.getUser());
             employment.setStatus(statusService.getByCode("REVIEWED"));
-            stateService.create(employment);
-            return employment;
+            return save(employment);
         } else {
             throw new ResourceStateException("The status is not valid is: " + employment.getStatus().getName());
         }
@@ -56,8 +71,7 @@ class EmploymentServiceImpl implements EmploymentService {
             employment.setApprovedDate(LocalDateTime.now());
             employment.setApprovedUser(authenticatedService.getUser());
             employment.setStatus(statusService.getByCode("APPROVED"));
-            stateService.create(employment);
-            return employment;
+            return save(employment);
         } else {
             throw new ResourceStateException("The status is not valid is: " + employment.getStatus().getName());
         }

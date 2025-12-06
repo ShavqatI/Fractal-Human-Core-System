@@ -41,6 +41,10 @@ public class EmployeeEmploymentController {
     public ResponseEntity<EmploymentResponse> getById(@PathVariable Long employeeId, @PathVariable Long id) {
         return ResponseEntity.ok(employmentService.toDTO(employmentService.getById(employeeId, id)));
     }
+    @GetMapping("/active")
+    public ResponseEntity<EmploymentResponse> getActive(@PathVariable Long employeeId) {
+        return ResponseEntity.ok(employmentService.toDTO(employmentService.getActiveEmployment(employeeId)));
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<EmploymentResponse> update(@PathVariable Long employeeId, @PathVariable Long id, @RequestBody @Valid EmploymentRequest dto) {

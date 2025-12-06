@@ -2,6 +2,7 @@ package com.fractal.domain.employment.internal;
 
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
+import com.fractal.domain.employment.internal.dto.TerminationRequest;
 import com.fractal.domain.employment.internal.mapper.InternalEmploymentMapperService;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +49,16 @@ class InternalEmploymentServiceImpl implements InternalEmploymentService {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
 
+    }
+
+    @Override
+    public InternalEmployment terminate(Long id, TerminationRequest dto) {
+        try {
+            InternalEmployment employment = mapperService.toEntity(findById(id), dto);
+            return save(employment);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
     @Override

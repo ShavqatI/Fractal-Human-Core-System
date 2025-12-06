@@ -82,6 +82,7 @@ class PositionServiceImpl implements PositionService {
             position.setCloseDate(dto.closeDate());
             position.setCloseReason(dto.closeReason());
             position.setClosedUser(currentUserHolder.get());
+            position.setStatus(statusService.getByCode("CLOSE"));
             return save(position);
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
@@ -96,6 +97,7 @@ class PositionServiceImpl implements PositionService {
             position.setCancelDate(LocalDate.now());
             position.setCancelReason(dto.reason());
             position.setCanceledUser(SpringContext.getBean(CurrentUserHolder.class).get());
+            position.setStatus(statusService.getByCode("CANCELED"));
             return save(position);
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
@@ -115,7 +117,7 @@ class PositionServiceImpl implements PositionService {
              position.setReviewedUser(SpringContext.getBean(CurrentUserHolder.class).get());
              position.setStatus(statusService.getByCode("REVIEWED"));
             //stateService.create(order);
-            return position;
+            return save(position);
         } else {
             throw new ResourceStateException("The status is not valid is: " + position.getStatus().getName());
         }
@@ -130,7 +132,7 @@ class PositionServiceImpl implements PositionService {
             position.setStatus(statusService.getByCode("APPROVED"));
             //stateService.create(order);
 
-            return position;
+            return save(position);
         } else {
             throw new ResourceStateException("The status is not valid is: " + position.getStatus().getName());
         }

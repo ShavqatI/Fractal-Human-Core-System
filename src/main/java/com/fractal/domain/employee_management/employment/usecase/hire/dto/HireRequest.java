@@ -7,14 +7,12 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
-
-@Data
-public class HireRequest {
-    private Long organizationId;
-    private Long departmentId;
-    private Long positionId;
-    private Long employmentTypeId;
-    private LocalDate startDate;
-    private LocalDate endDate;
-    private List<CompensationComponentRequest> compensationComponents;
-}
+public record HireRequest (
+    Long organizationId,
+    Long departmentId,
+    Long positionId,
+    Long employmentTypeId,
+    LocalDate startDate,
+    LocalDate endDate,
+    List<CompensationComponentRequest> compensationComponents
+) {}

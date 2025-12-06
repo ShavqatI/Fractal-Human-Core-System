@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
-    private final EmployeeEmploymentUseCaseService employmentUseCaseService;
 
     @PostMapping
     public ResponseEntity<EmployeeResponse> create(@RequestBody @Valid EmployeeRequest dto) {
@@ -66,13 +65,6 @@ public class EmployeeController {
         return ResponseEntity.noContent().build();
 
     }
-
-    @PostMapping("/hire")
-    public ResponseEntity<Void> hire(@PathVariable Long employeeId, @RequestBody @Valid HireRequest dto) {
-        employmentUseCaseService.hire(employeeId, dto);
-        return ResponseEntity.noContent().build();
-    }
-
     @PutMapping("review/{id}")
     public ResponseEntity<EmployeeResponse> review(@PathVariable Long id) {
         return ResponseEntity.ok(employeeService.toDTO(employeeService.review(id)));

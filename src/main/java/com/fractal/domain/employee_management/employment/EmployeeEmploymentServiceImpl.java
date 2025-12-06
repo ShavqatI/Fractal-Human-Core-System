@@ -2,13 +2,13 @@ package com.fractal.domain.employee_management.employment;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentApprovedMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentMapperService;
 import com.fractal.domain.employee_management.employment.state.ApprovalWorkflowAwareRequest;
-import com.fractal.domain.employee_management.employment.state.EmployeeEmploymentState;
 import com.fractal.domain.employee_management.employment.state.EmployeeEmploymentStateService;
+import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
+import com.fractal.domain.employee_management.employment.usecase.hire.dto.TransferRequest;
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.EmploymentService;
 import com.fractal.domain.employment.dto.EmploymentRequest;
@@ -19,6 +19,8 @@ import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
+import com.fractal.domain.employment.internal.dto.TerminationRequest;
+import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +28,7 @@ import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,11 +58,12 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
         } else if (dto instanceof ExternalEmploymentRequest) {
             employment = externalEmploymentService.create((ExternalEmploymentRequest) dto);
         }
-        var employeeEmployment = EmployeeEmployment.builder().employment(employment).build();
-        var employee = employeeService.getById(employeeId);
-        employee.addEmployment(employeeEmployment);
-        employeeService.save(employee);
-        return employeeEmployment;
+        var employeeEmployment = EmployeeEmployment.builder()
+                .employee(employeeService.getById(employeeId))
+                .employment(employment)
+                .status(statusService.getByCode("CREATED"))
+                .build();
+        return employmentRepository.save(employeeEmployment);
     }
 
     @Override
@@ -80,6 +84,11 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     @Override
     public List<EmployeeEmployment> getAllActive() {
         return employmentRepository.findAllByEmploymentEndDateIsNullAndEmploymentStatusCode("ACTIVE");
+    }
+
+    @Override
+    public EmployeeEmployment getActiveBefore(Long employeeId,LocalDate date) {
+        return employmentRepository.findActiveEmploymentBefore(employeeId,date).orElseThrow(()-> new ResourceNotFoundException("Employment for employee id: " + employeeId + " for date <= " + date + " not found"));
     }
 
     @Override
@@ -140,7 +149,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
             employeeEmployment.setStatus(statusService.getByCode("REVIEWED"));
             stateService.create(employeeEmployment);
             employmentService.review(employeeEmployment.getEmployment().getId());
-            return employeeEmployment;
+            return employmentRepository.save(employeeEmployment);
         } else {
             throw new ResourceStateException("The status is not valid is: " + employeeEmployment.getStatus().getName());
         }
@@ -155,12 +164,84 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
             employeeEmployment.setStatus(statusService.getByCode("APPROVED"));
             stateService.create(employeeEmployment);
             employmentService.approve(employeeEmployment.getEmployment().getId());
-            return employeeEmployment;
+            activate(dto.employeeId(),dto.id());
+            return employmentRepository.save(employeeEmployment);
         } else {
             throw new ResourceStateException("The status is not valid is: " + employeeEmployment.getStatus().getName());
         }
-
     }
+
+    @Override
+    @Transactional
+    public EmployeeEmployment hire(Long employeeId, HireRequest dto) {
+        return create(employeeId,
+                new InternalEmploymentRequest(
+                        dto.organizationId(),
+                        dto.departmentId(),
+                        dto.positionId(),
+                        dto.employmentTypeId(),
+                        dto.startDate(),
+                        dto.endDate(),
+                        List.of(),
+                        List.of(),
+                        dto.compensationComponents()
+                )
+        );
+    }
+
+    @Override
+    public EmployeeEmployment terminate(Long employeeId, TerminationRequest dto) {
+       var employeeEmployment = getActiveEmployment(employeeId);
+       if(employeeEmployment != null) {
+           employeeEmployment.setStatus(statusService.getByCode("CREATED"));
+           var employment = (Employment) Hibernate.unproxy(employeeEmployment.getEmployment());
+           if(employment instanceof InternalEmployment){
+               internalEmploymentService.terminate(employment.getId(),dto);
+           }
+          return employmentRepository.save(employeeEmployment);
+       }
+      return null;
+    }
+
+    @Override
+    public EmployeeEmployment transfer(Long employeeId, TransferRequest dto) {
+        return create(employeeId,
+                new InternalEmploymentRequest(
+                        dto.organizationId(),
+                        dto.departmentId(),
+                        dto.positionId(),
+                        dto.employmentTypeId(),
+                        dto.startDate(),
+                        dto.endDate(),
+                        List.of(),
+                        List.of(),
+                        dto.compensationComponents()
+
+                )
+        );
+    }
+
+    @Override
+    public EmployeeEmployment activate(Long employeeId,Long id) {
+        var employeeEmployment = getById(employeeId,id);
+        if (employeeEmployment.getStatus().getCode().equals("APPROVED")) {
+            employeeEmployment.setApprovedDate(LocalDateTime.now());
+            employeeEmployment.setApprovedUser(authenticatedService.getUser());
+            employeeEmployment.setStatus(statusService.getByCode("ACTIVE"));
+            stateService.create(employeeEmployment);
+            employmentService.activate(employeeEmployment.getEmployment().getId());
+            return employmentRepository.save(employeeEmployment);
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + employeeEmployment.getStatus().getName());
+        }
+    }
+
+    @Override
+    public EmployeeEmployment getActiveEmployment(Long employeeId) {
+        var employeeEmployment = employmentRepository.findByEmployeeIdAndEmploymentEndDateIsNullAndStatusCode(employeeId,"ACTIVE");
+        return employeeEmployment.isPresent() ?  employeeEmployment.get() : null;
+    }
+
 
 
 }

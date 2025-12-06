@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Data
 public abstract class Lifecycle extends ApprovalWorkflow {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     protected Long id;
 
