@@ -25,17 +25,17 @@ class EmployeeUseCaseServiceImpl implements EmployeeUseCaseService {
     private final StatusService statusService;
     @Override
     public String getFullName(Employee employee) {
+        if(employee == null) return "";
         StringBuilder sb = new StringBuilder();
-        if(employee != null) {
-            sb.append(employee.getLastName() + " ");
-            sb.append(employee.getFirstName() + " ");
-            sb.append(employee.getPatronymicName());
-        }
+        sb.append(employee.getLastName() + " ");
+        sb.append(employee.getFirstName() + " ");
+        sb.append(employee.getPatronymicName());
         return sb.toString();
     }
 
     @Override
     public String getLastNameWithInitials(Employee employee) {
+        if(employee == null) return "";
         StringBuilder sb = new StringBuilder();
         sb.append(employee.getLastName()).append(" ");
         sb.append(employee.getFirstName().substring(0,1)).append(". ");
@@ -56,13 +56,5 @@ class EmployeeUseCaseServiceImpl implements EmployeeUseCaseService {
         return response;
     }
 
-    @Override
-    public Optional<InternalEmploymentResponse> getEmployment(EmployeeEmployment employment) {
-       var  employeeEmployment = (EmployeeEmployment) Hibernate.unproxy(employment);
-       var employment1 = (Employment) Hibernate.unproxy(employeeEmployment.getEmployment());
-       if(employment1 instanceof InternalEmployment){
-           return Optional.ofNullable(internalEmploymentService.toDTO((InternalEmployment) employment1));
-       }
-       return Optional.empty();
-    }
+
 }

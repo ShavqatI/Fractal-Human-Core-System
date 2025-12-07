@@ -60,7 +60,7 @@ public class VacationAccrualController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("all-remaining-days/{employeeId}")
+    @PostMapping("remaining-days/{employeeId}")
     public ResponseEntity<Integer> getEmployeeAllRemainingDays(@PathVariable Long employeeId,@RequestBody @Valid PeriodRequest dto) {
         return new ResponseEntity<>(accrualUseCaseService.getEmployeeAllRemainingDays(employeeId,dto),HttpStatus.OK);
     }

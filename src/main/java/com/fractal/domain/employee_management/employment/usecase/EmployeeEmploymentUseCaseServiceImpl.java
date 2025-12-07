@@ -46,21 +46,24 @@ class EmployeeEmploymentUseCaseServiceImpl implements EmployeeEmploymentUseCaseS
 
     @Override
     public Employee getHrHeadEmployee() {
-       return getEmployeeByPosition("HR_HEAD");
+        var employee = getEmployeeByPosition("HR_HEAD");
+        return employee.isPresent() ? employee.get() : null;
+
     }
 
     @Override
     public Employee getCEOEmployee() {
-        return getEmployeeByPosition("CEO");
+        var employee = getEmployeeByPosition("CEO");
+        return employee.isPresent() ? employee.get() : null;
     }
 
-    private Employee getEmployeeByPosition(String positionCode){
+    private Optional<Employee> getEmployeeByPosition(String positionCode){
         var employee = employeeEmploymentService.getAllActive().stream().filter(
                         employeeEmployment -> filterInternalEmployment(employeeEmployment))
-                .filter(employeeEmployment ->
-                        filterPosition(getInternalEmployment(employeeEmployment),positionCode)
-                ).map(employeeEmployment -> employeeEmployment.getEmployee());
-        return employee.findFirst().get();
+                .filter(ee -> filterPosition(getInternalEmployment(ee),positionCode)
+                )
+                .map(employeeEmployment -> employeeEmployment.getEmployee());
+        return employee.findFirst();
     }
 
     private boolean filterInternalEmployment(EmployeeEmployment employeeEmployment) {

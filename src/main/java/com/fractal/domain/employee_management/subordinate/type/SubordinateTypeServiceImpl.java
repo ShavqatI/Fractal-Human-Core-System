@@ -78,7 +78,7 @@ class SubordinateTypeServiceImpl implements SubordinateTypeService {
     }
 
     private SubordinateType findById(Long id) {
-        return subordinateTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Relation Type with id: " + id + " not found"));
+        return subordinateTypeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Subordinate type with id: " + id + " not found"));
     }
 
 }

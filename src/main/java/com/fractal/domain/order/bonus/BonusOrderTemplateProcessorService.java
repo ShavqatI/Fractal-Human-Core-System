@@ -1,9 +1,10 @@
-package com.fractal.domain.order.employment;
+package com.fractal.domain.order.bonus;
 
+import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
-import com.fractal.domain.organization_management.organization.OrganizationService;
+import com.fractal.domain.order.employment.EmploymentOrder;
 import com.fractal.domain.utilities.converter.NumberToWordConverter;
 import com.fractal.domain.vacation_management.accrual.VacationAccrualService;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +16,10 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-class EmploymentOrderTemplateProcessorService {
+class BonusOrderTemplateProcessorService {
 
-    private final VacationAccrualService vacationAccrualService;
+    private final EmployeeUseCaseService employeeUseCaseService;
     private final EmployeeEmploymentService employeeEmploymentService;
-    private final OrganizationService organizationService;
 
 
     public Map<String,String> process(EmploymentOrder order){
@@ -31,6 +31,14 @@ class EmploymentOrderTemplateProcessorService {
             case "EMPTRANSFER" -> getInterOrganizationTransferValues(order);
             case "TEMPTRANSFER" -> getTemporaryTransferValues(order);
             case "EMPROTATE" -> getRotationValues(order);
+            /*case "PREGNANCY" -> getPregnancyValues(order);
+            case "PATERNITY" -> getPaternityValues(order);
+            case "CHILDCARE" -> getChildCareValues(order);
+            case "FUNERAL" -> getFuneralValues(order);
+            case "EDUCATION" -> getEducationValues(order);
+            case "UNPAID" -> getUnpaidValues(order);
+            case "CASUAL" -> getCasualValues(order);
+            case "RECALL" -> getRecallValues(order);*/
             default -> new HashMap<>();
         };
     }
@@ -42,6 +50,7 @@ class EmploymentOrderTemplateProcessorService {
         values.put("startDate", employment.startDate().toString());
         values.putAll(getSalaryValues(employment));
         values.putAll(getSurchargeValues(employment));
+        values.put("sourceDocument", order.getSourceDocument());
         return values;
     }
     private Map<String,String> getContractServiceValues(EmploymentOrder order) {
@@ -53,28 +62,28 @@ class EmploymentOrderTemplateProcessorService {
         values.put("endDate", employment.endDate().toString());
         values.putAll(getSalaryValues(employment));
         values.putAll(getSurchargeValues(employment));
-
+        values.put("sourceDocument", order.getSourceDocument());
       return values;
     }
     private Map<String,String> getTerminationValues(EmploymentOrder order) {
         Map<String,String> values = new HashMap<>();
         var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
-        var calendarDays = vacationAccrualService.getAllEmployeeRemainingDays(getEmployment(order).getEmployee().getId());
 
         values.put("fullBankName", employment.organization().name());
         values.put("departmentName", employment.department().name());
         values.put("startDate", employment.endDate().toString());
-        values.put("unusedCalendarDays", String.valueOf(calendarDays));
-
+        values.put("sourceDocument", order.getSourceDocument());
       return values;
     }
     private Map<String,String> getInternalTransferValues(EmploymentOrder order) {
-        Map<String, String> values = new HashMap<>();
+        Map<String,String> values = new HashMap<>();
         var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
-        var previousEmployment = (InternalEmploymentResponse) employeeEmploymentService.toDTO(employeeEmploymentService.getActiveBefore(getEmployment(order).getEmployee().getId(), employment.startDate()));
+        var previousEmployment = (InternalEmploymentResponse) employeeEmploymentService.toDTO(employeeEmploymentService.getActiveBefore(getEmployment(order).getEmployee().getId(),employment.startDate()));
+
         values.put("employeeOldPosition", previousEmployment.position().name());
         values.put("startDate", employment.endDate().toString());
         values.putAll(getSalaryValues(employment));
+        values.put("sourceDocument", order.getSourceDocument());
       return values;
     }
     private Map<String,String> getInterOrganizationTransferValues(EmploymentOrder order) {
@@ -84,11 +93,11 @@ class EmploymentOrderTemplateProcessorService {
 
         values.put("employeeOldPosition", previousEmployment.position().name());
         values.put("oldOrganizationName", previousEmployment.organization().name());
-        values.put("oldOrganizationAddress", getOrganizationAddress(previousEmployment));
-        values.put("organizationName", employment.organization().name());
-        values.put("organizationAddress", getOrganizationAddress(employment));
-        values.put("startDate", employment.startDate().toString());
+        values.put("newOrganizationName", employment.organization().name());
+        values.put("startDate", employment.endDate().toString());
+        values.put("endDate", employment.endDate().toString());
         values.putAll(getSalaryValues(employment));
+        values.put("sourceDocument", order.getSourceDocument());
       return values;
     }
 
@@ -101,13 +110,12 @@ class EmploymentOrderTemplateProcessorService {
 
         values.put("employeeOldPosition", previousEmployment.position().name());
         values.put("oldOrganizationName", previousEmployment.organization().name());
-        values.put("oldOrganizationAddress", getOrganizationAddress(previousEmployment));
-        values.put("organizationName", employment.organization().name());
-        values.put("organizationAddress", getOrganizationAddress(employment));
+        values.put("newOrganizationName", employment.organization().name());
         values.put("startDate", employment.endDate().toString());
         values.put("endDate", employment.endDate().toString());
         values.putAll(getSalaryValues(employment));
         values.putAll(getSurchargeValues(employment));
+        values.put("sourceDocument", order.getSourceDocument());
       return values;
     }
     private Map<String,String> getRotationValues(EmploymentOrder order) {
@@ -116,16 +124,14 @@ class EmploymentOrderTemplateProcessorService {
         var previousEmployment = (InternalEmploymentResponse) employeeEmploymentService.toDTO(employeeEmploymentService.getActiveBefore(getEmployment(order).getEmployee().getId(),employment.startDate()));
 
         values.put("employeeOldPosition", previousEmployment.position().name());
-        values.put("oldOrganizationName", previousEmployment.organization().name());
-        values.put("oldOrganizationAddress", getOrganizationAddress(previousEmployment));
-        values.put("organizationName", employment.organization().name());
-        values.put("organizationAddress", getOrganizationAddress(employment));
+        values.put("oldDepartment", previousEmployment.department().name());
+        values.put("newDepartment", employment.department().name());
         values.put("startDate", employment.endDate().toString());
         values.put("endDate", employment.endDate().toString());
         values.put("days", String.valueOf(Duration.between(employment.startDate(),employment.endDate().plusDays(1))));
         values.putAll(getSalaryValues(employment));
         values.putAll(getSurchargeValues(employment));
-
+        values.put("sourceDocument", order.getSourceDocument());
       return values;
     }
 
@@ -146,17 +152,6 @@ class EmploymentOrderTemplateProcessorService {
 
     private EmployeeEmployment getEmployment(EmploymentOrder order){
         return order.getRecords().getFirst().getEmployment();
-    }
-
-    private String getOrganizationAddress(InternalEmploymentResponse employment){
-        var organization = organizationService.toDTO(organizationService.getById(employment.organization().id()));
-        if(organization.addresses().size() > 0){
-            var address = organization.addresses().getLast();
-                return address.city().name() == null ?
-                        address.district().name() == null ? address.district().name() : ""
-                        : address.city().name();
-        }
-      else return "";
     }
 
 }

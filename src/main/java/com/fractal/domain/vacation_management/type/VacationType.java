@@ -17,4 +17,5 @@ import lombok.experimental.SuperBuilder;
 public class VacationType extends Dictionary {
     private String description;
     private Integer days;
+    private Boolean payable;
 }

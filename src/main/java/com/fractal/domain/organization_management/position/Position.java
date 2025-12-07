@@ -6,16 +6,15 @@ import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.grade.Grade;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "position", schema = "organization_schema", catalog = "fractal")
-@Data
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
@@ -38,7 +37,8 @@ public class Position extends Lifecycle {
     @JoinColumn(name = "grade_id", referencedColumnName = "id")
     private Grade grade;
 
-    private boolean supervisory;
+    @Column(name = "supervisory")
+    private Boolean supervisory;
 
     private LocalDate cancelDate;
     private String cancelReason;

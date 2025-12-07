@@ -19,6 +19,7 @@ import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
+import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.employment.internal.dto.TerminationRequest;
 import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceStateException;
@@ -31,6 +32,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -240,6 +242,16 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     public EmployeeEmployment getActiveEmployment(Long employeeId) {
         var employeeEmployment = employmentRepository.findActiveEmployment(employeeId);
         return employeeEmployment.isPresent() ?  employeeEmployment.get() : null;
+    }
+
+    @Override
+    public Optional<InternalEmploymentResponse> getEmployment(EmployeeEmployment employment) {
+        var  employeeEmployment = (EmployeeEmployment) Hibernate.unproxy(employment);
+        var employment1 = (Employment) Hibernate.unproxy(employeeEmployment.getEmployment());
+        if(employment1 instanceof InternalEmployment){
+            return Optional.ofNullable(internalEmploymentService.toDTO((InternalEmployment) employment1));
+        }
+        return Optional.empty();
     }
 
 

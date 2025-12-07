@@ -150,7 +150,7 @@ class PositionServiceImpl implements PositionService {
                 Optional.ofNullable(position.getGrade())
                         .map(gradeService::toCompactDTO)
                         .orElse(null),
-                position.isSupervisory(),
+                position.getSupervisory(),
                 position.getOpenDate(),
                 position.getOpenReason(),
                 position.getCloseDate(),

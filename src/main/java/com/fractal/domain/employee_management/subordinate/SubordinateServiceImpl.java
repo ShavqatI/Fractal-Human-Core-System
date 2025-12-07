@@ -79,7 +79,7 @@ class SubordinateServiceImpl implements SubordinateService {
         return Subordinate.builder()
                 .employee(employeeService.getById(dto.employeeId()))
                 .subordinateEmployee(employeeService.getById(dto.subordinateEmployeeId()))
-                .subordinateType(subordinateTypeService.getById(dto.subordinateEmployeeId()))
+                .subordinateType(subordinateTypeService.getById(dto.subordinateTypeId()))
                 .status(statusService.getById(dto.statusId()))
                 .startDate(dto.startDate())
                 .endDate(dto.endDate())

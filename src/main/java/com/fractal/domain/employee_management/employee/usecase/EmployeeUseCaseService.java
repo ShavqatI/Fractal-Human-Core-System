@@ -11,5 +11,4 @@ public interface EmployeeUseCaseService {
     String getFullName(Employee employee);
     String getLastNameWithInitials(Employee employee);
     Optional<InternalEmploymentResponse> getCurrentEmployment(Employee employee);
-    Optional<InternalEmploymentResponse> getEmployment(EmployeeEmployment employment);
 }

@@ -143,22 +143,6 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     }
 
     @Override
-    @Transactional
-    public EmploymentOrder transfer(EmploymentOrderHireRequest dto) {
-        var employment = employeeEmploymentService.hire(dto.employeeId(),dto.hire());
-        return create(new EmploymentOrderRequest(
-                dto.orderTypeId(),
-                List.of(new EmploymentOrderRecordRequest(employment.getId())),
-                dto.number(),
-                dto.date(),
-                dto.sourceDocument(),
-                List.of()
-        ));
-
-    }
-
-
-    @Override
     public EmploymentOrder review(Long id) {
         var order = getById(id);
         if (order.getStatus().getCode().equals("CREATED")) {
@@ -216,9 +200,10 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
         Map<String, String> values = new HashMap<>();
         var employeeEmployment = getEmployment(order);
 
-        var employment = employeeUseCaseService.getEmployment(employeeEmployment).get();
+        var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
         values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
         values.put("employeePosition", employment.position().name());
+        values.put("sourceDocument", order.getSourceDocument());
         values.put("ceo",employeeUseCaseService.getLastNameWithInitials(employeeEmploymentUseCaseService.getCEOEmployee()));
      return values;
     }

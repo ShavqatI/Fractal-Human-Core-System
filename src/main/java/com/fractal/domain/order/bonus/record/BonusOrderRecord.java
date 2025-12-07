@@ -20,7 +20,7 @@ import lombok.experimental.SuperBuilder;
 public class BonusOrderRecord extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employment_order_id", referencedColumnName = "id")
+    @JoinColumn(name = "bonus_order_id", referencedColumnName = "id")
     private BonusOrder bonusOrder;
 
     @ManyToOne(fetch = FetchType.LAZY)

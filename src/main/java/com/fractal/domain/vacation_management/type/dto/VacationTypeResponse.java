@@ -8,6 +8,7 @@ public record VacationTypeResponse(
         String name,
         String description,
         Integer days,
+        Boolean payable,
         LocalDateTime createdDate
 ) {
 }

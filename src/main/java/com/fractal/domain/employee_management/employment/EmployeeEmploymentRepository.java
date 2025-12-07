@@ -41,7 +41,6 @@ interface EmployeeEmploymentRepository extends JpaRepository<EmployeeEmployment,
     where ee.employment.endDate is null 
       and ee.status.code = :status
     order by ee.employment.startDate desc
-    LIMIT 1
 """)
     List<EmployeeEmployment> findAllByStatus(String status);
 }

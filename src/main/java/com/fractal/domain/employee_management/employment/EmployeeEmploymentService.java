@@ -7,10 +7,12 @@ import com.fractal.domain.employee_management.employment.usecase.hire.dto.Transf
 import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;
+import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.employment.internal.dto.TerminationRequest;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface EmployeeEmploymentService extends ApprovalWorkflowAware<ApprovalWorkflowAwareRequest, EmployeeEmployment> {
     EmployeeEmployment create(Long employeeId, EmploymentRequest dto);
@@ -19,6 +21,7 @@ public interface EmployeeEmploymentService extends ApprovalWorkflowAware<Approva
     EmployeeEmployment getActiveEmployment(Long employeeId);
     List<EmployeeEmployment> getAllByEmployeeId(Long employeeId);
     List<EmployeeEmployment> getAllActive();
+    Optional<InternalEmploymentResponse> getEmployment(EmployeeEmployment employment);
     EmployeeEmployment getActiveBefore(Long employeeId,LocalDate date);
     List<EmployeeEmployment> getAllApproved();
     EmployeeEmployment update(Long employeeId, Long id, EmploymentRequest dto);

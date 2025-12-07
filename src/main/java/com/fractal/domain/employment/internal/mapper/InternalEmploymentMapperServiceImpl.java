@@ -40,34 +40,36 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
 
     @Override
     public InternalEmploymentResponse toDTO(InternalEmployment employment) {
-        return new InternalEmploymentResponse(
-                employment.getId(),
-                employmentKindService.getByCode("INTERNAL").getCode(),
-                employment.getStartDate(),
-                employment.getEndDate(),
-                organizationService.toCompactDTO(employment.getOrganization()),
-                departmentService.toCompactDTO(employment.getDepartment()),
-                positionService.toCompactDTO(employment.getPosition()),
-                employmentTypeService.toCompactDTO(employment.getEmploymentType()),
-                Optional.ofNullable(employment.getAgreements())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(agreementMapperService::toDTO)
-                        .collect(Collectors.toList()),
-                Optional.ofNullable(employment.getSeparationReasons())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(separationReasonMapperService::toDTO)
-                        .collect(Collectors.toList()),
-                Optional.ofNullable(employment.getCompensationComponents())
-                        .orElse(emptyList())
-                        .stream()
-                        .map(compensationComponentMapperService::toDTO)
-                        .collect(Collectors.toList()),
-                statusService.toCompactDTO(employment.getStatus()),
-                employment.getCreatedDate(),
-                employment.getUpdatedDate()
-        );
+       return new InternalEmploymentResponse(
+                    employment.getId(),
+                    employmentKindService.getByCode("INTERNAL").getCode(),
+                    employment.getStartDate(),
+                    employment.getEndDate(),
+                    organizationService.toCompactDTO(employment.getOrganization()),
+                    departmentService.toCompactDTO(employment.getDepartment()),
+                    positionService.toCompactDTO(employment.getPosition()),
+                    employmentTypeService.toCompactDTO(employment.getEmploymentType()),
+                    Optional.ofNullable(employment.getAgreements())
+                            .orElse(emptyList())
+                            .stream()
+                            .map(agreementMapperService::toDTO)
+                            .collect(Collectors.toList()),
+                    Optional.ofNullable(employment.getSeparationReasons())
+                            .orElse(emptyList())
+                            .stream()
+                            .map(separationReasonMapperService::toDTO)
+                            .collect(Collectors.toList()),
+                    Optional.ofNullable(employment.getCompensationComponents())
+                            .orElse(emptyList())
+                            .stream()
+                            .map(compensationComponentMapperService::toDTO)
+                            .collect(Collectors.toList()),
+                    statusService.toCompactDTO(employment.getStatus()),
+                    employment.getCreatedDate(),
+                    employment.getUpdatedDate()
+            );
+
+
     }
     @Override
     public InternalEmployment toEntity(InternalEmploymentRequest dto) {

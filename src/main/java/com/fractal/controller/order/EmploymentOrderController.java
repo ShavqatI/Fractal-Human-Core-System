@@ -2,10 +2,7 @@ package com.fractal.controller.order;
 
 
 import com.fractal.domain.order.employment.EmploymentOrderService;
-import com.fractal.domain.order.employment.dto.EmploymentOrderHireRequest;
-import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
-import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
-import com.fractal.domain.order.employment.dto.EmploymentOrderTerminationRequest;
+import com.fractal.domain.order.employment.dto.*;
 import com.fractal.domain.resource.FileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -31,8 +28,8 @@ public class EmploymentOrderController {
         return new ResponseEntity<>(orderService.toDTO(orderService.hire(dto)), HttpStatus.CREATED);
     }
     @PostMapping("/transfer")
-    public ResponseEntity<EmploymentOrderResponse> transfer(@RequestBody @Valid EmploymentOrderHireRequest dto) {
-        return new ResponseEntity<>(orderService.toDTO(orderService.hire(dto)), HttpStatus.CREATED);
+    public ResponseEntity<EmploymentOrderResponse> transfer(@RequestBody @Valid EmploymentOrderTransferRequest dto) {
+        return new ResponseEntity<>(orderService.toDTO(orderService.transfer(dto)), HttpStatus.CREATED);
     }
     @PostMapping("/terminate")
     public ResponseEntity<EmploymentOrderResponse> terminate(@RequestBody @Valid EmploymentOrderTerminationRequest dto) {
