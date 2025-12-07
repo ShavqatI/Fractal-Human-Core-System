@@ -14,6 +14,7 @@ public interface VacationAccrualService {
 
     List<VacationAccrual> getAllByEmployeeId(Long employeeId);
     int getAllEmployeeRemainingDays(Long employeeId);
+    int getAllEmployeeRemainingDaysForCompensation(Long employeeId);
 
     VacationAccrual update(Long id, VacationAccrualRequest dto);
 

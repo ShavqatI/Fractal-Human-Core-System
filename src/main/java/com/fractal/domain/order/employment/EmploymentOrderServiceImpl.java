@@ -3,9 +3,10 @@ package com.fractal.domain.order.employment;
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
+import com.fractal.domain.employee_management.employment.CancelRequest;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
-import com.fractal.domain.employee_management.employment.state.ApprovalWorkflowAwareRequest;
+import com.fractal.domain.employee_management.employment.ApprovalWorkflowAwareRequest;
 import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
 import com.fractal.domain.order.employment.dto.*;
 import com.fractal.domain.order.employment.mapper.EmploymentOrderMapperService;
@@ -173,6 +174,21 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }
     }
+    @Override
+    public EmploymentOrder cancel(Long id) {
+        var order = getById(id);
+        if (order.getStatus().getCode().equals("APPROVED")) {
+            order.setApprovedDate(LocalDateTime.now());
+            order.setApprovedUser(authenticatedService.getUser());
+            order.setStatus(statusService.getByCode("CANCELED"));
+            order.getRecords().forEach(employmentOrderRecord -> {
+                employeeEmploymentService.cancel(new CancelRequest(employmentOrderRecord.getEmployment().getEmployee().getId(),employmentOrderRecord.getEmployment().getEmployment().getId()));
+            });
+            return save(order);
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
+        }
+    }
 
     @Override
     public Path print(Long id) {
@@ -211,4 +227,6 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     private EmployeeEmployment getEmployment(EmploymentOrder order){
         return order.getRecords().getFirst().getEmployment();
     }
+
+
 }

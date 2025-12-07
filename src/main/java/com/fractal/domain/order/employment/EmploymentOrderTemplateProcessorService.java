@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +51,7 @@ class EmploymentOrderTemplateProcessorService {
 
         values.put("departmentName", employment.department().name());
         values.put("startDate", employment.startDate().toString());
-        values.put("endDate", employment.endDate().toString());
+        values.put("endDate", employment.endDate() != null ?  employment.endDate().toString() : null);
         values.putAll(getSalaryValues(employment));
         values.putAll(getSurchargeValues(employment));
 
@@ -59,7 +60,7 @@ class EmploymentOrderTemplateProcessorService {
     private Map<String,String> getTerminationValues(EmploymentOrder order) {
         Map<String,String> values = new HashMap<>();
         var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
-        var calendarDays = vacationAccrualService.getAllEmployeeRemainingDays(getEmployment(order).getEmployee().getId());
+        var calendarDays = vacationAccrualService.getAllEmployeeRemainingDaysForCompensation(getEmployment(order).getEmployee().getId());
 
         values.put("fullBankName", employment.organization().name());
         values.put("departmentName", employment.department().name());
@@ -105,7 +106,7 @@ class EmploymentOrderTemplateProcessorService {
         values.put("organizationName", employment.organization().name());
         values.put("organizationAddress", getOrganizationAddress(employment));
         values.put("startDate", employment.endDate().toString());
-        values.put("endDate", employment.endDate().toString());
+        values.put("endDate", employment.endDate() != null ?  employment.endDate().toString() : null);
         values.putAll(getSalaryValues(employment));
         values.putAll(getSurchargeValues(employment));
       return values;
@@ -121,8 +122,8 @@ class EmploymentOrderTemplateProcessorService {
         values.put("organizationName", employment.organization().name());
         values.put("organizationAddress", getOrganizationAddress(employment));
         values.put("startDate", employment.endDate().toString());
-        values.put("endDate", employment.endDate().toString());
-        values.put("days", String.valueOf(Duration.between(employment.startDate(),employment.endDate().plusDays(1))));
+        values.put("endDate", employment.endDate() != null ?  employment.endDate().toString() : null);
+        values.put("days", String.valueOf((int) ChronoUnit.DAYS.between(employment.startDate(), employment.endDate().plusDays(1))));
         values.putAll(getSalaryValues(employment));
         values.putAll(getSurchargeValues(employment));
 
@@ -131,17 +132,23 @@ class EmploymentOrderTemplateProcessorService {
 
     private Map<String,String> getSalaryValues(InternalEmploymentResponse employment) {
         Map<String,String> values = new HashMap<>();
-        var compensationComponent  = employment.compensationComponents().stream().filter(cc-> cc.salaryClassification().code().equals("BASICSALARY")).findFirst().get();
-        values.put("newSalary", compensationComponent.grossAmount().toString());
-        values.put("newSalaryInLetters", NumberToWordConverter.convert(compensationComponent.grossAmount().longValue()));
-        return values;
+        var compensationComponent  = employment.compensationComponents().stream().filter(cc-> cc.salaryClassification().code().equals("BASICSALARY")).findFirst();
+        if(compensationComponent.isPresent()){
+            var amount = compensationComponent.get().grossAmount();
+            values.put("newSalary", amount.toString());
+            values.put("newSalaryInLetters", NumberToWordConverter.convert(amount.longValue()));
+        }
+       return values;
     }
     private Map<String,String> getSurchargeValues(InternalEmploymentResponse employment){
         Map<String,String> values = new HashMap<>();
-        var compensationComponent  = employment.compensationComponents().stream().filter(cc-> cc.salaryClassification().code().equals("ADDITIONALSALARY")).findFirst().get();
-        values.put("surcharge", compensationComponent.grossAmount().toString());
-        values.put("surchargeInLetters", NumberToWordConverter.convert(compensationComponent.grossAmount().longValue()));
-        return values;
+        var compensationComponent  = employment.compensationComponents().stream().filter(cc-> cc.salaryClassification().code().equals("ADDITIONALSALARY")).findFirst();
+        if(compensationComponent.isPresent()){
+            var amount = compensationComponent.get().grossAmount();
+            values.put("surcharge", amount.toString());
+            values.put("surchargeInLetters", NumberToWordConverter.convert(amount.longValue()));
+        }
+       return values;
     }
 
     private EmployeeEmployment getEmployment(EmploymentOrder order){

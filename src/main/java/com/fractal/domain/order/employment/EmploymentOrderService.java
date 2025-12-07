@@ -1,12 +1,13 @@
 package com.fractal.domain.order.employment;
 
 import com.fractal.domain.abstraction.ApprovalWorkflowAware;
+import com.fractal.domain.abstraction.Cancelable;
 import com.fractal.domain.order.employment.dto.*;
 
 import java.nio.file.Path;
 import java.util.List;
 
-public interface EmploymentOrderService extends ApprovalWorkflowAware<Long, EmploymentOrder> {
+public interface EmploymentOrderService extends ApprovalWorkflowAware<Long, EmploymentOrder> , Cancelable<Long, EmploymentOrder> {
 
     EmploymentOrder create(EmploymentOrderRequest dto);
 

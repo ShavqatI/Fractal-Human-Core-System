@@ -1,7 +1,7 @@
 package com.fractal.domain.employee_management.employment;
 
 import com.fractal.domain.abstraction.ApprovalWorkflowAware;
-import com.fractal.domain.employee_management.employment.state.ApprovalWorkflowAwareRequest;
+import com.fractal.domain.abstraction.Cancelable;
 import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
 import com.fractal.domain.employee_management.employment.usecase.hire.dto.TransferRequest;
 import com.fractal.domain.employment.dto.EmploymentRequest;
@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface EmployeeEmploymentService extends ApprovalWorkflowAware<ApprovalWorkflowAwareRequest, EmployeeEmployment> {
+public interface EmployeeEmploymentService extends ApprovalWorkflowAware<ApprovalWorkflowAwareRequest, EmployeeEmployment>, Cancelable<CancelRequest,Void> {
     EmployeeEmployment create(Long employeeId, EmploymentRequest dto);
     EmployeeEmployment getById(Long employeeId, Long id);
     EmployeeEmployment getById(Long id);

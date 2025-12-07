@@ -5,7 +5,6 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentApprovedMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentMapperService;
-import com.fractal.domain.employee_management.employment.state.ApprovalWorkflowAwareRequest;
 import com.fractal.domain.employee_management.employment.state.EmployeeEmploymentStateService;
 import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
 import com.fractal.domain.employee_management.employment.usecase.hire.dto.TransferRequest;
@@ -171,6 +170,14 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
         } else {
             throw new ResourceStateException("The status is not valid is: " + employeeEmployment.getStatus().getName());
         }
+    }
+    @Override
+    public Void cancel(CancelRequest dto) {
+        var employeeEmployment = getActiveBefore(dto.employeeId(),getById(dto.employeeId(),dto.id()).getEmployment().getStartDate());
+        employeeEmployment.setStatus(statusService.getByCode("ACTIVE"));
+        activate(employeeEmployment.getEmployee().getId(),employeeEmployment.getEmployment().getId());
+        delete(dto.employeeId(),dto.id());
+       return null;
     }
 
     @Override
