@@ -1,38 +1,54 @@
-package com.fractal.domain.order.bonus;
+package com.fractal.domain.order.recognition;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
-import com.fractal.domain.order.bonus.dto.EmploymentOrderRequest;
-import com.fractal.domain.order.bonus.dto.BonusOrderResponse;
-import com.fractal.domain.order.bonus.mapper.BonusOrderMapperService;
+import com.fractal.domain.order.recognition.dto.EmploymentOrderRequest;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderResponse;
+import com.fractal.domain.order.recognition.mapper.RecognitionOrderMapperService;
 import com.fractal.domain.order.state.OrderStateService;
+import com.fractal.domain.poi.processor.excel.ExcelReaderService;
+import com.fractal.domain.resource.FileService;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BonusOrderServiceImpl implements BonusOrderService {
+public class RecognitionOrderServiceImpl implements RecognitionOrderService {
 
-    private final BonusOrderRepository orderRepository;
-    private final BonusOrderMapperService orderMapperService;
+    private final RecognitionOrderRepository orderRepository;
+    private final RecognitionOrderMapperService orderMapperService;
     private final OrderStateService stateService;
     private final StatusService statusService;
     private final AuthenticatedService authenticatedService;
     private final EmployeeEmploymentUseCaseService employmentUseCaseService;
+    private final ExcelReaderService excelReaderService;
+    private final FileService fileService;
+    //private final EmployeeUseCaseService employeeUseCaseService;
+
+
+    @Value("${resource-storage.temporary}")
+    private String resourceStoragePath;
 
 
     @Override
     @Transactional
-    public BonusOrder create(EmploymentOrderRequest dto) {
+    public RecognitionOrder create(EmploymentOrderRequest dto) {
         var order = orderMapperService.toEntity(dto);
         order.setStatus(statusService.getByCode("CREATED"));
         order = save(order);
@@ -41,18 +57,18 @@ public class BonusOrderServiceImpl implements BonusOrderService {
     }
 
     @Override
-    public List<BonusOrder> getAll() {
+    public List<RecognitionOrder> getAll() {
         return orderRepository.findAll();
     }
 
     @Override
-    public BonusOrder getById(Long id) {
+    public RecognitionOrder getById(Long id) {
         return orderRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this,id));
     }
 
     @Override
     @Transactional
-    public BonusOrder update(Long id, EmploymentOrderRequest dto) {
+    public RecognitionOrder update(Long id, EmploymentOrderRequest dto) {
         var order = save(orderMapperService.toEntity(getById(id), dto));
         return order;
     }
@@ -64,12 +80,30 @@ public class BonusOrderServiceImpl implements BonusOrderService {
     }
 
     @Override
-    public BonusOrderResponse toDTO(BonusOrder order) {
+    public List<RecognitionOrder> createFromExcelFile(MultipartFile file) {
+        try {
+            String path = fileService.save(file,resourceStoragePath);
+            Workbook workbook = excelReaderService.read(Path.of(path));
+            Sheet sheet = workbook.getSheetAt(0);
+            for(Row row : sheet){
+                System.out.println(row.getCell(0));
+                System.out.println(row.getCell(1));
+                System.out.println(row.getCell(2));
+            }
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+
+    @Override
+    public RecognitionOrderResponse toDTO(RecognitionOrder order) {
         return orderMapperService.toDTO(order);
     }
 
     @Override
-    public BonusOrder save(BonusOrder order) {
+    public RecognitionOrder save(RecognitionOrder order) {
         try {
             order = orderRepository.save(order);
             stateService.create(order);
@@ -85,7 +119,7 @@ public class BonusOrderServiceImpl implements BonusOrderService {
     }
 
     @Override
-    public BonusOrder review(Long id) {
+    public RecognitionOrder review(Long id) {
         var order = getById(id);
         if (order.getStatus().getCode().equals("CREATED")) {
             order.setReviewedDate(LocalDateTime.now());
@@ -99,7 +133,7 @@ public class BonusOrderServiceImpl implements BonusOrderService {
     }
 
     @Override
-    public BonusOrder approve(Long id) {
+    public RecognitionOrder approve(Long id) {
         var order = getById(id);
         if (order.getStatus().getCode().equals("REVIEWED")) {
             order.setApprovedDate(LocalDateTime.now());
@@ -111,5 +145,10 @@ public class BonusOrderServiceImpl implements BonusOrderService {
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }
+    }
+
+    @Override
+    public RecognitionOrder cancel(Long id) {
+        return null;
     }
 }

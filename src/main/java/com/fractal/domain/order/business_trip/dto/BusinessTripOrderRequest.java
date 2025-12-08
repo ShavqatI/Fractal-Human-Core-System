@@ -12,9 +12,6 @@ public record BusinessTripOrderRequest(
         List<BusinessTripOrderRecordRequest> records,
         String number,
         LocalDate date,
-        LocalDate startDate,
-        LocalDate endDate,
-        String justification,
         String sourceDocument,
         List<MultipartFile> files
 

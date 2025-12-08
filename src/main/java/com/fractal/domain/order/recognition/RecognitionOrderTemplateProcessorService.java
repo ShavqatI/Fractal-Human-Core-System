@@ -1,4 +1,4 @@
-package com.fractal.domain.order.bonus;
+package com.fractal.domain.order.recognition;
 
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
@@ -6,7 +6,6 @@ import com.fractal.domain.employee_management.employment.EmployeeEmploymentServi
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.order.employment.EmploymentOrder;
 import com.fractal.domain.utilities.converter.NumberToWordConverter;
-import com.fractal.domain.vacation_management.accrual.VacationAccrualService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +15,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-class BonusOrderTemplateProcessorService {
+class RecognitionOrderTemplateProcessorService {
 
     private final EmployeeUseCaseService employeeUseCaseService;
     private final EmployeeEmploymentService employeeEmploymentService;

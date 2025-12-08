@@ -26,4 +26,8 @@ public class ProfileVacationAccrualController {
     public ResponseEntity<List<VacationAccrualResponse>> getAll() {
         return ResponseEntity.ok(vacationAccrualService.getAll().stream().map(vacationAccrualService::toDTO).collect(Collectors.toList()));
     }
+    @GetMapping("/active")
+    public ResponseEntity<List<VacationAccrualResponse>> getActive() {
+        return ResponseEntity.ok(vacationAccrualService.getActive().stream().map(vacationAccrualService::toDTO).collect(Collectors.toList()));
+    }
 }

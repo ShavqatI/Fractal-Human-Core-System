@@ -6,6 +6,7 @@ import com.fractal.domain.vacation_management.accrual.dto.VacationAccrualRespons
 import com.fractal.domain.vacation_management.schedule.VacationSchedule;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface ProfileVacationAccrualService {
@@ -13,4 +14,5 @@ public interface ProfileVacationAccrualService {
     VacationAccrualResponse toDTO(VacationAccrual vacationAccrual);
 
 
+    List<VacationAccrual> getActive();
 }

@@ -1,11 +1,11 @@
 
-package com.fractal.domain.order.bonus.mapper;
+package com.fractal.domain.order.recognition.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.order.bonus.BonusOrder;
-import com.fractal.domain.order.bonus.dto.EmploymentOrderRequest;
-import com.fractal.domain.order.bonus.dto.BonusOrderResponse;
-import com.fractal.domain.order.bonus.record.mapper.BonusOrderRecordMapperService;
+import com.fractal.domain.order.recognition.RecognitionOrder;
+import com.fractal.domain.order.recognition.dto.EmploymentOrderRequest;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderResponse;
+import com.fractal.domain.order.recognition.record.mapper.RecognitionOrderRecordMapperService;
 import com.fractal.domain.order.resource.mapper.OrderResourceMapperService;
 import com.fractal.domain.order.type.OrderTypeService;
 import lombok.RequiredArgsConstructor;
@@ -18,16 +18,16 @@ import static java.util.Collections.emptyList;
 
 @Service
 @RequiredArgsConstructor
-class BonusOrderMapperServiceImpl implements BonusOrderMapperService {
+class RecognitionOrderMapperServiceImpl implements RecognitionOrderMapperService {
 
     private final OrderTypeService orderTypeService;
     private final OrderResourceMapperService resourceMapperService;
     private final StatusService statusService;
-    private final BonusOrderRecordMapperService recordMapperService;
+    private final RecognitionOrderRecordMapperService recordMapperService;
 
     @Override
-    public BonusOrderResponse toDTO(BonusOrder order) {
-        return new BonusOrderResponse(
+    public RecognitionOrderResponse toDTO(RecognitionOrder order) {
+        return new RecognitionOrderResponse(
                 order.getId(),
                 orderTypeService.toDTO(order.getOrderType()),
                 Optional.ofNullable(order.getRecords())
@@ -49,16 +49,16 @@ class BonusOrderMapperServiceImpl implements BonusOrderMapperService {
     }
 
     @Override
-    public BonusOrder toEntity(EmploymentOrderRequest dto) {
-        return mapToEntity(new BonusOrder(), dto);
+    public RecognitionOrder toEntity(EmploymentOrderRequest dto) {
+        return mapToEntity(new RecognitionOrder(), dto);
     }
 
     @Override
-    public BonusOrder toEntity(BonusOrder order, EmploymentOrderRequest dto) {
+    public RecognitionOrder toEntity(RecognitionOrder order, EmploymentOrderRequest dto) {
         return mapToEntity(order, dto);
     }
 
-    private BonusOrder mapToEntity(BonusOrder order, EmploymentOrderRequest dto) {
+    private RecognitionOrder mapToEntity(RecognitionOrder order, EmploymentOrderRequest dto) {
         order.setOrderType(orderTypeService.getById(dto.orderTypeId()));
         order.setNumber(dto.number());
         order.setDate(dto.date());
