@@ -4,7 +4,7 @@ import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.abstraction.Cancelable;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderResponse;
-import com.fractal.domain.order.recognition.dto.RecognitionOrderDecreaseSalaryRequest;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderSalaryRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderUploadExcelRequest;
 
 import java.nio.file.Path;
@@ -23,7 +23,8 @@ public interface RecognitionOrderService extends ApprovalWorkflowAware<Long, Rec
     void delete(Long id);
 
     List<RecognitionOrder> createFromExcelFile(RecognitionOrderUploadExcelRequest dto);
-    RecognitionOrder decreaseSalary(RecognitionOrderDecreaseSalaryRequest dto);
+    RecognitionOrder decreaseSalary(RecognitionOrderSalaryRequest dto);
+    RecognitionOrder increaseSalary(RecognitionOrderSalaryRequest dto);
 
     RecognitionOrderResponse toDTO(RecognitionOrder recognitionOrder);
 

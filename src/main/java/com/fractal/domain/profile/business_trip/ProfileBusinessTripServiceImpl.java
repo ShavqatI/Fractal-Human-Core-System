@@ -68,7 +68,7 @@ class ProfileBusinessTripServiceImpl implements ProfileBusinessTripService {
         return new BusinessTripRequest(
                 authenticatedService.getEmployeeId(),
                 dto.businessTripTypeId(),
-                dto.purpose(),
+                dto.businessTripPurposeId(),
                 dto.description(),
                 dto.startDate(),
                 dto.endDate(),

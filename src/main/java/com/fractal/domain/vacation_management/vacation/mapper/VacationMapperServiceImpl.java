@@ -79,6 +79,11 @@ class VacationMapperServiceImpl implements VacationMapperService {
         periods.forEach(period -> {
             List<VacationAccrualPeriodRecord> records = period.getRecords().stream()
                     .filter(r -> r.getRemainingDays() > 0)
+                    .filter(r-> {
+                     if(request.getVacationType().getCode().equals("CASUAL"))
+                       return r.getVacationType() == request.getVacationType();
+                     else return r.getVacationType().getPayable();
+                    })
                     .sorted(Comparator.comparing(r -> r.getVacationType().getOrderOfUtilization()))
                     .collect(Collectors.toList());
             var calcDays = request.getDays();

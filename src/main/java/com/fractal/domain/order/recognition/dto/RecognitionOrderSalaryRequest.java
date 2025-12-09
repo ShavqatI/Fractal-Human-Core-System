@@ -6,13 +6,13 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-public record RecognitionOrderDecreaseSalaryRequest(
+public record RecognitionOrderSalaryRequest(
         Long orderTypeId,
         String number,
         LocalDate date,
         String sourceDocument,
         Long employeeId,
-        BigDecimal salaryAmount,
+        BigDecimal amount,
         LocalDate startDate,
         LocalDate endDate,
         List<MultipartFile> files

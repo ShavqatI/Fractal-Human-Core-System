@@ -9,7 +9,7 @@ import java.util.List;
 
 public record ProfileBusinessTripRequest(
         Long businessTripTypeId,
-        String purpose,
+        Long businessTripPurposeId,
         String description,
         LocalDate startDate,
         LocalDate endDate,

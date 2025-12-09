@@ -11,7 +11,7 @@ import com.fractal.domain.employment.salary_classification.SalaryClassificationS
 import com.fractal.domain.finance.currency.CurrencyService;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderResponse;
-import com.fractal.domain.order.recognition.dto.RecognitionOrderDecreaseSalaryRequest;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderSalaryRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderUploadExcelRequest;
 import com.fractal.domain.order.recognition.mapper.RecognitionOrderMapperService;
 import com.fractal.domain.order.recognition.record.dto.RecognitionOrderRecordRequest;
@@ -189,8 +189,22 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
     }
 
     @Override
-    public RecognitionOrder decreaseSalary(RecognitionOrderDecreaseSalaryRequest dto){
-        var employeeEmployment = addCompensation(dto.employeeId(),"BASICSALARY","MONTHLY",dto.salaryAmount(), dto.startDate(),dto.endDate());
+    public RecognitionOrder decreaseSalary(RecognitionOrderSalaryRequest dto){
+        var employeeEmployment = addCompensation(dto.employeeId(),"BASICSALARY","MONTHLY",dto.amount(), dto.startDate(),dto.endDate());
+        return create(new RecognitionOrderRequest(
+                        dto.orderTypeId(),
+                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId())),
+                        dto.number(),
+                        dto.date(),
+                        dto.sourceDocument(),
+                        List.of()
+                )
+        );
+    }
+
+    @Override
+    public RecognitionOrder increaseSalary(RecognitionOrderSalaryRequest dto) {
+        var employeeEmployment = addCompensation(dto.employeeId(),"BASICSALARY","MONTHLY",dto.amount(), dto.startDate(),dto.endDate());
         return create(new RecognitionOrderRequest(
                         dto.orderTypeId(),
                         List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId())),

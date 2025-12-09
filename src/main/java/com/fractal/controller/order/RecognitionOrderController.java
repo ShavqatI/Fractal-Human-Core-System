@@ -1,22 +1,17 @@
 package com.fractal.controller.order;
 
 
-import com.fractal.domain.order.employment.EmploymentOrderService;
-import com.fractal.domain.order.employment.dto.*;
 import com.fractal.domain.order.recognition.RecognitionOrderService;
-import com.fractal.domain.order.recognition.dto.RecognitionOrderDecreaseSalaryRequest;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderSalaryRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderResponse;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderUploadExcelRequest;
 import com.fractal.domain.resource.FileService;
-import com.fractal.domain.resource.dto.ResourceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
 import java.nio.file.Path;
@@ -36,7 +31,7 @@ public class RecognitionOrderController {
         return ResponseEntity.ok(orderService.createFromExcelFile(dto).stream().map(orderService::toDTO).collect(Collectors.toList()));
     }
     @PostMapping(value = "/decrease-salary")
-    public ResponseEntity<RecognitionOrderResponse> createFromExcel(@RequestBody @Valid RecognitionOrderDecreaseSalaryRequest dto) {
+    public ResponseEntity<RecognitionOrderResponse> createFromExcel(@RequestBody @Valid RecognitionOrderSalaryRequest dto) {
         return ResponseEntity.ok(orderService.toDTO(orderService.decreaseSalary(dto)));
     }
 
