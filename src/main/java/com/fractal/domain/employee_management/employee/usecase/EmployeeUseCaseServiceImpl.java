@@ -45,15 +45,12 @@ class EmployeeUseCaseServiceImpl implements EmployeeUseCaseService {
 
     @Override
     public Optional<InternalEmploymentResponse> getCurrentEmployment(Employee employee) {
-        List<EmployeeEmployment> employeeEmployments = employeeEmploymentService.getAllByEmployeeId(employee.getId());
-        var response = employeeEmployments.stream().map(employeeEmployment -> (EmployeeEmployment) Hibernate.unproxy(employeeEmployment))
-                .map(employeeEmployment -> employmentService.getById(employeeEmployment.getEmployment().getId()) )
-                .map(employment -> (Employment) Hibernate.unproxy(employment))
-                .filter(employment -> employment.getEndDate() == null
-                                && statusService.getById(employment.getStatus().getId()).getCode().equals("ACTIVE")
-                                && employment instanceof InternalEmployment
-                ).findFirst().map(employment-> internalEmploymentService.toDTO((InternalEmployment) employment));
-        return response;
+        var employeeEmployment = employeeEmploymentService.getActiveEmployment(employee.getId());
+        var employment  = (Employment) Hibernate.unproxy(employeeEmployment.getEmployment());
+        if(employeeEmployment != null && employment instanceof InternalEmployment internalEmployment){
+            return Optional.ofNullable(internalEmploymentService.toDTO(internalEmployment));
+        }
+        return Optional.empty();
     }
 
 

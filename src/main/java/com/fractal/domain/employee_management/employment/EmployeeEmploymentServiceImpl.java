@@ -263,8 +263,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
 
     @Override
     public EmployeeEmployment getActiveEmployment(Long employeeId) {
-        var employeeEmployment = employmentRepository.findActiveEmployment(employeeId);
-        return employeeEmployment.isPresent() ?  employeeEmployment.get() : null;
+        return employmentRepository.findActiveEmployment(employeeId).orElseThrow(()-> new ResourceNotFoundException("Employment for employee with id " + employeeId + " not found"));
     }
 
     @Override
