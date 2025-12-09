@@ -5,6 +5,7 @@ import com.fractal.domain.order.employment.EmploymentOrderService;
 import com.fractal.domain.order.employment.dto.*;
 import com.fractal.domain.order.recognition.RecognitionOrderService;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderResponse;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderUploadExcelRequest;
 import com.fractal.domain.resource.FileService;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import jakarta.validation.Valid;
@@ -29,8 +30,8 @@ public class RecognitionOrderController {
     private final FileService fileService;
 
     @PostMapping(value = "/excel",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String createFromExcel(@RequestParam("file") MultipartFile file) {
-        orderService.createFromExcelFile(file);
+    public String createFromExcel(@ModelAttribute RecognitionOrderUploadExcelRequest dto) {
+        orderService.createFromExcelFile(dto);
         return "fsdfdsfs";//new ResponseEntity<>(orderService.toDTO(), HttpStatus.CREATED);
     }
 

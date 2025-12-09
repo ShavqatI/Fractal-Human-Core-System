@@ -6,6 +6,7 @@ import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRe
 import com.fractal.domain.employee_management.employment.usecase.hire.dto.TransferRequest;
 import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
+import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.employment.internal.dto.TerminationRequest;
@@ -29,6 +30,8 @@ public interface EmployeeEmploymentService extends ApprovalWorkflowAware<Approva
     EmployeeEmployment hire(Long employeeId, HireRequest dto);
     EmployeeEmployment terminate(Long employeeId, TerminationRequest dto);
     EmployeeEmployment transfer(Long employeeId, TransferRequest dto);
+    EmployeeEmployment addCompensation(Long employeeId, CompensationComponentRequest dto);
+
     EmployeeEmployment activate(Long employeeId,Long id);
     EmploymentResponse toDTO(EmployeeEmployment employment);
     InternalEmploymentApprovedResponse toApprovedDTO(EmployeeEmployment employment);

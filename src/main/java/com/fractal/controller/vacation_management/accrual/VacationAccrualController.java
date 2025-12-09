@@ -42,6 +42,15 @@ public class VacationAccrualController {
         return ResponseEntity.ok(vacationAccrualService.toDTO(vacationAccrualService.getById(id)));
     }
 
+    @GetMapping("payable-remaining-days/{employeeId}")
+    public ResponseEntity<Integer> getEmployeeAllRemainingPayableDays(@PathVariable Long employeeId) {
+        return new ResponseEntity<>(vacationAccrualService.getAllEmployeeRemainingPayableDays(employeeId),HttpStatus.OK);
+    }
+    @GetMapping("unpayable-remaining-days/{employeeId}")
+    public ResponseEntity<Integer> getEmployeeAllRemainingUnpayableDays(@PathVariable Long employeeId) {
+        return new ResponseEntity<>(vacationAccrualService.getAllEmployeeRemainingUnpayableDays(employeeId),HttpStatus.OK);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<VacationAccrualResponse> update(@PathVariable Long id, @RequestBody @Valid VacationAccrualRequest dto) {
         return ResponseEntity.ok(vacationAccrualService.toDTO(vacationAccrualService.update(id, dto)));

@@ -27,4 +27,5 @@ public interface EmployeeService extends ApprovalWorkflowAware<Long, Employee> {
 
     Employee save(Employee employee);
     void activate(Long id);
+    Employee getByUUID(String uuid);
 }

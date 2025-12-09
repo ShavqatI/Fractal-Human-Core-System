@@ -3,7 +3,7 @@ package com.fractal.domain.order.recognition.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.order.recognition.RecognitionOrder;
-import com.fractal.domain.order.recognition.dto.EmploymentOrderRequest;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderResponse;
 import com.fractal.domain.order.recognition.record.mapper.RecognitionOrderRecordMapperService;
 import com.fractal.domain.order.resource.mapper.OrderResourceMapperService;
@@ -49,16 +49,16 @@ class RecognitionOrderMapperServiceImpl implements RecognitionOrderMapperService
     }
 
     @Override
-    public RecognitionOrder toEntity(EmploymentOrderRequest dto) {
+    public RecognitionOrder toEntity(RecognitionOrderRequest dto) {
         return mapToEntity(new RecognitionOrder(), dto);
     }
 
     @Override
-    public RecognitionOrder toEntity(RecognitionOrder order, EmploymentOrderRequest dto) {
+    public RecognitionOrder toEntity(RecognitionOrder order, RecognitionOrderRequest dto) {
         return mapToEntity(order, dto);
     }
 
-    private RecognitionOrder mapToEntity(RecognitionOrder order, EmploymentOrderRequest dto) {
+    private RecognitionOrder mapToEntity(RecognitionOrder order, RecognitionOrderRequest dto) {
         order.setOrderType(orderTypeService.getById(dto.orderTypeId()));
         order.setNumber(dto.number());
         order.setDate(dto.date());

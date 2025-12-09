@@ -14,4 +14,5 @@ interface EmployeeRepository extends JpaRepository<Employee, Long> {
 
     Optional<Employee> findByTin(String tin);
 
+    Optional<Employee> findByUuid(String uuid);
 }

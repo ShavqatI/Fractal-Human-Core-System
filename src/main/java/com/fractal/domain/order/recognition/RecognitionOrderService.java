@@ -2,27 +2,26 @@ package com.fractal.domain.order.recognition;
 
 import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.abstraction.Cancelable;
-import com.fractal.domain.order.employment.EmploymentOrder;
-import com.fractal.domain.order.recognition.dto.EmploymentOrderRequest;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderResponse;
-import org.springframework.web.multipart.MultipartFile;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderUploadExcelRequest;
 
 import java.nio.file.Path;
 import java.util.List;
 
 public interface RecognitionOrderService extends ApprovalWorkflowAware<Long, RecognitionOrder> , Cancelable<Long, RecognitionOrder> {
 
-    RecognitionOrder create(EmploymentOrderRequest dto);
+    RecognitionOrder create(RecognitionOrderRequest dto);
 
     List<RecognitionOrder> getAll();
 
     RecognitionOrder getById(Long id);
 
-    RecognitionOrder update(Long id, EmploymentOrderRequest dto);
+    RecognitionOrder update(Long id, RecognitionOrderRequest dto);
 
     void delete(Long id);
 
-    List<RecognitionOrder> createFromExcelFile(MultipartFile file);
+    List<RecognitionOrder> createFromExcelFile(RecognitionOrderUploadExcelRequest dto);
 
 
     RecognitionOrderResponse toDTO(RecognitionOrder recognitionOrder);

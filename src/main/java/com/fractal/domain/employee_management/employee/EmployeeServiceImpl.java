@@ -133,4 +133,9 @@ class EmployeeServiceImpl implements EmployeeService {
             throw new ResourceStateException("The status is not valid is: " + employee.getStatus().getName());
         }
     }
+
+    @Override
+    public Employee getByUUID(String uuid) {
+        return employeeRepository.findByUuid(uuid).orElseThrow(()-> new ResourceNotFoundException("Employee with uuid: " + uuid + " not found"));
+    }
 }
