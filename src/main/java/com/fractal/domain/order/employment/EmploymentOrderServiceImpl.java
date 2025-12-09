@@ -56,9 +56,7 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     @Override
     @Transactional
     public EmploymentOrder create(EmploymentOrderRequest dto) {
-        var order = orderMapperService.toEntity(dto);
-        order.setStatus(statusService.getByCode("CREATED"));
-        return save(order);
+        return save(orderMapperService.toEntity(dto));
     }
 
     @Override
@@ -74,8 +72,7 @@ public class EmploymentOrderServiceImpl implements EmploymentOrderService {
     @Override
     @Transactional
     public EmploymentOrder update(Long id, EmploymentOrderRequest dto) {
-        var order = save(orderMapperService.toEntity(getById(id), dto));
-        return order;
+        return save(orderMapperService.toEntity(getById(id), dto));
     }
 
     @Override

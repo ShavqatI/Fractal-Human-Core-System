@@ -52,6 +52,13 @@ class ProfileVacationAccrualServiceImpl implements ProfileVacationAccrualService
         return vacationAccrualService.getAllEmployeeRemainingDays(authenticatedService.getEmployeeId());
     }
 
+    @Override
+    public int getCasualRemainingDays() {
+      var record  = getActive().getFirst().getPeriods().getFirst().getRecords().stream().filter(r-> r.getVacationType().getCode().equals("CASUAL")).findFirst();
+      return record.get().getRemainingDays();
+
+    }
+
     private List<VacationAccrualPeriod> filterActivePeriod(VacationAccrual accrual){
        return accrual.getPeriods().stream().filter(period -> statusService.getById(period.getStatus().getId()).getCode().equals("ACTIVE")).collect(Collectors.toList());
     }

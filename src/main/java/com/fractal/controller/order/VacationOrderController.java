@@ -32,8 +32,6 @@ public class VacationOrderController {
 
     private final VacationOrderService orderService;
     private final FileService fileService;
-
-
     @PostMapping()
     public ResponseEntity<VacationOrderResponse> create( @RequestBody @Valid VacationOrderRequest dto) {
         return new ResponseEntity<>(orderService.toDTO(orderService.create(dto)), HttpStatus.CREATED);

@@ -12,4 +12,5 @@ public interface ProfileVacationAccrualService {
     int getAllRemainingPayableDays();
     int getAllRemainingUnPayableDays();
     int getAllRemainingDays();
+    int getCasualRemainingDays();
 }

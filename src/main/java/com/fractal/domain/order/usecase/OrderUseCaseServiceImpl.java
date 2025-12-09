@@ -24,7 +24,7 @@ class OrderUseCaseServiceImpl implements OrderUseCaseService {
     @Override
     public Map getHeader(Order order) {
         Map<String,String> values = new HashMap<>();
-        values.put("number",order.getNumber());
+        values.put("number",order.getNumber() + "-" + order.getOrderType().getSeries());
         values.put("docDate", order.getDate().toString());
         getCurrentUserEmployeeEmployment().ifPresent(employment-> values.put("branchName",employment.organization().name()));
         return values;

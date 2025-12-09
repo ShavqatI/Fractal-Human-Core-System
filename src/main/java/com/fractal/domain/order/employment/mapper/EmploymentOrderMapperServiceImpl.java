@@ -53,7 +53,9 @@ class EmploymentOrderMapperServiceImpl implements EmploymentOrderMapperService {
 
     @Override
     public EmploymentOrder toEntity(EmploymentOrderRequest dto) {
-        return mapToEntity(new EmploymentOrder(), dto);
+        var order = mapToEntity(new EmploymentOrder(), dto);
+        order.setStatus(statusService.getByCode("CREATED"));
+        return order;
     }
 
     @Override

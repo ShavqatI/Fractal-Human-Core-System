@@ -39,4 +39,8 @@ public class ProfileVacationAccrualController {
     public ResponseEntity<Integer> getAllRemainingUnPayableDays() {
         return new ResponseEntity<>(vacationAccrualService.getAllRemainingUnPayableDays(),HttpStatus.OK);
     }
+    @GetMapping("/casual-remaining-days")
+    public ResponseEntity<Integer> getCasualRemainingDays() {
+        return new ResponseEntity<>(vacationAccrualService.getCasualRemainingDays(),HttpStatus.OK);
+    }
 }

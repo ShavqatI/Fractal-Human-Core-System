@@ -18,7 +18,6 @@ public interface EmploymentOrderService extends ApprovalWorkflowAware<Long, Empl
     EmploymentOrder update(Long id, EmploymentOrderRequest dto);
 
     void delete(Long id);
-
     EmploymentOrderResponse toDTO(EmploymentOrder employmentOrder);
 
     EmploymentOrder save(EmploymentOrder order);
