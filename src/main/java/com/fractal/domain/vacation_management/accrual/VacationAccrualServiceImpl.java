@@ -50,7 +50,21 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
     @Override
     public List<VacationAccrual> getAllByEmployeeId(Long employeeId) {
         return vacationAccrualRepository.findAllByEmployeeId(employeeId);
-
+    }
+    @Override
+    public List<VacationAccrual> getAllActivePeriodByEmployeeId(Long employeeId) {
+        return vacationAccrualRepository.findAllByEmployeeId(employeeId)
+                .stream()
+                .map(accrual -> {
+                    var activePeriods = accrual.getPeriods().stream()
+                            .filter(period ->
+                                    "ACTIVE".equals(
+                                            statusService.getById(period.getStatus().getId()).getCode()
+                                    )
+                            ).collect(Collectors.toList());
+                    accrual.setPeriods(activePeriods);
+                    return accrual;
+                }).collect(Collectors.toList());
     }
 
     @Override
@@ -91,7 +105,7 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
     }
 
     @Override
-    public int getAllEmployeeRemainingUnpayableDays(Long employeeId) {
+    public int getAllEmployeeRemainingUnPayableDays(Long employeeId) {
         var days = 0;
         var accrual = getAllByEmployeeId(employeeId).getFirst();
         var periods = accrual.getPeriods().stream().filter(p-> statusService.getById(p.getStatus().getId()).getCode().equals("ACTIVE")).findFirst();

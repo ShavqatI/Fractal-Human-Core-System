@@ -134,6 +134,8 @@ public class VacationOrderServiceImpl implements VacationOrderService {
             order.getVacation().setStatus(order.getStatus());
             vacationService.close(order.getVacation().getId());
             vacationRequestService.close(order.getVacation().getVacationRequest().getId());
+
+
             order.getVacation().getAllocations().forEach(allocation -> vacationAccrualPeriodRecordService.decrease(allocation.getVacationAccrualPeriodRecord().getId(), allocation.getDays()));
             addAccrualOnRecall(order);
             return save(order);

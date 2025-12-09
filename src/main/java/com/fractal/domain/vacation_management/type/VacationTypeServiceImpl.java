@@ -45,6 +45,7 @@ public class VacationTypeServiceImpl implements VacationTypeService {
             vacationType.setDescription(dto.description());
             vacationType.setDays(dto.days());
             vacationType.setPayable(dto.payable());
+            vacationType.setOrderOfUtilization(dto.orderOfUtilization());
             return save(vacationType);
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
@@ -65,6 +66,7 @@ public class VacationTypeServiceImpl implements VacationTypeService {
                 vacationType.getDescription(),
                 vacationType.getDays(),
                 vacationType.getPayable(),
+                vacationType.getOrderOfUtilization(),
                 vacationType.getCreatedDate()
         );
     }
@@ -76,6 +78,7 @@ public class VacationTypeServiceImpl implements VacationTypeService {
                 .description(dto.description())
                 .days(dto.days())
                 .payable(dto.payable())
+                .orderOfUtilization(dto.orderOfUtilization())
                 .build();
     }
 

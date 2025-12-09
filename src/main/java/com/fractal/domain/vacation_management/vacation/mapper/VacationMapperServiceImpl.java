@@ -2,8 +2,11 @@ package com.fractal.domain.vacation_management.vacation.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
+import com.fractal.domain.vacation_management.accrual.VacationAccrualService;
+import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecord;
 import com.fractal.domain.vacation_management.request.VacationRequestService;
 import com.fractal.domain.vacation_management.vacation.Vacation;
+import com.fractal.domain.vacation_management.vacation.allocation.dto.VacationAllocationRequest;
 import com.fractal.domain.vacation_management.vacation.allocation.mapper.VacationAllocationMapperService;
 import com.fractal.domain.vacation_management.vacation.dto.VacationRequest;
 import com.fractal.domain.vacation_management.vacation.dto.VacationResponse;
@@ -11,6 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -24,6 +29,7 @@ class VacationMapperServiceImpl implements VacationMapperService {
     private final StatusService statusService;
     private final VacationRequestService vacationRequestService;
     private final VacationAllocationMapperService allocationMapperService;
+    private final VacationAccrualService vacationAccrualService;
 
 
     @Override
@@ -64,7 +70,24 @@ class VacationMapperServiceImpl implements VacationMapperService {
         if(dto.successorCompensationPercentage() !=null)
          vacation.setSuccessorCompensationPercentage(dto.successorCompensationPercentage());
         else vacation.setSuccessorCompensationPercentage(BigDecimal.ZERO);
-        dto.allocations().forEach(allocation-> vacation.addAllocation(allocationMapperService.toEntity(allocation)));
+
+
+        var periods = vacationAccrualService
+                .getAllActivePeriodByEmployeeId(request.getEmployee().getId())
+                .getFirst()
+                .getPeriods();
+        periods.forEach(period -> {
+            List<VacationAccrualPeriodRecord> records = period.getRecords().stream()
+                    .filter(r -> r.getRemainingDays() > 0)
+                    .sorted(Comparator.comparing(r -> r.getVacationType().getOrderOfUtilization()))
+                    .collect(Collectors.toList());
+            var calcDays = request.getDays();
+            for (var record: records) {
+                calcDays = (calcDays - record.getVacationType().getDays());
+                vacation.addAllocation(allocationMapperService.toEntity(new VacationAllocationRequest(record.getId(),calcDays)));
+            }
+            });
+        //dto.allocations().forEach(allocation-> vacation.addAllocation(allocationMapperService.toEntity(allocation)));
         return vacation;
     }
 }

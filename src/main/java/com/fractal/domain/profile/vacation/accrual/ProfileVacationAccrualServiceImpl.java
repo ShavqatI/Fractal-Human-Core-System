@@ -2,16 +2,10 @@ package com.fractal.domain.profile.vacation.accrual;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.profile.vacation.schedule.ProfileVacationScheduleRequest;
 import com.fractal.domain.vacation_management.accrual.VacationAccrual;
 import com.fractal.domain.vacation_management.accrual.VacationAccrualService;
 import com.fractal.domain.vacation_management.accrual.dto.VacationAccrualResponse;
 import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriod;
-import com.fractal.domain.vacation_management.schedule.VacationSchedule;
-import com.fractal.domain.vacation_management.schedule.VacationScheduleService;
-import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
-import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
-import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +35,16 @@ class ProfileVacationAccrualServiceImpl implements ProfileVacationAccrualService
         var vacationAccrual = getAll().getFirst();
         vacationAccrual.setPeriods(filterActivePeriod(vacationAccrual));
         return List.of(vacationAccrual);
+    }
+
+    @Override
+    public int getAllRemainingPayableDays() {
+        return vacationAccrualService.getAllEmployeeRemainingPayableDays(authenticatedService.getEmployeeId());
+    }
+
+    @Override
+    public int getAllRemainingUnPayableDays() {
+        return vacationAccrualService.getAllEmployeeRemainingUnPayableDays(authenticatedService.getEmployeeId());
     }
 
     private List<VacationAccrualPeriod> filterActivePeriod(VacationAccrual accrual){

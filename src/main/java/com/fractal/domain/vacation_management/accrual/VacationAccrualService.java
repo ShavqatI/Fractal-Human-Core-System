@@ -13,10 +13,11 @@ public interface VacationAccrualService {
     VacationAccrual getById(Long id);
 
     List<VacationAccrual> getAllByEmployeeId(Long employeeId);
+    List<VacationAccrual> getAllActivePeriodByEmployeeId(Long employeeId);
     int getAllEmployeeRemainingDays(Long employeeId);
     int getAllEmployeeRemainingDaysForCompensation(Long employeeId);
     int getAllEmployeeRemainingPayableDays(Long employeeId);
-    int getAllEmployeeRemainingUnpayableDays(Long employeeId);
+    int getAllEmployeeRemainingUnPayableDays(Long employeeId);
 
     VacationAccrual update(Long id, VacationAccrualRequest dto);
 

@@ -15,6 +15,7 @@ public record VacationTypeRequest(
         String name,
         String description,
         Integer days,
-        Boolean payable
+        Boolean payable,
+        Integer orderOfUtilization
 ) {
 }
