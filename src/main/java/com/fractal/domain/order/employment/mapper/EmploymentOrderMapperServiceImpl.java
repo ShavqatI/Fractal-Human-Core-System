@@ -2,6 +2,7 @@
 package com.fractal.domain.order.employment.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.order.employment.EmploymentOrder;
 import com.fractal.domain.order.employment.dto.EmploymentOrderRequest;
 import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
@@ -24,12 +25,14 @@ class EmploymentOrderMapperServiceImpl implements EmploymentOrderMapperService {
     private final OrderResourceMapperService resourceMapperService;
     private final StatusService statusService;
     private final EmploymentOrderRecordMapperService recordMapperService;
+    private final EmployeeService employeeService;
 
     @Override
     public EmploymentOrderResponse toDTO(EmploymentOrder order) {
         return new EmploymentOrderResponse(
                 order.getId(),
                 orderTypeService.toDTO(order.getOrderType()),
+                employeeService.toCompactDTO(order.getRecords().get(0).getEmployment().getEmployee()),
                 Optional.ofNullable(order.getRecords())
                         .orElse(emptyList())
                         .stream()
@@ -62,6 +65,7 @@ class EmploymentOrderMapperServiceImpl implements EmploymentOrderMapperService {
         order.setOrderType(orderTypeService.getById(dto.orderTypeId()));
         order.setNumber(dto.number());
         order.setDate(dto.date());
+        order.setSourceDocument(dto.sourceDocument());
         dto.files().forEach(file -> order.addResource(resourceMapperService.toEntity(file, null)));
         dto.records().forEach(record-> order.addRecord(recordMapperService.toEntity(record)));
         return order;

@@ -237,8 +237,11 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     public EmployeeEmployment addCompensation(Long employeeId, CompensationComponentRequest dto) {
         var employeeEmployment = getActiveEmployment(employeeId);
         var employment1 = (Employment) Hibernate.unproxy(employeeEmployment.getEmployment());
-        if(employment1 instanceof InternalEmployment){
-          compensationComponentService.create(employment1.getId(),dto);
+        if(employment1 instanceof InternalEmployment copy) {
+          var compensationComponent = compensationComponentService.create(employment1.getId(),dto);
+          copy.getCompensationComponents().clear();
+          copy.addCompensationComponent(compensationComponent);
+          employeeEmployment.setEmployment(copy);
         }
        return employeeEmployment;
     }

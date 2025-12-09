@@ -3,6 +3,7 @@ package com.fractal.domain.employment.internal.compensation_component.dto;
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.employment.payment_frequency.dto.PaymentFrequencyResponse;
 import com.fractal.domain.employment.salary_classification.dto.SalaryClassificationCompactResponse;
+import com.fractal.domain.finance.currency.dto.CurrencyCompactResponse;
 import com.fractal.domain.finance.currency.dto.CurrencyResponse;
 
 import java.math.BigDecimal;
@@ -15,7 +16,7 @@ public record CompensationComponentResponse(
         PaymentFrequencyResponse paymentFrequency,
         LocalDate startDate,
         LocalDate endDate,
-        CurrencyResponse currency,
+        CurrencyCompactResponse currency,
         BigDecimal grossAmount,
         BigDecimal netAmount,
         BigDecimal taxAmount,

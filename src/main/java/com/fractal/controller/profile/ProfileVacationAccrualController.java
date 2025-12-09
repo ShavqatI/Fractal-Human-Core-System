@@ -27,6 +27,10 @@ public class ProfileVacationAccrualController {
         return ResponseEntity.ok(vacationAccrualService.getActive().stream().map(vacationAccrualService::toDTO).collect(Collectors.toList()));
     }
 
+    @GetMapping("/all-remaining-days")
+    public ResponseEntity<Integer> getAllRemainingDays() {
+        return new ResponseEntity<>(vacationAccrualService.getAllRemainingDays(),HttpStatus.OK);
+    }
     @GetMapping("/payable-remaining-days")
     public ResponseEntity<Integer> getAllRemainingPayableDays() {
         return new ResponseEntity<>(vacationAccrualService.getAllRemainingPayableDays(),HttpStatus.OK);

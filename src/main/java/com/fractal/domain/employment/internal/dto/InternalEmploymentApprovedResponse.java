@@ -8,7 +8,6 @@ import com.fractal.domain.organization_management.position.dto.PositionCompactRe
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 public record InternalEmploymentApprovedResponse(
         Long id,
         EmployeeCompactResponse employeeCompactResponse,

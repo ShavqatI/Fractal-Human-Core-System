@@ -20,10 +20,10 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder
 @Setter
 @Getter
 @EntityListeners({AuditEntityListener.class})
+@SuperBuilder
 public abstract class Auditable {
 
     @Column(name = "created_date", updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

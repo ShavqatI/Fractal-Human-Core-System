@@ -2,17 +2,16 @@ package com.fractal.domain.order.recognition;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.payment_frequency.PaymentFrequencyService;
-import com.fractal.domain.employment.salary_classification.SalaryClassification;
 import com.fractal.domain.employment.salary_classification.SalaryClassificationService;
 import com.fractal.domain.finance.currency.CurrencyService;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderResponse;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderDecreaseSalaryRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderUploadExcelRequest;
 import com.fractal.domain.order.recognition.mapper.RecognitionOrderMapperService;
 import com.fractal.domain.order.recognition.record.dto.RecognitionOrderRecordRequest;
@@ -96,6 +95,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
 
     @Override
     public List<RecognitionOrder> createFromExcelFile(RecognitionOrderUploadExcelRequest dto) {
+        List<RecognitionOrder> recognitionOrders = new ArrayList<>();
         try {
             String path = fileService.save(dto.file(),resourceStoragePath);
             Workbook workbook = excelReaderService.read(Path.of(path));
@@ -107,10 +107,10 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
                 try {
                     var employee = employeeService.getByUUID(row.getCell(2).toString());
                     if(employee !=null) {
-                        var employeeEmployment = addCompensation(employee.getId(),BigDecimal.valueOf(row.getCell(3).getNumericCellValue()),dto);
+                        var employeeEmployment = addCompensation(employee.getId(),"ANNUALBONUS","ONE_TIME",BigDecimal.valueOf(row.getCell(3).getNumericCellValue()),dto.startDate(),dto.endDate());
                         records.add(new RecognitionOrderRecordRequest(employeeEmployment.getId()));
                     }
-                    create(new RecognitionOrderRequest(
+                    var order =create(new RecognitionOrderRequest(
                             dto.orderTypeId(),
                             records,
                             dto.number(),
@@ -119,11 +119,12 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
                             List.of()
                             )
                     );
+                    recognitionOrders.add(order);
                 }
                 catch (ResourceNotFoundException e){
                     System.out.println(e.getMessage());
                 }
-                System.out.println(row.getCell(0)+ ";" + row.getCell(1) + ";" + row.getCell(2)+ ";" + row.getCell(3));
+                return recognitionOrders;
             }
 
         } catch (Exception e) {
@@ -187,12 +188,26 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
         return null;
     }
 
-    private EmployeeEmployment addCompensation(Long employeeId,BigDecimal amount,RecognitionOrderUploadExcelRequest dto) {
+    @Override
+    public RecognitionOrder decreaseSalary(RecognitionOrderDecreaseSalaryRequest dto){
+        var employeeEmployment = addCompensation(dto.employeeId(),"BASICSALARY","MONTHLY",dto.salaryAmount(), dto.startDate(),dto.endDate());
+        return create(new RecognitionOrderRequest(
+                        dto.orderTypeId(),
+                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId())),
+                        dto.number(),
+                        dto.date(),
+                        dto.sourceDocument(),
+                        List.of()
+                )
+        );
+    }
+
+    private EmployeeEmployment addCompensation(Long employeeId,String salaryClassification, String paymentFrequency, BigDecimal amount,LocalDate startDate, LocalDate endDate) {
         var employeeEmployment = employeeEmploymentService.addCompensation(employeeId,new CompensationComponentRequest(
-                        salaryClassificationService.getByCode("ANNUALBONUS").getId(),
-                        paymentFrequencyService.getByCode("ONE_TIME").getId(),
-                        dto.startDate(),
-                        dto.endDate(),
+                        salaryClassificationService.getByCode(salaryClassification).getId(),
+                        paymentFrequencyService.getByCode(paymentFrequency).getId(),
+                        startDate,
+                        endDate,
                         currencyService.getByCode("TJS").getId(),
                         amount,
                         null,

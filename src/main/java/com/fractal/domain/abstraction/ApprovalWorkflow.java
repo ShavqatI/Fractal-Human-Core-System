@@ -15,11 +15,11 @@ import lombok.experimental.SuperBuilder;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+@SuperBuilder
 public abstract class ApprovalWorkflow extends Auditable {
 
     @Column(name = "reviewed_date")

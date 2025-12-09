@@ -4,6 +4,8 @@ package com.fractal.controller.order;
 import com.fractal.domain.order.employment.EmploymentOrderService;
 import com.fractal.domain.order.employment.dto.*;
 import com.fractal.domain.order.recognition.RecognitionOrderService;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderDecreaseSalaryRequest;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderResponse;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderUploadExcelRequest;
 import com.fractal.domain.resource.FileService;
@@ -30,9 +32,12 @@ public class RecognitionOrderController {
     private final FileService fileService;
 
     @PostMapping(value = "/excel",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String createFromExcel(@ModelAttribute RecognitionOrderUploadExcelRequest dto) {
-        orderService.createFromExcelFile(dto);
-        return "fsdfdsfs";//new ResponseEntity<>(orderService.toDTO(), HttpStatus.CREATED);
+    public ResponseEntity<List<RecognitionOrderResponse>> createFromExcel(@ModelAttribute RecognitionOrderUploadExcelRequest dto) {
+        return ResponseEntity.ok(orderService.createFromExcelFile(dto).stream().map(orderService::toDTO).collect(Collectors.toList()));
+    }
+    @PostMapping(value = "/decrease-salary")
+    public ResponseEntity<RecognitionOrderResponse> createFromExcel(@RequestBody @Valid RecognitionOrderDecreaseSalaryRequest dto) {
+        return ResponseEntity.ok(orderService.toDTO(orderService.decreaseSalary(dto)));
     }
 
 
@@ -46,10 +51,10 @@ public class RecognitionOrderController {
         return ResponseEntity.ok(orderService.toDTO(orderService.getById(id)));
     }
 
-    /*@PutMapping("/{id}")
-    public ResponseEntity<RecognitionOrderResponse> update(@PathVariable Long id, @RequestBody @Valid EmploymentOrderRequest dto) {
+    @PutMapping("/{id}")
+    public ResponseEntity<RecognitionOrderResponse> update(@PathVariable Long id, @RequestBody @Valid RecognitionOrderRequest dto) {
         return ResponseEntity.ok(orderService.toDTO(orderService.update(id, dto)));
-    }*/
+    }
     @PutMapping("review/{id}")
     public ResponseEntity<RecognitionOrderResponse> review(@PathVariable Long id) {
         return ResponseEntity.ok(orderService.toDTO(orderService.review(id)));

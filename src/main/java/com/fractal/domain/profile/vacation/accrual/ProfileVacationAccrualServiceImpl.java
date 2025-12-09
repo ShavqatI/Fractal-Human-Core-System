@@ -47,6 +47,11 @@ class ProfileVacationAccrualServiceImpl implements ProfileVacationAccrualService
         return vacationAccrualService.getAllEmployeeRemainingUnPayableDays(authenticatedService.getEmployeeId());
     }
 
+    @Override
+    public int getAllRemainingDays() {
+        return vacationAccrualService.getAllEmployeeRemainingDays(authenticatedService.getEmployeeId());
+    }
+
     private List<VacationAccrualPeriod> filterActivePeriod(VacationAccrual accrual){
        return accrual.getPeriods().stream().filter(period -> statusService.getById(period.getStatus().getId()).getCode().equals("ACTIVE")).collect(Collectors.toList());
     }

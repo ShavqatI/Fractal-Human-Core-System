@@ -18,7 +18,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "employment", schema = "employment_schema", catalog = "fractal")
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)

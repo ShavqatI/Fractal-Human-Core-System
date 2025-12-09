@@ -11,4 +11,5 @@ public interface ProfileVacationAccrualService {
     List<VacationAccrual> getActive();
     int getAllRemainingPayableDays();
     int getAllRemainingUnPayableDays();
+    int getAllRemainingDays();
 }

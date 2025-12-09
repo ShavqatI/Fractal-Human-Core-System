@@ -29,7 +29,7 @@ class CompensationComponentMapperServiceImpl implements CompensationComponentMap
                 paymentFrequencyService.toDTO(compensationComponent.getPaymentFrequency()),
                 compensationComponent.getStartDate(),
                 compensationComponent.getEndDate(),
-                currencyService.toDTO(compensationComponent.getCurrency()),
+                currencyService.toCompactDTO(compensationComponent.getCurrency()),
                 compensationComponent.getGrossAmount(),
                 compensationComponent.getNetAmount(),
                 compensationComponent.getTaxAmount(),
