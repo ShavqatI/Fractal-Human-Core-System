@@ -6,6 +6,8 @@ import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequ
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.employee_management.business_trip.expense.mapper.BusinessTripExpenseMapperService;
 import com.fractal.domain.employee_management.business_trip.location.mapper.BusinessTripLocationMapperService;
+import com.fractal.domain.employee_management.business_trip.purpose.BusinessTripPurpose;
+import com.fractal.domain.employee_management.business_trip.purpose.BusinessTripPurposeService;
 import com.fractal.domain.employee_management.business_trip.resource.mapper.BusinessTripResourceMapperService;
 import com.fractal.domain.employee_management.business_trip.type.BusinessTripTypeService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
@@ -25,6 +27,7 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
     private final EmployeeService employeeService;
     private final StatusService statusService;
     private final BusinessTripTypeService businessTripTypeService;
+    private final BusinessTripPurposeService businessTripPurposeService;
     private final BusinessTripResourceMapperService resourceMapperService;
     private final BusinessTripExpenseMapperService expenseMapperService;
     private final BusinessTripLocationMapperService locationMapperService;
@@ -36,8 +39,8 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
                 businessTrip.getId(),
                 employeeService.toCompactDTO(businessTrip.getEmployee()),
                 businessTripTypeService.toDTO(businessTrip.getBusinessTripType()),
+                businessTripPurposeService.toDTO(businessTrip.getBusinessTripPurpose()),
                 statusService.toCompactDTO(businessTrip.getStatus()),
-                businessTrip.getPurpose(),
                 businessTrip.getDescription(),
                 businessTrip.getStartDate(),
                 businessTrip.getEndDate(),
@@ -76,7 +79,7 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
     private BusinessTrip mapToEntity(BusinessTrip businessTrip, BusinessTripRequest dto) {
         businessTrip.setEmployee(employeeService.getById(dto.employeeId()));
         businessTrip.setBusinessTripType(businessTripTypeService.getById(dto.businessTripTypeId()));
-        businessTrip.setPurpose(dto.purpose());
+        businessTrip.setBusinessTripPurpose(businessTripPurposeService.getById(dto.businessTripPurposeId()));
         businessTrip.setDescription(dto.description());
         businessTrip.setStartDate(dto.startDate());
         businessTrip.setEndDate(dto.endDate());

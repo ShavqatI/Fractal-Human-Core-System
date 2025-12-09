@@ -10,7 +10,7 @@ import java.util.List;
 public record BusinessTripRequest(
         Long employeeId,
         Long businessTripTypeId,
-        String purpose,
+        Long businessTripPurposeId,
         String description,
         LocalDate startDate,
         LocalDate endDate,

@@ -4,6 +4,7 @@ import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.business_trip.expense.BusinessTripExpense;
 import com.fractal.domain.employee_management.business_trip.location.BusinessTripLocation;
+import com.fractal.domain.employee_management.business_trip.purpose.BusinessTripPurpose;
 import com.fractal.domain.employee_management.business_trip.resource.BusinessTripResource;
 import com.fractal.domain.employee_management.business_trip.type.BusinessTripType;
 import com.fractal.domain.employee_management.employee.Employee;
@@ -37,11 +38,12 @@ public class BusinessTrip extends ApprovalWorkflow {
     private BusinessTripType businessTripType;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "business_trip_purpose_id", referencedColumnName = "id")
+    private BusinessTripPurpose businessTripPurpose;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
-
-    @Column(name = "purpose", length = 5000)
-    private String purpose;
 
     @Column(name = "description", length = 1000)
     private String description;
