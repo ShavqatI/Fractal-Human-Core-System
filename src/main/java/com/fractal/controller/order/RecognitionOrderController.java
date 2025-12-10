@@ -31,8 +31,12 @@ public class RecognitionOrderController {
         return ResponseEntity.ok(orderService.createFromExcelFile(dto).stream().map(orderService::toDTO).collect(Collectors.toList()));
     }
     @PostMapping(value = "/decrease-salary")
-    public ResponseEntity<RecognitionOrderResponse> createFromExcel(@RequestBody @Valid RecognitionOrderSalaryRequest dto) {
+    public ResponseEntity<RecognitionOrderResponse> decreaseSalary(@RequestBody RecognitionOrderSalaryRequest dto) {
         return ResponseEntity.ok(orderService.toDTO(orderService.decreaseSalary(dto)));
+    }
+    @PostMapping(value = "/increase-salary")
+    public ResponseEntity<RecognitionOrderResponse> increaseSalary(@RequestBody RecognitionOrderSalaryRequest dto) {
+        return ResponseEntity.ok(orderService.toDTO(orderService.increaseSalary(dto)));
     }
 
 
