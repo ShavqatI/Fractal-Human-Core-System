@@ -3,12 +3,14 @@ package com.fractal.domain.order.recognition;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
+import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.order.employment.EmploymentOrder;
 import com.fractal.domain.utilities.converter.NumberToWordConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +26,7 @@ class RecognitionOrderTemplateProcessorService {
         return switch (order.getOrderType().getCode()) {
             case "SALARYREDUCTION" -> getDecreaseSalaryValues(order);
             case "PAYCHG" -> getIncreaseSalaryValues(order);
+            case "BONUSPAY" -> getAdditionalSalaryValues(order);
             /*
             case "NONLISTHIRE","OFFLISTHIRE" -> getContractServiceValues(order);
             case "TERMCONTRACT" -> getTerminationValues(order);
@@ -64,18 +67,18 @@ class RecognitionOrderTemplateProcessorService {
         values.put("sourceDocument", order.getSourceDocument());
         return values;
     }
-   /* private Map<String,String> getContractServiceValues(EmploymentOrder order) {
+    private Map<String,String> getAdditionalSalaryValues(RecognitionOrder order) {
         Map<String,String> values = new HashMap<>();
         var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
+        var compensationComponent = employment.compensationComponents().getLast();
 
-        values.put("departmentName", employment.department().name());
-        values.put("startDate", employment.startDate().toString());
-        values.put("endDate", employment.endDate().toString());
-        values.putAll(getSalaryValues(employment));
+        values.put("justification",order.getJustification());
+        values.put("startDate", compensationComponent.toString());
         values.putAll(getSurchargeValues(employment));
         values.put("sourceDocument", order.getSourceDocument());
       return values;
     }
+    /*
     private Map<String,String> getTerminationValues(EmploymentOrder order) {
         Map<String,String> values = new HashMap<>();
         var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
@@ -148,14 +151,14 @@ class RecognitionOrderTemplateProcessorService {
 
     private Map<String,String> getSalaryValues(InternalEmploymentResponse employment) {
         Map<String,String> values = new HashMap<>();
-        var compensationComponent  = employment.compensationComponents().stream().filter(cc-> cc.salaryClassification().code().equals("BASICSALARY")).findFirst().get();
+        var compensationComponent  = employment.compensationComponents().stream().filter(cc-> cc.salaryClassification().code().equals("BASICSALARY")).sorted(Comparator.comparing(CompensationComponentResponse::startDate).reversed()).findFirst().get();
         values.put("newSalary", compensationComponent.grossAmount().toString());
         values.put("newSalaryInLetters", NumberToWordConverter.convert(compensationComponent.grossAmount().longValue()));
         return values;
     }
     private Map<String,String> getSurchargeValues(InternalEmploymentResponse employment){
         Map<String,String> values = new HashMap<>();
-        var compensationComponent  = employment.compensationComponents().stream().filter(cc-> cc.salaryClassification().code().equals("ADDITIONALSALARY")).findFirst().get();
+        var compensationComponent  = employment.compensationComponents().stream().filter(cc-> cc.salaryClassification().code().equals("BASICSALARY")).sorted(Comparator.comparing(CompensationComponentResponse::startDate).reversed()).findFirst().get();
         values.put("surcharge", compensationComponent.grossAmount().toString());
         values.put("surchargeInLetters", NumberToWordConverter.convert(compensationComponent.grossAmount().longValue()));
         return values;

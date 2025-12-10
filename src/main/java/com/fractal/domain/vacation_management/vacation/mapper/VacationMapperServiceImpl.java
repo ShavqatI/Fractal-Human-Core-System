@@ -71,12 +71,11 @@ class VacationMapperServiceImpl implements VacationMapperService {
          vacation.setSuccessorCompensationPercentage(dto.successorCompensationPercentage());
         else vacation.setSuccessorCompensationPercentage(BigDecimal.ZERO);
 
-
-        var periods = vacationAccrualService
+       vacationAccrualService
                 .getAllActivePeriodByEmployeeId(request.getEmployee().getId())
                 .getFirst()
-                .getPeriods();
-        periods.forEach(period -> {
+                .getPeriods().
+          forEach(period -> {
             List<VacationAccrualPeriodRecord> records = period.getRecords().stream()
                     .filter(r -> r.getRemainingDays() > 0)
                     .filter(r-> {
@@ -92,7 +91,6 @@ class VacationMapperServiceImpl implements VacationMapperService {
                 vacation.addAllocation(allocationMapperService.toEntity(new VacationAllocationRequest(record.getId(),calcDays)));
             }
             });
-        //dto.allocations().forEach(allocation-> vacation.addAllocation(allocationMapperService.toEntity(allocation)));
         return vacation;
     }
 

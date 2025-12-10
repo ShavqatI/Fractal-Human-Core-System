@@ -262,6 +262,21 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
         );
     }
 
+    @Override
+    public RecognitionOrder surcharge(RecognitionOrderSalaryRequest dto) {
+        var employeeEmployment = addCompensation(dto.employeeId(),"ADDITIONALSALARY","MONTHLY",dto.amount(), dto.startDate(),dto.endDate());
+        return create(new RecognitionOrderRequest(
+                        dto.orderTypeId(),
+                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId())),
+                        dto.number(),
+                        dto.date(),
+                        dto.sourceDocument(),
+                        dto.justification(),
+                        List.of()
+                )
+        );
+    }
+
     private EmployeeEmployment addCompensation(Long employeeId,String salaryClassification, String paymentFrequency, BigDecimal amount,LocalDate startDate, LocalDate endDate) {
         var employeeEmployment = employeeEmploymentService.addCompensation(employeeId,new CompensationComponentRequest(
                         salaryClassificationService.getByCode(salaryClassification).getId(),

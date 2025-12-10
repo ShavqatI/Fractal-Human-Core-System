@@ -25,6 +25,7 @@ public interface RecognitionOrderService extends ApprovalWorkflowAware<Long, Rec
     List<RecognitionOrder> createFromExcelFile(RecognitionOrderUploadExcelRequest dto);
     RecognitionOrder decreaseSalary(RecognitionOrderSalaryRequest dto);
     RecognitionOrder increaseSalary(RecognitionOrderSalaryRequest dto);
+    RecognitionOrder surcharge(RecognitionOrderSalaryRequest dto);
 
     RecognitionOrderResponse toDTO(RecognitionOrder recognitionOrder);
 

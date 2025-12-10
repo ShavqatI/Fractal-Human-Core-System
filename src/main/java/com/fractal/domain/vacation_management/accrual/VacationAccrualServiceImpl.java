@@ -55,16 +55,14 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
     public List<VacationAccrual> getAllActivePeriodByEmployeeId(Long employeeId) {
         return vacationAccrualRepository.findAllByEmployeeId(employeeId)
                 .stream()
-                .map(accrual -> {
-                    var activePeriods = accrual.getPeriods().stream()
-                            .filter(period ->
-                                    "ACTIVE".equals(
-                                            statusService.getById(period.getStatus().getId()).getCode()
-                                    )
-                            ).collect(Collectors.toList());
-                    accrual.setPeriods(activePeriods);
-                    return accrual;
-                }).collect(Collectors.toList());
+                .filter(accrual ->
+                        accrual.getPeriods().stream()
+                                .anyMatch(period ->
+                                        "ACTIVE".equals(
+                                                statusService.getById(period.getStatus().getId()).getCode()
+                                        )
+                                )
+                ).toList();
     }
 
     @Override
