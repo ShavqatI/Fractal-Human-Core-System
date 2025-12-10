@@ -11,6 +11,7 @@ public record RecognitionOrderSalaryRequest(
         String number,
         LocalDate date,
         String sourceDocument,
+        String justification,
         Long employeeId,
         BigDecimal amount,
         LocalDate startDate,

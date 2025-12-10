@@ -3,8 +3,10 @@ package com.fractal.domain.order.recognition;
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
+import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
+import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.payment_frequency.PaymentFrequencyService;
 import com.fractal.domain.employment.salary_classification.SalaryClassificationService;
@@ -16,7 +18,10 @@ import com.fractal.domain.order.recognition.dto.RecognitionOrderUploadExcelReque
 import com.fractal.domain.order.recognition.mapper.RecognitionOrderMapperService;
 import com.fractal.domain.order.recognition.record.dto.RecognitionOrderRecordRequest;
 import com.fractal.domain.order.state.OrderStateService;
+import com.fractal.domain.order.usecase.OrderUseCaseService;
 import com.fractal.domain.poi.processor.excel.ExcelReaderService;
+import com.fractal.domain.poi.processor.word.WordTemplateProcessorService;
+import com.fractal.domain.poi.processor.word.WordToPdfConverterService;
 import com.fractal.domain.resource.FileService;
 import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceStateException;
@@ -34,8 +39,7 @@ import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -53,6 +57,13 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
     private final SalaryClassificationService salaryClassificationService;
     private final PaymentFrequencyService paymentFrequencyService;
     private final CurrencyService currencyService;
+    private final RecognitionOrderTemplateProcessorService templateProcessorService;
+    private final WordTemplateProcessorService wordTemplateProcessorService;
+    private final WordToPdfConverterService wordToPdfConverterService;
+    private final OrderUseCaseService orderUseCaseService;
+    private final EmployeeUseCaseService employeeUseCaseService;
+    private final EmployeeEmploymentUseCaseService employeeEmploymentUseCaseService;
+
 
 
 
@@ -116,6 +127,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
                             dto.number(),
                             dto.date(),
                             dto.sourceDocument(),
+                            dto.justification(),
                             List.of()
                             )
                     );
@@ -151,7 +163,39 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
 
     @Override
     public Path print(Long id) {
-        return null;
+        var order = getById(id);
+        var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
+        var pdfFilePath =  Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
+
+        Map<String, String> values = new HashMap<>();
+
+        values.putAll(orderUseCaseService.getHeader(order));
+        values.putAll(getCommonValues(order));
+        values.putAll(templateProcessorService.process(order));
+        values.putAll(orderUseCaseService.getFooter());
+        try {
+            wordTemplateProcessorService.process(Path.of(order.getOrderType().getDocumentTemplateManager().getFilePath()), wordFilePath, values);
+            wordToPdfConverterService.convert(wordFilePath,pdfFilePath);
+            fileService.delete(wordFilePath.toString());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return pdfFilePath;
+    }
+
+    private Map<String,String> getCommonValues(RecognitionOrder order){
+        Map<String, String> values = new HashMap<>();
+        var employeeEmployment = getEmployment(order);
+
+        var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
+        values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
+        values.put("employeePosition", employment.position().name());
+        values.put("sourceDocument", order.getSourceDocument());
+        values.put("ceo",employeeUseCaseService.getLastNameWithInitials(employeeEmploymentUseCaseService.getCEOEmployee()));
+        return values;
+    }
+    private EmployeeEmployment getEmployment(RecognitionOrder order){
+        return order.getRecords().getFirst().getEmployment();
     }
 
     @Override
@@ -197,6 +241,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
                         dto.number(),
                         dto.date(),
                         dto.sourceDocument(),
+                        dto.justification(),
                         List.of()
                 )
         );
@@ -211,6 +256,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
                         dto.number(),
                         dto.date(),
                         dto.sourceDocument(),
+                        dto.justification(),
                         List.of()
                 )
         );

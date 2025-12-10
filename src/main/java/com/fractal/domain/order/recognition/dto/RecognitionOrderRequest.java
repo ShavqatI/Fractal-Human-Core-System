@@ -12,6 +12,7 @@ public record RecognitionOrderRequest(
         String number,
         LocalDate date,
         String sourceDocument,
+        String justification,
         List<MultipartFile> files
 
 ) {

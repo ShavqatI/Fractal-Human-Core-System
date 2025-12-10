@@ -9,7 +9,6 @@ import com.fractal.domain.utilities.converter.NumberToWordConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,16 +20,18 @@ class RecognitionOrderTemplateProcessorService {
     private final EmployeeEmploymentService employeeEmploymentService;
 
 
-    public Map<String,String> process(EmploymentOrder order){
+    public Map<String,String> process(RecognitionOrder order){
         return switch (order.getOrderType().getCode()) {
-            case "EMPLOYHIRE","EMPLOYHIRESURCH" -> getPermanentValues(order);
+            case "SALARYREDUCTION" -> getDecreaseSalaryValues(order);
+            case "PAYCHG" -> getIncreaseSalaryValues(order);
+            /*
             case "NONLISTHIRE","OFFLISTHIRE" -> getContractServiceValues(order);
             case "TERMCONTRACT" -> getTerminationValues(order);
             case "PERMTRANSFER" -> getInternalTransferValues(order);
             case "EMPTRANSFER" -> getInterOrganizationTransferValues(order);
             case "TEMPTRANSFER" -> getTemporaryTransferValues(order);
             case "EMPROTATE" -> getRotationValues(order);
-            /*case "PREGNANCY" -> getPregnancyValues(order);
+            case "PREGNANCY" -> getPregnancyValues(order);
             case "PATERNITY" -> getPaternityValues(order);
             case "CHILDCARE" -> getChildCareValues(order);
             case "FUNERAL" -> getFuneralValues(order);
@@ -42,17 +43,28 @@ class RecognitionOrderTemplateProcessorService {
         };
     }
 
-    private Map<String,String> getPermanentValues(EmploymentOrder order) {
+    private Map<String,String> getDecreaseSalaryValues(RecognitionOrder order) {
         Map<String,String> values = new HashMap<>();
         var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
+        var compensationComponent = employment.compensationComponents().getLast();
 
-        values.put("startDate", employment.startDate().toString());
+        values.put("justification",order.getJustification());
+        values.put("startDate", compensationComponent.startDate().toString());
         values.putAll(getSalaryValues(employment));
-        values.putAll(getSurchargeValues(employment));
         values.put("sourceDocument", order.getSourceDocument());
         return values;
     }
-    private Map<String,String> getContractServiceValues(EmploymentOrder order) {
+    private Map<String,String> getIncreaseSalaryValues(RecognitionOrder order) {
+        Map<String,String> values = new HashMap<>();
+        var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
+        var compensationComponent = employment.compensationComponents().getLast();
+
+        values.put("startDate", compensationComponent.startDate().toString());
+        values.putAll(getSalaryValues(employment));
+        values.put("sourceDocument", order.getSourceDocument());
+        return values;
+    }
+   /* private Map<String,String> getContractServiceValues(EmploymentOrder order) {
         Map<String,String> values = new HashMap<>();
         var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
 
@@ -132,7 +144,7 @@ class RecognitionOrderTemplateProcessorService {
         values.putAll(getSurchargeValues(employment));
         values.put("sourceDocument", order.getSourceDocument());
       return values;
-    }
+    }*/
 
     private Map<String,String> getSalaryValues(InternalEmploymentResponse employment) {
         Map<String,String> values = new HashMap<>();
@@ -149,7 +161,7 @@ class RecognitionOrderTemplateProcessorService {
         return values;
     }
 
-    private EmployeeEmployment getEmployment(EmploymentOrder order){
+    private EmployeeEmployment getEmployment(RecognitionOrder order){
         return order.getRecords().getFirst().getEmployment();
     }
 

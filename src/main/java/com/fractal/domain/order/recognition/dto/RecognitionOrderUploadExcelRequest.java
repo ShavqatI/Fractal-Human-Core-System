@@ -17,6 +17,8 @@ public record RecognitionOrderUploadExcelRequest(
         LocalDate date,
         @NotBlank
         String sourceDocument,
+        @NotBlank
+        String justification,
         LocalDate startDate,
         LocalDate endDate,
         @NotNull
