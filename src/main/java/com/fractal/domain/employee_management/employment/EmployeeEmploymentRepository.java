@@ -26,8 +26,7 @@ interface EmployeeEmploymentRepository extends JpaRepository<EmployeeEmployment,
     @Query("""
     select ee from EmployeeEmployment ee
     where ee.employee.id = :employeeId
-      and ee.employment.startDate <= :date
-      and ee.employment.endDate is not null 
+      and ee.employment.startDate < :date
      order by ee.employment.startDate desc
     LIMIT 1
 """)

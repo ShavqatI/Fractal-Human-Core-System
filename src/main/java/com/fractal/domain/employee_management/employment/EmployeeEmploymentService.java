@@ -33,6 +33,7 @@ public interface EmployeeEmploymentService extends ApprovalWorkflowAware<Approva
     EmployeeEmployment addCompensation(Long employeeId, CompensationComponentRequest dto);
 
     EmployeeEmployment activate(Long employeeId,Long id);
+    EmployeeEmployment close(Long employeeId,Long id,LocalDate endDate);
     EmploymentResponse toDTO(EmployeeEmployment employment);
     InternalEmploymentApprovedResponse toApprovedDTO(EmployeeEmployment employment);
 

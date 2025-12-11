@@ -7,6 +7,8 @@ import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseSe
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
+import com.fractal.domain.employment.internal.InternalEmployment;
+import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.payment_frequency.PaymentFrequencyService;
 import com.fractal.domain.employment.salary_classification.SalaryClassificationService;
@@ -183,20 +185,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
         return pdfFilePath;
     }
 
-    private Map<String,String> getCommonValues(RecognitionOrder order){
-        Map<String, String> values = new HashMap<>();
-        var employeeEmployment = getEmployment(order);
 
-        var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
-        values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
-        values.put("employeePosition", employment.position().name());
-        values.put("sourceDocument", order.getSourceDocument());
-        values.put("ceo",employeeUseCaseService.getLastNameWithInitials(employeeEmploymentUseCaseService.getCEOEmployee()));
-        return values;
-    }
-    private EmployeeEmployment getEmployment(RecognitionOrder order){
-        return order.getRecords().getFirst().getEmployment();
-    }
 
     @Override
     public RecognitionOrder review(Long id) {
@@ -276,7 +265,6 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
                 )
         );
     }
-
     private EmployeeEmployment addCompensation(Long employeeId,String salaryClassification, String paymentFrequency, BigDecimal amount,LocalDate startDate, LocalDate endDate) {
         var employeeEmployment = employeeEmploymentService.addCompensation(employeeId,new CompensationComponentRequest(
                         salaryClassificationService.getByCode(salaryClassification).getId(),
@@ -293,4 +281,28 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
         );
         return employeeEmployment;
     }
+
+    private Map<String,String> getCommonValues(RecognitionOrder order){
+        Map<String, String> values = new HashMap<>();
+        var employeeEmployment = getEmployment(order);
+        getCompensationComponent(employeeEmployment);
+
+        var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
+        values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
+        values.put("employeePosition", employment.position().name());
+        values.put("sourceDocument", order.getSourceDocument());
+        values.put("ceo",employeeUseCaseService.getLastNameWithInitials(employeeEmploymentUseCaseService.getCEOEmployee()));
+        return values;
+    }
+    private EmployeeEmployment getEmployment(RecognitionOrder order){
+        return order.getRecords().getFirst().getEmployment();
+    }
+
+    private CompensationComponent getCompensationComponent(EmployeeEmployment employeeEmployment){
+        if(employeeEmployment.getEmployment() instanceof InternalEmployment){
+            System.out.println("Yes it is instance");
+        }
+        return null;
+    }
+
 }

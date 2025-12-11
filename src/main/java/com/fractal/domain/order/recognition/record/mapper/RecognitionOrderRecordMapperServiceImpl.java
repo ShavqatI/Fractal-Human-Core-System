@@ -1,5 +1,6 @@
 package com.fractal.domain.order.recognition.record.mapper;
 
+import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.order.recognition.record.RecognitionOrderRecord;
 import com.fractal.domain.order.recognition.record.dto.RecognitionOrderRecordRequest;
@@ -12,11 +13,13 @@ import org.springframework.stereotype.Service;
 class RecognitionOrderRecordMapperServiceImpl implements RecognitionOrderRecordMapperService {
 
     private final EmployeeEmploymentService employmentService;
+    private final EmployeeService employeeService;
 
     @Override
     public RecognitionOrderRecordResponse toDTO(RecognitionOrderRecord record) {
         return new RecognitionOrderRecordResponse(
                 record.getId(),
+                employeeService.toCompactDTO(record.getEmployment().getEmployee()),
                 employmentService.toDTO(record.getEmployment()),
                 record.getCreatedDate()
         );

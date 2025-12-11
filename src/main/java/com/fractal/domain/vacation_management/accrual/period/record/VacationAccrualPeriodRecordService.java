@@ -24,5 +24,7 @@ public interface VacationAccrualPeriodRecordService {
 
     void decrease(Long id, int days);
     void increase(Long id, int days);
+    void close(Long id);
+
 
 }

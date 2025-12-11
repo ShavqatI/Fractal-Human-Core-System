@@ -99,7 +99,18 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
 
     @Override
     public int getAllEmployeeRemainingPayableDays(Long employeeId) {
-        return getAllEmployeeRemainingDaysForCompensation(employeeId);
+        var days = 0;
+        var accrual = getAllByEmployeeId(employeeId).getFirst();
+        var periods = accrual.getPeriods().stream().filter(p-> statusService.getById(p.getStatus().getId()).getCode().equals("ACTIVE")).findFirst();
+        if(periods.isPresent()) {
+            if(!periods.get().getRecords().isEmpty()){
+                var records = periods.get().getRecords();
+                days = records.stream().filter(r-> r.getVacationType().getPayable().equals(true))
+                        .mapToInt(r -> r.getRemainingDays())
+                        .sum();
+            }
+        }
+        return days;
     }
 
     @Override
@@ -107,7 +118,7 @@ class VacationAccrualServiceImpl implements VacationAccrualService {
         var days = 0;
         var accrual = getAllByEmployeeId(employeeId).getFirst();
         var periods = accrual.getPeriods().stream().filter(p-> statusService.getById(p.getStatus().getId()).getCode().equals("ACTIVE")).findFirst();
-        if(periods.isPresent()){
+        if(periods.isPresent()) {
             if(!periods.get().getRecords().isEmpty()){
                 var records = periods.get().getRecords();
                 days = records.stream().filter(r-> r.getVacationType().getPayable().equals(false))

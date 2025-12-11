@@ -70,28 +70,43 @@ class VacationMapperServiceImpl implements VacationMapperService {
         if(dto.successorCompensationPercentage() !=null)
          vacation.setSuccessorCompensationPercentage(dto.successorCompensationPercentage());
         else vacation.setSuccessorCompensationPercentage(BigDecimal.ZERO);
+        if(request.getVacationType().getCode().equals("CASUAL") || request.getVacationType().getCode().equals("ANNUAL"))
+        addAllocation(vacation);
+        return vacation;
+    }
 
-       vacationAccrualService
+    private void addAllocation(Vacation vacation){
+      var request = vacation.getVacationRequest();
+      vacationAccrualService
                 .getAllActivePeriodByEmployeeId(request.getEmployee().getId())
                 .getFirst()
                 .getPeriods().
-          forEach(period -> {
-            List<VacationAccrualPeriodRecord> records = period.getRecords().stream()
-                    .filter(r -> r.getRemainingDays() > 0)
-                    .filter(r-> {
-                     if(request.getVacationType().getCode().equals("CASUAL"))
-                       return r.getVacationType() == request.getVacationType();
-                     else return r.getVacationType().getPayable();
-                    })
-                    .sorted(Comparator.comparing(r -> r.getVacationType().getOrderOfUtilization()))
-                    .collect(Collectors.toList());
-            var calcDays = request.getDays();
-            for (var record: records) {
-                calcDays = (calcDays - record.getVacationType().getDays());
-                vacation.addAllocation(allocationMapperService.toEntity(new VacationAllocationRequest(record.getId(),calcDays)));
-            }
-            });
-        return vacation;
+                forEach(period -> {
+                    List<VacationAccrualPeriodRecord> records = period.getRecords().stream()
+                            .filter(r -> r.getRemainingDays() > 0)
+                            .filter(r-> {
+                                if(request.getVacationType().getCode().equals("CASUAL"))
+                                    return r.getVacationType() == request.getVacationType();
+                                else return r.getVacationType().getPayable();
+                            })
+                            .sorted(Comparator.comparing(r -> r.getVacationType().getOrderOfUtilization()))
+                            .collect(Collectors.toList());
+                    var calcDays = request.getDays();
+                    int day;
+                    for (var record: records) {
+                        if(calcDays > 0) {
+                            if(calcDays > record.getRemainingDays()) {
+                                day = record.getRemainingDays();
+                                calcDays = calcDays - day;
+                            }
+                            else {
+                                day = calcDays;
+                            }
+                            if(day > 0)
+                                vacation.addAllocation(allocationMapperService.toEntity(new VacationAllocationRequest(record.getId(),day)));
+                        }
+                    }
+                });
     }
 
 }

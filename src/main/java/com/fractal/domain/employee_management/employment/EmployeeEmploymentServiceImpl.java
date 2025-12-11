@@ -237,11 +237,8 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     public EmployeeEmployment addCompensation(Long employeeId, CompensationComponentRequest dto) {
         var employeeEmployment = getActiveEmployment(employeeId);
         var employment1 = (Employment) Hibernate.unproxy(employeeEmployment.getEmployment());
-        if(employment1 instanceof InternalEmployment copy) {
-          var compensationComponent = compensationComponentService.create(employment1.getId(),dto);
-          copy.getCompensationComponents().clear();
-          copy.addCompensationComponent(compensationComponent);
-          employeeEmployment.setEmployment(copy);
+        if(employment1 instanceof InternalEmployment) {
+          compensationComponentService.create(employment1.getId(),dto);
         }
        return employeeEmployment;
     }
@@ -250,11 +247,24 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     public EmployeeEmployment activate(Long employeeId,Long id) {
         var employeeEmployment = getById(employeeId,id);
         if (employeeEmployment.getStatus().getCode().equals("APPROVED")) {
-            employeeEmployment.setApprovedDate(LocalDateTime.now());
-            employeeEmployment.setApprovedUser(authenticatedService.getUser());
             employeeEmployment.setStatus(statusService.getByCode("ACTIVE"));
             stateService.create(employeeEmployment);
             employmentService.activate(employeeEmployment.getEmployment().getId());
+            var activeEmployment = getActiveEmployment(employeeId);
+            close(employeeId,activeEmployment.getEmployment().getId(),employeeEmployment.getEmployment().getStartDate());
+            return employmentRepository.save(employeeEmployment);
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + employeeEmployment.getStatus().getName());
+        }
+    }
+
+    @Override
+    public EmployeeEmployment close(Long employeeId,Long id,LocalDate endDate) {
+        var employeeEmployment = getById(employeeId,id);
+        if (!employeeEmployment.getStatus().getCode().equals("CLOSE")) {
+            employeeEmployment.setStatus(statusService.getByCode("CLOSE"));
+            stateService.create(employeeEmployment);
+            employmentService.close(employeeEmployment.getEmployment().getId(),endDate);
             return employmentRepository.save(employeeEmployment);
         } else {
             throw new ResourceStateException("The status is not valid is: " + employeeEmployment.getStatus().getName());

@@ -26,7 +26,6 @@ public interface RecognitionOrderService extends ApprovalWorkflowAware<Long, Rec
     RecognitionOrder decreaseSalary(RecognitionOrderSalaryRequest dto);
     RecognitionOrder increaseSalary(RecognitionOrderSalaryRequest dto);
     RecognitionOrder surcharge(RecognitionOrderSalaryRequest dto);
-
     RecognitionOrderResponse toDTO(RecognitionOrder recognitionOrder);
 
     RecognitionOrder save(RecognitionOrder order);

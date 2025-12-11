@@ -25,5 +25,7 @@ public interface CompensationComponentService extends ApprovalWorkflowAware<Appr
 
     CompensationComponent getById(Long id);
 
+    CompensationComponent activate(Long employmentId, Long id);
+
 
 }

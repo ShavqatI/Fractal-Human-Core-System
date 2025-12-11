@@ -1,5 +1,6 @@
 package com.fractal.domain.vacation_management.accrual.period.record;
 
+import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriodService;
 import com.fractal.domain.vacation_management.accrual.period.record.dto.VacationAccrualPeriodRecordRequest;
 import com.fractal.domain.vacation_management.accrual.period.record.dto.VacationAccrualPeriodRecordResponse;
@@ -19,6 +20,7 @@ public class VacationAccrualPeriodRecordServiceImpl implements VacationAccrualPe
     private final VacationAccrualPeriodRecordRepository recordRepository;
     private final VacationAccrualPeriodRecordMapperService mapperService;
     private final VacationAccrualPeriodService accrualPeriodService;
+    private final StatusService statusService;
 
 
     @Override
@@ -88,6 +90,8 @@ public class VacationAccrualPeriodRecordServiceImpl implements VacationAccrualPe
         record.setRemainingDays(record.getRemainingDays() - days);
         record.setUtilizedDays(days);
         recordRepository.save(record);
+        if(record.getRemainingDays().intValue() == 0)
+        close(id);
     }
 
     @Override
@@ -97,4 +101,13 @@ public class VacationAccrualPeriodRecordServiceImpl implements VacationAccrualPe
         record.setUtilizedDays(record.getUtilizedDays() - days);
         recordRepository.save(record);
     }
+
+    @Override
+    public void close(Long id) {
+        System.out.println("Close coled");
+        var record = getById(id);
+        record.setStatus(statusService.getByCode("CLOSE"));
+        recordRepository.save(record);
+    }
+
 }

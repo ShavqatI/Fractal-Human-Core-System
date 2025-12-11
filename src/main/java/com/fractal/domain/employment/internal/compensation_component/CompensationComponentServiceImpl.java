@@ -115,11 +115,24 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
             compensationComponent.setApprovedUser(authenticatedService.getUser());
             compensationComponent.setStatus(statusService.getByCode("APPROVED"));
             stateService.create(compensationComponent);
+            activate(dto.employmentId(),dto.id());
             return compensationComponent;
         } else {
             throw new ResourceStateException("The status is not valid is: " + compensationComponent.getStatus().getName());
         }
 
+    }
+
+    @Override
+    public CompensationComponent activate(Long employmentId, Long id) {
+        var compensationComponent = getById(employmentId,id);
+        if (compensationComponent.getStatus().getCode().equals("APPROVED")) {
+            compensationComponent.setStatus(statusService.getByCode("ACTIVE"));
+            stateService.create(compensationComponent);
+            return compensationComponent;
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + compensationComponent.getStatus().getName());
+        }
     }
 
     private CompensationComponent findById(Long id) {

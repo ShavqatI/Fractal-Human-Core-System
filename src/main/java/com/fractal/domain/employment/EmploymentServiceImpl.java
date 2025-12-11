@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -42,9 +43,22 @@ class EmploymentServiceImpl implements EmploymentService {
     public Employment activate(Long id) {
         var employment = getById(id);
         if (employment.getStatus().getCode().equals("APPROVED")) {
-            employment.setReviewedDate(LocalDateTime.now());
+            /*employment.setReviewedDate(LocalDateTime.now());
             employment.setReviewedUser(authenticatedService.getUser());
+            */
             employment.setStatus(statusService.getByCode("ACTIVE"));
+            return save(employment);
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + employment.getStatus().getName());
+        }
+    }
+
+    @Override
+    public Employment close(Long id, LocalDate endDate) {
+        var employment = getById(id);
+        if (!employment.getStatus().getCode().equals("CLOSE")) {
+            employment.setStatus(statusService.getByCode("CLOSE"));
+            employment.setEndDate(endDate);
             return save(employment);
         } else {
             throw new ResourceStateException("The status is not valid is: " + employment.getStatus().getName());

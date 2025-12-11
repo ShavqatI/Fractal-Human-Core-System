@@ -38,7 +38,10 @@ public class RecognitionOrderController {
     public ResponseEntity<RecognitionOrderResponse> increaseSalary(@RequestBody RecognitionOrderSalaryRequest dto) {
         return ResponseEntity.ok(orderService.toDTO(orderService.increaseSalary(dto)));
     }
-
+    @PostMapping(value = "/surcharge")
+    public ResponseEntity<RecognitionOrderResponse> surcharge(@RequestBody RecognitionOrderSalaryRequest dto) {
+        return ResponseEntity.ok(orderService.toDTO(orderService.surcharge(dto)));
+    }
 
     @GetMapping
     public ResponseEntity<List<RecognitionOrderResponse>> getAll() {
