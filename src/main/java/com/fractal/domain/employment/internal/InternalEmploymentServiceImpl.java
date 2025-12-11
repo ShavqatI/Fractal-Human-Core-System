@@ -4,6 +4,7 @@ import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.employment.internal.dto.TerminationRequest;
 import com.fractal.domain.employment.internal.mapper.InternalEmploymentMapperService;
+import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
@@ -80,6 +81,11 @@ class InternalEmploymentServiceImpl implements InternalEmploymentService {
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
+    }
+
+    @Override
+    public InternalEmployment getByCompensationComponentId(Long compensationComponentId) {
+        return employmentRepository.findCompensationComponentId(compensationComponentId).orElseThrow(()-> new ResourceNotFoundException("InternalEmployment with compensationComponentId: " + compensationComponentId + " not found"));
     }
 
     private InternalEmployment findById(Long id) {

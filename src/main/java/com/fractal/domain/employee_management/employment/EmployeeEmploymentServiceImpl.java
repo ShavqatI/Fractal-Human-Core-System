@@ -16,6 +16,7 @@ import com.fractal.domain.employment.external.ExternalEmploymentService;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentRequest;
 import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
+import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponentService;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;
@@ -73,6 +74,12 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     @Override
     public EmployeeEmployment getById(Long employeeId, Long id) {
         return employmentRepository.findByEmployeeIdAndEmploymentId(employeeId, id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+    }
+
+    @Override
+    public EmployeeEmployment getByCompensationComponentId(Long compensationComponentId) {
+        var employment = internalEmploymentService.getByCompensationComponentId(compensationComponentId);
+        return employmentRepository.findByEmploymentId(employment.getId()).orElseThrow(()-> new ResourceNotFoundException("EmployeeEmployment with employmentId" + employment.getId() + " not found"));
     }
 
     @Override
@@ -234,13 +241,13 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     }
 
     @Override
-    public EmployeeEmployment addCompensation(Long employeeId, CompensationComponentRequest dto) {
+    public Optional<CompensationComponent> addCompensation(Long employeeId, CompensationComponentRequest dto) {
         var employeeEmployment = getActiveEmployment(employeeId);
         var employment1 = (Employment) Hibernate.unproxy(employeeEmployment.getEmployment());
         if(employment1 instanceof InternalEmployment) {
-          compensationComponentService.create(employment1.getId(),dto);
+          return Optional.of(compensationComponentService.create(employment1.getId(),dto));
         }
-       return employeeEmployment;
+       return Optional.empty();
     }
 
     @Override

@@ -104,7 +104,6 @@ public class VacationAccrualPeriodRecordServiceImpl implements VacationAccrualPe
 
     @Override
     public void close(Long id) {
-        System.out.println("Close coled");
         var record = getById(id);
         record.setStatus(statusService.getByCode("CLOSE"));
         recordRepository.save(record);

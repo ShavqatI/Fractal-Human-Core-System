@@ -24,4 +24,5 @@ public interface InternalEmploymentService {
     InternalEmployment save(InternalEmployment employment);
 
 
+    InternalEmployment getByCompensationComponentId(Long compensationComponentId);
 }

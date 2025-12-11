@@ -13,6 +13,7 @@ interface EmployeeEmploymentRepository extends JpaRepository<EmployeeEmployment,
     List<EmployeeEmployment> findAllByEmployeeId(Long employeeId);
 
     Optional<EmployeeEmployment> findByEmployeeIdAndEmploymentId(Long employeeId, Long id);
+    Optional<EmployeeEmployment> findByEmploymentId(Long id);
 
     @Query("""
     select ee from EmployeeEmployment ee

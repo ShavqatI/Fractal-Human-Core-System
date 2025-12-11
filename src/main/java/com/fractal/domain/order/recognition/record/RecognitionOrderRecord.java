@@ -2,6 +2,7 @@ package com.fractal.domain.order.recognition.record;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
+import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.order.recognition.RecognitionOrder;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,4 +27,8 @@ public class RecognitionOrderRecord extends AbstractEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_employment_id", referencedColumnName = "id")
     private EmployeeEmployment employment;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "compensation_component_id", referencedColumnName = "id")
+    private CompensationComponent compensationComponent;
 }

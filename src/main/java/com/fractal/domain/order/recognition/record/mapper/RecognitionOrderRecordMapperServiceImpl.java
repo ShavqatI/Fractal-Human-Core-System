@@ -2,6 +2,8 @@ package com.fractal.domain.order.recognition.record.mapper;
 
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
+import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
+import com.fractal.domain.employment.internal.compensation_component.CompensationComponentService;
 import com.fractal.domain.order.recognition.record.RecognitionOrderRecord;
 import com.fractal.domain.order.recognition.record.dto.RecognitionOrderRecordRequest;
 import com.fractal.domain.order.recognition.record.dto.RecognitionOrderRecordResponse;
@@ -14,6 +16,7 @@ class RecognitionOrderRecordMapperServiceImpl implements RecognitionOrderRecordM
 
     private final EmployeeEmploymentService employmentService;
     private final EmployeeService employeeService;
+    private final CompensationComponentService compensationComponentService;
 
     @Override
     public RecognitionOrderRecordResponse toDTO(RecognitionOrderRecord record) {
@@ -37,6 +40,7 @@ class RecognitionOrderRecordMapperServiceImpl implements RecognitionOrderRecordM
 
     private RecognitionOrderRecord mapToEntity(RecognitionOrderRecord record, RecognitionOrderRecordRequest dto) {
         record.setEmployment(employmentService.getById(dto.employmentId()));
+        record.setCompensationComponent(compensationComponentService.getById(dto.compensationComponentId()));
         return record;
     }
 

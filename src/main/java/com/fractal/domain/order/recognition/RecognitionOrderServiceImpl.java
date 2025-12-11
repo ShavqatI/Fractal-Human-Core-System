@@ -120,8 +120,9 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
                 try {
                     var employee = employeeService.getByUUID(row.getCell(2).toString());
                     if(employee !=null) {
-                        var employeeEmployment = addCompensation(employee.getId(),"ANNUALBONUS","ONE_TIME",BigDecimal.valueOf(row.getCell(3).getNumericCellValue()),dto.startDate(),dto.endDate());
-                        records.add(new RecognitionOrderRecordRequest(employeeEmployment.getId()));
+                        var compensation = addCompensation(employee.getId(),"ANNUALBONUS","ONE_TIME",BigDecimal.valueOf(row.getCell(3).getNumericCellValue()),dto.startDate(),dto.endDate());
+                        var employeeEmployment = employeeEmploymentService.getByCompensationComponentId(compensation.getId());
+                         records.add(new RecognitionOrderRecordRequest(employeeEmployment.getId(),compensation.getId()));
                     }
                     var order =create(new RecognitionOrderRequest(
                             dto.orderTypeId(),
@@ -223,10 +224,11 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
 
     @Override
     public RecognitionOrder decreaseSalary(RecognitionOrderSalaryRequest dto){
-        var employeeEmployment = addCompensation(dto.employeeId(),"BASICSALARY","MONTHLY",dto.amount(), dto.startDate(),dto.endDate());
+        var compensation = addCompensation(dto.employeeId(),"BASICSALARY","MONTHLY",dto.amount(), dto.startDate(),dto.endDate());
+        var employeeEmployment = employeeEmploymentService.getByCompensationComponentId(compensation.getId());
         return create(new RecognitionOrderRequest(
                         dto.orderTypeId(),
-                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId())),
+                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId(),compensation.getId())),
                         dto.number(),
                         dto.date(),
                         dto.sourceDocument(),
@@ -238,10 +240,11 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
 
     @Override
     public RecognitionOrder increaseSalary(RecognitionOrderSalaryRequest dto) {
-        var employeeEmployment = addCompensation(dto.employeeId(),"BASICSALARY","MONTHLY",dto.amount(), dto.startDate(),dto.endDate());
+        var compensation = addCompensation(dto.employeeId(),"BASICSALARY","MONTHLY",dto.amount(), dto.startDate(),dto.endDate());
+        var employeeEmployment = employeeEmploymentService.getByCompensationComponentId(compensation.getId());
         return create(new RecognitionOrderRequest(
                         dto.orderTypeId(),
-                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId())),
+                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId(),compensation.getId())),
                         dto.number(),
                         dto.date(),
                         dto.sourceDocument(),
@@ -253,10 +256,11 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
 
     @Override
     public RecognitionOrder surcharge(RecognitionOrderSalaryRequest dto) {
-        var employeeEmployment = addCompensation(dto.employeeId(),"ADDITIONALSALARY","MONTHLY",dto.amount(), dto.startDate(),dto.endDate());
+        var compensation = addCompensation(dto.employeeId(),"ADDITIONALSALARY","MONTHLY",dto.amount(), dto.startDate(),dto.endDate());
+        var employeeEmployment = employeeEmploymentService.getByCompensationComponentId(compensation.getId());
         return create(new RecognitionOrderRequest(
                         dto.orderTypeId(),
-                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId())),
+                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId(),compensation.getId())),
                         dto.number(),
                         dto.date(),
                         dto.sourceDocument(),
@@ -266,7 +270,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
         );
     }
     private EmployeeEmployment addCompensation(Long employeeId,String salaryClassification, String paymentFrequency, BigDecimal amount,LocalDate startDate, LocalDate endDate) {
-        var employeeEmployment = employeeEmploymentService.addCompensation(employeeId,new CompensationComponentRequest(
+        var compensationComponent = employeeEmploymentService.addCompensation(employeeId,new CompensationComponentRequest(
                         salaryClassificationService.getByCode(salaryClassification).getId(),
                         paymentFrequencyService.getByCode(paymentFrequency).getId(),
                         startDate,
@@ -279,13 +283,14 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
                         null
                 )
         );
-        return employeeEmployment;
+       if(compensationComponent.isPresent()) compensationComponent.get();
+       return null;
     }
 
     private Map<String,String> getCommonValues(RecognitionOrder order){
         Map<String, String> values = new HashMap<>();
         var employeeEmployment = getEmployment(order);
-        getCompensationComponent(employeeEmployment);
+        //getCompensationComponent(employeeEmployment);
 
         var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
         values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
@@ -298,11 +303,11 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
         return order.getRecords().getFirst().getEmployment();
     }
 
-    private CompensationComponent getCompensationComponent(EmployeeEmployment employeeEmployment){
+   /* private CompensationComponent getCompensationComponent(EmployeeEmployment employeeEmployment){
         if(employeeEmployment.getEmployment() instanceof InternalEmployment){
             System.out.println("Yes it is instance");
         }
         return null;
-    }
+    }*/
 
 }
