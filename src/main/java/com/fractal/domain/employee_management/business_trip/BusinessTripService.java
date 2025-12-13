@@ -4,6 +4,7 @@ import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 
+import java.nio.file.Path;
 import java.util.List;
 
 public interface BusinessTripService extends ApprovalWorkflowAware<Long,BusinessTrip> {
@@ -14,6 +15,7 @@ public interface BusinessTripService extends ApprovalWorkflowAware<Long,Business
     BusinessTrip update(Long id, BusinessTripRequest dto);
     void deleteById(Long id);
     void close(Long id);
+    Path passport(Long id);
     BusinessTripResponse toDTO(BusinessTrip businessTrip);
     BusinessTrip save(BusinessTrip businessTrip);
 

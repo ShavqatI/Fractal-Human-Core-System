@@ -3,15 +3,20 @@ package com.fractal.domain.order.recognition;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
+import com.fractal.domain.employment.Employment;
+import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.order.employment.EmploymentOrder;
+import com.fractal.domain.order.recognition.record.RecognitionOrderRecord;
 import com.fractal.domain.utilities.converter.NumberToWordConverter;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -48,9 +53,12 @@ class RecognitionOrderTemplateProcessorService {
 
     private Map<String,String> getDecreaseSalaryValues(RecognitionOrder order) {
         Map<String,String> values = new HashMap<>();
-        var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
+        var employeeEmployment = getEmployment(order.getRecords().getFirst());
+        var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
         var compensationComponent = employment.compensationComponents().getLast();
 
+        values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
+        values.put("employeePosition", employment.position().name());
         values.put("justification",order.getJustification());
         values.put("startDate", compensationComponent.startDate().toString());
         values.putAll(getSalaryValues(employment));
@@ -59,9 +67,12 @@ class RecognitionOrderTemplateProcessorService {
     }
     private Map<String,String> getIncreaseSalaryValues(RecognitionOrder order) {
         Map<String,String> values = new HashMap<>();
-        var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
+        var employeeEmployment = getEmployment(order.getRecords().getFirst());
+        var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
         var compensationComponent = employment.compensationComponents().getLast();
-
+        values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
+        values.put("employeePosition", employment.position().name());
+        values.put("justification",order.getJustification());
         values.put("startDate", compensationComponent.startDate().toString());
         values.putAll(getSalaryValues(employment));
         values.put("sourceDocument", order.getSourceDocument());
@@ -69,9 +80,12 @@ class RecognitionOrderTemplateProcessorService {
     }
     private Map<String,String> getAdditionalSalaryValues(RecognitionOrder order) {
         Map<String,String> values = new HashMap<>();
-        var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
+        var employeeEmployment = getEmployment(order.getRecords().getFirst());
+        var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
         var compensationComponent = employment.compensationComponents().getLast();
 
+        values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
+        values.put("employeePosition", employment.position().name());
         values.put("justification",order.getJustification());
         values.put("startDate", compensationComponent.toString());
         values.putAll(getSurchargeValues(employment));
@@ -164,8 +178,15 @@ class RecognitionOrderTemplateProcessorService {
         return values;
     }
 
-    private EmployeeEmployment getEmployment(RecognitionOrder order){
-        return order.getRecords().getFirst().getEmployment();
+    private EmployeeEmployment getEmployment(RecognitionOrderRecord record) {
+        var employment = (Employment) Hibernate.unproxy(record.getEmployment().getEmployment());
+        EmployeeEmployment employeeEmployment = null;
+        if (employment instanceof InternalEmployment internalEmployment) {
+            internalEmployment.setCompensationComponents(List.of(record.getCompensationComponent()));
+            employeeEmployment = record.getEmployment();
+            employeeEmployment.setEmployment(internalEmployment);
+        }
+        return employeeEmployment;
     }
 
 }

@@ -15,6 +15,7 @@ import com.fractal.domain.poi.processor.word.WordTemplateProcessorService;
 import com.fractal.domain.poi.processor.word.WordToPdfConverterService;
 import com.fractal.domain.resource.FileService;
 import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecordService;
+import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -68,6 +69,11 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     @Override
     public BusinessTripOrder getById(Long id) {
         return orderRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this,id));
+    }
+
+    @Override
+    public BusinessTripOrder getByBusinessTripId(Long businessTripId) {
+        return orderRepository.findByBusinessTripId(businessTripId).orElseThrow(()-> new ResourceNotFoundException("BusinessTrip in BusinessTripOrderRecord with id: " + businessTripId + " not found"));
     }
 
     @Override

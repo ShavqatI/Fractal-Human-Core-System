@@ -7,8 +7,11 @@ import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseSe
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
+import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
+import com.fractal.domain.employment.internal.compensation_component.CompensationComponentService;
+import com.fractal.domain.employment.internal.compensation_component.dto.ApprovalWorkflowAwareRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.payment_frequency.PaymentFrequencyService;
 import com.fractal.domain.employment.salary_classification.SalaryClassificationService;
@@ -18,6 +21,7 @@ import com.fractal.domain.order.recognition.dto.RecognitionOrderResponse;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderSalaryRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderUploadExcelRequest;
 import com.fractal.domain.order.recognition.mapper.RecognitionOrderMapperService;
+import com.fractal.domain.order.recognition.record.RecognitionOrderRecord;
 import com.fractal.domain.order.recognition.record.dto.RecognitionOrderRecordRequest;
 import com.fractal.domain.order.state.OrderStateService;
 import com.fractal.domain.order.usecase.OrderUseCaseService;
@@ -32,6 +36,7 @@ import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -65,8 +70,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
     private final OrderUseCaseService orderUseCaseService;
     private final EmployeeUseCaseService employeeUseCaseService;
     private final EmployeeEmploymentUseCaseService employeeEmploymentUseCaseService;
-
-
+    private final CompensationComponentService compensationComponentService;
 
 
     @Value("${resource-storage.temporary}")
@@ -85,12 +89,47 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
 
     @Override
     public List<RecognitionOrder> getAll() {
-        return orderRepository.findAll();
+        var data = orderRepository.findAll()
+                .stream()
+                .map(order -> {
+                    var newRecords = order.getRecords()
+                            .stream()
+                            .map(this::setRecord)
+                            .toList();
+
+                    order.setRecords(newRecords);
+                    order.getRecords().forEach(record->{
+                        if(record.getEmployment().getEmployment() instanceof InternalEmployment internalEmployment){
+                            System.out.println(record.getEmployment().getEmployment().getClass());
+                            internalEmployment.getCompensationComponents().forEach(cc-> System.out.println(cc.getId()));
+                        }
+                    });
+                    return order;
+                })
+                .toList();
+        data.forEach(o->{
+            o.getRecords().forEach(record -> {
+                if(record.getEmployment().getEmployment() instanceof InternalEmployment internalEmployment){
+                    System.out.println(record.getEmployment().getEmployment().getClass());
+                    internalEmployment.getCompensationComponents().forEach(cc-> System.out.println(cc.getId()));
+                }
+            });
+        });
+       return data;
     }
 
     @Override
     public RecognitionOrder getById(Long id) {
-        return orderRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this,id));
+        return orderRepository.findById(id)
+                .map(order -> {
+                    order.setRecords(
+                            order.getRecords().stream()
+                                    .map(this::setRecord)
+                                    .toList()
+                    );
+                    return order;
+                })
+                .orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -110,21 +149,21 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
     public List<RecognitionOrder> createFromExcelFile(RecognitionOrderUploadExcelRequest dto) {
         List<RecognitionOrder> recognitionOrders = new ArrayList<>();
         try {
-            String path = fileService.save(dto.file(),resourceStoragePath);
+            String path = fileService.save(dto.file(), resourceStoragePath);
             Workbook workbook = excelReaderService.read(Path.of(path));
             Sheet sheet = workbook.getSheetAt(0);
             List<RecognitionOrderRecordRequest> records = new ArrayList<>();
 
-            for(Row row : sheet){
+            for (Row row : sheet) {
                 if (row.getRowNum() == 0) continue;
                 try {
                     var employee = employeeService.getByUUID(row.getCell(2).toString());
-                    if(employee !=null) {
-                        var compensation = addCompensation(employee.getId(),"ANNUALBONUS","ONE_TIME",BigDecimal.valueOf(row.getCell(3).getNumericCellValue()),dto.startDate(),dto.endDate());
+                    if (employee != null) {
+                        var compensation = addCompensation(employee.getId(), "ANNUALBONUS", "ONE_TIME", BigDecimal.valueOf(row.getCell(3).getNumericCellValue()), dto.startDate(), dto.endDate());
                         var employeeEmployment = employeeEmploymentService.getByCompensationComponentId(compensation.getId());
-                         records.add(new RecognitionOrderRecordRequest(employeeEmployment.getId(),compensation.getId()));
+                        records.add(new RecognitionOrderRecordRequest(employeeEmployment.getId(), compensation.getId()));
                     }
-                    var order =create(new RecognitionOrderRequest(
+                    var order = create(new RecognitionOrderRequest(
                             dto.orderTypeId(),
                             records,
                             dto.number(),
@@ -135,8 +174,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
                             )
                     );
                     recognitionOrders.add(order);
-                }
-                catch (ResourceNotFoundException e){
+                } catch (ResourceNotFoundException e) {
                     System.out.println(e.getMessage());
                 }
                 return recognitionOrders;
@@ -168,7 +206,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
     public Path print(Long id) {
         var order = getById(id);
         var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
-        var pdfFilePath =  Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
+        var pdfFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
 
         Map<String, String> values = new HashMap<>();
 
@@ -178,14 +216,13 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
         values.putAll(orderUseCaseService.getFooter());
         try {
             wordTemplateProcessorService.process(Path.of(order.getOrderType().getDocumentTemplateManager().getFilePath()), wordFilePath, values);
-            wordToPdfConverterService.convert(wordFilePath,pdfFilePath);
+            wordToPdfConverterService.convert(wordFilePath, pdfFilePath);
             fileService.delete(wordFilePath.toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
         return pdfFilePath;
     }
-
 
 
     @Override
@@ -196,6 +233,11 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
             order.setReviewedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("REVIEWED"));
             stateService.create(order);
+            order.getRecords().forEach(
+                    record -> {
+                        compensationComponentService.review(new ApprovalWorkflowAwareRequest(record.getEmployment().getId(),record.getCompensationComponent().getId()));
+                    }
+            );
             return order;
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
@@ -210,7 +252,11 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
             order.setApprovedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("APPROVED"));
             stateService.create(order);
-
+            order.getRecords().forEach(
+                    record -> {
+                        compensationComponentService.approve(new ApprovalWorkflowAwareRequest(record.getEmployment().getId(),record.getCompensationComponent().getId()));
+                    }
+            );
             return order;
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
@@ -223,12 +269,12 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
     }
 
     @Override
-    public RecognitionOrder decreaseSalary(RecognitionOrderSalaryRequest dto){
-        var compensation = addCompensation(dto.employeeId(),"BASICSALARY","MONTHLY",dto.amount(), dto.startDate(),dto.endDate());
+    public RecognitionOrder decreaseSalary(RecognitionOrderSalaryRequest dto) {
+        var compensation = addCompensation(dto.employeeId(), "BASICSALARY", "MONTHLY", dto.amount(), dto.startDate(), dto.endDate());
         var employeeEmployment = employeeEmploymentService.getByCompensationComponentId(compensation.getId());
         return create(new RecognitionOrderRequest(
                         dto.orderTypeId(),
-                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId(),compensation.getId())),
+                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId(), compensation.getId())),
                         dto.number(),
                         dto.date(),
                         dto.sourceDocument(),
@@ -240,11 +286,11 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
 
     @Override
     public RecognitionOrder increaseSalary(RecognitionOrderSalaryRequest dto) {
-        var compensation = addCompensation(dto.employeeId(),"BASICSALARY","MONTHLY",dto.amount(), dto.startDate(),dto.endDate());
+        var compensation = addCompensation(dto.employeeId(), "BASICSALARY", "MONTHLY", dto.amount(), dto.startDate(), dto.endDate());
         var employeeEmployment = employeeEmploymentService.getByCompensationComponentId(compensation.getId());
         return create(new RecognitionOrderRequest(
                         dto.orderTypeId(),
-                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId(),compensation.getId())),
+                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId(), compensation.getId())),
                         dto.number(),
                         dto.date(),
                         dto.sourceDocument(),
@@ -256,11 +302,11 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
 
     @Override
     public RecognitionOrder surcharge(RecognitionOrderSalaryRequest dto) {
-        var compensation = addCompensation(dto.employeeId(),"ADDITIONALSALARY","MONTHLY",dto.amount(), dto.startDate(),dto.endDate());
+        var compensation = addCompensation(dto.employeeId(), "ADDITIONALSALARY", "MONTHLY", dto.amount(), dto.startDate(), dto.endDate());
         var employeeEmployment = employeeEmploymentService.getByCompensationComponentId(compensation.getId());
         return create(new RecognitionOrderRequest(
                         dto.orderTypeId(),
-                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId(),compensation.getId())),
+                        List.of(new RecognitionOrderRecordRequest(employeeEmployment.getId(), compensation.getId())),
                         dto.number(),
                         dto.date(),
                         dto.sourceDocument(),
@@ -269,8 +315,9 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
                 )
         );
     }
-    private EmployeeEmployment addCompensation(Long employeeId,String salaryClassification, String paymentFrequency, BigDecimal amount,LocalDate startDate, LocalDate endDate) {
-        var compensationComponent = employeeEmploymentService.addCompensation(employeeId,new CompensationComponentRequest(
+
+    private CompensationComponent addCompensation(Long employeeId, String salaryClassification, String paymentFrequency, BigDecimal amount, LocalDate startDate, LocalDate endDate) {
+        var compensationComponent = employeeEmploymentService.addCompensation(employeeId, new CompensationComponentRequest(
                         salaryClassificationService.getByCode(salaryClassification).getId(),
                         paymentFrequencyService.getByCode(paymentFrequency).getId(),
                         startDate,
@@ -283,31 +330,46 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
                         null
                 )
         );
-       if(compensationComponent.isPresent()) compensationComponent.get();
-       return null;
+        if (compensationComponent.isPresent()) return compensationComponent.get();
+        return null;
     }
 
-    private Map<String,String> getCommonValues(RecognitionOrder order){
+    private Map<String, String> getCommonValues(RecognitionOrder order) {
         Map<String, String> values = new HashMap<>();
-        var employeeEmployment = getEmployment(order);
-        //getCompensationComponent(employeeEmployment);
-
-        var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
-        values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
-        values.put("employeePosition", employment.position().name());
         values.put("sourceDocument", order.getSourceDocument());
-        values.put("ceo",employeeUseCaseService.getLastNameWithInitials(employeeEmploymentUseCaseService.getCEOEmployee()));
+        values.put("ceo", employeeUseCaseService.getLastNameWithInitials(employeeEmploymentUseCaseService.getCEOEmployee()));
         return values;
     }
-    private EmployeeEmployment getEmployment(RecognitionOrder order){
+
+
+
+
+
+
+    private EmployeeEmployment getEmployment(RecognitionOrder order) {
         return order.getRecords().getFirst().getEmployment();
     }
 
-   /* private CompensationComponent getCompensationComponent(EmployeeEmployment employeeEmployment){
-        if(employeeEmployment.getEmployment() instanceof InternalEmployment){
-            System.out.println("Yes it is instance");
+    private EmployeeEmployment getEmployment(RecognitionOrderRecord record) {
+        var employment = (Employment) Hibernate.unproxy(record.getEmployment().getEmployment());
+        var employeeEmployment = new EmployeeEmployment();
+        if (employment instanceof InternalEmployment internalEmployment) {
+            List<CompensationComponent> l = new ArrayList<>();
+            l.add(record.getCompensationComponent());
+            internalEmployment.setCompensationComponents(l);
+            employeeEmployment = record.getEmployment();
+            employeeEmployment.setEmployment(internalEmployment);
+            employeeEmployment.setStatus(record.getEmployment().getStatus());
+            employeeEmployment.setEmployee(record.getEmployment().getEmployee());
+            employeeEmployment.setStates(record.getEmployment().getStates());
         }
-        return null;
-    }*/
+        return employeeEmployment;
+    }
 
+    private RecognitionOrderRecord setRecord(RecognitionOrderRecord record) {
+        var copy = new RecognitionOrderRecord();
+        copy.setCompensationComponent(record.getCompensationComponent());
+        copy.setEmployment(getEmployment(record));
+        return copy;
+    }
 }

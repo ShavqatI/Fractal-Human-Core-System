@@ -36,8 +36,8 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
         var employment = employmentService.getById(employmentId);
         var compensationComponent = compensationComponentMapperService.toEntity(dto);
         employment.addCompensationComponent(compensationComponent);
-        employmentService.save(employment);
-        return compensationComponent;
+        compensationComponent.setInternalEmployment(employment);
+        return save(compensationComponent);
     }
 
     @Override

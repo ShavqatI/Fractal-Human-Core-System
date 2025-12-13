@@ -14,6 +14,7 @@ public interface BusinessTripOrderService extends ApprovalWorkflowAware<Long, Bu
     List<BusinessTripOrder> getAll();
 
     BusinessTripOrder getById(Long id);
+    BusinessTripOrder getByBusinessTripId(Long businessTripId);
 
     BusinessTripOrder update(Long id, BusinessTripOrderRequest dto);
 

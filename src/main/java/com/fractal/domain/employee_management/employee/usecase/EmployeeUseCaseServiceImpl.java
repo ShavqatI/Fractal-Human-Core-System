@@ -4,11 +4,13 @@ import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
+import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocumentService;
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.EmploymentService;
 import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
+import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,7 @@ class EmployeeUseCaseServiceImpl implements EmployeeUseCaseService {
     private final InternalEmploymentService internalEmploymentService;
     private final EmploymentService employmentService;
     private final StatusService statusService;
+    private final EmployeeIdentificationDocumentService identificationDocumentService;
     @Override
     public String getFullName(Employee employee) {
         if(employee == null) return "";
@@ -50,6 +53,21 @@ class EmployeeUseCaseServiceImpl implements EmployeeUseCaseService {
         if(employeeEmployment != null && employment instanceof InternalEmployment internalEmployment){
             return Optional.ofNullable(internalEmploymentService.toDTO(internalEmployment));
         }
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<IdentificationDocumentResponse> getIdentificationDocument(Employee employee) {
+        var identificationDocument = identificationDocumentService.getAllByEmployeeId(employee.getId())
+                .stream().filter(id-> id.getStatus().getCode().equals("ACTIVE")
+                        &&
+                        (id.getIdentificationDocumentType().getCode().equals("ID")
+                        || id.getIdentificationDocumentType().getCode().equals("PASSPORT")
+                        )
+
+                ).findAny();
+        if(identificationDocument.isPresent())
+            return Optional.of(identificationDocumentService.toDTO(identificationDocument.get()));
         return Optional.empty();
     }
 

@@ -3,6 +3,8 @@ package com.fractal.domain.employment;
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
+import com.fractal.domain.employment.internal.compensation_component.CompensationComponentService;
+import com.fractal.domain.employment.internal.compensation_component.dto.ApprovalWorkflowAwareRequest;
 import com.fractal.domain.employment.state.EmploymentStateService;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
@@ -21,6 +23,7 @@ class EmploymentServiceImpl implements EmploymentService {
     private final AuthenticatedService authenticatedService;
     private final StatusService statusService;
     private final EmploymentStateService stateService;
+
 
     @Override
     public Employment getById(Long id) {
@@ -43,9 +46,6 @@ class EmploymentServiceImpl implements EmploymentService {
     public Employment activate(Long id) {
         var employment = getById(id);
         if (employment.getStatus().getCode().equals("APPROVED")) {
-            /*employment.setReviewedDate(LocalDateTime.now());
-            employment.setReviewedUser(authenticatedService.getUser());
-            */
             employment.setStatus(statusService.getByCode("ACTIVE"));
             return save(employment);
         } else {
@@ -72,6 +72,7 @@ class EmploymentServiceImpl implements EmploymentService {
             employment.setReviewedDate(LocalDateTime.now());
             employment.setReviewedUser(authenticatedService.getUser());
             employment.setStatus(statusService.getByCode("REVIEWED"));
+
             return save(employment);
         } else {
             throw new ResourceStateException("The status is not valid is: " + employment.getStatus().getName());
