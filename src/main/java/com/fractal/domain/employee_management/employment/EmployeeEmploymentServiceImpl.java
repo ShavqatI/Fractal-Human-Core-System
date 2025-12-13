@@ -254,11 +254,14 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     public EmployeeEmployment activate(Long employeeId,Long id) {
         var employeeEmployment = getById(employeeId,id);
         if (employeeEmployment.getStatus().getCode().equals("APPROVED")) {
+            try {
+                var activeEmployment = getActiveEmployment(employeeId);
+                close(employeeId,activeEmployment.getEmployment().getId(),employeeEmployment.getEmployment().getStartDate());
+            }
+            catch (Exception e){}
             employeeEmployment.setStatus(statusService.getByCode("ACTIVE"));
             stateService.create(employeeEmployment);
             employmentService.activate(employeeEmployment.getEmployment().getId());
-            var activeEmployment = getActiveEmployment(employeeId);
-            close(employeeId,activeEmployment.getEmployment().getId(),employeeEmployment.getEmployment().getStartDate());
             return employmentRepository.save(employeeEmployment);
         } else {
             throw new ResourceStateException("The status is not valid is: " + employeeEmployment.getStatus().getName());

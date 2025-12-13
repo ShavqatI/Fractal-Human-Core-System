@@ -31,7 +31,7 @@ public class LayoutLabelController {
         return ResponseEntity.ok(layoutLabelService.getAll().stream().map(layoutLabelService::toDTO).collect(Collectors.toList()));
     }
 
-    @GetMapping("/list")
+    @PostMapping("/list")
     public ResponseEntity<List<LayoutLabelResponse>> getAllByListAndLanguage(@RequestBody LayoutLabelListRequest dto) {
         return ResponseEntity.ok(layoutLabelService.getAllByListAndLanguageCode(dto).stream().map(layoutLabelService::toDTO).collect(Collectors.toList()));
     }

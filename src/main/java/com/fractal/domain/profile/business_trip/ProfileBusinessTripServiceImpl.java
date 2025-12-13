@@ -11,6 +11,7 @@ import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.nio.file.Path;
 import java.util.List;
 
 @Service
@@ -62,6 +63,12 @@ class ProfileBusinessTripServiceImpl implements ProfileBusinessTripService {
     public BusinessTrip review(Long id) {
         var businessTrip = findById(id);
         return businessTripService.review(businessTrip.getId());
+    }
+
+    @Override
+    public Path passport(Long id) {
+        var businessTrip = findById(id);
+        return businessTripService.passport(businessTrip.getId());
     }
 
     private BusinessTripRequest mapDTO(ProfileBusinessTripRequest dto) {

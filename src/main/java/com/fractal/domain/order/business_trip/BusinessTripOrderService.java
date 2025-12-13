@@ -19,10 +19,7 @@ public interface BusinessTripOrderService extends ApprovalWorkflowAware<Long, Bu
     BusinessTripOrder update(Long id, BusinessTripOrderRequest dto);
 
     void delete(Long id);
-
-
     BusinessTripOrderResponse toDTO(BusinessTripOrder businessTripOrder);
-
     BusinessTripOrder save(BusinessTripOrder order);
     Path print(Long id);
 

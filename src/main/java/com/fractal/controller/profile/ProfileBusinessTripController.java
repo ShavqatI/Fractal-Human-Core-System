@@ -4,12 +4,15 @@ package com.fractal.controller.profile;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.profile.business_trip.ProfileBusinessTripRequest;
 import com.fractal.domain.profile.business_trip.ProfileBusinessTripService;
+import com.fractal.domain.resource.FileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +22,7 @@ import java.util.stream.Collectors;
 public class ProfileBusinessTripController {
 
     private final ProfileBusinessTripService businessTripService;
+    private final FileService fileService;
 
     @PostMapping
     public ResponseEntity<BusinessTripResponse> create(@RequestBody @Valid ProfileBusinessTripRequest dto) {
@@ -43,6 +47,12 @@ public class ProfileBusinessTripController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         businessTripService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
 
+    @GetMapping("passport/{id}")
+    @CrossOrigin(value = "*")
+    public ResponseEntity<StreamingResponseBody> passport(@PathVariable Long id) {
+        Path path = businessTripService.passport(id);
+        return fileService.view(path);
     }
 }

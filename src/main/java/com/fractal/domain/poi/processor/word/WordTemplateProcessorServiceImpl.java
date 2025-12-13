@@ -24,7 +24,8 @@ class WordTemplateProcessorServiceImpl implements WordTemplateProcessorService {
         }
     }
 
-    private void processDocument(XWPFDocument document, Map<String, String> variables) {
+    @Override
+    public void processDocument(XWPFDocument document, Map<String, String> variables) {
         // Process paragraphs
         for (XWPFParagraph paragraph : document.getParagraphs()) {
             replaceInParagraph(paragraph, variables);

@@ -2,12 +2,14 @@ package com.fractal.domain.order.business_trip;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.business_trip.BusinessTripService;
 import com.fractal.domain.employee_management.business_trip.location.mapper.BusinessTripLocationMapperService;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderRequest;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
 import com.fractal.domain.order.business_trip.mapper.BusinessTripOrderMapperService;
+import com.fractal.domain.order.business_trip.record.BusinessTripOrderRecord;
 import com.fractal.domain.order.state.OrderStateService;
 import com.fractal.domain.order.usecase.OrderUseCaseService;
 import com.fractal.domain.order.vacation.VacationOrder;
@@ -19,17 +21,21 @@ import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,13 +47,14 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     private final BusinessTripOrderMapperService orderMapperService;
     private final OrderStateService stateService;
     private final StatusService statusService;
-    private final WordTemplateProcessorService wordTemplateProcessorService;
-    private final WordToPdfConverterService wordToPdfConverterService;
     private final EmployeeUseCaseService employeeUseCaseService;
     private final OrderUseCaseService orderUseCaseService;
+    private final WordTemplateProcessorService wordTemplateProcessorService;
+    private final WordToPdfConverterService wordToPdfConverterService;
     private final FileService fileService;
     private final AuthenticatedService authenticatedService;
     private final BusinessTripLocationMapperService businessTripLocationMapperService;
+
 
     @Value("${resource-storage.temporary}")
     private String resourceStoragePath;
@@ -127,7 +134,7 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
         if (order.getStatus().getCode().equals("REVIEWED")) {
             order.setApprovedDate(LocalDateTime.now());
             order.getRecords().forEach(record -> {
-                businessTripService.close(record.getBusinessTrip().getId());
+                businessTripService.activate(record.getBusinessTrip().getId());
             });
             order.setApprovedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("APPROVED"));
@@ -139,51 +146,106 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
     }
 
     @Override
-    public Path print(Long id)  {
+    public Path print(Long id)   {
         var order = getById(id);
         var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
         var pdfFilePath =  Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
-        var employees = order.getRecords().stream().map(record -> record.getBusinessTrip().getEmployee()).collect(Collectors.toList());
-        StringBuilder employeeList = new StringBuilder();
-        employees.forEach(employee -> employeeList.append(employeeUseCaseService.getFullName(employee) + "\n"));
         Map<String, String> values = new HashMap<>();
-
-        values.putAll(orderUseCaseService.getHeader(order));
-
-        values.put("calendarDays", order.getDays().toString());
-        values.put("startDate", order.startDate.toString());
-        values.put("endDate", order.getEndDate().toString());
-        values.put("location", getLocation(order));
-        values.put("justification", order.getJustification());
-        values.put("employeeList", employeeList.toString());
-        values.put("sourceDocument", order.getSourceDocument());
-
-        values.putAll(orderUseCaseService.getFooter());
-
         try {
-            wordTemplateProcessorService.process(Path.of(order.getOrderType().getDocumentTemplateManager().getFilePath()), wordFilePath, values);
-            wordToPdfConverterService.convert(wordFilePath,pdfFilePath);
-            fileService.delete(wordFilePath.toString());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+            XWPFDocument document = new XWPFDocument(new FileInputStream(order.getOrderType().getDocumentTemplateManager().getFilePath()));
+             values.putAll(orderUseCaseService.getHeader(order));
+             values.put("sourceDocument", order.getSourceDocument());
+             values.putAll(orderUseCaseService.getFooter());
+             document = writeTable(document,order);
+             wordTemplateProcessorService.processDocument(document,values);
+            try (FileOutputStream out = new FileOutputStream(wordFilePath.toFile())) {
+                document.write(out);
+                wordToPdfConverterService.convert(wordFilePath,pdfFilePath);
+                fileService.delete(wordFilePath.toString());
+            }
         }
-        return pdfFilePath;
+        catch (Exception e){}
+       return pdfFilePath;
     }
 
-    private String getLocation(BusinessTripOrder order){
-       StringBuilder fullAddress = new StringBuilder();
-       var businessTripLocation = order.getRecords().stream().map(record -> record.getBusinessTrip().getLocations().getFirst()).findFirst();
-       var businessTripLocationResponse = businessTripLocationMapperService.toDTO(businessTripLocation.get());
-       var address = businessTripLocationResponse.addresses().getFirst();
-       if (businessTripLocationResponse.locationType().code().equals("INTERNAL")) {
-           if(address.district().name() != null)
-               fullAddress.append(address.district().name());
-           else fullAddress.append(address.city().name());
-       }
-       else if (businessTripLocationResponse.locationType().code().equals("EXTERNAL"))
-           fullAddress.append(address.country().name());
+    private String getLocation(BusinessTrip businessTrip){
+        StringBuilder fullAddress = new StringBuilder();
+        var businessTripLocationResponse = businessTripService.toDTO(businessTrip).locations().getFirst();
+        var address = businessTripLocationResponse.addresses().getFirst();
+        if (businessTripLocationResponse.locationType().code().equals("INTERNAL")) {
+            if(address.district().name() != null)
+                fullAddress.append(address.district().name());
+            else fullAddress.append(address.city().name());
+        }
+        else if (businessTripLocationResponse.locationType().code().equals("EXTERNAL"))
+            fullAddress.append(address.country().name());
 
-       return fullAddress.toString();
+        return fullAddress.toString();
     }
+
+
+    private XWPFDocument writeTable(XWPFDocument document,BusinessTripOrder order) throws Exception {
+           XWPFTable targetTable = document.getTables().get(1);
+
+            var headerRow = targetTable.getRow(0);
+            int i = 0;
+            var number = 1;
+            for(BusinessTripOrderRecord record: order.getRecords()) {
+                XWPFTableRow row;
+                var employeeName = employeeUseCaseService.getFullName(record.getBusinessTrip().getEmployee());
+                var employment = employeeUseCaseService.getCurrentEmployment(record.getBusinessTrip().getEmployee());
+                row = i + 1 < targetTable.getNumberOfRows() ? targetTable.getRow(i + 1) : targetTable.createRow();
+
+                List<String> rowData = new ArrayList<>();
+                rowData.add(String.valueOf(number));
+                rowData.add(employeeName);
+                employment.ifPresent(employmentResponse -> {
+                    rowData.add(employmentResponse.position().name());
+                });
+                rowData.add(record.getBusinessTrip().getStartDate().toString());
+                rowData.add(record.getBusinessTrip().getEndDate().toString());
+                rowData.add(record.getBusinessTrip().getDays().toString());
+                rowData.add(record.getBusinessTrip().getDescription());
+                rowData.add(getLocation(record.getBusinessTrip()));
+                number++;
+
+                for (int j = 0; j < rowData.size(); j++) {
+                    XWPFTableCell cell;
+                    if (j < row.getTableCells().size()) {
+                        cell = row.getCell(j);
+                    } else {
+                        cell = row.addNewTableCell();
+                    }
+                    cell.setText(rowData.get(j));
+
+                    if (j < headerRow.getTableCells().size()) {
+                        XWPFTableCell headerCell = headerRow.getCell(j);
+                        cell.getCTTc().setTcPr(headerCell.getCTTc().getTcPr());
+
+                        // Remove any existing paragraph
+                        cell.removeParagraph(0);
+
+                        for (XWPFParagraph headerParagraph : headerCell.getParagraphs()) {
+                            XWPFParagraph p = cell.addParagraph();
+                            p.getCTP().setPPr(headerParagraph.getCTP().getPPr());
+
+                            XWPFRun run = p.createRun();
+                            if (!headerParagraph.getRuns().isEmpty()) {
+                                XWPFRun headerRun = headerParagraph.getRuns().get(0);
+                                run.getCTR().setRPr(headerRun.getCTR().getRPr());
+                                run.setBold(false);
+                                run.setFontSize(8);
+                            }
+                            run.setText(rowData.get(j));
+                        }
+                    } else {
+                        cell.setText(rowData.get(j));
+                    }
+                }
+           };
+         return document;
+    }
+
+
 
 }

@@ -3,6 +3,7 @@ package com.fractal.domain.profile.business_trip;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 
+import java.nio.file.Path;
 import java.util.List;
 
 public interface ProfileBusinessTripService {
@@ -13,6 +14,7 @@ public interface ProfileBusinessTripService {
     void deleteById(Long id);
     void close(Long id);
     BusinessTrip review(Long id);
+    Path passport(Long id);
     BusinessTripResponse toDTO(BusinessTrip businessTrip);
 
 }

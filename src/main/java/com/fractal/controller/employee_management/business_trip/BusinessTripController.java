@@ -53,6 +53,10 @@ public class BusinessTripController {
     public ResponseEntity<BusinessTripResponse> approve(@PathVariable Long id) {
         return ResponseEntity.ok(businessTripService.toDTO(businessTripService.approve(id)));
     }
+    @PutMapping("cancel/{id}")
+    public ResponseEntity<BusinessTripResponse> cancel(@PathVariable Long id) {
+        return ResponseEntity.ok(businessTripService.toDTO(businessTripService.cancel(id)));
+    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

@@ -14,7 +14,7 @@ public interface BusinessTripOrderRepository extends JpaRepository<BusinessTripO
     select bto from BusinessTripOrder bto
     join bto.records record
     where record.businessTrip.id = :businessTripId
-    LIMIT 1
+    
 """)
     Optional<BusinessTripOrder> findByBusinessTripId(Long businessTripId);
 }

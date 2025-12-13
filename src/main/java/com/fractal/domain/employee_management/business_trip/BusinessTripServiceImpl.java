@@ -41,7 +41,6 @@ class BusinessTripServiceImpl implements BusinessTripService {
     private final WordToPdfConverterService wordToPdfConverterService;
     private final DocumentTemplateManagerService documentTemplateManagerService;
     private final EmployeeUseCaseService employeeUseCaseService;
-    private final BusinessTripOrderService businessTripOrderService;
     private final EmployeeEmploymentUseCaseService employeeEmploymentUseCaseService;
 
     @Value("${resource-storage.temporary}")
@@ -92,6 +91,13 @@ class BusinessTripServiceImpl implements BusinessTripService {
     }
 
     @Override
+    public void activate(Long id) {
+        var businessTrip = findById(id);
+        businessTrip.setStatus(statusService.getByCode("ACTIVE"));
+        save(businessTrip);
+    }
+
+    @Override
     public Path passport(Long id) {
         var businessTrip = getById(id);
         var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
@@ -99,19 +105,20 @@ class BusinessTripServiceImpl implements BusinessTripService {
 
         Map<String, String> values = new HashMap<>();
         var employment = employeeUseCaseService.getCurrentEmployment(businessTrip.getEmployee()).get();
-        var oder = getOrder(businessTrip);
+        var order = getOrder(businessTrip.getId());
         var identificationDocument = employeeUseCaseService.getIdentificationDocument(businessTrip.getEmployee());
 
-        values.put("oderDate", businessTrip.getCreatedDate().toString());
+        values.put("docDate", businessTrip.getCreatedDate().toLocalDate().toString());
         values.put("employeeName", employeeUseCaseService.getFullName(businessTrip.getEmployee()));
         values.put("employeePosition", employment.position().name());
+        values.put("fullBankName", employment.organization().name());
         values.put("calendarDays", businessTrip.getDays().toString());
         values.put("startDate", businessTrip.getStartDate().toString());
         values.put("endDate", businessTrip.getEndDate().toString());
         values.put("location", getLocation(businessTrip));
         values.put("description", businessTrip.getDescription());
-        values.put("oderNumber", oder.getNumber().toString());
-        values.put("oderDate", oder.getDate().toString());
+        values.put("orderNumber", order.getNumber().toString());
+        values.put("orderDate", order.getDate().toString());
 
         identificationDocument.ifPresent(identificationDocumentResponse -> {
             values.put("idSeries", identificationDocumentResponse.series());
@@ -145,6 +152,8 @@ class BusinessTripServiceImpl implements BusinessTripService {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
+
+
 
     private BusinessTrip findById(Long id) {
         return businessTripRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("BusinessTrip with id: " + id + " not found"));
@@ -191,7 +200,20 @@ class BusinessTripServiceImpl implements BusinessTripService {
         return fullAddress.toString();
     }
 
-    private BusinessTripOrder getOrder(BusinessTrip businessTrip){
-       return businessTripOrderService.getByBusinessTripId(businessTrip.getId());
+    private BusinessTripOrder getOrder(Long id){
+       return businessTripRepository.findOrder(id).orElseThrow(()-> new ResourceNotFoundException("BusinessTrip in BusinessTripOrderRecord with id: " + id + " not found"));
+    }
+
+    @Override
+    public BusinessTrip cancel(Long id) {
+        var businessTrip = getById(id);
+        if (businessTrip.getStatus().getCode().equals("REVIEWED") || businessTrip.getStatus().getCode().equals("CREATED")) {
+            businessTrip.setCanceledDate(LocalDateTime.now());
+            businessTrip.setCanceledUser(authenticatedService.getUser());
+            businessTrip.setStatus(statusService.getByCode("CANCEL"));
+            return save(businessTrip);
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + businessTrip.getStatus().getName());
+        }
     }
 }

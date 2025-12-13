@@ -1,6 +1,7 @@
 package com.fractal.domain.employee_management.business_trip;
 
 import com.fractal.domain.abstraction.ApprovalWorkflow;
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.business_trip.expense.BusinessTripExpense;
 import com.fractal.domain.employee_management.business_trip.location.BusinessTripLocation;
@@ -12,6 +13,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +58,16 @@ public class BusinessTrip extends ApprovalWorkflow {
 
     @Column(name = "days")
     private Integer days;
+
+    @Column(name = "canceled_date")
+    private LocalDateTime canceledDate;
+
+    @ManyToOne
+    @JoinColumn(name = "canceled_user_id")
+    private User canceledUser;
+
+    @Column(name = "canceled_reason")
+    private String canceledReason;
 
     @OneToMany(mappedBy = "businessTrip", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BusinessTripResource> resources = new ArrayList<>();

@@ -34,9 +34,12 @@ class LayoutLabelServiceImpl implements LayoutLabelService {
     @Override
     public List<LayoutLabel> getAllByListAndLanguageCode(LayoutLabelListRequest dto) {
         return layoutLabelRepository.findAllByNameIn(dto.list()).stream()
-                .filter(layoutLabel -> layoutLabel.getLayoutLabelDetails().stream()
-                        .anyMatch(detail -> detail.getLanguage().getCode().equals(dto.languageCode())))
-                .collect(Collectors.toList());
+                .map(layoutLabel -> {
+                    var details = layoutLabel.getLayoutLabelDetails().stream().filter(detail->
+                             detail.getLanguage().getCode().equals(dto.languageCode())).collect(Collectors.toList());
+                    layoutLabel.setLayoutLabelDetails(details);
+                    return layoutLabel;
+                }).collect(Collectors.toList());
     }
 
     @Override
