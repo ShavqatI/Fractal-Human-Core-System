@@ -1,12 +1,15 @@
 package com.fractal.domain.employee_management.business_trip;
 
+import com.fractal.domain.abstraction.Cancelable;
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManagerService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.business_trip.dto.BusinessTripCancelRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.employee_management.business_trip.mapper.BusinessTripMapperService;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
+import com.fractal.domain.employee_management.employment.CancelRequest;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
 import com.fractal.domain.order.business_trip.BusinessTripOrder;
@@ -205,11 +208,12 @@ class BusinessTripServiceImpl implements BusinessTripService {
     }
 
     @Override
-    public BusinessTrip cancel(Long id) {
-        var businessTrip = getById(id);
+    public BusinessTrip cancel(BusinessTripCancelRequest dto) {
+        var businessTrip = getById(dto.id());
         if (businessTrip.getStatus().getCode().equals("REVIEWED") || businessTrip.getStatus().getCode().equals("CREATED")) {
             businessTrip.setCanceledDate(LocalDateTime.now());
             businessTrip.setCanceledUser(authenticatedService.getUser());
+            businessTrip.setCanceledReason(dto.reason());
             businessTrip.setStatus(statusService.getByCode("CANCEL"));
             return save(businessTrip);
         } else {
