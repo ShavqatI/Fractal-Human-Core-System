@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -37,6 +38,11 @@ class SubordinateServiceImpl implements SubordinateService {
     }
 
     @Override
+    public Subordinate getActiveByEmployeeId(Long employeeId) {
+        return subordinateRepository.findActiveBySubordinateEmployeeId(employeeId).orElseThrow(()->new ResourceNotFoundException("No any active subordinate find for employee with id: " + employeeId + " not found"));
+    }
+
+    @Override
     public List<Subordinate> getAllByEmployeeId(Long employeeId) {
         return subordinateRepository.findAllByEmployeeId(employeeId);
     }
@@ -60,6 +66,18 @@ class SubordinateServiceImpl implements SubordinateService {
     @Override
     public void deleteById(Long id) {
         subordinateRepository.delete(findById(id));
+    }
+
+    @Override
+    public void close(Long id, LocalDate endDate) {
+        try {
+            Subordinate subordinate = findById(id);
+            subordinate.setStatus(statusService.getByCode("CLOSE"));
+            subordinate.setEndDate(endDate);
+            save(subordinate);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
     }
 
     public SubordinateResponse toDTO(Subordinate subordinate) {

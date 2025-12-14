@@ -5,6 +5,7 @@ import com.fractal.component.SpringContext;
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.order.employment.EmploymentOrder;
+import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.department.DepartmentService;
 import com.fractal.domain.organization_management.grade.GradeService;
 import com.fractal.domain.organization_management.position.dto.*;
@@ -117,7 +118,6 @@ class PositionServiceImpl implements PositionService {
              position.setReviewedDate(LocalDateTime.now());
              position.setReviewedUser(SpringContext.getBean(CurrentUserHolder.class).get());
              position.setStatus(statusService.getByCode("REVIEWED"));
-            //stateService.create(order);
             return save(position);
         } else {
             throw new ResourceStateException("The status is not valid is: " + position.getStatus().getName());
@@ -131,8 +131,6 @@ class PositionServiceImpl implements PositionService {
             position.setApprovedDate(LocalDateTime.now());
             position.setApprovedUser(SpringContext.getBean(CurrentUserHolder.class).get());
             position.setStatus(statusService.getByCode("APPROVED"));
-            //stateService.create(order);
-
             return save(position);
         } else {
             throw new ResourceStateException("The status is not valid is: " + position.getStatus().getName());
@@ -171,6 +169,17 @@ class PositionServiceImpl implements PositionService {
         );
     }
 
+    @Override
+    public Position getSupervisor(Long id) {
+        var position  = getById(id);
+        return positionRepository.findActiveSupervisor(position.getDepartment().getId()).orElseThrow(()-> new ResourceNotFoundException("Supervisor position for department id: " + position.getDepartment().getId() + " not found"));
+    }
+
+    @Override
+    public Position getSupervisor(Department department) {
+        return positionRepository.findActiveSupervisor(department.getId()).orElseThrow(()-> new ResourceNotFoundException("Supervisor position for department id: " + department.getId() + " not found"));
+    }
+
     private Position toEntity(PositionRequest dto) {
         return Position.builder()
                 .name(dto.name())
@@ -189,6 +198,7 @@ class PositionServiceImpl implements PositionService {
     private Position save(Position position) {
         try {
             return positionRepository.save(position);
+
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }

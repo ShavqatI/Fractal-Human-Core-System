@@ -8,6 +8,7 @@ import com.fractal.domain.employee_management.business_trip.location.mapper.Busi
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderRequest;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
+import com.fractal.domain.order.business_trip.dto.OrderCancelRequest;
 import com.fractal.domain.order.business_trip.mapper.BusinessTripOrderMapperService;
 import com.fractal.domain.order.business_trip.record.BusinessTripOrderRecord;
 import com.fractal.domain.order.state.OrderStateService;
@@ -144,6 +145,21 @@ public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }
     }
+
+    @Override
+    public BusinessTripOrder cancel(OrderCancelRequest dto) {
+        var order = getById(dto.id());
+        if (order.getStatus().getCode().equals("REVIEWED") || order.getStatus().getCode().equals("CREATED")) {
+            order.setCanceledDate(LocalDateTime.now());
+            order.setCanceledUser(authenticatedService.getUser());
+            order.setCanceledReason(dto.reason());
+            order.setStatus(statusService.getByCode("CANCEL"));
+            return save(order);
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
+        }
+    }
+
 
     @Override
     public Path print(Long id)   {

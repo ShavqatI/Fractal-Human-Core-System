@@ -12,6 +12,7 @@ import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
+import com.fractal.domain.organization_management.position.Position;
 import com.fractal.domain.organization_management.position.PositionService;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
@@ -54,6 +55,12 @@ class EmployeeEmploymentUseCaseServiceImpl implements EmployeeEmploymentUseCaseS
     @Override
     public Employee getCEOEmployee() {
         var employee = getEmployeeByPosition("CEO");
+        return employee.isPresent() ? employee.get() : null;
+    }
+
+    @Override
+    public Employee getSupervisorEmployee(Position position) {
+        var employee = getEmployeeByPosition(position.getCode());
         return employee.isPresent() ? employee.get() : null;
     }
 

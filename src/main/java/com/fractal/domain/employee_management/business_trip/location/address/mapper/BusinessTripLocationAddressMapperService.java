@@ -16,6 +16,7 @@ public interface BusinessTripLocationAddressMapperService {
     BusinessTripLocationAddress toEntity(BusinessTripLocationAddressRequest dto);
 
     BusinessTripLocationAddress toEntity(BusinessTripLocationAddress address, BusinessTripLocationAddressRequest dto);
+    BusinessTripLocationAddress copy(BusinessTripLocationAddress address);
 }
 
 

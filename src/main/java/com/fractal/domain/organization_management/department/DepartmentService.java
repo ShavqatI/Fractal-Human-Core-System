@@ -3,6 +3,7 @@ package com.fractal.domain.organization_management.department;
 import com.fractal.domain.organization_management.department.dto.DepartmentCompactResponse;
 import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
+import com.fractal.domain.organization_management.position.Position;
 
 import java.util.List;
 
@@ -30,4 +31,5 @@ public interface DepartmentService {
     Department updateChild(Long id, Long childId, DepartmentRequest dto);
 
     Department deleteChild(Long id, Long childId);
+
 }

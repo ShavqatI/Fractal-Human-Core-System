@@ -76,6 +76,29 @@ class BusinessTripLocationAddressMapperServiceImpl implements BusinessTripLocati
         return null;
     }
 
+    @Override
+    public BusinessTripLocationAddress copy(BusinessTripLocationAddress address) {
+        var copy = BusinessTripLocationAddress.builder()
+                .businessTripLocation(address.getBusinessTripLocation())
+                .addressType(address.getAddressType())
+                .country(address.getCountry())
+                .region(address.getRegion())
+                .city(address.getCity())
+                .district(address.getDistrict())
+                .street(address.getStreet())
+                .house(address.getHouse())
+                .apartment(address.getApartment())
+                .postalCode(address.getPostalCode())
+                .buildingNumber(address.getBuildingNumber())
+                .floorNumber(address.getFloorNumber())
+                .latitude(address.getLatitude())
+                .longitude(address.getLongitude())
+                .startDate(address.getStartDate())
+                .endDate(address.getEndDate())
+                .build();
+        return copy;
+    }
+
     private BusinessTripLocationAddress mapToEntity(BusinessTripLocationAddress address, ExternalBusinessTripLocationAddressRequest dto) {
         address.setAddressType(addressTypeService.getById(dto.addressTypeId()));
         address.setCountry(countryService.getById(dto.countryId()));

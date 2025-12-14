@@ -51,6 +51,19 @@ class BusinessTripLocationMapperServiceImpl implements BusinessTripLocationMappe
         return mapToEntity(location, dto);
     }
 
+    @Override
+    public BusinessTripLocation copy(BusinessTripLocation location) {
+        var copy = BusinessTripLocation.builder()
+                .businessTrip(location.getBusinessTrip())
+                .businessTripLocationType(location.getBusinessTripLocationType())
+                .startTime(location.getStartTime())
+                .endTime(location.getEndTime())
+                .status(location.getStatus())
+                .build();
+        location.getAddresses().forEach(address-> copy.addAddress(addressMapperService.copy(address)));
+       return copy;
+    }
+
     private BusinessTripLocation mapToEntity(BusinessTripLocation location, BusinessTripLocationRequest dto) {
         location.setBusinessTripLocationType(locationTypeService.getById(dto.locationTypeId()));
         location.setStartTime(dto.startTime());

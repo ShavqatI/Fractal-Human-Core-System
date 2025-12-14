@@ -1,13 +1,15 @@
 package com.fractal.domain.order.business_trip;
 
 import com.fractal.domain.abstraction.ApprovalWorkflowAware;
+import com.fractal.domain.abstraction.Cancelable;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderRequest;
 import com.fractal.domain.order.business_trip.dto.BusinessTripOrderResponse;
+import com.fractal.domain.order.business_trip.dto.OrderCancelRequest;
 
 import java.nio.file.Path;
 import java.util.List;
 
-public interface BusinessTripOrderService extends ApprovalWorkflowAware<Long, BusinessTripOrder> {
+public interface BusinessTripOrderService extends ApprovalWorkflowAware<Long, BusinessTripOrder>, Cancelable<OrderCancelRequest,BusinessTripOrder> {
 
     BusinessTripOrder create(BusinessTripOrderRequest dto);
 

@@ -2,6 +2,7 @@ package com.fractal.domain.order;
 
 
 import com.fractal.domain.abstraction.ApprovalWorkflow;
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.order.resource.OrderResource;
 import com.fractal.domain.order.state.OrderState;
@@ -14,6 +15,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,16 @@ public class Order extends ApprovalWorkflow {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
     private Status status;
+
+    @Column(name = "canceled_date")
+    private LocalDateTime canceledDate;
+
+    @ManyToOne
+    @JoinColumn(name = "canceled_user_id")
+    private User canceledUser;
+
+    @Column(name = "canceled_reason")
+    private String canceledReason;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<OrderResource> resources = new ArrayList<>();

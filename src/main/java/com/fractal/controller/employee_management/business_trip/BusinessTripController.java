@@ -3,6 +3,7 @@ package com.fractal.controller.employee_management.business_trip;
 
 import com.fractal.domain.employee_management.business_trip.BusinessTripService;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripCancelRequest;
+import com.fractal.domain.employee_management.business_trip.dto.BusinessTripProlongRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.resource.FileService;
@@ -57,6 +58,11 @@ public class BusinessTripController {
     @PutMapping("cancel/{id}")
     public ResponseEntity<BusinessTripResponse> cancel(@PathVariable Long id,@RequestBody String reason) {
         return ResponseEntity.ok(businessTripService.toDTO(businessTripService.cancel(new BusinessTripCancelRequest(id,reason))));
+    }
+
+    @PutMapping("prolong/{id}")
+    public ResponseEntity<BusinessTripResponse> cancel(@PathVariable Long id, @RequestBody @Valid BusinessTripProlongRequest dto ) {
+        return ResponseEntity.ok(businessTripService.toDTO(businessTripService.prolong(id,dto)));
     }
 
     @DeleteMapping("/{id}")

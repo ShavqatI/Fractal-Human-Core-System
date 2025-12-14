@@ -1,19 +1,16 @@
 package com.fractal.domain.employee_management.business_trip;
 
-import com.fractal.domain.abstraction.Cancelable;
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManagerService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripCancelRequest;
+import com.fractal.domain.employee_management.business_trip.dto.BusinessTripProlongRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.employee_management.business_trip.mapper.BusinessTripMapperService;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
-import com.fractal.domain.employee_management.employment.CancelRequest;
-import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
 import com.fractal.domain.order.business_trip.BusinessTripOrder;
-import com.fractal.domain.order.business_trip.BusinessTripOrderService;
 import com.fractal.domain.poi.processor.word.WordTemplateProcessorService;
 import com.fractal.domain.poi.processor.word.WordToPdfConverterService;
 import com.fractal.domain.resource.FileService;
@@ -81,6 +78,16 @@ class BusinessTripServiceImpl implements BusinessTripService {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
     }
+
+    @Override
+    public BusinessTrip prolong(Long id, BusinessTripProlongRequest dto) {
+        try {
+           return save(mapperService.toEntity(findById(id),dto));
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e.getMostSpecificCause().getMessage());
+        }
+    }
+
     @Override
     public void deleteById(Long id) {
         businessTripRepository.delete(findById(id));
@@ -214,7 +221,7 @@ class BusinessTripServiceImpl implements BusinessTripService {
             businessTrip.setCanceledDate(LocalDateTime.now());
             businessTrip.setCanceledUser(authenticatedService.getUser());
             businessTrip.setCanceledReason(dto.reason());
-            businessTrip.setStatus(statusService.getByCode("CANCEL"));
+            businessTrip.setStatus(statusService.getByCode("CANCELED"));
             return save(businessTrip);
         } else {
             throw new ResourceStateException("The status is not valid is: " + businessTrip.getStatus().getName());

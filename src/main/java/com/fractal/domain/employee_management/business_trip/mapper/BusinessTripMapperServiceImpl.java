@@ -2,11 +2,11 @@ package com.fractal.domain.employee_management.business_trip.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
+import com.fractal.domain.employee_management.business_trip.dto.BusinessTripProlongRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.employee_management.business_trip.expense.mapper.BusinessTripExpenseMapperService;
 import com.fractal.domain.employee_management.business_trip.location.mapper.BusinessTripLocationMapperService;
-import com.fractal.domain.employee_management.business_trip.purpose.BusinessTripPurpose;
 import com.fractal.domain.employee_management.business_trip.purpose.BusinessTripPurposeService;
 import com.fractal.domain.employee_management.business_trip.resource.mapper.BusinessTripResourceMapperService;
 import com.fractal.domain.employee_management.business_trip.type.BusinessTripTypeService;
@@ -45,6 +45,7 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
                 businessTrip.getStartDate(),
                 businessTrip.getEndDate(),
                 businessTrip.getDays(),
+                businessTrip.getCanceledReason(),
                 Optional.ofNullable(businessTrip.getExpenses())
                         .orElse(emptyList())
                         .stream()
@@ -74,6 +75,22 @@ class BusinessTripMapperServiceImpl implements BusinessTripMapperService {
     @Override
     public BusinessTrip toEntity(BusinessTrip businessTrip, BusinessTripRequest dto) {
         return mapToEntity(businessTrip, dto);
+    }
+
+    @Override
+    public BusinessTrip toEntity(BusinessTrip businessTrip, BusinessTripProlongRequest dto) {
+       var copy = BusinessTrip.builder()
+                .employee(businessTrip.getEmployee())
+                .businessTripType(businessTripTypeService.getByCode("PROLONG"))
+                .businessTripPurpose(businessTrip.getBusinessTripPurpose())
+                .status(statusService.getByCode("CREATED"))
+                .description(dto.description())
+                .startDate(dto.startDate())
+                .endDate(dto.endDate())
+                .days((int) ChronoUnit.DAYS.between(dto.startDate(), dto.endDate()) + 1)
+                .build();
+        businessTrip.getLocations().forEach(location-> copy.addLocation(locationMapperService.copy(location)));
+       return copy;
     }
 
     private BusinessTrip mapToEntity(BusinessTrip businessTrip, BusinessTripRequest dto) {

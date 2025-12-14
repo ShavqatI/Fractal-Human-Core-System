@@ -3,6 +3,7 @@ package com.fractal.domain.employee_management.business_trip;
 import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.abstraction.Cancelable;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripCancelRequest;
+import com.fractal.domain.employee_management.business_trip.dto.BusinessTripProlongRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 
@@ -15,11 +16,11 @@ public interface BusinessTripService extends ApprovalWorkflowAware<Long,Business
     BusinessTrip getById(Long id);
     List<BusinessTrip> getAllByEmployeeId(Long employeeId);
     BusinessTrip update(Long id, BusinessTripRequest dto);
+    BusinessTrip prolong(Long id,BusinessTripProlongRequest dto);
     void deleteById(Long id);
     void close(Long id);
     Path passport(Long id);
     BusinessTripResponse toDTO(BusinessTrip businessTrip);
     BusinessTrip save(BusinessTrip businessTrip);
-
     void activate(Long id);
 }

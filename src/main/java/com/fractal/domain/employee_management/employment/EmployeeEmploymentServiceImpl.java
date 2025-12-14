@@ -2,12 +2,16 @@ package com.fractal.domain.employee_management.employment;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentApprovedMapperService;
 import com.fractal.domain.employee_management.employment.mapper.EmployeeEmploymentMapperService;
 import com.fractal.domain.employee_management.employment.state.EmployeeEmploymentStateService;
 import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
 import com.fractal.domain.employee_management.employment.usecase.hire.dto.TransferRequest;
+import com.fractal.domain.employee_management.subordinate.SubordinateService;
+import com.fractal.domain.employee_management.subordinate.dto.SubordinateRequest;
+import com.fractal.domain.employee_management.subordinate.type.SubordinateTypeService;
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.EmploymentService;
 import com.fractal.domain.employment.dto.EmploymentRequest;
@@ -23,6 +27,7 @@ import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResp
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.employment.internal.dto.TerminationRequest;
+import com.fractal.domain.organization_management.position.PositionService;
 import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
@@ -52,6 +57,9 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     private final StatusService statusService;
     private final EmploymentService employmentService;
     private final CompensationComponentService compensationComponentService;
+    private final SubordinateService subordinateService;
+    private final PositionService positionService;
+    private final SubordinateTypeService subordinateTypeService;
 
 
     @Override
@@ -152,6 +160,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     }
 
     @Override
+    @Transactional
     public EmployeeEmployment review(ApprovalWorkflowAwareRequest dto) {
         var employeeEmployment = getById(dto.employeeId(),dto.id());
         if (employeeEmployment.getStatus().getCode().equals("CREATED")) {
@@ -167,6 +176,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     }
 
     @Override
+    @Transactional
     public EmployeeEmployment approve(ApprovalWorkflowAwareRequest dto) {
         var employeeEmployment = getById(dto.employeeId(),dto.id());
         if (employeeEmployment.getStatus().getCode().equals("REVIEWED")) {
@@ -251,6 +261,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     }
 
     @Override
+    @Transactional
     public EmployeeEmployment activate(Long employeeId,Long id) {
         var employeeEmployment = getById(employeeId,id);
         if (employeeEmployment.getStatus().getCode().equals("APPROVED")) {
@@ -262,6 +273,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
             employeeEmployment.setStatus(statusService.getByCode("ACTIVE"));
             stateService.create(employeeEmployment);
             employmentService.activate(employeeEmployment.getEmployment().getId());
+            addSubordinate(employeeEmployment);
             return employmentRepository.save(employeeEmployment);
         } else {
             throw new ResourceStateException("The status is not valid is: " + employeeEmployment.getStatus().getName());
@@ -269,6 +281,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     }
 
     @Override
+    @Transactional
     public EmployeeEmployment close(Long employeeId,Long id,LocalDate endDate) {
         var employeeEmployment = getById(employeeId,id);
         if (!employeeEmployment.getStatus().getCode().equals("CLOSE")) {
@@ -294,6 +307,65 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
             return Optional.ofNullable(internalEmploymentService.toDTO((InternalEmployment) employment1));
         }
         return Optional.empty();
+    }
+
+    private void addSubordinate(EmployeeEmployment employeeEmployment){
+        var internalEmployment = getInternalEmployment(employeeEmployment);
+        try {
+            var active = subordinateService.getActiveByEmployeeId(employeeEmployment.getEmployee().getId());
+            subordinateService.close(active.getId(),employeeEmployment.getEmployment().getStartDate());
+        }
+        catch (Exception e){}
+        try {
+                var supervisorPosition = positionService.getSupervisor(internalEmployment.getPosition().getId());
+                if(supervisorPosition == null){
+                    if(internalEmployment.getDepartment().getParent() != null){
+                        supervisorPosition = positionService.getSupervisor(internalEmployment.getDepartment().getParent());
+                    }
+                 }
+                var supervisorEmployee = getEmployeeByPosition(supervisorPosition.getCode());
+                subordinateService.create(new SubordinateRequest(
+                        supervisorEmployee.get().getId(),
+                        employeeEmployment.getEmployee().getId(),
+                        subordinateTypeService.getByCode("DIRECT").getId(),
+                        statusService.getByCode("ACTIVE").getId(),
+                        employeeEmployment.getEmployment().getStartDate(),
+                        employeeEmployment.getEmployment().getEndDate()
+                ));
+            }
+            catch (Exception e){
+                throw new RuntimeException(e.getMessage());
+            }
+
+
+    }
+
+    private Optional<Employee> getEmployeeByPosition(String positionCode){
+        var employee = getAllActive().stream().filter(
+                        employeeEmployment -> filterInternalEmployment(employeeEmployment))
+                .filter(ee -> filterPosition(getInternalEmployment(ee),positionCode)
+                )
+                .map(employeeEmployment -> employeeEmployment.getEmployee());
+        return employee.findFirst();
+    }
+
+    private boolean filterInternalEmployment(EmployeeEmployment employeeEmployment) {
+        employeeEmployment = (EmployeeEmployment) Hibernate.unproxy(employeeEmployment);
+        var employment = (Employment) Hibernate.unproxy(employmentService.getById(employeeEmployment.getEmployment().getId()));
+        if(employment instanceof InternalEmployment) return true;
+        else return false;
+    }
+    private boolean filterPosition(InternalEmployment employment,String positionCode) {
+        var position = positionService.getById(employment.getPosition().getId());
+        return position.getCode().equals(positionCode) ? true : false;
+    }
+
+    private InternalEmployment getInternalEmployment(EmployeeEmployment employeeEmployment){
+        if(filterInternalEmployment(employeeEmployment)) {
+            var employment = (Employment) Hibernate.unproxy(employmentService.getById(employeeEmployment.getEmployment().getId()));
+            return internalEmploymentService.getById(employment.getId());
+        }
+        return null;
     }
 
 

@@ -23,6 +23,7 @@ public record BusinessTripResponse(
         LocalDate startDate,
         LocalDate endDate,
         Integer days,
+        String canceledReason,
         List<BusinessTripExpenseResponse> expenses,
         List<BusinessTripLocationResponse> locations,
         List<ResourceResponse> resources,
