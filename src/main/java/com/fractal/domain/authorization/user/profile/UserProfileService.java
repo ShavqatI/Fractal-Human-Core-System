@@ -10,6 +10,7 @@ import java.util.List;
 public interface UserProfileService {
 
     void changePassword(ChangePasswordRequest dto);
+    User get();
     UserProfileResponse toDTO(User user);
     //UserProfileResponse toCompactDTO(User user);
 

@@ -30,6 +30,11 @@ public class UserProfileServiceImpl implements UserProfileService {
     }
 
     @Override
+    public User get() {
+        return userService.getById(authenticatedService.getUser().getId());
+    }
+
+    @Override
     public UserProfileResponse toDTO(User user) {
         return new UserProfileResponse(
                 user.getUsername(),

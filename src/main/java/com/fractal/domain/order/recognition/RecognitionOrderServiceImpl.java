@@ -299,19 +299,6 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
             }
 
 
-            /*for (XWPFParagraph paragraph : document.getParagraphs()) {
-                System.out.println(paragraph.toString());
-                List<XWPFRun> runs = paragraph.getRuns();
-
-                StringBuilder paragraphText = new StringBuilder();
-                for (XWPFRun run : runs) {
-                    String text = run.getText(0);
-                    paragraphText.append(text != null ? text : "");
-                }
-                String fullText = paragraphText.toString();
-                //System.out.println(fullText);
-            }*/
-
 
             values.putAll(orderUseCaseService.getHeader(order));
 
@@ -370,13 +357,6 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
         } catch (Exception e) {
         }
         return pdfFilePath;
-    }
-
-    private Map<String, String> getCommonValues(RecognitionOrder order) {
-        Map<String, String> values = new HashMap<>();
-        values.put("sourceDocument", order.getSourceDocument());
-        values.put("ceo", employeeUseCaseService.getLastNameWithInitials(employeeEmploymentUseCaseService.getCEOEmployee()));
-        return values;
     }
 
     private RecognitionOrder copy(RecognitionOrder order) {
