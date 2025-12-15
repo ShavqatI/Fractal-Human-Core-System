@@ -1,25 +1,22 @@
 package com.fractal.domain.system.environment_variable;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "environment_variable", schema = "system_schema", catalog = "fractal")
-@Data
-@Builder
+@Getter
+@Setter
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EnvironmentVariable extends AbstractEntity {
-    @Column(name = "name")
-    private String name;
-    @Column(name = "code")
-    private String code;
+public class EnvironmentVariable extends Dictionary {
+
     @Column(name = "value")
     private String value;
 
