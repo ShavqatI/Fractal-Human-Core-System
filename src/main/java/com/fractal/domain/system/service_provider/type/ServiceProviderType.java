@@ -5,18 +5,22 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 
 @Entity
 @Table(name = "service_provider_type", schema = "system_schema", catalog = "fractal")
-@Data
-@Builder
+@Getter
+@Setter
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 public class ServiceProviderType extends Dictionary {
 
     @Column(name = "description")
     private String description;
+
 }
