@@ -88,6 +88,11 @@ class InternalEmploymentServiceImpl implements InternalEmploymentService {
         return employmentRepository.findCompensationComponentId(compensationComponentId).orElseThrow(()-> new ResourceNotFoundException("InternalEmployment with compensationComponentId: " + compensationComponentId + " not found"));
     }
 
+    @Override
+    public InternalEmployment copy(InternalEmployment employment) {
+        return mapperService.copy(employment);
+    }
+
     private InternalEmployment findById(Long id) {
         return employmentRepository.findById(id).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }

@@ -91,6 +91,31 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
         return employment;
     }
 
+    @Override
+    public InternalEmployment copy(InternalEmployment employment) {
+        return InternalEmployment.builder()
+                    .id(employment.getId())
+                    .employmentType(employment.getEmploymentType())
+                    .startDate(employment.getStartDate())
+                    .endDate(employment.getEndDate())
+                    .status(employment.getStatus())
+                    .createdUser(employment.getCreatedUser())
+                    .createdDate(employment.getCreatedDate())
+                    .updatedUser(employment.getUpdatedUser())
+                    .updatedDate(employment.getUpdatedDate())
+                    .organization(employment.getOrganization())
+                    .department(employment.getDepartment())
+                    .position(employment.getPosition())
+                    .agreements(employment.getAgreements())
+                    .reviewedUser(employment.getReviewedUser())
+                    .reviewedDate(employment.getReviewedDate())
+                    .approvedUser(employment.getApprovedUser())
+                    .approvedDate(employment.getApprovedDate())
+                    .states(employment.getStates())
+                    .build();
+
+    }
+
     private InternalEmployment mapToEntity(InternalEmployment employment, InternalEmploymentRequest dto) {
         employment.setStartDate(dto.startDate());
         employment.setEndDate(dto.endDate());

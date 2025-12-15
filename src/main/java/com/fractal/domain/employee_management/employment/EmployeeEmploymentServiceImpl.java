@@ -333,9 +333,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
                         employeeEmployment.getEmployment().getEndDate()
                 ));
             }
-            catch (Exception e){
-                throw new RuntimeException(e.getMessage());
-            }
+            catch (Exception e){}
 
 
     }

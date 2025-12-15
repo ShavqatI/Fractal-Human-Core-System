@@ -1,13 +1,13 @@
 package com.fractal.domain.order.recognition;
 
 import com.fractal.domain.authorization.AuthenticatedService;
+import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManagerService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
-import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponentService;
@@ -36,17 +36,26 @@ import lombok.RequiredArgsConstructor;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.util.Units;
+import org.apache.poi.xwpf.usermodel.Document;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.math.BigDecimal;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -71,6 +80,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
     private final EmployeeUseCaseService employeeUseCaseService;
     private final EmployeeEmploymentUseCaseService employeeEmploymentUseCaseService;
     private final CompensationComponentService compensationComponentService;
+    private final DocumentTemplateManagerService documentTemplateManagerService;
 
 
     @Value("${resource-storage.temporary}")
@@ -89,47 +99,12 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
 
     @Override
     public List<RecognitionOrder> getAll() {
-        var data = orderRepository.findAll()
-                .stream()
-                .map(order -> {
-                    var newRecords = order.getRecords()
-                            .stream()
-                            .map(this::setRecord)
-                            .toList();
-
-                    order.setRecords(newRecords);
-                    order.getRecords().forEach(record->{
-                        if(record.getEmployment().getEmployment() instanceof InternalEmployment internalEmployment){
-                            System.out.println(record.getEmployment().getEmployment().getClass());
-                            internalEmployment.getCompensationComponents().forEach(cc-> System.out.println(cc.getId()));
-                        }
-                    });
-                    return order;
-                })
-                .toList();
-        data.forEach(o->{
-            o.getRecords().forEach(record -> {
-                if(record.getEmployment().getEmployment() instanceof InternalEmployment internalEmployment){
-                    System.out.println(record.getEmployment().getEmployment().getClass());
-                    internalEmployment.getCompensationComponents().forEach(cc-> System.out.println(cc.getId()));
-                }
-            });
-        });
-       return data;
+        return orderRepository.findAll().stream().map(order -> copy(order)).collect(Collectors.toList());
     }
 
     @Override
     public RecognitionOrder getById(Long id) {
-        return orderRepository.findById(id)
-                .map(order -> {
-                    order.setRecords(
-                            order.getRecords().stream()
-                                    .map(this::setRecord)
-                                    .toList()
-                    );
-                    return order;
-                })
-                .orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
+        return orderRepository.findById(id).map(order -> copy(order)).orElseThrow(() -> new ResourceWithIdNotFoundException(this, id));
     }
 
     @Override
@@ -203,29 +178,6 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
     }
 
     @Override
-    public Path print(Long id) {
-        var order = getById(id);
-        var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
-        var pdfFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
-
-        Map<String, String> values = new HashMap<>();
-
-        values.putAll(orderUseCaseService.getHeader(order));
-        values.putAll(getCommonValues(order));
-        values.putAll(templateProcessorService.process(order));
-        values.putAll(orderUseCaseService.getFooter());
-        try {
-            wordTemplateProcessorService.process(Path.of(order.getOrderType().getDocumentTemplateManager().getFilePath()), wordFilePath, values);
-            wordToPdfConverterService.convert(wordFilePath, pdfFilePath);
-            fileService.delete(wordFilePath.toString());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        return pdfFilePath;
-    }
-
-
-    @Override
     public RecognitionOrder review(Long id) {
         var order = getById(id);
         if (order.getStatus().getCode().equals("CREATED")) {
@@ -234,9 +186,8 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
             order.setStatus(statusService.getByCode("REVIEWED"));
             stateService.create(order);
             order.getRecords().forEach(
-                    record -> {
-                        compensationComponentService.review(new ApprovalWorkflowAwareRequest(record.getEmployment().getId(),record.getCompensationComponent().getId()));
-                    }
+                    record ->
+                            compensationComponentService.review(new ApprovalWorkflowAwareRequest(record.getEmployment().getId(), record.getCompensationComponent().getId()))
             );
             return order;
         } else {
@@ -253,9 +204,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
             order.setStatus(statusService.getByCode("APPROVED"));
             stateService.create(order);
             order.getRecords().forEach(
-                    record -> {
-                        compensationComponentService.approve(new ApprovalWorkflowAwareRequest(record.getEmployment().getId(),record.getCompensationComponent().getId()));
-                    }
+                    record -> compensationComponentService.approve(new ApprovalWorkflowAwareRequest(record.getEmployment().getId(), record.getCompensationComponent().getId()))
             );
             return order;
         } else {
@@ -334,6 +283,79 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
         return null;
     }
 
+    @Override
+    public Path print(Long id) {
+        var order = getById(id);
+        var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
+        var pdfFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
+        Map<String, String> values = new HashMap<>();
+        try {
+            XWPFDocument document = new XWPFDocument(new FileInputStream(order.getOrderType().getDocumentTemplateManager().getFilePath()));
+            for (XWPFParagraph paragraph : document.getParagraphs()) {
+                for (XWPFRun run : paragraph.getRuns()) {
+                    String text = run.getText(0);
+                    System.out.println(text);
+                }
+            }
+            values.putAll(orderUseCaseService.getHeader(order));
+
+            switch (order.getOrderType().getCode()) {
+                case "EMPBONUSPAY":
+                    document = templateProcessorService.getTenYearServiceBonusValues(document, order);
+                    break;
+                case "NEWCUSTBONUS":
+                    document = templateProcessorService.getNewCustomersBonusValues(document, order);
+                    break;
+                case "LOANBONUS":
+                    document = templateProcessorService.getLoanRecoveryBonusValues(document, order);
+                    break;
+                case "CSBONUS":
+                    document = templateProcessorService.getCustomerServiceBonusValues(document, order);
+                    break;
+                case "DFSBONUS":
+                    document = templateProcessorService.getDFSBonusValues(document, order);
+                    values.put("startDate", order.getRecords().getFirst().getCompensationComponent().getStartDate().toString());
+                    values.put("endDate", order.getRecords().getFirst().getCompensationComponent().getEndDate().toString());
+                    break;
+                case "TREASBONUS":
+                    document = templateProcessorService.getTreasureBonusValues(document, order);
+                    break;
+                case "REMITTBONUS":
+                    document = templateProcessorService.getRemittanceBonusValues(document, order);
+                    break;
+
+                default:
+                    values.putAll(templateProcessorService.process(order));
+            }
+            values.putAll(orderUseCaseService.getFooter());
+            try {
+                InputStream is = new FileInputStream(documentTemplateManagerService.getByCode("DIGITALSTAMP").getFilePath());
+                XWPFParagraph paragraph = document.createParagraph();
+                XWPFRun run = paragraph.createRun();
+                run.addPicture(
+                        is,
+                        Document.PICTURE_TYPE_PNG,
+                        "stamp.png",
+                        Units.toEMU(100),   // width
+                        Units.toEMU(60)    // height
+                );
+            }
+            catch (Exception e){}
+
+            wordTemplateProcessorService.processDocument(document, values);
+
+            try (FileOutputStream out = new FileOutputStream(wordFilePath.toFile())) {
+                document.write(out);
+                wordToPdfConverterService.convert(wordFilePath, pdfFilePath);
+                fileService.delete(wordFilePath.toString());
+            }
+
+
+        } catch (Exception e) {
+        }
+        return pdfFilePath;
+    }
+
     private Map<String, String> getCommonValues(RecognitionOrder order) {
         Map<String, String> values = new HashMap<>();
         values.put("sourceDocument", order.getSourceDocument());
@@ -341,35 +363,47 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
         return values;
     }
 
+    private RecognitionOrder copy(RecognitionOrder order) {
+        Map<Long, InternalEmployment> employmentCache = new HashMap<>();
+        List<RecognitionOrderRecord> newRecords = new ArrayList<>();
+        order.getRecords().forEach(record ->
+                {
+                    var originalEmployment =
+                            (InternalEmployment) Hibernate.unproxy(
+                                    record.getEmployment().getEmployment()
+                            );
 
+                    // one InternalEmployment per id
+                    InternalEmployment employmentCopy =
+                            employmentCache.computeIfAbsent(
+                                    originalEmployment.getId(),
+                                    id -> employeeEmploymentUseCaseService.copy(originalEmployment)
+                            );
 
+                    // aggregate components
+                    employmentCopy.addCompensationComponent(
+                            record.getCompensationComponent()
+                    );
 
+                    // rebuild EmployeeEmployment
+                    EmployeeEmployment ee = new EmployeeEmployment();
+                    ee.setEmployment(employmentCopy);
+                    ee.setEmployee(record.getEmployment().getEmployee());
+                    ee.setStatus(record.getEmployment().getStatus());
+                    ee.setStates(record.getEmployment().getStates());
 
+                    // rebuild record
+                    RecognitionOrderRecord recordCopy = new RecognitionOrderRecord();
+                    recordCopy.setCompensationComponent(record.getCompensationComponent());
+                    recordCopy.setEmployment(ee);
 
-    private EmployeeEmployment getEmployment(RecognitionOrder order) {
-        return order.getRecords().getFirst().getEmployment();
+                    newRecords.add(recordCopy);
+                }
+
+        );
+        order.setRecords(newRecords);
+        return order;
     }
 
-    private EmployeeEmployment getEmployment(RecognitionOrderRecord record) {
-        var employment = (Employment) Hibernate.unproxy(record.getEmployment().getEmployment());
-        var employeeEmployment = new EmployeeEmployment();
-        if (employment instanceof InternalEmployment internalEmployment) {
-            List<CompensationComponent> l = new ArrayList<>();
-            l.add(record.getCompensationComponent());
-            internalEmployment.setCompensationComponents(l);
-            employeeEmployment = record.getEmployment();
-            employeeEmployment.setEmployment(internalEmployment);
-            employeeEmployment.setStatus(record.getEmployment().getStatus());
-            employeeEmployment.setEmployee(record.getEmployment().getEmployee());
-            employeeEmployment.setStates(record.getEmployment().getStates());
-        }
-        return employeeEmployment;
-    }
 
-    private RecognitionOrderRecord setRecord(RecognitionOrderRecord record) {
-        var copy = new RecognitionOrderRecord();
-        copy.setCompensationComponent(record.getCompensationComponent());
-        copy.setEmployment(getEmployment(record));
-        return copy;
-    }
 }

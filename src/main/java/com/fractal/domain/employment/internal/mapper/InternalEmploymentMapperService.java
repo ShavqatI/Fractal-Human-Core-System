@@ -12,6 +12,8 @@ public interface InternalEmploymentMapperService {
 
     InternalEmployment toEntity(InternalEmployment employment, InternalEmploymentRequest dto);
     InternalEmployment toEntity(InternalEmployment employment, TerminationRequest dto);
+
+    InternalEmployment copy(InternalEmployment employment);
 }
 
 

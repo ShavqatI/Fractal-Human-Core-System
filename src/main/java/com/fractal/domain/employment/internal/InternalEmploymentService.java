@@ -17,4 +17,5 @@ public interface InternalEmploymentService {
     InternalEmploymentResponse toDTO(InternalEmployment employment);
     InternalEmployment save(InternalEmployment employment);
     InternalEmployment getByCompensationComponentId(Long compensationComponentId);
+    InternalEmployment copy(InternalEmployment employment);
 }

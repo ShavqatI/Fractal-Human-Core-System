@@ -82,7 +82,7 @@ class BusinessTripServiceImpl implements BusinessTripService {
     @Override
     public BusinessTrip prolong(Long id, BusinessTripProlongRequest dto) {
         try {
-           return save(mapperService.toEntity(findById(id),dto));
+            return save(mapperService.toEntity(findById(id),dto));
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }

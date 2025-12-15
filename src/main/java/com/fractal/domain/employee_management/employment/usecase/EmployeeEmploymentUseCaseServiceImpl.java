@@ -98,5 +98,10 @@ class EmployeeEmploymentUseCaseServiceImpl implements EmployeeEmploymentUseCaseS
         return null;
     }
 
+    @Override
+    public InternalEmployment copy(InternalEmployment employment) {
+        return internalEmploymentService.copy(employment);
+    }
+
 
 }

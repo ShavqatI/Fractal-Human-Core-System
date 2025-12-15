@@ -7,17 +7,17 @@ import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
+import com.fractal.domain.order.business_trip.BusinessTripOrder;
+import com.fractal.domain.order.business_trip.record.BusinessTripOrderRecord;
 import com.fractal.domain.order.employment.EmploymentOrder;
 import com.fractal.domain.order.recognition.record.RecognitionOrderRecord;
 import com.fractal.domain.utilities.converter.NumberToWordConverter;
 import lombok.RequiredArgsConstructor;
+import org.apache.poi.xwpf.usermodel.*;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -32,21 +32,7 @@ class RecognitionOrderTemplateProcessorService {
             case "SALARYREDUCTION" -> getDecreaseSalaryValues(order);
             case "PAYCHG" -> getIncreaseSalaryValues(order);
             case "BONUSPAY" -> getAdditionalSalaryValues(order);
-            /*
-            case "NONLISTHIRE","OFFLISTHIRE" -> getContractServiceValues(order);
-            case "TERMCONTRACT" -> getTerminationValues(order);
-            case "PERMTRANSFER" -> getInternalTransferValues(order);
-            case "EMPTRANSFER" -> getInterOrganizationTransferValues(order);
-            case "TEMPTRANSFER" -> getTemporaryTransferValues(order);
-            case "EMPROTATE" -> getRotationValues(order);
-            case "PREGNANCY" -> getPregnancyValues(order);
-            case "PATERNITY" -> getPaternityValues(order);
-            case "CHILDCARE" -> getChildCareValues(order);
-            case "FUNERAL" -> getFuneralValues(order);
-            case "EDUCATION" -> getEducationValues(order);
-            case "UNPAID" -> getUnpaidValues(order);
-            case "CASUAL" -> getCasualValues(order);
-            case "RECALL" -> getRecallValues(order);*/
+            case "ONETIMEBONUS" -> getOneTimeBonusValues(order);
             default -> new HashMap<>();
         };
     }
@@ -92,76 +78,146 @@ class RecognitionOrderTemplateProcessorService {
         values.put("sourceDocument", order.getSourceDocument());
       return values;
     }
-    /*
-    private Map<String,String> getTerminationValues(EmploymentOrder order) {
+    private Map<String,String> getOneTimeBonusValues(RecognitionOrder order) {
         Map<String,String> values = new HashMap<>();
-        var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
+        var employeeEmployment = getEmployment(order.getRecords().getFirst());
+        var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
 
-        values.put("fullBankName", employment.organization().name());
-        values.put("departmentName", employment.department().name());
-        values.put("startDate", employment.endDate().toString());
-        values.put("sourceDocument", order.getSourceDocument());
-      return values;
-    }
-    private Map<String,String> getInternalTransferValues(EmploymentOrder order) {
-        Map<String,String> values = new HashMap<>();
-        var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
-        var previousEmployment = (InternalEmploymentResponse) employeeEmploymentService.toDTO(employeeEmploymentService.getActiveBefore(getEmployment(order).getEmployee().getId(),employment.startDate()));
-
-        values.put("employeeOldPosition", previousEmployment.position().name());
-        values.put("startDate", employment.endDate().toString());
-        values.putAll(getSalaryValues(employment));
-        values.put("sourceDocument", order.getSourceDocument());
-      return values;
-    }
-    private Map<String,String> getInterOrganizationTransferValues(EmploymentOrder order) {
-        Map<String,String> values = new HashMap<>();
-        var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
-        var previousEmployment = (InternalEmploymentResponse) employeeEmploymentService.toDTO(employeeEmploymentService.getActiveBefore(getEmployment(order).getEmployee().getId(),employment.startDate()));
-
-        values.put("employeeOldPosition", previousEmployment.position().name());
-        values.put("oldOrganizationName", previousEmployment.organization().name());
-        values.put("newOrganizationName", employment.organization().name());
-        values.put("startDate", employment.endDate().toString());
-        values.put("endDate", employment.endDate().toString());
-        values.putAll(getSalaryValues(employment));
-        values.put("sourceDocument", order.getSourceDocument());
-      return values;
-    }
-
-
-
-    private Map<String,String> getTemporaryTransferValues(EmploymentOrder order) {
-        Map<String,String> values = new HashMap<>();
-        var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
-        var previousEmployment = (InternalEmploymentResponse) employeeEmploymentService.toDTO(employeeEmploymentService.getActiveBefore(getEmployment(order).getEmployee().getId(),employment.startDate()));
-
-        values.put("employeeOldPosition", previousEmployment.position().name());
-        values.put("oldOrganizationName", previousEmployment.organization().name());
-        values.put("newOrganizationName", employment.organization().name());
-        values.put("startDate", employment.endDate().toString());
-        values.put("endDate", employment.endDate().toString());
-        values.putAll(getSalaryValues(employment));
+        values.put("employeeName", employeeUseCaseService.getFullName(employeeEmployment.getEmployee()));
+        values.put("employeePosition", employment.position().name());
+        values.put("shortBankName", employment.organization().name());
+        values.put("justification",order.getJustification());
         values.putAll(getSurchargeValues(employment));
         values.put("sourceDocument", order.getSourceDocument());
       return values;
     }
-    private Map<String,String> getRotationValues(EmploymentOrder order) {
-        Map<String,String> values = new HashMap<>();
-        var employment = employeeEmploymentService.getEmployment(getEmployment(order)).get();
-        var previousEmployment = (InternalEmploymentResponse) employeeEmploymentService.toDTO(employeeEmploymentService.getActiveBefore(getEmployment(order).getEmployee().getId(),employment.startDate()));
+    public XWPFDocument getTenYearServiceBonusValues(XWPFDocument document,RecognitionOrder order) {
+        List<List<String>> tableData = new ArrayList<>();
+        int number = 1;
+        for (RecognitionOrderRecord record : order.getRecords()) {
+            var employeeEmployment = getEmployment(record);
+            var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
+            var employeeName = employeeUseCaseService.getFullName(employeeEmployment.getEmployee());
+            var organizationName = employment.organization().name();
+            var amount = record.getCompensationComponent().getGrossAmount();
+            tableData.add(List.of(String.valueOf(number++), employeeName, organizationName, amount.toString()));
+        }
+        try {
+          document =  writeTable(document,tableData);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+      return document;
+    }
+    public XWPFDocument getRemittanceBonusValues(XWPFDocument document,RecognitionOrder order) {
+        List<List<String>> tableData = new ArrayList<>();
+        int number = 1;
+        for (RecognitionOrderRecord record : order.getRecords()) {
+            var employeeEmployment = getEmployment(record);
+            var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
+            var employeeName = employeeUseCaseService.getFullName(employeeEmployment.getEmployee());
+            var organizationName = employment.organization().name();
+            var amount = record.getCompensationComponent().getGrossAmount();
+            tableData.add(List.of(String.valueOf(number++), employeeName, organizationName, amount.toString()));
+        }
+        try {
+          document =  writeTable(document,tableData);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+      return document;
+    }
+    public XWPFDocument getNewCustomersBonusValues(XWPFDocument document,RecognitionOrder order) {
+        List<List<String>> tableData = new ArrayList<>();
+        int number = 1;
+        for (RecognitionOrderRecord record : order.getRecords()) {
+            var employeeEmployment = getEmployment(record);
+            var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
+            var employeeName = employeeUseCaseService.getFullName(employeeEmployment.getEmployee());
+            var organizationName = employment.organization().name();
+            var amount = record.getCompensationComponent().getGrossAmount();
+            tableData.add(List.of(String.valueOf(number++), employeeName, organizationName, amount.toString()));
+        }
+        try {
+          document =  writeTable(document,tableData);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+      return document;
+    }
+    public XWPFDocument getLoanRecoveryBonusValues(XWPFDocument document,RecognitionOrder order) {
+        List<List<String>> tableData = new ArrayList<>();
+        int number = 1;
+        for (RecognitionOrderRecord record : order.getRecords()) {
+            var employeeEmployment = getEmployment(record);
+            var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
+            var employeeName = employeeUseCaseService.getFullName(employeeEmployment.getEmployee());
+            var organizationName = employment.organization().name();
+            var amount = record.getCompensationComponent().getGrossAmount();
+            tableData.add(List.of(String.valueOf(number++), employeeName, organizationName, amount.toString()));
+        }
+        try {
+          document =  writeTable(document,tableData);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+      return document;
+    }
+    public XWPFDocument getCustomerServiceBonusValues(XWPFDocument document,RecognitionOrder order) {
+        List<List<String>> tableData = new ArrayList<>();
+        int number = 1;
+        for (RecognitionOrderRecord record : order.getRecords()) {
+            var employeeEmployment = getEmployment(record);
+            var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
+            var employeeName = employeeUseCaseService.getFullName(employeeEmployment.getEmployee());
+            var organizationName = employment.organization().name();
+            var amount = record.getCompensationComponent().getGrossAmount();
+            tableData.add(List.of(String.valueOf(number++), employeeName, organizationName, amount.toString()));
+        }
+        try {
+          document =  writeTable(document,tableData);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+      return document;
+    }
+    public XWPFDocument getDFSBonusValues(XWPFDocument document,RecognitionOrder order) {
+        List<List<String>> tableData = new ArrayList<>();
+        int number = 1;
+        for (RecognitionOrderRecord record : order.getRecords()) {
+            var employeeEmployment = getEmployment(record);
+            var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
+            var employeeName = employeeUseCaseService.getFullName(employeeEmployment.getEmployee());
+            var organizationName = employment.organization().name();
+            var amount = record.getCompensationComponent().getGrossAmount();
+            tableData.add(List.of(String.valueOf(number++), employeeName, organizationName, amount.toString()));
+        }
+        try {
+          document =  writeTable(document,tableData);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+      return document;
+    }
+    public XWPFDocument getTreasureBonusValues(XWPFDocument document,RecognitionOrder order) {
+        List<List<String>> tableData = new ArrayList<>();
+        int number = 1;
+        for (RecognitionOrderRecord record : order.getRecords()) {
+            var employeeEmployment = getEmployment(record);
+            var employment = employeeEmploymentService.getEmployment(employeeEmployment).get();
+            var employeeName = employeeUseCaseService.getFullName(employeeEmployment.getEmployee());
+            var organizationName = employment.organization().name();
+            var amount = record.getCompensationComponent().getGrossAmount();
+            tableData.add(List.of(String.valueOf(number++), employeeName, organizationName, amount.toString()));
+        }
+        try {
+          document =  writeTable(document,tableData);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+      return document;
+    }
 
-        values.put("employeeOldPosition", previousEmployment.position().name());
-        values.put("oldDepartment", previousEmployment.department().name());
-        values.put("newDepartment", employment.department().name());
-        values.put("startDate", employment.endDate().toString());
-        values.put("endDate", employment.endDate().toString());
-        values.put("days", String.valueOf(Duration.between(employment.startDate(),employment.endDate().plusDays(1))));
-        values.putAll(getSalaryValues(employment));
-        values.putAll(getSurchargeValues(employment));
-        values.put("sourceDocument", order.getSourceDocument());
-      return values;
-    }*/
 
     private Map<String,String> getSalaryValues(InternalEmploymentResponse employment) {
         Map<String,String> values = new HashMap<>();
@@ -188,5 +244,52 @@ class RecognitionOrderTemplateProcessorService {
         }
         return employeeEmployment;
     }
+
+    private XWPFDocument writeTable(XWPFDocument document, List<List<String>> data) throws Exception {
+        XWPFTable targetTable = document.getTables().get(1);
+        var headerRow = targetTable.getRow(0);
+        int i = 0;
+        data.forEach(rowData->
+        {
+            XWPFTableRow row;
+            row = i + 1 < targetTable.getNumberOfRows() ? targetTable.getRow(i + 1) : targetTable.createRow();
+
+            for (int j = 0; j < rowData.size(); j++) {
+                XWPFTableCell cell;
+                if (j < row.getTableCells().size()) {
+                    cell = row.getCell(j);
+                } else {
+                    cell = row.addNewTableCell();
+                }
+                cell.setText(rowData.get(j));
+
+                if (j < headerRow.getTableCells().size()) {
+                    XWPFTableCell headerCell = headerRow.getCell(j);
+                    cell.getCTTc().setTcPr(headerCell.getCTTc().getTcPr());
+
+                    // Remove any existing paragraph
+                    cell.removeParagraph(0);
+
+                    for (XWPFParagraph headerParagraph : headerCell.getParagraphs()) {
+                        XWPFParagraph p = cell.addParagraph();
+                        p.getCTP().setPPr(headerParagraph.getCTP().getPPr());
+
+                        XWPFRun run = p.createRun();
+                        if (!headerParagraph.getRuns().isEmpty()) {
+                            XWPFRun headerRun = headerParagraph.getRuns().get(0);
+                            run.getCTR().setRPr(headerRun.getCTR().getRPr());
+                            run.setBold(false);
+                            run.setFontSize(8);
+                        }
+                        run.setText(rowData.get(j));
+                    }
+                } else {
+                    cell.setText(rowData.get(j));
+                }
+            }
+        });
+        return document;
+    }
+
 
 }
