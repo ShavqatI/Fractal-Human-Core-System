@@ -41,6 +41,11 @@ class UserEmployeeMappingServiceImpl implements UserEmployeeMappingService {
     }
 
     @Override
+    public UserEmployeeMapping getByUserId(Long userId) {
+        return userEmployeeMappingRepository.findByUserId(userId).orElseThrow(()-> new ResourceNotFoundException("User with id: " + userId +" in UserEmployeeMapping not found"));
+    }
+
+    @Override
     public Employee getEmployee(User user) {
         return userEmployeeMappingRepository.findByUserId(user.getId()).get().getEmployee();
     }

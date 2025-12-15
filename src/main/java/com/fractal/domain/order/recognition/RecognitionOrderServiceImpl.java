@@ -37,10 +37,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.util.Units;
-import org.apache.poi.xwpf.usermodel.Document;
-import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import org.apache.poi.xwpf.usermodel.XWPFRun;
+import org.apache.poi.xwpf.usermodel.*;
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
@@ -90,11 +87,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
     @Override
     @Transactional
     public RecognitionOrder create(RecognitionOrderRequest dto) {
-        var order = orderMapperService.toEntity(dto);
-        order.setStatus(statusService.getByCode("CREATED"));
-        order = save(order);
-        stateService.create(order);
-        return order;
+        return save(orderMapperService.toEntity(dto));
     }
 
     @Override
@@ -110,8 +103,7 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
     @Override
     @Transactional
     public RecognitionOrder update(Long id, RecognitionOrderRequest dto) {
-        var order = save(orderMapperService.toEntity(getById(id), dto));
-        return order;
+        return save(orderMapperService.toEntity(getById(id), dto));
     }
 
     @Override
@@ -178,35 +170,35 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
     }
 
     @Override
+    @Transactional
     public RecognitionOrder review(Long id) {
-        var order = getById(id);
+        var order = finById(id);
         if (order.getStatus().getCode().equals("CREATED")) {
             order.setReviewedDate(LocalDateTime.now());
             order.setReviewedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("REVIEWED"));
-            stateService.create(order);
             order.getRecords().forEach(
                     record ->
-                            compensationComponentService.review(new ApprovalWorkflowAwareRequest(record.getEmployment().getId(), record.getCompensationComponent().getId()))
+                            compensationComponentService.review(new ApprovalWorkflowAwareRequest(record.getEmployment().getEmployment().getId(), record.getCompensationComponent().getId()))
             );
-            return order;
+            return save(order);
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }
     }
 
     @Override
+    @Transactional
     public RecognitionOrder approve(Long id) {
-        var order = getById(id);
+        var order = finById(id);
         if (order.getStatus().getCode().equals("REVIEWED")) {
             order.setApprovedDate(LocalDateTime.now());
             order.setApprovedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("APPROVED"));
-            stateService.create(order);
             order.getRecords().forEach(
-                    record -> compensationComponentService.approve(new ApprovalWorkflowAwareRequest(record.getEmployment().getId(), record.getCompensationComponent().getId()))
+                    record -> compensationComponentService.approve(new ApprovalWorkflowAwareRequest(record.getEmployment().getEmployment().getId(), record.getCompensationComponent().getId()))
             );
-            return order;
+            return save(order);
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
         }
@@ -291,12 +283,36 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
         Map<String, String> values = new HashMap<>();
         try {
             XWPFDocument document = new XWPFDocument(new FileInputStream(order.getOrderType().getDocumentTemplateManager().getFilePath()));
-            for (XWPFParagraph paragraph : document.getParagraphs()) {
-                for (XWPFRun run : paragraph.getRuns()) {
-                    String text = run.getText(0);
-                    System.out.println(text);
+            var table = document.getTables().get(2);
+            for (XWPFTableRow row : table.getRows()) {
+                for (XWPFTableCell cell : row.getTableCells()) {
+                    for (XWPFParagraph paragraph : cell.getParagraphs()) {
+                        StringBuilder paragraphText = new StringBuilder();
+                        for (XWPFRun run : paragraph.getRuns()) {
+                            String text = run.getText(0);
+                            paragraphText.append(text != null ? text : "");
+                        }
+                        String fullText = paragraphText.toString();
+                        System.out.println(fullText);
+                    }
                 }
             }
+
+
+            /*for (XWPFParagraph paragraph : document.getParagraphs()) {
+                System.out.println(paragraph.toString());
+                List<XWPFRun> runs = paragraph.getRuns();
+
+                StringBuilder paragraphText = new StringBuilder();
+                for (XWPFRun run : runs) {
+                    String text = run.getText(0);
+                    paragraphText.append(text != null ? text : "");
+                }
+                String fullText = paragraphText.toString();
+                //System.out.println(fullText);
+            }*/
+
+
             values.putAll(orderUseCaseService.getHeader(order));
 
             switch (order.getOrderType().getCode()) {
@@ -404,6 +420,11 @@ public class RecognitionOrderServiceImpl implements RecognitionOrderService {
         order.setRecords(newRecords);
         return order;
     }
+
+    private RecognitionOrder finById(Long id){
+        return orderRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+    }
+
 
 
 }

@@ -13,6 +13,7 @@ public interface EmployeeMapperService {
     Employee toEntity(Employee employee, EmployeeRequest dto);
 
     EmployeeCompactResponse toCompactDTO(Employee employee);
+    String getProfilePhoto(Employee employee);
 }
 
 

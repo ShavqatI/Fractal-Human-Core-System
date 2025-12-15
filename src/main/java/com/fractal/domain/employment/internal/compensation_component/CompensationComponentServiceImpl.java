@@ -80,9 +80,11 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
     }
 
     @Override
-    public CompensationComponent save(CompensationComponent agreement) {
+    public CompensationComponent save(CompensationComponent compensationComponent) {
         try {
-            return compensationComponentRepository.save(agreement);
+            compensationComponent = compensationComponentRepository.save(compensationComponent);
+            stateService.create(compensationComponent);
+            return compensationComponent;
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
@@ -100,8 +102,7 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
             compensationComponent.setReviewedDate(LocalDateTime.now());
             compensationComponent.setReviewedUser(authenticatedService.getUser());
             compensationComponent.setStatus(statusService.getByCode("REVIEWED"));
-            stateService.create(compensationComponent);
-            return compensationComponent;
+            return save(compensationComponent);
         } else {
             throw new ResourceStateException("The status is not valid is: " + compensationComponent.getStatus().getName());
         }
@@ -114,9 +115,8 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
             compensationComponent.setApprovedDate(LocalDateTime.now());
             compensationComponent.setApprovedUser(authenticatedService.getUser());
             compensationComponent.setStatus(statusService.getByCode("APPROVED"));
-            stateService.create(compensationComponent);
             activate(dto.employmentId(),dto.id());
-            return compensationComponent;
+            return save(compensationComponent);
         } else {
             throw new ResourceStateException("The status is not valid is: " + compensationComponent.getStatus().getName());
         }
@@ -128,8 +128,7 @@ class CompensationComponentServiceImpl implements CompensationComponentService {
         var compensationComponent = getById(employmentId,id);
         if (compensationComponent.getStatus().getCode().equals("APPROVED")) {
             compensationComponent.setStatus(statusService.getByCode("ACTIVE"));
-            stateService.create(compensationComponent);
-            return compensationComponent;
+            return save(compensationComponent);
         } else {
             throw new ResourceStateException("The status is not valid is: " + compensationComponent.getStatus().getName());
         }

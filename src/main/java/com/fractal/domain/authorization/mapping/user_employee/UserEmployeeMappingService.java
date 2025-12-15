@@ -14,6 +14,7 @@ public interface UserEmployeeMappingService {
     List<UserEmployeeMapping> getAll();
 
     UserEmployeeMapping getById(Long id);
+    UserEmployeeMapping getByUserId(Long userId);
     Employee getEmployee(User user);
 
     UserEmployeeMapping update(Long id, UserEmployeeMappingRequest dto);

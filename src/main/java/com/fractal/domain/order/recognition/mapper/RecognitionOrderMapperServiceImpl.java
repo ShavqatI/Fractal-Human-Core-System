@@ -51,7 +51,9 @@ class RecognitionOrderMapperServiceImpl implements RecognitionOrderMapperService
 
     @Override
     public RecognitionOrder toEntity(RecognitionOrderRequest dto) {
-        return mapToEntity(new RecognitionOrder(), dto);
+        var order = mapToEntity(new RecognitionOrder(), dto);
+        order.setStatus(statusService.getByCode("CREATED"));
+        return order;
     }
 
     @Override

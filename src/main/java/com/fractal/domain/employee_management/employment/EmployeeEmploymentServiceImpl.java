@@ -169,6 +169,12 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
             employeeEmployment.setStatus(statusService.getByCode("REVIEWED"));
             stateService.create(employeeEmployment);
             employmentService.review(employeeEmployment.getEmployment().getId());
+            if(filterInternalEmployment(employeeEmployment)){
+                var internalEmployment  = getInternalEmployment(employeeEmployment);
+                 internalEmployment.getCompensationComponents().forEach(cc-> {
+                         compensationComponentService.review(new com.fractal.domain.employment.internal.compensation_component.dto.ApprovalWorkflowAwareRequest(internalEmployment.getId(),cc.getId()));
+                 });
+            }
             return employmentRepository.save(employeeEmployment);
         } else {
             throw new ResourceStateException("The status is not valid is: " + employeeEmployment.getStatus().getName());
@@ -186,12 +192,19 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
             stateService.create(employeeEmployment);
             employmentService.approve(employeeEmployment.getEmployment().getId());
             activate(dto.employeeId(),dto.id());
+            if(filterInternalEmployment(employeeEmployment)){
+                var internalEmployment  = getInternalEmployment(employeeEmployment);
+                internalEmployment.getCompensationComponents().forEach(cc-> {
+                    compensationComponentService.approve(new com.fractal.domain.employment.internal.compensation_component.dto.ApprovalWorkflowAwareRequest(internalEmployment.getId(),cc.getId()));
+                });
+            }
             return employmentRepository.save(employeeEmployment);
         } else {
             throw new ResourceStateException("The status is not valid is: " + employeeEmployment.getStatus().getName());
         }
     }
     @Override
+    @Transactional
     public Void cancel(CancelRequest dto) {
         var employeeEmployment = getActiveBefore(dto.employeeId(),getById(dto.employeeId(),dto.id()).getEmployment().getStartDate());
         employeeEmployment.setStatus(statusService.getByCode("ACTIVE"));

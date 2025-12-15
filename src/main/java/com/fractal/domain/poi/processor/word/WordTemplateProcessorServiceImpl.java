@@ -67,7 +67,7 @@ class WordTemplateProcessorServiceImpl implements WordTemplateProcessorService {
             paragraphText.append(text != null ? text : "");
         }
         String fullText = paragraphText.toString();
-        System.out.println(fullText);
+
 
         for (Map.Entry<String, String> entry : variables.entrySet()) {
             String placeholder = "${" + entry.getKey() + "}";

@@ -184,7 +184,8 @@ class EmployeeMapperServiceImpl implements EmployeeMapperService {
         return employee;
     }
 
-    private String getProfilePhoto(Employee employee) {
+    @Override
+    public String getProfilePhoto(Employee employee) {
         EmployeeResource resource = employee.getResources()
                 .stream()
                 .filter(res -> "PROFILE_PHOTO".equals(res.getEmployeeResourceType().getCode()))
