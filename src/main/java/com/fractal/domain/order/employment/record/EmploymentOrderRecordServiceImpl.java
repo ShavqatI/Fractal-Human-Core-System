@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class EmploymentOrderRecordServiceImpl implements EmploymentOrderRecordService {
+class EmploymentOrderRecordServiceImpl implements EmploymentOrderRecordService {
 
     private final EmploymentOrderRecordRepository recordRepository;
     private final EmploymentOrderRecordMapperService mapperService;

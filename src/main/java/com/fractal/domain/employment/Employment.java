@@ -4,6 +4,7 @@ import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.abstraction.Auditable;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employment.internal.compensation_component.state.CompensationComponentState;
+import com.fractal.domain.employment.punishment.Punishment;
 import com.fractal.domain.employment.separation_reason.SeparationReason;
 import com.fractal.domain.employment.state.EmploymentState;
 import com.fractal.domain.employment.type.EmploymentType;
@@ -47,21 +48,34 @@ public class Employment extends ApprovalWorkflow {
     @OneToMany(mappedBy = "employment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<SeparationReason> separationReasons = new ArrayList<>();
 
+    @OneToMany(mappedBy = "employment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Punishment> punishments = new ArrayList<>();
+
     @OneToMany(mappedBy = "employment", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<EmploymentState> states = new ArrayList<>();
 
 
-
-    @Transactional
     public void addSeparationReason(SeparationReason separationReason) {
         if (separationReasons == null) separationReasons = new ArrayList<>();
         separationReason.setEmployment(this);
         separationReasons.add(separationReason);
     }
 
-    @Transactional
+
     public void removeSeparationReason(SeparationReason separationReason) {
         if (separationReasons != null && !separationReasons.isEmpty())
             separationReasons.remove(separationReason);
+    }
+
+    public void addPunishment(Punishment punishment) {
+        if (punishments == null) punishments = new ArrayList<>();
+        punishment.setEmployment(this);
+        punishments.add(punishment);
+    }
+
+
+    public void removePunishment(Punishment punishment) {
+        if (punishments != null && !punishments.isEmpty())
+            punishments.remove(punishment);
     }
 }

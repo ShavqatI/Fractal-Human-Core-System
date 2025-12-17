@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class BusinessTripOrderRecordServiceImpl implements BusinessTripOrderRecordService {
+class BusinessTripOrderRecordServiceImpl implements BusinessTripOrderRecordService {
 
     private final BusinessTripOrderRecordRepository recordRepository;
     private final BusinessTripOrderRecordMapperService mapperService;

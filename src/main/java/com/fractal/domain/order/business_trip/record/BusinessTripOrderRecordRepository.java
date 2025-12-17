@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BusinessTripOrderRecordRepository extends JpaRepository<BusinessTripOrderRecord, Long> {
+interface BusinessTripOrderRecordRepository extends JpaRepository<BusinessTripOrderRecord, Long> {
 
     List<BusinessTripOrderRecord> findAllByBusinessTripOrderId(Long orderId);
 

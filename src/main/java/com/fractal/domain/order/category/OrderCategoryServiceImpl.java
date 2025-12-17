@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class OrderCategoryServiceImpl implements OrderCategoryService {
+class OrderCategoryServiceImpl implements OrderCategoryService {
 
     private final OrderCategoryRepository orderCategoryRepository;
 

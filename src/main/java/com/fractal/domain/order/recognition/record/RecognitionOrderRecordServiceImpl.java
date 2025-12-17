@@ -13,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RecognitionOrderRecordServiceImpl implements RecognitionOrderRecordService {
+class RecognitionOrderRecordServiceImpl implements RecognitionOrderRecordService {
 
     private final RecognitionOrderRecordRepository recordRepository;
     private final RecognitionOrderRecordMapperService mapperService;

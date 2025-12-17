@@ -10,6 +10,7 @@ import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.employment.internal.dto.TerminationRequest;
 import com.fractal.domain.employment.kind.EmploymentKindService;
+import com.fractal.domain.employment.punishment.mapper.PunishmentMapperService;
 import com.fractal.domain.employment.separation_reason.mapper.SeparationReasonMapperService;
 import com.fractal.domain.employment.type.EmploymentTypeService;
 import com.fractal.domain.organization_management.department.DepartmentService;
@@ -36,6 +37,7 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
     private final SeparationReasonMapperService separationReasonMapperService;
     private final EmploymentKindService employmentKindService;
     private final CompensationComponentMapperService compensationComponentMapperService;
+    private final PunishmentMapperService punishmentMapperService;
 
 
     @Override
@@ -127,6 +129,7 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
         dto.agreements().forEach(agreementRequest -> employment.addAgreement(agreementMapperService.toEntity(agreementRequest)));
         dto.separationReasons().forEach(separationReason -> employment.addSeparationReason(separationReasonMapperService.toEntity(separationReason)));
         dto.compensationComponents().forEach(compensationComponent -> employment.addCompensationComponent(compensationComponentMapperService.toEntity(compensationComponent)));
+        dto.punishments().forEach(punishment -> employment.addPunishment(punishmentMapperService.toEntity(punishment)));
         return employment;
     }
 }

@@ -226,7 +226,9 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
                         dto.endDate(),
                         List.of(),
                         List.of(),
+                        List.of(),
                         dto.compensationComponents()
+
                 )
         );
     }
@@ -255,6 +257,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
                         dto.employmentTypeId(),
                         dto.startDate(),
                         dto.endDate(),
+                        List.of(),
                         List.of(),
                         List.of(),
                         dto.compensationComponents()
@@ -322,7 +325,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
         return Optional.empty();
     }
 
-    private void addSubordinate(EmployeeEmployment employeeEmployment){
+    private void addSubordinate(EmployeeEmployment employeeEmployment) {
         var internalEmployment = getInternalEmployment(employeeEmployment);
         try {
             var active = subordinateService.getActiveByEmployeeId(employeeEmployment.getEmployee().getId());

@@ -1,0 +1,19 @@
+package com.fractal.domain.employment.punishment.type;
+
+import com.fractal.domain.abstraction.Dictionary;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+@Entity
+@Table(name = "punishment_type", schema = "employment_schema", catalog = "fractal")
+@Getter
+@Setter
+@SuperBuilder
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class PunishmentType extends Dictionary {
+    private Integer duration;
+
+}

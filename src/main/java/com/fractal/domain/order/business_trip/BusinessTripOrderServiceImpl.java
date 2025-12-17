@@ -41,7 +41,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
+class BusinessTripOrderServiceImpl implements BusinessTripOrderService {
 
     private final BusinessTripService businessTripService;
     private final BusinessTripOrderRepository orderRepository;

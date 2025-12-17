@@ -1,6 +1,7 @@
 package com.fractal.domain.employment.external.dto;
 
 import com.fractal.domain.employment.dto.EmploymentRequest;
+import com.fractal.domain.employment.punishment.dto.PunishmentRequest;
 import com.fractal.domain.employment.separation_reason.dto.SeparationReasonRequest;
 
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public record ExternalEmploymentRequest(
         String responsibilities,
         String achievements,
         List<SeparationReasonRequest> separationReasons,
+        List<PunishmentRequest> punishments,
         Long statusId
 
 ) implements EmploymentRequest {

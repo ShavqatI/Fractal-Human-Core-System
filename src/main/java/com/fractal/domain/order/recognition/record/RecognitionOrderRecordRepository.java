@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RecognitionOrderRecordRepository extends JpaRepository<RecognitionOrderRecord, Long> {
+interface RecognitionOrderRecordRepository extends JpaRepository<RecognitionOrderRecord, Long> {
 
     List<RecognitionOrderRecord> findAllByRecognitionOrderId(Long orderId);
 

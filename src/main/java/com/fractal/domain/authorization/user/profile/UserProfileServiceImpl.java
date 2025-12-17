@@ -18,7 +18,7 @@ public class UserProfileServiceImpl implements UserProfileService {
     private final UserService userService;
     private final AuthenticatedService authenticatedService;
     private final UserEmployeeMappingService userEmployeeMappingService;
-    private EmployeeMapperService employeeMapperService;
+    private final EmployeeMapperService employeeMapperService;
 
     @Override
     public void changePassword(ChangePasswordRequest dto) {

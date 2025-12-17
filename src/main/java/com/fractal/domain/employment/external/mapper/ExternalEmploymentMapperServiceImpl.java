@@ -6,6 +6,7 @@ import com.fractal.domain.employment.external.ExternalEmployment;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentRequest;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentResponse;
 import com.fractal.domain.employment.kind.EmploymentKindService;
+import com.fractal.domain.employment.punishment.mapper.PunishmentMapperService;
 import com.fractal.domain.employment.separation_reason.mapper.SeparationReasonMapperService;
 import com.fractal.domain.employment.type.EmploymentTypeService;
 import com.fractal.domain.location.country.CountryService;
@@ -27,6 +28,7 @@ class ExternalEmploymentMapperServiceImpl implements ExternalEmploymentMapperSer
     private final EmploymentTypeService employmentTypeService;
     private final SeparationReasonMapperService separationReasonMapperService;
     private final EmploymentKindService employmentKindService;
+    private final PunishmentMapperService punishmentMapperService;
 
     @Override
     public ExternalEmploymentResponse toDTO(ExternalEmployment employment) {
@@ -98,6 +100,7 @@ class ExternalEmploymentMapperServiceImpl implements ExternalEmploymentMapperSer
         employment.setAchievements(dto.achievements());
         employment.setStatus(statusService.getById(dto.statusId()));
         dto.separationReasons().forEach(separationReason -> employment.addSeparationReason(separationReasonMapperService.toEntity(separationReason)));
+        dto.punishments().forEach(punishment -> employment.addPunishment(punishmentMapperService.toEntity(punishment)));
         return employment;
     }
 }

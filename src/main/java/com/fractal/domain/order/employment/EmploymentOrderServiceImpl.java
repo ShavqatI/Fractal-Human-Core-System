@@ -33,7 +33,7 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class EmploymentOrderServiceImpl implements EmploymentOrderService {
+class EmploymentOrderServiceImpl implements EmploymentOrderService {
 
     private final EmploymentOrderRepository orderRepository;
     private final EmploymentOrderMapperService orderMapperService;

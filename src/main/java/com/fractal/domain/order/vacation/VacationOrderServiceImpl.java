@@ -88,8 +88,8 @@ public class VacationOrderServiceImpl implements VacationOrderService {
     @Override
     @Transactional
     public void delete(Long id) {
-        var oder = getById(id);
-        vacationService.deleteById(oder.getVacation().getId());
+        var order = getById(id);
+        vacationService.deleteById(order.getVacation().getId());
         orderRepository.delete(getById(id));
     }
 

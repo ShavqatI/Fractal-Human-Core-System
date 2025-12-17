@@ -56,7 +56,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class RecognitionOrderServiceImpl implements RecognitionOrderService {
+class RecognitionOrderServiceImpl implements RecognitionOrderService {
 
     private final RecognitionOrderRepository orderRepository;
     private final RecognitionOrderMapperService orderMapperService;

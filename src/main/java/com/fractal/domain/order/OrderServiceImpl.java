@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class OrderServiceImpl implements OrderService {
+class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
 
