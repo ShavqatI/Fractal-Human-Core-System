@@ -1,27 +1,14 @@
 package com.fractal.domain.profile.vacation.request;
 
 import com.fractal.domain.authorization.AuthenticatedService;
-import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.profile.vacation.schedule.ProfileVacationScheduleRequest;
 import com.fractal.domain.vacation_management.request.VacationRequest;
 import com.fractal.domain.vacation_management.request.VacationRequestService;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
-import com.fractal.domain.vacation_management.request.education.dto.VacationRequestEducationRequest;
-import com.fractal.domain.vacation_management.request.mapper.VacationRequestMapperService;
-import com.fractal.domain.vacation_management.request.medical_info.dto.VacationRequestMedicalInfoRequest;
-import com.fractal.domain.vacation_management.request.responsibility.dto.VacationRequestResponsibilityRequest;
-import com.fractal.domain.vacation_management.request.state.VacationRequestStateService;
-import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
-import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;

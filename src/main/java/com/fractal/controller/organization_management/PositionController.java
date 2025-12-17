@@ -1,6 +1,5 @@
 package com.fractal.controller.organization_management;
 
-import com.fractal.domain.order.employment.dto.EmploymentOrderResponse;
 import com.fractal.domain.organization_management.position.PositionService;
 import com.fractal.domain.organization_management.position.dto.*;
 import jakarta.validation.Valid;

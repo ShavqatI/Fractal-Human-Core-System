@@ -3,7 +3,6 @@ package com.fractal.domain.organization_management.department;
 import com.fractal.domain.organization_management.department.dto.DepartmentCompactResponse;
 import com.fractal.domain.organization_management.department.dto.DepartmentRequest;
 import com.fractal.domain.organization_management.department.dto.DepartmentResponse;
-import com.fractal.domain.organization_management.position.Position;
 
 import java.util.List;
 

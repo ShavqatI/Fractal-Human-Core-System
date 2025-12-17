@@ -5,8 +5,6 @@ import com.fractal.domain.system.service_provider.dto.ServiceProviderRequest;
 import com.fractal.domain.system.service_provider.dto.ServiceProviderResponse;
 import com.fractal.domain.system.service_provider.type.ServiceProviderTypeService;
 import com.fractal.exception.ResourceNotFoundException;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;

@@ -1,9 +1,7 @@
 package com.fractal.domain.employment;
 
 import com.fractal.domain.abstraction.ApprovalWorkflow;
-import com.fractal.domain.abstraction.Auditable;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.employment.internal.compensation_component.state.CompensationComponentState;
 import com.fractal.domain.employment.punishment.Punishment;
 import com.fractal.domain.employment.separation_reason.SeparationReason;
 import com.fractal.domain.employment.state.EmploymentState;
@@ -11,7 +9,6 @@ import com.fractal.domain.employment.type.EmploymentType;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

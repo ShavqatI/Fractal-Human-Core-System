@@ -9,7 +9,6 @@ import com.fractal.domain.vacation_management.accrual.VacationAccrualService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;

@@ -2,7 +2,6 @@ package com.fractal.domain.employee_management.employee;
 
 import com.fractal.component.CurrentUserHolder;
 import com.fractal.component.SpringContext;
-import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;

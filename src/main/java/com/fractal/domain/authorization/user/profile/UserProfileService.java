@@ -1,11 +1,8 @@
 package com.fractal.domain.authorization.user.profile;
 
 import com.fractal.domain.authorization.user.User;
-import com.fractal.domain.authorization.user.dto.*;
+import com.fractal.domain.authorization.user.dto.ChangePasswordRequest;
 import com.fractal.domain.authorization.user.profile.dto.UserProfileResponse;
-import com.fractal.domain.authorization.user.role.UserRole;
-
-import java.util.List;
 
 public interface UserProfileService {
 

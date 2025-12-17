@@ -3,17 +3,12 @@ package com.fractal.domain.poi.processor.word;
 import fr.opensagres.poi.xwpf.converter.pdf.PdfConverter;
 import fr.opensagres.poi.xwpf.converter.pdf.PdfOptions;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
-import org.apache.poi.xwpf.usermodel.XWPFTable;
-import org.apache.poi.xwpf.usermodel.XWPFTableCell;
-import org.apache.poi.xwpf.usermodel.XWPFTableRow;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STTblLayoutType;
 import org.springframework.stereotype.Service;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.math.BigInteger;
 import java.nio.file.Path;
 
 @Service

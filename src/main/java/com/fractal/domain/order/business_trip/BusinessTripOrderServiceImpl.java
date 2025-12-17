@@ -13,16 +13,13 @@ import com.fractal.domain.order.business_trip.mapper.BusinessTripOrderMapperServ
 import com.fractal.domain.order.business_trip.record.BusinessTripOrderRecord;
 import com.fractal.domain.order.state.OrderStateService;
 import com.fractal.domain.order.usecase.OrderUseCaseService;
-import com.fractal.domain.order.vacation.VacationOrder;
 import com.fractal.domain.poi.processor.word.WordTemplateProcessorService;
 import com.fractal.domain.poi.processor.word.WordToPdfConverterService;
 import com.fractal.domain.resource.FileService;
-import com.fractal.domain.vacation_management.accrual.period.record.VacationAccrualPeriodRecordService;
 import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xwpf.usermodel.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
@@ -31,13 +28,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor

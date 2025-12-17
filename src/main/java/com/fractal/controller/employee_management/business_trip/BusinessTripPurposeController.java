@@ -4,8 +4,6 @@ package com.fractal.controller.employee_management.business_trip;
 import com.fractal.domain.employee_management.business_trip.purpose.BusinessTripPurposeService;
 import com.fractal.domain.employee_management.business_trip.purpose.dto.BusinessTripPurposeRequest;
 import com.fractal.domain.employee_management.business_trip.purpose.dto.BusinessTripPurposeResponse;
-import com.fractal.domain.employee_management.business_trip.type.dto.BusinessTripTypeRequest;
-import com.fractal.domain.employee_management.business_trip.type.dto.BusinessTripTypeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

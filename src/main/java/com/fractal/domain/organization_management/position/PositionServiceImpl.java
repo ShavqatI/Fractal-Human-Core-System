@@ -2,9 +2,7 @@ package com.fractal.domain.organization_management.position;
 
 import com.fractal.component.CurrentUserHolder;
 import com.fractal.component.SpringContext;
-import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.order.employment.EmploymentOrder;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.department.DepartmentService;
 import com.fractal.domain.organization_management.grade.GradeService;

@@ -1,6 +1,5 @@
 package com.fractal.domain.system.environment_variable;
 
-import com.fractal.domain.system.message.type.MessageType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

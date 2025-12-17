@@ -6,7 +6,6 @@ import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employment.state.EmployeeEmploymentState;
 import com.fractal.domain.employment.Employment;
-import com.fractal.domain.order.state.OrderState;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

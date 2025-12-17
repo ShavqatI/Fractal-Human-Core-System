@@ -7,7 +7,10 @@ import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.position.Position;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;

@@ -1,6 +1,5 @@
 package com.fractal.domain.system.service_provider.dto;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

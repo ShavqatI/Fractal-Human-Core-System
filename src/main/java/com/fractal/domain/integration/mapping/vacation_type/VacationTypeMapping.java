@@ -1,7 +1,6 @@
 package com.fractal.domain.integration.mapping.vacation_type;
 
 import com.fractal.domain.abstraction.Integration;
-import com.fractal.domain.order.type.OrderType;
 import com.fractal.domain.vacation_management.type.VacationType;
 import jakarta.persistence.*;
 import lombok.Data;

@@ -1,7 +1,6 @@
 package com.fractal.domain.employee_management.employee.state;
 
 import com.fractal.domain.employee_management.employee.Employee;
-import com.fractal.domain.order.Order;
 import com.fractal.domain.state.EntityState;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -4,7 +4,6 @@ import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeRequest;
 import com.fractal.domain.employee_management.employee.dto.EmployeeResponse;
-import com.fractal.domain.order.vacation.VacationOrder;
 
 import java.util.List;
 

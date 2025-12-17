@@ -1,6 +1,5 @@
 package com.fractal.domain.authorization.user;
 
-import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.authorization.user.role.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

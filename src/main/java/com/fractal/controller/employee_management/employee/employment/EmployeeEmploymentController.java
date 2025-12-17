@@ -1,8 +1,8 @@
 package com.fractal.controller.employee_management.employee.employment;
 
 
-import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employee_management.employment.ApprovalWorkflowAwareRequest;
+import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employment.dto.EmploymentRequest;
 import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentApprovedResponse;

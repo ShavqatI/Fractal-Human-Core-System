@@ -3,9 +3,7 @@ package com.fractal.controller.profile;
 
 import com.fractal.domain.profile.vacation.request.ProfileVacationRequestRequest;
 import com.fractal.domain.profile.vacation.request.ProfileVacationRequestService;
-import com.fractal.domain.profile.vacation.schedule.ProfileVacationScheduleRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
-import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

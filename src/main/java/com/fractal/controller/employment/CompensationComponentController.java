@@ -1,6 +1,5 @@
 package com.fractal.controller.employment;
 
-import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponentService;
 import com.fractal.domain.employment.internal.compensation_component.dto.ApprovalWorkflowAwareRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;

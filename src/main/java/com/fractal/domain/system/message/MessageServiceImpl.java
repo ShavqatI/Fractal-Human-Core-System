@@ -3,7 +3,6 @@ package com.fractal.domain.system.message;
 import com.fractal.domain.localization.language.LanguageService;
 import com.fractal.domain.system.message.dto.MessageRequest;
 import com.fractal.domain.system.message.dto.MessageResponse;
-import com.fractal.domain.system.message.type.MessageType;
 import com.fractal.domain.system.message.type.MessageTypeService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;

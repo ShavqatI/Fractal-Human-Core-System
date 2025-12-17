@@ -2,7 +2,6 @@ package com.fractal.domain.vacation_management.request.education;
 
 
 import com.fractal.domain.education.Education;
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.vacation_management.request.VacationRequest;
 import jakarta.persistence.*;
 import lombok.Data;

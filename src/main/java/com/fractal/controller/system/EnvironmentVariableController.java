@@ -4,8 +4,6 @@ package com.fractal.controller.system;
 import com.fractal.domain.system.environment_variable.EnvironmentVariableService;
 import com.fractal.domain.system.environment_variable.dto.EnvironmentVariableRequest;
 import com.fractal.domain.system.environment_variable.dto.EnvironmentVariableResponse;
-import com.fractal.domain.system.message.dto.MessageRequest;
-import com.fractal.domain.system.message.dto.MessageResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -5,17 +5,13 @@ import com.fractal.domain.employee_management.business_trip.resource.BusinessTri
 import com.fractal.domain.resource.FileService;
 import com.fractal.domain.resource.dto.ResourceResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;

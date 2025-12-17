@@ -1,7 +1,6 @@
 package com.fractal.domain.employment.state;
 
 import com.fractal.domain.employment.Employment;
-import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.state.EntityState;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

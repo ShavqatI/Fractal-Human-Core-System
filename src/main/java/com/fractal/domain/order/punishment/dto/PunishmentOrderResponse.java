@@ -4,7 +4,6 @@ import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
 import com.fractal.domain.employment.punishment.dto.PunishmentResponse;
 import com.fractal.domain.order.type.dto.OrderTypeResponse;
 import com.fractal.domain.resource.dto.ResourceResponse;
-import com.fractal.domain.vacation_management.vacation.dto.VacationResponse;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

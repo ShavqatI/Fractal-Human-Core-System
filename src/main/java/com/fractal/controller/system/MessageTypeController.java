@@ -1,8 +1,6 @@
 package com.fractal.controller.system;
 
 
-import com.fractal.domain.order.type.dto.OrderTypeRequest;
-import com.fractal.domain.order.type.dto.OrderTypeResponse;
 import com.fractal.domain.system.message.type.MessageTypeService;
 import com.fractal.domain.system.message.type.dto.MessageTypeRequest;
 import com.fractal.domain.system.message.type.dto.MessageTypeResponse;

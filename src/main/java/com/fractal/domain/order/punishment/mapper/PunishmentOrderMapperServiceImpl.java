@@ -2,14 +2,12 @@ package com.fractal.domain.order.punishment.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
-import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
 import com.fractal.domain.employment.punishment.PunishmentService;
 import com.fractal.domain.order.punishment.PunishmentOrder;
 import com.fractal.domain.order.punishment.dto.PunishmentOrderRequest;
 import com.fractal.domain.order.punishment.dto.PunishmentOrderResponse;
 import com.fractal.domain.order.resource.mapper.OrderResourceMapperService;
 import com.fractal.domain.order.type.OrderTypeService;
-import com.fractal.domain.vacation_management.vacation.VacationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

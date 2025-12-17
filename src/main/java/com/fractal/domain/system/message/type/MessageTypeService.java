@@ -1,6 +1,5 @@
 package com.fractal.domain.system.message.type;
 
-import com.fractal.domain.insurance.type.InsuranceType;
 import com.fractal.domain.system.message.type.dto.MessageTypeRequest;
 import com.fractal.domain.system.message.type.dto.MessageTypeResponse;
 

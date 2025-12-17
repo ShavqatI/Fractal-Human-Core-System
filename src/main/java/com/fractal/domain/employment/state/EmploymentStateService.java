@@ -1,7 +1,6 @@
 package com.fractal.domain.employment.state;
 
 import com.fractal.domain.employment.Employment;
-import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 
 import java.util.List;
 

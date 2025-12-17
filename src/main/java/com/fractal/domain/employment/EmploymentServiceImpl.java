@@ -2,9 +2,6 @@ package com.fractal.domain.employment;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
-import com.fractal.domain.employment.internal.compensation_component.CompensationComponentService;
-import com.fractal.domain.employment.internal.compensation_component.dto.ApprovalWorkflowAwareRequest;
 import com.fractal.domain.employment.state.EmploymentStateService;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;

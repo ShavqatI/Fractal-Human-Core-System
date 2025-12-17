@@ -4,8 +4,6 @@ package com.fractal.controller.system;
 import com.fractal.domain.system.service_provider.ServiceProviderService;
 import com.fractal.domain.system.service_provider.dto.ServiceProviderRequest;
 import com.fractal.domain.system.service_provider.dto.ServiceProviderResponse;
-import com.fractal.domain.system.service_provider.type.dto.ServiceProviderTypeRequest;
-import com.fractal.domain.system.service_provider.type.dto.ServiceProviderTypeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

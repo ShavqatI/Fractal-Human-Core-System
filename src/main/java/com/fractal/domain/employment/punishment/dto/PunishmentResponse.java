@@ -1,7 +1,6 @@
 package com.fractal.domain.employment.punishment.dto;
 
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
-import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employment.punishment.type.dto.PunishmentTypeResponse;
 
 import java.math.BigDecimal;

@@ -2,7 +2,6 @@ package com.fractal.domain.order.employment.record;
 
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
-import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.order.employment.EmploymentOrder;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

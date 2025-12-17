@@ -2,7 +2,6 @@ package com.fractal.domain.employment.internal.compensation_component;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
 import com.fractal.domain.employment.internal.compensation_component.dto.ApprovalWorkflowAwareRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;

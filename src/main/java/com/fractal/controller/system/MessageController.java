@@ -4,8 +4,6 @@ package com.fractal.controller.system;
 import com.fractal.domain.system.message.MessageService;
 import com.fractal.domain.system.message.dto.MessageRequest;
 import com.fractal.domain.system.message.dto.MessageResponse;
-import com.fractal.domain.system.message.type.dto.MessageTypeRequest;
-import com.fractal.domain.system.message.type.dto.MessageTypeResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

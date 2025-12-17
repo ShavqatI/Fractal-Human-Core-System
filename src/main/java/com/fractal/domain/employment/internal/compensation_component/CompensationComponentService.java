@@ -4,7 +4,6 @@ import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.employment.internal.compensation_component.dto.ApprovalWorkflowAwareRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
-import com.fractal.domain.order.vacation.VacationOrder;
 
 import java.util.List;
 

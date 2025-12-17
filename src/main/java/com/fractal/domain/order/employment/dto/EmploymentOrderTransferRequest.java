@@ -1,6 +1,5 @@
 package com.fractal.domain.order.employment.dto;
 
-import com.fractal.domain.employee_management.employment.usecase.hire.dto.HireRequest;
 import com.fractal.domain.employee_management.employment.usecase.hire.dto.TransferRequest;
 import org.springframework.web.multipart.MultipartFile;
 

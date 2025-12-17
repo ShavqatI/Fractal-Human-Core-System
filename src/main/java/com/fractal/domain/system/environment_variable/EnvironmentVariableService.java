@@ -2,7 +2,6 @@ package com.fractal.domain.system.environment_variable;
 
 import com.fractal.domain.system.environment_variable.dto.EnvironmentVariableRequest;
 import com.fractal.domain.system.environment_variable.dto.EnvironmentVariableResponse;
-import com.fractal.domain.system.message.type.MessageType;
 
 import java.util.List;
 

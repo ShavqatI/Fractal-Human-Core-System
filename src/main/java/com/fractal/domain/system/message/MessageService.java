@@ -2,7 +2,6 @@ package com.fractal.domain.system.message;
 
 import com.fractal.domain.system.message.dto.MessageRequest;
 import com.fractal.domain.system.message.dto.MessageResponse;
-import com.fractal.domain.system.message.type.MessageType;
 
 import java.util.List;
 

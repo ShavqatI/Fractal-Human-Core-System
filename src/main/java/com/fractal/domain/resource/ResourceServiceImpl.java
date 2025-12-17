@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
-public class ResourceServiceImpl implements ResourceService {
+class ResourceServiceImpl implements ResourceService {
 
     private final ResourceMapperService resourceMapperService;
 

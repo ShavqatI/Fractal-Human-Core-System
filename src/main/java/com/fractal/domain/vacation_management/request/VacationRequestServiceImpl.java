@@ -1,6 +1,5 @@
 package com.fractal.domain.vacation_management.request;
 
-import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;

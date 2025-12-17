@@ -6,7 +6,6 @@ import com.fractal.domain.employment.punishment.dto.PunishmentCompactResponse;
 import com.fractal.domain.employment.punishment.dto.PunishmentRequest;
 import com.fractal.domain.employment.punishment.dto.PunishmentResponse;
 import com.fractal.domain.employment.punishment.type.PunishmentTypeService;
-import com.fractal.domain.employment.separation_reason_type.SeparationReasonTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

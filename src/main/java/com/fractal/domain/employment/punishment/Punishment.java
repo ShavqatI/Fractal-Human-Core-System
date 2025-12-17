@@ -3,7 +3,6 @@ package com.fractal.domain.employment.punishment;
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.punishment.type.PunishmentType;

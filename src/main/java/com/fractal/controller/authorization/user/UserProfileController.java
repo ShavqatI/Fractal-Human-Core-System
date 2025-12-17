@@ -1,7 +1,7 @@
 package com.fractal.controller.authorization.user;
 
 
-import com.fractal.domain.authorization.user.dto.*;
+import com.fractal.domain.authorization.user.dto.ChangePasswordRequest;
 import com.fractal.domain.authorization.user.profile.UserProfileService;
 import com.fractal.domain.authorization.user.profile.dto.UserProfileResponse;
 import jakarta.validation.Valid;

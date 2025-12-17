@@ -2,8 +2,6 @@ package com.fractal.domain.order.recognition.record.mapper;
 
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
-import com.fractal.domain.employment.internal.InternalEmployment;
-import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponentService;
 import com.fractal.domain.order.recognition.record.RecognitionOrderRecord;
 import com.fractal.domain.order.recognition.record.dto.RecognitionOrderRecordRequest;

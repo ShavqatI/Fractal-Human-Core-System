@@ -1,8 +1,6 @@
 package com.fractal.domain.organization_management.position;
 
 import com.fractal.domain.abstraction.ApprovalWorkflowAware;
-import com.fractal.domain.order.employment.EmploymentOrder;
-import com.fractal.domain.order.vacation.VacationOrder;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.position.dto.*;
 

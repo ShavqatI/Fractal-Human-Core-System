@@ -1,7 +1,6 @@
 package com.fractal.controller.system;
 
 
-import com.fractal.domain.system.message.type.dto.MessageTypeRequest;
 import com.fractal.domain.system.service_provider.type.ServiceProviderTypeService;
 import com.fractal.domain.system.service_provider.type.dto.ServiceProviderTypeRequest;
 import com.fractal.domain.system.service_provider.type.dto.ServiceProviderTypeResponse;

@@ -2,15 +2,12 @@ package com.fractal.domain.employment.punishment;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employment.EmploymentService;
-import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.employment.punishment.dto.PunishmentApprovalWorkflowAwareRequest;
 import com.fractal.domain.employment.punishment.dto.PunishmentCompactResponse;
 import com.fractal.domain.employment.punishment.dto.PunishmentRequest;
 import com.fractal.domain.employment.punishment.dto.PunishmentResponse;
 import com.fractal.domain.employment.punishment.mapper.PunishmentMapperService;
-import com.fractal.domain.employment.separation_reason_type.SeparationReasonTypeService;
 import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceStateException;
 import lombok.RequiredArgsConstructor;

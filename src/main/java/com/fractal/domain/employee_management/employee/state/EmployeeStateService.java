@@ -1,7 +1,6 @@
 package com.fractal.domain.employee_management.employee.state;
 
 import com.fractal.domain.employee_management.employee.Employee;
-import com.fractal.domain.order.Order;
 
 import java.util.List;
 

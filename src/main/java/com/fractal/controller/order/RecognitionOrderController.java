@@ -2,9 +2,9 @@ package com.fractal.controller.order;
 
 
 import com.fractal.domain.order.recognition.RecognitionOrderService;
-import com.fractal.domain.order.recognition.dto.RecognitionOrderSalaryRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderResponse;
+import com.fractal.domain.order.recognition.dto.RecognitionOrderSalaryRequest;
 import com.fractal.domain.order.recognition.dto.RecognitionOrderUploadExcelRequest;
 import com.fractal.domain.resource.FileService;
 import jakarta.validation.Valid;

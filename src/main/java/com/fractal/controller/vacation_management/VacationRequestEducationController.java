@@ -4,8 +4,6 @@ package com.fractal.controller.vacation_management;
 import com.fractal.domain.vacation_management.request.education.VacationRequestEducationService;
 import com.fractal.domain.vacation_management.request.education.dto.VacationRequestEducationRequest;
 import com.fractal.domain.vacation_management.request.education.dto.VacationRequestEducationResponse;
-import com.fractal.domain.vacation_management.request.medical_info.dto.VacationRequestMedicalInfoRequest;
-import com.fractal.domain.vacation_management.request.medical_info.dto.VacationRequestMedicalInfoResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
