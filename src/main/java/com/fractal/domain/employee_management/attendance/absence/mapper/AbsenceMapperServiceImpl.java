@@ -40,7 +40,7 @@ class AbsenceMapperServiceImpl implements AbsenceMapperService {
     @Override
     public Absence toEntity(AbsenceRequest dto) {
         var absence = mapToEntity(new Absence(), dto);
-        absence.setStatus(statusService.getByCode("CREATE"));
+        absence.setStatus(statusService.getByCode("CREATED"));
         return absence;
     }
 

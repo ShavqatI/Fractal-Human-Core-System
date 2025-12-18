@@ -38,7 +38,7 @@ class AttendanceMapperServiceImpl implements AttendanceMapperService {
     @Override
     public Attendance toEntity(AttendanceRequest dto) {
         var attendance = mapToEntity(new Attendance(), dto);
-        attendance.setStatus(statusService.getByCode("CREATE"));
+        attendance.setStatus(statusService.getByCode("CREATED"));
         return attendance;
     }
 

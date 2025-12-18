@@ -53,7 +53,7 @@ class PunishmentMapperServiceImpl implements PunishmentMapperService {
     @Override
     public Punishment toEntity(PunishmentRequest dto) {
         var punishment = mapToEntity(new Punishment(), dto);
-        punishment.setStatus(statusService.getByCode("CREATE"));
+        punishment.setStatus(statusService.getByCode("CREATED"));
         return punishment;
     }
 
