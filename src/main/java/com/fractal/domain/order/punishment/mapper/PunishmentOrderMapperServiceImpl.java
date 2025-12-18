@@ -1,6 +1,7 @@
 package com.fractal.domain.order.punishment.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employment.punishment.PunishmentService;
 import com.fractal.domain.order.punishment.PunishmentOrder;
@@ -25,11 +26,13 @@ class PunishmentOrderMapperServiceImpl implements PunishmentOrderMapperService {
     private final StatusService statusService;
     private final PunishmentService punishmentService;
     private final EmployeeEmploymentService employeeEmploymentService;
+    private final EmployeeService employeeService;
     @Override
     public PunishmentOrderResponse toDTO(PunishmentOrder order) {
         return new PunishmentOrderResponse(
                 order.getId(),
                 orderTypeService.toDTO(order.getOrderType()),
+                employeeService.toCompactDTO(order.getEmployeeEmployment().getEmployee()),
                 punishmentService.toDTO(order.getPunishment()),
                 order.getNumber(),
                 order.getDate(),

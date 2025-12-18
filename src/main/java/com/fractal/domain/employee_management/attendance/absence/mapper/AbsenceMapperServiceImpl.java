@@ -2,6 +2,7 @@ package com.fractal.domain.employee_management.attendance.absence.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.attendance.absence.Absence;
+import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceCompactRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceResponse;
 import com.fractal.domain.employee_management.attendance.absence.type.AbsenceTypeService;
@@ -38,7 +39,24 @@ class AbsenceMapperServiceImpl implements AbsenceMapperService {
 
     @Override
     public Absence toEntity(AbsenceRequest dto) {
-        return mapToEntity(new Absence(), dto);
+        var absence = mapToEntity(new Absence(), dto);
+        absence.setStatus(statusService.getByCode("CREATE"));
+        return absence;
+    }
+
+    @Override
+    public Absence toEntity(AbsenceCompactRequest dto) {
+        var absence = toEntity(
+              new AbsenceRequest(
+                      dto.employeeId(),
+                      absenceTypeService.getByCode("CASUAL_VACATION").getId(),
+                      dto.date(),
+                      dto.date(),
+                      dto.reason(),
+                      null
+              )
+        );
+       return absence;
     }
 
     @Override
@@ -49,7 +67,6 @@ class AbsenceMapperServiceImpl implements AbsenceMapperService {
     private Absence mapToEntity(Absence absence, AbsenceRequest dto) {
         absence.setEmployee(employeeService.getById(dto.employeeId()));
         absence.setAbsenceType(absenceTypeService.getById(dto.absenceTypeId()));
-        absence.setStatus(statusService.getById(dto.statusId()));
         absence.setStartDate(dto.startDate());
         absence.setEndDate(dto.endDate());
         absence.setDuration((int) ChronoUnit.DAYS.between(dto.startDate(), dto.endDate()));

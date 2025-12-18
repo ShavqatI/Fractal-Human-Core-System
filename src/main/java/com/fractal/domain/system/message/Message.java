@@ -23,7 +23,7 @@ public class Message extends AbstractEntity {
     @JoinColumn(name = "message_type_id", referencedColumnName = "id")
     private MessageType messageType;
 
-    @Column(name = "code", unique = true)
+    @Column(name = "code")
     private String code;
 
     @Column(name = "name")

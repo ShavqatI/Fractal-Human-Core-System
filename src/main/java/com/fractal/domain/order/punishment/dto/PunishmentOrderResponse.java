@@ -1,6 +1,7 @@
 package com.fractal.domain.order.punishment.dto;
 
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
+import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employment.punishment.dto.PunishmentResponse;
 import com.fractal.domain.order.type.dto.OrderTypeResponse;
 import com.fractal.domain.resource.dto.ResourceResponse;
@@ -12,6 +13,7 @@ import java.util.List;
 public record PunishmentOrderResponse(
         Long id,
         OrderTypeResponse orderType,
+        EmployeeCompactResponse employee,
         PunishmentResponse punishment,
         String number,
         LocalDate date,

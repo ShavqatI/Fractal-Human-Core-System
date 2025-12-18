@@ -5,7 +5,6 @@ import java.time.LocalDate;
 public record AbsenceRequest(
         Long employeeId,
         Long absenceTypeId,
-        Long statusId,
         LocalDate startDate,
         LocalDate endDate,
         String reason,

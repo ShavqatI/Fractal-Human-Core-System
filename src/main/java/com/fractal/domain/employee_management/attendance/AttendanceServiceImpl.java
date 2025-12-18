@@ -1,5 +1,8 @@
 package com.fractal.domain.employee_management.attendance;
 
+import com.fractal.domain.employee_management.attendance.absence.AbsenceService;
+import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceRequest;
+import com.fractal.domain.employee_management.attendance.dto.AttendanceBatchRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
 import com.fractal.domain.employee_management.attendance.mapper.AttendanceMapperService;
@@ -9,7 +12,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -17,11 +22,25 @@ class AttendanceServiceImpl implements AttendanceService {
 
     private final AttendanceRepository attendanceRepository;
     private final AttendanceMapperService mapperService;
+    private final AbsenceService absenceService;
 
     @Override
     @Transactional
     public Attendance create(AttendanceRequest dto) {
         return save(mapperService.toEntity(dto));
+    }
+
+    @Override
+    public List<Attendance> create(List<AttendanceBatchRequest> dto) {
+        List<Attendance> attendances = dto.stream()
+                .filter(attendanceBatchRequest -> attendanceBatchRequest.absence() == null)
+                .map(attendanceBatchRequest -> save(mapperService.toEntity(attendanceBatchRequest)))
+                .collect(Collectors.toList());
+        dto.stream()
+                .filter(attendanceBatchRequest -> attendanceBatchRequest.absence() != null)
+                .forEach(attendanceBatchRequest -> absenceService.create(attendanceBatchRequest.absence()));
+
+        return attendances;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.fractal.domain.employee_management.attendance;
 
+import com.fractal.domain.employee_management.attendance.dto.AttendanceBatchRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
 
@@ -7,6 +8,7 @@ import java.util.List;
 
 public interface AttendanceService {
     Attendance create(AttendanceRequest dto);
+    List<Attendance> create(List<AttendanceBatchRequest> dto);
 
     List<Attendance> getAll();
 

@@ -1,5 +1,6 @@
 package com.fractal.domain.employee_management.attendance.absence;
 
+import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceCompactRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceResponse;
 
@@ -7,6 +8,7 @@ import java.util.List;
 
 public interface AbsenceService {
     Absence create(AbsenceRequest dto);
+    Absence create(AbsenceCompactRequest dto);
 
     List<Absence> getAll();
 

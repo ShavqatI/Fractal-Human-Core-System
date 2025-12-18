@@ -2,6 +2,7 @@ package com.fractal.domain.employee_management.attendance.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.attendance.Attendance;
+import com.fractal.domain.employee_management.attendance.dto.AttendanceBatchRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
 import com.fractal.domain.employee_management.employee.EmployeeService;
@@ -36,7 +37,21 @@ class AttendanceMapperServiceImpl implements AttendanceMapperService {
 
     @Override
     public Attendance toEntity(AttendanceRequest dto) {
-        return mapToEntity(new Attendance(), dto);
+        var attendance = mapToEntity(new Attendance(), dto);
+        attendance.setStatus(statusService.getByCode("CREATE"));
+        return attendance;
+    }
+
+    @Override
+    public Attendance toEntity(AttendanceBatchRequest dto) {
+        return toEntity(new AttendanceRequest(
+                    dto.employeeId(),
+                    dto.date(),
+                    null,
+                    null,
+                    null
+            ));
+
     }
 
     @Override
@@ -47,7 +62,6 @@ class AttendanceMapperServiceImpl implements AttendanceMapperService {
     private Attendance mapToEntity(Attendance attendance, AttendanceRequest dto) {
         attendance.setEmployee(employeeService.getById(dto.employeeId()));
         attendance.setDate(dto.date());
-        attendance.setStatus(statusService.getById(dto.statusId()));
         attendance.setStartTime(dto.startTime());
         attendance.setEndTime(dto.endTime());
         attendance.setHoursWorked(Duration.between(dto.startTime(), dto.endTime()).toMinutes());

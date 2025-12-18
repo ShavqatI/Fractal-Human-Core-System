@@ -1,5 +1,6 @@
 package com.fractal.domain.employee_management.attendance.absence;
 
+import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceCompactRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceResponse;
 import com.fractal.domain.employee_management.attendance.absence.mapper.AbsenceMapperService;
@@ -21,6 +22,11 @@ class AbsenceServiceImpl implements AbsenceService {
     @Override
     @Transactional
     public Absence create(AbsenceRequest dto) {
+        return save(mapperService.toEntity(dto));
+    }
+
+    @Override
+    public Absence create(AbsenceCompactRequest dto) {
         return save(mapperService.toEntity(dto));
     }
 

@@ -6,7 +6,6 @@ import java.time.LocalTime;
 public record AttendanceRequest(
         Long employeeId,
         LocalDate date,
-        Long statusId,
         LocalTime startTime,
         LocalTime endTime,
         String remarks
