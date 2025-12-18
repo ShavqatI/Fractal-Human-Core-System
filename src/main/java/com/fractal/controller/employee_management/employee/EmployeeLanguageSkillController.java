@@ -27,7 +27,7 @@ public class EmployeeLanguageSkillController {
 
     @GetMapping
     public ResponseEntity<List<LanguageSkillResponse>> getAll(@PathVariable Long employeeId) {
-        return ResponseEntity.ok(languageSkillService.getAllByCandidateId(employeeId).stream().map(languageSkillService::toDTO).collect(Collectors.toList()));
+        return ResponseEntity.ok(languageSkillService.getAllByEmployeeId(employeeId).stream().map(languageSkillService::toDTO).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")

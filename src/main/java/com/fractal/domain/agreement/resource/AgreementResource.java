@@ -4,13 +4,12 @@ package com.fractal.domain.agreement.resource;
 import com.fractal.domain.agreement.Agreement;
 import com.fractal.domain.resource.Resource;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table(name = "agreement_resource", schema = "employee_schema", catalog = "fractal")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class AgreementResource extends Resource {

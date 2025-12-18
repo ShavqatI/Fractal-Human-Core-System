@@ -3,14 +3,13 @@ package com.fractal.domain.contact.type;
 import com.fractal.domain.abstraction.Dictionary;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "contact_type", schema = "contact_schema", catalog = "fractal")
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)

@@ -2,10 +2,7 @@ package com.fractal.domain.authorization.user;
 
 import com.fractal.domain.authorization.user.role.UserRole;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +12,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "user", schema = "authorization_schema", catalog = "fractal")
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

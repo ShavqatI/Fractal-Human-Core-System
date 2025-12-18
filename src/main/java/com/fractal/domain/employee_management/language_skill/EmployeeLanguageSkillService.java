@@ -10,7 +10,7 @@ public interface EmployeeLanguageSkillService {
 
     EmployeeLanguageSkill create(Long employeeId, LanguageSkillRequest dto);
 
-    List<EmployeeLanguageSkill> getAllByCandidateId(Long employeeId);
+    List<EmployeeLanguageSkill> getAllByEmployeeId(Long employeeId);
 
     EmployeeLanguageSkill getById(Long employeeId, Long id);
 

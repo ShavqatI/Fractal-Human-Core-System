@@ -12,7 +12,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
-@Data
+@Getter
+@Setter
 public abstract class Lifecycle extends ApprovalWorkflow {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

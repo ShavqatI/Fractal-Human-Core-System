@@ -7,11 +7,14 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
-@Data
+@Getter
+@Setter
 @SuperBuilder
 @NoArgsConstructor
 public abstract class Integration extends AbstractEntity {

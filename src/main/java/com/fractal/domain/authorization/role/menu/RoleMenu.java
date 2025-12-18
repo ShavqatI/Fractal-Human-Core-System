@@ -6,17 +6,15 @@ import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.navigation.menu.Menu;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "role_menu", schema = "authorization_schema", catalog = "fractal")
 @Builder
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoleMenu extends AbstractEntity {

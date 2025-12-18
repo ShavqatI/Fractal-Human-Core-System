@@ -31,7 +31,7 @@ class EmployeeLanguageSkillServiceImpl implements EmployeeLanguageSkillService {
     }
 
     @Override
-    public List<EmployeeLanguageSkill> getAllByCandidateId(Long employeeId) {
+    public List<EmployeeLanguageSkill> getAllByEmployeeId(Long employeeId) {
         return languageSkillRepository.findAllByEmployeeId(employeeId);
     }
 
