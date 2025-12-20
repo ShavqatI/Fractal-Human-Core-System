@@ -70,6 +70,7 @@ class PunishmentOrderMapperServiceImpl implements PunishmentOrderMapperService {
         if(employeeEmployment != null) {
           var punishment = punishmentService.create(employeeEmployment.getEmployment().getId(),dto.punishment());
           order.setPunishment(punishment);
+          order.setEmployeeEmployment(employeeEmployment);
         }
        return order;
     }

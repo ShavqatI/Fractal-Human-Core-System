@@ -1,19 +1,37 @@
 services:
   postgres:
-    image: 'postgres:latest'
+    image: postgres:latest
     environment:
-      - 'POSTGRES_DB=fractal'
-      - 'POSTGRES_PASSWORD=Fractal@2025'
-      - 'POSTGRES_USER=fractal'
+      POSTGRES_DB: proximus
+      POSTGRES_USER: proximus
+      POSTGRES_PASSWORD: Proximus@2025
     ports:
-      - '5435:5432'
+      - "5435:5432"
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
-        - auth-network
+      - auth-network
+  backend:
+    image: proximuscentavr/icb-backend-human-core-system
+    container_name: backend
+    ports:
+      - "9090:8585"
+    restart: unless-stopped
+    networks:
+      - auth-network
+  frontend:
+    image: proximuscentavr/icb-frontend-human-core-system
+    container_name: frontend
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - auth-network
+
 volumes:
   postgres-data:
     driver: local
+
 networks:
   auth-network:
     driver: bridge

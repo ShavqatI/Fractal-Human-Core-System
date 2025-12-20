@@ -64,7 +64,7 @@ class PunishmentMapperServiceImpl implements PunishmentMapperService {
 
     private Punishment mapToEntity(Punishment punishment, PunishmentRequest dto) {
         punishment.setPunishmentType(punishmentTypeService.getById(dto.punishmentTypeId()));
-        punishment.setDescription(punishment.getDescription());
+        punishment.setDescription(dto.description());
         punishment.setAmount(dto.amount());
         punishment.setStartDate(dto.startDate());
         punishment.setEndDate(dto.endDate());

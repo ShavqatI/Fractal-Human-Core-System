@@ -38,7 +38,13 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.*;
+import org.apache.xmlbeans.XmlObject;
+import org.apache.xmlbeans.XmlToken;
 import org.hibernate.Hibernate;
+import org.openxmlformats.schemas.drawingml.x2006.main.*;
+import org.openxmlformats.schemas.drawingml.x2006.wordprocessingDrawing.*;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBookmark;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTDrawing;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -283,23 +289,6 @@ class RecognitionOrderServiceImpl implements RecognitionOrderService {
         Map<String, String> values = new HashMap<>();
         try {
             XWPFDocument document = new XWPFDocument(new FileInputStream(order.getOrderType().getDocumentTemplateManager().getFilePath()));
-            var table = document.getTables().get(2);
-            for (XWPFTableRow row : table.getRows()) {
-                for (XWPFTableCell cell : row.getTableCells()) {
-                    for (XWPFParagraph paragraph : cell.getParagraphs()) {
-                        StringBuilder paragraphText = new StringBuilder();
-                        for (XWPFRun run : paragraph.getRuns()) {
-                            String text = run.getText(0);
-                            paragraphText.append(text != null ? text : "");
-                        }
-                        String fullText = paragraphText.toString();
-                        System.out.println(fullText);
-                    }
-                }
-            }
-
-
-
             values.putAll(orderUseCaseService.getHeader(order));
 
             switch (order.getOrderType().getCode()) {
@@ -331,26 +320,15 @@ class RecognitionOrderServiceImpl implements RecognitionOrderService {
                     values.putAll(templateProcessorService.process(order));
             }
             values.putAll(orderUseCaseService.getFooter());
-            try {
-                InputStream is = new FileInputStream(documentTemplateManagerService.getByCode("DIGITALSTAMP").getFilePath());
-                XWPFParagraph paragraph = document.createParagraph();
-                XWPFRun run = paragraph.createRun();
-                run.addPicture(
-                        is,
-                        Document.PICTURE_TYPE_PNG,
-                        "stamp.png",
-                        Units.toEMU(100),   // width
-                        Units.toEMU(60)    // height
-                );
-            }
-            catch (Exception e){}
-
+            setStamp(document);
+            //insertImageAtBookmark(document);
+            //findTextInTextBoxes(document, "myText");
             wordTemplateProcessorService.processDocument(document, values);
 
             try (FileOutputStream out = new FileOutputStream(wordFilePath.toFile())) {
                 document.write(out);
                 wordToPdfConverterService.convert(wordFilePath, pdfFilePath);
-                fileService.delete(wordFilePath.toString());
+                //fileService.delete(wordFilePath.toString());
             }
 
 
@@ -359,7 +337,53 @@ class RecognitionOrderServiceImpl implements RecognitionOrderService {
         return pdfFilePath;
     }
 
-    private RecognitionOrder copy(RecognitionOrder order) {
+    public void setStamp(XWPFDocument document) {
+
+        XWPFTable table = document.getTables()
+                .get(document.getTables().size() - 1);
+
+        outerLoop:
+        for (XWPFTableRow row : table.getRows()) {
+            for (XWPFTableCell cell : row.getTableCells()) {
+                for (XWPFParagraph paragraph : cell.getParagraphs()) {
+                    for (XWPFRun run : paragraph.getRuns()) {
+
+                        String text = run.getText(0);
+                        if (text != null && text.contains("${STAMP}")) {
+
+                            // 1️⃣ Удаляем плейсхолдер
+                            run.setText(text.replace("${STAMP}", ""), 0);
+
+                            try (InputStream is = new FileInputStream(
+                                    documentTemplateManagerService
+                                            .getByCode("DIGITALSTAMP")
+                                            .getFilePath())) {
+
+                                // 2️⃣ Вставляем картинку ЧЕРЕЗ API
+                                run.addPicture(
+                                        is,
+                                        Document.PICTURE_TYPE_PNG,
+                                        "stamp.png",
+                                        Units.toEMU(100),
+                                        Units.toEMU(100)
+                                );
+
+                            } catch (Exception e) {
+                                throw new RuntimeException("Failed to insert stamp image", e);
+                            }
+
+                            break outerLoop;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+   private RecognitionOrder copy(RecognitionOrder order) {
         Map<Long, InternalEmployment> employmentCache = new HashMap<>();
         List<RecognitionOrderRecord> newRecords = new ArrayList<>();
         order.getRecords().forEach(record ->
@@ -404,6 +428,9 @@ class RecognitionOrderServiceImpl implements RecognitionOrderService {
     private RecognitionOrder finById(Long id){
         return orderRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
+
+
+
 
 
 

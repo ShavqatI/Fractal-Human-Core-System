@@ -2,7 +2,7 @@ spring:
   application:
     name: Fractal-Human-Core-System
   profiles:
-    active: dev
+    active: prod
   jpa:
     hibernate:
       ddl-auto: update

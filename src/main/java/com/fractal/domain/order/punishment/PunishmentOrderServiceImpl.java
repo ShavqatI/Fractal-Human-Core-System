@@ -115,7 +115,7 @@ class PunishmentOrderServiceImpl implements PunishmentOrderService {
             order.setApprovedDate(LocalDateTime.now());
             order.setApprovedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("APPROVED"));
-            punishmentService.review(new PunishmentApprovalWorkflowAwareRequest(order.getEmployeeEmployment().getEmployment().getId(),order.getPunishment().getId()));
+            punishmentService.approve(new PunishmentApprovalWorkflowAwareRequest(order.getEmployeeEmployment().getEmployment().getId(),order.getPunishment().getId()));
             return save(order);
         } else {
             throw new ResourceStateException("The status is not valid is: " + order.getStatus().getName());
@@ -137,6 +137,7 @@ class PunishmentOrderServiceImpl implements PunishmentOrderService {
         values.put("employeeName", employeeUseCaseService.getFullName(order.getEmployeeEmployment().getEmployee()));
         values.put("employeePosition", employment.position().name());
         values.put("punishmentType", punishment.punishmentType().name());
+        values.put("sourceDocument", order.getSourceDocument());
 
         values.putAll(orderUseCaseService.getFooter());
 

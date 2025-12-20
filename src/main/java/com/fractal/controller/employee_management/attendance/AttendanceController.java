@@ -2,6 +2,7 @@ package com.fractal.controller.employee_management.attendance;
 
 
 import com.fractal.domain.employee_management.attendance.AttendanceService;
+import com.fractal.domain.employee_management.attendance.dto.AttendanceBatchRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
 import jakarta.validation.Valid;
@@ -23,6 +24,10 @@ public class AttendanceController {
     @PostMapping
     public ResponseEntity<AttendanceResponse> create(@RequestBody @Valid AttendanceRequest dto) {
         return new ResponseEntity<>(attendanceService.toDTO(attendanceService.create(dto)), HttpStatus.CREATED);
+    }
+    @PostMapping("/batch")
+    public ResponseEntity<List<AttendanceResponse>> create(@RequestBody @Valid List<AttendanceBatchRequest> dto) {
+        return ResponseEntity.ok(attendanceService.create(dto).stream().map(attendanceService::toDTO).collect(Collectors.toList()));
     }
 
     @GetMapping

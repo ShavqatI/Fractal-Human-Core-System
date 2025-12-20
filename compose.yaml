@@ -11,7 +11,7 @@ services:
      # - postgres-data:/var/lib/postgresql/data
     networks:
         - auth-network
-#volumes:
+  #volumes:
   #postgres-data:
     #driver: local
 networks:

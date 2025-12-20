@@ -35,13 +35,13 @@ public class Application implements CommandLineRunner {
        //employeeEmploymentService.getAll().size();
     }
 
-    private String buildUrl(MenuAction menuAction) {
+   /* private String buildUrl(MenuAction menuAction) {
         var actionUrl = actionService.getById(menuAction.getAction().getId()).getUrl();
         var menuUrl = buildMenuUrl(menuService.getById(menuAction.getMenu().getId()));
         return menuUrl + "/" + actionUrl;
-    }
+    }*/
 
-    private String buildMenuUrl(Menu menu) {
+  /*  private String buildMenuUrl(Menu menu) {
         if (menu == null) {
             return "";
         }
@@ -52,5 +52,5 @@ public class Application implements CommandLineRunner {
 
         String parentUrl = buildMenuUrl(menu.getParent()).replaceAll("/+$", "");
         return parentUrl + "/" + urlPart;
-    }
+    }*/
 }
