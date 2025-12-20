@@ -3,19 +3,15 @@ package com.fractal.controller.employee_management.attendance;
 
 import com.fractal.domain.employee_management.attendance.AttendanceService;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceBatchRequest;
-import com.fractal.domain.employee_management.attendance.dto.AttendancePeriodReportRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
 import com.fractal.domain.resource.FileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -76,12 +72,12 @@ public class AttendanceController {
         return ResponseEntity.ok(attendanceService.create(dto).stream().map(attendanceService::toDTO).collect(Collectors.toList()));
     }
     @PutMapping("batch/review")
-    public ResponseEntity<List<AttendanceResponse>> review(List<Long> list) {
+    public ResponseEntity<List<AttendanceResponse>> review(@RequestBody List<Long> list) {
         return ResponseEntity.ok(attendanceService.review(list).stream().map(attendanceService::toDTO).collect(Collectors.toList()));
 
     }
     @PutMapping("batch/approve")
-    public ResponseEntity<List<AttendanceResponse>> approve(List<Long> list) {
+    public ResponseEntity<List<AttendanceResponse>> approve(@RequestBody List<Long> list) {
         return ResponseEntity.ok(attendanceService.approve(list).stream().map(attendanceService::toDTO).collect(Collectors.toList()));
     }
 
@@ -92,10 +88,10 @@ public class AttendanceController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("period-report")
+   /* @PostMapping("period-report")
     @CrossOrigin(value = "*")
     public ResponseEntity<Resource> periodReport(@RequestBody @Valid AttendancePeriodReportRequest dto) {
         Path path = attendanceService.periodReport(dto);
         return fileService.download(path);
-    }
+    }*/
 }

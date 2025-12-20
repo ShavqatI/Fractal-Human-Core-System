@@ -17,7 +17,7 @@ interface AttendanceRepository extends JpaRepository<Attendance, Long> {
         and a.date >= :startDate and a.date <= :endDate
         order by a.date asc 
 """)
-    List<Attendance> findForPeriodReport(LocalDate startDate, LocalDate endDate);
+    List<Attendance> findAllByPeriod(LocalDate startDate, LocalDate endDate);
     @Query("""
         select a from Attendance a
         where a.createdUser.id = :userId 

@@ -2,11 +2,10 @@ package com.fractal.domain.employee_management.attendance;
 
 import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceBatchRequest;
-import com.fractal.domain.employee_management.attendance.dto.AttendancePeriodReportRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
 
-import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.List;
 
 public interface AttendanceService extends ApprovalWorkflowAware<Long,Attendance> {
@@ -25,9 +24,9 @@ public interface AttendanceService extends ApprovalWorkflowAware<Long,Attendance
     List<Attendance> getAllByUserIdReviewed();
 
     List<Attendance> getAllByUserIdApproved();
+    List<Attendance> getAllByPeriod(LocalDate startDate, LocalDate endDate);
 
     Attendance update(Long id, AttendanceRequest dto);
     void deleteById(Long id);
     AttendanceResponse toDTO(Attendance attendance);
-    Path periodReport(AttendancePeriodReportRequest dto);
 }
