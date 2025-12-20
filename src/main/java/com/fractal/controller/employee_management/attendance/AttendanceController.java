@@ -3,14 +3,19 @@ package com.fractal.controller.employee_management.attendance;
 
 import com.fractal.domain.employee_management.attendance.AttendanceService;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceBatchRequest;
+import com.fractal.domain.employee_management.attendance.dto.AttendancePeriodReportRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
+import com.fractal.domain.resource.FileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
 
+import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +25,7 @@ import java.util.stream.Collectors;
 public class AttendanceController {
 
     private final AttendanceService attendanceService;
+    private final FileService fileService;
 
     @PostMapping
     public ResponseEntity<AttendanceResponse> create(@RequestBody @Valid AttendanceRequest dto) {
@@ -45,15 +51,36 @@ public class AttendanceController {
         return ResponseEntity.ok(attendanceService.getAllByEmployeeId(id).stream().map(attendanceService::toDTO).collect(Collectors.toList()));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<AttendanceResponse> update(@PathVariable Long id, @RequestBody @Valid AttendanceRequest dto) {
-        return ResponseEntity.ok(attendanceService.toDTO(attendanceService.update(id, dto)));
+    @PutMapping("review/{id}")
+    public ResponseEntity<AttendanceResponse> review(@PathVariable Long id) {
+        return ResponseEntity.ok(attendanceService.toDTO(attendanceService.review(id)));
     }
+    @PutMapping("approve/{id}")
+    public ResponseEntity<AttendanceResponse> approve(@PathVariable Long id) {
+        return ResponseEntity.ok(attendanceService.toDTO(attendanceService.approve(id)));
+    }
+
+    @PutMapping("batch/review")
+    public ResponseEntity<List<AttendanceResponse>> review(List<Long> list) {
+        return ResponseEntity.ok(attendanceService.review(list).stream().map(attendanceService::toDTO).collect(Collectors.toList()));
+
+    }
+    @PutMapping("batch/approve")
+    public ResponseEntity<List<AttendanceResponse>> approve(List<Long> list) {
+        return ResponseEntity.ok(attendanceService.approve(list).stream().map(attendanceService::toDTO).collect(Collectors.toList()));
+    }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         attendanceService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
 
+    @GetMapping("period-report")
+    @CrossOrigin(value = "*")
+    public ResponseEntity<Resource> periodReport(AttendancePeriodReportRequest dto) {
+        Path path = attendanceService.periodReport(dto);
+        return fileService.download(path);
     }
 }

@@ -64,8 +64,10 @@ class AttendanceMapperServiceImpl implements AttendanceMapperService {
         attendance.setDate(dto.date());
         attendance.setStartTime(dto.startTime());
         attendance.setEndTime(dto.endTime());
-        attendance.setHoursWorked(Duration.between(dto.startTime(), dto.endTime()).toMinutes());
-        attendance.setOvertimeHours(Duration.between(dto.startTime(), dto.endTime()).toMinutes());
+        if(dto.startTime() != null && dto.endTime() != null) {
+            attendance.setHoursWorked(Duration.between(dto.startTime(), dto.endTime()).toMinutes());
+            attendance.setOvertimeHours(Duration.between(dto.startTime(), dto.endTime()).toMinutes());
+        }
         attendance.setRemarks(dto.remarks());
         return attendance;
     }

@@ -39,12 +39,15 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.util.Units;
 import org.apache.poi.xwpf.usermodel.*;
 import org.apache.xmlbeans.XmlObject;
-import org.apache.xmlbeans.XmlToken;
 import org.hibernate.Hibernate;
-import org.openxmlformats.schemas.drawingml.x2006.main.*;
-import org.openxmlformats.schemas.drawingml.x2006.wordprocessingDrawing.*;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTBookmark;
+import org.openxmlformats.schemas.drawingml.x2006.main.CTGraphicalObject;
+import org.openxmlformats.schemas.drawingml.x2006.main.CTGraphicalObjectData;
+import org.openxmlformats.schemas.drawingml.x2006.main.CTNonVisualDrawingProps;
+import org.openxmlformats.schemas.drawingml.x2006.main.CTPositiveSize2D;
+import org.openxmlformats.schemas.drawingml.x2006.wordprocessingDrawing.CTAnchor;
+import org.openxmlformats.schemas.drawingml.x2006.wordprocessingDrawing.CTInline;
 import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTDrawing;
+import org.openxmlformats.schemas.wordprocessingml.x2006.main.CTR;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -320,9 +323,14 @@ class RecognitionOrderServiceImpl implements RecognitionOrderService {
                     values.putAll(templateProcessorService.process(order));
             }
             values.putAll(orderUseCaseService.getFooter());
-            setStamp(document);
+            //setStamp(document);
+            setFloatingStamp(document);
+            findTextBoxes(document);
             //insertImageAtBookmark(document);
             //findTextInTextBoxes(document, "myText");
+            //findTextBoxes(document);
+            //findAllTextBoxes(document);
+
             wordTemplateProcessorService.processDocument(document, values);
 
             try (FileOutputStream out = new FileOutputStream(wordFilePath.toFile())) {
@@ -338,11 +346,9 @@ class RecognitionOrderServiceImpl implements RecognitionOrderService {
     }
 
     public void setStamp(XWPFDocument document) {
+      XWPFTable table = document.getTables().get(document.getTables().size() - 1);
 
-        XWPFTable table = document.getTables()
-                .get(document.getTables().size() - 1);
-
-        outerLoop:
+      outerLoop:
         for (XWPFTableRow row : table.getRows()) {
             for (XWPFTableCell cell : row.getTableCells()) {
                 for (XWPFParagraph paragraph : cell.getParagraphs()) {
@@ -350,16 +356,12 @@ class RecognitionOrderServiceImpl implements RecognitionOrderService {
 
                         String text = run.getText(0);
                         if (text != null && text.contains("${STAMP}")) {
-
-                            // 1️⃣ Удаляем плейсхолдер
                             run.setText(text.replace("${STAMP}", ""), 0);
 
-                            try (InputStream is = new FileInputStream(
-                                    documentTemplateManagerService
+                            try (InputStream is = new FileInputStream(documentTemplateManagerService
                                             .getByCode("DIGITALSTAMP")
                                             .getFilePath())) {
 
-                                // 2️⃣ Вставляем картинку ЧЕРЕЗ API
                                 run.addPicture(
                                         is,
                                         Document.PICTURE_TYPE_PNG,
@@ -373,6 +375,72 @@ class RecognitionOrderServiceImpl implements RecognitionOrderService {
                             }
 
                             break outerLoop;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void setFloatingStamp(XWPFDocument document) throws Exception {
+        XWPFTable table = document.getTables().get(document.getTables().size() - 1);
+
+        outerLoop:
+        for (XWPFTableRow row : table.getRows()) {
+            for (XWPFTableCell cell : row.getTableCells()) {
+                for (XWPFParagraph paragraph : cell.getParagraphs()) {
+                    for (XWPFRun run : paragraph.getRuns()) {
+
+                        String text = run.getText(0);
+                        if (text != null && text.contains("${STAMP}")) {
+                            run.setText(text.replace("${STAMP}", ""), 0);
+
+                            try (InputStream is = new FileInputStream(
+                                    documentTemplateManagerService.getByCode("DIGITALSTAMP").getFilePath())) {
+
+                                // Convert image to bytes
+                                byte[] bytes = is.readAllBytes();
+
+                                // Add picture with a placeholder inline (we will replace it)
+                                int pictureType = Document.PICTURE_TYPE_PNG;
+                                String filename = "stamp.png";
+
+                                String blipId = run.getDocument().addPictureData(bytes, pictureType);
+                                int width = Units.toEMU(100);  // width in EMUs
+                                int height = Units.toEMU(100); // height in EMUs
+
+                                // Create anchor (floating image)
+                                CTInline inline = run.getCTR().addNewDrawing().addNewInline();
+                                CTNonVisualDrawingProps docPr = inline.addNewDocPr();
+                                docPr.setId(1);
+                                docPr.setName(filename);
+
+                                CTPositiveSize2D extent = inline.addNewExtent();
+                                extent.setCx(width);
+                                extent.setCy(height);
+
+                                // Add graphic data
+                                CTGraphicalObject graphic = inline.addNewGraphic();
+                                CTGraphicalObjectData graphicData = graphic.addNewGraphicData();
+                                graphicData.setUri("http://schemas.openxmlformats.org/drawingml/2006/picture");
+
+                                // You need to create the <pic> element here manually
+                                // This is verbose; the easiest alternative is to use `XWPFPicture` + CTAnchor:
+                                XWPFPicture picture = run.addPicture(
+                                        new FileInputStream(documentTemplateManagerService.getByCode("DIGITALSTAMP").getFilePath()),
+                                        pictureType, filename, Units.toEMU(100), Units.toEMU(100)
+                                );
+
+                                // Make it floating (in front of text)
+                                picture.getCTPicture().getBlipFill().getBlip().setEmbed(blipId);
+                                picture.getCTPicture().getSpPr().addNewXfrm().addNewOff().setX(0);
+                                picture.getCTPicture().getSpPr().getXfrm().getOff().setY(0);
+
+                                break outerLoop;
+
+                            } catch (Exception e) {
+                                throw new RuntimeException("Failed to insert stamp image", e);
+                            }
                         }
                     }
                 }
@@ -428,6 +496,53 @@ class RecognitionOrderServiceImpl implements RecognitionOrderService {
     private RecognitionOrder finById(Long id){
         return orderRepository.findById(id).orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
+
+    public void findTextBoxes(XWPFDocument document) {
+        for (XWPFParagraph p : document.getParagraphs()) {
+            for (XWPFRun run : p.getRuns()) {
+                // Check if run has drawing
+                List<CTDrawing> drawings = run.getCTR().getDrawingList();
+                for (CTDrawing drawing : drawings) {
+                    System.out.println(drawing.getClass());
+                }
+            }
+        }
+
+
+
+    }
+
+    public void findAllTextBoxes(XWPFDocument document) {
+        for (XWPFParagraph paragraph : document.getParagraphs()) {
+            for (XWPFRun run : paragraph.getRuns()) {
+                CTR ctr = run.getCTR();
+
+                // 1️⃣ Modern text boxes inside mc:AlternateContent
+                XmlObject[] drawings = ctr.selectPath(
+                        "declare namespace mc='http://schemas.openxmlformats.org/markup-compatibility/2006' " +
+                                "declare namespace wps='http://schemas.microsoft.com/office/word/2010/wordprocessingShape' " +
+                                ".//mc:AlternateContent//wps:wsp//wps:txbx//w:txbxContent//w:p//w:r//w:t"
+                );
+
+                for (XmlObject obj : drawings) {
+                    System.out.println("TextBox content (modern): " + obj.xmlText());
+                }
+
+                // 2️⃣ Legacy text boxes in w:pict
+                XmlObject[] legacyText = ctr.selectPath(
+                        "declare namespace v='urn:schemas-microsoft-com:vml' " +
+                                "declare namespace w='http://schemas.openxmlformats.org/wordprocessingml/2006/main' " +
+                                ".//w:pict//v:shape//v:textbox//w:txbxContent//w:p//w:r//w:t"
+                );
+                for (XmlObject obj : legacyText) {
+                    System.out.println("TextBox content (legacy): " + obj.xmlText());
+                }
+            }
+        }
+    }
+
+
+
 
 
 
