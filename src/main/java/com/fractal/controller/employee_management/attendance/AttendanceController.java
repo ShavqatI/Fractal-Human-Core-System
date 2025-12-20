@@ -31,16 +31,11 @@ public class AttendanceController {
     public ResponseEntity<AttendanceResponse> create(@RequestBody @Valid AttendanceRequest dto) {
         return new ResponseEntity<>(attendanceService.toDTO(attendanceService.create(dto)), HttpStatus.CREATED);
     }
-    @PostMapping("/batch")
-    public ResponseEntity<List<AttendanceResponse>> create(@RequestBody @Valid List<AttendanceBatchRequest> dto) {
-        return ResponseEntity.ok(attendanceService.create(dto).stream().map(attendanceService::toDTO).collect(Collectors.toList()));
-    }
 
     @GetMapping
     public ResponseEntity<List<AttendanceResponse>> getAll() {
         return ResponseEntity.ok(attendanceService.getAll().stream().map(attendanceService::toDTO).collect(Collectors.toList()));
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<AttendanceResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(attendanceService.toDTO(attendanceService.getById(id)));
@@ -49,6 +44,22 @@ public class AttendanceController {
     @GetMapping("/employee/{id}")
     public ResponseEntity<List<AttendanceResponse>> getByEmployee(@PathVariable Long id) {
         return ResponseEntity.ok(attendanceService.getAllByEmployeeId(id).stream().map(attendanceService::toDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("/user/all")
+    public ResponseEntity<List<AttendanceResponse>> getAllByUser() {
+        return ResponseEntity.ok(attendanceService.getAllByUserId().stream().map(attendanceService::toDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("/user/created")
+    public ResponseEntity<List<AttendanceResponse>> getAllByUserCreated() {
+        return ResponseEntity.ok(attendanceService.getAllByUserIdCreated().stream().map(attendanceService::toDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("/user/reviewed")
+    public ResponseEntity<List<AttendanceResponse>> getAllByUserReviewed() {
+        return ResponseEntity.ok(attendanceService.getAllByUserIdReviewed().stream().map(attendanceService::toDTO).collect(Collectors.toList()));
+    }
+    @GetMapping("/user/approved")
+    public ResponseEntity<List<AttendanceResponse>> getAllByUserApproved() {
+        return ResponseEntity.ok(attendanceService.getAllByUserIdApproved().stream().map(attendanceService::toDTO).collect(Collectors.toList()));
     }
 
     @PutMapping("review/{id}")
@@ -60,6 +71,10 @@ public class AttendanceController {
         return ResponseEntity.ok(attendanceService.toDTO(attendanceService.approve(id)));
     }
 
+    @PostMapping("/batch")
+    public ResponseEntity<List<AttendanceResponse>> create(@RequestBody @Valid List<AttendanceBatchRequest> dto) {
+        return ResponseEntity.ok(attendanceService.create(dto).stream().map(attendanceService::toDTO).collect(Collectors.toList()));
+    }
     @PutMapping("batch/review")
     public ResponseEntity<List<AttendanceResponse>> review(List<Long> list) {
         return ResponseEntity.ok(attendanceService.review(list).stream().map(attendanceService::toDTO).collect(Collectors.toList()));
@@ -77,9 +92,9 @@ public class AttendanceController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("period-report")
+    @PostMapping("period-report")
     @CrossOrigin(value = "*")
-    public ResponseEntity<Resource> periodReport(AttendancePeriodReportRequest dto) {
+    public ResponseEntity<Resource> periodReport(@RequestBody @Valid AttendancePeriodReportRequest dto) {
         Path path = attendanceService.periodReport(dto);
         return fileService.download(path);
     }

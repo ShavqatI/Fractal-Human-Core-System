@@ -17,6 +17,15 @@ public interface AttendanceService extends ApprovalWorkflowAware<Long,Attendance
     List<Attendance> getAll();
     Attendance getById(Long id);
     List<Attendance> getAllByEmployeeId(Long employeeId);
+
+    List<Attendance> getAllByUserId();
+
+    List<Attendance> getAllByUserIdCreated();
+
+    List<Attendance> getAllByUserIdReviewed();
+
+    List<Attendance> getAllByUserIdApproved();
+
     Attendance update(Long id, AttendanceRequest dto);
     void deleteById(Long id);
     AttendanceResponse toDTO(Attendance attendance);

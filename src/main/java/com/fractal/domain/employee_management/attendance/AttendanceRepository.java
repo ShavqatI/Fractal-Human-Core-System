@@ -18,4 +18,18 @@ interface AttendanceRepository extends JpaRepository<Attendance, Long> {
         order by a.date asc 
 """)
     List<Attendance> findForPeriodReport(LocalDate startDate, LocalDate endDate);
+    @Query("""
+        select a from Attendance a
+        where a.createdUser.id = :userId 
+        order by a.date asc 
+""")
+    List<Attendance> findAllByUserId(Long userId);
+
+    @Query("""
+        select a from Attendance a
+        where a.createdUser.id = :userId
+        and a.status.id = :statusId  
+        order by a.date asc 
+""")
+    List<Attendance> findAllByUserIdAndStatusId(Long userId, Long statusId);
 }

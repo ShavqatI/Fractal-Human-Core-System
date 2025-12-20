@@ -4,7 +4,6 @@ import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManagerService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.attendance.absence.AbsenceService;
-import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceBatchRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendancePeriodReportRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceRequest;
@@ -12,7 +11,6 @@ import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
 import com.fractal.domain.employee_management.attendance.mapper.AttendanceMapperService;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
-import com.fractal.domain.order.vacation.VacationOrder;
 import com.fractal.domain.resource.FileService;
 import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceStateException;
@@ -88,6 +86,22 @@ class AttendanceServiceImpl implements AttendanceService {
     public List<Attendance> getAllByEmployeeId(Long employeeId) {
         return attendanceRepository.findAllByEmployeeId(employeeId);
     }
+    @Override
+    public List<Attendance> getAllByUserId() {
+        return attendanceRepository.findAllByUserId(authenticatedService.getUser().getId());
+    }
+    @Override
+    public List<Attendance> getAllByUserIdCreated() {
+        return attendanceRepository.findAllByUserIdAndStatusId(authenticatedService.getUser().getId(), statusService.getByCode("CREATED").getId());
+    }
+    @Override
+    public List<Attendance> getAllByUserIdReviewed() {
+        return attendanceRepository.findAllByUserIdAndStatusId(authenticatedService.getUser().getId(), statusService.getByCode("CREATED").getId());
+    }
+    @Override
+    public List<Attendance> getAllByUserIdApproved() {
+        return attendanceRepository.findAllByUserIdAndStatusId(authenticatedService.getUser().getId(), statusService.getByCode("CREATED").getId());
+    }
 
     @Override
     public Attendance update(Long id, AttendanceRequest dto) {
@@ -123,7 +137,7 @@ class AttendanceServiceImpl implements AttendanceService {
                                     Collectors.toList()     // collect as list
                             )
                     ));
-            FileInputStream fis = new FileInputStream(documentTemplateManagerService.getByCode("DIGITALSTAMP").getFilePath());
+            FileInputStream fis = new FileInputStream(documentTemplateManagerService.getByCode("ATTENDANCE_PERIOD_REPORT").getFilePath());
             Workbook workbook = new XSSFWorkbook(fis);
             fis.close();
 
