@@ -3,8 +3,11 @@ package com.fractal.controller.employee_management.attendance;
 
 import com.fractal.domain.employee_management.attendance.AttendanceService;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceBatchRequest;
+import com.fractal.domain.employee_management.attendance.dto.AttendanceCancelRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
+import com.fractal.domain.employee_management.business_trip.dto.BusinessTripCancelRequest;
+import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.resource.FileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -63,6 +66,10 @@ public class AttendanceController {
     @PutMapping("approve/{id}")
     public ResponseEntity<AttendanceResponse> approve(@PathVariable Long id) {
         return ResponseEntity.ok(attendanceService.toDTO(attendanceService.approve(id)));
+    }
+    @PutMapping("cancel/{id}")
+    public ResponseEntity<AttendanceResponse> cancel(@PathVariable Long id, @RequestBody String reason) {
+        return ResponseEntity.ok(attendanceService.toDTO(attendanceService.cancel(new AttendanceCancelRequest(id,reason))));
     }
 
     @PostMapping("/batch")

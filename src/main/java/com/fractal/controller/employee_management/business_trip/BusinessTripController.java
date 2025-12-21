@@ -61,7 +61,7 @@ public class BusinessTripController {
     }
 
     @PutMapping("prolong/{id}")
-    public ResponseEntity<BusinessTripResponse> cancel(@PathVariable Long id, @RequestBody @Valid BusinessTripProlongRequest dto ) {
+    public ResponseEntity<BusinessTripResponse> prolong(@PathVariable Long id, @RequestBody @Valid BusinessTripProlongRequest dto ) {
         return ResponseEntity.ok(businessTripService.toDTO(businessTripService.prolong(id,dto)));
     }
 
