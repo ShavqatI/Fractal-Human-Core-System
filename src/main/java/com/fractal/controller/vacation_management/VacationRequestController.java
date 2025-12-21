@@ -1,7 +1,10 @@
 package com.fractal.controller.vacation_management;
 
 
+import com.fractal.domain.employee_management.attendance.dto.AttendanceCancelRequest;
+import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
 import com.fractal.domain.vacation_management.request.VacationRequestService;
+import com.fractal.domain.vacation_management.request.dto.VacationRequestCancelRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
 import jakarta.validation.Valid;
@@ -48,6 +51,11 @@ public class VacationRequestController {
     @PutMapping("approve/{id}")
     public ResponseEntity<VacationRequestResponse> approve(@PathVariable Long id) {
         return ResponseEntity.ok(vacationRequestService.toDTO(vacationRequestService.approve(id)));
+    }
+
+    @PutMapping("cancel/{id}")
+    public ResponseEntity<VacationRequestResponse> cancel(@PathVariable Long id, @RequestBody String reason) {
+        return ResponseEntity.ok(vacationRequestService.toDTO(vacationRequestService.cancel(new VacationRequestCancelRequest(id,reason))));
     }
 
     @DeleteMapping("/{id}")
