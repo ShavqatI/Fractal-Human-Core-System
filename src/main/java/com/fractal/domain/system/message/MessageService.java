@@ -1,5 +1,6 @@
 package com.fractal.domain.system.message;
 
+import com.fractal.domain.system.message.dto.MessageCompactResponse;
 import com.fractal.domain.system.message.dto.MessageRequest;
 import com.fractal.domain.system.message.dto.MessageResponse;
 
@@ -22,4 +23,5 @@ public interface MessageService {
     void deleteById(Long id);
 
     MessageResponse toDTO(Message message);
+    MessageCompactResponse toCompactDTO(Message message);
 }

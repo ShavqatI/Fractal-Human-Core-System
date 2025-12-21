@@ -2,6 +2,7 @@ package com.fractal.controller.system;
 
 
 import com.fractal.domain.system.message.MessageService;
+import com.fractal.domain.system.message.dto.MessageCompactResponse;
 import com.fractal.domain.system.message.dto.MessageRequest;
 import com.fractal.domain.system.message.dto.MessageResponse;
 import jakarta.validation.Valid;
@@ -40,12 +41,12 @@ public class MessageController {
         return ResponseEntity.ok(messageService.toDTO(messageService.getByCode(code)));
     }
     @GetMapping("/code/{code}/language/{language}")
-    public ResponseEntity<MessageResponse> getByCodeAndLanguage(@PathVariable String code, @PathVariable String language) {
-        return ResponseEntity.ok(messageService.toDTO(messageService.getByCodeAndLanguage(code,language)));
+    public ResponseEntity<MessageCompactResponse> getByCodeAndLanguage(@PathVariable String code, @PathVariable String language) {
+        return ResponseEntity.ok(messageService.toCompactDTO(messageService.getByCodeAndLanguage(code,language)));
     }
     @PostMapping("/codes/language/{language}")
-    public ResponseEntity<List<MessageResponse>> getByCodesAndLanguage(@RequestBody List<String> codes, @PathVariable String language) {
-        return ResponseEntity.ok(messageService.getByCodesAndLanguage(codes,language).stream().map(messageService::toDTO).collect(Collectors.toList()));
+    public ResponseEntity<List<MessageCompactResponse>> getByCodesAndLanguage(@RequestBody List<String> codes, @PathVariable String language) {
+        return ResponseEntity.ok(messageService.getByCodesAndLanguage(codes,language).stream().map(messageService::toCompactDTO).collect(Collectors.toList()));
     }
 
     @PutMapping("/{id}")

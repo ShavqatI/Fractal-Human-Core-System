@@ -1,6 +1,7 @@
 package com.fractal.domain.system.message;
 
 import com.fractal.domain.localization.language.LanguageService;
+import com.fractal.domain.system.message.dto.MessageCompactResponse;
 import com.fractal.domain.system.message.dto.MessageRequest;
 import com.fractal.domain.system.message.dto.MessageResponse;
 import com.fractal.domain.system.message.type.MessageTypeService;
@@ -78,6 +79,15 @@ class MessageServiceImpl implements MessageService {
                 message.getName(),
                 message.getDescription(),
                 languageService.toDTO(message.getLanguage()),
+                message.getCreatedDate()
+        );
+    }@Override
+    public MessageCompactResponse toCompactDTO(Message message) {
+        return new MessageCompactResponse(
+                message.getId(),
+                message.getCode(),
+                message.getName(),
+                message.getDescription(),
                 message.getCreatedDate()
         );
     }
