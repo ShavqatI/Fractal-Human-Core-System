@@ -2,8 +2,11 @@ package com.fractal.controller.employee_management.attendance;
 
 
 import com.fractal.domain.employee_management.attendance.absence.AbsenceService;
+import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceCancelRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceResponse;
+import com.fractal.domain.employee_management.attendance.dto.AttendanceCancelRequest;
+import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -43,6 +46,19 @@ public class AbsenceController {
     @PutMapping("/{id}")
     public ResponseEntity<AbsenceResponse> update(@PathVariable Long id, @RequestBody @Valid AbsenceRequest dto) {
         return ResponseEntity.ok(absenceService.toDTO(absenceService.update(id, dto)));
+    }
+
+    @PutMapping("review/{id}")
+    public ResponseEntity<AbsenceResponse> review(@PathVariable Long id) {
+        return ResponseEntity.ok(absenceService.toDTO(absenceService.review(id)));
+    }
+    @PutMapping("approve/{id}")
+    public ResponseEntity<AbsenceResponse> approve(@PathVariable Long id) {
+        return ResponseEntity.ok(absenceService.toDTO(absenceService.approve(id)));
+    }
+    @PutMapping("cancel/{id}")
+    public ResponseEntity<AbsenceResponse> cancel(@PathVariable Long id, @RequestBody String reason) {
+        return ResponseEntity.ok(absenceService.toDTO(absenceService.cancel(new AbsenceCancelRequest(id,reason))));
     }
 
     @DeleteMapping("/{id}")
