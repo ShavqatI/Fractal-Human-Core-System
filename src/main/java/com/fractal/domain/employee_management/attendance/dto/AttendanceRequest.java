@@ -8,6 +8,7 @@ public record AttendanceRequest(
         LocalDate date,
         LocalTime startTime,
         LocalTime endTime,
+        Boolean absenceId,
         String remarks
 
 ) {

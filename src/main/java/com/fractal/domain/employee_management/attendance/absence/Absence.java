@@ -1,17 +1,17 @@
 package com.fractal.domain.employee_management.attendance.absence;
 
 import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.abstraction.ApprovalWorkflow;
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.attendance.Attendance;
 import com.fractal.domain.employee_management.attendance.absence.type.AbsenceType;
 import com.fractal.domain.employee_management.employee.Employee;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "absence", schema = "employee_schema", catalog = "fractal")
@@ -19,11 +19,12 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Absence extends AbstractEntity {
+public class Absence extends ApprovalWorkflow {
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "attendance_id", referencedColumnName = "id")
-    private Attendance attendance;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
@@ -51,5 +52,15 @@ public class Absence extends AbstractEntity {
 
     @Column(name = "remarks")
     private String remarks;
+
+    @Column(name = "canceled_date")
+    private LocalDateTime canceledDate;
+
+    @ManyToOne
+    @JoinColumn(name = "canceled_user_id")
+    private User canceledUser;
+
+    @Column(name = "canceled_reason")
+    private String canceledReason;
 
 }

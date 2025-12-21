@@ -1,6 +1,7 @@
 package com.fractal.domain.system.message;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -8,6 +9,6 @@ import java.util.Optional;
 @Repository
 interface MessageRepository extends JpaRepository<Message, Long> {
     Optional<Message> findByCode(String code);
-    Optional<Message> findByCodeAndLanguageAndCode(String code,String languageCode);
+    Optional<Message> findByCodeAndLanguageCode(String code,String languageCode);
 
 }

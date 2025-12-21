@@ -36,7 +36,7 @@ class MessageServiceImpl implements MessageService {
 
     @Override
     public Message getByCodeAndLanguage(String code, String languageCode) {
-        return messageRepository.findByCodeAndLanguageAndCode(code,languageCode).orElseThrow(() -> new ResourceNotFoundException("Insurance Type with code: " + code + " and language code:" + languageCode + " not found"));
+        return messageRepository.findByCodeAndLanguageCode(code,languageCode).orElseThrow(() -> new ResourceNotFoundException("Insurance Type with code: " + code + " and language code:" + languageCode + " not found"));
 
     }
 

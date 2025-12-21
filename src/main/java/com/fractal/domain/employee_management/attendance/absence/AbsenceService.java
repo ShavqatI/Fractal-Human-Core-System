@@ -1,12 +1,17 @@
 package com.fractal.domain.employee_management.attendance.absence;
 
+import com.fractal.domain.abstraction.ApprovalWorkflowAware;
+import com.fractal.domain.abstraction.Cancelable;
+import com.fractal.domain.employee_management.attendance.Attendance;
+import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceCancelRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceCompactRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceResponse;
+import com.fractal.domain.employee_management.attendance.dto.AttendanceCancelRequest;
 
 import java.util.List;
 
-public interface AbsenceService {
+public interface AbsenceService extends ApprovalWorkflowAware<Long, Absence>, Cancelable<AbsenceCancelRequest,Absence> {
     Absence create(AbsenceRequest dto);
     Absence create(AbsenceCompactRequest dto);
 

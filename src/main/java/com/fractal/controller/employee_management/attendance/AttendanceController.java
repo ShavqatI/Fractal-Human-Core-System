@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 public class AttendanceController {
 
     private final AttendanceService attendanceService;
-    private final FileService fileService;
-
     @PostMapping
     public ResponseEntity<AttendanceResponse> create(@RequestBody @Valid AttendanceRequest dto) {
         return new ResponseEntity<>(attendanceService.toDTO(attendanceService.create(dto)), HttpStatus.CREATED);

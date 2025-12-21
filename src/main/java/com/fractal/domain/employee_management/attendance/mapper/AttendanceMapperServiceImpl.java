@@ -2,6 +2,7 @@ package com.fractal.domain.employee_management.attendance.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.attendance.Attendance;
+import com.fractal.domain.employee_management.attendance.absence.AbsenceService;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceBatchRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
@@ -17,6 +18,7 @@ class AttendanceMapperServiceImpl implements AttendanceMapperService {
 
     private final StatusService statusService;
     private final EmployeeService employeeService;
+    private final AbsenceService absenceService;
 
     @Override
     public AttendanceResponse toDTO(Attendance attendance) {
@@ -49,6 +51,7 @@ class AttendanceMapperServiceImpl implements AttendanceMapperService {
                     dto.date(),
                     null,
                     null,
+                    null,
                     null
             ));
 
@@ -68,6 +71,7 @@ class AttendanceMapperServiceImpl implements AttendanceMapperService {
             attendance.setHoursWorked(Duration.between(dto.startTime(), dto.endTime()).toMinutes());
             attendance.setOvertimeHours(Duration.between(dto.startTime(), dto.endTime()).toMinutes());
         }
+        attendance.setAbsence(absenceService.getById(dto.employeeId()));
         attendance.setRemarks(dto.remarks());
         return attendance;
     }

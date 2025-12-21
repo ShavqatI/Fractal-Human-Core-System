@@ -3,7 +3,9 @@ package com.fractal.domain.employee_management.attendance;
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.attendance.absence.AbsenceService;
+import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceCancelRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceBatchRequest;
+import com.fractal.domain.employee_management.attendance.dto.AttendanceCancelRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceRequest;
 import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
 import com.fractal.domain.employee_management.attendance.mapper.AttendanceMapperService;
@@ -39,13 +41,15 @@ class AttendanceServiceImpl implements AttendanceService {
     @Override
     public List<Attendance> create(List<AttendanceBatchRequest> dto) {
         List<Attendance> attendances = dto.stream()
-                .filter(attendanceBatchRequest -> attendanceBatchRequest.absence() == null)
-                .map(attendanceBatchRequest -> save(mapperService.toEntity(attendanceBatchRequest)))
-                .collect(Collectors.toList());
-        dto.stream()
-                .filter(attendanceBatchRequest -> attendanceBatchRequest.absence() != null)
-                .forEach(attendanceBatchRequest -> absenceService.create(attendanceBatchRequest.absence()));
-
+                .map(attendanceBatchRequest ->
+                        {
+                            var attendance = mapperService.toEntity(attendanceBatchRequest);
+                            if(attendanceBatchRequest.absence() != null){
+                               attendance.setAbsence(absenceService.create(attendanceBatchRequest.absence()));
+                            }
+                            return save(attendance);
+                        }
+                        ).collect(Collectors.toList());
         return attendances;
     }
 
@@ -129,6 +133,9 @@ class AttendanceServiceImpl implements AttendanceService {
             attendance.setReviewedDate(LocalDateTime.now());
             attendance.setReviewedUser(authenticatedService.getUser());
             attendance.setStatus(statusService.getByCode("REVIEWED"));
+            if(attendance.getAbsence() != null){
+                absenceService.review(attendance.getAbsence().getId());
+            }
             return save(attendance);
         } else {
             throw new ResourceStateException("The status is not valid is: " + attendance.getStatus().getName());
@@ -142,6 +149,9 @@ class AttendanceServiceImpl implements AttendanceService {
             attendance.setApprovedDate(LocalDateTime.now());
             attendance.setApprovedUser(authenticatedService.getUser());
             attendance.setStatus(statusService.getByCode("APPROVED"));
+            if(attendance.getAbsence() != null){
+                absenceService.approve(attendance.getAbsence().getId());
+            }
             return save(attendance);
         } else {
             throw new ResourceStateException("The status is not valid is: " + attendance.getStatus().getName());
@@ -159,4 +169,20 @@ class AttendanceServiceImpl implements AttendanceService {
         return dto.stream().map(id-> approve(id)).collect(Collectors.toList());
     }
 
+    @Override
+    public Attendance cancel(AttendanceCancelRequest dto) {
+        var attendance = getById(dto.id());
+        if (attendance.getStatus().getCode().equals("REVIEWED") || attendance.getStatus().getCode().equals("CREATED")) {
+            attendance.setCanceledDate(LocalDateTime.now());
+            attendance.setCanceledUser(authenticatedService.getUser());
+            attendance.setCanceledReason(dto.reason());
+            attendance.setStatus(statusService.getByCode("CANCELED"));
+            if(attendance.getAbsence() != null){
+                absenceService.cancel( new AbsenceCancelRequest(attendance.getAbsence().getId(), dto.reason()));
+            }
+            return save(attendance);
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + attendance.getStatus().getName());
+        }
+    }
 }
