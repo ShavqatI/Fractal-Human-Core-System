@@ -74,11 +74,11 @@ class AttendanceServiceImpl implements AttendanceService {
     }
     @Override
     public List<Attendance> getAllByUserIdReviewed() {
-        return attendanceRepository.findAllByUserIdAndStatusId(authenticatedService.getUser().getId(), statusService.getByCode("CREATED").getId());
+        return attendanceRepository.findAllByUserIdAndStatusId(authenticatedService.getUser().getId(), statusService.getByCode("REVIEWED").getId());
     }
     @Override
     public List<Attendance> getAllByUserIdApproved() {
-        return attendanceRepository.findAllByUserIdAndStatusId(authenticatedService.getUser().getId(), statusService.getByCode("CREATED").getId());
+        return attendanceRepository.findAllByUserIdAndStatusId(authenticatedService.getUser().getId(), statusService.getByCode("APPROVED").getId());
     }
 
     @Override

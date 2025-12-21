@@ -39,6 +39,10 @@ public class MessageController {
     public ResponseEntity<MessageResponse> getByCode(@PathVariable String code) {
         return ResponseEntity.ok(messageService.toDTO(messageService.getByCode(code)));
     }
+    @GetMapping("/code/{code}/language/{language}")
+    public ResponseEntity<MessageResponse> getByCodeAndLanguage(@PathVariable String code, @PathVariable String language) {
+        return ResponseEntity.ok(messageService.toDTO(messageService.getByCodeAndLanguage(code,language)));
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<MessageResponse> update(@PathVariable Long id, @RequestBody @Valid MessageRequest dto) {

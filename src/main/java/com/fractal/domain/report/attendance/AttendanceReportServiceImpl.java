@@ -51,11 +51,24 @@ class AttendanceReportServiceImpl implements AttendanceReportService {
 
             Sheet sheet = workbook.getSheetAt(0);
 
-            var headerRow = sheet.getRow(0);
+            Row periodRow = sheet.getRow(1);
+            if (periodRow == null) periodRow = sheet.createRow(1);
+            Cell startDateCell = periodRow.getCell(0);
+            if (startDateCell == null) startDateCell = periodRow.createCell(0);
+            startDateCell.setCellValue(dto.startDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+            Cell endDateCell = periodRow.getCell(1);
+            if (endDateCell == null) endDateCell = periodRow.createCell(1);
+            endDateCell.setCellValue(dto.endDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+
+
+            var headerRow = sheet.getRow(2);
             var headerDate = dto.startDate();
             var headerCellIndex = 2;
             CellStyle style = workbook.createCellStyle();
             style.setRotation((short) 90);
+
+
             while (!headerDate.isAfter(dto.endDate())) {
                 Cell cell = headerRow.getCell(headerCellIndex);
                 if (cell == null) cell = headerRow.createCell(headerCellIndex);
@@ -65,7 +78,7 @@ class AttendanceReportServiceImpl implements AttendanceReportService {
                 headerCellIndex++;
             }
 
-            var rowIndex = 1;
+            var rowIndex = 3;
             for (Map.Entry<Employee, List<LocalDate>> entry : attendances.entrySet()) {
                 Employee employee = entry.getKey();
                 List<LocalDate> dates = entry.getValue();

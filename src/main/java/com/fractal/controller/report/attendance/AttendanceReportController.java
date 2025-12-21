@@ -19,6 +19,7 @@ public class AttendanceReportController {
 
     private final AttendanceReportService attendanceReportService;
     private final FileService fileService;
+
     @PostMapping("by-period")
     @CrossOrigin(value = "*")
     public ResponseEntity<Resource> byPeriod(@RequestBody @Valid AttendanceReportPeriodRequest dto) {

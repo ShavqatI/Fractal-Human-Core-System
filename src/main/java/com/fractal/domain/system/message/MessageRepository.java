@@ -8,5 +8,6 @@ import java.util.Optional;
 @Repository
 interface MessageRepository extends JpaRepository<Message, Long> {
     Optional<Message> findByCode(String code);
+    Optional<Message> findByCodeAndLanguageAndCode(String code,String languageCode);
 
 }
