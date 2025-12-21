@@ -22,8 +22,7 @@ class VacationServiceImpl implements VacationService {
 
     @Override
     public Vacation create(VacationRequest dto) {
-        var vacation = save(mapperService.toEntity(dto));
-        return vacation;
+        return save(mapperService.toEntity(dto));
     }
 
     @Override

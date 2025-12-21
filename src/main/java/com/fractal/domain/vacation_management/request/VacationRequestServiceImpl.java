@@ -2,6 +2,9 @@ package com.fractal.domain.vacation_management.request;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.attendance.Attendance;
+import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceCancelRequest;
+import com.fractal.domain.vacation_management.request.dto.VacationRequestCancelRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
 import com.fractal.domain.vacation_management.request.mapper.VacationRequestMapperService;
@@ -30,9 +33,7 @@ class VacationRequestServiceImpl implements VacationRequestService {
 
     @Override
     public VacationRequest create(VacationRequestRequest dto) {
-        var request = save(mapperService.toEntity(dto));
-        stateService.create(request);
-        return request;
+        return save(mapperService.toEntity(dto));
     }
 
     @Override
@@ -53,9 +54,7 @@ class VacationRequestServiceImpl implements VacationRequestService {
     @Override
     public VacationRequest update(Long id, VacationRequestRequest dto) {
         try {
-            var request = save(mapperService.toEntity(findById(id), dto));
-            stateService.create(request);
-            return request;
+            return save(mapperService.toEntity(findById(id), dto));
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
@@ -70,8 +69,8 @@ class VacationRequestServiceImpl implements VacationRequestService {
     public void close(Long id) {
         var request = findById(id);
         request.setStatus(statusService.getByCode("CLOSE"));
-        request = save(request);
-        stateService.create(request);
+        save(request);
+
     }
 
     public VacationRequestResponse toDTO(VacationRequest vacationRequest) {
@@ -82,7 +81,9 @@ class VacationRequestServiceImpl implements VacationRequestService {
     @Transactional
     public VacationRequest save(VacationRequest vacationRequest) {
         try {
-            return vacationRequestRepository.save(vacationRequest);
+             vacationRequest = vacationRequestRepository.save(vacationRequest);
+            stateService.create(vacationRequest);
+            return vacationRequest;
         } catch (DataAccessException e) {
             throw new RuntimeException(e.getMostSpecificCause().getMessage());
         }
@@ -99,8 +100,7 @@ class VacationRequestServiceImpl implements VacationRequestService {
             vacationRequest.setReviewedDate(LocalDateTime.now());
             vacationRequest.setReviewedUser(authenticatedService.getUser());
             vacationRequest.setStatus(statusService.getByCode("REVIEWED"));
-            stateService.create(vacationRequest);
-            return vacationRequest;
+            return save(vacationRequest);
         } else {
             throw new ResourceStateException("The status of request is not valid is: " + vacationRequest.getStatus().getName());
         }
@@ -113,10 +113,23 @@ class VacationRequestServiceImpl implements VacationRequestService {
             vacationRequest.setApprovedDate(LocalDateTime.now());
             vacationRequest.setApprovedUser(authenticatedService.getUser());
             vacationRequest.setStatus(statusService.getByCode("APPROVED"));
-            stateService.create(vacationRequest);
-            return vacationRequest;
+            return save(vacationRequest);
         } else {
             throw new ResourceStateException("The status of request is not valid is: " + vacationRequest.getStatus().getName());
+        }
+    }
+
+    @Override
+    public VacationRequest cancel(VacationRequestCancelRequest dto) {
+        var vacationRequest = getById(dto.id());
+        if (vacationRequest.getStatus().getCode().equals("REVIEWED") || vacationRequest.getStatus().getCode().equals("CREATED")) {
+            vacationRequest.setCanceledDate(LocalDateTime.now());
+            vacationRequest.setCanceledUser(authenticatedService.getUser());
+            vacationRequest.setCanceledReason(dto.reason());
+            vacationRequest.setStatus(statusService.getByCode("CANCELED"));
+            return save(vacationRequest);
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + vacationRequest.getStatus().getName());
         }
     }
 }

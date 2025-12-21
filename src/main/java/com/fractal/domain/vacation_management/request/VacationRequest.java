@@ -1,6 +1,7 @@
 package com.fractal.domain.vacation_management.request;
 
 import com.fractal.domain.abstraction.ApprovalWorkflow;
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.vacation_management.request.education.VacationRequestEducation;
@@ -13,6 +14,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,6 +64,16 @@ public class VacationRequest extends ApprovalWorkflow {
 
     @Column(name = "description")
     private String description;
+
+    @Column(name = "canceled_date")
+    private LocalDateTime canceledDate;
+
+    @ManyToOne
+    @JoinColumn(name = "canceled_user_id")
+    private User canceledUser;
+
+    @Column(name = "canceled_reason")
+    private String canceledReason;
 
     @OneToMany(mappedBy = "vacationRequest", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<VacationRequestResponsibility> responsibilities = new ArrayList<>();

@@ -2,6 +2,7 @@ package com.fractal.domain.vacation_management.schedule;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleCancelRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 import com.fractal.domain.vacation_management.schedule.mapper.VacationScheduleMapperService;
@@ -25,8 +26,7 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
 
     @Override
     public VacationSchedule create(VacationScheduleRequest dto) {
-        var schedule = mapperService.toEntity(dto);
-        return save(schedule);
+        return save(mapperService.toEntity(dto));
     }
     @Override
     public List<VacationSchedule> getAll() {
@@ -99,4 +99,17 @@ class VacationScheduleServiceImpl implements VacationScheduleService {
         }
     }
 
+    @Override
+    public VacationSchedule cancel(VacationScheduleCancelRequest dto) {
+        var schedule = getById(dto.id());
+        if (schedule.getStatus().getCode().equals("REVIEWED") || schedule.getStatus().getCode().equals("CREATED")) {
+            schedule.setCanceledDate(LocalDateTime.now());
+            schedule.setCanceledUser(authenticatedService.getUser());
+            schedule.setCanceledReason(dto.reason());
+            schedule.setStatus(statusService.getByCode("CANCELED"));
+            return save(schedule);
+        } else {
+            throw new ResourceStateException("The status is not valid is: " + schedule.getStatus().getName());
+        }
+    }
 }

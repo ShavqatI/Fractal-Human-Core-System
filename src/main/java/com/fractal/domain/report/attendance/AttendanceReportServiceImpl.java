@@ -65,15 +65,26 @@ class AttendanceReportServiceImpl implements AttendanceReportService {
             var headerRow = sheet.getRow(2);
             var headerDate = dto.startDate();
             var headerCellIndex = 2;
-            CellStyle style = workbook.createCellStyle();
-            style.setRotation((short) 90);
+            CellStyle headerCellStyle = workbook.createCellStyle();
+            headerCellStyle.setBorderTop(BorderStyle.THIN);
+            headerCellStyle.setBorderBottom(BorderStyle.THIN);
+            headerCellStyle.setBorderLeft(BorderStyle.THIN);
+            headerCellStyle.setBorderRight(BorderStyle.THIN);
+            headerCellStyle.setRotation((short) 90);
+
+            CellStyle borderStyle = workbook.createCellStyle();
+            borderStyle.setBorderTop(BorderStyle.THIN);
+            borderStyle.setBorderBottom(BorderStyle.THIN);
+            borderStyle.setBorderLeft(BorderStyle.THIN);
+            borderStyle.setBorderRight(BorderStyle.THIN);
+
 
 
             while (!headerDate.isAfter(dto.endDate())) {
                 Cell cell = headerRow.getCell(headerCellIndex);
                 if (cell == null) cell = headerRow.createCell(headerCellIndex);
                 cell.setCellValue(headerDate.format(DateTimeFormatter.ofPattern("dd/MM/yy")));
-                cell.setCellStyle(style);
+                cell.setCellStyle(headerCellStyle);
                 headerDate = headerDate.plusDays(1);
                 headerCellIndex++;
             }
@@ -87,15 +98,18 @@ class AttendanceReportServiceImpl implements AttendanceReportService {
                 Cell cell = row.getCell(0);
                 if (cell == null) cell = row.createCell(0);
                 cell.setCellValue(employeeUseCaseService.getFullName(employee));
+                cell.setCellStyle(borderStyle);
                 cell = row.getCell(1);
                 if (cell == null) cell = row.createCell(1);
                 cell.setCellValue(employee.getUuid());
+                cell.setCellStyle(borderStyle);
 
                 var cellIndex = 2;
                 for (LocalDate date : dates) {
                     cell = row.getCell(cellIndex);
                     if (cell == null) cell = row.createCell(cellIndex);
                     cell.setCellValue(date);
+                    cell.setCellStyle(borderStyle);
                     cellIndex++;
                 }
                 rowIndex++;
