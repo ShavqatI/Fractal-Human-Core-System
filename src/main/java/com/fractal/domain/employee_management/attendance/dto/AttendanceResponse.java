@@ -1,6 +1,8 @@
 package com.fractal.domain.employee_management.attendance.dto;
 
 import com.fractal.domain.dictionary.status.dto.StatusCompactResponse;
+import com.fractal.domain.employee_management.attendance.absence.Absence;
+import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceResponse;
 import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 
 import java.time.LocalDate;
@@ -17,6 +19,7 @@ public record AttendanceResponse(
         long hoursWorked,
         long overtimeHours,
         String remarks,
+        AbsenceResponse absence,
         LocalDateTime createdDate
 ) {
 }

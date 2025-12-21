@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +33,9 @@ class AttendanceMapperServiceImpl implements AttendanceMapperService {
                 attendance.getHoursWorked(),
                 attendance.getOvertimeHours(),
                 attendance.getRemarks(),
+                Optional.ofNullable(attendance.getAbsence())
+                        .map(absenceService::toDTO)
+                        .orElse(null),
                 attendance.getCreatedDate()
         );
     }
