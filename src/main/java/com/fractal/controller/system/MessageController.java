@@ -43,6 +43,10 @@ public class MessageController {
     public ResponseEntity<MessageResponse> getByCodeAndLanguage(@PathVariable String code, @PathVariable String language) {
         return ResponseEntity.ok(messageService.toDTO(messageService.getByCodeAndLanguage(code,language)));
     }
+    @PostMapping("/codes/language/{language}")
+    public ResponseEntity<List<MessageResponse>> getByCodesAndLanguage(@RequestBody List<String> codes, @PathVariable String language) {
+        return ResponseEntity.ok(messageService.getByCodesAndLanguage(codes,language).stream().map(messageService::toDTO).collect(Collectors.toList()));
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<MessageResponse> update(@PathVariable Long id, @RequestBody @Valid MessageRequest dto) {

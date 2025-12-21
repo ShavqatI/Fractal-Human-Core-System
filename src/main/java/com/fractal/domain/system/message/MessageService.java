@@ -13,6 +13,7 @@ public interface MessageService {
 
     Message getByCode(String code);
     Message getByCodeAndLanguage(String code, String languageCode);
+    List<Message> getByCodesAndLanguage(List<String> codes, String languageCode);
 
     Message getById(Long id);
 

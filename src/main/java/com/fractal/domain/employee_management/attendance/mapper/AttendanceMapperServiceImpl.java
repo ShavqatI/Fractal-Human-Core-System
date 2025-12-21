@@ -75,7 +75,6 @@ class AttendanceMapperServiceImpl implements AttendanceMapperService {
             attendance.setHoursWorked(Duration.between(dto.startTime(), dto.endTime()).toMinutes());
             attendance.setOvertimeHours(Duration.between(dto.startTime(), dto.endTime()).toMinutes());
         }
-        attendance.setAbsence(absenceService.getById(dto.employeeId()));
         attendance.setRemarks(dto.remarks());
         return attendance;
     }
