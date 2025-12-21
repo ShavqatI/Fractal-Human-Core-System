@@ -31,13 +31,17 @@ class MessageServiceImpl implements MessageService {
 
     @Override
     public Message getByCode(String code) {
-        return messageRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Insurance Type with code: " + code + " not found"));
+        return messageRepository.findByCode(code).orElseThrow(() -> new ResourceNotFoundException("Message  with code: " + code + " not found"));
     }
 
     @Override
     public Message getByCodeAndLanguage(String code, String languageCode) {
-        return messageRepository.findByCodeAndLanguageCode(code,languageCode).orElseThrow(() -> new ResourceNotFoundException("Insurance Type with code: " + code + " and language code:" + languageCode + " not found"));
+        return messageRepository.findByCodeAndLanguageCode(code,languageCode).orElseThrow(() -> new ResourceNotFoundException("Message  with code: " + code + " and language code:" + languageCode + " not found"));
+    }
 
+    @Override
+    public List<Message> getByCodesAndLanguage(List<String> codes, String languageCode) {
+        return messageRepository.findByCodeInAndLanguageCode(codes,languageCode);
     }
 
     @Override
@@ -97,7 +101,7 @@ class MessageServiceImpl implements MessageService {
     }
 
     private Message findById(Long id) {
-        return messageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Insurance Type with id: " + id + " not found"));
+        return messageRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Message with id: " + id + " not found"));
     }
 
 }
