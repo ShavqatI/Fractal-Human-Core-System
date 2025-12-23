@@ -1,4 +1,4 @@
-package com.fractal.controller.profile;
+package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/profile-management/identification-document")
+@RequestMapping("/api/v1/profile-management/employee/identification-document")
 @RequiredArgsConstructor
 public class ProfileIdentificationDocumentController {
 

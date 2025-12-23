@@ -7,10 +7,7 @@ import java.util.List;
 
 public interface ProfileAddressService {
     List<EmployeeAddress> getAll();
-
-
     EmployeeAddress getById(Long id);
-
     EmployeeAddressResponse toDTO(EmployeeAddress address);
 
 

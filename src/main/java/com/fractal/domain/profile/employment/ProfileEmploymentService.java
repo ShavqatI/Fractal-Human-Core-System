@@ -8,9 +8,7 @@ import java.util.List;
 public interface ProfileEmploymentService {
     List<EmployeeEmployment> getAll();
 
-
     EmployeeEmployment getById(Long id);
-
     EmploymentResponse toDTO(EmployeeEmployment employment);
 
 

@@ -1,0 +1,80 @@
+package com.fractal.domain.profile.subordinate.vacation.schedule;
+
+import com.fractal.domain.authorization.AuthenticatedService;
+import com.fractal.domain.employee_management.subordinate.SubordinateService;
+import com.fractal.domain.vacation_management.request.VacationRequest;
+import com.fractal.domain.vacation_management.schedule.VacationSchedule;
+import com.fractal.domain.vacation_management.schedule.VacationScheduleService;
+import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
+import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
+import com.fractal.exception.ResourceNotFoundException;
+import com.fractal.exception.ResourceWithIdNotFoundException;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+@RequiredArgsConstructor
+class SubordinateVacationScheduleServiceImpl implements SubordinateVacationScheduleService {
+
+    private final VacationScheduleService vacationScheduleService;
+    private final AuthenticatedService authenticatedService;
+    private final SubordinateService subordinateService;
+
+
+    @Override
+    public VacationSchedule getById(Long id) {
+        return findById(id);
+    }
+
+    @Override
+    public List<VacationSchedule> getAll() {
+        var subordinates = subordinateService.getActiveEmployees(authenticatedService.getEmployeeId());
+        List<VacationSchedule> vacationSchedules = new ArrayList<>();
+        subordinates.forEach(employee -> vacationSchedules.addAll(
+                vacationScheduleService.getAllByEmployeeId(employee.getId())
+                        .stream()
+                        .sorted(Comparator.comparing(VacationSchedule::getId).reversed())
+                        .collect(Collectors.toList())
+        ));
+        return vacationSchedules;
+     }
+    @Override
+    public VacationSchedule update(Long id, SubordinateVacationScheduleRequest dto) {
+        var schedule = findById(id);
+        return vacationScheduleService.update(schedule.getId(),mapDTO(dto));
+    }
+
+    public VacationScheduleResponse toDTO(VacationSchedule schedule) {
+        return vacationScheduleService.toDTO(schedule);
+    }
+    @Override
+    public VacationSchedule approve(Long id) {
+        var schedule = findById(id);
+        return vacationScheduleService.review(schedule.getId());
+    }
+    private VacationSchedule findById(Long id){
+        try {
+            var schedule = vacationScheduleService.getById(id);
+            var subordinate = subordinateService.getActiveEmployee(authenticatedService.getEmployeeId(),schedule.getEmployee().getId());
+            if(subordinate != null) return schedule;
+            else return null;
+        }
+        catch (ResourceNotFoundException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+    private VacationScheduleRequest mapDTO(SubordinateVacationScheduleRequest dto) {
+       return new VacationScheduleRequest(
+               authenticatedService.getEmployeeId(),
+               dto.startDate(),
+               dto.startDate().plusDays(dto.days() - 1)
+       );
+    }
+
+}

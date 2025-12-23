@@ -1,4 +1,4 @@
-package com.fractal.controller.profile;
+package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.employee_management.relative.dto.RelativeResponse;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/profile-management/relative")
+@RequestMapping("/api/v1/profile-management/employee/relative")
 @RequiredArgsConstructor
 public class ProfileRelativeController {
 

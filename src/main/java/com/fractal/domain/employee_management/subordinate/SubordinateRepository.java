@@ -23,4 +23,14 @@ interface SubordinateRepository extends JpaRepository<Subordinate, Long> {
     limit 1
    """)
     Optional<Subordinate> findActiveBySubordinateEmployeeId(Long employeeId);
+    @Query("""
+    select s 
+    from Subordinate s
+    where 
+    s.endDate is null
+    and s.status.code = 'ACTIVE'
+    and s.employee.id = :employeeId 
+    order by s.startDate desc
+   """)
+    List<Subordinate> findAllActiveSubordinates(Long employeeId);
 }

@@ -2,7 +2,7 @@ spring:
   application:
     name: Fractal-Human-Core-System
   profiles:
-    active: prod
+    active: dev
   jpa:
     hibernate:
       ddl-auto: update
@@ -28,11 +28,6 @@ jwt:
 #    org.hibernate.orm.jdbc.extract: TRACE
 #    org.hibernate.type.descriptor.sql: TRACE
 #    org.springframework.orm.jpa: DEBUG
-minio:
-  url: http://localhost:9000
-  access-key: admin
-  secret-key: strongpassword
-  bucket: app-files
 
 resource-storage:
   root-path: "./FILE-STORAGE"

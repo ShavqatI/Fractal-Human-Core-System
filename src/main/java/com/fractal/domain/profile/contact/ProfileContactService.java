@@ -8,9 +8,7 @@ import java.util.List;
 public interface ProfileContactService {
     List<EmployeeContact> getAll();
 
-
     EmployeeContact getById(Long id);
-
     ContactResponse toDTO(EmployeeContact contact);
 
 

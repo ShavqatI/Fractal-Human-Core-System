@@ -1,4 +1,4 @@
-package com.fractal.controller.profile;
+package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.employee_management.professional_experience.dto.EmployeeProfessionalExperienceResponse;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/profile-management/professional-experience")
+@RequestMapping("/api/v1/profile-management/employee/professional-experience")
 @RequiredArgsConstructor
 public class ProfileProfessionalExperienceController {
 

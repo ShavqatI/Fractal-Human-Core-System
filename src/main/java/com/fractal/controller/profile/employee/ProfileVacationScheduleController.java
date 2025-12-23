@@ -1,4 +1,4 @@
-package com.fractal.controller.profile;
+package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.profile.vacation.schedule.ProfileVacationScheduleRequest;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/profile-management/vacation/schedule")
+@RequestMapping("/api/v1/profile-management/employee/vacation/schedule")
 @RequiredArgsConstructor
 public class ProfileVacationScheduleController {
 

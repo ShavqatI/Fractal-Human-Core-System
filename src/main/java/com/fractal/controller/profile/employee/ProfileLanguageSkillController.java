@@ -1,4 +1,4 @@
-package com.fractal.controller.profile;
+package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.education.language_skill.dto.LanguageSkillResponse;
@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/profile-management/language-skill")
+@RequestMapping("/api/v1/profile-management/employee/language-skill")
 @RequiredArgsConstructor
 public class ProfileLanguageSkillController {
 

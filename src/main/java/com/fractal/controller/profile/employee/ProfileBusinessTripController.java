@@ -1,4 +1,4 @@
-package com.fractal.controller.profile;
+package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/profile-management/business-trip")
+@RequestMapping("/api/v1/profile-management/employee/business-trip")
 @RequiredArgsConstructor
 public class ProfileBusinessTripController {
 

@@ -39,7 +39,14 @@ class ProfileVacationRequestServiceImpl implements ProfileVacationRequestService
 
     @Override
     public VacationRequest update(Long id, ProfileVacationRequestRequest dto) {
-        return vacationRequestService.update(id,mapDTO(dto));
+        try {
+            var vacationRequest = findById(id);
+            return vacationRequestService.update(vacationRequest.getId(),mapDTO(dto));
+        }
+        catch (ResourceWithIdNotFoundException e){
+            throw new RuntimeException(e.getMessage());
+        }
+
     }
 
     @Override

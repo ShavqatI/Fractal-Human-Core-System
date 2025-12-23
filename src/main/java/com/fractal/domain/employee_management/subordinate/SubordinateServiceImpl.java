@@ -1,6 +1,7 @@
 package com.fractal.domain.employee_management.subordinate;
 
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.subordinate.dto.SubordinateRequest;
 import com.fractal.domain.employee_management.subordinate.dto.SubordinateResponse;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -43,8 +45,27 @@ class SubordinateServiceImpl implements SubordinateService {
     }
 
     @Override
+    public List<Subordinate> getAllActiveByEmployeeId(Long employeeId) {
+        return subordinateRepository.findAllActiveSubordinates(employeeId);
+    }
+
+    @Override
     public List<Subordinate> getAllByEmployeeId(Long employeeId) {
         return subordinateRepository.findAllByEmployeeId(employeeId);
+    }
+
+    @Override
+    public List<Employee> getActiveEmployees(Long employeeId){
+        return getAllActiveByEmployeeId(employeeId)
+                .stream().map(subordinate -> subordinate.getSubordinateEmployee()).collect(Collectors.toList());
+    }
+    @Override
+    public Employee getActiveEmployee(Long employeeId,Long subordinateEmployeeId) {
+        return getAllActiveByEmployeeId(employeeId)
+                .stream()
+                .filter(subordinate -> subordinate.getSubordinateEmployee().getId().equals(subordinateEmployeeId))
+                .map(subordinate -> subordinate.getSubordinateEmployee())
+                .findFirst().orElseThrow(()-> new ResourceNotFoundException("Employee with id: " + subordinateEmployeeId + " not found in your subordinate list"));
     }
 
     @Override
