@@ -25,7 +25,7 @@ class ProfileAddressServiceImpl implements ProfileAddressService {
     @Override
     public EmployeeAddress getById(Long id) {
         return getAll().stream()
-                .filter(identificationDocument -> identificationDocument.getId().equals(id))
+                .filter(address -> address.getId().equals(id))
                 .findFirst()
                 .orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }

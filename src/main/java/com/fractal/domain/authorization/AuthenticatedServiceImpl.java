@@ -1,5 +1,6 @@
 package com.fractal.domain.authorization;
 
+import com.fractal.domain.authorization.mapping.user_candidate.UserCandidateMappingService;
 import com.fractal.domain.authorization.mapping.user_employee.UserEmployeeMappingService;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.authorization.user.UserService;
@@ -15,6 +16,7 @@ class AuthenticatedServiceImpl implements AuthenticatedService {
 
     private final UserService userService;
     private final UserEmployeeMappingService userEmployeeMappingService;
+    private final UserCandidateMappingService userCandidateMappingService;
     @Override
     public User getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -32,5 +34,9 @@ class AuthenticatedServiceImpl implements AuthenticatedService {
     @Override
     public Long getEmployeeId() {
        return userEmployeeMappingService.getEmployee(getUser()).getId();
+    }
+    @Override
+    public Long getCandidateId() {
+       return userCandidateMappingService.getCandidate(getUser()).getId();
     }
 }

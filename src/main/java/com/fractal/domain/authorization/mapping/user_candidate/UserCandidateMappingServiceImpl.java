@@ -2,8 +2,10 @@ package com.fractal.domain.authorization.mapping.user_candidate;
 
 import com.fractal.domain.authorization.mapping.user_candidate.dto.UserCandidateMappingRequest;
 import com.fractal.domain.authorization.mapping.user_candidate.dto.UserCandidateMappingResponse;
+import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.authorization.user.UserService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.recruitment.candidate.Candidate;
 import com.fractal.domain.recruitment.candidate.CandidateService;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +38,11 @@ class UserCandidateMappingServiceImpl implements UserCandidateMappingService {
     @Override
     public UserCandidateMapping getById(Long id) {
         return findById(id);
+    }
+
+    @Override
+    public Candidate getCandidate(User user) {
+        return userCandidateMappingRepository.findByUserId(user.getId()).getFirst().getCandidate();
     }
 
     @Override
