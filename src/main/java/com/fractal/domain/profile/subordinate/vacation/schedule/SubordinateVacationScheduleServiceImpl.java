@@ -54,6 +54,11 @@ class SubordinateVacationScheduleServiceImpl implements SubordinateVacationSched
         return vacationScheduleService.update(findById(id).getId(),mapDTO(dto));
     }
 
+    @Override
+    public void deleteById(Long id) {
+        vacationScheduleService.deleteById(findById(id).getId());
+    }
+
     public VacationScheduleResponse toDTO(VacationSchedule schedule) {
         return vacationScheduleService.toDTO(schedule);
     }

@@ -1,6 +1,8 @@
 package com.fractal.controller.profile.subordinate;
 
 
+import com.fractal.domain.employee_management.business_trip.dto.BusinessTripCancelRequest;
+import com.fractal.domain.employee_management.business_trip.dto.BusinessTripProlongRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.profile.business_trip.ProfileBusinessTripRequest;
 import com.fractal.domain.profile.business_trip.ProfileBusinessTripService;
@@ -49,6 +51,20 @@ public class SubordinateBusinessTripController {
     public ResponseEntity<BusinessTripResponse> approve(@PathVariable Long id) {
         return ResponseEntity.ok(businessTripService.toDTO(businessTripService.approve(id)));
     }
+    @PutMapping("cancel/{id}")
+    public ResponseEntity<BusinessTripResponse> cancel(@PathVariable Long id,@RequestBody String reason) {
+        return ResponseEntity.ok(businessTripService.toDTO(businessTripService.cancel(new BusinessTripCancelRequest(id,reason))));
+    }
+    @PutMapping("prolong/{id}")
+    public ResponseEntity<BusinessTripResponse> prolong(@PathVariable Long id, @RequestBody @Valid BusinessTripProlongRequest dto ) {
+        return ResponseEntity.ok(businessTripService.toDTO(businessTripService.prolong(id,dto)));
+    }
+    @GetMapping("close/{id}")
+    public ResponseEntity<Void> close(@PathVariable Long id) {
+        businessTripService.close(id);
+        return ResponseEntity.noContent().build();
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         businessTripService.deleteById(id);

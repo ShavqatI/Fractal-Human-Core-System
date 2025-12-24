@@ -4,6 +4,7 @@ import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.abstraction.Cancelable;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripCancelRequest;
+import com.fractal.domain.employee_management.business_trip.dto.BusinessTripProlongRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 
 import java.nio.file.Path;
@@ -17,6 +18,7 @@ public interface SubordinateBusinessTripService extends ApprovalWorkflowAware<Lo
     void deleteById(Long id);
     void close(Long id);
     Path passport(Long id);
+    BusinessTrip prolong(Long id, BusinessTripProlongRequest dto);
     BusinessTripResponse toDTO(BusinessTrip businessTrip);
 
 }

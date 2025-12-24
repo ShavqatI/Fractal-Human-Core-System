@@ -15,6 +15,7 @@ public interface SubordinateVacationScheduleService extends ApprovalWorkflowAwar
     VacationSchedule getById(Long id);
     List<VacationSchedule> getAll();
     VacationSchedule update(Long id, SubordinateVacationScheduleRequest dto);
+    void deleteById(Long id);
     VacationScheduleResponse toDTO(VacationSchedule schedule);
 
 
