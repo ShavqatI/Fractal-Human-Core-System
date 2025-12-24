@@ -12,17 +12,11 @@ import java.util.List;
 
 public interface VacationScheduleService extends ApprovalWorkflowAware<Long, VacationSchedule>, Cancelable<VacationScheduleCancelRequest, VacationSchedule> {
     VacationSchedule create(VacationScheduleRequest dto);
-
     List<VacationSchedule> getAll();
-
     VacationSchedule getById(Long id);
-
     List<VacationSchedule> getAllByEmployeeId(Long employeeId);
-
     VacationSchedule update(Long id, VacationScheduleRequest dto);
-
     void deleteById(Long id);
-
     VacationScheduleResponse toDTO(VacationSchedule schedule);
 
 }

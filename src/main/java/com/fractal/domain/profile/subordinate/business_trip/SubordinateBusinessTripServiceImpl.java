@@ -3,6 +3,7 @@ package com.fractal.domain.profile.subordinate.business_trip;
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.employee_management.business_trip.BusinessTripService;
+import com.fractal.domain.employee_management.business_trip.dto.BusinessTripCancelRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.employee_management.subordinate.SubordinateService;
@@ -91,6 +92,10 @@ class SubordinateBusinessTripServiceImpl implements SubordinateBusinessTripServi
         var businessTrip = findById(id);
         return businessTripService.approve(businessTrip.getId());
     }
+    @Override
+    public BusinessTrip cancel(BusinessTripCancelRequest dto) {
+        return businessTripService.cancel(new BusinessTripCancelRequest(findById(dto.id()).getId(), dto.reason()));
+    }
 
     @Override
     public Path passport(Long id) {
@@ -111,4 +116,6 @@ class SubordinateBusinessTripServiceImpl implements SubordinateBusinessTripServi
                 dto.files()
         );
     }
+
+
 }

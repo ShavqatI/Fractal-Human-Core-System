@@ -5,6 +5,7 @@ import com.fractal.domain.employee_management.subordinate.SubordinateService;
 import com.fractal.domain.vacation_management.request.VacationRequest;
 import com.fractal.domain.vacation_management.schedule.VacationSchedule;
 import com.fractal.domain.vacation_management.schedule.VacationScheduleService;
+import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleCancelRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 import com.fractal.exception.ResourceNotFoundException;
@@ -27,6 +28,11 @@ class SubordinateVacationScheduleServiceImpl implements SubordinateVacationSched
 
 
     @Override
+    public VacationSchedule create(SubordinateVacationScheduleRequest dto) {
+        return vacationScheduleService.create(mapDTO(dto));
+    }
+
+    @Override
     public VacationSchedule getById(Long id) {
         return findById(id);
     }
@@ -45,17 +51,25 @@ class SubordinateVacationScheduleServiceImpl implements SubordinateVacationSched
      }
     @Override
     public VacationSchedule update(Long id, SubordinateVacationScheduleRequest dto) {
-        var schedule = findById(id);
-        return vacationScheduleService.update(schedule.getId(),mapDTO(dto));
+        return vacationScheduleService.update(findById(id).getId(),mapDTO(dto));
     }
 
     public VacationScheduleResponse toDTO(VacationSchedule schedule) {
         return vacationScheduleService.toDTO(schedule);
     }
+
+    @Override
+    public VacationSchedule review(Long id) {
+        return vacationScheduleService.review(findById(id).getId());
+    }
+
     @Override
     public VacationSchedule approve(Long id) {
-        var schedule = findById(id);
-        return vacationScheduleService.review(schedule.getId());
+        return vacationScheduleService.approve(findById(id).getId());
+    }
+    @Override
+    public VacationSchedule cancel(VacationScheduleCancelRequest dto) {
+        return vacationScheduleService.cancel(new VacationScheduleCancelRequest(findById(dto.id()).getId(), dto.reason()));
     }
     private VacationSchedule findById(Long id){
         try {
@@ -71,10 +85,11 @@ class SubordinateVacationScheduleServiceImpl implements SubordinateVacationSched
 
     private VacationScheduleRequest mapDTO(SubordinateVacationScheduleRequest dto) {
        return new VacationScheduleRequest(
-               authenticatedService.getEmployeeId(),
+               dto.employeeId(),
                dto.startDate(),
                dto.startDate().plusDays(dto.days() - 1)
        );
     }
+
 
 }

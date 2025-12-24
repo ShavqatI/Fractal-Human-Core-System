@@ -4,6 +4,7 @@ import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.employee_management.subordinate.SubordinateService;
 import com.fractal.domain.vacation_management.request.VacationRequest;
 import com.fractal.domain.vacation_management.request.VacationRequestService;
+import com.fractal.domain.vacation_management.request.dto.VacationRequestCancelRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
 import com.fractal.exception.ResourceNotFoundException;
@@ -22,6 +23,12 @@ class SubordinateVacationRequestServiceImpl implements SubordinateVacationReques
     private final VacationRequestService vacationRequestService;
     private final AuthenticatedService authenticatedService;
     private final SubordinateService subordinateService;
+
+    @Override
+    public VacationRequest create(SubordinateVacationRequestRequest dto) {
+        return vacationRequestService.create(mapDTO(dto));
+    }
+
     @Override
     public List<VacationRequest> getAll() {
         var subordinates = subordinateService.getActiveEmployees(authenticatedService.getEmployeeId());
@@ -45,31 +52,51 @@ class SubordinateVacationRequestServiceImpl implements SubordinateVacationReques
         var vacationRequest = findById(id);
         return vacationRequestService.update(vacationRequest.getId(),mapDTO(dto));
     }
+
+    @Override
     public VacationRequestResponse toDTO(VacationRequest vacationRequest) {
         return vacationRequestService.toDTO(vacationRequest);
     }
 
-    private VacationRequest findById(Long id) {
-       try {
-           var vacationRequest = vacationRequestService.getById(id);
-           var subordinate = subordinateService.getActiveEmployee(authenticatedService.getEmployeeId(),vacationRequest.getEmployee().getId());
-           if(subordinate != null) return vacationRequest;
-           else return null;
-       }
-       catch (ResourceNotFoundException e){
-           throw new RuntimeException(e.getMessage());
-       }
+    @Override
+    public VacationRequest review(Long id) {
+        return vacationRequestService.review(findById(id).getId());
     }
-
     @Override
     public VacationRequest approve(Long id) {
         var vacationRequest = findById(id);
         return vacationRequestService.review(vacationRequest.getId());
     }
+    @Override
+    public VacationRequest cancel(VacationRequestCancelRequest dto) {
+        return vacationRequestService.cancel(new VacationRequestCancelRequest(findById(dto.id()).getId(),dto.reason()));
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        vacationRequestService.deleteById(findById(id).getId());
+    }
+
+    @Override
+    public void close(Long id) {
+        vacationRequestService.close(findById(id).getId());
+    }
+
+    private VacationRequest findById(Long id) {
+        try {
+            var vacationRequest = vacationRequestService.getById(id);
+            var subordinate = subordinateService.getActiveEmployee(authenticatedService.getEmployeeId(),vacationRequest.getEmployee().getId());
+            if(subordinate != null) return vacationRequest;
+            else return null;
+        }
+        catch (ResourceNotFoundException e){
+            throw new RuntimeException(e.getMessage());
+        }
+    }
 
     private VacationRequestRequest mapDTO(SubordinateVacationRequestRequest dto) {
         return new VacationRequestRequest(
-                authenticatedService.getEmployeeId(),
+                dto.employeeId(),
                 dto.successorEmployeeId(),
                 dto.vacationTypeId(),
                 dto.startDate(),
@@ -80,4 +107,6 @@ class SubordinateVacationRequestServiceImpl implements SubordinateVacationReques
                 dto.description()
         );
     }
+
+
 }

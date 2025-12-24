@@ -9,6 +9,10 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record SubordinateVacationRequestRequest(
+
+        @NotNull
+        Long employeeId,
+        @NotNull
         Long successorEmployeeId,
         @NotNull
         Long vacationTypeId,

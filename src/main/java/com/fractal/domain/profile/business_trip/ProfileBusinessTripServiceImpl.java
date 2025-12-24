@@ -44,9 +44,7 @@ class ProfileBusinessTripServiceImpl implements ProfileBusinessTripService {
 
     @Override
     public void close(Long id) {
-        var businessTrip = findById(id);
-        businessTripService.close(businessTrip.getId());
-
+        businessTripService.close(findById(id).getId());
     }
 
     public BusinessTripResponse toDTO(BusinessTrip businessTrip) {
@@ -59,8 +57,7 @@ class ProfileBusinessTripServiceImpl implements ProfileBusinessTripService {
 
     @Override
     public BusinessTrip review(Long id) {
-        var businessTrip = findById(id);
-        return businessTripService.review(businessTrip.getId());
+        return businessTripService.review(findById(id).getId());
     }
 
     @Override

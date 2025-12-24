@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 public record SubordinateVacationScheduleRequest(
         @NotNull
+        Long employeeId,
+        @NotNull
         LocalDate startDate,
         @NotNull
         Integer days
