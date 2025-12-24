@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public record SubordinateBusinessTripRequest(
+        Long employeeId,
         Long businessTripTypeId,
         Long businessTripPurposeId,
         String description,

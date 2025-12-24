@@ -111,7 +111,7 @@ class SubordinateBusinessTripServiceImpl implements SubordinateBusinessTripServi
 
     private BusinessTripRequest mapDTO(SubordinateBusinessTripRequest dto) {
         return new BusinessTripRequest(
-                authenticatedService.getEmployeeId(),
+                dto.employeeId(),
                 dto.businessTripTypeId(),
                 dto.businessTripPurposeId(),
                 dto.description(),
