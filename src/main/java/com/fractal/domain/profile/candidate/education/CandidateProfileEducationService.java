@@ -1,15 +1,23 @@
 package com.fractal.domain.profile.candidate.education;
 
+import com.fractal.domain.education.dto.EducationRequest;
 import com.fractal.domain.education.dto.EducationResponse;
-import com.fractal.domain.employee_management.education.EmployeeEducation;
+import com.fractal.domain.recruitment.candidate.education.CandidateEducation;
 
 import java.util.List;
 
 public interface CandidateProfileEducationService {
-    List<EmployeeEducation> getAll();
+    CandidateEducation create(EducationRequest dto);
 
-    EmployeeEducation getById(Long id);
-    EducationResponse toDTO(EmployeeEducation education);
+    CandidateEducation getById(Long id);
+
+    List<CandidateEducation> getAll();
+
+    CandidateEducation update(Long id, EducationRequest dto);
+
+    void delete(Long id);
+
+    EducationResponse toDTO(CandidateEducation education);
 
 
 }

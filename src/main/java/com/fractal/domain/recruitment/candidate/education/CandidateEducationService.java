@@ -17,5 +17,5 @@ public interface CandidateEducationService {
 
     void delete(Long candidateId, Long id);
 
-    EducationResponse toDTO(CandidateEducation address);
+    EducationResponse toDTO(CandidateEducation education);
 }
