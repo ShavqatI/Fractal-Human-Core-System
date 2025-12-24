@@ -14,11 +14,8 @@ public interface SubordinateService {
     Subordinate getActiveByEmployeeId(Long employeeId);
     List<Subordinate> getAllActiveByEmployeeId(Long employeeId);
     List<Subordinate> getAllByEmployeeId(Long employeeId);
-
     List<Employee> getActiveEmployees(Long employeeId);
-
     Employee getActiveEmployee(Long employeeId, Long subordinateEmployeeId);
-
     Subordinate update(Long id, SubordinateRequest dto);
     void deleteById(Long id);
     void close(Long id, LocalDate endDate);

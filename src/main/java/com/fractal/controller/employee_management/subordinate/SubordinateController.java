@@ -1,6 +1,9 @@
 package com.fractal.controller.employee_management.subordinate;
 
 
+import com.fractal.domain.authorization.AuthenticatedService;
+import com.fractal.domain.employee_management.employee.Employee;
+import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employee_management.subordinate.SubordinateService;
 import com.fractal.domain.employee_management.subordinate.dto.SubordinateRequest;
 import com.fractal.domain.employee_management.subordinate.dto.SubordinateResponse;
@@ -20,6 +23,7 @@ public class SubordinateController {
 
     private final SubordinateService subordinateService;
 
+
     @PostMapping
     public ResponseEntity<SubordinateResponse> create(@RequestBody @Valid SubordinateRequest dto) {
         return new ResponseEntity<>(subordinateService.toDTO(subordinateService.create(dto)), HttpStatus.CREATED);
@@ -29,7 +33,6 @@ public class SubordinateController {
     public ResponseEntity<List<SubordinateResponse>> getAll() {
         return ResponseEntity.ok(subordinateService.getAll().stream().map(subordinateService::toDTO).collect(Collectors.toList()));
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<SubordinateResponse> getById(@PathVariable Long id) {
         return ResponseEntity.ok(subordinateService.toDTO(subordinateService.getById(id)));
