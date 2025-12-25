@@ -4,7 +4,6 @@ package com.fractal.controller.profile.candidate;
 import com.fractal.domain.employment.dto.EmploymentResponse;
 import com.fractal.domain.employment.external.dto.ExternalEmploymentRequest;
 import com.fractal.domain.profile.candidate.employment.CandidateProfileEmploymentService;
-import com.fractal.domain.recruitment.candidate.employment.CandidateEmploymentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

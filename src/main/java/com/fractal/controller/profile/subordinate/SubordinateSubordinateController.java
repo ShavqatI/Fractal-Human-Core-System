@@ -1,24 +1,16 @@
 package com.fractal.controller.profile.subordinate;
 
 
-import com.fractal.domain.employee_management.business_trip.dto.BusinessTripCancelRequest;
-import com.fractal.domain.employee_management.business_trip.dto.BusinessTripProlongRequest;
-import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employee.EmployeeService;
 import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employee_management.subordinate.dto.SubordinateResponse;
-import com.fractal.domain.profile.subordinate.business_trip.SubordinateBusinessTripRequest;
 import com.fractal.domain.profile.subordinate.subordinate.SubordinateSubordinateService;
-import com.fractal.domain.resource.FileService;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -4,7 +4,6 @@ package com.fractal.controller.profile.candidate;
 import com.fractal.domain.education.dto.EducationRequest;
 import com.fractal.domain.education.dto.EducationResponse;
 import com.fractal.domain.profile.candidate.education.CandidateProfileEducationService;
-import com.fractal.domain.recruitment.candidate.education.CandidateEducationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

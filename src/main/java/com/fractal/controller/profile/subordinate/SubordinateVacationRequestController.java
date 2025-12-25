@@ -3,10 +3,7 @@ package com.fractal.controller.profile.subordinate;
 
 import com.fractal.domain.profile.subordinate.vacation.request.SubordinateVacationRequestRequest;
 import com.fractal.domain.profile.subordinate.vacation.request.SubordinateVacationRequestService;
-import com.fractal.domain.profile.vacation.request.ProfileVacationRequestRequest;
-import com.fractal.domain.profile.vacation.request.ProfileVacationRequestService;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestCancelRequest;
-import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

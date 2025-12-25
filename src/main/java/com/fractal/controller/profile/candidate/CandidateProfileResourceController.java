@@ -2,7 +2,6 @@ package com.fractal.controller.profile.candidate;
 
 
 import com.fractal.domain.profile.candidate.resource.CandidateProfileResourceService;
-import com.fractal.domain.recruitment.candidate.resource.CandidateResourceService;
 import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceRequest;
 import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceResponse;
 import com.fractal.domain.resource.FileService;

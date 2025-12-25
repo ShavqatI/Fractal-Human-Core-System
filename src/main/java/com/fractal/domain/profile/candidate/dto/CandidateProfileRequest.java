@@ -1,4 +1,4 @@
-package com.fractal.domain.recruitment.candidate.usecase.profile.dto;
+package com.fractal.domain.profile.candidate.dto;
 
 import com.fractal.domain.contact.dto.ContactRequest;
 import jakarta.validation.constraints.NotBlank;
@@ -18,6 +18,10 @@ public record CandidateProfileRequest(
         LocalDate birthDate,
         @NotNull
         Long genderId,
+        String tin,
+        String ssn,
+        Long maritalStatusId,
+        Long nationalityId,
         @NotEmpty
         List<ContactRequest> contacts
 ) {

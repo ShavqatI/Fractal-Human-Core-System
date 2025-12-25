@@ -4,7 +4,6 @@ package com.fractal.controller.profile.candidate;
 import com.fractal.domain.contact.dto.ContactRequest;
 import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.profile.candidate.contact.CandidateProfileContactService;
-import com.fractal.domain.recruitment.candidate.contact.CandidateContactService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

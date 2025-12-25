@@ -4,7 +4,6 @@ package com.fractal.controller.profile.candidate;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
 import com.fractal.domain.profile.candidate.identification_document.CandidateProfileIdentificationDocumentService;
-import com.fractal.domain.recruitment.candidate.identification_document.CandidateIdentificationDocumentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

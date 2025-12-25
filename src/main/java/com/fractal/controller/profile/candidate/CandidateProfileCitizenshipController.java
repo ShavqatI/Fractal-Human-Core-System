@@ -4,7 +4,6 @@ package com.fractal.controller.profile.candidate;
 import com.fractal.domain.citizenship.dto.CitizenshipRequest;
 import com.fractal.domain.citizenship.dto.CitizenshipResponse;
 import com.fractal.domain.profile.candidate.citizenship.CandidateProfileCitizenshipService;
-import com.fractal.domain.recruitment.candidate.citizenship.CandidateCitizenshipService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -4,7 +4,6 @@ package com.fractal.controller.profile.candidate;
 import com.fractal.domain.education.language_skill.dto.LanguageSkillRequest;
 import com.fractal.domain.education.language_skill.dto.LanguageSkillResponse;
 import com.fractal.domain.profile.candidate.language_skill.CandidateProfileLanguageSkillService;
-import com.fractal.domain.recruitment.candidate.language_skill.CandidateLanguageSkillService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

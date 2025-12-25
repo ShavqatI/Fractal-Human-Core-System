@@ -4,7 +4,6 @@ package com.fractal.controller.profile.candidate;
 import com.fractal.domain.military_service.dto.MilitaryServiceRequest;
 import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
 import com.fractal.domain.profile.candidate.military_service.CandidateProfileMilitaryServiceService;
-import com.fractal.domain.recruitment.candidate.military_service.CandidateMilitaryServiceService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

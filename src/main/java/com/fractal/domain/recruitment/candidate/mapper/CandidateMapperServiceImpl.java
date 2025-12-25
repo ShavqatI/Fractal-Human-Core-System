@@ -4,6 +4,8 @@ import com.fractal.domain.dictionary.gender.GenderService;
 import com.fractal.domain.dictionary.marital_status.MaritalStatusService;
 import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
+import com.fractal.domain.profile.candidate.dto.CandidateProfileRequest;
+import com.fractal.domain.profile.candidate.dto.CandidateProfileResponse;
 import com.fractal.domain.recruitment.candidate.Candidate;
 import com.fractal.domain.recruitment.candidate.address.mapper.CandidateAddressMapperService;
 import com.fractal.domain.recruitment.candidate.citizenship.mapper.CandidateCitizenshipMapperService;
@@ -18,8 +20,6 @@ import com.fractal.domain.recruitment.candidate.language_skill.mapper.CandidateL
 import com.fractal.domain.recruitment.candidate.military_service.mapper.CandidateMilitaryServiceMapperService;
 import com.fractal.domain.recruitment.candidate.professional_experience.mapper.CandidateProfessionalExperienceMapperService;
 import com.fractal.domain.recruitment.candidate.resource.mapper.CandidateResourceMapperService;
-import com.fractal.domain.recruitment.candidate.usecase.profile.dto.CandidateProfileRequest;
-import com.fractal.domain.recruitment.candidate.usecase.profile.dto.CandidateProfileResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -175,6 +175,20 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     @Override
     public Candidate toEntity(Candidate candidate, CandidateRequest dto) {
         return mapToEntity(candidate, dto);
+    }
+
+    @Override
+    public Candidate toEntity(Candidate candidate, CandidateProfileRequest dto) {
+        candidate.setLastName(dto.lastName());
+        candidate.setFirstName(dto.firstName());
+        candidate.setPatronymicName(dto.patronymicName());
+        candidate.setBirthDate(dto.birthDate());
+        candidate.setTin(dto.tin());
+        candidate.setSsn(dto.ssn());
+        candidate.setGender(genderService.getById(dto.genderId()));
+        candidate.setMaritalStatus(maritalStatusService.getById(dto.maritalStatusId()));
+        candidate.setNationality(nationalityService.getById(dto.nationalityId()));
+        return candidate;
     }
 
     private Candidate mapToEntity(Candidate candidate, CandidateRequest dto) {

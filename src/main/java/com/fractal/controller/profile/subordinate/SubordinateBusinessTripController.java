@@ -4,8 +4,6 @@ package com.fractal.controller.profile.subordinate;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripCancelRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripProlongRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
-import com.fractal.domain.profile.business_trip.ProfileBusinessTripRequest;
-import com.fractal.domain.profile.business_trip.ProfileBusinessTripService;
 import com.fractal.domain.profile.subordinate.business_trip.SubordinateBusinessTripRequest;
 import com.fractal.domain.profile.subordinate.business_trip.SubordinateBusinessTripService;
 import com.fractal.domain.resource.FileService;

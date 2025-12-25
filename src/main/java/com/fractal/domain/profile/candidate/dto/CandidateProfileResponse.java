@@ -1,4 +1,4 @@
-package com.fractal.domain.recruitment.candidate.usecase.profile.dto;
+package com.fractal.domain.profile.candidate.dto;
 
 import com.fractal.domain.contact.dto.ContactResponse;
 import com.fractal.domain.dictionary.gender.dto.GenderResponse;

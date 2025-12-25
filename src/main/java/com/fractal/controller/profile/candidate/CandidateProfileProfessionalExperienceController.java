@@ -2,7 +2,6 @@ package com.fractal.controller.profile.candidate;
 
 
 import com.fractal.domain.profile.candidate.professional_experience.CandidateProfileProfessionalExperienceService;
-import com.fractal.domain.recruitment.candidate.professional_experience.CandidateProfessionalExperienceService;
 import com.fractal.domain.recruitment.candidate.professional_experience.dto.CandidateProfessionalExperienceRequest;
 import com.fractal.domain.recruitment.candidate.professional_experience.dto.CandidateProfessionalExperienceResponse;
 import jakarta.validation.Valid;
