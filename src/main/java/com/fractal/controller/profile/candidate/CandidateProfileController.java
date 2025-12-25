@@ -28,8 +28,8 @@ public class CandidateProfileController {
         return ResponseEntity.ok(candidateProfileService.toDTO(candidateProfileService.getById()));
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<CandidateProfileResponse> update(@PathVariable Long id, @RequestBody @Valid CandidateProfileRequest dto) {
+    @PutMapping()
+    public ResponseEntity<CandidateProfileResponse> update(@RequestBody @Valid CandidateProfileRequest dto) {
         return ResponseEntity.ok(candidateProfileService.toProfileDTO(candidateProfileService.update(dto)));
     }
 
