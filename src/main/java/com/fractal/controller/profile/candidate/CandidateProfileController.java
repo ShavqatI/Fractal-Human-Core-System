@@ -18,17 +18,17 @@ public class CandidateProfileController {
 
     private final CandidateProfileService candidateProfileService;
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<CandidateProfileResponse> create(@RequestBody @Valid CandidateProfileRequest dto) {
         return new ResponseEntity<>(candidateProfileService.toProfileDTO(candidateProfileService.create(dto)), HttpStatus.CREATED);
     }
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<CandidateResponse> get() {
         return ResponseEntity.ok(candidateProfileService.toDTO(candidateProfileService.getById()));
     }
 
-    @PutMapping()
+    @PutMapping
     public ResponseEntity<CandidateProfileResponse> update(@RequestBody @Valid CandidateProfileRequest dto) {
         return ResponseEntity.ok(candidateProfileService.toProfileDTO(candidateProfileService.update(dto)));
     }
