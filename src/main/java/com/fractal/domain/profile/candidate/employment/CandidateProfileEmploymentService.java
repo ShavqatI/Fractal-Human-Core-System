@@ -1,15 +1,23 @@
 package com.fractal.domain.profile.candidate.employment;
 
-import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employment.dto.EmploymentResponse;
+import com.fractal.domain.employment.external.dto.ExternalEmploymentRequest;
+import com.fractal.domain.recruitment.candidate.employment.CandidateEmployment;
 
 import java.util.List;
 
 public interface CandidateProfileEmploymentService {
-    List<EmployeeEmployment> getAll();
+    CandidateEmployment create(ExternalEmploymentRequest dto);
 
-    EmployeeEmployment getById(Long id);
-    EmploymentResponse toDTO(EmployeeEmployment employment);
+    CandidateEmployment getById(Long id);
+
+    List<CandidateEmployment> getAll();
+
+    CandidateEmployment update(Long id, ExternalEmploymentRequest dto);
+
+    void delete(Long id);
+
+    EmploymentResponse toDTO(CandidateEmployment employment);
 
 
 }

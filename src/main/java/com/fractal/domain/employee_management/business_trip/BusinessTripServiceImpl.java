@@ -67,7 +67,7 @@ class BusinessTripServiceImpl implements BusinessTripService {
 
     @Override
     public List<BusinessTrip> getAllByEmployeeId(Long employeeId) {
-        return businessTripRepository.findAllByEmployeeId(authenticatedService.getEmployeeId());
+        return businessTripRepository.findAllByEmployeeId(employeeId);
     }
 
     @Override

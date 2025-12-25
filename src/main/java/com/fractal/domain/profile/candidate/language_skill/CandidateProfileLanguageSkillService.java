@@ -1,17 +1,18 @@
 package com.fractal.domain.profile.candidate.language_skill;
 
+import com.fractal.domain.education.language_skill.dto.LanguageSkillRequest;
 import com.fractal.domain.education.language_skill.dto.LanguageSkillResponse;
-import com.fractal.domain.employee_management.language_skill.EmployeeLanguageSkill;
+import com.fractal.domain.recruitment.candidate.language_skill.CandidateLanguageSkill;
 
 import java.util.List;
 
 public interface CandidateProfileLanguageSkillService {
-    List<EmployeeLanguageSkill> getAll();
-
-
-    EmployeeLanguageSkill getById(Long id);
-
-    LanguageSkillResponse toDTO(EmployeeLanguageSkill languageSkill);
+    CandidateLanguageSkill create(LanguageSkillRequest dto);
+    List<CandidateLanguageSkill> getAll();
+    CandidateLanguageSkill getById(Long id);
+    CandidateLanguageSkill update(Long id, LanguageSkillRequest dto);
+    void delete(Long id);
+    LanguageSkillResponse toDTO(CandidateLanguageSkill candidateLanguageSkill);
 
 
 }

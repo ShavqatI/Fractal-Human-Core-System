@@ -54,7 +54,7 @@ class CandidateProfileEducationServiceImpl implements CandidateProfileEducationS
 
     private CandidateEducation findById(Long id) {
         return educationService.getAllByCandidateId(authenticatedService.getCandidateId()).stream()
-                .filter(contact -> contact.getId().equals(id))
+                .filter(education -> education.getId().equals(id))
                 .findFirst()
                 .orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
     }
