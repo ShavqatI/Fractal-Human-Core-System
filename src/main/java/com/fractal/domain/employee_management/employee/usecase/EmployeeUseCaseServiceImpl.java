@@ -1,5 +1,8 @@
 package com.fractal.domain.employee_management.employee.usecase;
 
+import com.fractal.domain.employee_management.address.EmployeeAddress;
+import com.fractal.domain.employee_management.address.EmployeeAddressService;
+import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocumentService;
@@ -8,6 +11,7 @@ import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.InternalEmploymentService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
+import com.fractal.domain.location.address.dto.AddressResponse;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
@@ -20,6 +24,7 @@ class EmployeeUseCaseServiceImpl implements EmployeeUseCaseService {
     private final EmployeeEmploymentService employeeEmploymentService;
     private final InternalEmploymentService internalEmploymentService;
     private final EmployeeIdentificationDocumentService identificationDocumentService;
+    private final EmployeeAddressService addressService;
     @Override
     public String getFullName(Employee employee) {
         if(employee == null) return "";
@@ -62,6 +67,17 @@ class EmployeeUseCaseServiceImpl implements EmployeeUseCaseService {
                 ).findAny();
         if(identificationDocument.isPresent())
             return Optional.of(identificationDocumentService.toDTO(identificationDocument.get()));
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<EmployeeAddressResponse> getAddress(Employee employee) {
+        var address = addressService.getAllByEmployeeId(employee.getId())
+                .stream().filter(address1 -> address1.getEndDate() == null)
+                .findAny();
+        if(address.isPresent()) {
+            return Optional.of(addressService.toDTO(address.get()));
+        }
         return Optional.empty();
     }
 

@@ -1,6 +1,7 @@
 package com.fractal.domain.order.employment;
 
 import com.fractal.domain.authorization.AuthenticatedService;
+import com.fractal.domain.dictionary.docuemnt_template_manager.DocumentTemplateManagerService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.ApprovalWorkflowAwareRequest;
@@ -19,11 +20,14 @@ import com.fractal.domain.resource.FileService;
 import com.fractal.exception.ResourceStateException;
 import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -44,10 +48,12 @@ class EmploymentOrderServiceImpl implements EmploymentOrderService {
     private final OrderUseCaseService orderUseCaseService;
     private final EmployeeUseCaseService employeeUseCaseService;
     private final EmploymentOrderTemplateProcessorService templateProcessorService;
+    private final EmploymentAgreementTemplateProcessorService agreementTemplateProcessorService;
     private final WordTemplateProcessorService wordTemplateProcessorService;
     private final WordToPdfConverterService wordToPdfConverterService;
     private final FileService fileService;
     private final EmployeeEmploymentUseCaseService employeeEmploymentUseCaseService;
+    private final DocumentTemplateManagerService documentTemplateManagerService;
 
     @Value("${resource-storage.temporary}")
     private String resourceStoragePath;
@@ -205,6 +211,39 @@ class EmploymentOrderServiceImpl implements EmploymentOrderService {
             fileService.delete(wordFilePath.toString());
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+        return pdfFilePath;
+    }
+
+    @Override
+    public Path printAgreement(Long id) {
+        var order = getById(id);
+        var wordFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".docx");
+        var pdfFilePath = Path.of(resourceStoragePath + UUID.randomUUID() + ".pdf").toAbsolutePath();
+        Map<String, String> values = new HashMap<>();
+        try {
+            XWPFDocument document = new XWPFDocument(new FileInputStream(order.getOrderType().getDocumentTemplateManager().getFilePath()));
+            values.putAll(orderUseCaseService.getHeader(order));
+            values.putAll(agreementTemplateProcessorService.process(order));
+            values.putAll(orderUseCaseService.getFooter());
+            //setStamp(document);
+            //setFloatingStamp(document);
+            //findTextBoxes(document);
+            //insertImageAtBookmark(document);
+            //findTextInTextBoxes(document, "myText");
+            //findTextBoxes(document);
+            //findAllTextBoxes(document);
+
+            wordTemplateProcessorService.processDocument(document, values);
+
+            try (FileOutputStream out = new FileOutputStream(wordFilePath.toFile())) {
+                document.write(out);
+                wordToPdfConverterService.convert(wordFilePath, pdfFilePath);
+                //fileService.delete(wordFilePath.toString());
+            }
+
+
+        } catch (Exception e) {
         }
         return pdfFilePath;
     }
