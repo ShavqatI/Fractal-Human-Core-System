@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/vacation-management/accrual")
+@RequestMapping("/api/v1/profile-management/subordinate/accrual")
 @RequiredArgsConstructor
 public class SubordinateVacationAccrualController {
 
