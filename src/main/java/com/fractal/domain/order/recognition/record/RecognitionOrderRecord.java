@@ -5,7 +5,10 @@ import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.order.recognition.RecognitionOrder;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity

@@ -3,7 +3,9 @@ package com.fractal.domain.resource;
 
 import com.fractal.domain.abstraction.Auditable;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity

@@ -3,7 +3,6 @@ package com.fractal.domain.authorization.mapping.user_candidate;
 import com.fractal.domain.authorization.mapping.user_candidate.dto.UserCandidateMappingRequest;
 import com.fractal.domain.authorization.mapping.user_candidate.dto.UserCandidateMappingResponse;
 import com.fractal.domain.authorization.user.User;
-import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.recruitment.candidate.Candidate;
 
 import java.util.List;

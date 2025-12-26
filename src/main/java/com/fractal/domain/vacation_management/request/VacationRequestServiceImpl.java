@@ -2,8 +2,6 @@ package com.fractal.domain.vacation_management.request;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.attendance.Attendance;
-import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceCancelRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestCancelRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestRequest;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;

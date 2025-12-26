@@ -3,7 +3,10 @@ package com.fractal.domain.employment.internal.compensation_component.state;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.state.EntityState;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity

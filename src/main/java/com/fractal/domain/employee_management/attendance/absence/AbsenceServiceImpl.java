@@ -2,7 +2,6 @@ package com.fractal.domain.employee_management.attendance.absence;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.employee_management.attendance.Attendance;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceCancelRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceCompactRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceRequest;

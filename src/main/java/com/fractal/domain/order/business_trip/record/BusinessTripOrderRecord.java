@@ -4,7 +4,10 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.employee_management.business_trip.BusinessTrip;
 import com.fractal.domain.order.business_trip.BusinessTripOrder;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity

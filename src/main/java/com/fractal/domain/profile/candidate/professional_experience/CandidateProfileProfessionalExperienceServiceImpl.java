@@ -1,10 +1,6 @@
 package com.fractal.domain.profile.candidate.professional_experience;
 
 import com.fractal.domain.authorization.AuthenticatedService;
-import com.fractal.domain.employee_management.professional_experience.EmployeeProfessionalExperience;
-import com.fractal.domain.employee_management.professional_experience.EmployeeProfessionalExperienceService;
-import com.fractal.domain.employee_management.professional_experience.dto.EmployeeProfessionalExperienceResponse;
-import com.fractal.domain.recruitment.candidate.military_service.CandidateMilitaryService;
 import com.fractal.domain.recruitment.candidate.professional_experience.CandidateProfessionalExperience;
 import com.fractal.domain.recruitment.candidate.professional_experience.CandidateProfessionalExperienceService;
 import com.fractal.domain.recruitment.candidate.professional_experience.dto.CandidateProfessionalExperienceRequest;

@@ -2,14 +2,12 @@ package com.fractal.domain.profile.subordinate.vacation.schedule;
 
 import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.employee_management.subordinate.SubordinateService;
-import com.fractal.domain.vacation_management.request.VacationRequest;
 import com.fractal.domain.vacation_management.schedule.VacationSchedule;
 import com.fractal.domain.vacation_management.schedule.VacationScheduleService;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleCancelRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 import com.fractal.exception.ResourceNotFoundException;
-import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

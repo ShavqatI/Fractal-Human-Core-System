@@ -1,10 +1,8 @@
 package com.fractal.domain.employee_management.attendance.absence;
 
-import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
-import com.fractal.domain.employee_management.attendance.Attendance;
 import com.fractal.domain.employee_management.attendance.absence.type.AbsenceType;
 import com.fractal.domain.employee_management.employee.Employee;
 import jakarta.persistence.*;

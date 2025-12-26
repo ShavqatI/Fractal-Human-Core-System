@@ -1,9 +1,6 @@
 package com.fractal.domain.profile.candidate.address;
 
 import com.fractal.domain.authorization.AuthenticatedService;
-import com.fractal.domain.employee_management.address.EmployeeAddress;
-import com.fractal.domain.employee_management.address.EmployeeAddressService;
-import com.fractal.domain.employee_management.address.dto.EmployeeAddressResponse;
 import com.fractal.domain.recruitment.candidate.address.CandidateAddress;
 import com.fractal.domain.recruitment.candidate.address.CandidateAddressService;
 import com.fractal.domain.recruitment.candidate.address.dto.CandidateAddressRequest;

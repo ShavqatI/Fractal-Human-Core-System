@@ -2,8 +2,6 @@ package com.fractal.domain.profile.subordinate.vacation.schedule;
 
 import com.fractal.domain.abstraction.ApprovalWorkflowAware;
 import com.fractal.domain.abstraction.Cancelable;
-import com.fractal.domain.profile.subordinate.vacation.request.SubordinateVacationRequestRequest;
-import com.fractal.domain.vacation_management.request.VacationRequest;
 import com.fractal.domain.vacation_management.schedule.VacationSchedule;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleCancelRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;

@@ -3,7 +3,10 @@ package com.fractal.domain.order.vacation;
 import com.fractal.domain.order.Order;
 import com.fractal.domain.vacation_management.vacation.Vacation;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity

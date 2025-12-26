@@ -3,7 +3,10 @@ package com.fractal.domain.order.recognition;
 import com.fractal.domain.order.Order;
 import com.fractal.domain.order.recognition.record.RecognitionOrderRecord;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;

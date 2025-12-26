@@ -1,8 +1,5 @@
 package com.fractal.domain.system.message.dto;
 
-import com.fractal.domain.localization.language.dto.LanguageResponse;
-import com.fractal.domain.system.message.type.dto.MessageTypeResponse;
-
 import java.time.LocalDateTime;
 
 public record MessageCompactResponse(

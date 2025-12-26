@@ -1,9 +1,6 @@
 package com.fractal.controller.employee_management.subordinate;
 
 
-import com.fractal.domain.authorization.AuthenticatedService;
-import com.fractal.domain.employee_management.employee.Employee;
-import com.fractal.domain.employee_management.employee.dto.EmployeeCompactResponse;
 import com.fractal.domain.employee_management.subordinate.SubordinateService;
 import com.fractal.domain.employee_management.subordinate.dto.SubordinateRequest;
 import com.fractal.domain.employee_management.subordinate.dto.SubordinateResponse;

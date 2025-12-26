@@ -5,8 +5,6 @@ import com.fractal.domain.employee_management.attendance.absence.AbsenceService;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceCancelRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceRequest;
 import com.fractal.domain.employee_management.attendance.absence.dto.AbsenceResponse;
-import com.fractal.domain.employee_management.attendance.dto.AttendanceCancelRequest;
-import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

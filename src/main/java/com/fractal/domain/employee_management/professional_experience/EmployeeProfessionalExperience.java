@@ -5,7 +5,10 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.industry.Industry;
 import com.fractal.domain.employee_management.employee.Employee;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity

@@ -1,11 +1,8 @@
 package com.fractal.domain.profile.candidate.identification_document;
 
 import com.fractal.domain.authorization.AuthenticatedService;
-import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocument;
-import com.fractal.domain.employee_management.identification_document.EmployeeIdentificationDocumentService;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentRequest;
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
-import com.fractal.domain.recruitment.candidate.employment.CandidateEmployment;
 import com.fractal.domain.recruitment.candidate.identification_document.CandidateIdentificationDocument;
 import com.fractal.domain.recruitment.candidate.identification_document.CandidateIdentificationDocumentService;
 import com.fractal.exception.ResourceWithIdNotFoundException;

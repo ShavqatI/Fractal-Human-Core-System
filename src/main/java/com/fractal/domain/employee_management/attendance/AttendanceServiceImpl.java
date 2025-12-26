@@ -12,7 +12,6 @@ import com.fractal.domain.employee_management.attendance.mapper.AttendanceMapper
 import com.fractal.exception.ResourceNotFoundException;
 import com.fractal.exception.ResourceStateException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

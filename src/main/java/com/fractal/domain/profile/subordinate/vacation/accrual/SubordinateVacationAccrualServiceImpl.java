@@ -1,14 +1,11 @@
 package com.fractal.domain.profile.subordinate.vacation.accrual;
 
 import com.fractal.domain.authorization.AuthenticatedService;
-import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employee_management.subordinate.SubordinateService;
 import com.fractal.domain.vacation_management.accrual.VacationAccrual;
 import com.fractal.domain.vacation_management.accrual.VacationAccrualService;
 import com.fractal.domain.vacation_management.accrual.dto.VacationAccrualResponse;
-import com.fractal.domain.vacation_management.accrual.period.VacationAccrualPeriod;
-import com.fractal.domain.vacation_management.request.VacationRequest;
 import com.fractal.exception.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

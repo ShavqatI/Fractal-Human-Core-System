@@ -1,8 +1,6 @@
 package com.fractal.controller.vacation_management;
 
 
-import com.fractal.domain.vacation_management.request.dto.VacationRequestCancelRequest;
-import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
 import com.fractal.domain.vacation_management.schedule.VacationScheduleService;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleCancelRequest;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleRequest;

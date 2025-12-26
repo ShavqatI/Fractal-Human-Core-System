@@ -1,7 +1,6 @@
 package com.fractal.domain.profile.candidate.resource;
 
 import com.fractal.domain.authorization.AuthenticatedService;
-import com.fractal.domain.recruitment.candidate.professional_experience.CandidateProfessionalExperience;
 import com.fractal.domain.recruitment.candidate.resource.CandidateResource;
 import com.fractal.domain.recruitment.candidate.resource.CandidateResourceService;
 import com.fractal.domain.recruitment.candidate.resource.dto.CandidateResourceRequest;

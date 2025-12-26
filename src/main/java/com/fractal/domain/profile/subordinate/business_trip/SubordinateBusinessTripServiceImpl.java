@@ -8,9 +8,7 @@ import com.fractal.domain.employee_management.business_trip.dto.BusinessTripProl
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripRequest;
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
 import com.fractal.domain.employee_management.subordinate.SubordinateService;
-import com.fractal.domain.vacation_management.request.VacationRequest;
 import com.fractal.exception.ResourceNotFoundException;
-import com.fractal.exception.ResourceWithIdNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

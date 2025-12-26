@@ -4,7 +4,10 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.localization.language.Language;
 import com.fractal.domain.system.message.type.MessageType;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity

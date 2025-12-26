@@ -6,7 +6,9 @@ import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.grade.Grade;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
