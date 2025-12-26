@@ -16,7 +16,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface EmployeeEmploymentService extends ApprovalWorkflowAware<ApprovalWorkflowAwareRequest, EmployeeEmployment>, Cancelable<CancelRequest,Void> {
+public interface EmployeeEmploymentService extends ApprovalWorkflowAware<ApprovalWorkflowAwareRequest, EmployeeEmployment>, Cancelable<EmployeeEmploymentCancelRequest,Void> {
     EmployeeEmployment create(Long employeeId, EmploymentRequest dto);
     EmployeeEmployment getById(Long employeeId, Long id);
     EmployeeEmployment getByCompensationComponentId(Long compensationComponentId);

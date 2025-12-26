@@ -14,6 +14,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @NoArgsConstructor
+
 public class OnlinePlatform extends Dictionary {
 
     @ManyToOne(fetch = FetchType.LAZY)

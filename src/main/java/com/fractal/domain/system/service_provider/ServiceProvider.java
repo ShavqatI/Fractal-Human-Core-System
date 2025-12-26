@@ -4,16 +4,12 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.system.service_provider.type.ServiceProviderType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "service_provider", schema = "system_schema", catalog = "fractal")
-@Setter
-@Getter
+@Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor

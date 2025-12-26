@@ -3,19 +3,16 @@ package com.fractal.domain.resource;
 
 import com.fractal.domain.abstraction.Auditable;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "resource", schema = "resource_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+@EqualsAndHashCode(callSuper = true)
 public class Resource extends Auditable {
 
     @Id

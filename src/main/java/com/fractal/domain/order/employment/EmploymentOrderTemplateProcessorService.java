@@ -4,7 +4,7 @@ import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.organization_management.organization.OrganizationService;
-import com.fractal.domain.utilities.converter.NumberToWordConverter;
+import com.fractal.domain.utility.converter.NumberToWordConverter;
 import com.fractal.domain.vacation_management.accrual.VacationAccrualService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

@@ -9,8 +9,7 @@ import lombok.experimental.SuperBuilder;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "contact", schema = "contact_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)

@@ -5,10 +5,7 @@ import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.learning_develpment.learning.learner.Learner;
 import com.fractal.domain.learning_develpment.learning.session.LearningSession;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -19,6 +16,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class LearningSessionEnrollment extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

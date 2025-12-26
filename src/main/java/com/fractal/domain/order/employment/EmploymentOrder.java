@@ -3,10 +3,7 @@ package com.fractal.domain.order.employment;
 import com.fractal.domain.order.Order;
 import com.fractal.domain.order.employment.record.EmploymentOrderRecord;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
@@ -14,11 +11,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "employment_order", schema = "order_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class EmploymentOrder extends Order {
 
     @OneToMany(mappedBy = "employmentOrder", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

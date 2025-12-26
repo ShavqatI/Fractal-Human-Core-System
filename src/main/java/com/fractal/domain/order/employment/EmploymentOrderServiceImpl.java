@@ -4,7 +4,7 @@ import com.fractal.domain.authorization.AuthenticatedService;
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseService;
 import com.fractal.domain.employee_management.employment.ApprovalWorkflowAwareRequest;
-import com.fractal.domain.employee_management.employment.CancelRequest;
+import com.fractal.domain.employee_management.employment.EmployeeEmploymentCancelRequest;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
@@ -179,7 +179,7 @@ class EmploymentOrderServiceImpl implements EmploymentOrderService {
             order.setApprovedUser(authenticatedService.getUser());
             order.setStatus(statusService.getByCode("CANCELED"));
             order.getRecords().forEach(employmentOrderRecord -> {
-                employeeEmploymentService.cancel(new CancelRequest(employmentOrderRecord.getEmployment().getEmployee().getId(),employmentOrderRecord.getEmployment().getEmployment().getId()));
+                employeeEmploymentService.cancel(new EmployeeEmploymentCancelRequest(employmentOrderRecord.getEmployment().getEmployee().getId(),employmentOrderRecord.getEmployment().getEmployment().getId()));
             });
             return save(order);
         } else {

@@ -18,6 +18,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class InterviewEvaluationSessionAnswerSubmission extends ApprovalWorkflow {
 
     @Id

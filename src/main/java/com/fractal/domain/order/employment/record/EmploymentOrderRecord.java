@@ -4,19 +4,16 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.order.employment.EmploymentOrder;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "employment_order_record", schema = "order_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class EmploymentOrderRecord extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

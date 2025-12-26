@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Absence extends ApprovalWorkflow {
 
     @Id

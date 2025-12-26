@@ -12,8 +12,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "user", schema = "authorization_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

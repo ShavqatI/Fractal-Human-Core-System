@@ -8,11 +8,11 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "employee_state", schema = "state_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class EmployeeState extends EntityState {
 
     @ManyToOne(fetch = FetchType.LAZY)

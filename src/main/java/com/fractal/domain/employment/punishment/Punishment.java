@@ -7,10 +7,7 @@ import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.employment.Employment;
 import com.fractal.domain.employment.punishment.type.PunishmentType;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
@@ -19,10 +16,10 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "punishment", schema = "employment_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Punishment extends ApprovalWorkflow {
 
     @Id

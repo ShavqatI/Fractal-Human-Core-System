@@ -8,6 +8,7 @@ import com.fractal.domain.location.district.District;
 import com.fractal.domain.location.region.Region;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -19,6 +20,7 @@ import java.time.LocalDate;
 @SuperBuilder
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+@EqualsAndHashCode(callSuper = true)
 public class Address extends Auditable {
 
     @Id

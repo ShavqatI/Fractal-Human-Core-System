@@ -3,10 +3,7 @@ package com.fractal.domain.employee_management.insurance.coverage;
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.employee_management.insurance.Insurance;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -16,6 +13,7 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class InsuranceCoverage extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

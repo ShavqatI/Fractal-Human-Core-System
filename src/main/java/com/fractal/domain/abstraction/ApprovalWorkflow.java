@@ -6,10 +6,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
@@ -17,9 +14,9 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
+@Data
 @SuperBuilder
+@EqualsAndHashCode(callSuper = true)
 public abstract class ApprovalWorkflow extends Auditable {
 
     @Column(name = "reviewed_date")

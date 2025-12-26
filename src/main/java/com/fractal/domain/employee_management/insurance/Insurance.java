@@ -7,10 +7,7 @@ import com.fractal.domain.employee_management.insurance.coverage.InsuranceCovera
 import com.fractal.domain.insurance.provider.InsuranceProvider;
 import com.fractal.domain.insurance.type.InsuranceType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
@@ -23,6 +20,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Insurance extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

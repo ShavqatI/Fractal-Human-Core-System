@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface CandidateContactRepository extends JpaRepository<CandidateContact, Long> {
 
-    List<CandidateContact> findAllByCandidateId(Long employeeId);
+    List<CandidateContact> findAllByCandidateId(Long candidateId);
 
-    Optional<CandidateContact> findByCandidateIdAndId(Long employeeId, Long id);
+    Optional<CandidateContact> findByCandidateIdAndId(Long candidateId, Long id);
 }

@@ -5,6 +5,7 @@ import com.fractal.domain.employee_management.employee.Employee;
 import com.fractal.domain.interview.interviewee.Interviewee;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -14,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class EmployeeInterviewee extends Interviewee {
 
     @ManyToOne(fetch = FetchType.LAZY)

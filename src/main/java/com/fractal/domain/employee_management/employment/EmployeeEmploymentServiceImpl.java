@@ -205,7 +205,7 @@ class EmployeeEmploymentServiceImpl implements EmployeeEmploymentService {
     }
     @Override
     @Transactional
-    public Void cancel(CancelRequest dto) {
+    public Void cancel(EmployeeEmploymentCancelRequest dto) {
         var employeeEmployment = getActiveBefore(dto.employeeId(),getById(dto.employeeId(),dto.id()).getEmployment().getStartDate());
         employeeEmployment.setStatus(statusService.getByCode("ACTIVE"));
         activate(employeeEmployment.getEmployee().getId(),employeeEmployment.getEmployment().getId());

@@ -5,19 +5,16 @@ import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.order.recognition.RecognitionOrder;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "recognition_order_record", schema = "order_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class RecognitionOrderRecord extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -33,10 +33,22 @@ class AuthenticatedServiceImpl implements AuthenticatedService {
 
     @Override
     public Long getEmployeeId() {
-       return userEmployeeMappingService.getEmployee(getUser()).getId();
+       try{
+           return userEmployeeMappingService.getEmployee(getUser()).getId();
+       }
+       catch (Exception e){
+          throw new RuntimeException(e.getMessage());
+       }
+
     }
     @Override
     public Long getCandidateId() {
-       return userCandidateMappingService.getCandidate(getUser()).getId();
+        try{
+            return userCandidateMappingService.getCandidate(getUser()).getId();
+        }
+        catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+
     }
 }

@@ -5,6 +5,7 @@ import com.fractal.domain.learning_develpment.learning.session.location.offline.
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class OfflineLearningLocation extends LearningLocation {
 
     @OneToMany(mappedBy = "offlineLearningLocation", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)

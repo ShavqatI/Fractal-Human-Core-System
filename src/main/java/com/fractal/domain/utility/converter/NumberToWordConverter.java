@@ -1,4 +1,4 @@
-package com.fractal.domain.utilities.converter;
+package com.fractal.domain.utility.converter;
 
 public class NumberToWordConverter {
 

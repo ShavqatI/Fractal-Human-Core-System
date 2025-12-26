@@ -4,10 +4,7 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.localization.layout_label.detail.LayoutLabelDetail;
 import jakarta.persistence.*;
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class LayoutLabel extends AbstractEntity {
 
     @Column(name = "name")

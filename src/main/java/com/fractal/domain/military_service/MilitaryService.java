@@ -5,6 +5,7 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.military_service.resource.MilitaryServiceResource;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -19,6 +20,7 @@ import java.util.List;
 @SuperBuilder
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+@EqualsAndHashCode(callSuper = true)
 public class MilitaryService extends AbstractEntity {
 
     @Column(name = "account_number")

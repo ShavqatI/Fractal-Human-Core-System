@@ -8,7 +8,7 @@ import com.fractal.domain.employment.internal.InternalEmployment;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentResponse;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.order.recognition.record.RecognitionOrderRecord;
-import com.fractal.domain.utilities.converter.NumberToWordConverter;
+import com.fractal.domain.utility.converter.NumberToWordConverter;
 import lombok.RequiredArgsConstructor;
 import org.apache.poi.xwpf.usermodel.*;
 import org.hibernate.Hibernate;

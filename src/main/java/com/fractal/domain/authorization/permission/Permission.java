@@ -6,18 +6,14 @@ import com.fractal.domain.authorization.user.User;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.navigation.menu.action.MenuAction;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 
 @Entity
 @Table(name = "permission", schema = "authorization_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Permission extends AbstractEntity {

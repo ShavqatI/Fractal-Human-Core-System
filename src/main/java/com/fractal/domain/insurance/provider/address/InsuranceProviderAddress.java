@@ -5,6 +5,7 @@ import com.fractal.domain.insurance.provider.InsuranceProvider;
 import com.fractal.domain.location.address.Address;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -14,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class InsuranceProviderAddress extends Address {
 
     @ManyToOne(fetch = FetchType.LAZY)

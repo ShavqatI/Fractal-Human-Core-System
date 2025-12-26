@@ -8,8 +8,7 @@ import lombok.*;
 
 @Entity
 @Table(name = "agreement_resource", schema = "employee_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class AgreementResource extends Resource {

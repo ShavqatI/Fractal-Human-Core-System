@@ -4,10 +4,7 @@ package com.fractal.domain.abstraction;
 import com.fractal.config.AuditEntityListener;
 import com.fractal.domain.authorization.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -19,8 +16,7 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
+@Data
 @EntityListeners({AuditEntityListener.class})
 @SuperBuilder
 public abstract class Auditable {

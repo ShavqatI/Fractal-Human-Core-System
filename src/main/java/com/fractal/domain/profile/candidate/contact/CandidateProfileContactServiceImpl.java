@@ -44,7 +44,7 @@ class CandidateProfileContactServiceImpl implements CandidateProfileContactServi
 
     @Override
     public void delete(Long id) {
-       contactService.delete(authenticatedService.getCandidateId(), findById(id).getId());
+        contactService.delete(authenticatedService.getCandidateId(), findById(id).getId());
     }
 
     @Override
@@ -53,9 +53,12 @@ class CandidateProfileContactServiceImpl implements CandidateProfileContactServi
     }
 
     private CandidateContact findById(Long id) {
-        return contactService.getAllByCandidateId(authenticatedService.getCandidateId()).stream()
-                .filter(contact -> contact.getId().equals(id))
+        System.out.println(id);
+        var contact1 = contactService.getAllByCandidateId(authenticatedService.getCandidateId()).stream()
+                .filter(contact -> contact.getId().longValue() == id.longValue())
                 .findFirst()
                 .orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
+        System.out.println(contact1.getId());
+        return contact1;
     }
 }

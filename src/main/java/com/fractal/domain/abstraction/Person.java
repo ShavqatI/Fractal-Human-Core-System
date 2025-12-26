@@ -16,8 +16,7 @@ import lombok.experimental.SuperBuilder;
 import java.time.LocalDate;
 
 @MappedSuperclass
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @NoArgsConstructor
 public abstract class Person extends AbstractEntity {

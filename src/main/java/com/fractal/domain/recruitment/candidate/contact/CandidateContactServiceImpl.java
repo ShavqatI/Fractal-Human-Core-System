@@ -56,10 +56,12 @@ public class CandidateContactServiceImpl implements CandidateContactService {
     @Override
     @Transactional
     public void delete(Long candidateId, Long id) {
+        System.out.println("income id " + id);
         var candidate = candidateService.getById(candidateId);
         var contact = candidate.getContacts()
                 .stream()
                 .filter(c -> c.getId().equals(id)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Candidate contact with id: " + id + " not found"));
+        System.out.println("found id" + contact.getId());
         candidate.removeContact(contact);
         candidateService.save(candidate);
     }

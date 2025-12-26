@@ -5,6 +5,7 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -15,6 +16,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
+@EqualsAndHashCode(callSuper = true)
 public class EntityState extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

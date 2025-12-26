@@ -7,10 +7,7 @@ import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.organization.Organization;
 import com.fractal.domain.organization_management.position.Position;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
@@ -18,11 +15,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "internal_employment", schema = "employment_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class InternalEmployment extends Employment {
 
     @ManyToOne(fetch = FetchType.LAZY)

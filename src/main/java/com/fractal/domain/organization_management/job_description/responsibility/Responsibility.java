@@ -3,10 +3,7 @@ package com.fractal.domain.organization_management.job_description.responsibilit
 import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.organization_management.job_description.JobDescription;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Entity
@@ -15,6 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Responsibility extends AbstractEntity {
 
     @Column(name = "description", columnDefinition = "TEXT", nullable = false)

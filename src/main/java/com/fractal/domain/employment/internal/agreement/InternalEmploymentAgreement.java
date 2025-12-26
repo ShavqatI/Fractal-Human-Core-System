@@ -5,6 +5,7 @@ import com.fractal.domain.employment.internal.InternalEmployment;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -14,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class InternalEmploymentAgreement extends Agreement {
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -13,10 +13,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 @Inheritance(strategy = InheritanceType.JOINED)
-@Setter
-@Getter
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class EmployeeProfessionalExperience extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

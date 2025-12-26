@@ -6,10 +6,7 @@ import com.fractal.domain.learning_develpment.learning.instructor.Instructor;
 import com.fractal.domain.learning_develpment.learning.session.LearningSession;
 import com.fractal.domain.learning_develpment.learning.session.instructor.type.InstructorAssignmentType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +17,7 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class InstructorAssignment extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -17,6 +17,7 @@ import com.fractal.domain.recruitment.vacncy.Vacancy;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -29,6 +30,7 @@ import java.util.List;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Candidate extends Person {
 
     @ManyToOne(fetch = FetchType.LAZY)

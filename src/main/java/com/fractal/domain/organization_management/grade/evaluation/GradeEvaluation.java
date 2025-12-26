@@ -6,6 +6,7 @@ import com.fractal.domain.organization_management.grade.Grade;
 import com.fractal.domain.organization_management.grade.method.GradingEvaluation;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -15,6 +16,7 @@ import lombok.experimental.SuperBuilder;
 @Data
 @SuperBuilder
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class GradeEvaluation extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -20,6 +20,7 @@ import java.time.LocalTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Attendance extends ApprovalWorkflow {
 
     @Id

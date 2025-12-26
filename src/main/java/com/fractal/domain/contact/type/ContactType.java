@@ -8,8 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "contact_type", schema = "contact_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)

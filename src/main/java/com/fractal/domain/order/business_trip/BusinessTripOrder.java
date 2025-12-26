@@ -3,10 +3,7 @@ package com.fractal.domain.order.business_trip;
 import com.fractal.domain.order.Order;
 import com.fractal.domain.order.business_trip.record.BusinessTripOrderRecord;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
@@ -15,11 +12,11 @@ import java.util.List;
 
 @Entity
 @Table(name = "business_trip_order", schema = "order_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class BusinessTripOrder extends Order {
 
     @Column(name = "start_date")

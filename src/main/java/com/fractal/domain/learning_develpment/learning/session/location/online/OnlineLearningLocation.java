@@ -5,6 +5,7 @@ import com.fractal.domain.learning_develpment.learning.session.location.Learning
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
@@ -14,6 +15,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class OnlineLearningLocation extends LearningLocation {
 
     @ManyToOne(fetch = FetchType.LAZY)

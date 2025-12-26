@@ -8,10 +8,7 @@ import com.fractal.domain.order.resource.OrderResource;
 import com.fractal.domain.order.state.OrderState;
 import com.fractal.domain.order.type.OrderType;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
@@ -22,10 +19,10 @@ import java.util.List;
 @Entity
 @Table(name = "order", schema = "order_schema", catalog = "fractal")
 @Inheritance(strategy = InheritanceType.JOINED)
-@Setter
-@Getter
+@Data
 @SuperBuilder
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class Order extends ApprovalWorkflow {
 
     @Id

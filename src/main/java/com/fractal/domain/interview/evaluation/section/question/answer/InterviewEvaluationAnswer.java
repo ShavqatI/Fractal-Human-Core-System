@@ -4,10 +4,7 @@ import com.fractal.domain.abstraction.AbstractEntity;
 import com.fractal.domain.dictionary.status.Status;
 import com.fractal.domain.interview.evaluation.section.question.InterviewEvaluationQuestion;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Entity
@@ -16,6 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 public class InterviewEvaluationAnswer extends AbstractEntity {
 
     @Column(nullable = false)

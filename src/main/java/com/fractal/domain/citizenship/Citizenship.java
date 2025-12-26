@@ -8,8 +8,7 @@ import lombok.experimental.SuperBuilder;
 
 @Entity
 @Table(name = "citizenship", schema = "citizenship_schema", catalog = "fractal")
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor

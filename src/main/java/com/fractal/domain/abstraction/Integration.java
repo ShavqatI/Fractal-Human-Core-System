@@ -13,8 +13,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @MappedSuperclass
-@Getter
-@Setter
+@Data
 @SuperBuilder
 @NoArgsConstructor
 public abstract class Integration extends AbstractEntity {
