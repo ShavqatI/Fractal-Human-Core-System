@@ -4,8 +4,9 @@ import com.fractal.domain.dictionary.gender.GenderService;
 import com.fractal.domain.dictionary.marital_status.MaritalStatusService;
 import com.fractal.domain.dictionary.nationality.NationalityService;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.profile.candidate.dto.CandidateProfileRequest;
+import com.fractal.domain.profile.candidate.dto.CandidateProfileCreateRequest;
 import com.fractal.domain.profile.candidate.dto.CandidateProfileResponse;
+import com.fractal.domain.profile.candidate.dto.CandidateProfileUpdateRequest;
 import com.fractal.domain.recruitment.candidate.Candidate;
 import com.fractal.domain.recruitment.candidate.address.mapper.CandidateAddressMapperService;
 import com.fractal.domain.recruitment.candidate.citizenship.mapper.CandidateCitizenshipMapperService;
@@ -163,7 +164,7 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     }
 
     @Override
-    public Candidate toEntity(CandidateProfileRequest dto) {
+    public Candidate toEntity(CandidateProfileCreateRequest dto) {
         var candidate = Candidate.builder()
                 .lastName(dto.lastName())
                 .firstName(dto.firstName())
@@ -182,7 +183,21 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     }
 
     @Override
-    public Candidate toEntity(Candidate candidate, CandidateProfileRequest dto) {
+    public Candidate toEntity(Candidate candidate, CandidateProfileUpdateRequest dto) {
+        candidate.setLastName(dto.lastName());
+        candidate.setFirstName(dto.firstName());
+        candidate.setPatronymicName(dto.patronymicName());
+        candidate.setBirthDate(dto.birthDate());
+        candidate.setTin(dto.tin());
+        candidate.setSsn(dto.ssn());
+        candidate.setGender(genderService.getById(dto.genderId()));
+        candidate.setMaritalStatus(maritalStatusService.getById(dto.maritalStatusId()));
+        candidate.setNationality(nationalityService.getById(dto.nationalityId()));
+        return candidate;
+    }
+
+    @Override
+    public Candidate toEntity(Candidate candidate, CandidateProfileCreateRequest dto) {
         candidate.setLastName(dto.lastName());
         candidate.setFirstName(dto.firstName());
         candidate.setPatronymicName(dto.patronymicName());

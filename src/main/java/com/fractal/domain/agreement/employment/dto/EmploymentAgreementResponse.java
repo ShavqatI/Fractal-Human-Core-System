@@ -11,6 +11,7 @@ import java.util.List;
 public record EmploymentAgreementResponse(
         Long id,
         AgreementTypeResponse agreementType,
+        LocalDate date,
         String number,
         LocalDate startDate,
         LocalDate endDate,

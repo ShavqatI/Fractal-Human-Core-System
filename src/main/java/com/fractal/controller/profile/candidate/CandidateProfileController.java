@@ -2,8 +2,9 @@ package com.fractal.controller.profile.candidate;
 
 
 import com.fractal.domain.profile.candidate.CandidateProfileService;
-import com.fractal.domain.profile.candidate.dto.CandidateProfileRequest;
+import com.fractal.domain.profile.candidate.dto.CandidateProfileCreateRequest;
 import com.fractal.domain.profile.candidate.dto.CandidateProfileResponse;
+import com.fractal.domain.profile.candidate.dto.CandidateProfileUpdateRequest;
 import com.fractal.domain.recruitment.candidate.dto.CandidateResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class CandidateProfileController {
     private final CandidateProfileService candidateProfileService;
 
     @PostMapping
-    public ResponseEntity<CandidateProfileResponse> create(@RequestBody @Valid CandidateProfileRequest dto) {
+    public ResponseEntity<CandidateProfileResponse> create(@RequestBody @Valid CandidateProfileCreateRequest dto) {
         return new ResponseEntity<>(candidateProfileService.toProfileDTO(candidateProfileService.create(dto)), HttpStatus.CREATED);
     }
 
@@ -29,7 +30,7 @@ public class CandidateProfileController {
     }
 
     @PutMapping
-    public ResponseEntity<CandidateProfileResponse> update(@RequestBody @Valid CandidateProfileRequest dto) {
+    public ResponseEntity<CandidateProfileResponse> update(@RequestBody @Valid CandidateProfileUpdateRequest dto) {
         return ResponseEntity.ok(candidateProfileService.toProfileDTO(candidateProfileService.update(dto)));
     }
 

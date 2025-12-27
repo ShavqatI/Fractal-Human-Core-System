@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "agreement", schema = "employee_schema", catalog = "fractal")
+@Table(name = "agreement", schema = "agreement_schema", catalog = "fractal")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @SuperBuilder

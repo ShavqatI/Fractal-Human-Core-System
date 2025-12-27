@@ -8,17 +8,11 @@ import java.util.List;
 
 public interface EmploymentAgreementService {
     EmploymentAgreement create(EmploymentAgreementRequest dto);
-
     List<EmploymentAgreement> getAll();
-
     EmploymentAgreement getById(Long id);
-
     EmploymentAgreement update(Long id, EmploymentAgreementRequest dto);
-
     void delete(Long id);
-
     EmploymentAgreementResponse toDTO(EmploymentAgreement agreement);
-
     EmploymentAgreement save(EmploymentAgreement agreement);
     Path print(Long id);
 }

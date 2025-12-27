@@ -8,8 +8,9 @@ import com.fractal.domain.authorization.user.UserService;
 import com.fractal.domain.authorization.user.dto.UserRequest;
 import com.fractal.domain.authorization.user.role.dto.UserRoleRequest;
 import com.fractal.domain.dictionary.status.StatusService;
-import com.fractal.domain.profile.candidate.dto.CandidateProfileRequest;
+import com.fractal.domain.profile.candidate.dto.CandidateProfileCreateRequest;
 import com.fractal.domain.profile.candidate.dto.CandidateProfileResponse;
+import com.fractal.domain.profile.candidate.dto.CandidateProfileUpdateRequest;
 import com.fractal.domain.recruitment.candidate.Candidate;
 import com.fractal.domain.recruitment.candidate.CandidateService;
 import com.fractal.domain.recruitment.candidate.dto.CandidateCompactResponse;
@@ -37,7 +38,7 @@ class CandidateProfileServiceImpl implements CandidateProfileService {
 
     @Override
     @Transactional
-    public Candidate create(CandidateProfileRequest dto) {
+    public Candidate create(CandidateProfileCreateRequest dto) {
         var candidate = candidateService.save(candidateMapperService.toEntity(dto));
         var candidateContact = candidate.getContacts().stream().filter(contact -> contact.getContactType().getCode().equals("EMAIL")).findFirst().get();
         var password = PasswordGeneratorService.generate(8);
@@ -53,7 +54,7 @@ class CandidateProfileServiceImpl implements CandidateProfileService {
     }
 
     @Override
-    public Candidate update(CandidateProfileRequest dto) {
+    public Candidate update(CandidateProfileUpdateRequest dto) {
         var candidate = candidateService.getById(authenticatedService.getCandidateId());
         var updatedCandidate = candidateMapperService.toEntity(candidate,dto);
         return candidateService.save(updatedCandidate);

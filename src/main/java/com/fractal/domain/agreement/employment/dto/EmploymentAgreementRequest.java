@@ -9,6 +9,7 @@ public record EmploymentAgreementRequest(
         Long employmentId,
         Long compensationComponentId,
         Long agreementTypeId,
+        LocalDate date,
         String number,
         LocalDate startDate,
         LocalDate endDate,

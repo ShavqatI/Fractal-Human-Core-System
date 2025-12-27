@@ -29,6 +29,7 @@ class EmploymentAgreementMapperServiceImpl implements EmploymentAgreementMapperS
         return new EmploymentAgreementResponse(
                 agreement.getId(),
                 agreementTypeService.toDTO(agreement.getAgreementType()),
+                agreement.getDate(),
                 agreement.getNumber(),
                 agreement.getStartDate(),
                 agreement.getEndDate(),
@@ -58,6 +59,7 @@ class EmploymentAgreementMapperServiceImpl implements EmploymentAgreementMapperS
     private EmploymentAgreement mapToEntity(EmploymentAgreement agreement, EmploymentAgreementRequest dto) {
         agreement.setCompensationComponent(compensationComponentService.getById(dto.employmentId(), dto.compensationComponentId()));
         agreement.setAgreementType(agreementTypeService.getById(dto.agreementTypeId()));
+        agreement.setDate(dto.date());
         agreement.setNumber(dto.number());
         agreement.setStartDate(dto.startDate());
         agreement.setEndDate(dto.endDate());

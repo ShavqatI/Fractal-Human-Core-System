@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
-@Table(name = "employment_agreement", schema = "employment_schema", catalog = "fractal")
+@Table(name = "employment_agreement", schema = "agreement_schema", catalog = "fractal")
 @Data
 @SuperBuilder
 @AllArgsConstructor

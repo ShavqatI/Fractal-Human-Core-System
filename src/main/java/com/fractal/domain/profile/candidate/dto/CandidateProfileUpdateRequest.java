@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
-public record CandidateProfileRequest(
+public record CandidateProfileUpdateRequest(
         @NotBlank
         String lastName,
         @NotBlank
@@ -18,11 +18,12 @@ public record CandidateProfileRequest(
         LocalDate birthDate,
         @NotNull
         Long genderId,
+        @NotBlank
         String tin,
         String ssn,
+        @NotNull
         Long maritalStatusId,
-        Long nationalityId,
-        @NotEmpty
-        List<ContactRequest> contacts
+        @NotNull
+        Long nationalityId
 ) {
 }
