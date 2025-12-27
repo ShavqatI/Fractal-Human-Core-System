@@ -134,14 +134,18 @@ class CandidateMapperServiceImpl implements CandidateMapperService {
     }
 
     @Override
-    public CandidateProfileResponse toAccountDTO(Candidate candidate) {
+    public CandidateProfileResponse toProfileDTO(Candidate candidate) {
         return new CandidateProfileResponse(
                 candidate.getId(),
                 candidate.getLastName(),
                 candidate.getFirstName(),
                 candidate.getPatronymicName(),
                 candidate.getBirthDate(),
+                candidate.getTin(),
+                candidate.getSsn(),
                 genderService.toDTO(candidate.getGender()),
+                maritalStatusService.toDTO(candidate.getMaritalStatus()),
+                nationalityService.toDTO(candidate.getNationality()),
                 Optional.ofNullable(candidate.getContacts())
                         .orElse(emptyList())
                         .stream()

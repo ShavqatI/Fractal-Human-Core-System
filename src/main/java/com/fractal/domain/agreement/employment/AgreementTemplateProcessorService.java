@@ -6,6 +6,7 @@ import com.fractal.domain.employee_management.employee.usecase.EmployeeUseCaseSe
 import com.fractal.domain.employee_management.employment.EmployeeEmployment;
 import com.fractal.domain.employee_management.employment.EmployeeEmploymentService;
 import com.fractal.domain.employee_management.employment.usecase.EmployeeEmploymentUseCaseService;
+import com.fractal.domain.employment.internal.compensation_component.CompensationComponentService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
 import com.fractal.domain.order.employment.EmploymentOrder;
 import com.fractal.domain.organization_management.organization.OrganizationService;
@@ -29,9 +30,7 @@ class AgreementTemplateProcessorService {
     private final OrganizationAddressService organizationAddressService;
     private final AuthenticatedService authenticatedService;
     private final UserEmployeeMappingService userEmployeeMappingService;
-
-
-
+    private final CompensationComponentService compensationComponentService;
 
     public Map<String,String> process(EmploymentAgreement agreement){
         var employeeEmployment = getEmployment(agreement);
@@ -51,7 +50,7 @@ class AgreementTemplateProcessorService {
         var headOffice = organizationService.getHeadOffice();
         var headOfficeAddress = organizationAddressService.toDTO(organizationService.getActiveAddress(headOffice));
 
-        //values.put("number",order.getNumber() + "-" + order.getOrderType().getSeries());
+        values.put("number",agreement.getNumber());
         values.put("docDate", agreement.getDate().toString());
         values.put("hrHead",employeeUseCaseService.getLastNameWithInitials(employeeEmploymentUseCaseService.getHrHeadEmployee()));
         getCurrentUserEmployeeEmployment().ifPresent(x-> values.put("branchName",x.organization().name()));
@@ -78,14 +77,10 @@ class AgreementTemplateProcessorService {
             values.put("employeeAddress", addressResponse.country() + " " + addressResponse.region() + " " + addressResponse.city() + addressResponse + addressResponse.district() + " " + addressResponse.street());
 
         });
-        values.putAll(getSalaryValues(employment));
-        values.putAll(getSurchargeValues(employment));
+        values.putAll(getSalaryValues(agreement));
+        values.putAll(getSurchargeValues(agreement));
         return values;
 
-
-       /*
-        ${number}
-          */
     }
     private Map<String,String> getContractServiceValues(EmploymentAgreement agreement) {
         Map<String,String> values = new HashMap<>();
@@ -94,26 +89,26 @@ class AgreementTemplateProcessorService {
         values.put("departmentName", employment.department().name());
         values.put("startDate", employment.startDate().toString());
         values.put("endDate", employment.endDate() != null ?  employment.endDate().toString() : null);
-        values.putAll(getSalaryValues(employment));
-        values.putAll(getSurchargeValues(employment));
+        values.putAll(getSalaryValues(agreement));
+        values.putAll(getSurchargeValues(agreement));
 
       return values;
     }
-    private Map<String,String> getSalaryValues(InternalEmploymentResponse employment) {
+    private Map<String,String> getSalaryValues(EmploymentAgreement agreement) {
         Map<String,String> values = new HashMap<>();
-        var compensationComponent  = employment.compensationComponents().stream().filter(cc-> cc.salaryClassification().code().equals("BASICSALARY")).findFirst();
-        if(compensationComponent.isPresent()){
-            var amount = compensationComponent.get().grossAmount();
+        var compensationComponent  = compensationComponentService.toDTO(agreement.getCompensationComponent());
+        if(compensationComponent.salaryClassification().code().equals("BASICSALARY")){
+            var amount = compensationComponent.grossAmount();
             values.put("newSalary", amount.toString());
             values.put("newSalaryInLetters", NumberToWordConverter.convert(amount.longValue()));
         }
        return values;
     }
-    private Map<String,String> getSurchargeValues(InternalEmploymentResponse employment){
+    private Map<String,String> getSurchargeValues(EmploymentAgreement agreement){
         Map<String,String> values = new HashMap<>();
-        var compensationComponent  = employment.compensationComponents().stream().filter(cc-> cc.salaryClassification().code().equals("ADDITIONALSALARY")).findFirst();
-        if(compensationComponent.isPresent()){
-            var amount = compensationComponent.get().grossAmount();
+        var compensationComponent  = compensationComponentService.toDTO(agreement.getCompensationComponent());
+        if(compensationComponent.salaryClassification().code().equals("ADDITIONALSALARY")){
+            var amount = compensationComponent.grossAmount();
             values.put("surcharge", amount.toString());
             values.put("surchargeInLetters", NumberToWordConverter.convert(amount.longValue()));
         }

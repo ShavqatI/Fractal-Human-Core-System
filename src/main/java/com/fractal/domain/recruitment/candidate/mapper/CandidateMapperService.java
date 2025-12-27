@@ -10,7 +10,7 @@ import com.fractal.domain.recruitment.candidate.dto.CandidateResponse;
 public interface CandidateMapperService {
     CandidateResponse toDTO(Candidate candidate);
     CandidateCompactResponse toCompactDTO(Candidate candidate);
-    CandidateProfileResponse toAccountDTO(Candidate candidate);
+    CandidateProfileResponse toProfileDTO(Candidate candidate);
     Candidate toEntity(CandidateRequest dto);
     Candidate toEntity(CandidateProfileRequest dto);
     Candidate toEntity(Candidate candidate, CandidateRequest dto);

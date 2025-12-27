@@ -71,6 +71,6 @@ class CandidateProfileServiceImpl implements CandidateProfileService {
 
     @Override
     public CandidateProfileResponse toProfileDTO(Candidate candidate) {
-        return candidateMapperService.toAccountDTO(candidate);
+        return candidateMapperService.toProfileDTO(candidate);
     }
 }
