@@ -2,6 +2,7 @@ package com.fractal.domain.employment;
 
 import com.fractal.domain.abstraction.ApprovalWorkflow;
 import com.fractal.domain.dictionary.status.Status;
+import com.fractal.domain.agreement.employment.EmploymentAgreement;
 import com.fractal.domain.employment.punishment.Punishment;
 import com.fractal.domain.employment.separation_reason.SeparationReason;
 import com.fractal.domain.employment.state.EmploymentState;
@@ -47,6 +48,10 @@ public class Employment extends ApprovalWorkflow {
     @OneToMany(mappedBy = "employment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Punishment> punishments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "employment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<EmploymentAgreement> agreements = new ArrayList<>();
+
+
     @OneToMany(mappedBy = "employment", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.LAZY)
     private List<EmploymentState> states = new ArrayList<>();
 
@@ -74,4 +79,17 @@ public class Employment extends ApprovalWorkflow {
         if (punishments != null && !punishments.isEmpty())
             punishments.remove(punishment);
     }
+
+    public void addAgreement(EmploymentAgreement agreement) {
+        if (agreements == null) agreements = new ArrayList<>();
+        agreement.setEmployment(this);
+        agreements.add(agreement);
+    }
+
+    public void removeAgreement(EmploymentAgreement agreement) {
+        if (agreements != null && !agreements.isEmpty())
+            agreements.remove(agreement);
+    }
+
+
 }

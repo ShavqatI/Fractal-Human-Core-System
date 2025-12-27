@@ -2,7 +2,7 @@ package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.citizenship.dto.CitizenshipResponse;
-import com.fractal.domain.profile.citizenship.ProfileCitizenshipService;
+import com.fractal.domain.profile.employee.citizenship.ProfileCitizenshipService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,8 +1,8 @@
 package com.fractal.controller.profile.employee;
 
 
-import com.fractal.domain.profile.vacation.request.ProfileVacationRequestRequest;
-import com.fractal.domain.profile.vacation.request.ProfileVacationRequestService;
+import com.fractal.domain.profile.employee.vacation.request.ProfileVacationRequestRequest;
+import com.fractal.domain.profile.employee.vacation.request.ProfileVacationRequestService;
 import com.fractal.domain.vacation_management.request.dto.VacationRequestResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

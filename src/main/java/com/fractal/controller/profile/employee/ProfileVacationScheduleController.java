@@ -1,8 +1,8 @@
 package com.fractal.controller.profile.employee;
 
 
-import com.fractal.domain.profile.vacation.schedule.ProfileVacationScheduleRequest;
-import com.fractal.domain.profile.vacation.schedule.ProfileVacationScheduleService;
+import com.fractal.domain.profile.employee.vacation.schedule.ProfileVacationScheduleRequest;
+import com.fractal.domain.profile.employee.vacation.schedule.ProfileVacationScheduleService;
 import com.fractal.domain.vacation_management.schedule.dto.VacationScheduleResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

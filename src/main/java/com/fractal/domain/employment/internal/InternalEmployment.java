@@ -1,7 +1,6 @@
 package com.fractal.domain.employment.internal;
 
 import com.fractal.domain.employment.Employment;
-import com.fractal.domain.employment.internal.agreement.InternalEmploymentAgreement;
 import com.fractal.domain.employment.internal.compensation_component.CompensationComponent;
 import com.fractal.domain.organization_management.department.Department;
 import com.fractal.domain.organization_management.organization.Organization;
@@ -38,21 +37,9 @@ public class InternalEmployment extends Employment {
     private Position position;
 
     @OneToMany(mappedBy = "internalEmployment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    private List<InternalEmploymentAgreement> agreements = new ArrayList<>();
-
-    @OneToMany(mappedBy = "internalEmployment", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<CompensationComponent> compensationComponents = new ArrayList<>();
 
-    public void addAgreement(InternalEmploymentAgreement agreement) {
-        if (agreements == null) agreements = new ArrayList<>();
-        agreement.setInternalEmployment(this);
-        agreements.add(agreement);
-    }
 
-    public void removeAgreement(InternalEmploymentAgreement agreement) {
-        if (agreements != null && !agreements.isEmpty())
-            agreements.remove(agreement);
-    }
     public void addCompensationComponent(CompensationComponent compensationComponent) {
         if (compensationComponents == null) compensationComponents = new ArrayList<>();
         compensationComponent.setInternalEmployment(this);

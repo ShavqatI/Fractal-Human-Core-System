@@ -2,7 +2,7 @@ package com.fractal.domain.employment.internal.mapper;
 
 import com.fractal.domain.dictionary.status.StatusService;
 import com.fractal.domain.employment.internal.InternalEmployment;
-import com.fractal.domain.employment.internal.agreement.mapper.InternalEmploymentAgreementMapperService;
+import com.fractal.domain.agreement.employment.mapper.EmploymentAgreementMapperService;
 import com.fractal.domain.employment.internal.compensation_component.mapper.CompensationComponentMapperService;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentRequest;
 import com.fractal.domain.employment.internal.dto.InternalEmploymentResponse;
@@ -26,7 +26,6 @@ import static java.util.Collections.emptyList;
 @RequiredArgsConstructor
 class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperService {
 
-    private final InternalEmploymentAgreementMapperService agreementMapperService;
     private final OrganizationService organizationService;
     private final DepartmentService departmentService;
     private final PositionService positionService;
@@ -49,11 +48,6 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
                     departmentService.toCompactDTO(employment.getDepartment()),
                     positionService.toCompactDTO(employment.getPosition()),
                     employmentTypeService.toCompactDTO(employment.getEmploymentType()),
-                    Optional.ofNullable(employment.getAgreements())
-                            .orElse(emptyList())
-                            .stream()
-                            .map(agreementMapperService::toDTO)
-                            .collect(Collectors.toList()),
                     Optional.ofNullable(employment.getSeparationReasons())
                             .orElse(emptyList())
                             .stream()
@@ -124,7 +118,6 @@ class InternalEmploymentMapperServiceImpl implements InternalEmploymentMapperSer
         employment.setPosition(positionService.getById(dto.positionId()));
         employment.setEmploymentType(employmentTypeService.getById(dto.employmentTypeId()));
 
-        dto.agreements().forEach(agreementRequest -> employment.addAgreement(agreementMapperService.toEntity(agreementRequest)));
         dto.separationReasons().forEach(separationReason -> employment.addSeparationReason(separationReasonMapperService.toEntity(separationReason)));
         dto.compensationComponents().forEach(compensationComponent -> employment.addCompensationComponent(compensationComponentMapperService.toEntity(compensationComponent)));
         dto.punishments().forEach(punishment -> employment.addPunishment(punishmentMapperService.toEntity(punishment)));

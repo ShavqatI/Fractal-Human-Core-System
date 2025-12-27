@@ -2,8 +2,8 @@ package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.employee_management.business_trip.dto.BusinessTripResponse;
-import com.fractal.domain.profile.business_trip.ProfileBusinessTripRequest;
-import com.fractal.domain.profile.business_trip.ProfileBusinessTripService;
+import com.fractal.domain.profile.employee.business_trip.ProfileBusinessTripRequest;
+import com.fractal.domain.profile.employee.business_trip.ProfileBusinessTripService;
 import com.fractal.domain.resource.FileService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

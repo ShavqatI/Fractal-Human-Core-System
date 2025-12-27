@@ -1,5 +1,6 @@
 package com.fractal.domain.organization_management.organization;
 
+import com.fractal.domain.organization_management.organization.address.OrganizationAddress;
 import com.fractal.domain.organization_management.organization.dto.OrganizationCompactResponse;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
@@ -32,4 +33,7 @@ public interface OrganizationService {
     Organization updateChild(Long id, Long childId, OrganizationRequest dto);
 
     Organization deleteChild(Long id, Long childId);
+
+    Organization getHeadOffice();
+    OrganizationAddress getActiveAddress(Organization organization);
 }

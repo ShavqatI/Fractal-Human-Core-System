@@ -26,7 +26,15 @@ class SubordinateVacationRequestServiceImpl implements SubordinateVacationReques
 
     @Override
     public VacationRequest create(SubordinateVacationRequestRequest dto) {
-        return vacationRequestService.create(mapDTO(dto));
+        try{
+            var employee = subordinateService.getActiveEmployee(authenticatedService.getEmployeeId(), dto.employeeId());
+            if(employee != null)
+            return vacationRequestService.create(mapDTO(dto));
+        }
+        catch (Exception e){
+           throw new RuntimeException(e.getMessage());
+        }
+       return null;
     }
 
     @Override
@@ -49,8 +57,15 @@ class SubordinateVacationRequestServiceImpl implements SubordinateVacationReques
 
     @Override
     public VacationRequest update(Long id, SubordinateVacationRequestRequest dto) {
-        var vacationRequest = findById(id);
-        return vacationRequestService.update(vacationRequest.getId(),mapDTO(dto));
+        try{
+            var employee = subordinateService.getActiveEmployee(authenticatedService.getEmployeeId(), dto.employeeId());
+            if(employee != null)
+                return vacationRequestService.update(findById(id).getId(),mapDTO(dto));
+         }
+        catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
     }
 
     @Override
@@ -65,7 +80,7 @@ class SubordinateVacationRequestServiceImpl implements SubordinateVacationReques
     @Override
     public VacationRequest approve(Long id) {
         var vacationRequest = findById(id);
-        return vacationRequestService.review(vacationRequest.getId());
+        return vacationRequestService.approve(vacationRequest.getId());
     }
     @Override
     public VacationRequest cancel(VacationRequestCancelRequest dto) {

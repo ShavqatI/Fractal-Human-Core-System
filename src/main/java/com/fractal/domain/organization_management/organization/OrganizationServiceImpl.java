@@ -1,5 +1,7 @@
 package com.fractal.domain.organization_management.organization;
 
+import com.fractal.domain.abstraction.AbstractEntity;
+import com.fractal.domain.organization_management.organization.address.OrganizationAddress;
 import com.fractal.domain.organization_management.organization.dto.OrganizationCompactResponse;
 import com.fractal.domain.organization_management.organization.dto.OrganizationRequest;
 import com.fractal.domain.organization_management.organization.dto.OrganizationResponse;
@@ -10,6 +12,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -106,6 +109,18 @@ class OrganizationServiceImpl implements OrganizationService {
         var child = organization.getChildren().stream().filter(ch -> ch.getId().equals(childId)).findFirst().orElseThrow(() -> new ResourceNotFoundException("Child with id: " + childId + " not found"));
         organization.removeChild(child);
         return save(organization);
+    }
+
+    @Override
+    public Organization getHeadOffice() {
+        return organizationRepository.findHeadOffice().orElseThrow(()-> new ResourceNotFoundException("The active Head office not found"));
+    }
+
+    @Override
+    public OrganizationAddress getActiveAddress(Organization organization) {
+        return organization.getAddresses().stream().filter(address-> address.getEndDate() !=null)
+                .sorted(Comparator.comparing(OrganizationAddress::getId).reversed())
+                .findFirst().orElseThrow(()->new ResourceNotFoundException("No any active address found for organization id:" + organization.getId()));
     }
 
     @Override

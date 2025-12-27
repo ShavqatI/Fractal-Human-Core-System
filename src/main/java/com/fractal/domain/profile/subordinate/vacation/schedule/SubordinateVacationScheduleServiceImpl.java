@@ -27,7 +27,15 @@ class SubordinateVacationScheduleServiceImpl implements SubordinateVacationSched
 
     @Override
     public VacationSchedule create(SubordinateVacationScheduleRequest dto) {
-        return vacationScheduleService.create(mapDTO(dto));
+        try{
+            var employee = subordinateService.getActiveEmployee(authenticatedService.getEmployeeId(), dto.employeeId());
+            if(employee != null)
+                return vacationScheduleService.create(mapDTO(dto));
+        }
+        catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
     }
 
     @Override
@@ -49,7 +57,15 @@ class SubordinateVacationScheduleServiceImpl implements SubordinateVacationSched
      }
     @Override
     public VacationSchedule update(Long id, SubordinateVacationScheduleRequest dto) {
-        return vacationScheduleService.update(findById(id).getId(),mapDTO(dto));
+       try{
+            var employee = subordinateService.getActiveEmployee(authenticatedService.getEmployeeId(), dto.employeeId());
+            if(employee != null)
+                return vacationScheduleService.update(findById(id).getId(),mapDTO(dto));
+       }
+        catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
     }
 
     @Override

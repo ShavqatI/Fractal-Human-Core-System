@@ -22,7 +22,6 @@ public interface EmploymentOrderService extends ApprovalWorkflowAware<Long, Empl
 
     EmploymentOrder save(EmploymentOrder order);
     Path print(Long id);
-    Path printAgreement(Long id);
     EmploymentOrder hire(EmploymentOrderHireRequest dto);
     EmploymentOrder terminate(EmploymentOrderTerminationRequest dto);
     EmploymentOrder transfer(EmploymentOrderTransferRequest dto);

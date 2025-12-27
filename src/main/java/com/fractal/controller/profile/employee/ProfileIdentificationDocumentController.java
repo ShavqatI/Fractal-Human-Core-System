@@ -2,7 +2,7 @@ package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.identification_document.dto.IdentificationDocumentResponse;
-import com.fractal.domain.profile.identification_document.ProfileIdentificationDocumentService;
+import com.fractal.domain.profile.employee.identification_document.ProfileIdentificationDocumentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

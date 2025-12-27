@@ -28,7 +28,15 @@ class SubordinateBusinessTripServiceImpl implements SubordinateBusinessTripServi
 
     @Override
     public BusinessTrip create(SubordinateBusinessTripRequest dto) {
-       return businessTripService.create(mapDTO(dto));
+        try{
+            var employee = subordinateService.getActiveEmployee(authenticatedService.getEmployeeId(), dto.employeeId());
+            if(employee != null)
+                return businessTripService.create(mapDTO(dto));
+        }
+        catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
     }
 
     @Override
@@ -49,7 +57,15 @@ class SubordinateBusinessTripServiceImpl implements SubordinateBusinessTripServi
     }
     @Override
     public BusinessTrip update(Long id, SubordinateBusinessTripRequest dto) {
-        return businessTripService.update(findById(id).getId(),mapDTO(dto));
+        try{
+            var employee = subordinateService.getActiveEmployee(authenticatedService.getEmployeeId(), dto.employeeId());
+            if(employee != null)
+                return businessTripService.update(findById(id).getId(),mapDTO(dto));
+        }
+        catch (Exception e){
+            throw new RuntimeException(e.getMessage());
+        }
+        return null;
     }
 
     @Override

@@ -31,7 +31,6 @@ class PunishmentServiceImpl implements PunishmentService {
     public Punishment create(Long employmentId, PunishmentRequest dto) {
         var employment = employmentService.getById(employmentId);
         var punishment = mapperService.toEntity(dto);
-        punishment.setEmployment(employment);
         employment.addPunishment(punishment);
         return punishmentRepository.save(punishment);
     }

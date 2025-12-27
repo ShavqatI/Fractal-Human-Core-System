@@ -1,6 +1,7 @@
 package com.fractal.domain.organization_management.organization;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,6 +15,12 @@ interface OrganizationRepository extends JpaRepository<Organization, Long> {
     List<Organization> findAll();
 
     List<Organization> findAllByOrganizationUnitCodeIn(List<String> codes);
+    @Query("""
+    select o from Organization o 
+    where o.organizationUnit.code = 'HEADOFFICE'
+    and o.status.code = 'ACTIVE'
+    """)
+    Optional<Organization> findHeadOffice();
 
     Optional<Organization> findByCode(String code);
 

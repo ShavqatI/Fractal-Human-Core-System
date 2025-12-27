@@ -1,7 +1,7 @@
 package com.fractal.domain.employment.internal.dto;
 
 import com.fractal.domain.employment.dto.EmploymentRequest;
-import com.fractal.domain.employment.internal.agreement.dto.InternalEmploymentAgreementRequest;
+import com.fractal.domain.agreement.employment.dto.EmploymentAgreementRequest;
 import com.fractal.domain.employment.internal.compensation_component.dto.CompensationComponentRequest;
 import com.fractal.domain.employment.punishment.dto.PunishmentRequest;
 import com.fractal.domain.employment.separation_reason.dto.SeparationReasonRequest;
@@ -16,7 +16,7 @@ public record InternalEmploymentRequest(
         Long employmentTypeId,
         LocalDate startDate,
         LocalDate endDate,
-        List<InternalEmploymentAgreementRequest> agreements,
+        List<EmploymentAgreementRequest> agreements,
         List<SeparationReasonRequest> separationReasons,
         List<PunishmentRequest> punishments,
         List<CompensationComponentRequest> compensationComponents

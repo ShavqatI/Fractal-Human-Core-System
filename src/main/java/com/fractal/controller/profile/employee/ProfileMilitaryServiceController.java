@@ -2,7 +2,7 @@ package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.military_service.dto.MilitaryServiceResponse;
-import com.fractal.domain.profile.military_service.ProfileMilitaryServiceService;
+import com.fractal.domain.profile.employee.military_service.ProfileMilitaryServiceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

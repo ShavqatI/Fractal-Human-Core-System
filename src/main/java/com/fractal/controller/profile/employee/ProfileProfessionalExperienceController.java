@@ -2,7 +2,7 @@ package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.employee_management.professional_experience.dto.EmployeeProfessionalExperienceResponse;
-import com.fractal.domain.profile.professional_experience.ProfileProfessionalExperienceService;
+import com.fractal.domain.profile.employee.professional_experience.ProfileProfessionalExperienceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

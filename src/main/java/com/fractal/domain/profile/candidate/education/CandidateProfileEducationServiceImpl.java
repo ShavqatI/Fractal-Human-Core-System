@@ -31,7 +31,7 @@ class CandidateProfileEducationServiceImpl implements CandidateProfileEducationS
 
     @Override
     public List<CandidateEducation> getAll() {
-        return null;
+        return educationService.getAllByCandidateId(authenticatedService.getCandidateId());
     }
 
     @Override

@@ -31,21 +31,24 @@ public class Agreement extends ApprovalWorkflow {
     @JoinColumn(name = "agreement_type_id")
     protected AgreementType agreementType;
 
+    @Column(name = "date")
+    private LocalDate date;
+
     @Column(name = "number")
     private String number;
 
     @Column(name = "start_date")
-    private LocalDate startDate;
+    protected LocalDate startDate;
 
     @Column(name = "end_date")
-    private LocalDate endDate;
+    protected LocalDate endDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "status_id", referencedColumnName = "id")
-    private Status status;
+    protected Status status;
 
     @OneToMany(mappedBy = "agreement", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AgreementResource> resources = new ArrayList<>();
+    protected List<AgreementResource> resources = new ArrayList<>();
 
     public void addResource(AgreementResource resource) {
         if (resources == null) resources = new ArrayList<>();

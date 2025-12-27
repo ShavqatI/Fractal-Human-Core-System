@@ -2,7 +2,7 @@ package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.education.dto.EducationResponse;
-import com.fractal.domain.profile.education.ProfileEducationService;
+import com.fractal.domain.profile.employee.education.ProfileEducationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

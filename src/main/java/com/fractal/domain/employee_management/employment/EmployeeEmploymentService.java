@@ -21,6 +21,7 @@ public interface EmployeeEmploymentService extends ApprovalWorkflowAware<Approva
     EmployeeEmployment getById(Long employeeId, Long id);
     EmployeeEmployment getByCompensationComponentId(Long compensationComponentId);
     EmployeeEmployment getById(Long id);
+    EmployeeEmployment getByEmploymentId(Long id);
     EmployeeEmployment getActiveEmployment(Long employeeId);
     List<EmployeeEmployment> getAllByEmployeeId(Long employeeId);
     List<EmployeeEmployment> getAllActive();

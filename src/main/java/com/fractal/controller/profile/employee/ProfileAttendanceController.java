@@ -2,7 +2,7 @@ package com.fractal.controller.profile.employee;
 
 
 import com.fractal.domain.employee_management.attendance.dto.AttendanceResponse;
-import com.fractal.domain.profile.attendance.ProfileAttendanceService;
+import com.fractal.domain.profile.employee.attendance.ProfileAttendanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -50,12 +50,10 @@ class CandidateProfileContactServiceImpl implements CandidateProfileContactServi
     }
 
     private CandidateContact findById(Long id) {
-        System.out.println(id);
         var contact1 = contactService.getAllByCandidateId(authenticatedService.getCandidateId()).stream()
                 .filter(contact -> contact.getId().longValue() == id.longValue())
                 .findFirst()
                 .orElseThrow(()-> new ResourceWithIdNotFoundException(this,id));
-        System.out.println(contact1.getId());
         return contact1;
     }
 }

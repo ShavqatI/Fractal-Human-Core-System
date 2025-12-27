@@ -1,7 +1,7 @@
 package com.fractal.controller.profile.employee;
 
 
-import com.fractal.domain.profile.vacation.accrual.ProfileVacationAccrualService;
+import com.fractal.domain.profile.employee.vacation.accrual.ProfileVacationAccrualService;
 import com.fractal.domain.vacation_management.accrual.dto.VacationAccrualResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
